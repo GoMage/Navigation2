@@ -1,0 +1,330 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../Magento/Config/etc/system_file.xsd">
+    <system>
+        <tab id="gomage" translate="label" sortOrder="1000">
+            <label>GoMage</label>
+        </tab>
+        <section id="navigation" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <label>Advanced Navigation</label>
+            <tab>gomage</tab>
+            <resource>GoMage_Navigation::config_navigation</resource>
+            <group id="genaral" translate="label" type="text" sortOrder="10" showInDefault="1"
+                   showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Advanced Navigation</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="pagination" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Ajax Pagination</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="place" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Shop By In</label>
+                    <source_model>GoMage\Navigation\Model\Config\Source\Place</source_model>
+                </field>
+                <field id="content_filter_button" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Filter Button for Content</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="place">1</field>
+                    </depends>
+                </field>
+                <field id="content_filter_type" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Content Filters in</label>
+                    <source_model>GoMage\Navigation\Model\Config\Source\Content\Filter\Type</source_model>
+                    <depends>
+                        <field id="place">1</field>
+                    </depends>
+                </field>
+                <field id="scroll" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use Autoscrolling</label>
+                    <source_model>GoMage\Navigation\Model\Config\Source\Scroll</source_model>
+                </field>
+                <field id="to_top_button" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Back to Top Button</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="to_top_speed" translate="label comment" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Scrolling Speed, ms</label>
+                    <comment>1000 equals 1 second</comment>
+                    <frontend_class>validate-number</frontend_class>
+                    <depends>
+                        <field id="to_top_button">1</field>
+                    </depends>
+                </field>
+                <field id="to_top_action" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Back to Top Action</label>
+                    <source_model>GoMage\Navigation\Model\Config\Source\Top\Action</source_model>
+                    <depends>
+                        <field id="to_top_button">1</field>
+                    </depends>
+                </field>
+                <field id="mobile" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Disable on Mobile Devices</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="settings" translate="label" type="text" sortOrder="20" showInDefault="1"
+                   showInWebsite="1" showInStore="1">
+                <label>Filter Settings</label>
+                <field id="use_hash" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Add Filter Results to URL</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="friendly_urls" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use Friendly URLs</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="result" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Applied Values in Results</label>
+                    <source_model>GoMage\Navigation\Model\Config\Source\Result</source_model>
+                </field>
+                <field id="qty" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Value's Qty</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="pager" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Pager</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="view" translate="label" type="text" sortOrder="30" showInDefault="1"
+                   showInWebsite="1" showInStore="1">
+                <label>Navigation View</label>
+                <group id="block" translate="label" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Block</label>
+                    <field id="background" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Block Background Color</label>
+                    </field>
+                    <field id="category_background" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Category Background Color</label>
+                    </field>
+                </group>
+                <group id="button" translate="label" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Button</label>
+                    <field id="background" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Background Color</label>
+                    </field>
+                    <field id="gradient" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Use Gradient</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="background2" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Background Color 2</label>
+                        <depends>
+                            <field id="gradient">1</field>
+                        </depends>
+                    </field>
+                    <field id="color" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Text Color</label>
+                    </field>
+                </group>
+                <group id="tooltip" translate="label" type="text" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Tooltip</label>
+                    <field id="background" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Icon Background</label>
+                    </field>
+                    <field id="window_background" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Window Background</label>
+                    </field>
+                    <field id="show_event" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Show Tooltip Window</label>
+                        <source_model>GoMage\Navigation\Model\Config\Source\Tooltip\Event\Show</source_model>
+                    </field>
+                    <field id="hide_event" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Hide Tooltip Window</label>
+                        <source_model>GoMage\Navigation\Model\Config\Source\Tooltip\Event\Hide</source_model>
+                    </field>
+                </group>
+                <group id="slider" translate="label" type="text" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Slider</label>
+                    <field id="line_color" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Line Color</label>
+                    </field>
+                    <field id="line_height" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Line Height, px</label>
+                        <frontend_class>validate-number</frontend_class>
+                    </field>
+                    <field id="element_color" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Element Color</label>
+                    </field>
+                    <field id="element_width" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Element Width, px</label>
+                        <frontend_class>validate-number</frontend_class>
+                    </field>
+                    <field id="element_height" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Element Height, px</label>
+                        <frontend_class>validate-number</frontend_class>
+                    </field>
+                    <field id="element_radius" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Element Radius, px</label>
+                        <frontend_class>validate-number</frontend_class>
+                    </field>
+                </group>
+            </group>
+            <group id="category" translate="label" type="text" sortOrder="40" showInDefault="1"
+                   showInWebsite="1" showInStore="1">
+                <label>Category Settings</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category Navigation</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="place" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category Block Location</label>
+                    <source_model>GoMage\Navigation\Model\Config\Source\Place</source_model>
+                </field>
+                <field id="navigation" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Navigation Type</label>
+                    <source_model>GoMage\Navigation\Model\Config\Source\Category\Navigation</source_model>
+                </field>
+                <field id="action" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category Filter Action</label>
+                    <source_model>GoMage\Navigation\Model\Config\Source\Filter\Action</source_model>
+                </field>
+                <field id="shop_by" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Category in Shop by</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="hide_empty" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Hide Empty Categories</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="show_all" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show All Subcategories</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="is_collapsed" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Collapsed</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="is_checkbox" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Checkboxes</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="is_image" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Image</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="image_alignment" translate="label" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image Alignment</label>
+                    <source_model>GoMage\Navigation\Model\Config\Source\Image\Alignment</source_model>
+                    <depends>
+                        <field id="image">1</field>
+                    </depends>
+                </field>
+                <field id="image_width" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image Width, px</label>
+                    <frontend_class>validate-number</frontend_class>
+                    <depends>
+                        <field id="image">1</field>
+                    </depends>
+                </field>
+                <field id="image_height" translate="label" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image Height, px</label>
+                    <frontend_class>validate-number</frontend_class>
+                    <depends>
+                        <field id="image">1</field>
+                    </depends>
+                </field>
+                <field id="is_reset" translate="label" type="select" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Reset Link</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="products_navigation" translate="label" type="text" sortOrder="50" showInDefault="1"
+                   showInWebsite="1" showInStore="1">
+                <label>Products Navigation</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Products Navigation</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="length" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Maximum Product Name Symbols</label>
+                    <frontend_class>validate-number</frontend_class>
+                </field>
+                <field id="previous_link" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Previous Product Link</label>
+                    <comment>
+                        <![CDATA[e.g. %product% - product name, %price% - price, %previous_image%]]>
+                    </comment>
+                </field>
+                <field id="previous_image" translate="label" type="image" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Previous Product Image</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system/filesystem/media" scope_info="1">gomage/navigation/previous_image</upload_dir>
+                    <base_url type="media" scope_info="1">gomage/navigation/previous_image</base_url>
+                </field>
+                <field id="next_link" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Next Product Link</label>
+                    <comment>
+                        <![CDATA[e.g. %product% - product name, %price% - price, %previous_image%]]>
+                    </comment>
+                </field>
+                <field id="next_image" translate="label" type="image" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Next Product Image</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system/filesystem/media" scope_info="1">gomage/navigation/next_image</upload_dir>
+                    <base_url type="media" scope_info="1">gomage/navigation/next_image</base_url>
+                </field>
+                <field id="category_link" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Back to Category Link</label>
+                    <comment>
+                        <![CDATA[e.g. %category%, %category_image%]]>
+                    </comment>
+                </field>
+                <field id="category_image" translate="label" type="image" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Back to Category Image</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system/filesystem/media" scope_info="1">gomage/navigation/category_image</upload_dir>
+                    <base_url type="media" scope_info="1">gomage/navigation/category_image</base_url>
+                </field>
+            </group>
+            <group id="loader" translate="label" type="text" sortOrder="60" showInDefault="1"
+                   showInWebsite="1" showInStore="1">
+                <label>Ajax Loader Window Settings</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Ajax Loader Window</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="image" translate="label" type="image" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Ajax Loader View</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system/filesystem/media" scope_info="1">gomage/navigation/loader</upload_dir>
+                    <base_url type="media" scope_info="1">gomage/navigation/loader</base_url>
+                </field>
+                <field id="alignment" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image Alignment</label>
+                    <source_model>GoMage\Navigation\Model\Config\Source\Alignment</source_model>
+                </field>
+                <field id="background" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Background Color</label>
+                </field>
+                <field id="border_color" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Border Color</label>
+                </field>
+                <field id="text_color" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Text Color</label>
+                </field>
+                <field id="width" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Widow Width, px</label>
+                    <frontend_class>validate-number</frontend_class>
+                </field>
+                <field id="height" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Widow Height, px</label>
+                    <frontend_class>validate-number</frontend_class>
+                </field>
+                <field id="text" translate="label" type="textarea" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Ajax Loader Text</label>
+                </field>
+            </group>
+
+        </section>
+    </system>
+</config>

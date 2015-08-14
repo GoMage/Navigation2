@@ -1,0 +1,101 @@
+"Advanced Navigation","Advanced Navigation"
+"General","General"
+"Enable Advanced Navigation","Enable Advanced Navigation"
+"Enable Ajax Pagination","Enable Ajax Pagination"
+"Show Shop By In","Show Shop By In"
+"Left Column","Left Column"
+Content,Content
+"Right Column","Right Column"
+"Show Filter Button for Content","Show Filter Button for Content"
+"Show Content Filters in","Show Content Filters in"
+Rows,Rows
+Columns,Columns
+"Use Autoscrolling","Use Autoscrolling"
+Button,Button
+Ajax,Ajax
+"Show Back to Top Button","Show Back to Top Button"
+"Scrolling Speed, ms","Scrolling Speed, ms"
+"1000 equals 1 second","1000 equals 1 second"
+"Back to Top Action","Back to Top Action"
+"Back to top of page","Back to top of page"
+"Back to top of products","Back to top of products"
+"Disable on Mobile Devices","Disable on Mobile Devices"
+"Filter Settings","Filter Settings"
+"Add Filter Results to URL","Add Filter Results to URL"
+"Use Friendly URLs","Use Friendly URLs"
+"Show Applied Values in Results","Show Applied Values in Results"
+"Yes, remove value from list","Yes, remove value from list"
+"Show Value's Qty","Show Value's Qty"
+"Show Pager","Show Pager"
+"Navigation View","Navigation View"
+Block,Block
+"Block Background Color","Block Background Color"
+"Category Background Color","Category Background Color"
+Button,Button
+"Background Color","Background Color"
+"Use Gradient","Use Gradient"
+"Background Color 2","Background Color 2"
+"Text Color","Text Color"
+Tooltip,Tooltip
+"Icon Background","Icon Background"
+"Window Background","Window Background"
+"Show Tooltip Window","Show Tooltip Window"
+"Mouse Over","Mouse Over"
+Click,Click
+"Hide Tooltip Window","Hide Tooltip Window"
+"Mouse Out","Mouse Out"
+"Close Button","Close Button"
+Slider,Slider
+"Line Color","Line Color"
+"Line Height, px","Line Height, px"
+"Element Color","Element Color"
+"Element Width, px","Element Width, px"
+"Element Height, px","Element Height, px"
+"Element Radius, px","Element Radius, px"
+"Category Settings","Category Settings"
+"Category Navigation","Category Navigation"
+"Category Block Location","Category Block Location"
+"Navigation Type","Navigation Type"
+Default,Default
+"Fly-Out","Fly-Out"
+Image,Image
+Dropdown,Dropdown
+"In Block","In Block"
+"Category Filter Action","Category Filter Action"
+"Page Reload","Page Reload"
+"Show Category in Shop by","Show Category in Shop by"
+"Hide Empty Categories","Hide Empty Categories"
+"Show All Subcategories","Show All Subcategories"
+"Show Collapsed","Show Collapsed"
+"Show Checkboxes","Show Checkboxes"
+"Show Image","Show Image"
+"Image Alignment","Image Alignment"
+Vertically,Vertically
+Horizontally,Horizontally
+"2 Columns","2 Columns"
+"Image Width, px","Image Width, px"
+"Image Height, px","Image Height, px"
+"Show Reset Link","Show Reset Link"
+"Products Navigation","Products Navigation"
+"Enable Products Navigation","Enable Products Navigation"
+"Maximum Product Name Symbols","Maximum Product Name Symbols"
+"Previous Product Link","Previous Product Link"
+"Previous Product Image","Previous Product Image"
+"e.g. %product% - product name, %price% - price, %previous_image%","e.g. %product% - product name, %price% - price, %previous_image%"
+"Next Product Link","Next Product Link"
+"Next Product Image","Next Product Image"
+"Back to Category Link","Back to Category Link"
+"Back to Category Image","Back to Category Image"
+"Ajax Loader Window Settings","Ajax Loader Window Settings"
+"Show Ajax Loader Window","Show Ajax Loader Window"
+"Ajax Loader View","Ajax Loader View"
+"Image Alignment","Image Alignment"
+Left,Left
+Right,Right
+Top,Top
+Bottom,Bottom
+"Border Color","Border Color"
+"Widow Width, px","Widow Width, px"
+"Widow Height, px","Widow Height, px"
+"Ajax Loader Text","Ajax Loader Text"
+"Undefined navigation type","Undefined navigation type"

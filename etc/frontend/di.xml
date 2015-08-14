@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <virtualType name="GoMageCategoryFilterList" type="Magento\Catalog\Model\Layer\FilterList">
+        <arguments>
+            <argument name="filters" xsi:type="array">
+                <item name="attribute" xsi:type="string">GoMage\Navigation\Model\Catalog\Layer\Filter\Attribute</item>
+                <item name="price" xsi:type="string">GoMage\Navigation\Model\Catalog\Layer\Filter\Price</item>
+                <item name="decimal" xsi:type="string">GoMage\Navigation\Model\Catalog\Layer\Filter\Decimal</item>
+                <item name="category" xsi:type="string">GoMage\Navigation\Model\Catalog\Layer\Filter\Category</item>
+            </argument>
+            <argument name="filterableAttributes" xsi:type="object">Magento\Catalog\Model\Layer\Category\FilterableAttributeList</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="GoMage\Navigation\Block\Navigation\Category" type="GoMage\Navigation\Block\Navigation">
+        <arguments>
+            <argument name="filterList" xsi:type="object">GoMageCategoryFilterList</argument>
+        </arguments>
+    </virtualType>
+    <preference for="Magento\Catalog\Model\Layer\Filter\Item" type="GoMage\Navigation\Model\Catalog\Layer\Filter\Item" />
+</config>
