@@ -10,15 +10,15 @@
             <label>Advanced Navigation</label>
             <tab>gomage</tab>
             <resource>GoMage_Navigation::config_navigation</resource>
-            <group id="genaral" translate="label" type="text" sortOrder="10" showInDefault="1"
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1"
                    showInWebsite="1" showInStore="1">
                 <label>General</label>
                 <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Enable Advanced Navigation</label>
+                    <label>Enable Advanced Navigation (Filter Mode)</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="pagination" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Enable Ajax Pagination</label>
+                    <label>Enable Ajax Pagination (Filter Category Pages)</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="place" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -87,8 +87,11 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="pager" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Pager</label>
+                    <label>Show Pager</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="gomage_navigation/general/scroll">0</field>
+                    </depends>
                 </field>
             </group>
             <group id="view" translate="label" type="text" sortOrder="30" showInDefault="1"
@@ -99,46 +102,53 @@
                     <label>Block</label>
                     <field id="background" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Block Background Color</label>
+                        <frontend_model>GoMage\Navigation\Block\Color</frontend_model>
                     </field>
                     <field id="category_background" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Category Background Color</label>
+                        <label>Category Background Color (from category settings)</label>
+                        <frontend_model>GoMage\Navigation\Block\Color</frontend_model>
                     </field>
                 </group>
                 <group id="button" translate="label" type="text" sortOrder="20" showInDefault="1"
                        showInWebsite="1" showInStore="1">
                     <label>Button</label>
                     <field id="background" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Background Color</label>
+                        <label>Buttons Background Color</label>
+                        <frontend_model>GoMage\Navigation\Block\Color</frontend_model>
                     </field>
                     <field id="gradient" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Use Gradient</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
                     <field id="background2" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Background Color 2</label>
+                        <label>Buttons Background Color 2</label>
+                        <frontend_model>GoMage\Navigation\Block\Color</frontend_model>
                         <depends>
                             <field id="gradient">1</field>
                         </depends>
                     </field>
                     <field id="color" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Text Color</label>
+                        <label>Button Text Color</label>
+                        <frontend_model>GoMage\Navigation\Block\Color</frontend_model>
                     </field>
                 </group>
                 <group id="tooltip" translate="label" type="text" sortOrder="30" showInDefault="1"
                        showInWebsite="1" showInStore="1">
                     <label>Tooltip</label>
                     <field id="background" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Icon Background</label>
+                        <label>Tooltip Icon Background (Help Icon View)</label>
+                        <frontend_model>GoMage\Navigation\Block\Color</frontend_model>
                     </field>
                     <field id="window_background" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Window Background</label>
+                        <label>Tooltip Window Background</label>
+                        <frontend_model>GoMage\Navigation\Block\Color</frontend_model>
                     </field>
                     <field id="show_event" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Show Tooltip Window</label>
+                        <label>Show Tooltip Window (Show Help Icon Window)</label>
                         <source_model>GoMage\Navigation\Model\Config\Source\Tooltip\Event\Show</source_model>
                     </field>
                     <field id="hide_event" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Hide Tooltip Window</label>
+                        <label>Hide Tooltip Window (Hide Tooltip Help Icon Window)</label>
                         <source_model>GoMage\Navigation\Model\Config\Source\Tooltip\Event\Hide</source_model>
                     </field>
                 </group>
@@ -146,25 +156,27 @@
                        showInWebsite="1" showInStore="1">
                     <label>Slider</label>
                     <field id="line_color" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Line Color</label>
+                        <label>Slider Line Color</label>
+                        <frontend_model>GoMage\Navigation\Block\Color</frontend_model>
                     </field>
                     <field id="line_height" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Line Height, px</label>
+                        <label>Slider Line Height, px</label>
                         <frontend_class>validate-number</frontend_class>
                     </field>
                     <field id="element_color" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Element Color</label>
+                        <label>Slider Element Color</label>
+                        <frontend_model>GoMage\Navigation\Block\Color</frontend_model>
                     </field>
                     <field id="element_width" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Element Width, px</label>
+                        <label>Slider Element Width, px</label>
                         <frontend_class>validate-number</frontend_class>
                     </field>
                     <field id="element_height" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Element Height, px</label>
+                        <label>Slider Element Height, px</label>
                         <frontend_class>validate-number</frontend_class>
                     </field>
                     <field id="element_radius" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Element Radius, px</label>
+                        <label>Slider Element Radius, px</label>
                         <frontend_class>validate-number</frontend_class>
                     </field>
                 </group>
@@ -201,7 +213,7 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="is_collapsed" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Show Collapsed</label>
+                    <label>Show Collapsed (Show Minimized in biznes documentation)</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="is_checkbox" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -209,7 +221,7 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="is_image" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Show Image</label>
+                    <label>Show Image Name</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="image_alignment" translate="label" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -305,12 +317,15 @@
                 </field>
                 <field id="background" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Background Color</label>
+                    <frontend_model>GoMage\Navigation\Block\Color</frontend_model>
                 </field>
                 <field id="border_color" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Border Color</label>
+                    <frontend_model>GoMage\Navigation\Block\Color</frontend_model>
                 </field>
                 <field id="text_color" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Text Color</label>
+                    <frontend_model>GoMage\Navigation\Block\Color</frontend_model>
                 </field>
                 <field id="width" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Widow Width, px</label>
