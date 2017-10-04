@@ -1,0 +1,32 @@
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="my_fieldset" sortOrder="40">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="valuesForOptions" xsi:type="array">
+                    <item name="media_image" xsi:type="string">media_image</item>
+                </item>
+                <item name="openOnShow" xsi:type="boolean">false</item>
+                <item name="inverseVisibility" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">Test Fieldset</label>
+        </settings>
+        <field name="gomage_test" sortOrder="10" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">product_attribute</item>
+                </item>
+            </argument>
+            <settings>
+                <required>true</required>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>string</dataType>
+                <label translate="true">Test Label</label>
+            </settings>
+        </field>
+    </fieldset>
+</form>
