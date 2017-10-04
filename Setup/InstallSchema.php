@@ -12,8 +12,8 @@ use Magento\Framework\Setup\SchemaSetupInterface;
 class InstallSchema implements InstallSchemaInterface
 {
     /**
-     * {@inheritdoc}
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     * @param SchemaSetupInterface $setup
+     * @param ModuleContextInterface $context
      */
     public function install(SchemaSetupInterface $setup, ModuleContextInterface $context)
     {
@@ -21,126 +21,188 @@ class InstallSchema implements InstallSchemaInterface
 
         $installer->startSetup();
 
-        $columns = [
-            'navigation'      => [
-                'type'     => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
-                'nullable' => true,
-                'unsigned' => true,
-                'comment'  => 'Filter Type',
-            ],
+        /**
+         * Create table 'gomage_navigation_attribute'
+         */
+        $table = $installer->getConnection()->newTable(
+            $installer->getTable('gomage_navigation_attribute')
+        )->addColumn(
+            'attribute_id',
+            \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+            null,
+            ['identity' => true, 'nullable' => false, 'primary' => true],
+            'Attribute Id'
+        )->addColumn(
+            'filter_type',
+            \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+            null,
+            ['unsigned' => true, 'nullable' => false],
+            'Filter Type'
+        )->addColumn(
+            'is_show_filter_button',
+            \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+            null,
+            ['unsigned' => true, 'default'  => '0', 'nullable' => false],
+            'Show Filter Button'
+        )->addColumn(
+            'max_block_height',
+            \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+            null,
+            ['unsigned' => true, 'nullable' => false],
+            'Max Block Height'
+        )->addColumn(
+            'is_ajax',
+            \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+            null,
+            ['unsigned' => true, 'default'  => '0', 'nullable' => false],
+            'Use Ajax'
+        )->addColumn(
+            'is_collapsed',
+            \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+            null,
+            ['unsigned' => true, 'default'  => '0', 'nullable' => false],
+            'Show Collapsed'
+        )->addColumn(
+            'is_checkbox',
+            \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+            null,
+            ['unsigned' => true, 'default'  => '0', 'nullable' => false],
+            'Show Checkboxes'
+        )->addColumn(
+            'is_show_image_name',
+            \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+            null,
+            ['unsigned' => true, 'default'  => '0', 'nullable' => false],
+            'Show Image Name'
+        )->addColumn(
+            'options_alignment',
+            \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+            null,
+            ['unsigned' => true, 'nullable' => false],
+            'Options Alignment'
+        )->addColumn(
+            'image_width',
+            \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+            null,
+            ['unsigned' => true, 'nullable' => false],
+            'Image Width'
+        )->addColumn(
+            'image_height',
+            \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+            null,
+            ['unsigned' => true, 'nullable' => false],
+            'Image Height'
+        )->addColumn(
+            'visible_options',
+            \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+            null,
+            ['unsigned' => true, 'nullable' => false],
+            'Visible Options per Attribute'
+        )->addColumn(
+            'is_show_tooltip',
+            \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+            null,
+            ['unsigned' => true, 'default'  => '0', 'nullable' => false],
+            'Show Tooltip'
+        )->addColumn(
+            'tooltip_width',
+            \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+            null,
+            ['unsigned' => true, 'nullable' => false],
+            'Tooltip Window Width'
+        )->addColumn(
+            'tooltip_height',
+            \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+            null,
+            ['unsigned' => true, 'nullable' => false],
+            'Tooltip Window Height'
+        )->addColumn(
+            'is_reset',
+            \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+            null,
+            ['unsigned' => true, 'nullable' => false, 'default'  => '0'],
+            'Show Reset Link'
+        )->addColumn(
+            'is_exclude_categories',
+            \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+            null,
+            ['unsigned' => true, 'nullable' => false, 'default'  => '0'],
+            'Exclude Categories'
+        );
 
-            'is_show_button'  => [
-                'type'     => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
-                'default'  => '0',
-                'nullable' => false,
-                'unsigned' => true,
-                'comment'  => 'Show Filter Button',
-            ],
+        $installer->getConnection()->createTable($table);
 
-            'is_ajax'         => [
-                'type'     => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
-                'default'  => '0',
-                'nullable' => false,
-                'unsigned' => true,
-                'comment'  => 'Use Ajax',
-            ],
+        /**
+         * Create table 'gomage_navigation_attribute_option'
+         */
+        $table = $installer->getConnection()->newTable(
+            $installer->getTable('gomage_navigation_attribute_option')
+        )->addColumn(
+            'attribute_id',
+            \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+            null,
+            ['unsigned' => true, 'nullable' => false],
+            'Attribute Id'
+        )->addColumn(
+            'option_id',
+            \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+            null,
+            ['identity' => true, 'nullable' => false, 'primary' => true],
+            'Option Id'
+        )->addColumn(
+            'filename',
+            \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+            255,
+            [],
+            'Filename'
+        )->addColumn(
+            'name',
+            \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+            255,
+            [],
+            'Name'
+        )->addIndex(
+            $installer->getIdxName('gomage_navigation_attribute_option', ['attribute_id']),
+            ['attribute_id']
+        );
 
-            'is_collapsed'    => [
-                'type'     => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
-                'default'  => '0',
-                'nullable' => false,
-                'unsigned' => true,
-                'comment'  => 'Show Collapsed',
-            ],
-            'is_checkbox'     =>
-                [
-                    'type'     => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
-                    'default'  => '0',
-                    'nullable' => false,
-                    'unsigned' => true,
-                    'comment'  => 'Show Checkboxes',
-                ],
-            'is_image'        => [
-                'type'     => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
-                'default'  => '0',
-                'nullable' => false,
-                'unsigned' => true,
-                'comment'  => 'Show Image',
-            ],
+        $installer->getConnection()->createTable($table);
 
-            'image_alignment' => [
-                'type'     => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
-                'default'  => '0',
-                'nullable' => false,
-                'unsigned' => true,
-                'comment'  => 'Image Alignment',
-            ],
+        /**
+         * Create table 'gomage_navigation_attribute_store'
+         */
+        $table = $installer->getConnection()->newTable(
+            $installer->getTable('gomage_navigation_attribute_store')
+        )->addColumn(
+            'id',
+            \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+            null,
+            ['identity' => true, 'nullable' => false, 'primary' => true],
+            'Attribute Id'
+        )->addColumn(
+            'attribute_id',
+            \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+            null,
+            ['unsigned' => true],
+            'Attribute Id'
+        )->addColumn(
+            'store_id',
+            \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+            null,
+            ['unsigned' => true],
+            'Store Id'
+        )->addColumn(
+            'popup_text',
+            \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+            '64k',
+            [],
+            'Popup text'
+        )->addIndex(
+                $installer->getIdxName('gomage_navigation_attribute_store', ['attribute_id']),
+                ['attribute_id']
+        );
 
-            'image_width'     => [
-                'type'     => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
-                'nullable' => true,
-                'unsigned' => true,
-                'comment'  => 'Image Width',
-            ],
-
-            'image_height'    => [
-                'type'     => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
-                'nullable' => true,
-                'unsigned' => true,
-                'comment'  => 'Image Height',
-            ],
-
-            'limit'           => [
-                'type'     => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
-                'nullable' => true,
-                'unsigned' => true,
-                'comment'  => 'Visible Options per Attribute',
-            ],
-
-            'is_tooltip'      => [
-                'type'     => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
-                'default'  => '0',
-                'nullable' => false,
-                'unsigned' => true,
-                'comment'  => 'Show Tooltip',
-            ],
-
-            'tooltip_width'   => [
-                'type'     => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
-                'nullable' => true,
-                'unsigned' => true,
-                'comment'  => 'Tooltip Window Width',
-            ],
-
-            'tooltip_height'  => [
-                'type'     => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
-                'nullable' => true,
-                'unsigned' => true,
-                'comment'  => 'Tooltip Window Height',
-            ],
-
-            'tooltip_text'    => [
-                'type'     => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-                'nullable' => true,
-                'unsigned' => false,
-                'comment'  => 'Tooltip Text',
-            ],
-
-            'is_reset'        => [
-                'type'     => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
-                'default'  => '0',
-                'nullable' => false,
-                'unsigned' => true,
-                'comment'  => 'Show Reset Link',
-            ]
-        ];
-
-        $connection = $installer->getConnection();
-        $table      = $installer->getTable('catalog_eav_attribute');
-
-        foreach ($columns as $columnName => $definition) {
-            $connection->addColumn($table, $columnName, $definition);
-        }
+        $installer->getConnection()->createTable($table);
 
         $installer->endSetup();
     }
