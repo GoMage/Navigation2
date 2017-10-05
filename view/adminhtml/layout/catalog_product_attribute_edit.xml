@@ -7,8 +7,12 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
     <body>
-        <referenceContainer name="main">
-            <block class="GoMage\Navigation\Block\Adminhtml\Catalog\Product\Attribute\Edit\Tab\Navigation" as="navigation" />
-        </referenceContainer>
+        <referenceBlock name="attribute_edit_tabs">
+            <action method="addTabAfter">
+                <argument name="name" xsi:type="string">advanced_navigation_properties_tab</argument>
+                <argument name="block" xsi:type="string">GoMage\Navigation\Block\Adminhtml\Catalog\Product\Attribute\Edit\Tab\AdvancedNavigationProperties</argument>
+                <argument name="after" xsi:type="string">front</argument>
+            </action>
+        </referenceBlock>
     </body>
 </page>

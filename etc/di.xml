@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="GoMage\Navigation\Api\NavigationAttributeRepositoryInterface" type="GoMage\Navigation\Model\NavigationAttributeRepository"/>
+	<preference for="GoMage\Navigation\Api\Data\NavigationAttributeInterface" type="GoMage\Navigation\Model\NavigationAttribute"/>
+	<preference for="GoMage\Navigation\Api\Data\NavigationAttributeSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+</config>

@@ -11,22 +11,289 @@
         </argument>
         <settings>
             <collapsible>true</collapsible>
-            <label translate="true">Test Fieldset</label>
+            <label translate="true">GoMage Advanced Navigation Properties</label>
         </settings>
-        <field name="gomage_test" sortOrder="10" formElement="input">
+        <field name="gomage_filter_type" sortOrder="10" formElement="select">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">product_attribute</item>
                 </item>
             </argument>
             <settings>
-                <required>true</required>
+                <dataType>string</dataType>
+                <label translate="true">Filter Input</label>
+                <dataScope>gomage_filter_type</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="GoMage\Navigation\Model\Config\Source\Navigation"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="gomage_is_show_filter_button" sortOrder="20" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Show Filter Button</label>
+                <dataScope>gomage_is_show_filter_button</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="gomage_max_block_height" sortOrder="30" formElement="input">
+            <settings>
                 <validation>
-                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
                 </validation>
                 <dataType>string</dataType>
-                <label translate="true">Test Label</label>
+                <label translate="true">Max Block Height, px</label>
+                <dataScope>gomage_max_block_height</dataScope>
             </settings>
+        </field>
+        <field name="gomage_is_ajax" sortOrder="40" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Use Ajax</label>
+                <dataScope>gomage_is_ajax</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="gomage_is_collapsed" sortOrder="50" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Show Collapsed</label>
+                <dataScope>gomage_is_collapsed</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="gomage_is_checkbox" sortOrder="60" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Show Checkboxes</label>
+                <dataScope>gomage_is_checkbox</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="gomage_is_show_image_name" sortOrder="60" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Show Image Name</label>
+                <dataScope>gomage_is_show_image_name</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="gomage_options_alignment" sortOrder="70" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">product_attribute</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+                <label translate="true">Options Alignment</label>
+                <dataScope>gomage_options_alignment</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="GoMage\Navigation\Model\Config\Source\Image\Alignment"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="gomage_image_width" sortOrder="80" formElement="input">
+            <settings>
+                <validation>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>string</dataType>
+                <label translate="true">Image Width, px</label>
+                <dataScope>gomage_image_width</dataScope>
+            </settings>
+        </field>
+        <field name="gomage_image_height" sortOrder="90" formElement="input">
+            <settings>
+                <validation>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>string</dataType>
+                <label translate="true">Image Height, px</label>
+                <dataScope>gomage_image_height</dataScope>
+            </settings>
+        </field>
+        <field name="gomage_visible_options" sortOrder="100" formElement="input">
+            <settings>
+                <validation>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>string</dataType>
+                <label translate="true">Visible Options per Attribute</label>
+                <dataScope>gomage_visible_options</dataScope>
+            </settings>
+        </field>
+        <field name="gomage_is_show_tooltip" sortOrder="110" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+                <label translate="true">Show Tooltip</label>
+                <dataScope>gomage_is_show_tooltip</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="gomage_tooltip_width" sortOrder="120" formElement="input">
+            <settings>
+                <validation>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>string</dataType>
+                <label translate="true">Tooltip Window Width, px</label>
+                <dataScope>gomage_tooltip_width</dataScope>
+            </settings>
+        </field>
+        <field name="gomage_tooltip_height" sortOrder="130" formElement="input">
+            <settings>
+                <validation>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>string</dataType>
+                <label translate="true">Tooltip Window Height, px</label>
+                <dataScope>gomage_tooltip_height</dataScope>
+            </settings>
+        </field>
+        <field name="gomage_is_reset" sortOrder="140" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+                <label translate="true">Show Reset Link</label>
+                <dataScope>gomage_is_reset</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="gomage_is_exclude_categories" sortOrder="150" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+                <label translate="true">Exclude Categories</label>
+                <dataScope>gomage_is_exclude_categories</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
         </field>
     </fieldset>
 </form>
