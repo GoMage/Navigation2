@@ -10,11 +10,9 @@ class GomageLoadAttribute implements \Magento\Framework\Event\ObserverInterface
     protected $navigationAttributeCollectionFactory;
 
     public function __construct(
-        \GoMage\Navigation\Model\NavigationAttributeRepository $navigationAttributeRepository,
         \GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory $navigationAttributeCollectionFactory
     )
     {
-        $this->navigationAttributeRepository = $navigationAttributeRepository;
         $this->navigationAttributeCollectionFactory = $navigationAttributeCollectionFactory;
     }
 
