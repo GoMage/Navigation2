@@ -12,63 +12,51 @@ define([
         constructor: Params,
 
         get: function (key) {
-            var data = this.data;
-
-            if (this.has(key)) {
-                return data[key];
+            if (this.data.hasOwnProperty(key)) {
+                return this.data[key];
             }
-
             return undefined;
         },
 
         set: function (key, value) {
-            var data = this.data;
-
-            if (this.has(key)) {
-                data[key].push(value);
-            } else {
-                data[key] = [value];
+            if (key) {
+                if (this.data.hasOwnProperty(key)) {
+                    //TODO: for multi filter
+                    //this.data[key].push(value);
+                    this.data[key] = [value];
+                } else {
+                    this.data[key] = [value];
+                }
             }
-
-            return this;
         },
 
         unset: function (key, value) {
-            var data = this.data;
-
-            if (this.has(key)) {
-                var index = data[key].indexOf(value);
+            if (this.data.hasOwnProperty(key)) {
+                var index = this.data[key].indexOf(value);
                 if (index > -1) {
-                    data[key].splice(index, 1);
+                    this.data[key].splice(index, 1);
                 }
-                if (data[key].length == 0) {
+                if (this.data[key].length == 0) {
                     this.remove(key);
                 }
             }
-
-            return this;
         },
 
         remove: function (key) {
-            var data = this.data;
-
-            if (this.has(key)) {
-                delete data[key];
+            if (this.data.hasOwnProperty(key)) {
+                delete this.data[key];
             }
-
-            return this;
-        },
-
-        has: function (key) {
-            var data = this.data;
-            return data.hasOwnProperty(key);
         },
 
         clear: function () {
-            var data = this.data;
-            data = {};
-
-            return this;
+            var result = {};
+            if (this.data.hasOwnProperty('product_list_order')) {
+                result['product_list_order'] = this.data['product_list_order'];
+            }
+            if (this.data.hasOwnProperty('product_list_mode')) {
+                result['product_list_mode'] = this.data['product_list_mode'];
+            }
+            this.data = result;
         },
 
         toUrlParams: function () {

@@ -1,27 +1,26 @@
 <?php
-
-// @codingStandardsIgnoreFile
-
-?>
-<?php
 /**
- * Template for filter items block
  *
  * @var $block \GoMage\Navigation\Block\Navigation\FilterRenderer
  */
 ?>
+ <?php $item = reset($filterItems)->getFilter(); ?>
+<ol class="items"  class="<?php echo $item->canShowMinimized() ? "filter-content-hide" : "filter-content-show"; ?>  >
 
-<ol class="items">
     <?php foreach ($filterItems as $filterItem): ?>
-        <li class="item">
+        <li class="item  <?php if ($filterItem->getIsPreferred()) : ?>preferred-brand<?php endif?>">
             <?php if ($filterItem->getCount() > 0): ?>
+
+
                 <a href="<?php echo $block->escapeUrl($filterItem->getUrl()) ?>"
                    data-role="navigation-filter"
                    data-value="<?php echo $filterItem->getValueString() ?>"
                    data-param="<?php echo $filterItem->getRequestVar() ?>"
                    data-ajax="<?php echo $filterItem->isAjax() ?>"
-                   data-active="<?php echo $filterItem->isActive() ?>">
-                    <?php echo $filterItem->getLabel() ?>
+                   data-type="<?php echo $block->getType(); ?>"
+                   data-active="">
+                    <span class="filter-label-text"><?php echo $filterItem->getLabel() ?></span>
+                    <?php if ($filterItem->getIsPreferred()) : ?><div class="filter-preferred"><?php echo __('Preferred brand') ?></div><?php endif?>
                     <?php if ($this->helper('\Magento\Catalog\Helper\Data')->shouldDisplayProductCountOnLayer()): ?>
                         <span class="count"><?php echo $filterItem->getCount()?><span class="filter-count-label">
                             <?php if ($filterItem->getCount() == 1):?> <?php echo __('item')?><?php else:?> <?php echo __('items') ?><?php endif;?></span></span>

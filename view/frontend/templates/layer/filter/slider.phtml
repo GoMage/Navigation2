@@ -1,0 +1,39 @@
+<?php
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Template for filter items block
+ *
+ * @var $block \GoMage\Navigation\Block\Navigation\FilterRenderer
+ */
+?>
+
+<ol class="items">
+    <?php $filterItem = reset($filterItems)->getFilter(); ?>
+    <?php $attributeCode = $filterItem->getAttributeModel()->getAttributeCode(); ?>
+    <div class="layout">
+        <div class="layout-slider" style="width: 100%;">
+            <span style="display: inline-block; width: 100%; padding: 0 5px;">
+                <input style="display: none;"
+                       data-role="navigation-filter"
+                       data-active=""
+                       data-from="<?php echo $filterItem->getMinBasePrice(); ?>"
+                       data-to="<?php echo $filterItem->getMaxBasePrice(); ?>"
+                       data-step="<?php echo $block->getStep(); ?>"
+                       data-skin="<?php echo $block->getSliderSkin(); ?>"
+                       data-code="<?php echo $attributeCode; ?>"
+                       data-dimension="&nbsp;<?php echo $filterItem->getCurrencySymbol(); ?>"
+                       data-param="<?php echo $filterItem->getRequestVar() ?>"
+                       data-ajax="<?php echo $filterItem->isAjax() ?>"
+                       id="<?php echo $attributeCode; ?>"
+                       data-type="<?php echo $block->getType(); ?>"
+                       type="<?php echo $block->getType(); ?>"
+                       name="<?php echo $attributeCode; ?>"
+                       value="<?php echo $filterItem->getPriceValue(); ?>"/>
+            </span>
+        </div>
+    </div>
+</ol>

@@ -17,4 +17,13 @@ interface NavigationInterface
     const SLIDER_INPUT = 7;
     const FLY_OUT = 8;
     const IMAGE = 9;
+    const PRICE_SLIDER_STEP = 1;
+    const TYPE_SLIDER = 'slider';
+    const SLIDER_SKIN = 'round_plastic'; /*** OR classic,plastic,round,round_plastic ****/
+    const TYPE_DEFAULTS = 'defaults';
+    const TYPE_DROP_DOWN = 'select';
+    const ATTRIBUTE_CATEGORY = 'cat';
+    const ATTRIBUTE_PRICE = 'price';
+    const ATTRIBUTE_SWATCH_VISUAL = 'visual';
+    const ATTRIBUTE_SWATCH_TEXT = 'text';
 }
