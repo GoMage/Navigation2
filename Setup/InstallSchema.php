@@ -27,10 +27,16 @@ class InstallSchema implements InstallSchemaInterface
         $table = $installer->getConnection()->newTable(
             $installer->getTable('gomage_navigation_attribute')
         )->addColumn(
-            'attribute_id',
+            'id',
             \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
             null,
             ['identity' => true, 'nullable' => false, 'primary' => true],
+            'Id'
+        )->addColumn(
+            'attribute_id',
+            \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+            null,
+            ['unsigned' => true, 'nullable' => false],
             'Attribute Id'
         )->addColumn(
             'filter_type',
@@ -128,42 +134,13 @@ class InstallSchema implements InstallSchemaInterface
             null,
             ['unsigned' => true, 'nullable' => false, 'default'  => '0'],
             'Exclude Categories'
-        );
-
-        $installer->getConnection()->createTable($table);
-
-        /**
-         * Create table 'gomage_navigation_attribute_option'
-         */
-        $table = $installer->getConnection()->newTable(
-            $installer->getTable('gomage_navigation_attribute_option')
-        )->addColumn(
+        )->addForeignKey(
+            $installer->getFkName('gomage_navigation_attribute', 'attribute_id',
+                $installer->getTable('eav_attribute'), 'attribute_id'),
             'attribute_id',
-            \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
-            null,
-            ['unsigned' => true, 'nullable' => false],
-            'Attribute Id'
-        )->addColumn(
-            'option_id',
-            \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
-            null,
-            ['identity' => true, 'nullable' => false, 'primary' => true],
-            'Option Id'
-        )->addColumn(
-            'filename',
-            \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-            255,
-            [],
-            'Filename'
-        )->addColumn(
-            'name',
-            \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-            255,
-            [],
-            'Name'
-        )->addIndex(
-            $installer->getIdxName('gomage_navigation_attribute_option', ['attribute_id']),
-            ['attribute_id']
+            $installer->getTable('eav_attribute'),
+            'attribute_id',
+            \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
         );
 
         $installer->getConnection()->createTable($table);
@@ -181,15 +158,15 @@ class InstallSchema implements InstallSchemaInterface
             'Attribute Id'
         )->addColumn(
             'attribute_id',
-            \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+            \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
             null,
-            ['unsigned' => true],
+            ['unsigned' => true, 'nullable' => false],
             'Attribute Id'
         )->addColumn(
             'store_id',
             \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
             null,
-            ['unsigned' => true],
+            ['unsigned' => true, 'nullable' => false],
             'Store Id'
         )->addColumn(
             'popup_text',
@@ -197,9 +174,13 @@ class InstallSchema implements InstallSchemaInterface
             '64k',
             [],
             'Popup text'
-        )->addIndex(
-                $installer->getIdxName('gomage_navigation_attribute_store', ['attribute_id']),
-                ['attribute_id']
+        )->addForeignKey(
+            $installer->getFkName('gomage_navigation_attribute_store', 'attribute_id',
+                $installer->getTable('eav_attribute'), 'attribute_id'),
+            'attribute_id',
+            $installer->getTable('eav_attribute'),
+            'attribute_id',
+            \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
         );
 
         $installer->getConnection()->createTable($table);

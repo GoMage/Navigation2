@@ -1,22 +1,22 @@
 <?php
 namespace GoMage\Navigation\Model;
 
-use GoMage\Navigation\Api\NavigationAttributeRepositoryInterface;
-use GoMage\Navigation\Api\Data\NavigationAttributeInterface;
-use GoMage\Navigation\Model\NavigationAttributeFactory;
-use GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory;
+use GoMage\Navigation\Api\NavigationAttributeStoreRepositoryInterface;
+use GoMage\Navigation\Api\Data\NavigationAttributeStoreInterface;
+use GoMage\Navigation\Model\NavigationAttributeStoreFactory;
+use GoMage\Navigation\Model\ResourceModel\NavigationAttributeStore\CollectionFactory;
 
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Api\SearchResultsInterfaceFactory;
-class NavigationAttributeRepository implements \GoMage\Navigation\Api\NavigationAttributeRepositoryInterface
+class NavigationAttributeStoreRepository implements \GoMage\Navigation\Api\NavigationAttributeStoreRepositoryInterface
 {
     protected $objectFactory;
     protected $collectionFactory;
     public function __construct(
-        NavigationAttributeFactory $objectFactory,
+        NavigationAttributeStoreFactory $objectFactory,
         CollectionFactory $collectionFactory,
         SearchResultsInterfaceFactory $searchResultsFactory       
     )
@@ -26,7 +26,7 @@ class NavigationAttributeRepository implements \GoMage\Navigation\Api\Navigation
         $this->searchResultsFactory = $searchResultsFactory;
     }
     
-    public function save(NavigationAttributeInterface $object)
+    public function save(NavigationAttributeStoreInterface $object)
     {
         try
         {
@@ -49,7 +49,7 @@ class NavigationAttributeRepository implements \GoMage\Navigation\Api\Navigation
         return $object;        
     }       
 
-    public function delete(NavigationAttributeInterface $object)
+    public function delete(NavigationAttributeStoreInterface $object)
     {
         try {
             $object->delete();

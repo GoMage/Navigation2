@@ -1,28 +1,15 @@
 <?php
-
-
 namespace GoMage\Navigation\Model;
-
-use GoMage\Navigation\Api\Data\NavigationAttributeInterface;
-
-class NavigationAttribute extends \Magento\Framework\Model\AbstractModel implements NavigationAttributeInterface
+class NavigationAttribute extends \Magento\Framework\Model\AbstractModel implements \GoMage\Navigation\Api\Data\NavigationAttributeInterface, \Magento\Framework\DataObject\IdentityInterface
 {
 
-    /**
-     * @return void
-     */
     protected function _construct()
     {
         $this->_init('GoMage\Navigation\Model\ResourceModel\NavigationAttribute');
     }
 
-    public function getId()
+    public function getIdentities()
     {
-        return $this->getData(self::ID);
-    }
-
-    public function setId($id)
-    {
-        return $this->setData(self::ID, $id);
+        return [$this->getId()];
     }
 }

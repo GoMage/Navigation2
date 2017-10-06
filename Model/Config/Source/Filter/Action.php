@@ -14,7 +14,7 @@ class Action implements \Magento\Framework\Option\ArrayInterface
     public function toOptionArray()
     {
         return [
-            ['value' => self::PAGE_RELOAD, 'label' => __('Page Reload')],
+            ['value' => self::PAGE_RELOAD, 'label' => __('Page Reload (Breadcrumbs)')],
             ['value' => self::AJAX, 'label' => __('Ajax')],
         ];
     }
