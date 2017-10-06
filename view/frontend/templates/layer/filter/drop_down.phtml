@@ -15,6 +15,7 @@
     <?php $filterItem = reset($filterItems) ?>
     <select data-role="navigation-filter"
             data-param="<?php echo $filterItem->getRequestVar() ?>"
+            data-type="<?php echo $block->getType(); ?>"
             data-ajax="<?php echo $filterItem->isAjax() ?>">
         <option><?php echo __('Select Filter') ?></option>
         <?php foreach ($filterItems as $filterItem): ?>

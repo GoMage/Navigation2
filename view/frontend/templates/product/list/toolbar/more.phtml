@@ -1,0 +1,29 @@
+<?php
+/**
+ * GoMage Advanced Navigation Extension
+ *
+ * @category     Extension
+ * @copyright    Copyright (c) 2010-2015 GoMage (http://www.gomage.com)
+ * @author       GoMage
+ * @license      http://www.gomage.com/license-agreement/  Single domain license
+ * @terms of use http://www.gomage.com/terms-of-use
+ * @version      Release: 4.9
+ * @since        Class available since Release 3.0
+ */
+?>
+<?php
+$more_url = $block->getMoreUrl();
+?>
+<?php if ($more_url): ?>
+    <div class="gan-more-button" id="gan-more-button">
+        <button
+                style="display: none"
+                id="<?php echo $block->getType(); ?>"
+                class="<?php echo $block->getType(); ?>"
+                data-role="navigation-filter"
+                data-value="<?php echo $block->getMoreValue($more_url); ?>"
+                data-ajax="1"
+                data-type="<?php echo $block->getType(); ?>"
+        ><span><?php echo __('Show more products') ?></span></button>
+    </div>
+<?php endif; ?>

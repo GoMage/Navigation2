@@ -7,14 +7,15 @@ define([
 
         element = $(element);
 
-        if (element.is("select")) {
+        if (element.is('select')) {
             this.value = element.val();
-        }else {
+        } else {
             this.value = element.attr('data-value');
         }
         this.param = element.attr('data-param');
         this.ajax = element.attr('data-ajax');
         this.active = element.attr('data-active');
+        this.clear = element.attr('data-clear');
     }
 
     Filter.prototype = {
@@ -24,8 +25,13 @@ define([
             return this.active;
         },
 
+
         isAjax: function () {
             return this.ajax;
+        },
+
+        isClear: function () {
+            return this.clear;
         },
 
         getParam: function () {

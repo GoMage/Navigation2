@@ -80,6 +80,7 @@ class Navigation extends Generic
             ]
         );
 
+
         $fieldset->addField(
             'is_show_button',
             'select',

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
-    <virtualType name="GoMageCategoryFilterList" type="Magento\Catalog\Model\Layer\FilterList">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="categoryFilterList" type="Magento\Catalog\Model\Layer\FilterList">
         <arguments>
             <argument name="filters" xsi:type="array">
                 <item name="attribute" xsi:type="string">GoMage\Navigation\Model\Catalog\Layer\Filter\Attribute</item>
@@ -13,8 +13,18 @@
     </virtualType>
     <virtualType name="GoMage\Navigation\Block\Navigation\Category" type="GoMage\Navigation\Block\Navigation">
         <arguments>
-            <argument name="filterList" xsi:type="object">GoMageCategoryFilterList</argument>
+            <argument name="filterList" xsi:type="object">categoryFilterList</argument>
         </arguments>
     </virtualType>
     <preference for="Magento\Catalog\Model\Layer\Filter\Item" type="GoMage\Navigation\Model\Catalog\Layer\Filter\Item" />
+    <preference for="Magento\Catalog\Model\ResourceModel\Layer\Filter\Price" type="GoMage\Navigation\Model\ResourceModel\Layer\Filter\Price" />
+    <preference for="Magento\Catalog\Model\ResourceModel\Layer\Filter\Attribute" type="GoMage\Navigation\Model\ResourceModel\Layer\Filter\Attribute" />
+
+    <!--type name="Magento\Catalog\Model\ResourceModel\Layer\Filter\Attribute">
+        <plugin name="gomage_navigation_attribute" type="GoMage\Navigation\Plugin\Layer\Filter\Attribute" />
+    </type-->
+    <!--type name="Magento\Catalog\Model\Layer">
+        <plugin name="gomage_navigation_attribute" type="GoMage\Navigation\Plugin\Layer" />
+    </type-->
+
 </config>

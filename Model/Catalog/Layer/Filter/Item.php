@@ -5,6 +5,11 @@ namespace GoMage\Navigation\Model\Catalog\Layer\Filter;
 class Item extends \Magento\Catalog\Model\Layer\Filter\Item
 {
     /**
+     * @var boolean
+     */
+    protected $_isPreferred = false;
+    
+    /**
      * Get request variable name which is used for apply filter
      *
      * @return string
@@ -23,12 +28,21 @@ class Item extends \Magento\Catalog\Model\Layer\Filter\Item
     }
 
     /**
-     * TODO: detect Item status
-     * @return bool
+     * @param boolean $value
+     * @return $this
      */
-    public function isActive()
+    public function setIsPreferred($value)
     {
-        return false;
+        $this->_isPreferred = $value;
+        return $this;
+    }
+    
+    /**
+     * @return boolean
+     */
+    public function getIsPreferred()
+    {
+        return $this->_isPreferred;
     }
 
 }

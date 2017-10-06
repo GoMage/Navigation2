@@ -1,47 +1,33 @@
 <?php
-
-// @codingStandardsIgnoreFile
-
-?>
-<?php
 /**
- * Category layered navigation state
- *
- * @var $block \Magento\LayeredNavigation\Block\Navigation\State
+ * @var $block \GoMage\Navigation\Block\Navigation\State
  */
 ?>
 <?php $_filters = $block->getActiveFilters() ?>
 <?php if (!empty($_filters)): ?>
-<div class="filter-current">
+<div class="filter-current active">
     <strong class="block-subtitle filter-current-subtitle"
             role="heading"
             aria-level="2"
-            data-count="<?php echo count($_filters); ?>"><?php echo __('Now Shopping by') ?></strong>
+            data-count="<?php echo count($_filters); ?>"><?php /* @escapeNotVerified */ echo __('Applied Filters:') ?></strong>
     <ol class="items">
         <?php foreach ($_filters as $_filter): ?>
             <li class="item">
                 <span class="filter-label"><?php echo $block->escapeHtml(__($_filter->getName())); ?></span>
-                <span class="filter-value"><?php echo $block->stripTags($_filter->getLabel()) ?></span>
-                <?php
-                $clearLinkUrl = $_filter->getClearLinkUrl();
-                $currentFilterName = $block->escapeHtml(__($_filter->getName())) . " " . $block->stripTags($_filter->getLabel());
-                if ($clearLinkUrl):
-                    ?>
-                    <a class="action previous" href="<?php echo $_filter->getRemoveUrl() ?>"
-                       title="<?php echo __('Previous') ?>">
-                        <span><?php echo __('Previous') ?></span>
-                    </a>
+                <div class="filter-value-wrap">
+                    <span class="filter-value"><?php /* @escapeNotVerified */ echo $block->stripTags($_filter->getLabel()) ?></span>
+                    <?php $currentFilterName = $block->escapeHtml(__($_filter->getName())) . " " . $block->stripTags($_filter->getLabel()); ?>
                     <a class="action remove"
-                       title="<?php echo $block->escapeHtml($_filter->getFilter()->getClearLinkText()) ?>"
-                       href="<?php echo $clearLinkUrl ?>">
-                        <span><?php echo $block->escapeHtml($_filter->getFilter()->getClearLinkText()) ?></span>
+                       href="<?php /* @escapeNotVerified */ echo $_filter->getRemoveUrl() ?>"
+                       title="<?php /* @escapeNotVerified */ echo $block->escapeHtml(__('Remove')) . " " . $currentFilterName;?>"
+                       data-role="navigation-filter"
+                       data-value="<?php echo $_filter->getValueString() ?>"
+                       data-param="<?php echo $_filter->getRequestVar() ?>"
+                       data-ajax="<?php echo $_filter->isAjax() ?>"
+                       data-active="1">
+                        <span><?php /* @escapeNotVerified */ echo __('Remove This Item') ?></span>
                     </a>
-                <?php else: ?>
-                    <a class="action remove" href="<?php echo $_filter->getRemoveUrl() ?>"
-                       title="<?php echo $block->escapeHtml(__('Remove')) . " " . $currentFilterName;?>">
-                        <span><?php echo __('Remove This Item') ?></span>
-                    </a>
-                <?php endif; ?>
+                </div>
             </li>
         <?php endforeach; ?>
     </ol>
