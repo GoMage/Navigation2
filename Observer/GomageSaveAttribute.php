@@ -4,11 +4,21 @@ namespace GoMage\Navigation\Observer;
 
 class GomageSaveAttribute implements \Magento\Framework\Event\ObserverInterface
 {
-
-    protected $navigationAttributeFactory;
+    /**
+     * @var \GoMage\Navigation\Model\NavigationAttributeRepository
+     */
     protected $navigationAttributeRepository;
+
+    /**
+     * @var \GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory
+     */
     protected $navigationAttributeCollectionFactory;
 
+    /**
+     * GomageSaveAttribute constructor.
+     * @param \GoMage\Navigation\Model\NavigationAttributeRepository $navigationAttributeRepository
+     * @param \GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory $navigationAttributeCollectionFactory
+     */
     public function __construct(
         \GoMage\Navigation\Model\NavigationAttributeRepository $navigationAttributeRepository,
         \GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory $navigationAttributeCollectionFactory
@@ -18,6 +28,10 @@ class GomageSaveAttribute implements \Magento\Framework\Event\ObserverInterface
         $this->navigationAttributeCollectionFactory = $navigationAttributeCollectionFactory;
     }
 
+    /**
+     * @param \Magento\Framework\Event\Observer $observer
+     * @return $this
+     */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
         $attribute = $observer->getEvent()->getAttribute();

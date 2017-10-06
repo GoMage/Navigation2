@@ -4,11 +4,15 @@ namespace GoMage\Navigation\Observer;
 
 class GomageLoadAttribute implements \Magento\Framework\Event\ObserverInterface
 {
-
-    protected $navigationAttributeFactory;
-    protected $navigationAttributeRepository;
+    /**
+     * @var \GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory
+     */
     protected $navigationAttributeCollectionFactory;
 
+    /**
+     * GomageLoadAttribute constructor.
+     * @param \GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory $navigationAttributeCollectionFactory
+     */
     public function __construct(
         \GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory $navigationAttributeCollectionFactory
     )
@@ -16,6 +20,10 @@ class GomageLoadAttribute implements \Magento\Framework\Event\ObserverInterface
         $this->navigationAttributeCollectionFactory = $navigationAttributeCollectionFactory;
     }
 
+    /**
+     * @param \Magento\Framework\Event\Observer $observer
+     * @return $this
+     */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
         $attribute = $observer->getEvent()->getAttribute();
