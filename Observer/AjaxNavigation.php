@@ -64,7 +64,10 @@ class AjaxNavigation implements ObserverInterface
             $this->_eventManager->dispatch('gomage_navigation_ajax_result', ['result' => $result]);
 
             $this->_actionFlag->set('', \Magento\Framework\App\Action\Action::FLAG_NO_DISPATCH, true);
-            $this->_response->representJson($result->toJson());
+            //$this->_response->representJson($result->toJson());
+
+            echo $result->toJson();
+            exit;
         }
 
         return $this;

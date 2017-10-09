@@ -6,6 +6,7 @@ use GoMage\Navigation\Model\Config\Source\NavigationInterface;
 
 class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements FilterInterface
 {
+    protected $catalogSession;
     /**
      * Attribute constructor.
      * @param \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory
@@ -25,6 +26,7 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         \Magento\Catalog\Model\ResourceModel\Layer\Filter\AttributeFactory $filterAttributeFactory,
         \Magento\Framework\Stdlib\StringUtils $string,
         \Magento\Framework\Filter\StripTags $tagFilter,
+        \Magento\Catalog\Model\Session $catalogSession,
         array $data = []
     )
     {
@@ -32,6 +34,7 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         $this->string = $string;
         $this->_requestVar = 'attribute';
         $this->tagFilter = $tagFilter;
+        $this->catalogSession = $catalogSession;
         parent::__construct($filterItemFactory, $storeManager, $layer, $itemDataBuilder, $filterAttributeFactory, $string, $tagFilter, $data);
     }
 
@@ -40,7 +43,10 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
      */
     public function isAjax()
     {
-        return $this->getData('attribute_model')->getIsAjax();
+        $settings = $this->catalogSession->getGoMageAttributeSettings();
+        $model = $this->getData('attribute_model');
+
+        return (!empty($settings[$model->getId()]['gomage_is_ajax'])) ? 1 : 0;
     }
 
     /**
@@ -57,10 +63,10 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
     public function getSwatchInputType()
     {
         if ($additional_data = $this->getData('attribute_model')->getData('additional_data')) {
-            if (unserialize($additional_data)) {
-                $data = unserialize($additional_data);
-                if ($data['swatch_input_type']) {
-                    return $data['swatch_input_type'];
+            if (json_decode($additional_data)) {
+                $data = json_decode($additional_data);
+                if ($data->swatch_input_type) {
+                    return $data->swatch_input_type;
                 }
             }
         }
