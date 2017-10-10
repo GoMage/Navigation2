@@ -13,6 +13,7 @@
             <block class="GoMage\Navigation\Block\Navigation\State" name="catalog.navigation.state" as="state" />
             <block class="GoMage\Navigation\Block\Navigation\FilterRenderer" name="catalog.navigation.renderer" as="renderer"/>
         </block>
+        <block class="Magento\Framework\View\Element\Template" name="advanced.navigation.js_components" template="GoMage_Navigation::layer/js_components.phtml"/>
     </referenceContainer>
     <referenceBlock name="product_list_toolbar_pager">
         <arguments>

@@ -56,15 +56,24 @@ class AjaxNavigation implements ObserverInterface
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
         if ($this->_request->isAjax()) {
+
             $result = new DataObject();
 
-            $result->setData('navigation', $this->_layout->getBlock('catalog.leftnav')->toHtml());
+            /*$result->setData('navigation', $this->_layout->getBlock('catalog.leftnav')->toHtml());
             $result->setData('products', $this->_layout->getBlock('category.products')->toHtml());
 
             $this->_eventManager->dispatch('gomage_navigation_ajax_result', ['result' => $result]);
 
-            $this->_actionFlag->set('', \Magento\Framework\App\Action\Action::FLAG_NO_DISPATCH, true);
+            $this->_actionFlag->set('', \Magento\Framework\App\Action\Action::FLAG_NO_DISPATCH, true);*/
             //$this->_response->representJson($result->toJson());
+
+            $testData = array(
+                ['url' => '/price', 'label' => 'Price'],
+                ['url' => '/material', 'label' => 'Material'],
+                ['url' => '/size', 'label' => 'Size']
+            );
+
+            $result->setData('filters', $testData);
 
             echo $result->toJson();
             exit;
