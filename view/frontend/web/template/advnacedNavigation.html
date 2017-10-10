@@ -1,0 +1,14 @@
+<!-- ko if: showAjaxNavigation -->
+<div class="field">
+    <span data-bind="i18n: 'Filters'"></span></label>
+    <div class="advanced-filters">
+        <ul  data-bind="foreach: filters.data">
+            <li>
+                <a data-bind="attr: { href: url }">
+                    <span data-bind="text: label"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- /ko -->
