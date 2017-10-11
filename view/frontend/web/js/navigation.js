@@ -193,17 +193,14 @@ define([
                     }
 
                     var data = $.parseJSON(response);
-                    this._populateFilterModel(data.filters);
-
-                    //$(this.options.navigationContainer).parent().html(response.navigation);
+                    this._populateFilterModel(data);
+                    $('.sidebar-main').html($('#advanced-navigation-template').prop('outerHTML'));
                     $(this.options.navigationContainer).trigger('contentUpdated');
-                    //$(this.options.productsContainer).html(response.products);
-                    //$(this.options.productsContainer).trigger('contentUpdated');
+                    $(this.options.productsContainer).trigger('contentUpdated');
                     $(this.options.authentication).trigger('bindTrigger');
 
                 }.bind(this)
             });
-
         },
 
         _populateFilterModel: function (data) {

@@ -3,13 +3,15 @@
  * @var $block \GoMage\Navigation\Block\Navigation\State
  */
 ?>
+<?php $_dataHelper = $this->helper('GoMage\Navigation\Helper\Data');?>
 <?php $_filters = $block->getActiveFilters() ?>
 <?php if (!empty($_filters)): ?>
 <div class="filter-current active">
     <strong class="block-subtitle filter-current-subtitle"
             role="heading"
             aria-level="2"
-            data-count="<?php echo count($_filters); ?>"><?php /* @escapeNotVerified */ echo __('Applied Filters:') ?></strong>
+            data-count="<?php echo $_dataHelper->storeData('active_filters_count', count($_filters)); ?>">
+            <?php /* @escapeNotVerified */ echo  __('Applied Filters:') ?></strong>
     <ol class="items">
         <?php foreach ($_filters as $_filter): ?>
             <li class="item">
@@ -29,6 +31,15 @@
                     </a>
                 </div>
             </li>
+            <?php $_dataHelper->storeData('active_filters', [
+                    'filter_label' => $block->escapeHtml(__($_filter->getName())),
+                    'filter_value' => $block->stripTags(__($_filter->getLabel())),
+                    'href' => $block->stripTags(__($_filter->getRemoveUrl())),
+                    'title' => $block->escapeHtml(__('Remove')) . " " . $currentFilterName,
+                    'data_value' => $_filter->getValueString(),
+                    'data_param' => $_filter->getRequestVar(),
+                    'data_ajax' => $_filter->isAjax(),
+                ]); ?>
         <?php endforeach; ?>
     </ol>
 </div>

@@ -13,6 +13,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     protected $_scopeConfig;
 
+    /*
+     * @var Varien_Object
+     */
+    protected $_dataObject;
+
     /**
      * Data constructor.
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
@@ -57,5 +62,39 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
             . SystemConfigInterface::SYSTEM_CONFIG_FIELD_PAGER_BUTTON
         );
+    }
+
+    public function newDataObject()
+    {
+        $this->_dataObject = new Varien_Object();
+    }
+
+    public function getDataObject()
+    {
+        return $this->_dataObject;
+    }
+
+    public function storeData($key, $value)
+    {
+        if (is_object($value)) {
+            $this->_dataObject->addData([$key => (string) $value]);
+            return $value;
+        }
+
+        if(is_array($value)) {
+
+            $data = $this->_dataObject->getData($key);
+            if (!is_array($data)) {
+                $data = [];
+            }
+            $data[] = $value;
+
+            $this->_dataObject->addData([$key => $data]);
+            return $value;
+        }
+
+        $this->_dataObject->addData([$key => $value]);
+
+        return $value;
     }
 }

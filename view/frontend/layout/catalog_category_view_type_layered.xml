@@ -29,7 +29,7 @@
         <action method="setTemplate">
             <argument name="template" xsi:type="string">GoMage_Navigation::product/list/toolbar.phtml</argument>
         </action>
-
     </referenceBlock>
+    <referenceBlock name="category.products.list" template="GoMage_Navigation::product/list.phtml" />
     </body>
 </page>
