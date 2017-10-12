@@ -138,14 +138,41 @@ class FilterRenderer extends Template implements FilterRendererInterface
             $this->_filterType = $filter->getSwatchInputType();
             $template = 'GoMage_Navigation::layer/filter/swatches.phtml';
         } else {
-            switch ($filter->getNavigation()) {
+            switch ($filter->getFilterType()) {
+
+                case NavigationInterface::IN_BLOCK:
+                    $this->_filterType = NavigationInterface::IN_BLOCK;
+                    $template = 'GoMage_Navigation::layer/filter/in_block.phtml';
+                    break;
+                case NavigationInterface::BUTTON:
+                    $this->_filterType = NavigationInterface::BUTTON;
+                    $template = 'GoMage_Navigation::layer/filter/button.phtml';
+                    break;
+                case NavigationInterface::INPUT:
+                    $this->_filterType = NavigationInterface::INPUT;
+                    $template = 'GoMage_Navigation::layer/filter/input.phtml';
+                    break;
                 case NavigationInterface::SLIDER:
-                    $this->_filterType = NavigationInterface::TYPE_SLIDER;
+                    $this->_filterType = NavigationInterface::SLIDER;
                     $template = 'GoMage_Navigation::layer/filter/slider.phtml';
+                    break;
+                case NavigationInterface::SLIDER_INPUT:
+                    $this->_filterType = NavigationInterface::SLIDER_INPUT;
+                    $template = 'GoMage_Navigation::layer/filter/slider.phtml';
+                    break;
+                case NavigationInterface::DROP_DOWN:
+                    $this->_filterType = NavigationInterface::DROP_DOWN;
+                    $template = 'GoMage_Navigation::layer/filter/drop_down.phtml';
+                    break;
+                case NavigationInterface::DROP_DOWN:
+                    $this->_filterType = NavigationInterface::IN;
+                    $template = 'GoMage_Navigation::layer/filter/drop_down.phtml';
                     break;
                 default:
                     $this->_filterType = NavigationInterface::TYPE_DEFAULTS;
                     $template = 'GoMage_Navigation::layer/filter/default.phtml';
+
+
             }
         }
         return $this->setTemplate($template);

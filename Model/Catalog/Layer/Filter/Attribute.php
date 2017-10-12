@@ -6,6 +6,8 @@ use GoMage\Navigation\Model\Config\Source\NavigationInterface;
 
 class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements FilterInterface
 {
+    protected $attributeProperties;
+
     protected $catalogSession;
     /**
      * Attribute constructor.
@@ -36,6 +38,7 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         $this->tagFilter = $tagFilter;
         $this->catalogSession = $catalogSession;
         parent::__construct($filterItemFactory, $storeManager, $layer, $itemDataBuilder, $filterAttributeFactory, $string, $tagFilter, $data);
+        $test = 1;
     }
 
     /**
@@ -52,9 +55,9 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
     /**
      * @return mixed
      */
-    public function getNavigation()
+    public function getFilterType()
     {
-        return $this->getData('attribute_model')->getNavigation();
+        return $this->_getAdvancedNavigationAttribute('gomage_filter_type');
     }
 
     /**
@@ -154,4 +157,15 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         return $this->itemDataBuilder->build();
     }
 
+    protected function _getAdvancedNavigationAttribute($attribute)
+    {
+        $settings = $this->catalogSession->getGoMageAttributeSettings();
+        $model = $this->getData('attribute_model');
+
+        if (!empty($settings[$model->getId()][$attribute])) {
+            return $settings[$model->getId()][$attribute];
+        }
+
+        return false;
+    }
 }

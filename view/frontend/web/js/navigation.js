@@ -194,8 +194,23 @@ define([
 
                     var data = $.parseJSON(response);
                     this._populateFilterModel(data);
-                    $('.sidebar-main').html($('#advanced-navigation-template').prop('outerHTML'));
+                    this._populateProductModel(data);
+
+                    var adv_nav_tmpl = $('#advanced-navigation-template').prop('outerHTML');
+                    var adv_nav_tmpl_product = $('#advanced-navigation-products-template').prop('outerHTML');
+
+                    $('.sidebar-main').html(adv_nav_tmpl);
+                    $('.products.wrapper.grid.products-grid').html(adv_nav_tmpl_product);
+
+                    /*$('.filter-options-item').on('click')
+
+                    $(".filter-options-item").on( "click", function() {
+                        $( this ).children('.filter-options-content').toggle();
+                    });*/
+
+                    //$(this.options.navigationContainer).replaceWith($('#advanced-navigation-template'));
                     $(this.options.navigationContainer).trigger('contentUpdated');
+                    //$(this.options.productsContainer).html(response.products);
                     $(this.options.productsContainer).trigger('contentUpdated');
                     $(this.options.authentication).trigger('bindTrigger');
 
@@ -207,6 +222,13 @@ define([
 
             uiRegistry.get('advancedNavigationDataModel', function (dataModel) {
                 dataModel.populateModel(data);
+            });
+        },
+
+        _populateProductModel: function (data) {
+
+            uiRegistry.get('advancedNavigationProducts', function (productModel) {
+                productModel.populateModel(data);
             });
         },
 

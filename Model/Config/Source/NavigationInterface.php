@@ -20,8 +20,11 @@ interface NavigationInterface
     const PRICE_SLIDER_STEP = 1;
     const TYPE_SLIDER = 'slider';
     const SLIDER_SKIN = 'round_plastic'; /*** OR classic,plastic,round,round_plastic ****/
+
     const TYPE_DEFAULTS = 'defaults';
     const TYPE_DROP_DOWN = 'select';
+    const TYPE_IN_BLOCK = 'input';
+    const TYPE_INPUT = 'input';
     const ATTRIBUTE_CATEGORY = 'cat';
     const ATTRIBUTE_PRICE = 'price';
     const ATTRIBUTE_SWATCH_VISUAL = 'visual';

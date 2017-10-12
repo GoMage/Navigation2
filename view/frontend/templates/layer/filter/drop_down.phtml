@@ -21,8 +21,8 @@
         <?php foreach ($filterItems as $filterItem): ?>
             <?php if ($filterItem->getCount() > 0): ?>
                 <option value="<?php echo $filterItem->getValueString() ?>"
-                        <?php if ($filterItem->isActive()): ?>selected="selected"<?php endif ?>
-                        data-active="<?php echo $filterItem->isActive() ?>">
+                        <?php /*if ($filterItem->isActive()): */?><!--selected="selected"--><?php /*endif */?>
+                        <!--data-active="<?php /*echo $filterItem->isActive() */?>">-->
                     <?php echo $filterItem->getLabel() ?>
                 </option>
             <?php endif; ?>

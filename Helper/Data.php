@@ -14,7 +14,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     protected $_scopeConfig;
 
     /*
-     * @var Varien_Object
+     * @var \Magento\Framework\DataObject
      */
     protected $_dataObject;
 
@@ -66,7 +66,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     public function newDataObject()
     {
-        $this->_dataObject = new Varien_Object();
+        $this->_dataObject = new \Magento\Framework\DataObject();
     }
 
     public function getDataObject()

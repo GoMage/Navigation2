@@ -1,0 +1,57 @@
+<!-- ko if: showTemplate -->
+<ol id="ajax-products-template" class="products list items product-items" data-bind="foreach: { data: products }">
+    <li class="item product product-item">
+        <div class="product-item-info" data-container="product-grid">
+            <a class="product photo product-item-photo" tabindex="-1" data-bind="html: product_image, attr: { href: product_url }"></a>
+            <div class="product details product-item-details">
+                <strong class="product name product-item-name">
+                    <a class="product-item-link" data-bind="text: product_attribute_name, attr: { href: product_url }"></a>
+                </strong>
+
+                <!-- ko bindHtml: reviews_summary_html --><!-- /ko -->
+
+                <div data-bind="html: product_price"></div>
+                <div data-bind="html: product_details_html"></div>
+
+                <div class="product-item-inner">
+                    <div class="product actions product-item-actions">
+                        <div class="actions-primary">
+                            <!-- ko if: is_salable -->
+                                <form data-role="tocart-form" data-product-sku="" action="" method="post" data-bind="attr: { 'data-product-sku': product_sku, action: post_params_action }">
+                                    <input type="hidden" name="product" value="1401" data-bind="attr: {value: post_params_data_product}">
+                                    <input type="hidden" name="" value="" data-bind="attr: {name: param_name_encoded, value: post_params_data_param_name_url_encoded}">
+                                    <input name="form_key" type="hidden" value="" data-bind="attr: {name: form_key}">
+                                    <button type="submit" title="<!-- ko i18n: 'Add to Cart' --><!-- /ko -->" class="action tocart primary" data-bind="attr: {title: 'Add to Cart'}">
+                                    <span><!-- ko i18n: 'Add to Cart' --><!-- /ko --></span>
+                                </button>
+                                </form>
+                            <!-- /ko -->
+                            <!-- ko ifnot: is_salable -->
+                                <!-- ko if: is_available -->
+                                    <div class="stock available"><span data-bind="i18n: 'In stock'"></span></div>
+                                <!-- /ko -->
+                                <!-- ko ifnot: is_available -->
+                                    <div class="stock unavailable"><span data-bind="i18n: 'Out of stock'"></span></div>
+                                <!-- /ko -->
+                            <!-- /ko -->
+                        </div>
+                        <div data-role="add-to-links" class="actions-secondary">
+                            <!-- ko if: add_to_block -->
+                                <div data-bind="html: child_html"></div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <!-- ko if: show_description -->
+                        <div class="product description product-item-description">
+                            <span data-bind="text: short_description"> </span>
+                            <a href="" title=""
+                               class="action more" data-bind="attr: {text: i18n('Learn More'), href: product_url, title: product_name_stripped}"></a>
+                        </div>
+                    <!-- /ko -->
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </li>
+</ol>
+<!-- /ko -->

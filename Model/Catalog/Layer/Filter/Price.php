@@ -220,4 +220,9 @@ class Price extends \Magento\Catalog\Model\Layer\Filter\Price implements FilterI
 
     }
 
+    public function canShowMinimized()
+    {
+        return false;
+    }
+
 }

@@ -19,12 +19,13 @@ use Magento\Framework\App\Action\Action;
 
 $_productCollection = $block->getLoadedProductCollection();
 $_helper = $this->helper('Magento\Catalog\Helper\Output');
-$_dataHelper = $this->helper('GoMage\Navigation\Helper\Data')->newDataObject();
+$_dataHelper = $this->helper('GoMage\Navigation\Helper\Data');
+$_dataHelper->newDataObject();
 ?>
 <?php if (!$_productCollection->count()): ?>
     <div class="message info empty"><div><?= /* @escapeNotVerified */ __('We can\'t find products matching the selection.') ?></div></div>
 <?php else: ?>
-    <?= $block->getToolbarHtml() ?>
+    <?= $toolbarHtml = $block->getToolbarHtml() ?>
     <?= $block->getAdditionalHtml() ?>
     <?php
     if ($block->getMode() == 'grid') {
@@ -59,7 +60,7 @@ $_dataHelper = $this->helper('GoMage\Navigation\Helper\Data')->newDataObject();
                     ?>
                     <?php // Product Image ?>
                     <a href="<?= /* @escapeNotVerified */ $_product->getProductUrl() ?>" class="product photo product-item-photo" tabindex="-1">
-                        <?= $productImage->toHtml() ?>
+                        <?= $productImageHtml = $productImage->toHtml() ?>
                     </a>
                     <div class="product details product-item-details">
                         <?php
@@ -92,9 +93,9 @@ $_dataHelper = $this->helper('GoMage\Navigation\Helper\Data')->newDataObject();
                                         </form>
                                     <?php else: ?>
                                         <?php if ($_product->isAvailable()): ?>
-                                            <div class="stock available"><span><?= /* @escapeNotVerified */ $inStockLabel = __('In stock') ?></span></div>
+                                            <div class="stock available"><span><?= /* @escapeNotVerified */ __('In stock') ?></span></div>
                                         <?php else: ?>
-                                            <div class="stock unavailable"><span><?= /* @escapeNotVerified */ $outOfStockLabel = __('Out of stock') ?></span></div>
+                                            <div class="stock unavailable"><span><?= /* @escapeNotVerified */ __('Out of stock') ?></span></div>
                                         <?php endif; ?>
                                     <?php endif; ?>
                                 </div>
@@ -108,7 +109,7 @@ $_dataHelper = $this->helper('GoMage\Navigation\Helper\Data')->newDataObject();
                                 <div class="product description product-item-description">
                                     <?= /* @escapeNotVerified */ $shortDescription = $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
                                     <a href="<?= /* @escapeNotVerified */ $_product->getProductUrl() ?>" title="<?= /* @escapeNotVerified */ $_productNameStripped ?>"
-                                       class="action more"><?= /* @escapeNotVerified */ $learnMore = __('Learn More') ?></a>
+                                       class="action more"><?= /* @escapeNotVerified */ __('Learn More') ?></a>
                                 </div>
                             <?php endif; ?>
                         </div>
@@ -117,28 +118,30 @@ $_dataHelper = $this->helper('GoMage\Navigation\Helper\Data')->newDataObject();
                 <?= ($iterator == count($_productCollection)+1) ? '</li>' : '' ?>
                 <?php
                 $_dataHelper->storeData('products', [
-                    'product_image' => $productImage,
+                    'product_image' => $productImageHtml,
                     'position' => (!empty($position)) ? $position : '',
                     'product_url' => $_product->getProductUrl(),
                     'product_name_stripped' => $_productNameStripped,
                     'product_attribute_name' => $productAttributeName,
                     'reviews_summary_html' => $reviewsSummary,
                     'product_price' => $productPrice,
-                    '$product_details_html' => $productDetailsHtml,
+                    'product_details_html' => $productDetailsHtml,
                     'view_mode_action_position' => $viewModeActionPosition,
+                    'is_salable' => ($_product->isSaleable()) ? 1 : '',
                     'product_sku' => $_product->getSku(),
                     'post_params_action' => (!empty($postParams['action'])) ? $postParams['action'] : '',
                     'post_params_data_product' => (!empty($postParams['data']['product'])) ? $postParams['data']['product'] : '',
                     'param_name_encoded' =>  Action::PARAM_NAME_URL_ENCODED,
                     'post_params_data_param_name_url_encoded' =>  (!empty($postParams['data'][Action::PARAM_NAME_URL_ENCODED])) ? $postParams['data'][Action::PARAM_NAME_URL_ENCODED] : '',
-                    'form_key' => ($formKey) ? $formKey : '',
-                    'add_to_cart_label' => ($addToCartLabel) ? $addToCartLabel : '',
-                    'in_stock_label' => ($inStockLabel) ? $inStockLabel : '',
-                    'out_of_stock_label' => ($outOfStockLabel) ? $outOfStockLabel : '',
+                    'form_key' => (!empty($formKey)) ? $formKey : '',
+                    'is_available' => $_product->isAvailable(),
+                    'add_to_block' => $addToBlock,
+                    'child_html' => (!empty($childHtml)) ? $childHtml : '',
                     'view_mode_secondary_position' => $viewModeSecondaryPosition,
-                    'child_html' => ($childHtml) ? $childHtml : '',
-                    'short_description' => ($shortDescription) ? $shortDescription : '',
-                    'learn_more' => ($learnMore) ? $learnMore : '',
+                    'child_html' => (!empty($childHtml)) ? $childHtml : '',
+                    'show_description' => $showDescription,
+                    'short_description' => (!empty($shortDescription)) ? $shortDescription : '',
+                    'toolbar_html' => (!empty($shortDescription)) ? $shortDescription : '',
                 ]);?>
             <?php endforeach; ?>
         </ol>

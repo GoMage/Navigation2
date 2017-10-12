@@ -18,3 +18,20 @@
 
     </script>
 </div>
+<div id="advanced-navigation-products-template" data-bind="scope:'advancedNavigationProducts'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+               "components": {
+                    "advancedNavigationProducts": {
+                        "component": "GoMage_Navigation/js/advancedNavigationProducts"
+                    }
+               }
+            }
+        }
+    }
+
+    </script>
+</div>
