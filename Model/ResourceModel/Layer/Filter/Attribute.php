@@ -59,11 +59,18 @@ class Attribute extends \Magento\Catalog\Model\ResourceModel\Layer\Filter\Attrib
         $attribute = $filter->getAttributeModel();
         $connection = $this->getConnection();
         $tableAlias = $attribute->getAttributeCode() . '_idx';
+
+        $value = (array)$value;
+
+        foreach ($value as $_value) {
+            $where[] = intval($_value);
+        }
+
         $conditions = [
             "{$tableAlias}.entity_id = e.entity_id",
             $connection->quoteInto("{$tableAlias}.attribute_id = ?", $attribute->getAttributeId()),
             $connection->quoteInto("{$tableAlias}.store_id = ?", $storeId),
-            $connection->quoteInto("{$tableAlias}.value = ?", $value),
+            $connection->quoteInto($tableAlias . '.value IN (' . implode(',', $where) . ')', null)
         ];
 
         $select->join(

@@ -9,8 +9,7 @@
  * @var $block \GoMage\Navigation\Block\Navigation
  */
 ?>
-<?php $_dataHelper = $this->helper('GoMage\Navigation\Helper\Data')?>
-<?php $_dataHelper->newDataObject();?>
+
 <?php if ($block->canShowBlock()): ?>
     <div class="block filter" data-role="navigation" data-mage-init='{"navigation": {}}'>
         <div class="block-content filter-content">
@@ -18,7 +17,7 @@
 
             <?php if ($block->getLayer()->getState()->getFilters()): ?>
                 <div class="block-actions filter-actions">
-                    <a href="<?php /* @escapeNotVerified */ echo $_dataHelper->storeData('clear_url', $block->getClearUrl())?>"
+                    <a href="<?php /* @escapeNotVerified */ echo $block->getClearUrl() ?>"
                        class="action clear filter-clear"
                        data-role="navigation-filter"
                        data-ajax="1"
@@ -29,24 +28,20 @@
             <?php endif; ?>
             <?php $wrapOptions = false; ?>
             <?php if ($block->hasFilters()): ?>
-                <div class="filter-subtitle2"><?php /* @escapeNotVerified */ echo $_dataHelper->storeData('add_filter_title', __('Add Filter:')) ?></div>
+                <div class="filter-subtitle2"><?php /* @escapeNotVerified */ echo __('Add Filter:') ?></div>
 
                 <?php foreach ($block->getFilters() as $filter): ?>
                     <?php if (!$wrapOptions): ?>
-                        <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle"><?php /* @escapeNotVerified */ echo $_dataHelper->storeData('shopping_opt_title', __('Shopping Options')) ?></strong>
+                        <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle"><?php /* @escapeNotVerified */ echo __('Shopping Options') ?></strong>
                         <dl class="filter-options" id="narrow-by-list" data-role="content" data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": "true", "multipleCollapsible": true}}'>
 
                         <?php $wrapOptions = true; endif; ?>
-                        <? $name = $filter->getname();?>
+
                         <?php if ($filter->getItemsCount()): ?>
                         <div data-role="collapsible" class="filter-options-item">
                             <dt data-role="title" role="heading" aria-level="3" class="filter-options-title"><?php echo $block->escapeHtml(__($filter->getName())) ?></dt>
                             <dd data-role="content" class="filter-options-content"><?php /* @escapeNotVerified */ echo $block->getChildBlock('renderer')->render($filter); ?></dd>
                         </div>
-                        <?php $_dataHelper->storeData('filters', [
-                            'title' => $block->escapeHtml(__($filter->getName())),
-                            'content' => $block->getChildBlock('renderer')->render($filter),
-                        ]);?>
                            <?php endif; ?>
                 <?php endforeach; ?>
                 <?php if ($wrapOptions): ?>

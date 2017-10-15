@@ -38,7 +38,7 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         $this->tagFilter = $tagFilter;
         $this->catalogSession = $catalogSession;
         parent::__construct($filterItemFactory, $storeManager, $layer, $itemDataBuilder, $filterAttributeFactory, $string, $tagFilter, $data);
-        $test = 1;
+
     }
 
     /**
@@ -105,12 +105,16 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         if (is_array($filter)) {
             return $this;
         }
-        $text = $this->getOptionText($filter);
 
-        if ($filter && strlen($text)) {
-            $this->_getResource()->applyFilterToCollection($this, $filter);
-            $this->getLayer()->getState()->addFilter($this->_createItem($text, $filter));
-            $this->_items = [];
+        if ($filter) {
+
+            $filters = explode(',', $filter);
+            $this->_getResource()->applyFilterToCollection($this, $filters);
+            foreach ($filters as $filterItem) {
+                $text = $this->getOptionText($filterItem);
+                $this->getLayer()->getState()->addFilter($this->_createItem($text, $filterItem));
+            }
+                $this->_items = [];
         }
 
         return $this;

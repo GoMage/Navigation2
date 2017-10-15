@@ -3,43 +3,32 @@
  * @var $block \GoMage\Navigation\Block\Navigation\State
  */
 ?>
-<?php $_dataHelper = $this->helper('GoMage\Navigation\Helper\Data');?>
 <?php $_filters = $block->getActiveFilters() ?>
 <?php if (!empty($_filters)): ?>
 <div class="filter-current active">
     <strong class="block-subtitle filter-current-subtitle"
             role="heading"
             aria-level="2"
-            data-count="<?php echo $_dataHelper->storeData('active_filters_count', count($_filters)); ?>">
-            <?php /* @escapeNotVerified */ echo  __('Applied Filters:') ?></strong>
+            data-count="<?php echo count($_filters); ?>"><?php /* @escapeNotVerified */ echo __('Applied Filters:') ?></strong>
     <ol class="items">
         <?php foreach ($_filters as $_filter): ?>
             <li class="item">
-                <span class="filter-label"><?php echo $filter_label = $block->escapeHtml(__($_filter->getName())); ?></span>
+                <span class="filter-label"><?php echo $block->escapeHtml(__($_filter->getName())); ?></span>
                 <div class="filter-value-wrap">
-                    <span class="filter-value"><?php /* @escapeNotVerified */ echo $filter_value = $block->stripTags($_filter->getLabel()) ?></span>
+                    <span class="filter-value"><?php /* @escapeNotVerified */ echo $block->stripTags($_filter->getLabel()) ?></span>
                     <?php $currentFilterName = $block->escapeHtml(__($_filter->getName())) . " " . $block->stripTags($_filter->getLabel()); ?>
                     <a class="action remove"
-                       href="<?php /* @escapeNotVerified */ echo $filter_remove_url = $filter_remove_url = $_filter->getRemoveUrl() ?>"
-                       title="<?php /* @escapeNotVerified */ echo $title = $block->escapeHtml(__('Remove')) . " " . $currentFilterName;?>"
+                       href="<?php /* @escapeNotVerified */ echo $_filter->getRemoveUrl() ?>"
+                       title="<?php /* @escapeNotVerified */ echo $block->escapeHtml(__('Remove')) . " " . $currentFilterName;?>"
                        data-role="navigation-filter"
-                       data-value="<?php echo $data_value = $_filter->getValueString() ?>"
-                       data-param="<?php echo $data_param = $_filter->getRequestVar() ?>"
-                       data-ajax="<?php echo $data_ajax = $_filter->isAjax() ?>"
+                       data-value="<?php echo $_filter->getValueString() ?>"
+                       data-param="<?php echo $_filter->getRequestVar() ?>"
+                       data-ajax="<?php echo $_filter->isAjax() ?>"
                        data-active="1">
                         <span><?php /* @escapeNotVerified */ echo __('Remove This Item') ?></span>
                     </a>
                 </div>
             </li>
-            <?php $_dataHelper->storeData('active_filters', [
-                    'filter_label' => $filter_label,
-                    'filter_value' => $filter_value,
-                    'href' => $filter_remove_url,
-                    'title' => $title,
-                    'data_value' => $data_value,
-                    'data_param' => $data_param,
-                    'data_ajax' => $data_ajax,
-                ]); ?>
         <?php endforeach; ?>
     </ol>
 </div>

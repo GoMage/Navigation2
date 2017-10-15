@@ -12,6 +12,8 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
      */
     protected $request;
 
+    protected $activeFilters;
+
     /**
      * Navigation constructor.
      * @param \Magento\Framework\View\Element\Template\Context $context
@@ -79,4 +81,31 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         return parent::_prepareLayout();
     }
 
+    public function isFilterActive($name)
+    {
+        if(in_array($name, $this->_getActiveFilters()))
+            return true;
+
+        return false;
+    }
+
+    protected function _getActiveFilters()
+    {
+        $filters = $this->getLayer()->getState()->getFilters();
+        if (!is_array($filters)) {
+            $filters = [];
+        }
+
+        if (is_array($this->activeFilters)) {
+            return $this->activeFilters;
+        }
+
+        $this->activeFilters = [];
+
+        foreach ($filters as $filter) {
+            $this->activeFilters[] = $filter->getName();
+        }
+
+        return $this->activeFilters;
+    }
 }

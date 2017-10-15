@@ -13,23 +13,11 @@
             <block class="GoMage\Navigation\Block\Navigation\State" name="catalog.navigation.state" as="state" />
             <block class="GoMage\Navigation\Block\Navigation\FilterRenderer" name="catalog.navigation.renderer" as="renderer"/>
         </block>
-        <block class="Magento\Framework\View\Element\Template" name="advanced.navigation.js_components" template="GoMage_Navigation::layer/js_components.phtml"/>
     </referenceContainer>
     <referenceBlock name="product_list_toolbar_pager">
         <arguments>
             <argument name="template" xsi:type="string">GoMage_Navigation::html/pager.phtml</argument>
         </arguments>
-
     </referenceBlock>
-    <referenceBlock name="product_list_toolbar">
-        <block name="gomage.navigation.more.button" class="GoMage\Navigation\Block\Product\ProductList\More"/>
-        <arguments>
-            <argument name="template" xsi:type="string">GoMage_Navigation::product/list/toolbar.phtml</argument>
-        </arguments>
-        <action method="setTemplate">
-            <argument name="template" xsi:type="string">GoMage_Navigation::product/list/toolbar.phtml</argument>
-        </action>
-    </referenceBlock>
-    <referenceBlock name="category.products.list" template="GoMage_Navigation::product/list.phtml" />
     </body>
 </page>
