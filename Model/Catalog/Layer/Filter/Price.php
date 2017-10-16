@@ -225,4 +225,8 @@ class Price extends \Magento\Catalog\Model\Layer\Filter\Price implements FilterI
         return false;
     }
 
+    public function isFilterInState()
+    {
+        return ;
+    }
 }

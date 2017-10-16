@@ -101,16 +101,18 @@ class Attribute extends \Magento\Catalog\Model\ResourceModel\Layer\Filter\Attrib
             $select = clone $filter->getLayer()->getProductCollection()->getSelect();
         }
 
+        $tableAlias = sprintf('%s_idx', $attribute_code . md5(microtime()));
 
         // reset columns, order and limitation conditions
         $select->reset(\Magento\Framework\DB\Select::COLUMNS);
         $select->reset(\Magento\Framework\DB\Select::ORDER);
         $select->reset(\Magento\Framework\DB\Select::LIMIT_COUNT);
         $select->reset(\Magento\Framework\DB\Select::LIMIT_OFFSET);
+        $select->reset(\Magento\Framework\DB\Select::GROUP);
+
 
         $connection = $this->getConnection();
 
-        $tableAlias = sprintf('%s_idx', $attribute_code);
         $conditions = [
             "{$tableAlias}.entity_id = e.entity_id",
             $connection->quoteInto("{$tableAlias}.attribute_id = ?", $attribute->getAttributeId()),
@@ -120,11 +122,13 @@ class Attribute extends \Magento\Catalog\Model\ResourceModel\Layer\Filter\Attrib
         $select->join(
             [$tableAlias => $this->getMainTable()],
             join(' AND ', $conditions),
-            ['value', 'count' => new \Zend_Db_Expr("COUNT({$tableAlias}.entity_id)")]
+            ['value', 'count' => new \Zend_Db_Expr("COUNT( {$tableAlias}.entity_id)")]
         )->group(
             "{$tableAlias}.value"
         );
 
+        $_collection =  $filter->getLayer()->getProductCollection();
+        $_collection->getSelect()->distinct(true);
 
         return $connection->fetchPairs($select);
     }

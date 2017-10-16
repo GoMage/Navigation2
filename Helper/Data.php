@@ -3,6 +3,7 @@
 namespace GoMage\Navigation\Helper;
 
 use GoMage\Navigation\Helper\Config\SystemConfigInterface;
+use Magento\Framework\App\Helper\Context;
 
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
@@ -13,12 +14,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     protected $_scopeConfig;
 
-    /**
-     * Url Builder
-     *
-     * @var \Magento\Framework\UrlInterface
-     */
-    protected $_urlBuilder;
+    protected $_request;
 
     /**
      * Data constructor.
@@ -27,14 +23,18 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @param \Magento\Framework\UrlInterface $urlHelper
      */
     public function __construct(
+        Context $context,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \GoMage\Navigation\Helper\Url $urlHelper,
-        \Magento\Framework\UrlInterface $urlBuilder
+        \Magento\Framework\App\Request\Http $request
+        //\Magento\Framework\UrlInterface $url,
     )
     {
+        parent::__construct($context);
         $this->_scopeConfig = $scopeConfig;
         $this->_urlHelper = $urlHelper;
-        $this->_urlBuilder = $urlBuilder;
+        $this->_request = $request;
+
     }
 
 
@@ -80,7 +80,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     public function isFriendlyUrl()
     {
-        return $this->isGomageNavigation() && Mage::getStoreConfigFlag('gomage_navigation/settings/friendly_urls');
+        return false;
+        //return $this->isGomageNavigation() && Mage::getStoreConfigFlag('gomage_navigation/settings/friendly_urls');
     }
 
     public function isGomageNavigation()
@@ -105,15 +106,35 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return true;
     }
 
+    public function getRemoveUrl($route, $data)
+    {
+        $queryParams = is_array($this->_request->getParams()) ? $this->_request->getParams() : array();
+        $temp = explode(',', $queryParams[$data['request_var']]);
+        $queryParams[$data['request_var']] = implode(',', array_diff($temp, [$data['request_value']]));
+
+        $params = array(
+            '_nosid'		=> true,
+            '_current'		=> true,
+            '_secure'		=> true,
+            '_use_rewrite'	=> true,
+            '_query'		=> $queryParams,
+            '_escape'		=> false,
+
+        );
+
+        return $this->_urlHelper->wrapp($this->_urlBuilder->getUrl($route, $params));
+    }
+
     public function getFilterUrl($route = '*/*/*', $params = array())
     {
         if (!$this->isFriendlyUrl()) {
             $params['_query']['ajax'] = null;
             return $this->_urlHelper->wrapp($this->_urlBuilder->getUrl($route, $params));
         }
-        $model = Mage::getModel('core/url');
+
+
         $attr = Mage::registry('gan_filter_attributes');
-        $query_params = is_array($model->getRequest()->getQuery()) ? $model->getRequest()->getQuery() : array();
+        $query_params = is_array($this->_request->getParams()) ? $this->_request->getParams() : array();
         $query = array();
         if (isset($params['_query']) && is_array($params['_query'])) {
             $query_params = array_merge($query_params, $params['_query']);

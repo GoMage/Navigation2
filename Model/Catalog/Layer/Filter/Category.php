@@ -32,4 +32,9 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
     public function _getItemsData(){
         return [];
     }
+
+    public function isFilterInState()
+    {
+        return ;
+    }
 }

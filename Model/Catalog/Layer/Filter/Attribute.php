@@ -38,26 +38,20 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         $this->tagFilter = $tagFilter;
         $this->catalogSession = $catalogSession;
         parent::__construct($filterItemFactory, $storeManager, $layer, $itemDataBuilder, $filterAttributeFactory, $string, $tagFilter, $data);
-
+        $this->_setGoMageAttributeSettings();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isAjax()
+    protected function _setGoMageAttributeSettings()
     {
         $settings = $this->catalogSession->getGoMageAttributeSettings();
         $model = $this->getData('attribute_model');
 
-        return (!empty($settings[$model->getId()]['gomage_is_ajax'])) ? 1 : 0;
-    }
+        if(empty($settings[$model->getId()]))
+            return ;
 
-    /**
-     * @return mixed
-     */
-    public function getFilterType()
-    {
-        return $this->_getAdvancedNavigationAttribute('gomage_filter_type');
+        foreach ($settings[$model->getId()] as $key => $value) {
+            $this->addData([$key => $value]);
+        }
     }
 
     /**
@@ -114,7 +108,7 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
                 $text = $this->getOptionText($filterItem);
                 $this->getLayer()->getState()->addFilter($this->_createItem($text, $filterItem));
             }
-                $this->_items = [];
+                $this->_items = $this->_getItemsData();
         }
 
         return $this;
@@ -129,11 +123,41 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
      */
     protected function _getItemsData()
     {
-
         $attribute = $this->getAttributeModel();
         $this->_requestVar = $attribute->getAttributeCode();
         $options = $attribute->getFrontend()->getSelectOptions();
         $optionsCount = $this->_getResource()->getCount($this);
+
+
+            $items = [];
+            foreach ($options as $option) {
+                if (is_array($option['value'])) {
+                    continue;
+                }
+                if ($this->string->strlen($option['value'])) {
+                    // Check filter type
+                    if ($this->getAttributeIsFilterable($attribute) == self::ATTRIBUTE_OPTIONS_ONLY_WITH_RESULTS) {
+                        if (!empty($optionsCount[$option['value']])) {
+                            $items[] = $this->_createItem($option['label'], $option['value'], $optionsCount[$option['value']]);
+                        }
+                    } else {
+                        $items[] = $this->_createItem($option['label'], $option['value'], isset($optionsCount[$option['value']]) ? $optionsCount[$option['value']] : 0);
+                    }
+                }
+            }
+
+
+
+
+        //$this->tagFilter->filter($option['label']),
+
+        return $items;
+    }
+
+    public function setItemsData()
+    {
+        $attribute = $this->getAttributeModel();
+        $options = $attribute->getFrontend()->getSelectOptions();
 
         foreach ($options as $option) {
             if (is_array($option['value'])) {
@@ -158,18 +182,16 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
                 }
             }
         }
-        return $this->itemDataBuilder->build();
+
+        $this->_items = $this->itemDataBuilder->build();
     }
 
-    protected function _getAdvancedNavigationAttribute($attribute)
+    public function getActiveStateItems()
     {
-        $settings = $this->catalogSession->getGoMageAttributeSettings();
-        $model = $this->getData('attribute_model');
-
-        if (!empty($settings[$model->getId()][$attribute])) {
-            return $settings[$model->getId()][$attribute];
-        }
-
-        return false;
+        $attribute = $this->getAttributeModel();
+        $this->_requestVar = $attribute->getAttributeCode();
+        $options = $attribute->getFrontend()->getSelectOptions();
+        $optionsCount = $this->_getResource()->getCount($this);
+        $this->addData('items', $options);
     }
 }

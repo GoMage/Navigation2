@@ -81,9 +81,11 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         return parent::_prepareLayout();
     }
 
-    public function isFilterActive($name)
+    public function isFilterActive($filter)
     {
-        if(in_array($name, $this->_getActiveFilters()))
+        $code = $filter->getAttributeModel()->getAttributeCode();
+
+        if(in_array($code, $this->_getActiveFilters()))
             return true;
 
         return false;
@@ -103,8 +105,11 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         $this->activeFilters = [];
 
         foreach ($filters as $filter) {
-            $this->activeFilters[] = $filter->getName();
+
+            $this->activeFilters[] = $filter->getFilter()->getAttributeModel()->getAttributeCode();
         }
+
+        $this->activeFilters = array_unique($this->activeFilters);
 
         return $this->activeFilters;
     }

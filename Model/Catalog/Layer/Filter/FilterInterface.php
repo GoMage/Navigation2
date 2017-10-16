@@ -7,11 +7,5 @@ namespace GoMage\Navigation\Model\Catalog\Layer\Filter;
  */
 interface FilterInterface extends \Magento\Catalog\Model\Layer\Filter\FilterInterface
 {
-    /**
-     * @return boolean
-     */
-    public function isAjax();
-
-
 
 }

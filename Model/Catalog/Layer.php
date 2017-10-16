@@ -11,16 +11,13 @@ use Magento\Catalog\Model\ResourceModel\Product\Attribute\CollectionFactory as A
   */
 class Layer extends  \Magento\Catalog\Model\Layer
 {
-    const FILTER_TYPE_DEFAULT         = 0;
-    const FILTER_TYPE_IMAGE           = 1;
-    const FILTER_TYPE_DROPDOWN        = 2;
-    const FILTER_TYPE_INPUT           = 3;
-    const FILTER_TYPE_SLIDER          = 4;
-    const FILTER_TYPE_SLIDER_INPUT    = 5;
-    const FILTER_TYPE_PLAIN           = 6;
-    const FILTER_TYPE_FOLDING         = 7;
-    const FILTER_TYPE_DEFAULT_PRO     = 8;
-    const FILTER_TYPE_DEFAULT_INBLOCK = 9;
-    const FILTER_TYPE_INPUT_SLIDER    = 10;
-    const FILTER_TYPE_ACCORDION       = 11;
+    const FILTER_TYPE_DEFAULT            = 0;
+    const FILTER_TYPE_COLOR_PICKER       = 1;
+    const FILTER_TYPE_DROPDOWN           = 2;
+    const FILTER_TYPE_IN_BLOCK           = 3;
+    const FILTER_TYPE_BUTTON             = 4;
+    const FILTER_TYPE_INPUT              = 5;
+    const FILTER_TYPE_SLIDER             = 6;
+    const FILTER_TYPE_SLIDER_AND_INPUT   = 7;
+
 }

@@ -15,8 +15,8 @@
                 <a href="<?php echo $block->escapeUrl($filterItem->getUrl()) ?>"
                    data-role="navigation-filter"
                    data-value="<?php echo $filterItem->getValueString() ?>"
-                   data-param="<?php echo $filterItem->getRequestVar() ?>"
-                   data-ajax="<?php echo $filterItem->isAjax() ?>"
+                   data-param="<?php echo $filterItem->getFilter()->getRequestVar() ?>"
+                   data-ajax="<?php echo $filterItem->getFilter()->getData('gomage_is_ajax'); ?>"
                    data-type="<?php echo $block->getType(); ?>"
                    data-active="">
                     <span class="filter-label-text"><?php echo $filterItem->getLabel() ?></span>

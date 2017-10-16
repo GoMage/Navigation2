@@ -37,7 +37,7 @@
 
                         <?php $wrapOptions = true; endif; ?>
 
-                        <?php if ($filter->getItemsCount()): ?>
+                        <?php if ($filter->getItemsCount() || $block->isFilterActive($filter)): ?>
                         <div data-role="collapsible" class="filter-options-item">
                             <dt data-role="title" role="heading" aria-level="3" class="filter-options-title"><?php echo $block->escapeHtml(__($filter->getName())) ?></dt>
                             <dd data-role="content" class="filter-options-content"><?php /* @escapeNotVerified */ echo $block->getChildBlock('renderer')->render($filter); ?></dd>

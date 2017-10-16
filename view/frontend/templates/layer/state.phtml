@@ -23,7 +23,7 @@
                        data-role="navigation-filter"
                        data-value="<?php echo $_filter->getValueString() ?>"
                        data-param="<?php echo $_filter->getRequestVar() ?>"
-                       data-ajax="<?php echo $_filter->isAjax() ?>"
+                       data-ajax="<?php echo $_filter->getFilter()->getData('gomage_is_ajax'); ?>"
                        data-active="1">
                         <span><?php /* @escapeNotVerified */ echo __('Remove This Item') ?></span>
                     </a>
