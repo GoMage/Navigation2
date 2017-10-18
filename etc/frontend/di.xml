@@ -19,6 +19,9 @@
     <preference for="Magento\Catalog\Model\Layer\Filter\Item" type="GoMage\Navigation\Model\Catalog\Layer\Filter\Item" />
     <preference for="Magento\Catalog\Model\ResourceModel\Layer\Filter\Price" type="GoMage\Navigation\Model\ResourceModel\Layer\Filter\Price" />
     <preference for="Magento\Catalog\Model\ResourceModel\Layer\Filter\Attribute" type="GoMage\Navigation\Model\ResourceModel\Layer\Filter\Attribute" />
+    <type name="Magento\Catalog\Model\Layer\FilterList">
+        <plugin name="gomage_set_additional_data_to_filters" type="\GoMage\Navigation\Plugin\SetAdditionalAttributeData" />
+    </type>
 
     <!--type name="Magento\Catalog\Model\ResourceModel\Layer\Filter\Attribute">
         <plugin name="gomage_navigation_attribute" type="GoMage\Navigation\Plugin\Layer\Filter\Attribute" />

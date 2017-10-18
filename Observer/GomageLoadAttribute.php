@@ -31,8 +31,6 @@ class GomageLoadAttribute implements \Magento\Framework\Event\ObserverInterface
     {
         $attribute = $observer->getEvent()->getAttribute();
 
-        file_put_contents('test.txt', 'loaded='.$attribute->getId()."\r\n", FILE_APPEND);
-
         $navigationAttributeCollection = $this->navigationAttributeCollectionFactory->create()
             ->addFieldToFilter('attribute_id', $attribute->getId())
             ->setPageSize(1)

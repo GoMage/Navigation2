@@ -15,6 +15,7 @@ interface NavigationInterface
     const INPUT = 5;
     const SLIDER = 6;
     const SLIDER_INPUT = 7;
+    const SWATCHES = 8;
     const FLY_OUT = 8;
     const IMAGE = 9;
     const PRICE_SLIDER_STEP = 1;

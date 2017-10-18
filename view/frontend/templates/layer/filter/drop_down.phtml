@@ -16,7 +16,7 @@
     <select data-role="navigation-filter"
             data-param="<?php echo $filterItem->getRequestVar() ?>"
             data-type="<?php echo $block->getType(); ?>"
-            data-ajax="<?php echo $filterItem->isAjax() ?>">
+            data-ajax="<?php echo $filterItem->getFilter()->getData('gomage_is_ajax'); ?>">
         <option><?php echo __('Select Filter') ?></option>
         <?php foreach ($filterItems as $filterItem): ?>
             <?php if ($filterItem->getCount() > 0): ?>

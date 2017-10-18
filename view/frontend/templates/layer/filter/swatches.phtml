@@ -9,8 +9,13 @@
 /** @var $block \Magento\Swatches\Block\LayeredNavigation\RenderLayered */
 ?>
 
-<?php $swatchData = $block->getSwatch()->getSwatchData(); ?>
-<?php $filterItem = reset($filterItems)->getFilter(); ?>
+<?php
+
+$filterItem = reset($filterItems)->getFilter();
+$swatchData = $block->getSwatch()->setSwatchFilter($filterItem)->getSwatchData();
+
+?>
+
 <div class="swatch-attribute swatch-layered <?php /* @escapeNotVerified */
 echo $swatchData['attribute_code'] ?>"
      attribute-code="<?php /* @escapeNotVerified */
@@ -23,8 +28,8 @@ echo $swatchData['attribute_id'] ?>">
                data-role="navigation-filter"
                data-value="<?php echo $option; ?>"
                data-param="<?php echo $filterItem->getRequestVar() ?>"
-               data-ajax="<?php echo $filterItem->isAjax() ?>"
-               data-type="<?php echo $block->getType(); ?>"
+               data-ajax="<?php echo $filterItem->getData('gomage_is_ajax'); ?>"
+               data-type="<?php echo $filterItem->getSwatchInputType(); ?>"
                data-active=""
                class="swatch-option-link-layered">
                 <?php if (isset($swatchData['swatches'][$option]['type'])) { ?>

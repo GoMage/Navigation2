@@ -1,0 +1,64 @@
+<?php
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Template for filter items block
+ *
+ * @var $block \GoMage\Navigation\Block\Navigation\FilterRenderer
+ */
+?>
+
+<ol class="items">
+    <?php $filterItem = reset($filterItems)->getFilter(); ?>
+    <?php $attributeModel = $filterItem->getAttributeModel(); ?>
+    <div class="layout">
+        <div class="layout-slider" style="width: 100%;">
+            <span style="display: inline-block; width: 100%; padding: 0 5px;">
+                <input style="display: none;"
+                       data-role="navigation-filter"
+                       data-active=""
+                       data-from="<?php echo $filterItem->getMinBasePrice(); ?>"
+                       data-to="<?php echo $filterItem->getMaxBasePrice(); ?>"
+                       data-step="<?php echo $block->getStep(); ?>"
+                       data-skin="<?php echo $block->getSliderSkin(); ?>"
+                       data-code="<?php echo $attributeModel->getAttributeCode(); ?>"
+                       data-dimension="&nbsp;<?php echo $filterItem->getCurrencySymbol(); ?>"
+                       data-param="<?php echo $filterItem->getRequestVar() ?>"
+                       data-ajax="<?php echo $filterItem->isAjax() ?>"
+                       id="<?php echo $attributeModel->getAttributeCode(); ?>"
+                       data-type="slider"
+                       type="slider"
+                       name="<?php echo $attributeModel->getAttributeCode(); ?>"
+                       value="<?php echo $filterItem->getPriceValue(); ?>"/>
+            </span>
+        </div>
+    </div>
+    <div class="filter-type-input" style="padding:0;">
+        <form>
+            <fieldset class="filter-fieldset">
+
+                <div class="fields">
+                    <div class="from-wrapper">
+                        <label>
+                            <input data-role="navigation-filter" type="text" name="<?php echo $attributeModel->getAttributeCode();?>_from" value="<?php echo $filterItem->getMinBasePrice(); ?>" />
+                        </label>
+                    </div>
+                    <div class="from-wrapper">
+                        <label>
+                            <span><?php echo __('to')?></span>
+                            <input data-role="navigation-filter" type="text" name="<?php echo $attributeModel->getAttributeCode();?>_to" value="<?php echo $filterItem->getMaxBasePrice(); ?>" />
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <button class="button" type="submit"><span><?php echo $attributeModel->getFrontendLabel(); ?></span></button>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+</ol>

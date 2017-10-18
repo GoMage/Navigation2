@@ -3,6 +3,7 @@
  *
  * @var $block \GoMage\Navigation\Block\Navigation\FilterRenderer
  */
+
 ?>
  <?php $item = reset($filterItems)->getFilter(); ?>
 <ol class="items"  class="<?php echo $item->canShowMinimized() ? "filter-content-hide" : "filter-content-show"; ?>  >
@@ -16,8 +17,8 @@
                    data-role="navigation-filter"
                    data-value="<?php echo $filterItem->getValueString() ?>"
                    data-param="<?php echo $filterItem->getFilter()->getRequestVar() ?>"
-                   data-ajax="<?php echo $filterItem->getFilter()->getData('gomage_is_ajax'); ?>"
-                   data-type="<?php echo $block->getType(); ?>"
+                   data-ajax="<?php echo $filterItem->getFilter()->getAttributeModel()->getData('gomage_is_ajax'); ?>"
+                   data-type="<?php echo (int) $filterItem->getFilter()->getAttributeModel()->getData('gomage_filter_type');; ?>"
                    data-active="">
                     <span class="filter-label-text"><?php echo $filterItem->getLabel() ?></span>
                     <?php if ($filterItem->getIsPreferred()) : ?><div class="filter-preferred"><?php echo __('Preferred brand') ?></div><?php endif?>

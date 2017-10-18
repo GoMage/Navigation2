@@ -1,0 +1,31 @@
+
+<?php $filterItem = reset($filterItems)->getFilter(); ?>
+<?php $attributeModel = $filterItem->getAttributeModel(); ?>
+
+<ol class="items">
+    <div class="filter-type-input" style="padding:0;">
+        <form>
+            <fieldset class="filter-fieldset">
+
+                <div class="fields">
+                    <div class="from-wrapper">
+                        <label>
+                            <input data-role="navigation-filter" type="text" name="<?php echo $attributeModel->getAttributeCode();?>_from" value="<?php echo $filterItem->getMinBasePrice(); ?>" />
+                        </label>
+                    </div>
+                    <div class="from-wrapper">
+                        <label>
+                            <span><?php echo __('to')?></span>
+                            <input data-role="navigation-filter" type="text" name="<?php echo $attributeModel->getAttributeCode();?>_to" value="<?php echo $filterItem->getMaxBasePrice(); ?>" />
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <button class="button" type="submit"><span><?php echo $attributeModel->getFrontendLabel(); ?></span></button>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+</ol>

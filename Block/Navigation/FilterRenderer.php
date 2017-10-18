@@ -85,7 +85,7 @@ class FilterRenderer extends Template implements FilterRendererInterface
      */
     public function render(FilterInterface $filter)
     {
-        $this->_switchTemplate($filter);
+        $this->setTemplate($filter->getData('gomage_filter_template'));
 
         $filtersPreferred = [];
         $filtersCommon = [];
@@ -122,60 +122,6 @@ class FilterRenderer extends Template implements FilterRendererInterface
         }
 
         return in_array($filterItem->getValue(), $this->_preferredItems);
-    }
-
-    /**
-     * @param FilterInterface $filter
-     * @return $this
-     */
-    protected function _switchTemplate(FilterInterface $filter)
-    {
-
-        if ($filter->getSwatchInputType() == NavigationInterface::ATTRIBUTE_SWATCH_TEXT
-            || $filter->getSwatchInputType() == NavigationInterface::ATTRIBUTE_SWATCH_VISUAL
-        ) {
-            $this->getSwatch()->setSwatchFilter($filter);
-            $this->_filterType = $filter->getSwatchInputType();
-            $template = 'GoMage_Navigation::layer/filter/swatches.phtml';
-        } else {
-            switch ($filter->getFilterType()) {
-
-                case NavigationInterface::IN_BLOCK:
-                    $this->_filterType = NavigationInterface::IN_BLOCK;
-                    $template = 'GoMage_Navigation::layer/filter/in_block.phtml';
-                    break;
-                case NavigationInterface::BUTTON:
-                    $this->_filterType = NavigationInterface::BUTTON;
-                    $template = 'GoMage_Navigation::layer/filter/button.phtml';
-                    break;
-                case NavigationInterface::INPUT:
-                    $this->_filterType = NavigationInterface::INPUT;
-                    $template = 'GoMage_Navigation::layer/filter/input.phtml';
-                    break;
-                case NavigationInterface::SLIDER:
-                    $this->_filterType = NavigationInterface::SLIDER;
-                    $template = 'GoMage_Navigation::layer/filter/slider.phtml';
-                    break;
-                case NavigationInterface::SLIDER_INPUT:
-                    $this->_filterType = NavigationInterface::SLIDER_INPUT;
-                    $template = 'GoMage_Navigation::layer/filter/slider.phtml';
-                    break;
-                case NavigationInterface::DROP_DOWN:
-                    $this->_filterType = NavigationInterface::DROP_DOWN;
-                    $template = 'GoMage_Navigation::layer/filter/drop_down.phtml';
-                    break;
-                case NavigationInterface::DROP_DOWN:
-                    $this->_filterType = NavigationInterface::IN;
-                    $template = 'GoMage_Navigation::layer/filter/drop_down.phtml';
-                    break;
-                default:
-                    $this->_filterType = NavigationInterface::TYPE_DEFAULTS;
-                    $template = 'GoMage_Navigation::layer/filter/default.phtml';
-
-
-            }
-        }
-        return $this->setTemplate($template);
     }
 
     /**
