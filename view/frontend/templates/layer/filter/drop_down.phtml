@@ -1,14 +1,27 @@
 <?php
-
-// @codingStandardsIgnoreFile
-
-?>
-<?php
 /**
- * Template for filter items block
  *
  * @var $block \GoMage\Navigation\Block\Navigation\FilterRenderer
  */
+
+$filter = reset($filterItems)->getFilter();
+$filter->getGoMageFilterType();
+$filter->getGoMageIsShowFilterButton();
+$filter->getGoMageMaxBlockHeight();
+$filter->getGoMageIsAjax();
+$filter->getGoMageIsCollapsed();
+$filter->getGoMageIsCheckbox();
+$filter->getGoMageIsShowImageName();
+$filter->getGoMageOptionsAlignment();
+$filter->getGoMageImageWidth();
+$filter->getGoMageImageHeight();
+$filter->getGoMageVisibleOptions();
+$filter->getGoMageIsShowTooltip();
+$filter->getGoMageTooltipWidth();
+$filter->getGoMageTooltipHeight();
+$filter->getGoMageIsReset();
+$filter->getGoMageIsExcludeCategories();
+
 ?>
 
 <ol class="items">
@@ -16,7 +29,7 @@
     <select data-role="navigation-filter"
             data-param="<?php echo $filterItem->getRequestVar() ?>"
             data-type="<?php echo $block->getType(); ?>"
-            data-ajax="<?php echo $filterItem->getFilter()->getData('gomage_is_ajax'); ?>">
+            data-ajax="<?php echo $filter->getGoMageIsAjax(); ?>">
         <option><?php echo __('Select Filter') ?></option>
         <?php foreach ($filterItems as $filterItem): ?>
             <?php if ($filterItem->getCount() > 0): ?>

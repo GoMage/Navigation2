@@ -1,0 +1,29 @@
+<?php
+/**
+ *
+ * @var $block \GoMage\Navigation\Block\Navigation\FilterRenderer
+ */
+
+$filter = reset($filterItems)->getFilter();
+$filter->GoMageFilterType();
+$filter->GoMageIsShowFilterButton();
+$filter->GoMageMaxBlockHeight();
+$filter->GoMageIsAjax();
+$filter->GoMageIsCollapsed();
+$filter->GoMageIsCheckbox();
+$filter->GoMageIsShowImageName();
+$filter->GoMageOptionsAlignment();
+$filter->GoMageImageWidth();
+$filter->GoMageImageHeight();
+$filter->GoMageVisibleOptions();
+$filter->GoMageIsShowTooltip();
+$filter->GoMageTooltipWidth();
+$filter->GoMageTooltipHeight();
+$filter->GoMageIsReset();
+$filter->GoMageIsExcludeCategories();
+
+
+?>
+<ol class="items"  class="<?php echo $filter->canShowMinimized() ? "filter-content-hide" : "filter-content-show"; ?>  >
+
+</ol>

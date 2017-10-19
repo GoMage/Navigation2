@@ -1,37 +1,55 @@
 <?php
 /**
  *
- * @var $block \GoMage\Navigation\Block\Navigation\FilterRenderer
+ * @var $block \Gomage\Navigation\Block\Navigation\FilterRenderer
  */
 
+$filter = reset($filterItems)->getFilter();
+$filter->getGomageFilterType();
+$filter->getGomageIsShowFilterButton();
+$filter->getGomageMaxBlockHeight();
+$filter->getGomageIsAjax();
+$filter->getGomageIsCollapsed();
+$filter->getGomageIsCheckbox();
+$filter->getGomageIsShowImageName();
+$filter->getGomageOptionsAlignment();
+$filter->getGomageImageWidth();
+$filter->getGomageImageHeight();
+$filter->getGomageVisibleOptions();
+$filter->getGomageIsShowTooltip();
+$filter->getGomageTooltipWidth();
+$filter->getGomageTooltipHeight();
+$filter->getGomageIsReset();
+$filter->getGomageIsExcludeCategories();
+
 ?>
- <?php $item = reset($filterItems)->getFilter(); ?>
-<ol class="items"  class="<?php echo $item->canShowMinimized() ? "filter-content-hide" : "filter-content-show"; ?>  >
+<ol class="items"  class="<?php echo $filter->canShowMinimized() ? "filter-content-hide" : "filter-content-show"; ?>  >
 
-    <?php foreach ($filterItems as $filterItem): ?>
-        <li class="item  <?php if ($filterItem->getIsPreferred()) : ?>preferred-brand<?php endif?>">
-            <?php if ($filterItem->getCount() > 0): ?>
-
-
-                <a href="<?php echo $block->escapeUrl($filterItem->getUrl()) ?>"
+    <?php foreach ($filterItems as $item): ?>
+        <li class="item  <?php if ($item->getIsPreferred()) : ?>preferred-brand<?php endif?>">
+            <?php if ($item->getCount() > 0): ?>
+                <a <?php if(!$item->getIsActive()):?> href="<?php echo $item->getGomageUrl(); ?> <?endif;?>"
+                    <?php if($item->getIsActive()):?>
+                        style="background-color: lightgrey"
+                    <?endif;?>
                    data-role="navigation-filter"
-                   data-value="<?php echo $filterItem->getValueString() ?>"
-                   data-param="<?php echo $filterItem->getFilter()->getRequestVar() ?>"
-                   data-ajax="<?php echo $filterItem->getFilter()->getAttributeModel()->getData('gomage_is_ajax'); ?>"
-                   data-type="<?php echo (int) $filterItem->getFilter()->getAttributeModel()->getData('gomage_filter_type');; ?>"
+                   data-value="<?php echo $item->getValueString() ?>"
+                   data-param="<?php echo $filter->getRequestVar() ?>"
+                   data-ajax="<?php echo $filter->getGomageIsAjax(); ?>"
+                   data-type="<?php echo (int) $filter->getGomageFilterType(); ?>"
                    data-active="">
-                    <span class="filter-label-text"><?php echo $filterItem->getLabel() ?></span>
-                    <?php if ($filterItem->getIsPreferred()) : ?><div class="filter-preferred"><?php echo __('Preferred brand') ?></div><?php endif?>
+                    <span class="filter-label-text"><?php echo $item->getLabel() ?></span>
+                    <?php if ($item->getIsPreferred()) : ?><div class="filter-preferred"><?php echo __('Preferred brand') ?></div><?php endif?>
                     <?php if ($this->helper('\Magento\Catalog\Helper\Data')->shouldDisplayProductCountOnLayer()): ?>
-                        <span class="count"><?php echo $filterItem->getCount()?><span class="filter-count-label">
-                            <?php if ($filterItem->getCount() == 1):?> <?php echo __('item')?><?php else:?> <?php echo __('items') ?><?php endif;?></span></span>
+                        <span class="count"><?php echo $item->getCount()?><span class="filter-count-label">
+                            <?php if ($item->getCount() == 1):?> <?php echo __('item')?><?php else:?> <?php echo __('items') ?><?php endif;?></span></span>
                     <?php endif; ?>
                 </a>
             <?php else:?>
-                <?php echo $filterItem->getLabel() ?>
+                <?php echo $item->getLabel() ?>
                 <?php if ($this->helper('\Magento\Catalog\Helper\Data')->shouldDisplayProductCountOnLayer()): ?>
-                    <span class="count"><?php echo $filterItem->getCount()?><span class="filter-count-label">
-                        <?php if ($filterItem->getCount() == 1):?><?php echo __('item')?><?php else:?><?php echo __('items') ?><?php endif;?></span></span>
+                    <span class="count"><?php echo $item->getCount()?><span class="filter-count-label">
+                        <?php if ($item->getCount() == 1):?><?php echo __('item')?><?php else:?><?php echo __('items') ?><?php endif;?></span></span>
                 <?php endif; ?>
             <?php endif; ?>
         </li>

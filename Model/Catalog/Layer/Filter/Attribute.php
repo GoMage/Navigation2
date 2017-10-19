@@ -82,7 +82,7 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         }
 
         if ($filter) {
-            $filters = explode(',', $filter);
+            $filters = explode('_', $filter);
             $attribute = $this->getAttributeModel();
             $collection = $this->getLayer()
                 ->getProductCollection();
@@ -106,6 +106,12 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
      */
     protected function _getItemsData()
     {
+
+        /*$collection = $this->getLayer()
+            ->getProductCollection();
+        $attribute = $this->getAttributeModel();
+        $optionsFacetedData = $collection->getFacetedData($attribute->getAttributeCode());*/
+
         $attribute = $this->getAttributeModel();
         $this->_requestVar = $attribute->getAttributeCode();
         $options = $attribute->getFrontend()->getSelectOptions();

@@ -14,11 +14,76 @@
 
 namespace GoMage\Navigation\Helper;
 
+use Magento\Framework\App\Helper\Context;
+
 class Url extends \Magento\Framework\App\Helper\AbstractHelper
 {
-    public function wrapp($url)
+    /**
+     * Html pager block
+     *
+     * @var \Magento\Theme\Block\Html\Pager
+     */
+    protected $_htmlPagerBlock;
+
+    /**
+     * Url
+     *
+     * @var \Magento\Framework\UrlInterface
+     */
+    protected $_url;
+
+    /**
+     * Url
+     *
+     * @var \Magento\Framework\App\Request\Http
+     */
+    protected $_request;
+
+    /**
+     * Url
+     *
+     * @var \Magento\Framework\Escaper
+     */
+    protected $_escaper;
+
+    public function __construct(
+        Context $context,
+        \Magento\Framework\UrlInterface $url,
+        \Magento\Theme\Block\Html\Pager $htmlPagerBlock,
+        \Magento\Framework\App\Request\Http $request,
+        \Magento\Framework\Escaper $escaper
+    )
     {
-        //can't decode url gomage-8956
-        return $url;
+        $this->_url = $url;
+        $this->_htmlPagerBlock = $htmlPagerBlock;
+        $this->_request = $request;
+        $this->_escaper = $escaper;
+        parent::__construct($context);
+    }
+
+    /**
+     * @param $item
+     * @return string
+     */
+    public function getItemUrl($item)
+    {
+        $paramValues = [];
+        $queryParams = is_array($this->_request->getParams()) ? $this->_request->getParams() : [];
+        if (!empty($queryParams[$item->getFilter()->getRequestVar()])) {
+            $paramValues = explode('_', $queryParams[$item->getFilter()->getRequestVar()]);
+        }
+
+        if(!in_array($item->getValue(), $paramValues)) {
+            $paramValues[] = $item->getValue();
+        }
+
+        $query = [
+            $item->getFilter()->getRequestVar() => implode('_', $paramValues),
+            $this->_htmlPagerBlock->getPageVarName() => null,
+        ];
+
+        $url = $this->_url->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true, '_query' => $query]);
+
+        return $this->_escaper->escapeUrl($url);
     }
 }

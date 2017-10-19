@@ -122,7 +122,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
         );
 
-        return $this->_urlHelper->wrapp($this->_urlBuilder->getUrl($route, $params));
+        return $this->_urlBuilder->getUrl($route, $params);
     }
 
     public function getFilterUrl($route = '*/*/*', $params = array())

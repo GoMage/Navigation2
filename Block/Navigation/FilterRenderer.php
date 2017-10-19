@@ -28,24 +28,41 @@ class FilterRenderer extends Template implements FilterRendererInterface
     /**
      * @var \Magento\Eav\Model\Entity\Attribute
      */
-    protected $renderLayered;
-
+    protected $_renderLayered;
 
     /**
-     * @param \Magento\Framework\View\Element\Template\Context $context
+     * @var \Magento\Framework\App\RequestInterface
+     */
+    protected $_request;
+
+    /**
+     * @var \GoMage\Navigation\Helper\Url
+     */
+    protected $_urlHelper;
+
+    /**
+     * FilterRenderer constructor.
+     * @param Template\Context $context
      * @param \Magento\Framework\Registry $coreRegistry
+     * @param \Magento\Swatches\Block\LayeredNavigation\RenderLayered $renderLayered
+     * @param \Magento\Framework\App\RequestInterface $request
      * @param array $data
      */
     public function __construct(
         Template\Context $context,
         \Magento\Framework\Registry $coreRegistry,
         \Magento\Swatches\Block\LayeredNavigation\RenderLayered $renderLayered,
+        \Magento\Framework\App\RequestInterface $request,
+        \GoMage\Navigation\Helper\Url $urlHelper,
         array $data = array()
     )
     {
         $this->_coreRegistry = $coreRegistry;
+        $this->_request = $request;
+        $this->_urlHelper = $urlHelper;
+        $this->_renderLayered = $renderLayered;
+        
         parent::__construct($context, $data);
-        $this->renderLayered = $renderLayered;
     }
 
     /**
@@ -85,22 +102,25 @@ class FilterRenderer extends Template implements FilterRendererInterface
      */
     public function render(FilterInterface $filter)
     {
-        $this->setTemplate($filter->getData('gomage_filter_template'));
+        $this->setTemplate($filter->getGomageFilterTemplate());
 
         $filtersPreferred = [];
         $filtersCommon = [];
         $key = -1;
 
-        foreach ($filter->getItems() as $filterItem) {
+        foreach ($filter->getItems() as $item) {
             $key++;
 
-            if ($this->_isPreferred($filterItem)) {
-                $filterItem->setIsPreferred(true);
-                $filtersPreferred[$key] = $filterItem;
+            $this->checkIsActive($item, $filter->getRequestVar());
+            $item->setGomageUrl($this->_urlHelper->getItemUrl($item));
+
+            if ($this->_isPreferred($item)) {
+                $item->setIsPreferred(true);
+                $filtersPreferred[$key] = $item;
                 continue;
             }
 
-            $filtersCommon[$key] = $filterItem;
+            $filtersCommon[$key] = $item;
         }
 
         $filters = $filtersPreferred + $filtersCommon;
@@ -112,16 +132,16 @@ class FilterRenderer extends Template implements FilterRendererInterface
     }
 
     /**
-     * @param \GoMage\Navigation\Model\Catalog\Layer\Filter\Item $filterItem
+     * @param \GoMage\Navigation\Model\Catalog\Layer\Filter\Item $item
      * @return boolean
      */
-    public function _isPreferred($filterItem)
+    public function _isPreferred($item)
     {
         if (is_null($this->_preferredItems)) {
             $this->_initPreferredFilterItems();
         }
 
-        return in_array($filterItem->getValue(), $this->_preferredItems);
+        return in_array($item->getValue(), $this->_preferredItems);
     }
 
     /**
@@ -153,7 +173,16 @@ class FilterRenderer extends Template implements FilterRendererInterface
      */
     public function getSwatch()
     {
-        return $this->renderLayered;
+        return $this->_renderLayered;
     }
 
+    public function checkIsActive($item, $requestVar)
+    {
+        $params = $this->_request->getParam($requestVar);
+        $params = explode('_', $params);
+
+        if (in_array($item->getValue(), $params)) {
+            $item->setIsActive(true);
+        }
+    }
 }

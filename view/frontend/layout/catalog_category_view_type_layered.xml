@@ -19,5 +19,10 @@
             <argument name="template" xsi:type="string">GoMage_Navigation::html/pager.phtml</argument>
         </arguments>
     </referenceBlock>
+    <referenceBlock name="product_list_toolbar">
+        <action method="setTemplate">
+            <argument name="template" xsi:type="string">GoMage_Navigation::product/list/toolbar.phtml</argument>
+        </action>
+    </referenceBlock>
     </body>
 </page>
