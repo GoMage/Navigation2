@@ -30,7 +30,7 @@ $filter->getGomageIsExcludeCategories();
             <?php if ($item->getCount() > 0): ?>
                 <a <?php if(!$item->getIsActive()):?> href="<?php echo $item->getGomageUrl(); ?> <?endif;?>"
                     <?php if($item->getIsActive()):?>
-                        style="background-color: lightgrey"
+                        class="active"
                     <?endif;?>
                    data-role="navigation-filter"
                    data-value="<?php echo $item->getValueString() ?>"
