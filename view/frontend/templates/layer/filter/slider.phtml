@@ -1,38 +1,50 @@
 <?php
-
-// @codingStandardsIgnoreFile
-
-?>
-<?php
 /**
  * Template for filter items block
  *
  * @var $block \GoMage\Navigation\Block\Navigation\FilterRenderer
  */
+
+$filter = reset($filterItems)->getFilter();
+$filter->getGomageFilterType();
+$filter->getGomageIsShowFilterButton();
+$filter->getGomageMaxBlockHeight();
+$filter->getGomageIsAjax();
+$filter->getGomageIsCollapsed();
+$filter->getGomageIsCheckbox();
+$filter->getGomageIsShowImageName();
+$filter->getGomageOptionsAlignment();
+$filter->getGomageImageWidth();
+$filter->getGomageImageHeight();
+$filter->getGomageVisibleOptions();
+$filter->getGomageIsShowTooltip();
+$filter->getGomageTooltipWidth();
+$filter->getGomageTooltipHeight();
+$filter->getGomageIsReset();
+$filter->getGomageIsExcludeCategories();
 ?>
 
 <ol class="items">
-    <?php $filterItem = reset($filterItems)->getFilter(); ?>
-    <?php $attributeCode = $filterItem->getAttributeModel()->getAttributeCode(); ?>
+    <?php $attributeCode = $filter->getAttributeModel()->getAttributeCode(); ?>
     <div class="layout">
         <div class="layout-slider" style="width: 100%;">
             <span style="display: inline-block; width: 100%; padding: 0 5px;">
                 <input style="display: none;"
                        data-role="navigation-filter"
                        data-active=""
-                       data-from="<?php echo $filterItem->getMinBasePrice(); ?>"
-                       data-to="<?php echo $filterItem->getMaxBasePrice(); ?>"
+                       data-from="<?php echo $filter->getMinBasePrice(); ?>"
+                       data-to="<?php echo $filter->getMaxBasePrice(); ?>"
                        data-step="<?php echo $block->getStep(); ?>"
                        data-skin="<?php echo $block->getSliderSkin(); ?>"
                        data-code="<?php echo $attributeCode; ?>"
-                       data-dimension="&nbsp;<?php echo $filterItem->getCurrencySymbol(); ?>"
-                       data-param="<?php echo $filterItem->getRequestVar() ?>"
-                       data-ajax="<?php echo $filterItem->isAjax() ?>"
+                       data-dimension="&nbsp;<?php echo $filter->getCurrencySymbol(); ?>"
+                       data-param="<?php echo $filter->getRequestVar() ?>"
+                       data-ajax="<?php echo $filter->getGomageIsAjax() ?>"
                        id="<?php echo $attributeCode; ?>"
                        data-type="slider"
                        type="slider"
                        name="<?php echo $attributeCode; ?>"
-                       value="<?php echo $filterItem->getPriceValue(); ?>"/>
+                       value="<?php echo $filter->getPriceValue(); ?>"/>
             </span>
         </div>
     </div>
