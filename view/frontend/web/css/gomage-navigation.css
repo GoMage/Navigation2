@@ -1,0 +1,29 @@
+/* GoMage Advanced Navigation M2
+-------------------------------------------------- */
+
+
+/* Filter type = input
+-------------------------------------------------- */
+.gan-filter-input-fieldset{
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.gan-filter-input-fields{
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+.gan-filter-input-fields .from-wrapper,
+.gan-filter-input-fields .to-wrapper{
+  width: calc(50% - 15px);
+}
+.to-text-wrapper{
+  text-align: center;
+  width: 30px;
+  line-height: 32px;
+}
+.gan-filter-input-actions{
+  text-align: right;
+  margin: 10px 0 0;
+}

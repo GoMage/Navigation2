@@ -6,6 +6,7 @@
         <css src="GoMage_Navigation::css/jslider.plastic.css" />
         <css src="GoMage_Navigation::css/jslider.round.css" />
         <css src="GoMage_Navigation::css/jslider.round.plastic.css" />
+        <css src="GoMage_Navigation::css/gomage-navigation.css" />
     </head>
     <body>
     <referenceContainer name="sidebar.main">

@@ -24,7 +24,7 @@ $filter->getGoMageIsExcludeCategories();
 
 ?>
 
-<ol class="items">
+<div class="gan-filter gan-filter-dropdown">
     <?php $filterItem = reset($filterItems) ?>
     <select data-role="navigation-filter"
             data-param="<?php echo $filterItem->getRequestVar() ?>"
@@ -41,4 +41,4 @@ $filter->getGoMageIsExcludeCategories();
             <?php endif; ?>
         <?php endforeach ?>
     </select>
-</ol>
+</div>

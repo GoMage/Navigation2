@@ -11,7 +11,7 @@
  */
 ?>
 
-<ol class="items">
+<div class="gan-filter gan-filter-slider">
     <?php $filterItem = reset($filterItems)->getFilter(); ?>
     <?php $attributeCode = $filterItem->getAttributeModel()->getAttributeCode(); ?>
     <div class="layout">
@@ -36,4 +36,4 @@
             </span>
         </div>
     </div>
-</ol>
+</div>

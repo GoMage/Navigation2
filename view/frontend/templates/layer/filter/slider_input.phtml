@@ -11,7 +11,7 @@
  */
 ?>
 
-<ol class="items">
+<div class="gan-filter gan-filter-slider-input">
     <?php $filterItem = reset($filterItems)->getFilter(); ?>
     <?php $attributeModel = $filterItem->getAttributeModel(); ?>
     <div class="layout">
@@ -36,29 +36,31 @@
             </span>
         </div>
     </div>
-    <div class="filter-type-input" style="padding:0;">
+    <div class="gan-filter gan-filter-input">
         <form>
-            <fieldset class="filter-fieldset">
+            <fieldset class="gan-filter-input-fieldset">
 
-                <div class="fields">
+                <div class="gan-filter-input-fields">
                     <div class="from-wrapper">
                         <label>
                             <input data-role="navigation-filter" type="text" name="<?php echo $attributeModel->getAttributeCode();?>_from" value="<?php echo $filterItem->getMinBasePrice(); ?>" />
                         </label>
                     </div>
-                    <div class="from-wrapper">
+                    <div class="to-text-wrapper">
+                        <span><?php echo __('to')?></span>
+                    </div>
+                    <div class="to-wrapper">
                         <label>
-                            <span><?php echo __('to')?></span>
                             <input data-role="navigation-filter" type="text" name="<?php echo $attributeModel->getAttributeCode();?>_to" value="<?php echo $filterItem->getMaxBasePrice(); ?>" />
                         </label>
                     </div>
                 </div>
 
-                <div>
+                <div class="gan-filter-input-actions">
                     <button class="button" type="submit"><span><?php echo $attributeModel->getFrontendLabel(); ?></span></button>
                 </div>
 
             </fieldset>
         </form>
     </div>
-</ol>
+</div>

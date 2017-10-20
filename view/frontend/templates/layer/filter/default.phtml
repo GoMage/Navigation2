@@ -23,10 +23,10 @@ $filter->getGomageIsReset();
 $filter->getGomageIsExcludeCategories();
 
 ?>
-<ol class="items"  class="<?php echo $filter->canShowMinimized() ? "filter-content-hide" : "filter-content-show"; ?>  >
+<ol class="items gan-filter gan-filter-default <?php echo $filter->canShowMinimized() ? "filter-content-hide" : "filter-content-show"; ?>">
 
     <?php foreach ($filterItems as $item): ?>
-        <li class="item  <?php if ($item->getIsPreferred()) : ?>preferred-brand<?php endif?>">
+        <li class="item<?php if ($item->getIsPreferred()) : ?> preferred-brand<?php endif?>">
             <?php if ($item->getCount() > 0): ?>
                 <a <?php if(!$item->getIsActive()):?> href="<?php echo $item->getGomageUrl(); ?> <?endif;?>"
                     <?php if($item->getIsActive()):?>
