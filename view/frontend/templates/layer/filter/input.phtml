@@ -27,30 +27,30 @@ $attributeModel = $filter->getAttributeModel();
 
 ?>
 
-<ol class="items">
-    <div class="filter-type-input" style="padding:0;">
-        <form>
-            <fieldset class="filter-fieldset">
+<div class="gan-filter gan-filter-input">
+    <form>
+        <fieldset class="gan-filter-input-fieldset">
 
-                <div class="fields">
-                    <div class="from-wrapper">
-                        <label>
-                            <input data-role="navigation-filter" type="text" name="<?php echo $attributeModel->getAttributeCode();?>_from" value="<?php echo $filter->getMinBasePrice(); ?>" />
-                        </label>
-                    </div>
-                    <div class="from-wrapper">
-                        <label>
-                            <span><?php echo __('to')?></span>
-                            <input data-role="navigation-filter" type="text" name="<?php echo $attributeModel->getAttributeCode();?>_to" value="<?php echo $filter->getMaxBasePrice(); ?>" />
-                        </label>
-                    </div>
+            <div class="gan-filter-input-fields">
+                <div class="from-wrapper">
+                    <label>
+                        <input data-role="navigation-filter" type="text" name="<?php echo $attributeModel->getAttributeCode();?>_from" value="<?php echo $filter->getMinBasePrice(); ?>" />
+                    </label>
                 </div>
-
-                <div>
-                    <button class="button" type="submit"><span><?php echo $attributeModel->getFrontendLabel(); ?></span></button>
+                <div class="to-text-wrapper">
+                    <span><?php echo __('to')?></span>
                 </div>
+                <div class="to-wrapper">
+                    <label>
+                        <input data-role="navigation-filter" type="text" name="<?php echo $attributeModel->getAttributeCode();?>_to" value="<?php echo $filter->getMaxBasePrice(); ?>" />
+                    </label>
+                </div>
+            </div>
 
-            </fieldset>
-        </form>
-    </div>
-</ol>
+            <div class="gan-filter-input-actions">
+                <button class="button" type="submit"><span><?php echo $attributeModel->getFrontendLabel(); ?></span></button>
+            </div>
+
+        </fieldset>
+    </form>
+</div>

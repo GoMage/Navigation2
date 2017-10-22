@@ -1,0 +1,59 @@
+/* GoMage Advanced Navigation M2
+-------------------------------------------------- */
+
+/* Filter type = default
+-------------------------------------------------- */
+
+
+/* Filter type = input
+-------------------------------------------------- */
+.gan-filter-input-fieldset{
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.gan-filter-input-fields{
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+.gan-filter-input-fields .from-wrapper,
+.gan-filter-input-fields .to-wrapper{
+  width: calc(50% - 15px);
+}
+.to-text-wrapper{
+  text-align: center;
+  width: 30px;
+  line-height: 32px;
+}
+.gan-filter-input-actions{
+  text-align: right;
+  margin: 10px 0 0;
+}
+
+/* Filter type = slider
+-------------------------------------------------- */
+.gan-filter-slider .layout{
+  padding: 10px 0 0;
+  font-family: inherit;
+}
+.gan-filter-slider .layout-slider{
+  margin-bottom: 0;
+  width: 100%;
+}
+.gan-filter-slider-input .layout{
+  margin-bottom: 20px;
+}
+.gan-filter-slider .jslider .jslider-bg .f,
+.gan-filter-slider .jslider .jslider-bg .r,
+.gan-filter-slider .jslider .jslider-bg .l{
+  background: #bfbfbf;
+}
+.gan-filter-slider .jslider .jslider-bg .v{
+  background: #1E90FF;
+}
+.gan-filter-slider .jslider_round_plastic .jslider-pointer{
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAXCAMAAAAMT46wAAAAV1BMVEUAAADAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMD4+Pj09PTAwMD8/Pz6+vrx8fHu7u7+/v7r6+vj4+Pc3NzS0tLU1NTT09P2t9y+AAAAD3RSTlMABur25NvJsYqHhGlONhVtaHd7AAAAaklEQVQY04XHRxKAIBAF0Q/miGMi6P3PqYVATRULe9UPoi8pVPYCnVVnSNkOMum1BK0syrixcirWLxfWL3dWRmmPlJWYChNligkYKdjQiLfBaZ8b4Gu9XfsJorm1vhuB6Pq66iRgrqrZzwM3fhM/VaXUPAAAAABJRU5ErkJggg==) no-repeat 0 0;
+  width: 14px;
+  height: 23px;
+}
