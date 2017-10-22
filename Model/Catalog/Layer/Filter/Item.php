@@ -10,7 +10,7 @@ class Item extends \Magento\Catalog\Model\Layer\Filter\Item
     protected $_isPreferred = false;
 
     /**
-     * @var \GoMage\Navigation\Helper\Data
+     * @var \GoMage\Navigation\Helper\Url
      */
     protected $helper;
 
@@ -18,7 +18,7 @@ class Item extends \Magento\Catalog\Model\Layer\Filter\Item
     public function __construct(
         \Magento\Framework\UrlInterface $url,
         \Magento\Theme\Block\Html\Pager $htmlPagerBlock,
-        \GoMage\Navigation\Helper\Data $helper,
+        \GoMage\Navigation\Helper\Url $helper,
         array $data = []
     ) {
 
@@ -49,9 +49,9 @@ class Item extends \Magento\Catalog\Model\Layer\Filter\Item
      *
      * @return string
      */
-    public function getRemoveUrl($ajax = false)
+    public function getRemoveUrl()
     {
-        return $this->helper->getRemoveUrl('*/*/*', ['request_var' => $this->getFilter()->getRequestVar(), 'request_value' => $this->getData('value')]);
+        return $this->helper->getRemoveUrl($this);
 
     }
 }

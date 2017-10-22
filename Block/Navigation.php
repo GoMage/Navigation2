@@ -51,33 +51,4 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         }
         return false;
     }
-
-
-    /**
-     * @return $this
-     */
-    protected function _prepareLayout()
-    {
-        $collection = $this->getLayer()->getProductCollection();
-        $base_select = array();
-        $request = $this->request;
-        $base_select = $this->getLayer()->getBaseSelect();
-        if (!isset($base_select['collection'])) {
-            $base_select['collection'] = clone $collection;
-        }
-        if ($request->getParam(NavigationInterface::ATTRIBUTE_CATEGORY)) {
-            $base_select[NavigationInterface::ATTRIBUTE_CATEGORY] = clone $collection->getSelect();
-        }
-        foreach ($this->getFilters() as $filter) {
-            $attribute = $filter->getAttributeModel();
-            if ($code = $attribute->getAttributeCode()) {
-                if ($request->getParam($code)) {
-                    $base_select[$code] = clone $collection->getSelect();
-                }
-            }
-        }
-        $this->getLayer()->setBaseSelect($base_select);
-
-        return parent::_prepareLayout();
-    }
 }

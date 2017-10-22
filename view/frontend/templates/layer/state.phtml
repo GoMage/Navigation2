@@ -18,10 +18,11 @@
                     <span class="filter-value"><?php /* @escapeNotVerified */ echo $block->stripTags($_filter->getLabel()) ?></span>
                     <?php $currentFilterName = $block->escapeHtml(__($_filter->getName())) . " " . $block->stripTags($_filter->getLabel()); ?>
                     <a class="action remove"
-                       href="<?php /* @escapeNotVerified */ echo $_filter->getRemoveUrl() ?>"
+                       href="#"
                        title="<?php /* @escapeNotVerified */ echo $block->escapeHtml(__('Remove')) . " " . $currentFilterName;?>"
                        data-role="navigation-filter"
                        data-value="<?php echo $_filter->getValueString() ?>"
+                       data-url="<?php /* @escapeNotVerified */ echo $_filter->getRemoveUrl() ?>"
                        data-param="<?php echo $_filter->getRequestVar() ?>"
                        data-ajax="<?php echo $_filter->getFilter()->getData('gomage_is_ajax'); ?>"
                        data-active="1">

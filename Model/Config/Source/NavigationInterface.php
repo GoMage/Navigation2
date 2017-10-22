@@ -18,7 +18,7 @@ interface NavigationInterface
     const SWATCHES = 8;
     const FLY_OUT = 8;
     const IMAGE = 9;
-    const PRICE_SLIDER_STEP = 1;
+    const PRICE_SLIDER_STEP = 2;
     const TYPE_SLIDER = 'slider';
     const SLIDER_SKIN = 'round_plastic'; /*** OR classic,plastic,round,round_plastic ****/
 

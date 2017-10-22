@@ -26,18 +26,16 @@ $filter->getGomageIsExcludeCategories();
 <ol class="items"  class="<?php echo $filter->canShowMinimized() ? "filter-content-hide" : "filter-content-show"; ?>  >
 
     <?php foreach ($filterItems as $item): ?>
-        <li class="item  <?php if ($item->getIsPreferred()) : ?>preferred-brand<?php endif?>">
+        <li class="item <?php if($filter->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK) echo 'in-block'; ?>">
             <?php if ($item->getCount() > 0): ?>
-                <a <?php if(!$item->getIsActive()):?> href="<?php echo $item->getGomageUrl(); ?> <?endif;?>"
-                    <?php if($item->getIsActive()):?>
-                        style="background-color: lightgrey"
-                    <?endif;?>
+                <a <?php echo (!$item->getIsActive())? 'href="#"' : 'style="background-color: lightgrey"';?>
                    data-role="navigation-filter"
+                   data-url="<?php if(!$item->getIsActive()):?><?php echo $item->getGomageUrl(); ?> <?endif;?>"
                    data-value="<?php echo $item->getValueString() ?>"
                    data-param="<?php echo $filter->getRequestVar() ?>"
                    data-ajax="<?php echo $filter->getGomageIsAjax(); ?>"
                    data-type="<?php echo (int) $filter->getGomageFilterType(); ?>"
-                   data-active="">
+                   data-active="<?php echo (int) $item->getIsActive();?>">
                     <span class="filter-label-text"><?php echo $item->getLabel() ?></span>
                     <?php if ($item->getIsPreferred()) : ?><div class="filter-preferred"><?php echo __('Preferred brand') ?></div><?php endif?>
                     <?php if ($this->helper('\Magento\Catalog\Helper\Data')->shouldDisplayProductCountOnLayer()): ?>

@@ -160,7 +160,7 @@ class Price extends \Magento\Catalog\Model\ResourceModel\Layer\Filter\Price
      * @param mixed $interval
      * @return $this
      */
-    public function applyPriceRange(\Magento\Catalog\Model\Layer\Filter\FilterInterface $filter, $interval)
+    /*public function applyPriceRange(\Magento\Catalog\Model\Layer\Filter\FilterInterface $filter, $interval)
     {
         if (!$interval) {
             return $this;
@@ -173,7 +173,7 @@ class Price extends \Magento\Catalog\Model\ResourceModel\Layer\Filter\Price
         $value['from'] = $from;
         $value['to'] = $to;
         $select = $filter->getLayer()->getProductCollection()->getSelect();
-        $this->prepareSelect($select, $value);
+        //$this->prepareSelect($select, $value);
         $base_select = $filter->getLayer()->getBaseSelect();
         $attribute_code = NavigationInterface::ATTRIBUTE_PRICE;
         foreach ($base_select as $code => $select) {
@@ -182,7 +182,7 @@ class Price extends \Magento\Catalog\Model\ResourceModel\Layer\Filter\Price
             }
         }
         return $this;
-    }
+    }*/
 
    
 }

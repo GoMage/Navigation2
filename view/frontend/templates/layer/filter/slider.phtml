@@ -26,26 +26,30 @@ $filter->getGomageIsExcludeCategories();
 
 <ol class="items">
     <?php $attributeCode = $filter->getAttributeModel()->getAttributeCode(); ?>
-    <div class="layout">
-        <div class="layout-slider" style="width: 100%;">
-            <span style="display: inline-block; width: 100%; padding: 0 5px;">
-                <input style="display: none;"
-                       data-role="navigation-filter"
-                       data-active=""
-                       data-from="<?php echo $filter->getMinBasePrice(); ?>"
-                       data-to="<?php echo $filter->getMaxBasePrice(); ?>"
-                       data-step="<?php echo $block->getStep(); ?>"
-                       data-skin="<?php echo $block->getSliderSkin(); ?>"
-                       data-code="<?php echo $attributeCode; ?>"
-                       data-dimension="&nbsp;<?php echo $filter->getCurrencySymbol(); ?>"
-                       data-param="<?php echo $filter->getRequestVar() ?>"
-                       data-ajax="<?php echo $filter->getGomageIsAjax() ?>"
-                       id="<?php echo $attributeCode; ?>"
-                       data-type="slider"
-                       type="slider"
-                       name="<?php echo $attributeCode; ?>"
-                       value="<?php echo $filter->getPriceValue(); ?>"/>
-            </span>
+    <?foreach ($filterItems as $item):?>
+        <?if (!$item->getIsActive()) continue;?>
+
+        <div class="layout">
+            <div class="layout-slider" style="width: 100%;">
+                <span style="display: inline-block; width: 100%; padding: 0 5px;">
+                    <input style="display: none;"
+                           data-role="navigation-filter"
+                           data-active=""
+                           data-from="<?php echo $filter->getMinBasePrice(); ?>"
+                           data-to="<?php echo $filter->getMaxBasePrice(); ?>"
+                           data-step="<?php echo $block->getStep(); ?>"
+                           data-skin="<?php echo $block->getSliderSkin(); ?>"
+                           data-code="<?php echo $attributeCode; ?>"
+                           data-dimension="&nbsp;<?php echo $filter->getCurrencySymbol(); ?>"
+                           data-param="<?php echo $filter->getRequestVar() ?>"
+                           data-ajax="0"
+                           id="<?php echo $attributeCode; ?>"
+                           data-type="slider"
+                           type="slider"
+                           name="<?php echo $attributeCode; ?>"
+                           value="<?php echo $str = str_replace('-', ';', $item->getValue()); ?>"/>
+                </span>
+            </div>
         </div>
-    </div>
+    <?endforeach;?>
 </ol>

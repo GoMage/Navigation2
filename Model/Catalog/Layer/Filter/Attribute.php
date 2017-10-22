@@ -5,6 +5,8 @@ namespace GoMage\Navigation\Model\Catalog\Layer\Filter;
 class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements FilterInterface
 {
     protected $attributeProperties;
+    protected $request;
+    protected $catalogSession;
 
     /**
      * Attribute constructor.
@@ -25,6 +27,8 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         \Magento\Catalog\Model\ResourceModel\Layer\Filter\AttributeFactory $filterAttributeFactory,
         \Magento\Framework\Stdlib\StringUtils $string,
         \Magento\Framework\Filter\StripTags $tagFilter,
+        \Magento\Framework\App\RequestInterface $request,
+        \Magento\Catalog\Model\Session $catalogSession,
         array $data = []
     )
     {
@@ -32,6 +36,8 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         $this->string = $string;
         $this->_requestVar = 'attribute';
         $this->tagFilter = $tagFilter;
+        $this->request = $request;
+        $this->catalogSession = $catalogSession;
         parent::__construct($filterItemFactory, $storeManager, $layer, $itemDataBuilder, $filterAttributeFactory, $string, $tagFilter, $data);
     }
 
@@ -88,6 +94,15 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
                 ->getProductCollection();
 
             $collection->addFieldToFilter($attribute->getAttributeCode(), array('in' => $filters));
+
+            $data = $this->catalogSession->getData('used_filters');
+            if (empty($data)) {
+                $data = [];
+            }
+            $data[] = [$attribute->getAttributeCode() => array('in' => $filters)];
+
+            $this->catalogSession->setData('used_filters', $data);
+
             foreach ($filters as $filterItem) {
                 $text = $this->getOptionText($filterItem);
                 $this->getLayer()->getState()->addFilter($this->_createItem($text, $filterItem));
@@ -95,6 +110,11 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         }
 
         return $this;
+    }
+
+    public function getUsedOptions()
+    {
+        return explode('_', $this->request->getParam($this->_requestVar));
     }
 
 
@@ -106,34 +126,64 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
      */
     protected function _getItemsData()
     {
+        if (!$this->request->getParam($this->_requestVar)) {
+            return parent::_getItemsData();
+        }
 
-        /*$collection = $this->getLayer()
+        $attribute = $this->getAttributeModel();
+        $productCollection = $this->getLayer()
             ->getProductCollection();
-        $attribute = $this->getAttributeModel();
-        $optionsFacetedData = $collection->getFacetedData($attribute->getAttributeCode());*/
 
-        $attribute = $this->getAttributeModel();
-        $this->_requestVar = $attribute->getAttributeCode();
-        $options = $attribute->getFrontend()->getSelectOptions();
-        $optionsCount = $this->_getResource()->getCount($this);
-
-        $items = [];
-        foreach ($options as $option) {
-            if (is_array($option['value'])) {
+        $collection = $this->getLayer()->getCollectionProvider()->getCollection($this->getLayer()->getCurrentCategory());
+        $collection->updateSearchCriteriaBuilder();
+        $this->getLayer()->prepareProductCollection($collection);
+        foreach ($productCollection->getAddedFilters() as $field => $condition) {
+            if ($this->getAttributeModel()->getAttributeCode() == $field) {
                 continue;
             }
-            if ($this->string->strlen($option['value'])) {
-                // Check filter type
-                if ($this->getAttributeIsFilterable($attribute) == self::ATTRIBUTE_OPTIONS_ONLY_WITH_RESULTS) {
-                    if (!empty($optionsCount[$option['value']])) {
-                        $items[] = $this->_createItem($option['label'], $option['value'], $optionsCount[$option['value']]);
-                    }
-                } else {
-                    $items[] = $this->_createItem($option['label'], $option['value'], isset($optionsCount[$option['value']]) ? $optionsCount[$option['value']] : 0);
-                }
+            $collection->addFieldToFilter($field, $condition);
+        }
+
+        $optionsFacetedData = $collection->getFacetedData($attribute->getAttributeCode());
+        $originalFacetedData = $productCollection->getFacetedData($attribute->getAttributeCode());
+
+        if ($attribute->getFrontendInput() == 'multiselect') {
+            $optionsFacetedData = $this->calculateOptionsCount($originalFacetedData, $optionsFacetedData);
+        }
+
+        $usedOptions = $this->getUsedOptions();
+        foreach ($attribute->getFrontend()->getSelectOptions() as $option) {
+
+            if (empty($option['value'])) {
+                continue;
+            }
+
+            if (in_array($option['value'], $usedOptions)) {
+                $optionsFacetedData[$option['value']]['count'] = $originalFacetedData[$option['value']]['count'];
+            }
+
+            if (empty($optionsFacetedData[$option['value']]['count'])) {
+                continue;
+            }
+            $this->itemDataBuilder->addItemData(
+                $this->tagFilter->filter($option['label']),
+                $option['value'],
+                isset($optionsFacetedData[$option['value']]['count']) ? '+' . $optionsFacetedData[$option['value']]['count'] : 0
+            );
+        }
+
+        return $this->itemDataBuilder->build();
+    }
+
+    protected function calculateOptionsCount($originalFacetedData, $optionsFacetedData)
+    {
+        foreach ($originalFacetedData as $key => $optionData) {
+            $optionsFacetedData[$key]['count'] = $optionsFacetedData[$key]['count'] - $optionData['count'];
+            if ($optionsFacetedData[$key]['count'] <= 0) {
+                unset($optionsFacetedData[$key]['count']);
             }
         }
 
-        return $items;
+        return $optionsFacetedData;
     }
 }

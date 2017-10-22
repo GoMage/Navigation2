@@ -86,4 +86,31 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
 
         return $this->_escaper->escapeUrl($url);
     }
+
+    public function getRemoveUrl($item)
+    {
+        $paramValues = [];
+        $queryParams = is_array($this->_request->getParams()) ? $this->_request->getParams() : [];
+        if (!empty($queryParams[$item->getFilter()->getRequestVar()])) {
+            $paramValues = explode('_', $queryParams[$item->getFilter()->getRequestVar()]);
+        }
+
+        $position = array_search($item->getValue(), $paramValues);
+        if($position !== false) {
+            unset($paramValues[$position]);
+        }
+
+        $query = [];
+        if (count($paramValues) > 0) {
+            $query[$item->getFilter()->getRequestVar()] = implode('_', $paramValues);
+        } else {
+            $query[$item->getFilter()->getRequestVar()] = null;
+        }
+
+        $query[$this->_htmlPagerBlock->getPageVarName()] = null;
+
+        $url = $this->_url->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true, '_query' => $query]);
+
+        return $this->_escaper->escapeUrl($url);
+    }
 }

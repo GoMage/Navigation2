@@ -27,7 +27,7 @@
                 </div>
             <?php endif; ?>
             <?php $wrapOptions = false; ?>
-            <?php if ($block->hasFilters()): ?>
+
                 <div class="filter-subtitle2"><?php /* @escapeNotVerified */ echo __('Add Filter:') ?></div>
 
                 <?php foreach ($block->getFilters() as $filter): ?>
@@ -47,7 +47,7 @@
                 <?php if ($wrapOptions): ?>
                     </dl>
                 <?php endif; ?>
-            <?php endif; ?>
+
         </div>
     </div>
 <?php endif; ?>
