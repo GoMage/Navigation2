@@ -113,6 +113,7 @@ class FilterRenderer extends Template implements FilterRendererInterface
 
             $this->checkIsActive($item, $filter->getRequestVar());
             $item->setGomageUrl($this->_urlHelper->getItemUrl($item));
+            $item->setGomageValue($this->_urlHelper->getItemValue($item));
 
             if ($this->_isPreferred($item)) {
                 $item->setIsPreferred(true);

@@ -116,7 +116,7 @@ class Price extends \Magento\Catalog\Model\Layer\Filter\Price implements FilterI
      */
     public function getMaxBasePrice()
     {
-        return $this->resource->getMaxPrice();
+        return $this->resource->getMaxPriceForSlider();
     }
 
     /**
@@ -124,7 +124,7 @@ class Price extends \Magento\Catalog\Model\Layer\Filter\Price implements FilterI
      */
     public function getMinBasePrice()
     {
-        return $this->resource->getMinPrice();
+        return $this->resource->getMinPriceForSlider();
     }
 
     /**

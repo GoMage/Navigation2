@@ -19,12 +19,12 @@ define([
             authentication: 'div.block-authentication',
             productListContainer: 'ol.product-items',
             productToolbarContainer: 'div.toolbar-products',
-            loader: 'body',
+            loader: 'body'
         },
 
         _create: function () {
             if (!this.options.baseUrl) {
-                this.options.baseUrl = window.location.href;
+                this.options.baseUrl = location.protocol + '//' + location.host + location.pathname;
             }
             this._initFilters();
             $(this.options.navigationContainer).on({
@@ -79,6 +79,18 @@ define([
                         element.unbind('change');
                         element.on('change', {element: element}, $.proxy(this._processFilter, this));
                         break;
+                    case 'input-price':
+                        element.unbind('change');
+                        element.on('change', {element: element}, $.proxy(this._processInputPrice, this));
+                        break;
+                    case 'price-button':
+                        element.unbind('click');
+                        element.on('click', {element: element}, $.proxy(this._processPriceButton, this));
+                        break;
+                    case 'remove-item':
+                        element.unbind('click');
+                        element.on('click', {element: element}, $.proxy(this._processRemoveItem, this));
+                        break;
                     default:
                         element.unbind('click');
                         element.on('click', {element: element}, $.proxy(this._processFilter, this));
@@ -86,6 +98,33 @@ define([
                 }
 
             }
+        },
+
+        _processRemoveItem: function (element) {
+
+            var url = element.currentTarget.attributes['data-url'].nodeValue;
+            var ajax = element.currentTarget.attributes['data-ajax'].nodeValue;
+
+            if (ajax == true) {
+                return this._ajaxFilter(url, false);
+            } else {
+                return $.mage.redirect(url);
+            }
+        },
+
+        _processInputPrice: function () {
+            var value = $('#price-from').val() + '-' + $('#price-to').val();
+            var el = $('#price');
+            el.attr("data-value", value);
+            this._runProcessFilterForElement(el);
+        },
+
+        _processPriceButton: function (event) {
+            event.preventDefault();
+            var value = $('#price-from').val() + '-' + $('#price-to').val();
+            var el = $('#price');
+            el.attr("data-value", value);
+            this._runProcessFilterForElement(el);
         },
 
         /**
@@ -161,8 +200,6 @@ define([
             var filter = new Filter(element);
 
             var params = this._getParams();
-
-
             if (filter.isClear()) {
                 params.clear();
             } else if (filter.isActive() && !element.is('select')) {
@@ -183,16 +220,18 @@ define([
                 url: url,
                 type: 'get',
                 cache: true,
-                data: params.toUrlParams(),
+                data: (params) ? params.toUrlParams() : [],
                 beforeSend: (this._ajaxSend).bind(this),
                 complete: (this._ajaxComplete).bind(this),
                 success: function (response) {
                     if (successCallback) {
                         successCallback.call(this, response);
                     }
-                    $(this.options.navigationContainer).parent().html(response.navigation);
+
+                    var data = $.parseJSON(response);
+                    $(this.options.navigationContainer).parent().html(data.navigation);
                     $(this.options.navigationContainer).trigger('contentUpdated');
-                    $(this.options.productsContainer).html(response.products);
+                    $(this.options.productsContainer).html(data.products);
                     $(this.options.productsContainer).trigger('contentUpdated');
                     $(this.options.authentication).trigger('bindTrigger');
 

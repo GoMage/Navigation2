@@ -87,6 +87,21 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
         return $this->_escaper->escapeUrl($url);
     }
 
+    public function getItemValue($item)
+    {
+        $paramValues = [];
+        $queryParams = is_array($this->_request->getParams()) ? $this->_request->getParams() : [];
+        if (!empty($queryParams[$item->getFilter()->getRequestVar()])) {
+            $paramValues = explode('_', $queryParams[$item->getFilter()->getRequestVar()]);
+        }
+
+        if(!in_array($item->getValue(), $paramValues)) {
+            $paramValues[] = $item->getValue();
+        }
+
+        return implode('_', $paramValues);
+    }
+
     public function getRemoveUrl($item)
     {
         $paramValues = [];
@@ -112,5 +127,21 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
         $url = $this->_url->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true, '_query' => $query]);
 
         return $this->_escaper->escapeUrl($url);
+    }
+
+    public function getRemoveValue($item)
+    {
+        $paramValues = [];
+        $queryParams = is_array($this->_request->getParams()) ? $this->_request->getParams() : [];
+        if (!empty($queryParams[$item->getFilter()->getRequestVar()])) {
+            $paramValues = explode('_', $queryParams[$item->getFilter()->getRequestVar()]);
+        }
+
+        $position = array_search($item->getValue(), $paramValues);
+        if($position !== false) {
+            unset($paramValues[$position]);
+        }
+
+        return implode('_', $paramValues);
     }
 }

@@ -25,18 +25,20 @@ $filter->getGoMageIsExcludeCategories();
 ?>
 
 <div class="gan-filter gan-filter-dropdown">
-    <?php $filterItem = reset($filterItems) ?>
     <select data-role="navigation-filter"
-            data-param="<?php echo $filterItem->getRequestVar() ?>"
-            data-type="<?php echo $block->getType(); ?>"
-            data-ajax="<?php echo $filter->getGoMageIsAjax(); ?>">
-        <option><?php echo __('Select Filter') ?></option>
-        <?php foreach ($filterItems as $filterItem): ?>
-            <?php if ($filterItem->getCount() > 0): ?>
-                <option value="<?php echo $filterItem->getValueString() ?>"
-                        <?php /*if ($filterItem->isActive()): */?><!--selected="selected"--><?php /*endif */?>
-                        <!--data-active="<?php /*echo $filterItem->isActive() */?>">-->
-                    <?php echo $filterItem->getLabel() ?>
+            data-param="<?php echo $filter->getRequestVar() ?>"
+            data-type="select"
+            data-ajax="<?php echo $filter->getGoMageIsAjax(); ?>"
+            <?php if (!empty($filter->getUsedOptions())): ?>
+                data-active="1"
+            <? endif; ?>
+    >
+        <option value=""><?php echo __('Select Filter') ?></option>
+        <?php foreach ($filterItems as $item): ?>
+            <?php if ($item->getCount() > 0): ?>
+                <option value="<?php echo $item->getValueString() ?>"
+                        <?php if ($item->getIsActive()): ?>selected="selected" data-active="1"<?php endif ?>>
+                    <?php echo $item->getLabel() . ' (' . $item->getCount() . ')' ?>
                 </option>
             <?php endif; ?>
         <?php endforeach ?>

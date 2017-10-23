@@ -34,7 +34,7 @@ $filter->getGomageIsExcludeCategories();
                     <?endif;?>
                    data-role="navigation-filter"
                    data-url="<?php if(!$item->getIsActive()):?><?php echo $item->getGomageUrl(); ?> <?endif;?>"
-                   data-value="<?php echo $item->getValueString() ?>"
+                   data-value="<?php echo $item->getGomageValue() ?>"
                    data-param="<?php echo $filter->getRequestVar() ?>"
                    data-ajax="<?php echo $filter->getGomageIsAjax(); ?>"
                    data-type="<?php echo (int) $filter->getGomageFilterType(); ?>"
@@ -42,18 +42,9 @@ $filter->getGomageIsExcludeCategories();
                     data-active="1">
                     <?php endif;?>
                     <span class="filter-label-text"><?php echo $item->getLabel() ?></span>
-                    <?php if ($item->getIsPreferred()) : ?><div class="filter-preferred"><?php echo __('Preferred brand') ?></div><?php endif?>
-                    <?php if ($this->helper('\Magento\Catalog\Helper\Data')->shouldDisplayProductCountOnLayer()): ?>
-                        <span class="count"><?php echo $item->getCount()?><span class="filter-count-label">
-                            <?php if ($item->getCount() == 1):?> <?php echo __('item')?><?php else:?> <?php echo __('items') ?><?php endif;?></span></span>
-                    <?php endif; ?>
-                </a>
-            <?php else:?>
-                <?php echo $item->getLabel() ?>
-                <?php if ($this->helper('\Magento\Catalog\Helper\Data')->shouldDisplayProductCountOnLayer()): ?>
                     <span class="count"><?php echo $item->getCount()?><span class="filter-count-label">
-                        <?php if ($item->getCount() == 1):?><?php echo __('item')?><?php else:?><?php echo __('items') ?><?php endif;?></span></span>
-                <?php endif; ?>
+                    <?php if ($item->getCount() == 1):?> <?php echo __('item')?><?php else:?> <?php echo __('items') ?><?php endif;?></span></span>
+                </a>
             <?php endif; ?>
         </li>
     <?php endforeach ?>

@@ -27,24 +27,6 @@ class Item extends \Magento\Catalog\Model\Layer\Filter\Item
     }
 
     /**
-     * @param boolean $value
-     * @return $this
-     */
-    public function setIsPreferred($value)
-    {
-        $this->_isPreferred = $value;
-        return $this;
-    }
-    
-    /**
-     * @return boolean
-     */
-    public function getIsPreferred()
-    {
-        return $this->_isPreferred;
-    }
-
-    /**
      * Get url for remove item from filter
      *
      * @return string
@@ -52,6 +34,12 @@ class Item extends \Magento\Catalog\Model\Layer\Filter\Item
     public function getRemoveUrl()
     {
         return $this->helper->getRemoveUrl($this);
+
+    }
+
+    public function getRemoveValue()
+    {
+        return $this->helper->getRemoveValue($this);
 
     }
 }

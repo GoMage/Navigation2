@@ -127,31 +127,22 @@ class Price extends \Magento\Catalog\Model\ResourceModel\Layer\Filter\Price
         return $select;
     }
 
-    /**
-     * @return float
-     */
-    public function getMinPrice()
+    public function getMinPriceForSlider()
     {
-        $base_select = $this->layer->getBaseSelect();
-        if (isset($base_select['collection'])) {
-            $collection = $base_select['collection'];
-        } else {
-            $collection = $this->layer->getProductCollection();
-        }
+        $collection = $this->layer->getCollectionProvider()->getCollection($this->layer->getCurrentCategory());
+        $collection->updateSearchCriteriaBuilder();
+        $this->layer->prepareProductCollection($collection);
         return $collection->getMinPrice();
     }
 
     /**
      * @return float
      */
-    public function getMaxPrice()
+    public function getMaxPriceForSlider()
     {
-        $base_select = $this->layer->getBaseSelect();
-        if (isset($base_select['collection'])) {
-            $collection = $base_select['collection'];
-        } else {
-            $collection = $this->layer->getProductCollection();
-        }
+        $collection = $this->layer->getCollectionProvider()->getCollection($this->layer->getCurrentCategory());
+        $collection->updateSearchCriteriaBuilder();
+        $this->layer->prepareProductCollection($collection);
         return $collection->getMaxPrice();
     }
 

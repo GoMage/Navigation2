@@ -16,6 +16,7 @@ define([
         this.ajax = element.attr('data-ajax');
         this.active = element.attr('data-active');
         this.clear = element.attr('data-clear');
+        this.url = element.attr('data-url');
     }
 
     Filter.prototype = {
@@ -40,6 +41,10 @@ define([
 
         getValue: function () {
             return this.value;
+        },
+
+        getUrl: function () {
+            return this.url;
         }
 
     };

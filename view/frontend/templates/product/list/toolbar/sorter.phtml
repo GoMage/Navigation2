@@ -11,7 +11,8 @@ use Magento\Catalog\Model\Product\ProductList\Toolbar;
     <select id="sorter" data-role="navigation-filter"
             data-param="product_list_order"
             data-ajax="1"
-            data-active="1" class="sorter-options">
+            data-active="1" class="sorter-options"
+            data-type="select">
         <?php foreach ($block->getAvailableOrders() as $_key => $_order): ?>
             <option value="<?php /* @escapeNotVerified */ echo $_key; ?>"
                 <?php if ($block->isOrderCurrent($_key)): ?>
