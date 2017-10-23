@@ -158,7 +158,7 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
                 continue;
             }
 
-            if (in_array($option['value'], $usedOptions)) {
+            if (in_array($option['value'], $usedOptions) && !empty($originalFacetedData[$option['value']]['count'])) {
                 $optionsFacetedData[$option['value']]['count'] = $originalFacetedData[$option['value']]['count'];
             }
 

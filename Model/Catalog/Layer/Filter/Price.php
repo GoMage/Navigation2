@@ -217,7 +217,6 @@ class Price extends \Magento\Catalog\Model\Layer\Filter\Price implements FilterI
                 return $this->_request->getParam($this->getRequestVar());
 
         }
-
     }
 
     public function canShowMinimized()
@@ -228,5 +227,14 @@ class Price extends \Magento\Catalog\Model\Layer\Filter\Price implements FilterI
     public function isFilterInState()
     {
         return ;
+    }
+
+    public function getSingleValue()
+    {
+        if ($value = $this->_request->getParam($this->getRequestVar())) {
+            return str_replace('-', ';', $value);
+        }
+
+        return $this->getMinBasePrice() . ';' . $this->getMaxBasePrice();
     }
 }

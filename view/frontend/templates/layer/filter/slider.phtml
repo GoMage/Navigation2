@@ -26,8 +26,6 @@ $filter->getGomageIsExcludeCategories();
 
 <div class="gan-filter gan-filter-slider">
     <?php $attributeCode = $filter->getAttributeModel()->getAttributeCode(); ?>
-    <?foreach ($filterItems as $item):?>
-        <?if (!$item->getIsActive()) continue;?>
         <div class="layout">
             <div class="layout-slider">
                 <span>
@@ -46,9 +44,8 @@ $filter->getGomageIsExcludeCategories();
                            data-type="slider"
                            type="slider"
                            name="<?php echo $attributeCode; ?>"
-                           value="<?php echo $str = str_replace('-', ';', $item->getValue()); ?>"/>
+                           value="<?php echo $filter->getSingleValue() ?>"/>
                 </span>
             </div>
         </div>
-    <?endforeach;?>
 </div>

@@ -38,7 +38,9 @@ $filter->getGomageIsExcludeCategories();
                    data-param="<?php echo $filter->getRequestVar() ?>"
                    data-ajax="<?php echo $filter->getGomageIsAjax(); ?>"
                    data-type="<?php echo (int) $filter->getGomageFilterType(); ?>"
-                   data-active="<?php echo (int) $item->getIsActive();?>">
+                   <?php if($item->getIsActive()):?>
+                    data-active="1">
+                    <?php endif;?>
                     <span class="filter-label-text"><?php echo $item->getLabel() ?></span>
                     <?php if ($item->getIsPreferred()) : ?><div class="filter-preferred"><?php echo __('Preferred brand') ?></div><?php endif?>
                     <?php if ($this->helper('\Magento\Catalog\Helper\Data')->shouldDisplayProductCountOnLayer()): ?>
