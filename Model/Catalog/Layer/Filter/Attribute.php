@@ -130,31 +130,28 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
             return parent::_getItemsData();
         }
 
+        if ($this->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::DROP_DOWN) {
+            return parent::_getItemsData();
+        }
+
         $attribute = $this->getAttributeModel();
         $productCollection = $this->getLayer()
             ->getProductCollection();
 
-        $sign = '';
-        $originalFacetedData = $productCollection->getFacetedData($attribute->getAttributeCode());
-        if ($this->getGomageFilterType() != \GoMage\Navigation\Model\Config\Source\Navigation::DROP_DOWN) {
-
-            $sing = '+';
-            $collection = $this->getLayer()->getCollectionProvider()->getCollection($this->getLayer()->getCurrentCategory());
-            $collection->updateSearchCriteriaBuilder();
-            $this->getLayer()->prepareProductCollection($collection);
-            foreach ($productCollection->getAddedFilters() as $field => $condition) {
-                if ($this->getAttributeModel()->getAttributeCode() == $field) {
-                    continue;
-                }
-                $collection->addFieldToFilter($field, $condition);
+        $collection = $this->getLayer()->getCollectionProvider()->getCollection($this->getLayer()->getCurrentCategory());
+        $collection->updateSearchCriteriaBuilder();
+        $this->getLayer()->prepareProductCollection($collection);
+        foreach ($productCollection->getAddedFilters() as $field => $condition) {
+            if ($this->getAttributeModel()->getAttributeCode() == $field) {
+                continue;
             }
-            $optionsFacetedData = $collection->getFacetedData($attribute->getAttributeCode());
-
-        } else {
-            $optionsFacetedData = $originalFacetedData;
+            $collection->addFieldToFilter($field, $condition);
         }
 
-        if ($attribute->getFrontendInput() == 'multiselect' && $this->getGomageFilterType() != \GoMage\Navigation\Model\Config\Source\Navigation::DROP_DOWN) {
+        $originalFacetedData = $productCollection->getFacetedData($attribute->getAttributeCode());
+        $optionsFacetedData = $collection->getFacetedData($attribute->getAttributeCode());
+
+        if ($attribute->getFrontendInput() == 'multiselect') {
             $optionsFacetedData = $this->calculateOptionsCount($originalFacetedData, $optionsFacetedData);
         }
 
@@ -175,7 +172,7 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
             $this->itemDataBuilder->addItemData(
                 $this->tagFilter->filter($option['label']),
                 $option['value'],
-                isset($optionsFacetedData[$option['value']]['count']) ? $sign . $optionsFacetedData[$option['value']]['count'] : 0
+                isset($optionsFacetedData[$option['value']]['count']) ? '' . $optionsFacetedData[$option['value']]['count'] : 0
             );
         }
 

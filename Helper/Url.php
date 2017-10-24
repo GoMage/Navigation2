@@ -110,7 +110,12 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
             $paramValues = explode('_', $queryParams[$item->getFilter()->getRequestVar()]);
         }
 
-        $position = array_search($item->getValue(), $paramValues);
+        if ($item->getFilter()->getRequestVar() == 'price') {
+            $position = array_search(implode('-', $item->getValue()), $paramValues);
+        } else {
+            $position = array_search($item->getValue(), $paramValues);
+        }
+
         if($position !== false) {
             unset($paramValues[$position]);
         }
@@ -137,7 +142,12 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
             $paramValues = explode('_', $queryParams[$item->getFilter()->getRequestVar()]);
         }
 
-        $position = array_search($item->getValue(), $paramValues);
+        if ($item->getFilter()->getRequestVar() == 'price') {
+            $position = array_search(implode('-', $item->getValue()), $paramValues);
+        } else {
+            $position = array_search($item->getValue(), $paramValues);
+        }
+
         if($position !== false) {
             unset($paramValues[$position]);
         }

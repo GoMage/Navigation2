@@ -204,4 +204,16 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $params['_query']['ajax'] = null;
         return Mage::helper('gomage_navigation/url')->wrapp($model->getUrl($route, $params));
     }
+
+    public function prepareSwatchesData($data, $items)
+    {
+
+        foreach ($items as $item) {
+            $data['options'][$item->getValue()]['link'] = $item->getGomageUrl();
+            $data['options'][$item->getValue()]['gomage_value'] = $item->getGomageValue();
+            $data['options'][$item->getValue()]['is_active'] = $item->getIsActive();
+        }
+
+        return $data;
+    }
 }

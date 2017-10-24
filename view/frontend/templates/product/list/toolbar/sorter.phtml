@@ -24,11 +24,11 @@ use Magento\Catalog\Model\Product\ProductList\Toolbar;
         <?php endforeach; ?>
     </select>
     <?php if ($block->getCurrentDirection() == 'desc'): ?>
-        <a title="<?php /* @escapeNotVerified */ echo __('Set Ascending Direction') ?>" href="#" class="action sorter-action sort-desc" data-role="direction-switcher" data-value="asc">
+        <a title="<?php /* @escapeNotVerified */ echo __('Set Ascending Direction') ?>" href="#" class="action sorter-action sort-desc" data-role="navigation-filter" data-param="product_list_dir" data-value="asc" data-ajax="1">
             <span><?php /* @escapeNotVerified */ echo __('Set Ascending Direction') ?></span>
         </a>
     <?php else: ?>
-        <a title="<?php /* @escapeNotVerified */ echo __('Set Descending Direction') ?>" href="#" class="action sorter-action sort-asc" data-role="direction-switcher" data-value="desc">
+        <a title="<?php /* @escapeNotVerified */ echo __('Set Descending Direction') ?>" href="#" class="action sorter-action sort-asc" data-role="navigation-filter" data-param="product_list_dir" data-value="desc" data-ajax="1">
             <span><?php /* @escapeNotVerified */ echo __('Set Descending Direction') ?></span>
         </a>
     <?php endif; ?>
