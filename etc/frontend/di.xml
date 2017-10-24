@@ -26,6 +26,16 @@
             <argument name="instanceName" xsi:type="string">GoMage\Navigation\Model\ResourceModel\Fulltext\Collection</argument>
         </arguments>
     </virtualType>
+    <virtualType name="Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollection" type="GoMage\Navigation\Model\ResourceModel\Fulltext\Collection">
+        <arguments>
+            <argument name="searchRequestName" xsi:type="string">quick_search_container</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\CatalogSearch\Model\Layer\Category\ItemCollectionProvider">
+        <arguments>
+            <argument name="collectionFactory" xsi:type="object">GoMage\Navigation\Model\ResourceModel\Fulltext\CollectionFactory</argument>
+        </arguments>
+    </type>
     <type name="Magento\Catalog\Model\Layer\Resolver">
         <arguments>
             <argument name="layersPool" xsi:type="array">

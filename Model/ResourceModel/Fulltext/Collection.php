@@ -49,4 +49,13 @@ class Collection extends \Magento\CatalogSearch\Model\ResourceModel\Fulltext\Col
     {
         return $this->_addedFilters;
     }
+
+    public function updateSearchCriteriaBuilder()
+    {
+        $searchCriteriaBuilder = ObjectManager::getInstance()
+            ->create(\Magento\Framework\Api\Search\SearchCriteriaBuilder::class);
+        $this->setSearchCriteriaBuilder($searchCriteriaBuilder);
+        return $this;
+
+    }
 }
