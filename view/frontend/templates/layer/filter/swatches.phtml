@@ -27,11 +27,11 @@ echo $swatchData['attribute_id'] ?>">
             <a  href="<?php /* @escapeNotVerified */
             echo $data['link'] ?>"
                data-role="navigation-filter"
-               data-value="<?php echo $data['gomage_value']; ?>"
+                data-value="<?php echo (!empty($data['gomage_value'])) ? $data['gomage_value'] : $option; ?>"
                data-param="<?php echo $filter->getRequestVar() ?>"
                data-ajax="<?php echo $filter->getGomageIsAjax(); ?>"
                data-type="<?php echo $filter->getSwatchInputType(); ?>"
-                <? if ($data['is_active']) : ?>
+                <? if (!empty($data['is_active'])) : ?>
                 <?php $selected = 'selected';?>
                data-active="1"
                 <? endif; ?>

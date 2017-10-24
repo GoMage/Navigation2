@@ -26,6 +26,14 @@
             <argument name="instanceName" xsi:type="string">GoMage\Navigation\Model\ResourceModel\Fulltext\Collection</argument>
         </arguments>
     </virtualType>
+    <type name="Magento\Catalog\Model\Layer\Resolver">
+        <arguments>
+            <argument name="layersPool" xsi:type="array">
+                <item name="category" xsi:type="string">GoMage\Navigation\Model\Layer\Category</item>
+                <item name="search" xsi:type="string">GoMage\Navigation\Model\Layer\Search</item>
+            </argument>
+        </arguments>
+    </type>
 
     <!--type name="Magento\Catalog\Model\ResourceModel\Layer\Filter\Attribute">
         <plugin name="gomage_navigation_attribute" type="GoMage\Navigation\Plugin\Layer\Filter\Attribute" />

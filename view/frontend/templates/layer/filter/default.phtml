@@ -23,7 +23,7 @@ $filter->getGomageIsReset();
 $filter->getGomageIsExcludeCategories();
 
 ?>
-<ol class="items gan-filter gan-filter-default <?php if($filter->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK) echo 'gan-filter-in-block'; ?> <?php echo $filter->canShowMinimized() ? "filter-content-hide" : "filter-content-show"; ?>">
+<ol class="items gan-filter gan-filter-default <?php if($filter->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK) echo 'gan-filter-in-block'; ?> <?php echo $filter->canShowMinimized() ? "filter-content-hide" : "filter-content-show"; ?>" <?php echo $filter->getGomageMaxBlockHeight();?>>
 
     <?php foreach ($filterItems as $item): ?>
         <li class="item">
