@@ -16,6 +16,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     protected $_request;
 
+    protected $filters;
+
     /**
      * Data constructor.
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
@@ -45,6 +47,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getScopeData($param, $section = SystemConfigInterface::SYSTEM_CONFIG_SECTION)
     {
+        $str = $section . SystemConfigInterface::SYSTEM_CONFIG_SLASH. $param;
+
         return $this->_scopeConfig->getValue(
             $section . SystemConfigInterface::SYSTEM_CONFIG_SLASH. $param,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
@@ -69,6 +73,17 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
             . SystemConfigInterface::SYSTEM_CONFIG_FIELD_PAGER_BUTTON
+        );
+    }
+
+    /**
+     * @return mixed
+     */
+    public function isShowPager(){
+
+        return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_SETTINGS_GROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_PAGER
         );
     }
 
@@ -215,5 +230,15 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         }
 
         return $data;
+    }
+
+    public function setAddedFilters($type, $field, $condition)
+    {
+        $this->filters[] = ['type' => $type, 'field' => $field, 'condition' => $condition];
+    }
+
+    public function getAddedFilters()
+    {
+        return $this->filters;
     }
 }

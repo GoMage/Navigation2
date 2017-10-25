@@ -7,6 +7,9 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
     protected $attributeProperties;
     protected $request;
     protected $catalogSession;
+    protected $helper;
+    protected $productCollectionFactory;
+    protected $filter;
 
     /**
      * Attribute constructor.
@@ -29,6 +32,9 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         \Magento\Framework\Filter\StripTags $tagFilter,
         \Magento\Framework\App\RequestInterface $request,
         \Magento\Catalog\Model\Session $catalogSession,
+        \GoMage\Navigation\Helper\Data $helper,
+        \Magento\Catalog\Model\Layer\Category\CollectionFilter $filter,
+        //\Magento\Catalog\Model\ResourceModel\CollectionFactory $productCollectionFactory,
         array $data = []
     )
     {
@@ -38,6 +44,9 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         $this->tagFilter = $tagFilter;
         $this->request = $request;
         $this->catalogSession = $catalogSession;
+        $this->helper = $helper;
+        $this->filter = $filter;
+        //$this->productCollectionFactory = $productCollectionFactory;
         parent::__construct($filterItemFactory, $storeManager, $layer, $itemDataBuilder, $filterAttributeFactory, $string, $tagFilter, $data);
     }
 
@@ -93,20 +102,29 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
             $collection = $this->getLayer()
                 ->getProductCollection();
 
-            $collection->addFieldToFilter($attribute->getAttributeCode(), array('in' => $filters));
+            if(!empty($this->getSwatchInputType())) {
 
-            $data = $this->catalogSession->getData('used_filters');
-            if (empty($data)) {
-                $data = [];
+                $newCollection = $this->getLayer()->getCollectionProvider()->getCollection($this->getLayer()->getCurrentCategory());
+                $newCollection->updateSearchCriteriaBuilder();
+                $this->getLayer()->prepareProductCollection($newCollection);
+                $newCollection->addFieldToFilter($attribute->getAttributeCode(), array('in' => $filters));
+                $newCollection->load();
+                $ids = $newCollection->getAllIds();
+                if(!empty($ids)) {
+                    $collection->addAttributeToFilter('entity_id', array('in' => $ids));
+                    $this->helper->setAddedFilters('attribute', 'entity_id', array('in' => $ids));
+                }
+
+            } else {
+                $collection->addFieldToFilter($attribute->getAttributeCode(), array('in' => $filters));
+                $this->helper->setAddedFilters('field', $attribute->getAttributeCode(), array('in' => $filters));
             }
-            $data[] = [$attribute->getAttributeCode() => array('in' => $filters)];
-
-            $this->catalogSession->setData('used_filters', $data);
 
             foreach ($filters as $filterItem) {
                 $text = $this->getOptionText($filterItem);
                 $this->getLayer()->getState()->addFilter($this->_createItem($text, $filterItem));
             }
+
         }
 
         return $this;
@@ -134,26 +152,50 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
             return parent::_getItemsData();
         }
 
+        if ($this->getSwatchInputType()) {
+            return parent::_getItemsData();
+        }
+
         $attribute = $this->getAttributeModel();
         $productCollection = $this->getLayer()
             ->getProductCollection();
 
-        $collection = $this->getLayer()->getCollectionProvider()->getCollection($this->getLayer()->getCurrentCategory());
-        $collection->updateSearchCriteriaBuilder();
+        //$collection = $this->getLayer()->getCollectionProvider()->getCollection($this->getLayer()->getCurrentCategory());
+        //$collection->updateSearchCriteriaBuilder();
+
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+//Load product by product id
+        $collection = $objectManager->create('GoMage\Navigation\Model\ResourceModel\Fulltext\Collection');
+
+        $this->filter->filter($collection, $this->getLayer()->getCurrentCategory());
+
+
+        //$collection = $this->productCollectionFactory->create();
+        //$this->collectionFilter->filter($collection, $this->getCurrentCategory());
         $this->getLayer()->prepareProductCollection($collection);
-        foreach ($productCollection->getAddedFilters() as $field => $condition) {
-            if ($this->getAttributeModel()->getAttributeCode() == $field) {
+        foreach ($this->helper->getAddedFilters() as $filter) {
+
+            if ($this->getAttributeModel()->getAttributeCode() == $filter['field']) {
                 continue;
             }
-            $collection->addFieldToFilter($field, $condition);
+
+            if ($filter['type'] == 'field') {
+                $collection->addFieldToFilter($filter['field'], $filter['condition']);
+            }
+
+            if ($filter['type'] == 'attribute') {
+                $collection->addAttributeToFilter($filter['field'], $filter['condition']);
+            }
         }
+
 
         $originalFacetedData = $productCollection->getFacetedData($attribute->getAttributeCode());
         $optionsFacetedData = $collection->getFacetedData($attribute->getAttributeCode());
 
-        if ($attribute->getFrontendInput() == 'multiselect') {
-            $optionsFacetedData = $this->calculateOptionsCount($originalFacetedData, $optionsFacetedData);
-        }
+        //if ($attribute->getFrontendInput() == 'multiselect') {
+        //    $optionsFacetedData = $this->calculateOptionsCount($originalFacetedData, $optionsFacetedData);
+        //}
 
         $usedOptions = $this->getUsedOptions();
         foreach ($attribute->getFrontend()->getSelectOptions() as $option) {

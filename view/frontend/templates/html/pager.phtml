@@ -4,8 +4,10 @@
  *
  * @var $block \Magento\Theme\Block\Html\Pager
  */
+$helper = $this->helper('GoMage\Navigation\Helper\Data');
+
 ?>
-<?php if ($block->getCollection()->getSize()): ?>
+<?php if ($block->getCollection()->getSize() && $helper->isShowPager()): ?>
 
     <?php if ($block->getUseContainer()): ?>
     <div class="pager">

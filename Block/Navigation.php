@@ -51,4 +51,20 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         }
         return false;
     }
+
+    public function getExpandedFilters()
+    {
+        $data = [];
+        $cnt = 0;
+        foreach ($this->getFilters() as $filter) {
+            if($filter->getItemsCount()) {
+                if ($filter->getGomageIsCollapsed()) {
+                    $data[] = $cnt;
+                }
+                $cnt++;
+            }
+        }
+
+        return '[' . implode(',', $data) . ']';
+    }
 }
