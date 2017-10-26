@@ -3,7 +3,9 @@
 
 /* Filter type = default
 -------------------------------------------------- */
-
+.gan-filter-default a.active{
+  font-weight: 700;
+}
 
 /* Filter type = input
 -------------------------------------------------- */
