@@ -31,7 +31,7 @@ $filter->getGomageIsExcludeCategories();
                 <span>
                     <input style="display: none;"
                            data-role="navigation-filter"
-                           data-active=""
+                           data-active="1"
                            data-from="<?php echo $filter->getMinBasePrice(); ?>"
                            data-to="<?php echo $filter->getMaxBasePrice(); ?>"
                            data-step="<?php echo $block->getStep(); ?>"
@@ -39,12 +39,14 @@ $filter->getGomageIsExcludeCategories();
                            data-code="<?php echo $attributeCode; ?>"
                            data-dimension="&nbsp;<?php echo $filter->getCurrencySymbol(); ?>"
                            data-param="<?php echo $filter->getRequestVar() ?>"
-                           data-ajax="<?php echo $filter->getGomageIsAjax() ?>"
+                           data-ajax="0"
                            id="<?php echo $attributeCode; ?>"
                            data-type="slider"
                            type="slider"
                            name="<?php echo $attributeCode; ?>"
-                           value="<?php echo $filter->getSingleValue() ?>"/>
+                           value="<?php echo $filter->getSingleValue() ?>"
+                           data-value="<?php echo str_replace(';', '-', $filter->getSingleValue()); ?>"
+                    />
                 </span>
             </div>
         </div>

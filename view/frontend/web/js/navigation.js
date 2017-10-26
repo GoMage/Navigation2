@@ -62,9 +62,7 @@ define([
                             dimension: slider.getDimension(),
                             skin: slider.getSkin(),
                             callback: function (value) {
-                                var el = $('#' + slider.getCode());
-                                el.attr("data-value", value.replace(';', '-'));
-                                self._runProcessFilterForElement(el);
+                                self._processPriceSlider(value, this);
                             }
                         });
                         break;
@@ -125,6 +123,20 @@ define([
             var el = $('#price');
             el.attr("data-value", value);
             this._runProcessFilterForElement(el);
+        },
+
+        _processPriceSlider: function (value, event) {
+
+            var el = $('#price');
+            var filter = new Filter(el);
+            var params = this._getParams();
+            params.set('price', value.replace(';', '-'));
+
+            if (filter.isAjax()) {
+                return this._ajaxFilter(this.options.baseUrl, params);
+            } else {
+                return $.mage.redirect(this.options.baseUrl + '?' + params.toUrlParams());
+            }
         },
 
         /**

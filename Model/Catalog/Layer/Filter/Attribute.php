@@ -112,19 +112,16 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
                 $ids = $newCollection->getAllIds();
                 if(!empty($ids)) {
                     $collection->addAttributeToFilter('entity_id', array('in' => $ids));
-                    $this->helper->setAddedFilters('attribute', 'entity_id', array('in' => $ids));
+                    $collection->addAdditionalFilter($attribute->getAttributeCode(), array('in' => $filters));
                 }
-
             } else {
                 $collection->addFieldToFilter($attribute->getAttributeCode(), array('in' => $filters));
-                $this->helper->setAddedFilters('field', $attribute->getAttributeCode(), array('in' => $filters));
             }
 
             foreach ($filters as $filterItem) {
                 $text = $this->getOptionText($filterItem);
                 $this->getLayer()->getState()->addFilter($this->_createItem($text, $filterItem));
             }
-
         }
 
         return $this;
@@ -152,7 +149,7 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
             return parent::_getItemsData();
         }
 
-        if ($this->getSwatchInputType()) {
+        if(!empty($this->getSwatchInputType())) {
             return parent::_getItemsData();
         }
 
@@ -160,43 +157,22 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         $productCollection = $this->getLayer()
             ->getProductCollection();
 
-        //$collection = $this->getLayer()->getCollectionProvider()->getCollection($this->getLayer()->getCurrentCategory());
-        //$collection->updateSearchCriteriaBuilder();
-
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-
-//Load product by product id
-        $collection = $objectManager->create('GoMage\Navigation\Model\ResourceModel\Fulltext\Collection');
-
-        $this->filter->filter($collection, $this->getLayer()->getCurrentCategory());
-
-
-        //$collection = $this->productCollectionFactory->create();
-        //$this->collectionFilter->filter($collection, $this->getCurrentCategory());
+        $collection = $this->getLayer()->getCollectionProvider()->getCollection($this->getLayer()->getCurrentCategory());
+        $collection->updateSearchCriteriaBuilder();
         $this->getLayer()->prepareProductCollection($collection);
-        foreach ($this->helper->getAddedFilters() as $filter) {
 
-            if ($this->getAttributeModel()->getAttributeCode() == $filter['field']) {
+        foreach ($productCollection->getAddedFilters() as $field => $condition) {
+
+            if ($this->getAttributeModel()->getAttributeCode() == $field) {
                 continue;
             }
-
-            if ($filter['type'] == 'field') {
-                $collection->addFieldToFilter($filter['field'], $filter['condition']);
-            }
-
-            if ($filter['type'] == 'attribute') {
-                $collection->addAttributeToFilter($filter['field'], $filter['condition']);
-            }
+            $collection->addFieldToFilter($field, $condition);
         }
 
-
-        $originalFacetedData = $productCollection->getFacetedData($attribute->getAttributeCode());
+        $productCollection->getFacetedData($attribute->getAttributeCode());
         $optionsFacetedData = $collection->getFacetedData($attribute->getAttributeCode());
 
-        //if ($attribute->getFrontendInput() == 'multiselect') {
-        //    $optionsFacetedData = $this->calculateOptionsCount($originalFacetedData, $optionsFacetedData);
-        //}
-
+        $optionsCount = $this->_getResource()->getCount($this);
         $usedOptions = $this->getUsedOptions();
         foreach ($attribute->getFrontend()->getSelectOptions() as $option) {
 
@@ -204,32 +180,21 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
                 continue;
             }
 
-            if (in_array($option['value'], $usedOptions) && !empty($originalFacetedData[$option['value']]['count'])) {
-                $optionsFacetedData[$option['value']]['count'] = $originalFacetedData[$option['value']]['count'];
+            if (in_array($option['value'], $usedOptions) && !empty($optionsCount[$option['value']])) {
+                $optionsFacetedData[$option['value']]['count'] = $optionsCount[$option['value']];
             }
 
             if (empty($optionsFacetedData[$option['value']]['count'])) {
                 continue;
             }
+
             $this->itemDataBuilder->addItemData(
                 $this->tagFilter->filter($option['label']),
                 $option['value'],
-                isset($optionsFacetedData[$option['value']]['count']) ? '' . $optionsFacetedData[$option['value']]['count'] : 0
+                isset($optionsFacetedData[$option['value']]['count']) ? $optionsFacetedData[$option['value']]['count'] : 0
             );
         }
 
         return $this->itemDataBuilder->build();
-    }
-
-    protected function calculateOptionsCount($originalFacetedData, $optionsFacetedData)
-    {
-        foreach ($originalFacetedData as $key => $optionData) {
-            $optionsFacetedData[$key]['count'] = $optionsFacetedData[$key]['count'] - $optionData['count'];
-            if ($optionsFacetedData[$key]['count'] <= 0) {
-                unset($optionsFacetedData[$key]['count']);
-            }
-        }
-
-        return $optionsFacetedData;
     }
 }

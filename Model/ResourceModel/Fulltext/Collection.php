@@ -28,6 +28,13 @@ class Collection extends \Magento\CatalogSearch\Model\ResourceModel\Fulltext\Col
         return parent::addFieldToFilter($field, $condition);
     }
 
+    public function addAdditionalFilter($field, $condition = null)
+    {
+        if (is_string($field)) {
+            $this->_addedFilters[$field] = $condition;
+        }
+    }
+
 
     /**
      * Get applied filters
