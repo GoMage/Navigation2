@@ -36,7 +36,9 @@ $filter->getGomageIsExcludeCategories();
                    data-url="<?php if(!$item->getIsActive()):?><?php echo $item->getGomageUrl(); ?> <?endif;?>"
                    data-value="<?php echo $item->getGomageValue() ?>"
                    data-param="<?php echo $filter->getRequestVar() ?>"
-                   data-ajax="<?php echo $filter->getGomageIsAjax(); ?>"
+                   <?if ($filter->getGomageIsAjax()):?>
+                    data-ajax="1"
+                   <?endif;?>
                    data-type="<?php echo (int) $filter->getGomageFilterType(); ?>"
                    <?php if($item->getIsActive()):?>
                     data-active="1">

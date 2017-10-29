@@ -149,10 +149,6 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
             return parent::_getItemsData();
         }
 
-        if(!empty($this->getSwatchInputType())) {
-            return parent::_getItemsData();
-        }
-
         $attribute = $this->getAttributeModel();
         $productCollection = $this->getLayer()
             ->getProductCollection();

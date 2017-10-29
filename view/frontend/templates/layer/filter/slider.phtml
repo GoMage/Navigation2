@@ -31,7 +31,9 @@ $filter->getGomageIsExcludeCategories();
                 <span>
                     <input style="display: none;"
                            data-role="navigation-filter"
-                           data-active="1"
+                        <? if (!empty($filter->isActive())): ?>
+                            data-active="1"
+                        <? endif; ?>
                            data-from="<?php echo $filter->getMinBasePrice(); ?>"
                            data-to="<?php echo $filter->getMaxBasePrice(); ?>"
                            data-step="<?php echo $block->getStep(); ?>"

@@ -14,4 +14,5 @@ interface SystemConfigInterface
     const SYSTEM_CONFIG_FIELD_ENABLE= 'enable';
     const SYSTEM_CONFIG_FIELD_PAGER_BUTTON = 'pager_button';
     const SYSTEM_CONFIG_FIELD_PAGER = 'pager';
+    const SYSTEM_CONFIG_FIELD_QTY = 'qty';
 }

@@ -67,6 +67,10 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getItemUrl($item)
     {
+        if ($item->getFilter()->getFilterType() == \GoMage\Navigation\Model\Catalog\Layer\Filter\Price::FILTER_TYPE) {
+            return $this->getItemPriceUrl($item);
+        }
+
         $paramValues = [];
         $queryParams = is_array($this->_request->getParams()) ? $this->_request->getParams() : [];
         if (!empty($queryParams[$item->getFilter()->getRequestVar()])) {
@@ -87,8 +91,24 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
         return $this->_escaper->escapeUrl($url);
     }
 
+    public function getItemPriceUrl($item)
+    {
+        $query = [
+            $item->getFilter()->getRequestVar() => $item->getValue(),
+            $this->_htmlPagerBlock->getPageVarName() => null,
+        ];
+
+        $url = $this->_url->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true, '_query' => $query]);
+
+        return $this->_escaper->escapeUrl($url);
+    }
+
     public function getItemValue($item)
     {
+        if ($item->getFilter()->getFilterType() == \GoMage\Navigation\Model\Catalog\Layer\Filter\Price::FILTER_TYPE) {
+            return $this->getItemPriceValue($item);
+        }
+
         $paramValues = [];
         $queryParams = is_array($this->_request->getParams()) ? $this->_request->getParams() : [];
         if (!empty($queryParams[$item->getFilter()->getRequestVar()])) {
@@ -100,6 +120,11 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
         }
 
         return implode('_', $paramValues);
+    }
+
+    public function getItemPriceValue($item)
+    {
+        return $item->getValue();
     }
 
     public function getRemoveUrl($item)
