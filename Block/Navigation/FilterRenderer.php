@@ -35,6 +35,8 @@ class FilterRenderer extends Template implements FilterRendererInterface
      */
     protected $_request;
 
+    protected $_dataHelper;
+
     /**
      * @var \GoMage\Navigation\Helper\Url
      */
@@ -54,12 +56,14 @@ class FilterRenderer extends Template implements FilterRendererInterface
         \Magento\Swatches\Block\LayeredNavigation\RenderLayered $renderLayered,
         \Magento\Framework\App\RequestInterface $request,
         \GoMage\Navigation\Helper\Url $urlHelper,
+        \GoMage\Navigation\Helper\Data $dataHelper,
         array $data = array()
     )
     {
         $this->_coreRegistry = $coreRegistry;
         $this->_request = $request;
         $this->_urlHelper = $urlHelper;
+        $this->_dataHelper = $dataHelper;
         $this->_renderLayered = $renderLayered;
         
         parent::__construct($context, $data);
@@ -182,7 +186,11 @@ class FilterRenderer extends Template implements FilterRendererInterface
         $params = $this->_request->getParam($requestVar);
         $params = explode('_', $params);
 
-        if (in_array($item->getValue(), $params)) {
+        if ($this->_dataHelper->isUseFriendlyUrls() && in_array(mb_strtolower(htmlentities($item->getLabel())), $params)) {
+            $item->setIsActive(true);
+        }
+
+        if (!$this->_dataHelper->isUseFriendlyUrls() && in_array($item->getValue(), $params)) {
             $item->setIsActive(true);
         }
     }

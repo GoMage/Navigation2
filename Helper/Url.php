@@ -46,18 +46,25 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
      */
     protected $_escaper;
 
+    /**
+     * @var \GoMage\Navigation\Helper\Data
+     */
+    protected $_dataHelper;
+
     public function __construct(
         Context $context,
         \Magento\Framework\UrlInterface $url,
         \Magento\Theme\Block\Html\Pager $htmlPagerBlock,
         \Magento\Framework\App\Request\Http $request,
-        \Magento\Framework\Escaper $escaper
+        \Magento\Framework\Escaper $escaper,
+        \GoMage\Navigation\Helper\Data $dataHelper
     )
     {
         $this->_url = $url;
         $this->_htmlPagerBlock = $htmlPagerBlock;
         $this->_request = $request;
         $this->_escaper = $escaper;
+        $this->_dataHelper = $dataHelper;
         parent::__construct($context);
     }
 
@@ -77,8 +84,8 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
             $paramValues = explode('_', $queryParams[$item->getFilter()->getRequestVar()]);
         }
 
-        if(!in_array($item->getValue(), $paramValues)) {
-            $paramValues[] = $item->getValue();
+        if(!in_array($this->getItemFormattedValue($item), $paramValues)) {
+            $paramValues[] = $this->getItemFormattedValue($item);
         }
 
         $query = [
@@ -115,8 +122,8 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
             $paramValues = explode('_', $queryParams[$item->getFilter()->getRequestVar()]);
         }
 
-        if(!in_array($item->getValue(), $paramValues)) {
-            $paramValues[] = $item->getValue();
+        if(!in_array($this->getItemFormattedValue($item), $paramValues)) {
+            $paramValues[] = $this->getItemFormattedValue($item);
         }
 
         return implode('_', $paramValues);
@@ -138,7 +145,7 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
         if ($item->getFilter()->getRequestVar() == 'price') {
             $position = array_search(implode('-', $item->getValue()), $paramValues);
         } else {
-            $position = array_search($item->getValue(), $paramValues);
+            $position = array_search($this->getItemFormattedValue($item), $paramValues);
         }
 
         if($position !== false) {
@@ -170,7 +177,7 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
         if ($item->getFilter()->getRequestVar() == 'price') {
             $position = array_search(implode('-', $item->getValue()), $paramValues);
         } else {
-            $position = array_search($item->getValue(), $paramValues);
+            $position = array_search($this->getItemFormattedValue($item), $paramValues);
         }
 
         if($position !== false) {
@@ -178,5 +185,13 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
         }
 
         return implode('_', $paramValues);
+    }
+
+    protected function getItemFormattedValue($item)
+    {
+        if (!$this->_dataHelper->isUseFriendlyUrls())
+            return $item->getValue();
+
+        return mb_strtolower(str_replace(' ', '+', html_entity_decode($item->getLabel())));
     }
 }

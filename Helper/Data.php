@@ -27,14 +27,12 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function __construct(
         Context $context,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
-        \GoMage\Navigation\Helper\Url $urlHelper,
         \Magento\Framework\App\Request\Http $request
         //\Magento\Framework\UrlInterface $url,
     )
     {
         parent::__construct($context);
         $this->_scopeConfig = $scopeConfig;
-        $this->_urlHelper = $urlHelper;
         $this->_request = $request;
 
     }
@@ -90,6 +88,22 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_SETTINGS_GROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
             . SystemConfigInterface::SYSTEM_CONFIG_FIELD_QTY
+        );
+    }
+
+    public function isAddFilterResultsToUrl(){
+
+        return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_SETTINGS_GROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_HASH
+        );
+    }
+
+    public function isUseFriendlyUrls(){
+
+        return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_SETTINGS_GROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_FRIENDLY_URLS
         );
     }
 

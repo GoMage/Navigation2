@@ -10,6 +10,7 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
     protected $helper;
     protected $productCollectionFactory;
     protected $filter;
+    protected $options;
 
     /**
      * Attribute constructor.
@@ -97,7 +98,7 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         }
 
         if ($filter) {
-            $filters = explode('_', $filter);
+            $filters = $this->getFormattedFilters($filter);
             $attribute = $this->getAttributeModel();
             $collection = $this->getLayer()
                 ->getProductCollection();
@@ -192,5 +193,27 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         }
 
         return $this->itemDataBuilder->build();
+    }
+
+    protected function getFormattedFilters($filter)
+    {
+        $filters = explode('_', $filter);
+        if (!$this->helper->isUseFriendlyUrls()) {
+            return $filters;
+        }
+
+        if(empty($this->options)) {
+            foreach ($this->getAttributeModel()->getFrontend()->getSelectOptions() as $option) {
+                $this->options[mb_strtolower(str_replace(' ', '+', $option['label']))] = $option['value'];
+            }
+        }
+
+        $params = [];
+        foreach ($filters as $item) {
+
+            $params[] = $this->options[htmlentities($item)];
+        }
+
+        return $params;
     }
 }

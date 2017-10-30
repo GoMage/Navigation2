@@ -16,6 +16,11 @@
             <argument name="filterList" xsi:type="object">categoryFilterList</argument>
         </arguments>
     </virtualType>
+    <type name="Magento\Catalog\Model\Layer\Filter\ItemFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">GoMage\Navigation\Model\Catalog\Layer\Filter\Item</argument>
+        </arguments>
+    </type>
     <type name="Magento\Catalog\Model\Layer\FilterList">
         <plugin name="gomage_set_additional_data_to_filters" type="\GoMage\Navigation\Plugin\SetAdditionalAttributeData" />
     </type>
