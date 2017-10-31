@@ -17,4 +17,5 @@ interface SystemConfigInterface
     const SYSTEM_CONFIG_FIELD_QTY = 'qty';
     const SYSTEM_CONFIG_FIELD_USE_HASH = 'use_hash';
     const SYSTEM_CONFIG_FIELD_USE_FRIENDLY_URLS = 'friendly_urls';
+    const SYSTEM_CONFIG_FIELD_SHOW_APPLIED_VALUES = 'result';
 }

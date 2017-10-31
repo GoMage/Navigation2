@@ -12,17 +12,24 @@ class Item extends \Magento\Catalog\Model\Layer\Filter\Item
     /**
      * @var \GoMage\Navigation\Helper\Url
      */
-    protected $helper;
+    protected $urlHelper;
+
+    /**
+     * @var \GoMage\Navigation\Helper\Data
+     */
+    protected $dataHelper;
 
 
     public function __construct(
         \Magento\Framework\UrlInterface $url,
         \Magento\Theme\Block\Html\Pager $htmlPagerBlock,
-        \GoMage\Navigation\Helper\Url $helper,
+        \GoMage\Navigation\Helper\Url $urlHelper,
+        \GoMage\Navigation\Helper\Data $dataHelper,
         array $data = []
     ) {
 
-        $this->helper = $helper;
+        $this->urlHelper = $urlHelper;
+        $this->dataHelper = $dataHelper;
         parent::__construct($url, $htmlPagerBlock, $data);
     }
 
@@ -33,13 +40,22 @@ class Item extends \Magento\Catalog\Model\Layer\Filter\Item
      */
     public function getRemoveUrl()
     {
-        return $this->helper->getRemoveUrl($this);
+        return $this->urlHelper->getRemoveUrl($this);
 
     }
 
     public function getRemoveValue()
     {
-        return $this->helper->getRemoveValue($this);
+        return $this->urlHelper->getRemoveValue($this);
 
+    }
+
+    public function isShowAppliedValues()
+    {
+        if ($this->dataHelper->isShowAppliedValuesInResults() == \GoMage\Navigation\Model\Config\Source\Result::REMOVE && $this->getIsActive()) {
+            return false;
+        }
+
+        return true;
     }
 }

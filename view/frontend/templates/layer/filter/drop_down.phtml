@@ -35,7 +35,7 @@ $filter->getGoMageIsExcludeCategories();
     >
         <option value=""><?php echo __('Select Filter') ?></option>
         <?php foreach ($filterItems as $item): ?>
-            <?php if ($item->getCount() > 0): ?>
+            <?php if ($item->getCount() > 0 && $item->isShowAppliedValues()): ?>
                 <option value="<?php echo $item->getValueString() ?>"
                         <?php if ($item->getIsActive()): ?>selected="selected" data-active="1"<?php endif ?>>
                     <?php echo $item->getLabel() . ' (' . $item->getCount() . ')' ?>

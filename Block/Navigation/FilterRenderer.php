@@ -186,7 +186,11 @@ class FilterRenderer extends Template implements FilterRendererInterface
         $params = $this->_request->getParam($requestVar);
         $params = explode('_', $params);
 
-        if ($this->_dataHelper->isUseFriendlyUrls() && in_array(mb_strtolower(htmlentities($item->getLabel())), $params)) {
+        foreach ($params as &$param) {
+            $param = mb_strtolower(str_replace(' ', '+', htmlentities($param)));
+        }
+
+        if ($this->_dataHelper->isUseFriendlyUrls() && in_array(mb_strtolower($item->getLabel()), $params)) {
             $item->setIsActive(true);
         }
 

@@ -107,6 +107,14 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         );
     }
 
+    public function isShowAppliedValuesInResults(){
+
+        return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_SETTINGS_GROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_SHOW_APPLIED_VALUES
+        );
+    }
+
     public function getRemoveUrl($route, $data)
     {
         $queryParams = is_array($this->_request->getParams()) ? $this->_request->getParams() : array();
@@ -133,6 +141,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             $data['options'][$item->getValue()]['link'] = $item->getGomageUrl();
             $data['options'][$item->getValue()]['gomage_value'] = $item->getGomageValue();
             $data['options'][$item->getValue()]['is_active'] = $item->getIsActive();
+            $data['options'][$item->getValue()]['is_show'] = $item->isShowAppliedValues();
         }
 
         return $data;

@@ -17,19 +17,21 @@ $helper = $this->helper('GoMage\Navigation\Helper\Data');
                         "addFilterResultsToUrl": "<?php echo $helper->isAddFilterResultsToUrl()?>"
                         }}'>
         <div class="block-content filter-content">
-            <?php echo $block->getChildHtml('state') ?>
+            <?if ($helper->isShowAppliedValuesInResults()):?>
+                <?php echo $block->getChildHtml('state') ?>
 
-            <?php if ($block->getLayer()->getState()->getFilters()): ?>
-                <div class="block-actions filter-actions">
-                    <a href="<?php /* @escapeNotVerified */ echo $block->getClearUrl() ?>"
-                       class="action clear filter-clear"
-                       data-role="navigation-filter"
-                       data-ajax="1"
-                       data-clear="1">
-                        <span><?php /* @escapeNotVerified */ echo __('Clear All') ?></span>
-                    </a>
-                </div>
-            <?php endif; ?>
+                <?php if ($block->getLayer()->getState()->getFilters()): ?>
+                    <div class="block-actions filter-actions">
+                        <a href="<?php /* @escapeNotVerified */ echo $block->getClearUrl() ?>"
+                           class="action clear filter-clear"
+                           data-role="navigation-filter"
+                           data-ajax="1"
+                           data-clear="1">
+                            <span><?php /* @escapeNotVerified */ echo __('Clear All') ?></span>
+                        </a>
+                    </div>
+                <?php endif; ?>
+            <?endif;?>
             <?php $wrapOptions = false; ?>
 
                 <div class="filter-subtitle2"><?php /* @escapeNotVerified */ echo __('Add Filter:') ?></div>

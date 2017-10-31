@@ -41,6 +41,11 @@ class Price extends \Magento\Catalog\Model\Layer\Filter\Price implements FilterI
 
     protected $filterTemplates;
 
+    /**
+     * @var \GoMage\Navigation\Helper\Data
+     */
+    protected $dataHelper;
+
 
     /**
      * Price constructor.
@@ -73,6 +78,7 @@ class Price extends \Magento\Catalog\Model\Layer\Filter\Price implements FilterI
         \Magento\Catalog\Model\Layer\Filter\Price\Render $render,
         \Magento\Framework\App\RequestInterface $request,
         \GoMage\Navigation\Model\Config\Source\Filter\Templates $filterTemplates,
+        \GoMage\Navigation\Helper\Data $dataHelper,
         array $data = []
     )
     {
@@ -95,7 +101,19 @@ class Price extends \Magento\Catalog\Model\Layer\Filter\Price implements FilterI
         $this->render = $render;
         $this->request = $request;
         $this->filterTemplates = $filterTemplates;
+        $this->dataHelper = $dataHelper;
     }
+
+    public function apply(\Magento\Framework\App\RequestInterface $request)
+    {
+        parent::apply($request);
+        if (!$this->isShowAppliedValues()) {
+            $this->_items = [];
+        }
+
+        return $this;
+    }
+
     /**
      * @return mixed
      */
@@ -166,5 +184,15 @@ class Price extends \Magento\Catalog\Model\Layer\Filter\Price implements FilterI
         $collection->updateSearchCriteriaBuilder();
         $this->layer->prepareProductCollection($collection);
         return $collection;
+    }
+
+    public function isShowAppliedValues()
+    {
+        if ($this->dataHelper->isShowAppliedValuesInResults() == \GoMage\Navigation\Model\Config\Source\Result::REMOVE && $this->isActive()
+        && $this->filterTemplates->get(\GoMage\Navigation\Model\Config\Source\Navigation::SLIDER)) {
+            return false;
+        }
+
+        return true;
     }
 }

@@ -24,7 +24,10 @@ echo $swatchData['attribute_code'] ?>"
 echo $swatchData['attribute_id'] ?>">
     <div class="swatch-attribute-options clearfix">
         <?php foreach ($swatchData['options'] as $option => $data): ?>
-            <?php $selected = '';?>
+            <?php
+                if (!$data['is_show']) continue;
+                $selected = '';
+            ?>
             <a  href="<?php /* @escapeNotVerified */
             echo $data['link'] ?>"
                data-role="navigation-filter"
