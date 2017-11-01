@@ -106,6 +106,14 @@ class FilterRenderer extends Template implements FilterRendererInterface
      */
     public function render(FilterInterface $filter)
     {
+        if(!$this->_dataHelper->isEnable()) {
+            $this->setTemplate('Magento_LayeredNavigation::layer/filter.phtml');
+            $this->assign('filterItems', $filter->getItems());
+            $html = $this->_toHtml();
+            $this->assign('filterItems', []);
+            return $html;
+        }
+
         $this->setTemplate($filter->getGomageFilterTemplate());
 
         $filtersPreferred = [];

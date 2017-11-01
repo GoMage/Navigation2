@@ -14,6 +14,8 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
 
     protected $activeFilters;
 
+    protected $dataHelper;
+
     /**
      * Navigation constructor.
      * @param \Magento\Framework\View\Element\Template\Context $context
@@ -29,6 +31,7 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         \Magento\Catalog\Model\Layer\FilterList $filterList,
         \Magento\Catalog\Model\Layer\AvailabilityFlagInterface $visibilityFlag,
         \Magento\Framework\App\RequestInterface $request,
+        \GoMage\Navigation\Helper\Data $dataHelper,
         array $data = []
     )
     {
@@ -36,6 +39,7 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         $this->filterList = $filterList;
         $this->visibilityFlag = $visibilityFlag;
         $this->request = $request;
+        $this->dataHelper = $dataHelper;
         parent::__construct($context, $layerResolver, $filterList, $visibilityFlag, $data);
     }
 
@@ -66,5 +70,16 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         }
 
         return '[' . implode(',', $data) . ']';
+    }
+
+    public function setTemplate($template)
+    {
+        if (!$this->dataHelper->isEnable()) {
+            $this->_template = 'Magento_LayeredNavigation::layer/view.phtml';
+        } else {
+            $this->_template = $template;
+        }
+
+        return $this;
     }
 }

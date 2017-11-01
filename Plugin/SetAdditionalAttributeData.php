@@ -6,16 +6,23 @@ class SetAdditionalAttributeData {
 
     protected $navigationAttributeCollectionFactory;
     protected $filterTemplates;
+    protected $dataHelper;
 
     public function __construct(
         \GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory $navigationAttributeCollectionFactory,
-        \GoMage\Navigation\Model\Config\Source\Filter\Templates $filterTemplates
+        \GoMage\Navigation\Model\Config\Source\Filter\Templates $filterTemplates,
+        \GoMage\Navigation\Helper\Data $dataHelper
     ) {
         $this->navigationAttributeCollectionFactory = $navigationAttributeCollectionFactory;
         $this->filterTemplates = $filterTemplates;
+        $this->dataHelper = $dataHelper;
     }
 
     public function afterGetFilters($filterList, $result) {
+
+        if (!$this->dataHelper->isEnable()) {
+            return $result;
+        }
 
         foreach ($result as $filter) {
 

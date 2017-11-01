@@ -92,6 +92,10 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
      */
     public function apply(\Magento\Framework\App\RequestInterface $request)
     {
+        if (!$this->helper->isEnable()) {
+            return parent::apply($request);
+        }
+
         $filter = $request->getParam($this->_requestVar);
         if (is_array($filter)) {
             return $this;
@@ -142,6 +146,10 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
      */
     protected function _getItemsData()
     {
+        if (!$this->helper->isEnable()) {
+            return parent::_getItemsData();
+        }
+
         if (!$this->request->getParam($this->_requestVar)) {
             return parent::_getItemsData();
         }
