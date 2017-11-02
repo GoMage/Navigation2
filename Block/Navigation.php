@@ -72,14 +72,14 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         return '[' . implode(',', $data) . ']';
     }
 
-    public function setTemplate($template)
+    protected function _beforeToHtml()
     {
-        if (!$this->dataHelper->isEnable()) {
-            $this->_template = 'Magento_LayeredNavigation::layer/view.phtml';
+        if ($this->dataHelper->isEnable()) {
+            $this->setTemplate('GoMage_Navigation::layer/view.phtml');
         } else {
-            $this->_template = $template;
+            $this->setTemplate('Magento_LayeredNavigation::layer/view.phtml');
         }
 
-        return $this;
+        return parent::_beforeToHtml();
     }
 }

@@ -115,6 +115,30 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         );
     }
 
+    public function isShowCategories(){
+
+        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_ENABLE
+        );
+    }
+
+    public function getCategoriesBlockLocation(){
+
+        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_BLOCK_LOCATION
+        );
+    }
+
+    public function getCategoriesNavigationType(){
+
+        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_NAVIGATION_TYPE
+        );
+    }
+
     public function getRemoveUrl($route, $data)
     {
         $queryParams = is_array($this->_request->getParams()) ? $this->_request->getParams() : array();
