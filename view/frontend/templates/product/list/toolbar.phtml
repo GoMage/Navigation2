@@ -5,8 +5,11 @@
  * @var $block \Magento\Catalog\Block\Product\ProductList\Toolbar
  */
 use Magento\Catalog\Model\Product\ProductList\Toolbar;
+$helper = $this->helper('GoMage\Navigation\Helper\Data');
 ?>
 <?php if ($block->getCollection()->getSize()): ?>
+
+    <?if ($helper->isEnable()):?>
     <div class="toolbar toolbar-products" data-mage-init='<?php /* @escapeNotVerified */ echo $block->getWidgetOptionsJson(); ?>'>
         <?php if ($block->isExpanded()): ?>
             <?php include ($block->getTemplateFile('GoMage_Navigation::product/list/toolbar/viewmode.phtml')) ?>
@@ -23,4 +26,21 @@ use Magento\Catalog\Model\Product\ProductList\Toolbar;
         <?php endif; ?>
     </div>
     <?php echo $block->getChildHtml('gomage.navigation.more.button'); ?>
+    <?else:?>
+    <div class="toolbar toolbar-products" data-mage-init='<?= /* @escapeNotVerified */ $block->getWidgetOptionsJson() ?>'>
+        <?php if ($block->isExpanded()): ?>
+            <?php include ($block->getTemplateFile('Magento_Catalog::product/list/toolbar/viewmode.phtml')) ?>
+        <?php endif; ?>
+
+        <?php include ($block->getTemplateFile('Magento_Catalog::product/list/toolbar/amount.phtml')) ?>
+
+        <?= $block->getPagerHtml() ?>
+
+        <?php include ($block->getTemplateFile('Magento_Catalog::product/list/toolbar/limiter.phtml')) ?>
+
+        <?php if ($block->isExpanded()): ?>
+            <?php include ($block->getTemplateFile('Magento_Catalog::product/list/toolbar/sorter.phtml')) ?>
+        <?php endif; ?>
+    </div>
+    <?endif;?>
 <?php endif ?>
