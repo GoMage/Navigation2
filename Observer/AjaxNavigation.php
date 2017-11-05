@@ -31,6 +31,7 @@ class AjaxNavigation implements ObserverInterface
      * @var \Magento\Framework\Event\ManagerInterface
      */
     protected $_eventManager;
+    protected $dataHelper;
 
 
     public function __construct(
@@ -38,7 +39,8 @@ class AjaxNavigation implements ObserverInterface
         \Magento\Framework\App\ResponseInterface $response,
         \Magento\Framework\App\ActionFlag $actionFlag,
         \Magento\Framework\View\LayoutInterface $layout,
-        \Magento\Framework\Event\ManagerInterface $eventManager
+        \Magento\Framework\Event\ManagerInterface $eventManager,
+        \GoMage\Navigation\Helper\Data $dataHelper
     )
     {
         $this->_request = $request;
@@ -46,6 +48,7 @@ class AjaxNavigation implements ObserverInterface
         $this->_actionFlag = $actionFlag;
         $this->_layout = $layout;
         $this->_eventManager = $eventManager;
+        $this->dataHelper = $dataHelper;
     }
 
     /**
@@ -55,10 +58,15 @@ class AjaxNavigation implements ObserverInterface
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
-        if ($this->_request->isAjax()) {
-            $result = new DataObject();
+        if ($this->_request->isAjax() && $this->dataHelper->isEnable()) {
 
-            $result->setData('navigation', $this->_layout->getBlock('catalog.leftnav')->toHtml());
+            $navigationPosition = $this->getBlockLocation($this->dataHelper->getShowShopByIn());
+            $categoryPosition = $this->getBlockLocation($this->dataHelper->getCategoriesBlockLocation());
+
+            $result = new DataObject();
+            $result->setData('categories', $this->_layout->getBlock('gomage.categories.' . $categoryPosition)->toHtml());
+            $result->setData('navigation', $this->_layout->getBlock('catalog.' . $navigationPosition . 'nav')->toHtml());
+
             $result->setData('products', $this->_layout->getBlock('category.products')->toHtml());
 
             $this->_eventManager->dispatch('gomage_navigation_ajax_result', ['result' => $result]);
@@ -73,4 +81,16 @@ class AjaxNavigation implements ObserverInterface
         return $this;
     }
 
+    public function getBlockLocation($type)
+    {
+        $place[\GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN] = 'left';
+        $place[\GoMage\Navigation\Model\Config\Source\Place::CONTENT] = 'content';
+        $place[\GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN] = 'right';
+
+        if(empty($place[$type])) {
+            throw new Exception(__('Block position is not set for ' . (int) $type . ' type'));
+        }
+
+        return $place[$type];
+    }
 }

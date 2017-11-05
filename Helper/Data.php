@@ -65,6 +65,17 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * @return mixed
      */
+    public function getShowShopByIn()
+    {
+        return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_SHOW_SHOP_BY_IN
+        );
+    }
+
+    /**
+     * @return mixed
+     */
     public function isPagerButton(){
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH

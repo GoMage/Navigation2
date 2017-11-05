@@ -10,10 +10,20 @@
     </head>
     <body>
     <referenceContainer name="sidebar.main">
-        <block class="GoMage\Navigation\Block\Navigation\Categories\Left" name="gomage.categories.left" />
-        <block class="GoMage\Navigation\Block\Navigation\Category" name="catalog.leftnav">
+        <block class="GoMage\Navigation\Block\Navigation\Categories\Left" name="gomage.categories.left"/>
+        <block class="GoMage\Navigation\Block\Navigation" name="catalog.leftnav">
             <block class="GoMage\Navigation\Block\Navigation\State" name="catalog.navigation.state" as="state" />
             <block class="GoMage\Navigation\Block\Navigation\FilterRenderer" name="catalog.navigation.renderer" as="renderer"/>
+        </block>
+    </referenceContainer>
+    <referenceContainer name="sidebar.right">
+        <block class="GoMage\Navigation\Block\Navigation\Categories\Right" name="gomage.categories.right" before="-"/>
+        <block class="GoMage\Navigation\Block\NavigationRight" name="catalog.rightnav">
+        </block>
+    </referenceContainer>
+    <referenceContainer name="main">
+        <block class="GoMage\Navigation\Block\Navigation\Categories\Content" name="gomage.categories.content" before="-"/>
+        <block class="GoMage\Navigation\Block\NavigationContent" name="catalog.contentnav" before="-">
         </block>
     </referenceContainer>
     <move element="gomage.categories.left" destination="sidebar.main" before="-"/>

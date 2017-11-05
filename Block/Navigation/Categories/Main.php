@@ -57,7 +57,7 @@ class Main extends \Magento\Framework\View\Element\Template
 
     protected function _beforeToHtml()
     {
-        if ($this->dataHelper->isEnable() && 
+        if ($this->dataHelper->isEnable() &&
             $this->dataHelper->isShowCategories() &&
             $this->dataHelper->getCategoriesBlockLocation() == static::LOCATION) {
 

@@ -88,3 +88,8 @@
   padding: 0 10px;
   overflow: auto;
 }
+
+.gan-sidebar-right {
+  float: right;
+  width: 20.83333333%
+}

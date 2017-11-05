@@ -13,6 +13,7 @@ interface SystemConfigInterface
     const SYSTEM_CATEGORIES_CONFIG_CROUP = 'category';
     const SYSTEM_CONFIG_SETTINGS_GROUP = 'settings';
     const SYSTEM_CONFIG_FIELD_ENABLE= 'enable';
+    const SYSTEM_CONFIG_FIELD_SHOW_SHOP_BY_IN = 'place';
     const SYSTEM_CONFIG_FIELD_PAGER_BUTTON = 'pager_button';
     const SYSTEM_CONFIG_FIELD_PAGER = 'pager';
     const SYSTEM_CONFIG_FIELD_QTY = 'qty';

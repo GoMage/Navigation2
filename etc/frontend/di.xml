@@ -11,11 +11,24 @@
             <argument name="filterableAttributes" xsi:type="object">Magento\Catalog\Model\Layer\Category\FilterableAttributeList</argument>
         </arguments>
     </virtualType>
-    <virtualType name="GoMage\Navigation\Block\Navigation\Category" type="GoMage\Navigation\Block\Navigation">
+    <type name="GoMage\Navigation\Block\Navigation">
         <arguments>
             <argument name="filterList" xsi:type="object">categoryFilterList</argument>
+            <argument name="location" xsi:type="string">0</argument>
         </arguments>
-    </virtualType>
+    </type>
+    <type name="GoMage\Navigation\Block\NavigationRight">
+        <arguments>
+            <argument name="filterList" xsi:type="object">categoryFilterList</argument>
+            <argument name="location" xsi:type="string">2</argument>
+        </arguments>
+    </type>
+    <type name="GoMage\Navigation\Block\NavigationContent">
+        <arguments>
+            <argument name="filterList" xsi:type="object">categoryFilterList</argument>
+            <argument name="location" xsi:type="string">1</argument>
+        </arguments>
+    </type>
     <type name="Magento\Catalog\Model\Layer\Filter\ItemFactory">
         <arguments>
             <argument name="instanceName" xsi:type="string">GoMage\Navigation\Model\Catalog\Layer\Filter\Item</argument>

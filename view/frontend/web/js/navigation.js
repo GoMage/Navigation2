@@ -19,6 +19,7 @@ define([
             authentication: 'div.block-authentication',
             productListContainer: 'ol.product-items',
             productToolbarContainer: 'div.toolbar-products',
+            categoriesContainer: 'div.gan-categories',
             loader: 'body'
         },
 
@@ -241,11 +242,22 @@ define([
                     }
 
                     var data = $.parseJSON(response);
-                    $(this.options.navigationContainer).parent().html(data.navigation);
+                    if (this.options.contentPlace == 1) {
+                        var categories = $(this.options.categoriesContainer).html(data.categories);
+                        var navigation = $(this.options.navigationContainer).html(data.navigation);
+                        $(this.options.productsContainer).html(data.products);
+                        $(navigation).prependTo($(this.options.productsContainer));
+                        $(categories).prependTo($(this.options.productsContainer));
+                    } else {
+                        $(this.options.categoriesContainer).html(data.categories);
+                        $(this.options.navigationContainer).html(data.navigation);
+                        $(this.options.productsContainer).html(data.products);
+                    }
+
                     $(this.options.navigationContainer).trigger('contentUpdated');
-                    $(this.options.productsContainer).html(data.products);
                     $(this.options.productsContainer).trigger('contentUpdated');
                     $(this.options.authentication).trigger('bindTrigger');
+                    this.setNavigationUrl(params);
 
                 }.bind(this)
             });
@@ -278,6 +290,14 @@ define([
          */
         _ajaxComplete: function () {
             $(this.options.loader).trigger('processStop');
+        },
+
+        setNavigationUrl: function (params) {
+
+            if (this.options.addFilterResultsToUrl == 0)
+                return ;
+
+            window.history.pushState(null, '', this.options.baseUrl + '?' + params.toUrlParams());
         }
 
     });

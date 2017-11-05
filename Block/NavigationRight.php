@@ -4,7 +4,7 @@ namespace GoMage\Navigation\Block;
 
 use GoMage\Navigation\Model\Config\Source\NavigationInterface;
 
-class Navigation extends \Magento\LayeredNavigation\Block\Navigation
+class NavigationRight extends \Magento\LayeredNavigation\Block\Navigation
 {
     /**
      * @var \Magento\Framework\App\RequestInterface
@@ -42,9 +42,6 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         $this->request = $request;
         $this->dataHelper = $dataHelper;
         $this->location = $location;
-
-
-
         parent::__construct($context, $layerResolver, $filterList, $visibilityFlag, $data);
     }
 
@@ -79,24 +76,16 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
 
     protected function _beforeToHtml()
     {
-        if (!$this->dataHelper->isEnable()) {
-            $this->setTemplate('Magento_LayeredNavigation::layer/view.phtml');
+        if($this->dataHelper->getShowShopByIn() == $this->location) {
+            $this->setTemplate('GoMage_Navigation::layer/view.phtml');
             return parent::_beforeToHtml();
         }
 
-        if($this->dataHelper->getShowShopByIn() == $this->location) {
-            $this->setTemplate('GoMage_Navigation::layer/view.phtml');
-        }
-
-        return parent::_beforeToHtml();
+        return '';
     }
 
     protected function _prepareLayout()
     {
-        if (!$this->dataHelper->isEnable()) {
-            return parent::_prepareLayout();
-        }
-
         if($this->dataHelper->getShowShopByIn() == $this->location) {
             return parent::_prepareLayout();
         }

@@ -10,16 +10,20 @@
  */
 
 $helper = $this->helper('GoMage\Navigation\Helper\Data');
+$render = $this->getLayout()->createBlock('GoMage\Navigation\Block\Navigation\FilterRenderer');
+$state = $this->getLayout()->createBlock('GoMage\Navigation\Block\Navigation\State');
+$block->setChild('state',$state);
+
 ?>
 
 <?php if ($block->canShowBlock()): ?>
     <div class="block filter" data-role="navigation" data-mage-init='{"navigation": {
-                        "addFilterResultsToUrl": "<?php echo $helper->isAddFilterResultsToUrl()?>"
+                        "addFilterResultsToUrl": "<?php echo $helper->isAddFilterResultsToUrl()?>",
+                        "contentPlace": "1"
                         }}'>
         <div class="block-content filter-content">
             <?if ($helper->isShowAppliedValuesInResults()):?>
-                <?php echo $block->getChildHtml('state') ?>
-
+                <?php echo $state->toHtml() ?>
                 <?php if ($block->getLayer()->getState()->getFilters()): ?>
                     <div class="block-actions filter-actions">
                         <a href="<?php /* @escapeNotVerified */ echo $block->getClearUrl() ?>"
@@ -46,7 +50,7 @@ $helper = $this->helper('GoMage\Navigation\Helper\Data');
                         <?php if ($filter->getItemsCount()): ?>
                         <div data-role="collapsible" class="filter-options-item">
                             <dt data-role="title" role="heading" aria-level="3" class="filter-options-title"><?php echo $block->escapeHtml(__($filter->getName())) ?></dt>
-                            <dd data-role="content" class="filter-options-content"><?php /* @escapeNotVerified */ echo $block->getChildBlock('renderer')->render($filter); ?></dd>
+                            <dd data-role="content" class="filter-options-content"><?php /* @escapeNotVerified */ echo $render->render($filter); ?></dd>
                         </div>
                            <?php endif; ?>
                 <?php endforeach; ?>

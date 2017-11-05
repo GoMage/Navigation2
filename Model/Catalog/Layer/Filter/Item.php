@@ -40,6 +40,10 @@ class Item extends \Magento\Catalog\Model\Layer\Filter\Item
      */
     public function getRemoveUrl()
     {
+        if (!$this->dataHelper->isEnable()) {
+            return parent::getRemoveUrl();
+        }
+
         return $this->urlHelper->getRemoveUrl($this);
 
     }
