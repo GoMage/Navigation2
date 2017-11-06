@@ -40,7 +40,11 @@ $filter->getGomageIsExcludeCategories();
                        data-code="<?php echo $attributeModel->getAttributeCode(); ?>"
                        data-dimension="&nbsp;<?php echo $filter->getCurrencySymbol(); ?>"
                        data-param="<?php echo $filter->getRequestVar() ?>"
-                       data-ajax="<?php echo $filter->getGomageIsAjax(); ?>"
+                        <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+                            data-ajax="1"
+                        <?else:?>
+                            data-ajax="0"
+                        <?endif;?>
                        id="<?php echo $attributeModel->getAttributeCode(); ?>"
                        data-type="slider"
                        type="slider"

@@ -24,7 +24,11 @@
                        data-value="<?php echo $_filter->getRemoveValue() ?>"
                        data-url="<?php /* @escapeNotVerified */ echo $_filter->getRemoveUrl() ?>"
                        data-param="<?php echo $_filter->getFilter()->getRequestVar() ?>"
-                       data-ajax="<?php echo $_filter->getFilter()->getGomageIsAjax(); ?>"
+                        <?if ($_filter->getFilter()->getGomageIsAjax() || is_null($_filter->getFilter()->getGomageIsAjax())):?>
+                            data-ajax="1"
+                        <?else:?>
+                            data-ajax="0"
+                        <?endif;?>
                        data-type="remove-item"
                        data-active="1">
                         <span><?php /* @escapeNotVerified */ echo __('Remove This Item') ?></span>

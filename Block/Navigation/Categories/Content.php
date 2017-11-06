@@ -12,9 +12,10 @@ class Content extends \GoMage\Navigation\Block\Navigation\Categories\Main
         \Magento\Catalog\Model\Indexer\Category\Flat\State $categoryFlatState,
         \Magento\Theme\Block\Html\Topmenu $topMenu,
         \GoMage\Navigation\Helper\Data $dataHelper,
-        \GoMage\Navigation\Model\Config\Source\Category\Templates $templates
+        \GoMage\Navigation\Model\Config\Source\Category\Templates $templates,
+        \Magento\Catalog\Model\ResourceModel\Category $categoryResource
     ) {
 
-        parent::__construct($context, $categoryHelper, $categoryFlatState, $topMenu, $dataHelper, $templates);
+        parent::__construct($context, $categoryHelper, $categoryFlatState, $topMenu, $dataHelper, $templates, $categoryResource);
     }
 }

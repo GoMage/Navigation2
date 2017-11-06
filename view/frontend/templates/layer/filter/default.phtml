@@ -21,8 +21,10 @@ $helper = $this->helper('GoMage\Navigation\Helper\Data');
                    data-url="<?php if(!$item->getIsActive()):?><?php echo $item->getGomageUrl(); ?> <?endif;?>"
                    data-value="<?php echo $item->getGomageValue() ?>"
                    data-param="<?php echo $filter->getRequestVar() ?>"
-                   <?if ($filter->getGomageIsAjax()):?>
-                    data-ajax="1"
+                   <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+                        data-ajax="1"
+                   <?else:?>
+                        data-ajax="0"
                    <?endif;?>
                    data-type="<?php echo (int) $filter->getGomageFilterType(); ?>"
                    <?php if($item->getIsActive()):?>

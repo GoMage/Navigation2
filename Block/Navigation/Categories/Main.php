@@ -9,6 +9,7 @@ class Main extends \Magento\Framework\View\Element\Template
      protected $topMenu;
      protected $dataHelper;
      protected $templates;
+     protected $categoryResource;
 
     /**
      * Main constructor.
@@ -24,7 +25,8 @@ class Main extends \Magento\Framework\View\Element\Template
         \Magento\Catalog\Model\Indexer\Category\Flat\State $categoryFlatState,
         \Magento\Theme\Block\Html\Topmenu $topMenu,
         \GoMage\Navigation\Helper\Data $dataHelper,
-        \GoMage\Navigation\Model\Config\Source\Category\Templates $templates
+        \GoMage\Navigation\Model\Config\Source\Category\Templates $templates,
+        \Magento\Catalog\Model\ResourceModel\Category $categoryResource
     ) {
 
         $this->_categoryHelper = $categoryHelper;
@@ -32,6 +34,7 @@ class Main extends \Magento\Framework\View\Element\Template
         $this->topMenu = $topMenu;
         $this->dataHelper = $dataHelper;
         $this->templates = $templates;
+        $this->categoryResource = $categoryResource;
         parent::__construct($context);
     }
 
@@ -45,14 +48,38 @@ class Main extends \Magento\Framework\View\Element\Template
         return $this->_categoryHelper->getStoreCategories($sorted , $asCollection, $toLoad);
     }
 
-    public function getChildCategories($category)
+    public function getChildCategories($category, $data = false)
     {
-           if ($this->categoryFlatConfig->isFlatEnabled() && $category->getUseFlatResource()) {
-                $subcategories = (array)$category->getChildrenNodes();
-            } else {
-                $subcategories = $category->getChildren();
+        $html = '';
+        if ($this->categoryFlatConfig->isFlatEnabled() && $category->getUseFlatResource()) {
+            $subcategories = (array)$category->getChildrenNodes();
+        } else {
+            $subcategories = $category->getChildren();
+        }
+
+        foreach ($subcategories as $cat) {
+
+            $cnt = $this->getProductsCount($cat);
+            if(!$cnt && !$cat->getChildrenCount()) {
+                continue;
             }
-            return $subcategories;
+
+            $html .= '<li>';
+            $html .= '<a href="' . $this->getCategoryHelper()->getCategoryUrl($cat) . '">' . $cat->getName() . '</a>';
+            $html .= $this->getChildCategories($cat);
+            $html .= '</li>';
+        }
+
+        if (!empty($html)) {
+            $html = '<ul>' . $html . '</ul>';
+        }
+
+        return $html;
+    }
+
+    public function getProductsCount($category)
+    {
+        return $this->categoryResource->getProductCount($category);
     }
 
     protected function _beforeToHtml()

@@ -23,4 +23,7 @@ interface SystemConfigInterface
     const SYSTEM_CATEGORIES_CONFIG_ENABLE = 'enable';
     const SYSTEM_CATEGORIES_CONFIG_BLOCK_LOCATION = 'place';
     const SYSTEM_CATEGORIES_CONFIG_NAVIGATION_TYPE = 'navigation';
+    const SYSTEM_CATEGORIES_CONFIG_SHOW_ALL_SUBCATEGORIES = 'show_all';
+    const SYSTEM_CATEGORIES_CONFIG_HIDE_EMPTY_CATEGORIES = 'hide_empty';
+    const SYSTEM_CATEGORIES_CONFIG_IS_SHOW_COLLAPSED = 'is_collapsed';
 }

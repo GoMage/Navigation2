@@ -28,7 +28,11 @@ $filter->getGoMageIsExcludeCategories();
     <select data-role="navigation-filter"
             data-param="<?php echo $filter->getRequestVar() ?>"
             data-type="select"
-            data-ajax="<?php echo $filter->getGoMageIsAjax(); ?>"
+            <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+                data-ajax="1"
+            <?else:?>
+                data-ajax="0"
+            <?endif;?>
             <?php if (!empty($filter->getUsedOptions())): ?>
                 data-active="1"
             <? endif; ?>

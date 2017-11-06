@@ -1,35 +1,22 @@
 <?php
-$categories = $this->getStoreCategories(true,false,true);
+$dataHelper = $this->helper('GoMage\Navigation\Helper\Data');
+$categories = $this->getStoreCategories(true, false, true);
 $categoryHelper = $this->getCategoryHelper();
 ?>
 <div class="gan-categories">
-<ul>
-<?php
-foreach($categories as $category):
-     if (!$category->getIsActive()) {
-        continue;
-     }
-
-?>
-<li><a href="<?php echo $categoryHelper->getCategoryUrl($category) ?>"><?php echo $category->getName() ?></a></li>
-<?php  
-if($childrenCategories = $this->getChildCategories($category)):
-?>
-<ul>
-<?php
-foreach($childrenCategories as $childrenCategory):
-     if (!$childrenCategory->getIsActive()) {
-        continue;
-     }
-?>
-<li><a href="<?php echo $categoryHelper->getCategoryUrl($childrenCategory) ?>"><?php echo $childrenCategory->getName() ?></a></li>
-<?php
-endforeach;
-?>
-</ul>
-<?php
-endif;
-endforeach;
-?>
-</ul>
+    <div class="gan-categories-content" data-role="navigation-filter" data-type="categories-content">CATEGORIES</div>
+    <div <? echo ($dataHelper->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
+        <ul>
+            <?php
+            foreach($categories as $category):
+                 if (!$category->getIsActive()) continue;?>
+            <li>
+                <a href="<?php echo $categoryHelper->getCategoryUrl($category) ?>"><?php echo $category->getName() ?></a>
+            </li>
+                <? if(!$dataHelper->isHideEmptyCategories()) continue; ?>
+                    <? if (!$childrenCategories = $this->getChildCategories($category)) continue; ?>
+                    <? echo $childrenCategories; ?>
+            <?php endforeach; ?>
+        </ul>
+    </div>
 </div>
