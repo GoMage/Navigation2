@@ -28,7 +28,7 @@ define([
 
 
         isAjax: function () {
-            return this.ajax;
+            return Number(this.ajax);
         },
 
         isClear: function () {
