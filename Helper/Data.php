@@ -205,4 +205,17 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
         return $data;
     }
+
+    public function getBlockLocation($type)
+    {
+        $place[\GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN] = 'left';
+        $place[\GoMage\Navigation\Model\Config\Source\Place::CONTENT] = 'content';
+        $place[\GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN] = 'right';
+
+        if(empty($place[$type])) {
+            throw new Exception(__('Block position is not set for ' . (int) $type . ' type'));
+        }
+
+        return $place[$type];
+    }
 }
