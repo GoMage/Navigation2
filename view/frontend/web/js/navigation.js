@@ -90,6 +90,10 @@ define([
                         element.unbind('click');
                         element.on('click', {element: element}, $.proxy(this._processRemoveItem, this));
                         break;
+                    case 'categories-content':
+                        element.unbind('click');
+                        element.on('click', {element: element}, $.proxy(this._processCategoriesContent, this));
+                        break;
                     default:
                         element.unbind('click');
                         element.on('click', {element: element}, $.proxy(this._processFilter, this));
@@ -99,13 +103,24 @@ define([
             }
         },
 
+        _processCategoriesContent: function () {
+            $('.gan-categories-content').next().toggle();
+        },
+
         _processRemoveItem: function (element) {
 
             var url = element.currentTarget.attributes['data-url'].nodeValue;
-            var ajax = element.currentTarget.attributes['data-ajax'].nodeValue;
+            var param = element.currentTarget.attributes['data-param'].nodeValue;
+            var value = element.currentTarget.attributes['data-value'].nodeValue;
+            var ajax = Number(element.currentTarget.attributes['data-ajax'].nodeValue);
 
-            if (ajax == true) {
-                return this._ajaxFilter(url, false);
+            var params = this._getParams();
+            params.remove(param);
+            if (value !== '')
+                params.set(param, value);
+
+            if (ajax) {
+                return this._ajaxFilter(url, params);
             } else {
                 return $.mage.redirect(url);
             }
