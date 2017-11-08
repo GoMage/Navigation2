@@ -1,3 +1,4 @@
 .page-layout-3columns .sidebar-main.gan-sidebar-position {
   float: right !important;
+  clear: right;
 }

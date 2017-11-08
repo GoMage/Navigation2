@@ -257,16 +257,18 @@ define([
                     }
 
                     var data = $.parseJSON(response);
-                    if (this.options.contentPlace == 1) {
-                        var categories = $(this.options.categoriesContainer).html(data.categories);
-                        var navigation = $(this.options.navigationContainer).html(data.navigation);
-                        $(this.options.productsContainer).html(data.products);
-                        $(navigation).prependTo($(this.options.productsContainer));
-                        $(categories).prependTo($(this.options.productsContainer));
+                    $(this.options.productsContainer).html(data.products);
+                    if (this.options.navigationPlace == 1) {
+                        $(data.navigation).prependTo($(this.options.productsContainer));
+
                     } else {
-                        $(this.options.categoriesContainer).html(data.categories);
                         $(this.options.navigationContainer).html(data.navigation);
-                        $(this.options.productsContainer).html(data.products);
+                    }
+
+                    if (this.options.categoriesPlace == 1) {
+                        $(data.categories).prependTo($(this.options.productsContainer));
+                    } else {
+                        $(this.options.categoriesContainer).replaceWith(data.categories);
                     }
 
                     $(this.options.navigationContainer).trigger('contentUpdated');

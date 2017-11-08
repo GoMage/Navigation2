@@ -59,8 +59,10 @@ class AjaxNavigation implements ObserverInterface
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
         if ($this->_request->isAjax()) {
+
             $result = new DataObject();
 
+            $result->setData('categories', $this->_layout->getBlock('gomage.categories.left')->toHtml());
             $result->setData('navigation', $this->_layout->getBlock('catalog.leftnav')->toHtml());
             $result->setData('products', $this->_layout->getBlock('category.products')->toHtml());
 

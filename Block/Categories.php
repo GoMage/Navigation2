@@ -1,7 +1,7 @@
 <?php
-namespace GoMage\Navigation\Block\Navigation\Categories;
+namespace GoMage\Navigation\Block;
 
-class Main extends \Magento\Framework\View\Element\Template
+class Categories extends \Magento\Framework\View\Element\Template
 {
 
      protected $_categoryHelper;
@@ -36,6 +36,7 @@ class Main extends \Magento\Framework\View\Element\Template
         $this->templates = $templates;
         $this->categoryResource = $categoryResource;
         parent::__construct($context);
+        $this->setLocation();
     }
 
     public function getCategoryHelper()
@@ -84,14 +85,32 @@ class Main extends \Magento\Framework\View\Element\Template
 
     protected function _beforeToHtml()
     {
-        if ($this->dataHelper->isEnable() &&
-            $this->dataHelper->isShowCategories() &&
-            $this->dataHelper->getCategoriesBlockLocation() == static::LOCATION) {
-
-            $templateFile = $this->templates->get($this->dataHelper->getCategoriesNavigationType());
-            $this->setTemplate($templateFile);
-        }
+        $templateFile = $this->templates->get($this->dataHelper->getCategoriesNavigationType());
+        $this->setTemplate($templateFile);
 
         return parent::_beforeToHtml();
+    }
+
+    protected function setLocation()
+    {
+        if (!$this->dataHelper->isEnable() || !$this->dataHelper->isShowCategories()) {
+            return ;
+        }
+
+        if ($this->dataHelper->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN ||
+            $this->dataHelper->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN) {
+
+            $categoriesPosition = $this->dataHelper->getBlockLocation($this->dataHelper->getCategoriesBlockLocation());
+            $this->pageConfig->addPageAsset('GoMage_Navigation::css/gomage-navigation-categories-position-' . $categoriesPosition . '.css');
+            return ;
+        }
+
+        if ($this->dataHelper->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT) {
+
+            $this->getLayout()->unsetChild('columns', 'gomage.categories.left');
+            $this->getLayout()->setChild('main', 'gomage.categories.left', 'gomage.categories.left.content');
+            $this->getLayout()->reorderChild('main', 'gomage.categories.left', 0);
+            return ;
+        }
     }
 }

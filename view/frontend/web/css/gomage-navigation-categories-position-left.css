@@ -1,3 +1,5 @@
 .page-layout-3columns .gan-categories.gan-sidebar-position {
     float: left !important;
+    width: 20%;
+    clear: right;
 }

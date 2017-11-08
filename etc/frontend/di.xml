@@ -14,19 +14,6 @@
     <type name="GoMage\Navigation\Block\Navigation">
         <arguments>
             <argument name="filterList" xsi:type="object">categoryFilterList</argument>
-            <argument name="location" xsi:type="string">0</argument>
-        </arguments>
-    </type>
-    <type name="GoMage\Navigation\Block\NavigationRight">
-        <arguments>
-            <argument name="filterList" xsi:type="object">categoryFilterList</argument>
-            <argument name="location" xsi:type="string">2</argument>
-        </arguments>
-    </type>
-    <type name="GoMage\Navigation\Block\NavigationContent">
-        <arguments>
-            <argument name="filterList" xsi:type="object">categoryFilterList</argument>
-            <argument name="location" xsi:type="string">1</argument>
         </arguments>
     </type>
     <type name="Magento\Catalog\Model\Layer\Filter\ItemFactory">
