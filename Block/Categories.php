@@ -127,8 +127,22 @@ class Categories extends \Magento\Framework\View\Element\Template
             return ;
         }
 
+        if ($this->dataHelper->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN &&
+            $this->getPageLayout() == '3columns' ) {
+            $this->setPageAssets();
+            $this->canShowCategories = true;
+            return ;
+        }
+
         if ($this->dataHelper->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN &&
             $this->getPageLayout() == '2columns-right' ) {
+            $this->setPageAssets();
+            $this->canShowCategories = true;
+            return ;
+        }
+
+        if ($this->dataHelper->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN &&
+            $this->getPageLayout() == '3columns' ) {
             $this->setPageAssets();
             $this->canShowCategories = true;
             return ;

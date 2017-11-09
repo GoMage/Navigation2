@@ -124,8 +124,22 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
             return ;
         }
 
+        if ($this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN &&
+            $this->getPageLayout() == '3columns' ) {
+            $this->setPageAssets();
+            $this->canShowNavigation = true;
+            return ;
+        }
+
         if ($this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN &&
             $this->getPageLayout() == '2columns-right' ) {
+            $this->setPageAssets();
+            $this->canShowNavigation = true;
+            return ;
+        }
+
+        if ($this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN &&
+            $this->getPageLayout() == '3columns' ) {
             $this->setPageAssets();
             $this->canShowNavigation = true;
             return ;
