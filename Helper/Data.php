@@ -216,6 +216,16 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return $str;
     }
 
+    public function isShowCheckboxes(){
+
+        $str = $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CHECKBOX
+        );
+
+        return $str;
+    }
+
     public function getRemoveUrl($route, $data)
     {
         $queryParams = is_array($this->_request->getParams()) ? $this->_request->getParams() : array();

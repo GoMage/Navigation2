@@ -90,9 +90,10 @@ class Categories extends \Magento\Framework\View\Element\Template
 
     public function getOlList($data)
     {
+        $checkboxes = ($this->dataHelper->isShowCheckboxes()) ? '' : '';
         $html = '';
         foreach ($data as $category) {
-            $html .= '<ol><li><a href="'. $category['url'] . '">' . $category['name'] . '</a>';
+            $html .= '<ol '. $checkboxes .'><li><a href="'. $category['url'] . '">' . $category['name'] . '</a>';
             if(is_array($category['children'])) {
                 $html .= $this->getOlList($category['children']);
             }
@@ -106,7 +107,19 @@ class Categories extends \Magento\Framework\View\Element\Template
     {
         $html = '';
         foreach ($data as $category) {
-            $html .= '<ol><li><a href="'. $category['url'] . '"><img src=" '. $this->getCategoryImage($category['entity_id']) .' "></a>';
+
+            $alignment = ($this->dataHelper->getCategoriesImageAlignment()) ? 'alignment:' . $this->dataHelper->getCategoriesImageAlignment() : '';
+            $width = ($this->dataHelper->getCategoriesImageWidth()) ? $this->dataHelper->getCategoriesImageWidth() : '';
+            $height = ($this->dataHelper->getCategoriesImageHeight()) ? $this->dataHelper->getCategoriesImageHeight() : '';
+            $name = ($this->dataHelper->isShowImageName()) ? $category['name'] : '';
+            $html .= '<ol><li><a href="' . $category['url'] . '">
+            <img 
+                style = "' . $alignment . '"  
+                src=" ' . $this->getCategoryImage($category['entity_id']) . ' "
+                width="' . $width . '"
+                height="' . $height . '"
+                >' . $name . '
+            </a>';
             if(is_array($category['children'])) {
                 $html .= $this->getImageCategoriesList($category['children']);
             }

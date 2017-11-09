@@ -12,7 +12,7 @@ $categoryHelper = $this->getCategoryHelper();
 >
     <div class="gan-categories-content" data-role="navigation-filter" data-type="categories-content">CATEGORIES</div>
     <div <? echo ($dataHelper->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
-        <ul>
+        <ul <?= ($dataHelper->isShowCheckboxes()) ? :''; ?>>
             <?php
             foreach($categories as $category):
                  if (!$category->getIsActive()) continue;?>

@@ -31,4 +31,5 @@ interface SystemConfigInterface
     const SYSTEM_CATEGORIES_CONFIG_IMAGE_WIDTH = 'image_width';
     const SYSTEM_CATEGORIES_CONFIG_IMAGE_HEIGHT = 'image_height';
     const SYSTEM_CATEGORIES_CONFIG_IMAGE_NAME = 'is_image';
+    const SYSTEM_CATEGORIES_CONFIG_CHECKBOX = 'is_checkbox';
 }
