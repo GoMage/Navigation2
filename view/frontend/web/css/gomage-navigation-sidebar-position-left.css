@@ -3,6 +3,6 @@
   clear: left;
 }
 
-.page-layout-2columns .sidebar-main.gan-sidebar-position {
+.page-layout-2columns-left .sidebar-main.gan-sidebar-position {
   float: left !important;
 }

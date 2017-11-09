@@ -3,3 +3,9 @@
     width: 20%;
     clear: right;
 }
+
+.page-layout-2columns-right .gan-categories.gan-sidebar-position {
+    float: right !important;
+    width: 20%;
+    clear: right;
+}

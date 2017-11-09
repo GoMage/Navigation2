@@ -18,30 +18,6 @@
     <referenceContainer name="columns">
         <block class="GoMage\Navigation\Block\Categories" name="gomage.categories.left" before="-"/>
     </referenceContainer>
-    <!--<referenceContainer name="sidebar.right">
-        <block class="GoMage\Navigation\Block\Navigation\Categories\Right" name="gomage.categories.right" before="-"/>
-        <block class="GoMage\Navigation\Block\NavigationRight" name="catalog.rightnav">
-        </block>
-    </referenceContainer>-->
-    <!--<referenceContainer name="main">
-        <block class="GoMage\Navigation\Block\Navigation\Categories\Content" name="gomage.categories.content" before="-"/>
-        <block class="GoMage\Navigation\Block\Navigation" name="catalog.contentnav" after="gomage.categories.content">
-            <block class="GoMage\Navigation\Block\Navigation\State" name="catalog.navigation.state" as="state" />
-            <block class="GoMage\Navigation\Block\Navigation\FilterRenderer" name="catalog.navigation.renderer" as="renderer"/>
-        </block>
-    </referenceContainer>-->
-    <!--<move element="gomage.categories.left" destination="columns" before="-"/>-->
-    <!--<move element="sidebar.main" destination="columns" before="-"/>-->
-
-    <!--<move element="catalog.leftnav" destination="columns" />-->
-    <!--<referenceContainer name="columns">
-        <container name="div.sidebar.right" htmlTag="div" htmlClass="sidebar gan-sidebar-right" before="-">
-            <container name="sidebar.right" as="sidebar_right" label="Sidebar Right"/>
-        </container>
-        <container name="div.sidebar.content" htmlTag="div">
-            <container name="sidebar.content" as="sidebar_content" label="Sidebar Content"/>
-        </container>
-    </referenceContainer>-->
     <referenceBlock name="product_list_toolbar_pager">
         <arguments>
             <argument name="template" xsi:type="string">GoMage_Navigation::html/pager.phtml</argument>

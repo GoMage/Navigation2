@@ -10,6 +10,8 @@ class Categories extends \Magento\Framework\View\Element\Template
      protected $dataHelper;
      protected $templates;
      protected $categoryResource;
+     protected $pageLayout;
+     protected $canShowCategories;
 
     /**
      * Main constructor.
@@ -37,6 +39,15 @@ class Categories extends \Magento\Framework\View\Element\Template
         $this->categoryResource = $categoryResource;
         parent::__construct($context);
         $this->setLocation();
+    }
+
+    protected function getPageLayout()
+    {
+        if (empty($this->pageLayout)) {
+            $this->pageLayout = $this->getLayout()->getUpdate()->getPageLayout();
+        }
+
+        return $this->pageLayout;
     }
 
     public function getCategoryHelper()
@@ -85,6 +96,10 @@ class Categories extends \Magento\Framework\View\Element\Template
 
     protected function _beforeToHtml()
     {
+        if (!$this->dataHelper->isEnable() || !$this->dataHelper->isShowCategories() || !$this->canShowCategories) {
+            return parent::_beforeToHtml();
+        }
+
         $templateFile = $this->templates->get($this->dataHelper->getCategoriesNavigationType());
         $this->setTemplate($templateFile);
 
@@ -97,20 +112,47 @@ class Categories extends \Magento\Framework\View\Element\Template
             return ;
         }
 
-        if ($this->dataHelper->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN ||
-            $this->dataHelper->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN) {
-
-            $categoriesPosition = $this->dataHelper->getBlockLocation($this->dataHelper->getCategoriesBlockLocation());
-            $this->pageConfig->addPageAsset('GoMage_Navigation::css/gomage-navigation-categories-position-' . $categoriesPosition . '.css');
+        if ($this->dataHelper->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
+            $this->getPageLayout() == '1column' ) {
+            $this->moveBlockToContent();
+            $this->setPageAssets();
+            $this->canShowCategories = true;
             return ;
         }
 
-        if ($this->dataHelper->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT) {
-
-            $this->getLayout()->unsetChild('columns', 'gomage.categories.left');
-            $this->getLayout()->setChild('main', 'gomage.categories.left', 'gomage.categories.left.content');
-            $this->getLayout()->reorderChild('main', 'gomage.categories.left', 0);
+        if ($this->dataHelper->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN &&
+            $this->getPageLayout() == '2columns-left' ) {
+            $this->setPageAssets();
+            $this->canShowCategories = true;
             return ;
         }
+
+        if ($this->dataHelper->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN &&
+            $this->getPageLayout() == '2columns-right' ) {
+            $this->setPageAssets();
+            $this->canShowCategories = true;
+            return ;
+        }
+
+        if ($this->dataHelper->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
+            $this->getPageLayout()== '3columns' ) {
+            $this->moveBlockToContent();
+            $this->setPageAssets();
+            $this->canShowCategories = true;
+            return ;
+        }
+    }
+
+    protected function moveBlockToContent()
+    {
+        $this->getLayout()->unsetChild('columns', 'gomage.categories.left');
+        $this->getLayout()->setChild('main', 'gomage.categories.left', 'gomage.categories.left.content');
+        $this->getLayout()->reorderChild('main', 'gomage.categories.left', 0);
+    }
+
+    protected function setPageAssets()
+    {
+        $categoriesPosition = $this->dataHelper->getBlockLocation($this->dataHelper->getCategoriesBlockLocation());
+        $this->pageConfig->addPageAsset('GoMage_Navigation::css/gomage-navigation-categories-position-' . $categoriesPosition . '.css');
     }
 }

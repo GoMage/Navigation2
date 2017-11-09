@@ -15,6 +15,12 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
 
     protected $dataHelper;
 
+    protected $pageRepository;
+
+    protected $pageLayout;
+
+    protected $canShowNavigation = false;
+
     /**
      * Navigation constructor.
      * @param \Magento\Framework\View\Element\Template\Context $context
@@ -42,6 +48,16 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
 
         parent::__construct($context, $layerResolver, $filterList, $visibilityFlag, $data);
         $this->setLocation();
+
+    }
+
+    protected function getPageLayout()
+    {
+        if (empty($this->pageLayout)) {
+            $this->pageLayout = $this->getLayout()->getUpdate()->getPageLayout();
+        }
+
+        return $this->pageLayout;
     }
 
     /**
@@ -80,7 +96,9 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
             return parent::_beforeToHtml();
         }
 
-        $this->setTemplate('GoMage_Navigation::layer/view.phtml');
+        if($this->canShowNavigation) {
+            $this->setTemplate('GoMage_Navigation::layer/view.phtml');
+        }
 
         return parent::_beforeToHtml();
     }
@@ -91,18 +109,47 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
             return ;
         }
 
-        if ($this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN ||
-            $this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN) {
-
-            $sidebarPosition = $this->dataHelper->getBlockLocation($this->dataHelper->getShowShopByIn());
-            $this->pageConfig->addPageAsset('GoMage_Navigation::css/gomage-navigation-sidebar-position-' . $sidebarPosition . '.css');
+        if ($this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
+            $this->getPageLayout() == '1column' ) {
+            $this->moveBlockToContent();
+            $this->setPageAssets();
+            $this->canShowNavigation = true;
             return ;
         }
 
-        if ($this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT) {
-            $this->getLayout()->unsetChild('sidebar.main', 'catalog.leftnav');
-            $this->getLayout()->setChild('main', 'catalog.leftnav', 'catalog.leftnav.content');
-            $this->getLayout()->reorderChild('main', 'catalog.leftnav', 1);
+        if ($this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN &&
+            $this->getPageLayout() == '2columns-left' ) {
+            $this->setPageAssets();
+            $this->canShowNavigation = true;
+            return ;
         }
+
+        if ($this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN &&
+            $this->getPageLayout() == '2columns-right' ) {
+            $this->setPageAssets();
+            $this->canShowNavigation = true;
+            return ;
+        }
+
+        if ($this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
+            $this->getPageLayout()== '3columns' ) {
+            $this->moveBlockToContent();
+            $this->setPageAssets();
+            $this->canShowNavigation = true;
+            return ;
+        }
+    }
+
+    protected function moveBlockToContent()
+    {
+        $this->getLayout()->unsetChild('sidebar.main', 'catalog.leftnav');
+        $this->getLayout()->setChild('main', 'catalog.leftnav', 'catalog.leftnav.content');
+        $this->getLayout()->reorderChild('main', 'catalog.leftnav', 1);
+    }
+
+    protected function setPageAssets()
+    {
+        $sidebarPosition = $this->dataHelper->getBlockLocation($this->dataHelper->getShowShopByIn());
+        $this->pageConfig->addPageAsset('GoMage_Navigation::css/gomage-navigation-sidebar-position-' . $sidebarPosition . '.css');
     }
 }
