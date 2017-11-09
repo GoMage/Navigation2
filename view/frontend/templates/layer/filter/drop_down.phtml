@@ -5,22 +5,6 @@
  */
 
 $filter = reset($filterItems)->getFilter();
-$filter->getGoMageFilterType();
-$filter->getGoMageIsShowFilterButton();
-$filter->getGoMageMaxBlockHeight();
-$filter->getGoMageIsAjax();
-$filter->getGoMageIsCollapsed();
-$filter->getGoMageIsCheckbox();
-$filter->getGoMageIsShowImageName();
-$filter->getGoMageOptionsAlignment();
-$filter->getGoMageImageWidth();
-$filter->getGoMageImageHeight();
-$filter->getGoMageVisibleOptions();
-$filter->getGoMageIsShowTooltip();
-$filter->getGoMageTooltipWidth();
-$filter->getGoMageTooltipHeight();
-$filter->getGoMageIsReset();
-$filter->getGoMageIsExcludeCategories();
 
 ?>
 
@@ -28,7 +12,11 @@ $filter->getGoMageIsExcludeCategories();
     <select data-role="navigation-filter"
             data-param="<?php echo $filter->getRequestVar() ?>"
             data-type="select"
+            <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+                data-ajax="1"
+            <?else:?>
                 data-ajax="0"
+            <?endif;?>
             <?php if (!empty($filter->getUsedOptions())): ?>
                 data-active="1"
             <? endif; ?>

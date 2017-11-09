@@ -3,7 +3,13 @@ $dataHelper = $this->helper('GoMage\Navigation\Helper\Data');
 $categories = $this->getStoreCategories(true, false, true);
 $categoryHelper = $this->getCategoryHelper();
 ?>
-<div class="gan-categories gan-sidebar-position">
+<div class="gan-categories gan-sidebar-position
+    <?php if($dataHelper->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK) echo 'gan-filter-in-block'; ?>
+    <?php if($dataHelper->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::FLY_OUT) echo 'gan-filter-flyout'; ?>
+    "
+    <?php if($dataHelper->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK &&
+    $dataHelper->getMaxBlockHeightCategories()): ?>style="max-height:<?php echo $dataHelper->getMaxBlockHeightCategories(); ?>px;"<?endif;?>
+>
     <div class="gan-categories-content" data-role="navigation-filter" data-type="categories-content">CATEGORIES</div>
     <div <? echo ($dataHelper->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
         <ul>
@@ -13,9 +19,7 @@ $categoryHelper = $this->getCategoryHelper();
             <li>
                 <a href="<?php echo $categoryHelper->getCategoryUrl($category) ?>"><?php echo $category->getName() ?></a>
             </li>
-                <? if(!$dataHelper->isHideEmptyCategories()) continue; ?>
-                    <? if (!$childrenCategories = $this->getChildCategories($category)) continue; ?>
-                    <? echo $childrenCategories; ?>
+                <?= $block->getOlList($block->getChildCategories($category)); ?>
             <?php endforeach; ?>
         </ul>
     </div>

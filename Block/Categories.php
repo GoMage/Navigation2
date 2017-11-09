@@ -60,9 +60,9 @@ class Categories extends \Magento\Framework\View\Element\Template
         return $this->_categoryHelper->getStoreCategories($sorted , $asCollection, $toLoad);
     }
 
-    public function getChildCategories($category, $data = false)
+    public function getChildCategories($category)
     {
-        $html = '';
+        $html = [];
         if ($this->categoryFlatConfig->isFlatEnabled() && $category->getUseFlatResource()) {
             $subcategories = (array)$category->getChildrenNodes();
         } else {
@@ -76,14 +76,41 @@ class Categories extends \Magento\Framework\View\Element\Template
                 continue;
             }
 
-            $html .= '<li>';
-            $html .= '<a href="' . $this->getCategoryHelper()->getCategoryUrl($cat) . '">' . $cat->getName() . '</a>';
-            $html .= $this->getChildCategories($cat);
-            $html .= '</li>';
+            $html[] = [
+                'entity_id' => $cat['entity_id'],
+                'url' => $this->getCategoryHelper()->getCategoryUrl($cat),
+                'name' => $cat->getName(),
+                'children' => $this->getChildCategories($cat)
+            ];
+
         }
 
-        if (!empty($html)) {
-            $html = '<ul>' . $html . '</ul>';
+        return $html;
+    }
+
+    public function getOlList($data)
+    {
+        $html = '';
+        foreach ($data as $category) {
+            $html .= '<ol><li><a href="'. $category['url'] . '">' . $category['name'] . '</a>';
+            if(is_array($category['children'])) {
+                $html .= $this->getOlList($category['children']);
+            }
+            $html .= '</li></ol>';
+        }
+
+        return $html;
+    }
+
+    public function getImageCategoriesList($data)
+    {
+        $html = '';
+        foreach ($data as $category) {
+            $html .= '<ol><li><a href="'. $category['url'] . '"><img src=" '. $this->getCategoryImage($category['entity_id']) .' "></a>';
+            if(is_array($category['children'])) {
+                $html .= $this->getImageCategoriesList($category['children']);
+            }
+            $html .= '</li></ol>';
         }
 
         return $html;
@@ -92,6 +119,14 @@ class Categories extends \Magento\Framework\View\Element\Template
     public function getProductsCount($category)
     {
         return $this->categoryResource->getProductCount($category);
+    }
+
+    public function getCategoryImage($id)
+    {
+        $category = \Magento\Framework\App\ObjectManager::getInstance()
+            ->create('Magento\Catalog\Model\Category')->load($id);
+
+        return $category->getImageUrl();
     }
 
     protected function _beforeToHtml()

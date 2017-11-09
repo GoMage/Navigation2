@@ -26,4 +26,9 @@ interface SystemConfigInterface
     const SYSTEM_CATEGORIES_CONFIG_SHOW_ALL_SUBCATEGORIES = 'show_all';
     const SYSTEM_CATEGORIES_CONFIG_HIDE_EMPTY_CATEGORIES = 'hide_empty';
     const SYSTEM_CATEGORIES_CONFIG_IS_SHOW_COLLAPSED = 'is_collapsed';
+    const SYSTEM_CATEGORIES_CONFIG_MAX_BLOCK_HEIGHT = 'max_block_height';
+    const SYSTEM_CATEGORIES_CONFIG_IMAGE_ALIGNMENT = 'image_alignment';
+    const SYSTEM_CATEGORIES_CONFIG_IMAGE_WIDTH = 'image_width';
+    const SYSTEM_CATEGORIES_CONFIG_IMAGE_HEIGHT = 'image_height';
+    const SYSTEM_CATEGORIES_CONFIG_IMAGE_NAME = 'is_image';
 }

@@ -174,6 +174,48 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         );
     }
 
+    public function getMaxBlockHeightCategories(){
+
+        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_MAX_BLOCK_HEIGHT
+        );
+    }
+
+    public function getCategoriesImageAlignment(){
+
+        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IMAGE_ALIGNMENT
+        );
+    }
+
+    public function getCategoriesImageWidth(){
+
+        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IMAGE_WIDTH
+        );
+    }
+
+    public function getCategoriesImageHeight(){
+
+        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IMAGE_HEIGHT
+        );
+    }
+
+    public function isShowImageName(){
+
+        $str = $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IMAGE_NAME
+        );
+
+        return $str;
+    }
+
     public function getRemoveUrl($route, $data)
     {
         $queryParams = is_array($this->_request->getParams()) ? $this->_request->getParams() : array();
@@ -218,4 +260,5 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
         return $place[$type];
     }
+
 }

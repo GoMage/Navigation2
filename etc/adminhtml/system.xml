@@ -208,6 +208,13 @@
                     <label>Show Category in Shop by</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
+                <field id="max_block_height" translate="label" type="text" sortOrder="51" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Max block height, px</label>
+                    <frontend_class>validate-number</frontend_class>
+                    <depends>
+                        <field id="navigation">3</field>
+                    </depends>
+                </field>
                 <field id="hide_empty" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Hide Empty Categories</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
