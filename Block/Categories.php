@@ -114,7 +114,6 @@ class Categories extends \Magento\Framework\View\Element\Template
             $name = ($this->dataHelper->isShowImageName()) ? $category['name'] : '';
             $html .= '<ol><li><a href="' . $category['url'] . '">
             <img 
-                style = "' . $alignment . '"  
                 src=" ' . $this->getCategoryImage($category['entity_id']) . ' "
                 width="' . $width . '"
                 height="' . $height . '"

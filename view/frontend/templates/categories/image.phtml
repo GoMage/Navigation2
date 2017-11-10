@@ -3,25 +3,28 @@ $dataHelper = $this->helper('GoMage\Navigation\Helper\Data');
 $categories = $this->getStoreCategories(true, false, true);
 $categoryHelper = $this->getCategoryHelper();
 ?>
-<div class="gan-categories gan-sidebar-position">
-    <div class="gan-categories-content" data-role="navigation-filter" data-type="categories-content">CATEGORIES</div>
-    <div <? echo ($dataHelper->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
-        <ul>
-            <?php
-            foreach($categories as $category):
-                if (!$category->getIsActive()) continue;?>
-                <li>
-                    <a href="<?php echo $categoryHelper->getCategoryUrl($category) ?>">
-                        <img style="<?=($dataHelper->getCategoriesImageAlignment()) ? 'alignment:' . $dataHelper->getCategoriesImageAlignment() : '';?>"
-                                width="<?=($dataHelper->getCategoriesImageWidth()) ? $dataHelper->getCategoriesImageWidth() : '';?>"
-                                height="<?=($dataHelper->getCategoriesImageHeight()) ? $dataHelper->getCategoriesImageHeight() : '';?>"
-                                src="<?= $block->getCategoryImage($category->getEntityId()) ?>"
-                        >
-                        <?= ($dataHelper->isShowImageName()) ? $category->getName() : '';?>
-                    </a>
-                </li>
-                <?= $block->getImageCategoriesList($block->getChildCategories($category)); ?>
-            <?php endforeach; ?>
-        </ul>
+<div class="block block-gan-categories gan-categories-image gan-sidebar-position">
+    <div class="block-title gan-categories-title" data-role="navigation-filter" data-type="categories-content">
+        <strong><?php echo __('Categories') ?></strong>
+    </div>
+    <div class="block-content block-content-gan-categories">
+        <div <? echo ($dataHelper->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
+            <ul class="gan-categories-list gan-categories-list-img<?=($dataHelper->getCategoriesImageAlignment()) ? ' gan-categories-list-alignment-' . $dataHelper->getCategoriesImageAlignment() : '';?>">
+                <?php
+                foreach($categories as $category):
+                    if (!$category->getIsActive()) continue;?>
+                    <li>
+                        <a href="<?php echo $categoryHelper->getCategoryUrl($category) ?>">
+                            <img    width="<?=($dataHelper->getCategoriesImageWidth()) ? $dataHelper->getCategoriesImageWidth() : '';?>"
+                                    height="<?=($dataHelper->getCategoriesImageHeight()) ? $dataHelper->getCategoriesImageHeight() : '';?>"
+                                    src="<?= $block->getCategoryImage($category->getEntityId()) ?>"
+                            >
+                            <?= ($dataHelper->isShowImageName()) ? $category->getName() : '';?>
+                        </a>
+                        <?= $block->getImageCategoriesList($block->getChildCategories($category)); ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
     </div>
 </div>

@@ -3,24 +3,26 @@ $dataHelper = $this->helper('GoMage\Navigation\Helper\Data');
 $categories = $this->getStoreCategories(true, false, true);
 $categoryHelper = $this->getCategoryHelper();
 ?>
-<div class="gan-categories gan-sidebar-position
-    <?php if($dataHelper->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK) echo 'gan-filter-in-block'; ?>
-    <?php if($dataHelper->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::FLY_OUT) echo 'gan-filter-flyout'; ?>
-    "
-    <?php if($dataHelper->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK &&
-    $dataHelper->getMaxBlockHeightCategories()): ?>style="max-height:<?php echo $dataHelper->getMaxBlockHeightCategories(); ?>px;"<?endif;?>
->
-    <div class="gan-categories-content" data-role="navigation-filter" data-type="categories-content">CATEGORIES</div>
-    <div <? echo ($dataHelper->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
-        <ul <?= ($dataHelper->isShowCheckboxes()) ? :''; ?>>
-            <?php
-            foreach($categories as $category):
-                 if (!$category->getIsActive()) continue;?>
-            <li>
-                <a href="<?php echo $categoryHelper->getCategoryUrl($category) ?>"><?php echo $category->getName() ?></a>
-            </li>
-                <?= $block->getOlList($block->getChildCategories($category)); ?>
-            <?php endforeach; ?>
-        </ul>
+<div class="block block-gan-categories gan-sidebar-position
+    <?php if($dataHelper->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::DEFAULTS) echo 'gan-categories-default'; ?>
+    <?php if($dataHelper->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK) echo 'gan-categories-default gan-categories-in-block'; ?>
+    <?php if($dataHelper->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::FLY_OUT) echo 'gan-categories-flyout'; ?>
+    ">
+    <div class="block-title gan-categories-title" data-role="navigation-filter" data-type="categories-content">
+        <strong><?php echo __('Categories') ?></strong>
+    </div>
+    <div class="block-content block-content-gan-categories"<?php if($dataHelper->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK && $dataHelper->getMaxBlockHeightCategories()): ?> style="max-height:<?php echo $dataHelper->getMaxBlockHeightCategories(); ?>px;"<?endif;?>>
+        <div <? echo ($dataHelper->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
+            <ul class="gan-categories-list" <?= ($dataHelper->isShowCheckboxes()) ? :''; ?>>
+                <?php
+                foreach($categories as $category):
+                     if (!$category->getIsActive()) continue;?>
+                <li>
+                    <a href="<?php echo $categoryHelper->getCategoryUrl($category) ?>"><?php echo $category->getName() ?></a>
+                </li>
+                    <?= $block->getOlList($block->getChildCategories($category)); ?>
+                <?php endforeach; ?>
+            </ul>
+        </div>
     </div>
 </div>

@@ -3,11 +3,12 @@ $dataHelper = $this->helper('GoMage\Navigation\Helper\Data');
 $categories = $this->getStoreCategories(true, false, true);
 $categoryHelper = $this->getCategoryHelper();
 ?>
-
-<div class="gan-categories gan-sidebar-position">
-    <div class="gan-categories-content" data-role="navigation-filter" data-type="categories-content">CATEGORIES</div>
-    <div <? echo ($dataHelper->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
-
+<div class="block block-gan-categories gan-categories-dropdown gan-sidebar-position">
+    <div class="block-title gan-categories-title" data-role="navigation-filter" data-type="categories-content">
+        <strong><?php echo __('Categories') ?></strong>
+    </div>
+    <div class="block-content block-content-gan-categories">
+        <div class="gan-categories-list-dropdown" <? echo ($dataHelper->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
             <?php
             foreach($categories as $category):
                 if (!$category->getIsActive()) continue;?>
@@ -23,6 +24,6 @@ $categoryHelper = $this->getCategoryHelper();
                         <?endforeach;?>
                     </select>
             <?php endforeach; ?>
-
+        </div>
     </div>
 </div>

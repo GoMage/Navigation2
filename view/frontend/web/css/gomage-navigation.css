@@ -88,3 +88,88 @@
   padding: 0 10px;
   overflow: auto;
 }
+
+/* Categories block
+-------------------------------------------------- */
+
+.block-gan-categories{
+  
+}
+.block-gan-categories .block-title{
+  margin: 0 0 20px;
+}
+.block-gan-categories .block-title strong{
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.gan-categories-list,
+.gan-categories-list ol{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.gan-categories-list li{
+  margin: 0;
+}
+
+/* Default */
+.gan-categories-default .gan-categories-list{
+  font-size: 14px;
+}
+.gan-categories-default .gan-categories-list li{
+  position:relative;
+  float:none;
+  display:block;
+  border-top:1px solid #ccc;
+  line-height: 30px;
+}
+.gan-categories-default .gan-categories-list > li:first-child{
+  border-top: 0;
+}
+.gan-categories-default .gan-categories-list li a{
+  color:#636363;
+  display:block;
+  line-height: 30px;
+  text-decoration:none;
+}
+.gan-categories-default .gan-categories-list li a:hover{
+  color:#3399CC;
+}
+.gan-categories-default .gan-categories-list li a.active{
+  color:#3399CC;
+}
+.gan-categories-default .gan-categories-list ol a{
+  padding-left: 15px;
+}
+.gan-categories-default .gan-categories-list ol ol a{
+  padding-left: 30px;
+}
+.gan-categories-default .gan-categories-list ol ol ol a{
+  padding-left: 45px;
+}
+.gan-categories-default .gan-categories-list ol ol ol ol a{
+  padding-left: 60px;
+}
+
+/* In block */
+.gan-categories-in-block .block-content-gan-categories{
+  overflow: auto;
+}
+
+/* Dropdown */
+.gan-categories-list-dropdown select{
+  display: block;
+  width: 100%;
+  margin: 0 0 10px;
+}
+.gan-categories-list-dropdown select:last-child{
+  margin-bottom: 0;
+}
+
+/* Image Vertical */
+.gan-categories-list-img li{
+  margin: 0 0 5px;
+}
+
+/* Image 2 cols */

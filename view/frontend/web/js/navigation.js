@@ -104,7 +104,7 @@ define([
         },
 
         _processCategoriesContent: function () {
-            $('.gan-categories-content').next().toggle();
+            $('.gan-categories-title').next().toggle();
         },
 
         _processRemoveItem: function (element) {
