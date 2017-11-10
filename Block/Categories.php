@@ -162,7 +162,7 @@ class Categories extends \Magento\Framework\View\Element\Template
 
         if ($this->dataHelper->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
             $this->getPageLayout() == '1column' ) {
-            $this->moveBlockToContent();
+            $this->moveBlock('main');
             $this->setPageAssets();
             $this->canShowCategories = true;
             return ;
@@ -170,6 +170,16 @@ class Categories extends \Magento\Framework\View\Element\Template
 
         if ($this->dataHelper->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN &&
             $this->getPageLayout() == '2columns-left' ) {
+            $this->getLayout()->reorderChild('sidebar.main', 'gomage.categories', 0);
+            $this->setPageAssets();
+            $this->canShowCategories = true;
+            return ;
+        }
+
+        if ($this->dataHelper->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
+            $this->getPageLayout() == '2columns-left' ) {
+            $this->moveBlock('main');
+            $this->getLayout()->reorderChild('main', 'gomage.categories', 0);
             $this->setPageAssets();
             $this->canShowCategories = true;
             return ;
@@ -177,6 +187,7 @@ class Categories extends \Magento\Framework\View\Element\Template
 
         if ($this->dataHelper->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN &&
             $this->getPageLayout() == '3columns' ) {
+            $this->getLayout()->reorderChild('sidebar.main', 'gomage.categories', 0);
             $this->setPageAssets();
             $this->canShowCategories = true;
             return ;
@@ -184,6 +195,16 @@ class Categories extends \Magento\Framework\View\Element\Template
 
         if ($this->dataHelper->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN &&
             $this->getPageLayout() == '2columns-right' ) {
+            $this->getLayout()->reorderChild('sidebar.main', 'gomage.categories', 0);
+            $this->setPageAssets();
+            $this->canShowCategories = true;
+            return ;
+        }
+
+        if ($this->dataHelper->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
+            $this->getPageLayout() == '2columns-right' ) {
+            $this->moveBlock('main');
+            $this->getLayout()->reorderChild('main', 'gomage.categories', 0);
             $this->setPageAssets();
             $this->canShowCategories = true;
             return ;
@@ -191,6 +212,7 @@ class Categories extends \Magento\Framework\View\Element\Template
 
         if ($this->dataHelper->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN &&
             $this->getPageLayout() == '3columns' ) {
+            $this->moveBlock('sidebar.additional');
             $this->setPageAssets();
             $this->canShowCategories = true;
             return ;
@@ -198,18 +220,18 @@ class Categories extends \Magento\Framework\View\Element\Template
 
         if ($this->dataHelper->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
             $this->getPageLayout()== '3columns' ) {
-            $this->moveBlockToContent();
+            $this->moveBlock('main');
             $this->setPageAssets();
             $this->canShowCategories = true;
             return ;
         }
     }
 
-    protected function moveBlockToContent()
+    protected function moveBlock($parent)
     {
-        $this->getLayout()->unsetChild('columns', 'gomage.categories.left');
-        $this->getLayout()->setChild('main', 'gomage.categories.left', 'gomage.categories.left.content');
-        $this->getLayout()->reorderChild('main', 'gomage.categories.left', 0);
+        $this->getLayout()->unsetChild('sidebar.main', 'gomage.categories');
+        $this->getLayout()->setChild($parent, 'gomage.categories', 'gomage.categories.moved');
+        $this->getLayout()->reorderChild($parent, 'gomage.categories', 0);
     }
 
     protected function setPageAssets()

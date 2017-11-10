@@ -62,7 +62,7 @@ class AjaxNavigation implements ObserverInterface
 
             $result = new DataObject();
 
-            $result->setData('categories', $this->_layout->getBlock('gomage.categories.left')->toHtml());
+            $result->setData('categories', $this->_layout->getBlock('gomage.categories')->toHtml());
             $result->setData('navigation', $this->_layout->getBlock('catalog.leftnav')->toHtml());
             $result->setData('products', $this->_layout->getBlock('category.products')->toHtml());
 

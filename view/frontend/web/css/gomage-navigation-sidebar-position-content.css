@@ -1,3 +1,7 @@
-.page-layout-3columns .sidebar-main.gan-sidebar-position {
+.page-layout-3columns .gan-sidebar-position {
   display: block !important;
 }
+.page-layout-1column .filter.block.gan-sidebar-position {
+  display: block !important;
+}
+

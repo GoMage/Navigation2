@@ -1,8 +1,8 @@
-.page-layout-3columns .sidebar-main.gan-sidebar-position {
+.page-layout-3columns .sidebar-main .gan-sidebar-position {
   float: right !important;
   clear: right;
 }
 
-.page-layout-2columns-right .sidebar-main.gan-sidebar-position {
+.page-layout-2columns-right .sidebar-main .gan-sidebar-position {
   float: right !important;
 }

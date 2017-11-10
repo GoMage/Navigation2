@@ -1,11 +1,9 @@
 .page-layout-3columns .gan-categories.gan-sidebar-position {
     float: left !important;
-    width: 20%;
     clear: right;
 }
 
 .page-layout-2columns-left .gan-categories.gan-sidebar-position {
     float: left !important;
-    width: 20%;
     clear: right;
 }

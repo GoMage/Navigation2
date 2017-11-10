@@ -111,7 +111,7 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
 
         if ($this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
             $this->getPageLayout() == '1column' ) {
-            $this->moveBlockToContent();
+            $this->moveBlock('main');
             $this->setPageAssets();
             $this->canShowNavigation = true;
             return ;
@@ -119,6 +119,14 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
 
         if ($this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN &&
             $this->getPageLayout() == '2columns-left' ) {
+            $this->setPageAssets();
+            $this->canShowNavigation = true;
+            return ;
+        }
+
+        if ($this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
+            $this->getPageLayout() == '2columns-left' ) {
+            $this->moveBlock('main');
             $this->setPageAssets();
             $this->canShowNavigation = true;
             return ;
@@ -138,8 +146,17 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
             return ;
         }
 
+        if ($this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
+            $this->getPageLayout() == '2columns-right' ) {
+            $this->moveBlock('main');
+            $this->setPageAssets();
+            $this->canShowNavigation = true;
+            return ;
+        }
+
         if ($this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN &&
             $this->getPageLayout() == '3columns' ) {
+            $this->moveBlock('sidebar.additional');
             $this->setPageAssets();
             $this->canShowNavigation = true;
             return ;
@@ -147,18 +164,18 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
 
         if ($this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
             $this->getPageLayout()== '3columns' ) {
-            $this->moveBlockToContent();
+            $this->moveBlock('main');
             $this->setPageAssets();
             $this->canShowNavigation = true;
             return ;
         }
     }
 
-    protected function moveBlockToContent()
+    protected function moveBlock($parent)
     {
         $this->getLayout()->unsetChild('sidebar.main', 'catalog.leftnav');
-        $this->getLayout()->setChild('main', 'catalog.leftnav', 'catalog.leftnav.content');
-        $this->getLayout()->reorderChild('main', 'catalog.leftnav', 1);
+        $this->getLayout()->setChild($parent, 'catalog.leftnav', 'catalog.leftnav.moved');
+        $this->getLayout()->reorderChild($parent, 'catalog.leftnav', 0);
     }
 
     protected function setPageAssets()

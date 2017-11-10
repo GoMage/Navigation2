@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<page layout="3columns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
         <css src="GoMage_Navigation::css/jslider.css" />
         <css src="GoMage_Navigation::css/jslider.blue.css" />
@@ -10,13 +10,11 @@
     </head>
     <body>
     <referenceContainer name="sidebar.main" >
-        <block class="GoMage\Navigation\Block\Navigation" name="catalog.leftnav" >
+        <block class="GoMage\Navigation\Block\Categories" name="gomage.categories" before="-"/>
+        <block class="GoMage\Navigation\Block\Navigation" name="catalog.leftnav" after="gomage.categories">
             <block class="GoMage\Navigation\Block\Navigation\State" name="catalog.navigation.state" as="state" />
             <block class="GoMage\Navigation\Block\Navigation\FilterRenderer" name="catalog.navigation.renderer" as="renderer"/>
         </block>
-    </referenceContainer>
-    <referenceContainer name="columns">
-        <block class="GoMage\Navigation\Block\Categories" name="gomage.categories.left" before="-"/>
     </referenceContainer>
     <referenceBlock name="product_list_toolbar_pager">
         <arguments>
