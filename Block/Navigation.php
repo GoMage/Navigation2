@@ -112,14 +112,12 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         if ($this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
             $this->getPageLayout() == '1column' ) {
             $this->moveBlock('main');
-            $this->setPageAssets();
             $this->canShowNavigation = true;
             return ;
         }
 
         if ($this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN &&
             $this->getPageLayout() == '2columns-left' ) {
-            $this->setPageAssets();
             $this->canShowNavigation = true;
             return ;
         }
@@ -127,21 +125,18 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         if ($this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
             $this->getPageLayout() == '2columns-left' ) {
             $this->moveBlock('main');
-            $this->setPageAssets();
             $this->canShowNavigation = true;
             return ;
         }
 
         if ($this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN &&
             $this->getPageLayout() == '3columns' ) {
-            $this->setPageAssets();
             $this->canShowNavigation = true;
             return ;
         }
 
         if ($this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN &&
             $this->getPageLayout() == '2columns-right' ) {
-            $this->setPageAssets();
             $this->canShowNavigation = true;
             return ;
         }
@@ -149,7 +144,6 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         if ($this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
             $this->getPageLayout() == '2columns-right' ) {
             $this->moveBlock('main');
-            $this->setPageAssets();
             $this->canShowNavigation = true;
             return ;
         }
@@ -157,7 +151,6 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         if ($this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN &&
             $this->getPageLayout() == '3columns' ) {
             $this->moveBlock('sidebar.additional');
-            $this->setPageAssets();
             $this->canShowNavigation = true;
             return ;
         }
@@ -165,7 +158,6 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         if ($this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
             $this->getPageLayout()== '3columns' ) {
             $this->moveBlock('main');
-            $this->setPageAssets();
             $this->canShowNavigation = true;
             return ;
         }
