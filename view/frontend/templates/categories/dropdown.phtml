@@ -15,7 +15,6 @@ $categoryHelper = $this->getCategoryHelper();
                         <option data-ajax="0" data-role="navigation-filter" data-type="categories-select" data-url="<?php echo $categoryHelper->getCategoryUrl($category) ?>">
                             <?php echo $category->getName() ?>
                         </option>
-                        <? if(!$dataHelper->isHideEmptyCategories()) continue; ?>
                         <?// if (!$childrenCategories = $this->getChildCategories($category)) continue; ?>
                         <?foreach ($block->getChildCategories($category) as $child): ?>
                             <option data-ajax="0" data-role="navigation-filter" data-type="categories-select" data-url="<?=$child['url'] ?>">
