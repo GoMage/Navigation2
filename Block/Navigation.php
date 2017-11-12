@@ -21,6 +21,8 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
 
     protected $canShowNavigation = false;
 
+    protected $catalogLayer;
+
     /**
      * Navigation constructor.
      * @param \Magento\Framework\View\Element\Template\Context $context
@@ -40,7 +42,7 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         array $data = []
     )
     {
-        $this->_catalogLayer = $layerResolver->get();
+        $this->catalogLayer = $layerResolver->get();
         $this->filterList = $filterList;
         $this->visibilityFlag = $visibilityFlag;
         $this->request = $request;
@@ -54,7 +56,7 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
     protected function getPageLayout()
     {
         if (empty($this->pageLayout)) {
-            $this->pageLayout = $this->getLayout()->getUpdate()->getPageLayout();
+            $this->pageLayout = $this->catalogLayer->getCurrentCategory()->getPageLayout();
         }
 
         return $this->pageLayout;
@@ -86,7 +88,7 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
             }
         }
 
-        return '[' . implode(',', $data) . ']';
+        return $data;
     }
 
     protected function _beforeToHtml()

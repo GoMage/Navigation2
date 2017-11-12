@@ -12,6 +12,7 @@ class Categories extends \Magento\Framework\View\Element\Template
      protected $categoryResource;
      protected $pageLayout;
      protected $canShowCategories;
+     protected $catalogLayer;
 
     /**
      * Main constructor.
@@ -28,9 +29,11 @@ class Categories extends \Magento\Framework\View\Element\Template
         \Magento\Theme\Block\Html\Topmenu $topMenu,
         \GoMage\Navigation\Helper\Data $dataHelper,
         \GoMage\Navigation\Model\Config\Source\Category\Templates $templates,
-        \Magento\Catalog\Model\ResourceModel\Category $categoryResource
+        \Magento\Catalog\Model\ResourceModel\Category $categoryResource,
+        \Magento\Catalog\Model\Layer\Resolver $layerResolver
     ) {
 
+        $this->catalogLayer = $layerResolver->get();
         $this->_categoryHelper = $categoryHelper;
         $this->categoryFlatConfig = $categoryFlatState;
         $this->topMenu = $topMenu;
@@ -44,7 +47,7 @@ class Categories extends \Magento\Framework\View\Element\Template
     protected function getPageLayout()
     {
         if (empty($this->pageLayout)) {
-            $this->pageLayout = $this->getLayout()->getUpdate()->getPageLayout();
+            $this->pageLayout = $this->catalogLayer->getCurrentCategory()->getPageLayout();
         }
 
         return $this->pageLayout;

@@ -50,6 +50,8 @@ class SetAdditionalAttributeData {
         $navigationAttribute = $navigationAttributeCollection->getFirstItem();
 
         if (!$navigationAttribute->getAttributeId()) {
+            $temp = ['gomage_is_ajax' => null];
+            $filter->addData($temp);
             return ;
         }
 
