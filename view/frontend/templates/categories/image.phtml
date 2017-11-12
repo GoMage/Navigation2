@@ -15,13 +15,15 @@ $categoryHelper = $this->getCategoryHelper();
                     if (!$category->getIsActive()) continue;?>
                     <li>
                         <a href="<?php echo $categoryHelper->getCategoryUrl($category) ?>">
-                            <img    width="<?=($dataHelper->getCategoriesImageWidth()) ? $dataHelper->getCategoriesImageWidth() : '';?>"
-                                    height="<?=($dataHelper->getCategoriesImageHeight()) ? $dataHelper->getCategoriesImageHeight() : '';?>"
-                                    src="<?= $block->getCategoryImage($category->getEntityId()) ?>"
+                            <img width="<?=($dataHelper->getCategoriesImageWidth()) ? $dataHelper->getCategoriesImageWidth() : '';?>"
+                                 height="<?=($dataHelper->getCategoriesImageHeight()) ? $dataHelper->getCategoriesImageHeight() : '';?>"
+                                 src="<?= $block->getCategoryImage($category->getEntityId()) ?>"
                             >
-                            <?= ($dataHelper->isShowImageName()) ? $category->getName() : '';?>
+                            <?php if($dataHelper->isShowImageName()): ?>
+                                <span><?= $category->getName();?></span>
+                            <?endif;?>
                         </a>
-                        <?= $block->getImageCategoriesList($block->getChildCategories($category)); ?>
+                        <?//= $block->getImageCategoriesList($block->getChildCategories($category)); ?>
                     </li>
                 <?php endforeach; ?>
             </ul>
