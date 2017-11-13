@@ -57,6 +57,11 @@ class Categories extends \Magento\Framework\View\Element\Template
         return $this->pageLayout;
     }
 
+    public function getCurrentCategoryId()
+    {
+        return $this->catalogLayer->getCurrentCategory()->getId();
+    }
+
     public function getCategoryHelper()
     {
         return $this->_categoryHelper;
@@ -87,6 +92,7 @@ class Categories extends \Magento\Framework\View\Element\Template
                 'entity_id' => $cat['entity_id'],
                 'url' => $this->getCategoryHelper()->getCategoryUrl($cat),
                 'name' => $cat->getName(),
+                'level' => $cat->getLevel(),
                 'children' => $this->getChildCategories($cat)
             ];
 
@@ -98,9 +104,12 @@ class Categories extends \Magento\Framework\View\Element\Template
     public function getOlList($data)
     {
         $checkboxes = ($this->dataHelper->isShowCheckboxes()) ? '' : '';
+
         $html = '';
         foreach ($data as $category) {
-            $html .= '<ol '. $checkboxes .'><li><a href="'. $category['url'] . '">' . $category['name'] . '</a>';
+            $active = ($this->getCurrentCategoryId() == $category['entity_id']) ? 'active' : '';
+            $html .= '<ol ' . $checkboxes . '><li data-ajax="1" data-role="navigation-filter" data-type="categories-li" data-url="' . $category['url'] . '">';
+            $html .= '<a class="' . $active . '" href="' . $category['url'] . '">' . $category['name'] . '</a>';
             if(is_array($category['children'])) {
                 $html .= $this->getOlList($category['children']);
             }
@@ -108,6 +117,30 @@ class Categories extends \Magento\Framework\View\Element\Template
         }
 
         return $html;
+    }
+
+    public function getSelectList($data)
+    {
+        $html = '';
+        foreach ($data as $category) {
+            $selected = ($this->getCurrentCategoryId() == $category['entity_id']) ? 'selected' : '';
+            $html .= '<option ' . $selected . ' value="' . $category['url'] . '">' . $this->addlevelSuffix($category['level']) . $category['name'] . '</option>';
+            if(is_array($category['children'])) {
+                $html .= $this->getSelectList($category['children']);
+            }
+        }
+
+        return $html;
+    }
+
+    protected function addLevelSuffix($level)
+    {
+        $suffix = '';
+        for ($i = 1; $i < $level; $i++) {
+            $suffix .= '&nbsp;&nbsp;';
+        }
+
+        return $suffix;
     }
 
     public function getImageCategoriesList($data)

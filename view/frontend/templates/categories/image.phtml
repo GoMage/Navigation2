@@ -2,6 +2,7 @@
 $dataHelper = $this->helper('GoMage\Navigation\Helper\Data');
 $categories = $this->getStoreCategories(true, false, true);
 $categoryHelper = $this->getCategoryHelper();
+$dataHelper->isShowCheckboxes();
 ?>
 <div class="block block-gan-categories gan-categories-image gan-sidebar-position">
     <div class="block-title gan-categories-title" data-role="navigation-filter" data-type="categories-content">
@@ -14,7 +15,8 @@ $categoryHelper = $this->getCategoryHelper();
                 foreach($categories as $category):
                     if (!$category->getIsActive()) continue;?>
                     <li>
-                        <a href="<?php echo $categoryHelper->getCategoryUrl($category) ?>">
+                        <a class="<?= ($block->getCurrentCategoryId() == $category->getId()) ? 'selected' : ''; ?>"
+                            href="<?php echo $categoryHelper->getCategoryUrl($category) ?>">
                             <img width="<?=($dataHelper->getCategoriesImageWidth()) ? $dataHelper->getCategoriesImageWidth() : '';?>"
                                  height="<?=($dataHelper->getCategoriesImageHeight()) ? $dataHelper->getCategoriesImageHeight() : '';?>"
                                  src="<?= $block->getCategoryImage($category->getEntityId()) ?>"

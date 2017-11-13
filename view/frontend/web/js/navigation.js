@@ -94,6 +94,10 @@ define([
                         element.unbind('click');
                         element.on('click', {element: element}, $.proxy(this._processCategoriesContent, this));
                         break;
+                    case 'category':
+                        element.unbind('click');
+                        element.on('click', {element: element}, $.proxy(this._processCategory, this));
+                        break;
                     default:
                         element.unbind('click');
                         element.on('click', {element: element}, $.proxy(this._processFilter, this));
@@ -101,6 +105,14 @@ define([
                 }
 
             }
+        },
+
+        _processCategory: function () {
+
+            var params = this._getParams();
+            params.clear();
+            params.set('gan_ajax_cat', 1);
+            return this._ajaxFilter('http://magento2-new.local/women/tops-women.html', params);
         },
 
         _processCategoriesContent: function () {
