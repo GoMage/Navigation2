@@ -15,6 +15,7 @@ interface SystemConfigInterface
     const SYSTEM_CONFIG_FIELD_ENABLE= 'enable';
     const SYSTEM_CONFIG_FIELD_SHOW_SHOP_BY_IN = 'place';
     const SYSTEM_CONFIG_FIELD_PAGER_BUTTON = 'pager_button';
+    const SYSTEM_CONFIG_FIELD_CONTENT_FILTER_TYPE = 'content_filter_type';
     const SYSTEM_CONFIG_FIELD_PAGER = 'pager';
     const SYSTEM_CONFIG_FIELD_QTY = 'qty';
     const SYSTEM_CONFIG_FIELD_USE_HASH = 'use_hash';

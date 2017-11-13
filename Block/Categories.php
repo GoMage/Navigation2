@@ -50,6 +50,10 @@ class Categories extends \Magento\Framework\View\Element\Template
             $this->pageLayout = $this->catalogLayer->getCurrentCategory()->getPageLayout();
         }
 
+        if(empty($this->pageLayout)) {
+            $this->pageLayout = $this->getLayout()->getUpdate()->getPageLayout();
+        }
+
         return $this->pageLayout;
     }
 

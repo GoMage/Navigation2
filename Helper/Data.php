@@ -73,6 +73,14 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         );
     }
 
+    public function getContentFilterType()
+    {
+        return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_CONTENT_FILTER_TYPE
+        );
+    }
+
     /**
      * @return mixed
      */

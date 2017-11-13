@@ -59,6 +59,10 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
             $this->pageLayout = $this->catalogLayer->getCurrentCategory()->getPageLayout();
         }
 
+        if(empty($this->pageLayout)) {
+            $this->pageLayout = $this->getLayout()->getUpdate()->getPageLayout();
+        }
+
         return $this->pageLayout;
     }
 
@@ -89,6 +93,45 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         }
 
         return $data;
+    }
+
+    public function getFiltersWithItemsCount()
+    {
+        $cnt = 0;
+        foreach ($this->getFilters() as $filter) {
+            if ($filter->getItemsCount()) {
+                $cnt++;
+            }
+        }
+
+        return $cnt;
+    }
+
+    public function getItemWidthStyle()
+    {
+        $itemStyle = '';
+        if ($this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
+            $this->dataHelper->getContentFilterType() == \GoMage\Navigation\Model\Config\Source\Content\Filter\Type::COLUMNS) {
+            $itemStyle = 'width: ' . round(100 / $this->getFiltersWithItemsCount()) . '%';
+        }
+
+        return $itemStyle;
+    }
+
+    public function getItemClass()
+    {
+        $itemClass = '';
+        if ($this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
+            $this->dataHelper->getContentFilterType() == \GoMage\Navigation\Model\Config\Source\Content\Filter\Type::COLUMNS) {
+            $itemClass = 'gan-column-item';
+        }
+
+        if ($this->dataHelper->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
+            $this->dataHelper->getContentFilterType() == \GoMage\Navigation\Model\Config\Source\Content\Filter\Type::ROWS) {
+            $itemClass = 'gan-row-item';
+        }
+
+        return $itemClass;
     }
 
     protected function _beforeToHtml()
