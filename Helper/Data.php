@@ -216,22 +216,34 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     public function isShowImageName(){
 
-        $str = $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
             . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IMAGE_NAME
         );
-
-        return $str;
     }
 
     public function isShowCheckboxes(){
 
-        $str = $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
             . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CHECKBOX
         );
+    }
 
-        return $str;
+    public function isAjax(){
+
+        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_FILTER_ACTION
+        );
+    }
+
+    public function isShowCategoryInShopBy(){
+
+        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_SHOP_BY
+        );
     }
 
     public function getRemoveUrl($route, $data)

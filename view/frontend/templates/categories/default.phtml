@@ -2,11 +2,11 @@
 $dataHelper = $this->helper('GoMage\Navigation\Helper\Data');
 $categories = $this->getStoreCategories(true, false, true);
 $categoryHelper = $this->getCategoryHelper();
+$dataHelper->isShowCheckboxes();
 ?>
 <div class="block block-gan-categories gan-sidebar-position
     <?php if($dataHelper->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::DEFAULTS) echo 'gan-categories-default'; ?>
     <?php if($dataHelper->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK) echo 'gan-categories-default gan-categories-in-block'; ?>
-    <?php if($dataHelper->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::FLY_OUT) echo 'gan-categories-flyout'; ?>
     ">
     <div class="block-title gan-categories-title" data-role="navigation-filter" data-type="categories-content">
         <strong><?php echo __('Categories') ?></strong>
@@ -17,11 +17,14 @@ $categoryHelper = $this->getCategoryHelper();
                 <?php
                 foreach($categories as $category):
                      if (!$category->getIsActive()) continue;?>
-                    <li data-ajax="1" data-role="navigation-filter" data-type="categories-li" data-url="<?= $categoryHelper->getCategoryUrl($category) ?>">
+                    <li data-ajax="<?= (int)$dataHelper->isAjax(); ?>" data-role="navigation-filter"
+                        data-type="categories-li" data-url="<?= $categoryHelper->getCategoryUrl($category) ?>">
                         <a class="<?= ($block->getCurrentCategoryId() == $category->getId()) ? 'active' : ''; ?>"
                            href="#"> <?= $category->getName() ?></a>
                     </li>
-                    <?= $block->getOlList($block->getChildCategories($category)); ?>
+                    <? if ($dataHelper->getShowAllSubcategories()): ?>
+                        <?= $block->getOlList($block->getChildCategories($category)); ?>
+                    <? endif; ?>
                 <?php endforeach; ?>
             </ul>
         </div>

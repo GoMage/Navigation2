@@ -12,15 +12,15 @@ $categoryHelper = $this->getCategoryHelper();
             <?php
             foreach($categories as $category):
                 if (!$category->getIsActive()) continue;?>
-                    <select data-role="navigation-filter" data-type="categories-select" data-ajax="1">
+                    <select data-role="navigation-filter" data-type="categories-select" data-ajax="<?= (int)$dataHelper->isAjax(); ?>">
                         <option
                             <?= ($block->getCurrentCategoryId() == $category->getId()) ? 'selected' : ''; ?>
                                 value="<?php echo $categoryHelper->getCategoryUrl($category) ?>">
                             <?php echo $category->getName() ?>
                         </option>
-                        <?= $block->getSelectList($block->getChildCategories($category)); ?>
-                        <?// if (!$childrenCategories = $this->getChildCategories($category)) continue; ?>
-
+                        <? if ($dataHelper->getShowAllSubcategories()): ?>
+                            <?= $block->getSelectList($block->getChildCategories($category)); ?>
+                        <?endif;?>
                     </select>
             <?php endforeach; ?>
         </div>

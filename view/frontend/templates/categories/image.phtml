@@ -14,9 +14,10 @@ $dataHelper->isShowCheckboxes();
                 <?php
                 foreach($categories as $category):
                     if (!$category->getIsActive()) continue;?>
-                    <li>
+                    <li data-ajax="<?= (int)$dataHelper->isAjax(); ?>" data-role="navigation-filter"
+                        data-type="categories-li" data-url="<?= $categoryHelper->getCategoryUrl($category) ?>">
                         <a class="<?= ($block->getCurrentCategoryId() == $category->getId()) ? 'selected' : ''; ?>"
-                            href="<?php echo $categoryHelper->getCategoryUrl($category) ?>">
+                            href="#">
                             <img width="<?=($dataHelper->getCategoriesImageWidth()) ? $dataHelper->getCategoriesImageWidth() : '';?>"
                                  height="<?=($dataHelper->getCategoriesImageHeight()) ? $dataHelper->getCategoriesImageHeight() : '';?>"
                                  src="<?= $block->getCategoryImage($category->getEntityId()) ?>"
@@ -25,7 +26,6 @@ $dataHelper->isShowCheckboxes();
                                 <span><?= $category->getName();?></span>
                             <?endif;?>
                         </a>
-                        <?//= $block->getImageCategoriesList($block->getChildCategories($category)); ?>
                     </li>
                 <?php endforeach; ?>
             </ul>

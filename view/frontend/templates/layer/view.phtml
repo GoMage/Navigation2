@@ -12,6 +12,12 @@
 $helper = $this->helper('GoMage\Navigation\Helper\Data');
 $render = $this->getLayout()->createBlock('GoMage\Navigation\Block\Navigation\FilterRenderer');
 $state = $this->getLayout()->createBlock('GoMage\Navigation\Block\Navigation\State');
+$categoriesHtml = '';
+if ($helper->isShowCategoryInShopBy()) {
+    $categories = $this->getLayout()->createBlock('GoMage\Navigation\Block\Categories');
+    $categoriesHtml = $categories->toHtml();
+}
+
 $block->setChild('state',$state);
 ?>
 
@@ -22,6 +28,7 @@ $block->setChild('state',$state);
                         "navigationPlace": "<?php echo $helper->getShowShopByIn(); ?>",
                         "categoriesPlace": "<?php echo $helper->getCategoriesBlockLocation(); ?>"
                         }}'>
+        <?=$categoriesHtml;?>
         <div class="block-content filter-content">
             <?if ($helper->isShowAppliedValuesInResults()):?>
                 <?php echo $state->toHtml() ?>

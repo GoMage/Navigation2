@@ -83,8 +83,7 @@ class Categories extends \Magento\Framework\View\Element\Template
 
         foreach ($subcategories as $cat) {
 
-            $cnt = $this->getProductsCount($cat);
-            if(!$cnt && !$cat->getChildrenCount()) {
+            if ($this->dataHelper->isHideEmptyCategories() && !$this->getProductsCount($cat) && !$cat->getChildrenCount()) {
                 continue;
             }
 
@@ -108,7 +107,7 @@ class Categories extends \Magento\Framework\View\Element\Template
         $html = '';
         foreach ($data as $category) {
             $active = ($this->getCurrentCategoryId() == $category['entity_id']) ? 'active' : '';
-            $html .= '<ol ' . $checkboxes . '><li data-ajax="1" data-role="navigation-filter" data-type="categories-li" data-url="' . $category['url'] . '">';
+            $html .= '<ol ' . $checkboxes . '><li data-ajax="' . (int)$this->dataHelper->isAjax() . '" data-role="navigation-filter" data-type="categories-li" data-url="' . $category['url'] . '">';
             $html .= '<a class="' . $active . '" href="' . $category['url'] . '">' . $category['name'] . '</a>';
             if(is_array($category['children'])) {
                 $html .= $this->getOlList($category['children']);
@@ -197,6 +196,12 @@ class Categories extends \Magento\Framework\View\Element\Template
     {
         if (!$this->dataHelper->isEnable() || !$this->dataHelper->isShowCategories()) {
             return ;
+        }
+
+        if ($this->dataHelper->isShowCategoryInShopBy()) {
+            $this->getLayout()->unsetChild('sidebar.main', 'gomage.categories');
+            $this->canShowCategories = true;
+            return;
         }
 
         if ($this->dataHelper->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
