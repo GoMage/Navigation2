@@ -5,7 +5,7 @@ namespace GoMage\Navigation\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\DataObject;
 
-class AjaxNavigation implements ObserverInterface
+class GomageBeforeSend implements ObserverInterface
 {
     /**
      * @var \Magento\Framework\App\RequestInterface
@@ -58,27 +58,21 @@ class AjaxNavigation implements ObserverInterface
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
-        if ($this->_request->isAjax()) {
+        if ($this->_request->getRouteName() == 'catalog' && $this->_request->isAjax() &&
+            (($this->_request->getParam('gan_ajax_filter') || $this->_request->getParam('gan_ajax_cat')))){
 
             $result = new DataObject();
+            if ($this->_request->getParam('gan_ajax_filter')) {
+                $result->setData('content', $this->_layout->renderElement('main.content'));
+            }
 
             if ($this->_request->getParam('gan_ajax_cat')) {
                 $result->setData('content', $this->_layout->renderElement('main.content'));
                 $result->setData('breadcrumbs', $this->_layout->renderElement('breadcrumbs'));
-            } else {
-
-                $result->setData('categories', $this->_layout->getBlock('gomage.categories')->toHtml());
-                $result->setData('navigation', $this->_layout->getBlock('catalog.leftnav')->toHtml());
-                $result->setData('products', $this->_layout->getBlock('category.products')->toHtml());
             }
 
-            $this->_eventManager->dispatch('gomage_navigation_ajax_result', ['result' => $result]);
-            $this->_actionFlag->set('', \Magento\Framework\App\Action\Action::FLAG_NO_DISPATCH, true);
-            //$this->_response->representJson($result->toJson());
-
-            echo $result->toJson();
-            exit;
-        }
+            $this->_response->representJson($result->toJson());
+    }
 
         return $this;
     }

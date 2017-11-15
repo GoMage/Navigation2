@@ -6,28 +6,12 @@
  */
 
 $filter = reset($filterItems)->getFilter();
-$filter->getGoMageFilterType();
-$filter->getGoMageIsShowFilterButton();
-$filter->getGoMageMaxBlockHeight();
-$filter->getGoMageIsAjax();
-$filter->getGoMageIsCollapsed();
-$filter->getGoMageIsCheckbox();
-$filter->getGoMageIsShowImageName();
-$filter->getGoMageOptionsAlignment();
-$filter->getGoMageImageWidth();
-$filter->getGoMageImageHeight();
-$filter->getGoMageVisibleOptions();
-$filter->getGoMageIsShowTooltip();
-$filter->getGoMageTooltipWidth();
-$filter->getGoMageTooltipHeight();
-$filter->getGoMageIsReset();
-$filter->getGoMageIsExcludeCategories();
-
 $attributeModel = $filter->getAttributeModel();
 
 ?>
 
 <div class="gan-filter gan-filter-input">
+    <?=$block->getTooltip($filter)->toHtml()?>
     <form>
         <fieldset class="gan-filter-input-fieldset">
 

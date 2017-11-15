@@ -62,6 +62,7 @@ class GomageSaveAttribute implements \Magento\Framework\Event\ObserverInterface
             'is_show_tooltip' => (int) $attribute->getData('gomage_is_show_tooltip'),
             'tooltip_width' => (int) $attribute->getData('gomage_tooltip_width'),
             'tooltip_height' => (int) $attribute->getData('gomage_tooltip_height'),
+            'tooltip_text' => $this->prepareTooltipData($attribute->getData('gomage_tooltip_text')),
             'is_reset' => (int) $attribute->getData('gomage_is_reset'),
             'is_exclude_categories' => (int) $attribute->getData('gomage_is_exclude_categories')
         ]);
@@ -69,5 +70,14 @@ class GomageSaveAttribute implements \Magento\Framework\Event\ObserverInterface
         $this->navigationAttributeRepository->save($navigationAttribute);
 
         return $this;
+    }
+
+    protected function prepareTooltipData($data)
+    {
+        foreach ($data as &$text) {
+            $text = htmlentities($text, ENT_QUOTES);
+        }
+
+        return serialize($data);
     }
 }

@@ -28,6 +28,7 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
     protected $_sourceNavigation;
     protected $_yesNoSource;
     protected $_sourceImageAlignment;
+    protected $storeManager;
 
     /**
      * AdvancedNavigationProperties constructor.
@@ -46,9 +47,11 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
         \GoMage\Navigation\Model\Config\Source\Navigation $sourceNavigation,
         \GoMage\Navigation\Model\Config\Source\Image\Alignment $sourceImageAlignment,
         Yesno $yesNo,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
         array $data = []
     ) {
 
+        $this->storeManager = $storeManager;
         $this->_sourceNavigation = $sourceNavigation;
         $this->_sourceImageAlignment = $sourceImageAlignment;
         $this->_yesNoSource = $yesNo->toOptionArray();
@@ -287,6 +290,23 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
             ]
         );
 
+        $tooltipText = [];
+        $tooltipData = unserialize($attributeObject->getData('gomage_tooltip_text'));
+        foreach ($this->storeManager->getStores() as $store) {
+
+            $tooltipText['tooltip_text_store_' . $store->getId()] = (!empty($tooltipData[$store->getId()])) ? html_entity_decode($tooltipData[$store->getId()], ENT_QUOTES) : '';
+
+            $fieldset->addField(
+                'tooltip_text_store_' . $store->getId(),
+                'textarea',
+                [
+                    'name' => 'gomage_tooltip_text[' . $store->getId() . ']',
+                    'label' => __('Tooltip Text for ' . $store->getCode() . ' Store'),
+                    'title' => __('Tooltip Text for ' . $store->getCode()) . ' Store',
+                ]
+            );
+        }
+
         $fieldset->addField(
             'gomage_is_reset',
             'select',
@@ -309,9 +329,8 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
             ]
         );
 
-
         $this->setForm($form);
-        $form->setValues($attributeObject->getData());
+        $form->setValues($attributeObject->getData() + $tooltipText);
 
         return parent::_prepareForm();
     }

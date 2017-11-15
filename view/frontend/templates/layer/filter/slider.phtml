@@ -6,25 +6,10 @@
  */
 
 $filter = reset($filterItems)->getFilter();
-$filter->getGomageFilterType();
-$filter->getGomageIsShowFilterButton();
-$filter->getGomageMaxBlockHeight();
-$filter->getGomageIsAjax();
-$filter->getGomageIsCollapsed();
-$filter->getGomageIsCheckbox();
-$filter->getGomageIsShowImageName();
-$filter->getGomageOptionsAlignment();
-$filter->getGomageImageWidth();
-$filter->getGomageImageHeight();
-$filter->getGomageVisibleOptions();
-$filter->getGomageIsShowTooltip();
-$filter->getGomageTooltipWidth();
-$filter->getGomageTooltipHeight();
-$filter->getGomageIsReset();
-$filter->getGomageIsExcludeCategories();
 ?>
 
 <div class="gan-filter gan-filter-slider">
+    <?=$block->getTooltip($filter)->toHtml()?>
     <?php $attributeCode = $filter->getAttributeModel()->getAttributeCode(); ?>
         <div class="layout">
             <div class="layout-slider">

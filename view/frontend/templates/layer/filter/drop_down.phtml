@@ -9,6 +9,7 @@ $filter = reset($filterItems)->getFilter();
 ?>
 
 <div class="gan-filter gan-filter-dropdown">
+    <?=$block->getTooltip($filter)->toHtml()?>
     <select data-role="navigation-filter"
             data-param="<?php echo $filter->getRequestVar() ?>"
             data-type="select"

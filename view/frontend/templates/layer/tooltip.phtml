@@ -1,0 +1,8 @@
+<? if($filter->getGomageIsShowTooltip()):?>
+    <div>
+        tooltip
+        <div style="display: none; width: <?=$filter->getGomageTooltipWidth();?>px; height: <?=$filter->getGomageTooltipHeight();?>px;">
+            <?=$block->getTooltipText($filter->getGomageTooltipText());?>
+        </div>
+    </div>
+<?endif;?>

@@ -9,7 +9,7 @@ $helper = $this->helper('GoMage\Navigation\Helper\Data');
 
 ?>
 <ol class="items gan-filter gan-filter-default <?php if($filter->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK) echo 'gan-filter-in-block'; ?> <?php echo $filter->canShowMinimized() ? "filter-content-hide" : "filter-content-show"; ?>" <?php if($filter->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK && $filter->getGomageMaxBlockHeight()): ?>style="max-height:<?php echo $filter->getGomageMaxBlockHeight(); ?>px;"<?endif;?>>
-
+    <?=$block->getTooltip($filter)->toHtml()?>
     <?php foreach ($filterItems as $item): ?>
         <li class="item">
             <?php if ($item->getCount() > 0 && $item->isShowAppliedValues()): ?>

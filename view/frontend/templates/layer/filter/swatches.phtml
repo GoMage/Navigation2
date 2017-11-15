@@ -14,7 +14,6 @@ $helper = $this->helper('GoMage\Navigation\Helper\Data');
 $filter = reset($filterItems)->getFilter();
 $swatchData = $block->getSwatch()->setSwatchFilter($filter)->getSwatchData();
 $swatchData = $helper->prepareSwatchesData($swatchData, $filterItems);
-
 ?>
 
 <div class="swatch-attribute swatch-layered <?php /* @escapeNotVerified */
@@ -23,6 +22,7 @@ echo $swatchData['attribute_code'] ?>"
      echo $swatchData['attribute_code'] ?>" attribute-id="<?php /* @escapeNotVerified */
 echo $swatchData['attribute_id'] ?>">
     <div class="swatch-attribute-options clearfix">
+        <?=$block->getTooltip($filter)->toHtml()?>
         <?php foreach ($swatchData['options'] as $option => $data): ?>
             <?php
                 if (!$data['is_show']) continue;

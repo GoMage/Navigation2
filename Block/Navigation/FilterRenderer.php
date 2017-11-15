@@ -42,6 +42,9 @@ class FilterRenderer extends Template implements FilterRendererInterface
      */
     protected $_urlHelper;
 
+    protected $storeManager;
+    public $tooltip;
+
     /**
      * FilterRenderer constructor.
      * @param Template\Context $context
@@ -57,6 +60,8 @@ class FilterRenderer extends Template implements FilterRendererInterface
         \Magento\Framework\App\RequestInterface $request,
         \GoMage\Navigation\Helper\Url $urlHelper,
         \GoMage\Navigation\Helper\Data $dataHelper,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+
         array $data = array()
     )
     {
@@ -65,6 +70,7 @@ class FilterRenderer extends Template implements FilterRendererInterface
         $this->_urlHelper = $urlHelper;
         $this->_dataHelper = $dataHelper;
         $this->_renderLayered = $renderLayered;
+        $this->storeManager = $storeManager;
         
         parent::__construct($context, $data);
     }
@@ -205,5 +211,13 @@ class FilterRenderer extends Template implements FilterRendererInterface
         if (!$this->_dataHelper->isUseFriendlyUrls() && in_array($item->getValue(), $params)) {
             $item->setIsActive(true);
         }
+    }
+
+    public function getTooltip($filter)
+    {
+        $tooltip = $this->getLayout()->createBlock('GoMage\Navigation\Block\Navigation\Tooltip');
+        $tooltip->assign('filter', $filter);
+
+        return $tooltip;
     }
 }
