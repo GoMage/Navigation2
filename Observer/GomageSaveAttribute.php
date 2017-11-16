@@ -74,6 +74,10 @@ class GomageSaveAttribute implements \Magento\Framework\Event\ObserverInterface
 
     protected function prepareTooltipData($data)
     {
+        if (!is_array($data)) {
+            return '';
+        }
+
         foreach ($data as &$text) {
             $text = htmlentities($text, ENT_QUOTES);
         }

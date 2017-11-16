@@ -257,54 +257,6 @@
                     </depends>
                 </field>
             </group>
-            <group id="products_navigation" translate="label" type="text" sortOrder="50" showInDefault="1"
-                   showInWebsite="1" showInStore="1">
-                <label>Products Navigation</label>
-                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Enable Products Navigation</label>
-                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
-                </field>
-                <field id="length" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Maximum Product Name Symbols</label>
-                    <frontend_class>validate-number</frontend_class>
-                </field>
-                <field id="previous_link" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Previous Product Link</label>
-                    <comment>
-                        <![CDATA[e.g. %product% - product name, %price% - price, %previous_image%]]>
-                    </comment>
-                </field>
-                <field id="previous_image" translate="label" type="image" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Previous Product Image</label>
-                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
-                    <upload_dir config="system/filesystem/media" scope_info="1">gomage/navigation/previous_image</upload_dir>
-                    <base_url type="media" scope_info="1">gomage/navigation/previous_image</base_url>
-                </field>
-                <field id="next_link" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Next Product Link</label>
-                    <comment>
-                        <![CDATA[e.g. %product% - product name, %price% - price, %previous_image%]]>
-                    </comment>
-                </field>
-                <field id="next_image" translate="label" type="image" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Next Product Image</label>
-                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
-                    <upload_dir config="system/filesystem/media" scope_info="1">gomage/navigation/next_image</upload_dir>
-                    <base_url type="media" scope_info="1">gomage/navigation/next_image</base_url>
-                </field>
-                <field id="category_link" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Back to Category Link</label>
-                    <comment>
-                        <![CDATA[e.g. %category%, %category_image%]]>
-                    </comment>
-                </field>
-                <field id="category_image" translate="label" type="image" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Back to Category Image</label>
-                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
-                    <upload_dir config="system/filesystem/media" scope_info="1">gomage/navigation/category_image</upload_dir>
-                    <base_url type="media" scope_info="1">gomage/navigation/category_image</base_url>
-                </field>
-            </group>
             <group id="loader" translate="label" type="text" sortOrder="60" showInDefault="1"
                    showInWebsite="1" showInStore="1">
                 <label>Ajax Loader Window Settings</label>
@@ -312,15 +264,32 @@
                     <label>Show Ajax Loader Window</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
+                <field id="spinner_type" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Spinner Type</label>
+                    <source_model>GoMage\Navigation\Model\Config\Source\SpinnerType</source_model>
+                </field>
                 <field id="image" translate="label" type="image" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Ajax Loader View</label>
                     <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">gomage/navigation/loader</upload_dir>
                     <base_url type="media" scope_info="1">gomage/navigation/loader</base_url>
+                    <depends>
+                        <field id="spinner_type">1</field>
+                    </depends>
+                </field>
+                <field id="spinner_color" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Spinner Color</label>
+                    <frontend_model>GoMage\Navigation\Block\Color</frontend_model>
+                    <depends>
+                        <field id="spinner_type">0</field>
+                    </depends>
                 </field>
                 <field id="alignment" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Image Alignment</label>
                     <source_model>GoMage\Navigation\Model\Config\Source\Alignment</source_model>
+                    <depends>
+                        <field id="spinner_type">1</field>
+                    </depends>
                 </field>
                 <field id="background" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Background Color</label>

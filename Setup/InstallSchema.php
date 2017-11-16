@@ -129,6 +129,12 @@ class InstallSchema implements InstallSchemaInterface
             ['unsigned' => true, 'nullable' => false, 'default'  => '0'],
             'Show Reset Link'
         )->addColumn(
+            'tooltip_text',
+            \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+            '64k',
+            [],
+            'Tooltip Text'
+        )->addColumn(
             'is_exclude_categories',
             \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
             null,
@@ -136,46 +142,6 @@ class InstallSchema implements InstallSchemaInterface
             'Exclude Categories'
         )->addForeignKey(
             $installer->getFkName('gomage_navigation_attribute', 'attribute_id',
-                $installer->getTable('eav_attribute'), 'attribute_id'),
-            'attribute_id',
-            $installer->getTable('eav_attribute'),
-            'attribute_id',
-            \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
-        );
-
-        $installer->getConnection()->createTable($table);
-
-        /**
-         * Create table 'gomage_navigation_attribute_store'
-         */
-        $table = $installer->getConnection()->newTable(
-            $installer->getTable('gomage_navigation_attribute_store')
-        )->addColumn(
-            'id',
-            \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
-            null,
-            ['identity' => true, 'nullable' => false, 'primary' => true],
-            'Attribute Id'
-        )->addColumn(
-            'attribute_id',
-            \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
-            null,
-            ['unsigned' => true, 'nullable' => false],
-            'Attribute Id'
-        )->addColumn(
-            'store_id',
-            \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
-            null,
-            ['unsigned' => true, 'nullable' => false],
-            'Store Id'
-        )->addColumn(
-            'popup_text',
-            \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-            '64k',
-            [],
-            'Popup text'
-        )->addForeignKey(
-            $installer->getFkName('gomage_navigation_attribute_store', 'attribute_id',
                 $installer->getTable('eav_attribute'), 'attribute_id'),
             'attribute_id',
             $installer->getTable('eav_attribute'),

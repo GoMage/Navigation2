@@ -31,6 +31,8 @@ define([
             $(this.options.navigationContainer).on({
                 'show.navigation': $.proxy(this._initFilters, this)
             });
+
+            $(this.options.loader).trigger('processStart');
         },
 
         _initFilters: function () {
@@ -272,7 +274,6 @@ define([
                     $(this.options.productsContainer).html(data.products);
                     if (this.options.navigationPlace == 1) {
                         $(data.navigation).prependTo($(this.options.productsContainer));
-
                     } else {
                         $(this.options.navigationContainer).html(data.navigation);
                     }

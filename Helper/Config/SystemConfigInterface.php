@@ -11,6 +11,7 @@ interface SystemConfigInterface
     const SYSTEM_CONFIG_SECTION = 'gomage_navigation';
     const SYSTEM_CONFIG_CROUP = 'general';
     const SYSTEM_CATEGORIES_CONFIG_CROUP = 'category';
+    const SYSTEM_LOADER_CONFIG_CROUP = 'loader';
     const SYSTEM_CONFIG_SETTINGS_GROUP = 'settings';
     const SYSTEM_CONFIG_FIELD_ENABLE= 'enable';
     const SYSTEM_CONFIG_FIELD_SHOW_SHOP_BY_IN = 'place';
@@ -35,4 +36,15 @@ interface SystemConfigInterface
     const SYSTEM_CATEGORIES_CONFIG_IMAGE_HEIGHT = 'image_height';
     const SYSTEM_CATEGORIES_CONFIG_IMAGE_NAME = 'is_image';
     const SYSTEM_CATEGORIES_CONFIG_CHECKBOX = 'is_checkbox';
+    const SYSTEM_LOADER_CONFIG_ENABLE = 'enable';
+    const SYSTEM_LOADER_CONFIG_SPINNER_TYPE = 'spinner_type';
+    const SYSTEM_LOADER_CONFIG_IMAGE = 'image';
+    const SYSTEM_LOADER_CONFIG_ALIGNMENT = 'alignment';
+    const SYSTEM_LOADER_CONFIG_BACKGROUND = 'background';
+    const SYSTEM_LOADER_CONFIG_BORDER_COLOR = 'border_color';
+    const SYSTEM_LOADER_CONFIG_TEXT_COLOR = 'text_color';
+    const SYSTEM_LOADER_CONFIG_SPINNER_COLOR = 'spinner_color';
+    const SYSTEM_LOADER_CONFIG_WINDOW_WIDTH = 'width';
+    const SYSTEM_LOADER_CONFIG_WINDOW_HEIGHT = 'height';
+    const SYSTEM_LOADER_CONFIG_TEXT = 'text';
 }

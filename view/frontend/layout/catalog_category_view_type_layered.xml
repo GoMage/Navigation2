@@ -15,6 +15,7 @@
             <block class="GoMage\Navigation\Block\Navigation\State" name="catalog.navigation.state" as="state" />
             <block class="GoMage\Navigation\Block\Navigation\FilterRenderer" name="catalog.navigation.renderer" as="renderer"/>
         </block>
+        <block class="GoMage\Navigation\Block\Loader" name="gomage.loader"/>
     </referenceContainer>
     <referenceBlock name="product_list_toolbar_pager">
         <arguments>

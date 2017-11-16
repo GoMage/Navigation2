@@ -59,10 +59,18 @@ class GomageBeforeSend implements ObserverInterface
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
         if ($this->_request->getRouteName() == 'catalog' && $this->_request->isAjax() &&
-            (($this->_request->getParam('gan_ajax_filter') || $this->_request->getParam('gan_ajax_cat')))){
+            (($this->_request->getParam('gan_ajax_filter') ||
+                $this->_request->getParam('gan_ajax_cat') ||
+                $this->_request->getParam('gan_ajax_more')
+            ))){
 
             $result = new DataObject();
-            if ($this->_request->getParam('gan_ajax_filter')) {
+
+            if ($this->_request->getParam('gan_ajax_more')) {
+                $result->setData('content', $this->_layout->renderElement('category.products'));
+            }
+
+            if ($this->_request->getParam('gan_ajax_filter') && !$this->_request->getParam('gan_ajax_more')) {
                 $result->setData('content', $this->_layout->renderElement('main.content'));
             }
 

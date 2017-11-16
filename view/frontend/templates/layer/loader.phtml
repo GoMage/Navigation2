@@ -1,0 +1,23 @@
+<?if($block->getHelper()->isShowAjaxLoader()):?>
+    <div id="gomage-loader" class="loading-mask ng-scope" style="display: none;">
+        <div class="popup popup-loading" >
+            <div class="popup-inner" style="
+                    background-color: <?=$block->getHelper()->getLoaderBackgroundColor();?>;
+                    border-color: <?=$block->getHelper()->getLoaderBorderColor();?>;
+                    color: <?=$block->getHelper()->getLoaderTextColor();?>;
+                    width: <?=$block->getHelper()->getLoaderWindowWidth();?>px;
+                    height: <?=$block->getHelper()->getLoaderWindowHeight();?>px;
+                    ">
+                <? if ($block->getHelper()->isSpinnerTypeImage() && ($image = $block->getLoaderImage()) && !empty($image)): ?>
+                    <img alt="Loading..." align="<?=$block->getImageAlignment()?>"
+                         src="<?= $image ?>">
+                <?else:?>
+                    <!-- put spinner -->
+                    <?//=$block->getHelper->getLoaderSpinnerColor()?>
+
+                <?endif; ?>
+                <?=$block->getHelper()->getLoaderText();?>
+            </div>
+        </div>
+    </div>
+<?endif;?>
