@@ -25,10 +25,11 @@ $block->setChild('state',$state);
     <div class="block filter gan-sidebar-position" data-role="navigation" data-mage-init='{"navigation": {
                         "addFilterResultsToUrl": "<?php echo $helper->isAddFilterResultsToUrl()?>",
                         "navigationPlace": "<?php echo $helper->getShowShopByIn(); ?>",
-                        "categoriesPlace": "<?php echo $helper->getCategoriesBlockLocation(); ?>"
+                        "categoriesPlace": "<?php echo $helper->getCategoriesBlockLocation(); ?>",
+                        "ajaxAutoload": "<?php echo $helper->isUseAutoScrolling(); ?>"
                         }}'>
         <?=$categoriesHtml;?>
-        <div class="block-content filter-content">
+        <div class="block-content filter-content" style="background-color: <?=$helper->getNavigationViewBlockBackgroundColor()?>; ">
             <?if ($helper->isShowAppliedValuesInResults()):?>
                 <?php echo $state->toHtml() ?>
                 <?php if ($block->getLayer()->getState()->getFilters()): ?>

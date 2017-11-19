@@ -15,12 +15,16 @@ define([
             filters: null,
             filterControl: '[data-role="navigation-filter"]',
             navigationContainer: '[data-role="navigation"]',
+            mainContainer: '#maincontent',
+            breadcrumbsContainer: 'div.breadcrumbs',
             productsContainer: 'div.main:first',
             authentication: 'div.block-authentication',
             productListContainer: 'ol.product-items',
             productToolbarContainer: 'div.toolbar-products',
             categoriesContainer: 'div.gan-categories',
-            loader: 'body'
+            loader: '#gomage-loader',
+            productLoader: '<div id="product-loader">Loading ...</div>',
+            showMore: false
         },
 
         _create: function () {
@@ -32,7 +36,9 @@ define([
                 'show.navigation': $.proxy(this._initFilters, this)
             });
 
-            $(this.options.loader).trigger('processStart');
+            if (this.options.ajaxAutoload) {
+                $(window).on('scroll', {}, $.proxy(this._bindAjaxAutoload, this));
+            }
         },
 
         _initFilters: function () {
@@ -96,7 +102,11 @@ define([
                         element.unbind('click');
                         element.on('click', {element: element}, $.proxy(this._processCategoriesContent, this));
                         break;
-                    case 'category':
+                    case 'categories-select':
+                        element.unbind('change');
+                        element.on('change', {element: element}, $.proxy(this._processCategory, this));
+                        break;
+                    case 'categories-li':
                         element.unbind('click');
                         element.on('click', {element: element}, $.proxy(this._processCategory, this));
                         break;
@@ -105,20 +115,51 @@ define([
                         element.on('click', {element: element}, $.proxy(this._processFilter, this));
 
                 }
-
             }
         },
 
-        _processCategory: function () {
+        _bindAjaxAutoload: function () {
+
+            if ($(window).scrollTop() >= $('div.pages:eq(1)').offset().top - $(window).height()) {
+                console.log('scrollTop:' + $(window).scrollTop());
+                console.log('pages position:' + $('.pages').offset().top);
+
+                var url = $('li.item.pages-item-next a:eq(1)').attr('href');
+                if (typeof(url) == 'undefined')
+                    return ;
+
+                var params = this._getParams();
+                params.clear();
+                params.set('gan_ajax_more', 1);
+                this._ajaxMoreProducts(url, params);
+            }
+        },
+
+        _processCategory: function (event) {
+
+            event.preventDefault();
+            event.stopPropagation();
+            var element = event.data.element;
+            var ajax = Number(event.currentTarget.attributes['data-ajax'].nodeValue);
+            var url = event.currentTarget.value;
+            if(!url)
+                url = event.currentTarget.attributes['data-url'].nodeValue;
+
 
             var params = this._getParams();
             params.clear();
             params.set('gan_ajax_cat', 1);
-            return this._ajaxFilter('http://magento2-new.local/women/tops-women.html', params);
+
+            if (ajax) {
+                return this._ajaxCategory(url, params);
+            } else {
+                return $.mage.redirect(url);
+            }
+
         },
 
         _processCategoriesContent: function () {
-            $('.gan-categories-title').next().toggle();
+            $('.gan-categories-title').next().children().toggle();
         },
 
         _processRemoveItem: function (element) {
@@ -134,6 +175,7 @@ define([
                 params.set(param, value);
 
             if (ajax) {
+                params.set('gan_ajax_filter', 1);
                 return this._ajaxFilter(url, params);
             } else {
                 return $.mage.redirect(url);
@@ -163,6 +205,7 @@ define([
             params.set('price', value.replace(';', '-'));
 
             if (filter.isAjax()) {
+                params.set('gan_ajax_filter', 1);
                 return this._ajaxFilter(this.options.baseUrl, params);
             } else {
                 return $.mage.redirect(this.options.baseUrl + '?' + params.toUrlParams());
@@ -193,6 +236,8 @@ define([
                 for (var i = 0; i < data.length; i++) {
                     i++; params.set(data[i - 1], data[i]);
                 }
+
+                params.set('gan_ajax_more', 1);
 
                 $.ajax({
                     url: this.options.baseUrl,
@@ -229,6 +274,7 @@ define([
                 params.set(filter.getParam(), filter.getValue());
             }
             if (filter.isAjax()) {
+                params.set('gan_ajax_filter', 1);
                 this._ajaxFilter(this.options.baseUrl, params);
             } else {
                 $.mage.redirect(this.options.baseUrl + '?' + params.toUrlParams());
@@ -251,6 +297,7 @@ define([
             }
 
             if (filter.isAjax()) {
+                params.set('gan_ajax_filter', 1);
                 this._ajaxFilter(this.options.baseUrl, params);
             } else {
                 $.mage.redirect(this.options.baseUrl + '?' + params.toUrlParams());
@@ -270,28 +317,69 @@ define([
                         successCallback.call(this, response);
                     }
 
-                    var data = $.parseJSON(response);
-                    $(this.options.productsContainer).html(data.products);
-                    if (this.options.navigationPlace == 1) {
-                        $(data.navigation).prependTo($(this.options.productsContainer));
-                    } else {
-                        $(this.options.navigationContainer).html(data.navigation);
-                    }
-
-                    if (this.options.categoriesPlace == 1) {
-                        $(data.categories).prependTo($(this.options.productsContainer));
-                    } else {
-                        $(this.options.categoriesContainer).replaceWith(data.categories);
-                    }
-
-                    $(this.options.navigationContainer).trigger('contentUpdated');
-                    $(this.options.productsContainer).trigger('contentUpdated');
+                    $(this.options.mainContainer).html(response.content);
+                    $(this.options.mainContainer).trigger('contentUpdated');
+                    $(this.options.breadcrumbsContainer).trigger('contentUpdated');
                     $(this.options.authentication).trigger('bindTrigger');
                     this.setNavigationUrl(params);
 
                 }.bind(this)
             });
 
+        },
+
+        _ajaxCategory: function (url, params, successCallback) {
+            $.ajax({
+                url: url,
+                type: 'get',
+                cache: true,
+                data: (params) ? params.toUrlParams() : [],
+                beforeSend: (this._ajaxSend).bind(this),
+                complete: (this._ajaxComplete).bind(this),
+                success: function (response) {
+                    if (successCallback) {
+                        successCallback.call(this, response);
+                    }
+
+                    var data = $.parseJSON(response);
+                    $(this.options.mainContainer).html(data.content);
+                    $(this.options.breadcrumbsContainer).html(data.breadcrumbs);
+
+                    $(this.options.mainContainer).trigger('contentUpdated');
+                    $(this.options.breadcrumbsContainer).trigger('contentUpdated');
+                    $(this.options.authentication).trigger('bindTrigger');
+                    this.setCategoryUrl(url);
+
+                }.bind(this)
+            });
+        },
+
+        _ajaxMoreProducts: function (url, params, successCallback) {
+
+            if (this.options.showMore == true)
+                return ;
+
+            this.options.showMore = true;
+
+            $.ajax({
+                url: url,
+                type: 'get',
+                cache: true,
+                data: (params) ? params.toUrlParams() : [],
+                beforeSend: (this._ajaxSendShowMore).bind(this),
+                complete: (this._ajaxCompleteShowMore).bind(this),
+                success: function (response) {
+                    if (successCallback) {
+                        successCallback.call(this, response);
+                    }
+                    var newProducts = $(response.content).find('ol.products.list.items.product-items').html();
+                    var toolbar = $(response.content).find('div.pages').html();
+                    $('div.pages').html(toolbar);
+                    $(this.options.productListContainer).append(newProducts);
+                    this.options.showMore = false;
+
+                }.bind(this)
+            });
         },
 
         _getParams: function () {
@@ -311,7 +399,13 @@ define([
          * @private
          */
         _ajaxSend: function () {
-            $(this.options.loader).trigger('processStart');
+
+            $(this.options.loader).show();
+        },
+
+        _ajaxSendShowMore: function () {
+
+            $(this.options.productListContainer).append(this.options.productLoader);
         },
 
         /**
@@ -319,7 +413,18 @@ define([
          * @private
          */
         _ajaxComplete: function () {
-            $(this.options.loader).trigger('processStop');
+
+            if(this.options.showMore) {
+                $(this.options.mainContainer).find('#product-loader').remove();
+                return ;
+            }
+
+            $(this.options.loader).hide();
+        },
+
+        _ajaxCompleteShowMore: function () {
+
+            $(this.options.mainContainer).find('#product-loader').remove();
         },
 
         setNavigationUrl: function (params) {
@@ -327,9 +432,14 @@ define([
             if (this.options.addFilterResultsToUrl == 0)
                 return ;
 
+            params.remove('gan_ajax_filter');
             window.history.pushState(null, '', this.options.baseUrl + '?' + params.toUrlParams());
-        }
+        },
 
+        setCategoryUrl: function (url) {
+
+            window.history.pushState(null, '', url);
+        }
     });
 
     return $.gomage.navigation;

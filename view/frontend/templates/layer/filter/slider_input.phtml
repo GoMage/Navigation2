@@ -7,6 +7,14 @@
  */
 
 $filter = reset($filterItems)->getFilter();
+$dataHelper = $this->helper('GoMage\Navigation\Helper\Data');
+
+$block->getHelper()->getNavigationViewSliderLineColor();
+$block->getHelper()->getNavigationViewSliderLineHeight();
+$block->getHelper()->getNavigationViewSliderElementColor();
+$block->getHelper()->getNavigationViewSliderElementWidth();
+$block->getHelper()->getNavigationViewSliderElementHeight();
+$block->getHelper()->getNavigationViewSliderElementRadius();
 ?>
 
 <div class="gan-filter gan-filter-slider gan-filter-slider-input">
@@ -58,7 +66,10 @@ $filter = reset($filterItems)->getFilter();
                 </div>
                 <?php if($filter->getGomageIsShowFilterButton()):?>
                     <div class="gan-filter-input-actions">
-                        <button id="price-button" data-role="navigation-filter" data-type="price-button" class="button" type="submit">
+                        <button id="price-button" data-role="navigation-filter" data-type="price-button" class="button" type="submit"
+                            <?$dataHelper->isNavigationViewButtonsGradient(); $dataHelper->getNavigationViewButtonsBackgroundColor2();?>
+                        style="background-color: <?=$dataHelper->getNavigationViewButtonsBackgroundColor()?>; color: <?=$dataHelper->getNavigationViewButtonsTextColor()?>"
+                        >
                             <span><?php echo $attributeModel->getFrontendLabel(); ?></span>
                         </button>
                     </div>

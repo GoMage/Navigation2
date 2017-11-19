@@ -220,4 +220,9 @@ class FilterRenderer extends Template implements FilterRendererInterface
 
         return $tooltip;
     }
+
+    public function getHelper()
+    {
+        return $this->_dataHelper;
+    }
 }

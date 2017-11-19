@@ -27,7 +27,7 @@ $helper = $this->helper('GoMage\Navigation\Helper\Data');
         </p>
         <?php endif ?>
 
-        <?php if ($block->getLastPageNum()>1): ?>
+        <?php if ($block->getLastPageNum() > 1 && $helper->isShowPager()): ?>
         <div class="pages">
             <strong class="label pages-label" id="paging-label"><?php /* @escapeNotVerified */ echo __('Page') ?></strong>
             <ul class="items pages-items" aria-labelledby="paging-label">

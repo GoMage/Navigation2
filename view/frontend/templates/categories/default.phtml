@@ -7,7 +7,9 @@ $dataHelper->isShowCheckboxes();
 <div class="block block-gan-categories gan-sidebar-position
     <?php if($dataHelper->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::DEFAULTS) echo 'gan-categories-default'; ?>
     <?php if($dataHelper->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK) echo 'gan-categories-default gan-categories-in-block'; ?>
-    ">
+    "
+    style="background-color: <?=$dataHelper->getNavigationViewBlockCategoriesBackgroundColor()?>"
+>
     <div class="block-title gan-categories-title" data-role="navigation-filter" data-type="categories-content">
         <strong><?php echo __('Categories') ?></strong>
     </div>

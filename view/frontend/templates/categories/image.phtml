@@ -4,7 +4,9 @@ $categories = $this->getStoreCategories(true, false, true);
 $categoryHelper = $this->getCategoryHelper();
 $dataHelper->isShowCheckboxes();
 ?>
-<div class="block block-gan-categories gan-categories-image gan-sidebar-position">
+<div class="block block-gan-categories gan-categories-image gan-sidebar-position"
+     style="background-color: <?=$dataHelper->getNavigationViewBlockCategoriesBackgroundColor()?>"
+>
     <div class="block-title gan-categories-title" data-role="navigation-filter" data-type="categories-content">
         <strong><?php echo __('Categories') ?></strong>
     </div>
