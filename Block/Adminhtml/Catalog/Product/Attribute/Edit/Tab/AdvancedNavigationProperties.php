@@ -329,8 +329,13 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
             ]
         );
 
+        $ajaxData = [];
+        if(empty($attributeObject->getData('gomage_is_ajax'))) {
+            $ajaxData['gomage_is_ajax'] = 1;
+        }
+
         $this->setForm($form);
-        $form->setValues($attributeObject->getData() + $tooltipText);
+        $form->setValues($attributeObject->getData() + $tooltipText + $ajaxData);
 
         return parent::_prepareForm();
     }
