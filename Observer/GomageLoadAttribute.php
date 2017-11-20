@@ -17,8 +17,8 @@ class GomageLoadAttribute implements \Magento\Framework\Event\ObserverInterface
     public function __construct(
         \GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory $navigationAttributeCollectionFactory,
         \Magento\Catalog\Model\Session $catalogSession
-    )
-    {
+    ) {
+    
         $this->navigationAttributeCollectionFactory = $navigationAttributeCollectionFactory;
         $this->catalogSession = $catalogSession;
     }
@@ -58,7 +58,7 @@ class GomageLoadAttribute implements \Magento\Framework\Event\ObserverInterface
     protected function getSettingsArray()
     {
         $goMageAttributeSettings = $this->catalogSession->getGoMageAttributeSettings();
-        if(!is_array($goMageAttributeSettings)) {
+        if (!is_array($goMageAttributeSettings)) {
             return $goMageAttributeSettings = [];
         }
 

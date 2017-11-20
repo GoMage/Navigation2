@@ -2,7 +2,8 @@
 
 namespace GoMage\Navigation\Model\Config\Source\Category;
 
-class Navigation implements \Magento\Framework\Option\ArrayInterface,
+class Navigation implements
+    \Magento\Framework\Option\ArrayInterface,
     \GoMage\Navigation\Model\Config\Source\NavigationInterface
 {
 

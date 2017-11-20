@@ -4,7 +4,8 @@ namespace GoMage\Navigation\Block;
  
 use Magento\Framework\Registry;
  
-class Color extends \Magento\Config\Block\System\Config\Form\Field {
+class Color extends \Magento\Config\Block\System\Config\Form\Field
+{
 
     /**
      * @param \Magento\Backend\Block\Template\Context $context
@@ -12,12 +13,14 @@ class Color extends \Magento\Config\Block\System\Config\Form\Field {
      * @param array $data
      */
     public function __construct(
-        \Magento\Backend\Block\Template\Context $context, array $data = []
+        \Magento\Backend\Block\Template\Context $context,
+        array $data = []
     ) {
         parent::__construct($context, $data);
     }
 
-    protected function _getElementHtml(\Magento\Framework\Data\Form\Element\AbstractElement $element) {
+    protected function _getElementHtml(\Magento\Framework\Data\Form\Element\AbstractElement $element)
+    {
         $html = $element->getElementHtml();
         $value = $element->getData('value');
 
@@ -39,5 +42,4 @@ class Color extends \Magento\Config\Block\System\Config\Form\Field {
             </script>';
         return $html;
     }
-
 }

@@ -12,5 +12,4 @@ class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements Fil
     {
         return true;
     }
-
 }

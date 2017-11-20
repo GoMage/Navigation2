@@ -40,8 +40,8 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         \Magento\Framework\App\RequestInterface $request,
         \GoMage\Navigation\Helper\Data $dataHelper,
         array $data = []
-    )
-    {
+    ) {
+    
         $this->catalogLayer = $layerResolver->get();
         $this->filterList = $filterList;
         $this->visibilityFlag = $visibilityFlag;
@@ -50,7 +50,6 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
 
         parent::__construct($context, $layerResolver, $filterList, $visibilityFlag, $data);
         $this->setLocation();
-
     }
 
     protected function getPageLayout()
@@ -59,7 +58,7 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
             $this->pageLayout = $this->catalogLayer->getCurrentCategory()->getPageLayout();
         }
 
-        if(empty($this->pageLayout)) {
+        if (empty($this->pageLayout)) {
             $this->pageLayout = $this->getLayout()->getUpdate()->getPageLayout();
         }
 
@@ -84,7 +83,7 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         $data = [];
         $cnt = 0;
         foreach ($this->getFilters() as $filter) {
-            if($filter->getItemsCount()) {
+            if ($filter->getItemsCount()) {
                 if ($filter->getGomageIsCollapsed()) {
                     $data[] = $cnt;
                 }
@@ -141,7 +140,7 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
             return parent::_beforeToHtml();
         }
 
-        if($this->canShowNavigation) {
+        if ($this->canShowNavigation) {
             $this->setTemplate('GoMage_Navigation::layer/view.phtml');
         }
 

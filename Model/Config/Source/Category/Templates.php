@@ -18,7 +18,7 @@ class Templates
             \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK => 'GoMage_Navigation::categories/default.phtml',
         ];
 
-        if(empty($templates[$type])) {
+        if (empty($templates[$type])) {
             throw new Exception(__('Template is not set for ' . (int) $type . ' filter type'));
         }
 

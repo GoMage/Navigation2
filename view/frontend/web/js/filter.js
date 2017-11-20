@@ -3,7 +3,8 @@ define([
 ], function ($) {
     "use strict";
 
-    function Filter(element) {
+    function Filter(element)
+    {
 
         element = $(element);
 
@@ -51,3 +52,4 @@ define([
 
     return Filter;
 });
+

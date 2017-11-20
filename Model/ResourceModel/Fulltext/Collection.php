@@ -1,5 +1,6 @@
 <?php
 namespace GoMage\Navigation\Model\ResourceModel\Fulltext;
+
 use Magento\Framework\App\ObjectManager;
 
 /**
@@ -52,6 +53,5 @@ class Collection extends \Magento\CatalogSearch\Model\ResourceModel\Fulltext\Col
             ->create(\Magento\Framework\Api\Search\SearchCriteriaBuilder::class);
         $this->setSearchCriteriaBuilder($searchCriteriaBuilder);
         return $this;
-
     }
 }

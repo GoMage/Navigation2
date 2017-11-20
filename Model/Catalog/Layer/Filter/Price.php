@@ -80,9 +80,10 @@ class Price extends \Magento\Catalog\Model\Layer\Filter\Price implements FilterI
         \GoMage\Navigation\Model\Config\Source\Filter\Templates $filterTemplates,
         \GoMage\Navigation\Helper\Data $dataHelper,
         array $data = []
-    )
-    {
-        parent::__construct($filterItemFactory,
+    ) {
+    
+        parent::__construct(
+            $filterItemFactory,
             $storeManager,
             $layer,
             $itemDataBuilder,
@@ -92,7 +93,8 @@ class Price extends \Magento\Catalog\Model\Layer\Filter\Price implements FilterI
             $priceCurrency,
             $algorithmFactory,
             $dataProviderFactory,
-            $data);
+            $data
+        );
         $this->layer = $layer;
         $this->storeManager = $storeManager;
         $this->algorithmFactory = $algorithmFactory;

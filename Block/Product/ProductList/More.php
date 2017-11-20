@@ -27,9 +27,9 @@ class More extends Template
     public function __construct(
         Template\Context $context,
         \GoMage\Navigation\Helper\Data $navigationHelper,
-        array $data = array()
-    )
-    {
+        array $data = []
+    ) {
+    
         parent::__construct($context, $data);
         $this->context = $context;
         $this->navigationHelper = $navigationHelper;
@@ -63,7 +63,9 @@ class More extends Template
     public function getPagerBlock()
     {
         $toolbar = $this->context->getLayout()->getBlock('product_list_toolbar');
-        if (!$toolbar || !$toolbar->getCollection()) return false;
+        if (!$toolbar || !$toolbar->getCollection()) {
+            return false;
+        }
         $pagerBlock =$toolbar->getChildBlock('product_list_toolbar_pager');
         if ($pagerBlock) {
             $pagerBlock->setAvailableLimit($toolbar->getAvailableLimit());
@@ -82,7 +84,8 @@ class More extends Template
      * @param $url
      * @return int
      */
-    public function getMoreValue($url){
+    public function getMoreValue($url)
+    {
         $parse_url = parse_url($url);
         return $parse_url['query'];
     }
@@ -90,8 +93,8 @@ class More extends Template
     /**
      * @return string
      */
-    public function getType(){
+    public function getType()
+    {
         return self::BLOCK_MORE;
     }
-
 }

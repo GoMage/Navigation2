@@ -2,7 +2,7 @@
 
 namespace GoMage\Navigation\Block\Navigation;
 
-use  GoMage\Navigation\Model\Catalog\Layer\Filter\FilterInterface;
+use GoMage\Navigation\Model\Catalog\Layer\Filter\FilterInterface;
 
 /**
  * Interface FilterRendererInterface

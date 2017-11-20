@@ -15,8 +15,9 @@ class Loader extends \Magento\Framework\View\Element\Template
         Template\Context $context,
         \GoMage\Navigation\Helper\Data $helper,
         \GoMage\Navigation\Model\Config\Source\Alignment $alignmentConfig,
-        array $data = [])
-    {
+        array $data = []
+    ) {
+    
         $this->helper = $helper;
         $this->alignmentConfig = $alignmentConfig;
         $this->setTemplate('GoMage_Navigation::layer/loader.phtml');
@@ -30,7 +31,7 @@ class Loader extends \Magento\Framework\View\Element\Template
 
     public function getLoaderImage()
     {
-        if(!empty($this->helper->getLoaderImage())) {
+        if (!empty($this->helper->getLoaderImage())) {
             return $this->getUrl('pub/media') . static::LOADER_IMAGE_PATH . $this->helper->getLoaderImage();
         }
 

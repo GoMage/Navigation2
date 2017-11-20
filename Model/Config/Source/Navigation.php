@@ -2,7 +2,8 @@
 
 namespace GoMage\Navigation\Model\Config\Source;
 
-class Navigation implements \Magento\Framework\Option\ArrayInterface,
+class Navigation implements
+    \Magento\Framework\Option\ArrayInterface,
     \GoMage\Navigation\Model\Config\Source\NavigationInterface
 {
     /**
@@ -21,5 +22,4 @@ class Navigation implements \Magento\Framework\Option\ArrayInterface,
             ['value' => self::SLIDER_INPUT, 'label' => __('Slider & Input')],
         ];
     }
-
 }

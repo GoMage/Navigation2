@@ -1,7 +1,9 @@
 <?php
 
 namespace GoMage\Navigation\Model\Catalog\Layer\Filter;
+
 use GoMage\Navigation\Model\Config\Source\NavigationInterface;
+
 class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements FilterInterface
 {
     /**
@@ -15,21 +17,24 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
     /**
      * @return mixed
      */
-    public function getAttributeCode(){
+    public function getAttributeCode()
+    {
         return NavigationInterface::ATTRIBUTE_CATEGORY;
     }
 
     /**
      * @return $this
      */
-    public function getAttributeModel(){
+    public function getAttributeModel()
+    {
         return $this;
     }
 
     /**
      * return array
      */
-    public function _getItemsData(){
+    public function _getItemsData()
+    {
         return [];
     }
 

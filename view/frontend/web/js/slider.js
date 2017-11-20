@@ -9,7 +9,8 @@ define([
 ], function ($) {
     "use strict";
 
-    function SliderPrice(element) {
+    function SliderPrice(element)
+    {
 
         element = $(element);
         this.from = element.attr('data-from');
@@ -118,3 +119,4 @@ define([
 
     return SliderPrice;
 });
+

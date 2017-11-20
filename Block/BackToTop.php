@@ -13,10 +13,11 @@ class BackToTop extends \Magento\Framework\View\Element\Template
     public function __construct(
         Template\Context $context,
         \GoMage\Navigation\Helper\Data $helper,
-        array $data = [])
-    {
+        array $data = []
+    ) {
+    
         $this->helper = $helper;
-        if($this->helper->isUseBackToTopButton()) {
+        if ($this->helper->isUseBackToTopButton()) {
             $this->setTemplate('GoMage_Navigation::layer/back_to_top.phtml');
         }
 

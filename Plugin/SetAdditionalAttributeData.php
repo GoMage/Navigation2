@@ -2,7 +2,8 @@
 
 namespace GoMage\Navigation\Plugin;
 
-class SetAdditionalAttributeData {
+class SetAdditionalAttributeData
+{
 
     protected $navigationAttributeCollectionFactory;
     protected $filterTemplates;
@@ -18,14 +19,14 @@ class SetAdditionalAttributeData {
         $this->dataHelper = $dataHelper;
     }
 
-    public function afterGetFilters($filterList, $result) {
+    public function afterGetFilters($filterList, $result)
+    {
 
         if (!$this->dataHelper->isEnable()) {
             return $result;
         }
 
         foreach ($result as $filter) {
-
             if (empty($filter->getAttributeModel()->getAttributeId()) || !empty($filter->getData('is_gomage_loaded'))) {
                 continue;
             }
@@ -56,7 +57,6 @@ class SetAdditionalAttributeData {
         }
 
         foreach ($navigationAttribute->getData() as $field => $value) {
-
             $temp = ['gomage_' . $field => $value];
             $filter->addData($temp);
         }
@@ -64,7 +64,7 @@ class SetAdditionalAttributeData {
 
     protected function setTemplateData($filter)
     {
-        if($filter->getSwatchInputType()) {
+        if ($filter->getSwatchInputType()) {
             $filterType = \GoMage\Navigation\Model\Config\Source\NavigationInterface::SWATCHES;
         } else {
             $filterType = ($filter->getData('gomage_filter_type')) ? $filter->getData('gomage_filter_type') : 0;

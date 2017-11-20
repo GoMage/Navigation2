@@ -13,8 +13,9 @@ class Tooltip extends \Magento\Framework\View\Element\Template
         Template\Context $context,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \GoMage\Navigation\Helper\Data $helper,
-        array $data = [])
-    {
+        array $data = []
+    ) {
+    
         $this->storeManager = $storeManager;
         $this->helper = $helper;
         $this->setTemplate('GoMage_Navigation::layer/tooltip.phtml');

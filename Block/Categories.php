@@ -4,15 +4,15 @@ namespace GoMage\Navigation\Block;
 class Categories extends \Magento\Framework\View\Element\Template
 {
 
-     protected $_categoryHelper;
-     protected $categoryFlatConfig;
-     protected $topMenu;
-     protected $dataHelper;
-     protected $templates;
-     protected $categoryResource;
-     protected $pageLayout;
-     protected $canShowCategories;
-     protected $catalogLayer;
+    protected $_categoryHelper;
+    protected $categoryFlatConfig;
+    protected $topMenu;
+    protected $dataHelper;
+    protected $templates;
+    protected $categoryResource;
+    protected $pageLayout;
+    protected $canShowCategories;
+    protected $catalogLayer;
 
     /**
      * Main constructor.
@@ -50,7 +50,7 @@ class Categories extends \Magento\Framework\View\Element\Template
             $this->pageLayout = $this->catalogLayer->getCurrentCategory()->getPageLayout();
         }
 
-        if(empty($this->pageLayout)) {
+        if (empty($this->pageLayout)) {
             $this->pageLayout = $this->getLayout()->getUpdate()->getPageLayout();
         }
 
@@ -67,9 +67,9 @@ class Categories extends \Magento\Framework\View\Element\Template
         return $this->_categoryHelper;
     }
 
-   public function getStoreCategories($sorted = false, $asCollection = false, $toLoad = true)
+    public function getStoreCategories($sorted = false, $asCollection = false, $toLoad = true)
     {
-        return $this->_categoryHelper->getStoreCategories($sorted , $asCollection, $toLoad);
+        return $this->_categoryHelper->getStoreCategories($sorted, $asCollection, $toLoad);
     }
 
     public function getChildCategories($category)
@@ -82,7 +82,6 @@ class Categories extends \Magento\Framework\View\Element\Template
         }
 
         foreach ($subcategories as $cat) {
-
             if ($this->dataHelper->isHideEmptyCategories() && !$this->getProductsCount($cat) && !$cat->getChildrenCount()) {
                 continue;
             }
@@ -94,7 +93,6 @@ class Categories extends \Magento\Framework\View\Element\Template
                 'level' => $cat->getLevel(),
                 'children' => $this->getChildCategories($cat)
             ];
-
         }
 
         return $html;
@@ -109,7 +107,7 @@ class Categories extends \Magento\Framework\View\Element\Template
             $active = ($this->getCurrentCategoryId() == $category['entity_id']) ? 'active' : '';
             $html .= '<ol ' . $checkboxes . '><li data-ajax="' . (int)$this->dataHelper->isAjax() . '" data-role="navigation-filter" data-type="categories-li" data-url="' . $category['url'] . '">';
             $html .= '<a class="' . $active . '" href="' . $category['url'] . '">' . $category['name'] . '</a>';
-            if(is_array($category['children'])) {
+            if (is_array($category['children'])) {
                 $html .= $this->getOlList($category['children']);
             }
             $html .= '</li></ol>';
@@ -124,7 +122,7 @@ class Categories extends \Magento\Framework\View\Element\Template
         foreach ($data as $category) {
             $selected = ($this->getCurrentCategoryId() == $category['entity_id']) ? 'selected' : '';
             $html .= '<option ' . $selected . ' value="' . $category['url'] . '">' . $this->addlevelSuffix($category['level']) . $category['name'] . '</option>';
-            if(is_array($category['children'])) {
+            if (is_array($category['children'])) {
                 $html .= $this->getSelectList($category['children']);
             }
         }
@@ -146,7 +144,6 @@ class Categories extends \Magento\Framework\View\Element\Template
     {
         $html = '';
         foreach ($data as $category) {
-
             $alignment = ($this->dataHelper->getCategoriesImageAlignment()) ? 'alignment:' . $this->dataHelper->getCategoriesImageAlignment() : '';
             $width = ($this->dataHelper->getCategoriesImageWidth()) ? $this->dataHelper->getCategoriesImageWidth() : '';
             $height = ($this->dataHelper->getCategoriesImageHeight()) ? $this->dataHelper->getCategoriesImageHeight() : '';
@@ -158,7 +155,7 @@ class Categories extends \Magento\Framework\View\Element\Template
                 height="' . $height . '"
                 >' . $name . '
             </a>';
-            if(is_array($category['children'])) {
+            if (is_array($category['children'])) {
                 $html .= $this->getImageCategoriesList($category['children']);
             }
             $html .= '</li></ol>';

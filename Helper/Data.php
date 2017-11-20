@@ -29,12 +29,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Framework\App\Request\Http $request
         //\Magento\Framework\UrlInterface $url,
-    )
-    {
+    ) {
+    
         parent::__construct($context);
         $this->_scopeConfig = $scopeConfig;
         $this->_request = $request;
-
     }
 
 
@@ -58,8 +57,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_ENABLE
-        );
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_ENABLE);
     }
 
     /**
@@ -69,373 +67,347 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_SHOW_SHOP_BY_IN
-        );
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_SHOW_SHOP_BY_IN);
     }
 
     public function isUseAutoScrolling()
     {
         return (int) $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_AUTOSCROLLING
-        );
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_AUTOSCROLLING);
     }
 
     public function isUseBackToTopButton()
     {
         return (int) $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_BACK_TO_TOP
-        );
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_BACK_TO_TOP);
     }
 
     public function getBackToTopSpeed()
     {
         return (int) $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_BACK_TO_TOP_SPEED
-        );
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_BACK_TO_TOP_SPEED);
     }
 
     public function getBackToTopAction()
     {
         return (int) $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_BACK_TO_TOP_ACTION
-        );
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_BACK_TO_TOP_ACTION);
     }
 
     public function getContentFilterType()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_CONTENT_FILTER_TYPE
-        );
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_CONTENT_FILTER_TYPE);
     }
 
     /**
      * @return mixed
      */
-    public function isPagerButton(){
+    public function isPagerButton()
+    {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_PAGER_BUTTON
-        );
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_PAGER_BUTTON);
     }
 
     /**
      * @return mixed
      */
-    public function isShowPager(){
+    public function isShowPager()
+    {
 
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_SETTINGS_GROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_PAGER
-        );
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_PAGER);
     }
 
-    public function isShowValueQty(){
+    public function isShowValueQty()
+    {
 
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_SETTINGS_GROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_QTY
-        );
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_QTY);
     }
 
-    public function isAddFilterResultsToUrl(){
+    public function isAddFilterResultsToUrl()
+    {
 
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_SETTINGS_GROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_HASH
-        );
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_HASH);
     }
 
-    public function isUseFriendlyUrls(){
+    public function isUseFriendlyUrls()
+    {
 
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_SETTINGS_GROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_FRIENDLY_URLS
-        );
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_FRIENDLY_URLS);
     }
 
-    public function isShowAppliedValuesInResults(){
+    public function isShowAppliedValuesInResults()
+    {
 
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_SETTINGS_GROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_SHOW_APPLIED_VALUES
-        );
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_SHOW_APPLIED_VALUES);
     }
 
-    public function isShowCategories(){
+    public function isShowCategories()
+    {
 
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_ENABLE
-        );
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_ENABLE);
     }
 
-    public function getCategoriesBlockLocation(){
+    public function getCategoriesBlockLocation()
+    {
 
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_BLOCK_LOCATION
-        );
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_BLOCK_LOCATION);
     }
 
-    public function getCategoriesNavigationType(){
+    public function getCategoriesNavigationType()
+    {
 
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_NAVIGATION_TYPE
-        );
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_NAVIGATION_TYPE);
     }
 
-    public function getShowAllSubcategories(){
+    public function getShowAllSubcategories()
+    {
 
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_SHOW_ALL_SUBCATEGORIES
-        );
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_SHOW_ALL_SUBCATEGORIES);
     }
 
-    public function isHideEmptyCategories(){
+    public function isHideEmptyCategories()
+    {
 
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_HIDE_EMPTY_CATEGORIES
-        );
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_HIDE_EMPTY_CATEGORIES);
     }
 
-    public function isCategoriesShowCollapsed(){
+    public function isCategoriesShowCollapsed()
+    {
 
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IS_SHOW_COLLAPSED
-        );
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IS_SHOW_COLLAPSED);
     }
 
-    public function getMaxBlockHeightCategories(){
+    public function getMaxBlockHeightCategories()
+    {
 
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_MAX_BLOCK_HEIGHT
-        );
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_MAX_BLOCK_HEIGHT);
     }
 
-    public function getCategoriesImageAlignment(){
+    public function getCategoriesImageAlignment()
+    {
 
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IMAGE_ALIGNMENT
-        );
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IMAGE_ALIGNMENT);
     }
 
-    public function getCategoriesImageWidth(){
+    public function getCategoriesImageWidth()
+    {
 
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IMAGE_WIDTH
-        );
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IMAGE_WIDTH);
     }
 
-    public function getCategoriesImageHeight(){
+    public function getCategoriesImageHeight()
+    {
 
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IMAGE_HEIGHT
-        );
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IMAGE_HEIGHT);
     }
 
-    public function isShowImageName(){
+    public function isShowImageName()
+    {
 
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IMAGE_NAME
-        );
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IMAGE_NAME);
     }
 
-    public function isShowCheckboxes(){
+    public function isShowCheckboxes()
+    {
 
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CHECKBOX
-        );
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CHECKBOX);
     }
 
-    public function isAjax(){
+    public function isAjax()
+    {
 
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_FILTER_ACTION
-        );
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_FILTER_ACTION);
     }
 
-    public function isShowCategoryInShopBy(){
+    public function isShowCategoryInShopBy()
+    {
 
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_SHOP_BY
-        );
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_SHOP_BY);
     }
 
     public function isShowAjaxLoader()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_ENABLE
-        );
+            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_ENABLE);
     }
 
     public function isSpinnerTypeImage()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_SPINNER_TYPE
-        );
+            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_SPINNER_TYPE);
     }
 
     public function getLoaderImage()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_IMAGE
-        );
+            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_IMAGE);
     }
 
     public function getLoaderBackgroundColor()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_BACKGROUND
-        );
+            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_BACKGROUND);
     }
 
     public function getLoaderBorderColor()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_BORDER_COLOR
-        );
+            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_BORDER_COLOR);
     }
 
     public function getLoaderTextColor()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_TEXT_COLOR
-        );
+            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_TEXT_COLOR);
     }
 
     public function getLoaderSpinnerColor()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_TEXT_COLOR
-        );
+            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_TEXT_COLOR);
     }
 
     public function getLoaderWindowWidth()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_WINDOW_WIDTH
-        );
+            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_WINDOW_WIDTH);
     }
 
     public function getLoaderWindowHeight()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_WINDOW_HEIGHT
-        );
+            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_WINDOW_HEIGHT);
     }
 
     public function getLoaderText()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_TEXT
-        );
+            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_TEXT);
     }
 
     public function getNavigationViewBlockBackgroundColor()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_BACKGROUND
-        );
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_BACKGROUND);
     }
 
     public function getNavigationViewBlockCategoriesBackgroundColor()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CATEGORY_BACKGROUND
-        );
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CATEGORY_BACKGROUND);
     }
 
     public function getNavigationViewButtonsBackgroundColor()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_BUTTON_BACKGROUND
-        );
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_BUTTON_BACKGROUND);
     }
 
     public function isNavigationViewButtonsGradient()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_BUTTON_GRADIENT
-        );
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_BUTTON_GRADIENT);
     }
 
     public function getNavigationViewButtonsBackgroundColor2()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_BUTTON_BACKGROUND2
-        );
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_BUTTON_BACKGROUND2);
     }
 
     public function getNavigationViewButtonsTextColor()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_BUTTON_TEXT_COLOR
-        );
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_BUTTON_TEXT_COLOR);
     }
 
     public function getNavigationViewTooltipBackgroundColor()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_BACKGROUND
-        );
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_BACKGROUND);
     }
 
     public function getNavigationViewTooltipWindowBackgroundColor()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_WINDOW_BACKGROUND
-        );
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_WINDOW_BACKGROUND);
     }
 
     public function isNavigationViewTooltipShowOnClick()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_SHOW_EVENT
-        );
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_SHOW_EVENT);
     }
 
     public function isNavigationViewTooltipShowOnMouseOver()
     {
         $value = $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_SHOW_EVENT
-        );
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_SHOW_EVENT);
 
         return (!$value) ? true : false;
     }
@@ -444,8 +416,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         $value = $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_HIDE_EVENT
-        );
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_HIDE_EVENT);
 
         return (!$value) ? true : false;
     }
@@ -454,73 +425,66 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_HIDE_EVENT
-        );
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_HIDE_EVENT);
     }
 
     public function getNavigationViewSliderLineColor()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_LINE_COLOR
-        );
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_LINE_COLOR);
     }
 
     public function getNavigationViewSliderLineHeight()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_LINE_HEIGHT
-        );
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_LINE_HEIGHT);
     }
 
     public function getNavigationViewSliderElementColor()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_ELEMENT_COLOR
-        );
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_ELEMENT_COLOR);
     }
 
     public function getNavigationViewSliderElementWidth()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_ELEMENT_WIDTH
-        );
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_ELEMENT_WIDTH);
     }
 
     public function getNavigationViewSliderElementHeight()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_ELEMENT_HEIGHT
-        );
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_ELEMENT_HEIGHT);
     }
 
     public function getNavigationViewSliderElementRadius()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_ELEMENT_RADIUS
-        );
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_ELEMENT_RADIUS);
     }
 
     public function getRemoveUrl($route, $data)
     {
-        $queryParams = is_array($this->_request->getParams()) ? $this->_request->getParams() : array();
+        $queryParams = is_array($this->_request->getParams()) ? $this->_request->getParams() : [];
         $temp = explode(',', $queryParams[$data['request_var']]);
         $queryParams[$data['request_var']] = implode(',', array_diff($temp, [$data['request_value']]));
 
-        $params = array(
-            '_nosid'		=> true,
-            '_current'		=> true,
-            '_secure'		=> true,
-            '_use_rewrite'	=> true,
-            '_query'		=> $queryParams,
-            '_escape'		=> false,
+        $params = [
+            '_nosid'        => true,
+            '_current'      => true,
+            '_secure'       => true,
+            '_use_rewrite'  => true,
+            '_query'        => $queryParams,
+            '_escape'       => false,
 
-        );
+        ];
 
         return $this->_urlBuilder->getUrl($route, $params);
     }
@@ -544,7 +508,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $place[\GoMage\Navigation\Model\Config\Source\Place::CONTENT] = 'content';
         $place[\GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN] = 'right';
 
-        if(empty($place[$type])) {
+        if (empty($place[$type])) {
             throw new Exception(__('Block position is not set for ' . (int) $type . ' type'));
         }
 
@@ -555,15 +519,14 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         $value = $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_ALIGNMENT
-        );
+            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_ALIGNMENT);
 
         $alignment[\GoMage\Navigation\Model\Config\Source\Alignment::LEFT] = 'left';
         $alignment[\GoMage\Navigation\Model\Config\Source\Alignment::RIGHT] = 'right';
         $alignment[\GoMage\Navigation\Model\Config\Source\Alignment::TOP] = 'top';
         $alignment[\GoMage\Navigation\Model\Config\Source\Alignment::BOTTOM] = 'bottom';
 
-        if(empty($alignment[$value])) {
+        if (empty($alignment[$value])) {
             throw new Exception(__('Alignment position is not set for ' . (int) $value . ' type'));
         }
 

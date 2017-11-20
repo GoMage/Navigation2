@@ -22,7 +22,7 @@ class Templates
             \GoMage\Navigation\Model\Config\Source\Navigation::SWATCHES => 'GoMage_Navigation::layer/filter/swatches.phtml',
         ];
 
-        if(empty($templates[$filterType])) {
+        if (empty($templates[$filterType])) {
             throw new Exception(__('Template is not set for ' . (int) $filterType . ' filter type'));
         }
 

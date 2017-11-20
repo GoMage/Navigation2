@@ -5,7 +5,7 @@ use GoMage\Navigation\Api\Data\NavigationAttributeInterface;
 use Magento\Framework\Api\SortOrder;
 use Magento\Framework\Api\SearchCriteriaInterface;
 
-interface NavigationAttributeRepositoryInterface 
+interface NavigationAttributeRepositoryInterface
 {
     public function save(NavigationAttributeInterface $page);
 

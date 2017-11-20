@@ -58,8 +58,8 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
         \Magento\Framework\App\Request\Http $request,
         \Magento\Framework\Escaper $escaper,
         \GoMage\Navigation\Helper\Data $dataHelper
-    )
-    {
+    ) {
+    
         $this->_url = $url;
         $this->_htmlPagerBlock = $htmlPagerBlock;
         $this->_request = $request;
@@ -84,7 +84,7 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
             $paramValues = explode('_', $queryParams[$item->getFilter()->getRequestVar()]);
         }
 
-        if(!in_array($this->getItemFormattedValue($item), $paramValues)) {
+        if (!in_array($this->getItemFormattedValue($item), $paramValues)) {
             $paramValues[] = $this->getItemFormattedValue($item);
         }
 
@@ -122,7 +122,7 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
             $paramValues = explode('_', $queryParams[$item->getFilter()->getRequestVar()]);
         }
 
-        if(!in_array($this->getItemFormattedValue($item), $paramValues)) {
+        if (!in_array($this->getItemFormattedValue($item), $paramValues)) {
             $paramValues[] = $this->getItemFormattedValue($item);
         }
 
@@ -148,7 +148,7 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
             $position = array_search($this->getItemFormattedValue($item), $paramValues);
         }
 
-        if($position !== false) {
+        if ($position !== false) {
             unset($paramValues[$position]);
         }
 
@@ -180,7 +180,7 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
             $position = array_search($this->getItemFormattedValue($item), $paramValues);
         }
 
-        if($position !== false) {
+        if ($position !== false) {
             unset($paramValues[$position]);
         }
 
@@ -189,8 +189,9 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
 
     protected function getItemFormattedValue($item)
     {
-        if (!$this->_dataHelper->isUseFriendlyUrls())
+        if (!$this->_dataHelper->isUseFriendlyUrls()) {
             return $item->getValue();
+        }
 
         return mb_strtolower(str_replace(' ', '+', html_entity_decode($item->getLabel())));
     }

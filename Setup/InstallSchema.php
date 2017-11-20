@@ -141,8 +141,12 @@ class InstallSchema implements InstallSchemaInterface
             ['unsigned' => true, 'nullable' => false, 'default'  => '0'],
             'Exclude Categories'
         )->addForeignKey(
-            $installer->getFkName('gomage_navigation_attribute', 'attribute_id',
-                $installer->getTable('eav_attribute'), 'attribute_id'),
+            $installer->getFkName(
+                'gomage_navigation_attribute',
+                'attribute_id',
+                $installer->getTable('eav_attribute'),
+                'attribute_id'
+            ),
             'attribute_id',
             $installer->getTable('eav_attribute'),
             'attribute_id',

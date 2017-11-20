@@ -1,5 +1,6 @@
 <?php
 namespace GoMage\Navigation\Model;
+
 class NavigationAttributeStore extends \Magento\Framework\Model\AbstractModel implements \GoMage\Navigation\Api\Data\NavigationAttributeStoreInterface, \Magento\Framework\DataObject\IdentityInterface
 {
 

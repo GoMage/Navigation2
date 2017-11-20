@@ -45,13 +45,11 @@ class Item extends \Magento\Catalog\Model\Layer\Filter\Item
         }
 
         return $this->urlHelper->getRemoveUrl($this);
-
     }
 
     public function getRemoveValue()
     {
         return $this->urlHelper->getRemoveValue($this);
-
     }
 
     public function isShowAppliedValues()

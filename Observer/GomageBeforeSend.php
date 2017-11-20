@@ -41,8 +41,8 @@ class GomageBeforeSend implements ObserverInterface
         \Magento\Framework\View\LayoutInterface $layout,
         \Magento\Framework\Event\ManagerInterface $eventManager,
         \GoMage\Navigation\Helper\Data $dataHelper
-    )
-    {
+    ) {
+    
         $this->_request = $request;
         $this->_response = $response;
         $this->_actionFlag = $actionFlag;
@@ -62,25 +62,24 @@ class GomageBeforeSend implements ObserverInterface
             (($this->_request->getParam('gan_ajax_filter') ||
                 $this->_request->getParam('gan_ajax_cat') ||
                 $this->_request->getParam('gan_ajax_more')
-            ))){
+            ))) {
+                $result = new DataObject();
 
-            $result = new DataObject();
+                if ($this->_request->getParam('gan_ajax_more')) {
+                    $result->setData('content', $this->_layout->renderElement('category.products'));
+                }
 
-            if ($this->_request->getParam('gan_ajax_more')) {
-                $result->setData('content', $this->_layout->renderElement('category.products'));
-            }
+                if ($this->_request->getParam('gan_ajax_filter') && !$this->_request->getParam('gan_ajax_more')) {
+                    $result->setData('content', $this->_layout->renderElement('main.content'));
+                }
 
-            if ($this->_request->getParam('gan_ajax_filter') && !$this->_request->getParam('gan_ajax_more')) {
-                $result->setData('content', $this->_layout->renderElement('main.content'));
-            }
+                if ($this->_request->getParam('gan_ajax_cat')) {
+                    $result->setData('content', $this->_layout->renderElement('main.content'));
+                    $result->setData('breadcrumbs', $this->_layout->renderElement('breadcrumbs'));
+                }
 
-            if ($this->_request->getParam('gan_ajax_cat')) {
-                $result->setData('content', $this->_layout->renderElement('main.content'));
-                $result->setData('breadcrumbs', $this->_layout->renderElement('breadcrumbs'));
-            }
-
-            $this->_response->representJson($result->toJson());
-    }
+                $this->_response->representJson($result->toJson());
+        }
 
         return $this;
     }

@@ -3,7 +3,8 @@ define([
 ], function ($) {
     "use strict";
 
-    function Params() {
+    function Params()
+    {
         this.data = {};
     }
 
@@ -67,3 +68,4 @@ define([
 
     return Params;
 });
+

@@ -37,8 +37,8 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         \Magento\Catalog\Model\Layer\Category\CollectionFilter $filter,
         //\Magento\Catalog\Model\ResourceModel\CollectionFactory $productCollectionFactory,
         array $data = []
-    )
-    {
+    ) {
+    
         $this->_resource = $filterAttributeFactory->create();
         $this->string = $string;
         $this->_requestVar = 'attribute';
@@ -107,20 +107,19 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
             $collection = $this->getLayer()
                 ->getProductCollection();
 
-            if(!empty($this->getSwatchInputType())) {
-
+            if (!empty($this->getSwatchInputType())) {
                 $newCollection = $this->getLayer()->getCollectionProvider()->getCollection($this->getLayer()->getCurrentCategory());
                 $newCollection->updateSearchCriteriaBuilder();
                 $this->getLayer()->prepareProductCollection($newCollection);
-                $newCollection->addFieldToFilter($attribute->getAttributeCode(), array('in' => $filters));
+                $newCollection->addFieldToFilter($attribute->getAttributeCode(), ['in' => $filters]);
                 $newCollection->load();
                 $ids = $newCollection->getAllIds();
-                if(!empty($ids)) {
-                    $collection->addAttributeToFilter('entity_id', array('in' => $ids));
-                    $collection->addAdditionalFilter($attribute->getAttributeCode(), array('in' => $filters));
+                if (!empty($ids)) {
+                    $collection->addAttributeToFilter('entity_id', ['in' => $ids]);
+                    $collection->addAdditionalFilter($attribute->getAttributeCode(), ['in' => $filters]);
                 }
             } else {
-                $collection->addFieldToFilter($attribute->getAttributeCode(), array('in' => $filters));
+                $collection->addFieldToFilter($attribute->getAttributeCode(), ['in' => $filters]);
             }
 
             foreach ($filters as $filterItem) {
@@ -167,7 +166,6 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         $this->getLayer()->prepareProductCollection($collection);
 
         foreach ($productCollection->getAddedFilters() as $field => $condition) {
-
             if ($this->getAttributeModel()->getAttributeCode() == $field) {
                 continue;
             }
@@ -180,7 +178,6 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         $optionsCount = $this->_getResource()->getCount($this);
         $usedOptions = $this->getUsedOptions();
         foreach ($attribute->getFrontend()->getSelectOptions() as $option) {
-
             if (empty($option['value'])) {
                 continue;
             }
@@ -210,7 +207,7 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
             return $filters;
         }
 
-        if(empty($this->options)) {
+        if (empty($this->options)) {
             foreach ($this->getAttributeModel()->getFrontend()->getSelectOptions() as $option) {
                 $this->options[mb_strtolower(str_replace(' ', '+', $option['label']))] = $option['value'];
             }
@@ -218,7 +215,6 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
 
         $params = [];
         foreach ($filters as $item) {
-
             $params[] = $this->options[htmlentities($item)];
         }
 

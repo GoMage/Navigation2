@@ -69,9 +69,6 @@ class Observer
                 ->sendResponse();
             /** TODO: stop second send response  */
             exit();
-
         }
-
     }
-
 }

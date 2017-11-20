@@ -62,9 +62,9 @@ class FilterRenderer extends Template implements FilterRendererInterface
         \GoMage\Navigation\Helper\Data $dataHelper,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
 
-        array $data = array()
-    )
-    {
+                array $data = []
+    ) {
+    
         $this->_coreRegistry = $coreRegistry;
         $this->_request = $request;
         $this->_urlHelper = $urlHelper;
@@ -112,7 +112,7 @@ class FilterRenderer extends Template implements FilterRendererInterface
      */
     public function render(FilterInterface $filter)
     {
-        if(!$this->_dataHelper->isEnable()) {
+        if (!$this->_dataHelper->isEnable()) {
             $this->setTemplate('Magento_LayeredNavigation::layer/filter.phtml');
             $this->assign('filterItems', $filter->getItems());
             $html = $this->_toHtml();
