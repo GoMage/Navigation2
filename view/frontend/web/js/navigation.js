@@ -124,6 +124,9 @@ define([
 
         _bindAjaxAutoload: function () {
 
+            if (typeof($('div.pages:eq(1)')) == 'undefined')
+                return ;
+
             if ($(window).scrollTop() >= $('div.pages:eq(1)').offset().top - $(window).height()) {
 
                 var url = $('li.item.pages-item-next a:eq(1)').attr('href');
@@ -371,9 +374,8 @@ define([
                         successCallback.call(this, response);
                     }
 
-                    var data = $.parseJSON(response);
-                    $(this.options.mainContainer).html(data.content);
-                    $(this.options.breadcrumbsContainer).html(data.breadcrumbs);
+                    $(this.options.mainContainer).html(response.content);
+                    $(this.options.breadcrumbsContainer).html(response.breadcrumbs);
 
                     $(this.options.mainContainer).trigger('contentUpdated');
                     $(this.options.breadcrumbsContainer).trigger('contentUpdated');
