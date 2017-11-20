@@ -79,8 +79,30 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
             . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_AUTOSCROLLING
         );
+    }
 
+    public function isUseBackToTopButton()
+    {
+        return (int) $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_BACK_TO_TOP
+        );
+    }
 
+    public function getBackToTopSpeed()
+    {
+        return (int) $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_BACK_TO_TOP_SPEED
+        );
+    }
+
+    public function getBackToTopAction()
+    {
+        return (int) $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_BACK_TO_TOP_ACTION
+        );
     }
 
     public function getContentFilterType()

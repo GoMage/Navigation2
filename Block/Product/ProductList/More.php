@@ -33,16 +33,13 @@ class More extends Template
         parent::__construct($context, $data);
         $this->context = $context;
         $this->navigationHelper = $navigationHelper;
+
+        if (!$this->navigationHelper->isUseAutoScrolling()) {
+            $this->setTemplate('GoMage_Navigation::product/list/toolbar/more.phtml');
+        }
     }
 
-    /**
-     * set template
-     */
-    protected function _construct()
-    {
-        parent::_construct();
-        $this->setTemplate('GoMage_Navigation::product/list/toolbar/more.phtml');
-    }
+
 
     /**
      * @return string
@@ -50,14 +47,13 @@ class More extends Template
     public function getMoreUrl()
     {
         $url = '';
-        if($this->navigationHelper->isPagerButton()) {
-            $pager = $this->getPagerBlock();
-            if ($pager) {
-                if (!$pager->isLastPage()) {
-                    $url = $pager->getNextPageUrl();
-                }
+        $pager = $this->getPagerBlock();
+        if ($pager) {
+            if (!$pager->isLastPage()) {
+                $url = $pager->getNextPageUrl();
             }
         }
+
         return $url;
     }
 

@@ -5,9 +5,10 @@
  * @var $block \Magento\Theme\Block\Html\Pager
  */
 $helper = $this->helper('GoMage\Navigation\Helper\Data');
+$moreButton = $this->getLayout()->createBlock('GoMage\Navigation\Block\Product\ProductList\More');
 
 ?>
-<?php if ($block->getCollection()->getSize() && $helper->isShowPager()): ?>
+<?php if ($block->getCollection()->getSize()): ?>
 
     <?php if ($block->getUseContainer()): ?>
     <div class="pager">
@@ -27,8 +28,8 @@ $helper = $this->helper('GoMage\Navigation\Helper\Data');
         </p>
         <?php endif ?>
 
-        <?php if ($block->getLastPageNum() > 1 && $helper->isShowPager()): ?>
-        <div class="pages">
+        <?php if ($block->getLastPageNum() > 1): ?>
+        <div class="pages" <? if (!$helper->isPagerButton()): ?>style="display: none"<? endif; ?>>
             <strong class="label pages-label" id="paging-label"><?php /* @escapeNotVerified */ echo __('Page') ?></strong>
             <ul class="items pages-items" aria-labelledby="paging-label">
             <?php if (!$block->isFirstPage()): ?>

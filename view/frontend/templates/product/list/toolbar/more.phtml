@@ -11,18 +11,15 @@
  * @since        Class available since Release 3.0
  */
 ?>
-<?php
-$more_url = $block->getMoreUrl();
-?>
-
+<? if ($block->getMoreUrl()) : ?>
     <div class="gan-more-button" id="gan-more-button">
         <button
                 style="display: block"
                 id="<?php echo $block->getType(); ?>"
                 class="<?php echo $block->getType(); ?>"
                 data-role="navigation-filter"
-                data-value="<?php echo $block->getMoreValue($more_url); ?>"
                 data-ajax="1"
                 data-type="<?php echo $block->getType(); ?>"
         ><span><?php echo __('Show more products') ?></span></button>
     </div>
+<?php endif; ?>

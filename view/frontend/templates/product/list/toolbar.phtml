@@ -7,7 +7,6 @@
 use Magento\Catalog\Model\Product\ProductList\Toolbar;
 $helper = $this->helper('GoMage\Navigation\Helper\Data');
 $state = $this->getLayout()->createBlock('GoMage\Navigation\Block\Navigation\State');
-$showMore = $this->getLayout()->createBlock('GoMage\Navigation\Block\Product\ProductList\More');
 ?>
 <?php if ($block->getCollection()->getSize()): ?>
 
@@ -26,8 +25,6 @@ $showMore = $this->getLayout()->createBlock('GoMage\Navigation\Block\Product\Pro
         <?php if ($block->isExpanded()): ?>
             <?php include ($block->getTemplateFile('GoMage_Navigation::product/list/toolbar/sorter.phtml')) ?>
         <?php endif; ?>
-
-        <?php echo $showMore->toHtml(); ?>
     </div>
     <?else:?>
     <div class="toolbar toolbar-products" data-mage-init='<?= /* @escapeNotVerified */ $block->getWidgetOptionsJson() ?>'>

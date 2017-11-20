@@ -36,7 +36,7 @@ define([
                 'show.navigation': $.proxy(this._initFilters, this)
             });
 
-            if (this.options.ajaxAutoload) {
+            if (this.options.ajaxAutoload == true) {
                 $(window).on('scroll', {}, $.proxy(this._bindAjaxAutoload, this));
             }
         },
@@ -79,7 +79,7 @@ define([
 
                         this._showButtonMore(element);
                         element.unbind('click');
-                        element.on('click', {element: element}, $.proxy(this._processProductMore, this));
+                        element.on('click', {element: element}, $.proxy(this._bindShowMoreProductsButton, this));
 
                         break;
                     case 'select':
@@ -110,6 +110,10 @@ define([
                         element.unbind('click');
                         element.on('click', {element: element}, $.proxy(this._processCategory, this));
                         break;
+                    case 'back-to-top':
+                        element.unbind('click');
+                        element.on('click', {element: element}, $.proxy(this._processBackToTop, this));
+                        break;
                     default:
                         element.unbind('click');
                         element.on('click', {element: element}, $.proxy(this._processFilter, this));
@@ -121,8 +125,6 @@ define([
         _bindAjaxAutoload: function () {
 
             if ($(window).scrollTop() >= $('div.pages:eq(1)').offset().top - $(window).height()) {
-                console.log('scrollTop:' + $(window).scrollTop());
-                console.log('pages position:' + $('.pages').offset().top);
 
                 var url = $('li.item.pages-item-next a:eq(1)').attr('href');
                 if (typeof(url) == 'undefined')
@@ -133,6 +135,30 @@ define([
                 params.set('gan_ajax_more', 1);
                 this._ajaxMoreProducts(url, params);
             }
+        },
+
+        _bindShowMoreProductsButton: function () {
+
+            var url = $('li.item.pages-item-next a:eq(1)').attr('href');
+            if (typeof(url) == 'undefined')
+                return ;
+
+            var params = this._getParams();
+            params.clear();
+            params.set('gan_ajax_more', 1);
+            this._ajaxMoreProducts(url, params);
+            this._showButtonMore;
+        },
+
+        _processBackToTop: function () {
+
+            if (this.options.backToTopAction == 1) {
+                $('html, body').animate({
+                    scrollTop: parseInt($(".product-items").offset().top)
+                }, this.options.backToTopSpeed);
+            }
+            else
+                $("html, body").animate({ scrollTop: 0 }, this.options.backToTopSpeed);
         },
 
         _processCategory: function (event) {
@@ -218,8 +244,12 @@ define([
          * @private
          */
         _showButtonMore: function (element) {
+
+            /*var url = $('li.item.pages-item-next a:eq(1)').attr('href');
+            if (typeof(url) == 'undefined')
+
             $(this.options.productToolbarContainer+':eq( 1 )').hide();
-            $('button.'+element.attr('class')+':eq( 1 )').show();
+            $('button.'+element.attr('class')+':eq( 1 )').show();*/
         },
 
         /**
@@ -377,6 +407,12 @@ define([
                     $('div.pages').html(toolbar);
                     $(this.options.productListContainer).append(newProducts);
                     this.options.showMore = false;
+
+                    var url = $('li.item.pages-item-next a:eq(1)').attr('href');
+                    if (typeof(url) == 'undefined') {
+                        $('#gan-more-button').hide();
+                    }
+
 
                 }.bind(this)
             });

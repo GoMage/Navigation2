@@ -26,6 +26,8 @@ $block->setChild('state',$state);
                         "addFilterResultsToUrl": "<?php echo $helper->isAddFilterResultsToUrl()?>",
                         "navigationPlace": "<?php echo $helper->getShowShopByIn(); ?>",
                         "categoriesPlace": "<?php echo $helper->getCategoriesBlockLocation(); ?>",
+                        "backToTopSpeed": "<?php echo $helper->getBackToTopSpeed(); ?>",
+                        "backToTopAction": "<?php echo $helper->getBackToTopAction(); ?>",
                         "ajaxAutoload": "<?php echo $helper->isUseAutoScrolling(); ?>"
                         }}'>
         <?=$categoriesHtml;?>

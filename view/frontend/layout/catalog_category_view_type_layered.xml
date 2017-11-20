@@ -17,6 +17,10 @@
         </block>
         <block class="GoMage\Navigation\Block\Loader" name="gomage.loader"/>
     </referenceContainer>
+    <referenceContainer name="main">
+        <block class="GoMage\Navigation\Block\Product\ProductList\More" name="gomage.products.more" />
+        <block class="GoMage\Navigation\Block\BackToTop" name="gomage.back_to_top" />
+    </referenceContainer>
     <referenceBlock name="product_list_toolbar_pager">
         <arguments>
             <argument name="template" xsi:type="string">GoMage_Navigation::html/pager.phtml</argument>
