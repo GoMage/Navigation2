@@ -17,9 +17,14 @@ class State extends \Magento\LayeredNavigation\Block\Navigation\State
         parent::__construct($context, $layerResolver, $data);
     }
 
+    public function getDataHelper()
+    {
+        return $this->dataHelper;
+    }
+
     protected function _beforeToHtml()
     {
-        if ($this->dataHelper->isEnable()) {
+        if ($this->getDataHelper()->isEnable()) {
             $this->setTemplate('GoMage_Navigation::layer/state.phtml');
         } else {
             $this->setTemplate('Magento_LayeredNavigation::layer/state.phtml');

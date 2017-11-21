@@ -1,26 +1,21 @@
-<?php
-$dataHelper = $this->helper('GoMage\Navigation\Helper\Data');
-$categories = $this->getStoreCategories(true, false, true);
-$categoryHelper = $this->getCategoryHelper();
-?>
 <div class="block block-gan-categories gan-categories-dropdown gan-sidebar-position"
-     style="background-color: <?=$dataHelper->getNavigationViewBlockCategoriesBackgroundColor()?>"
+     style="background-color: <?=$block->getDataHelper()->getNavigationViewBlockCategoriesBackgroundColor()?>"
 >
     <div class="block-title gan-categories-title" data-role="navigation-filter" data-type="categories-content">
         <strong><?php echo __('Categories') ?></strong>
     </div>
     <div class="block-content block-content-gan-categories">
-        <div class="gan-categories-list-dropdown" <? echo ($dataHelper->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
+        <div class="gan-categories-list-dropdown" <? echo ($block->getDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
             <?php
-            foreach($categories as $category):
+            foreach($block->getStoreCategories(true, false, true) as $category):
                 if (!$category->getIsActive()) continue;?>
-                    <select data-role="navigation-filter" data-type="categories-select" data-ajax="<?= (int)$dataHelper->isAjax(); ?>">
+                    <select data-role="navigation-filter" data-type="categories-select" data-ajax="<?= (int)$block->getDataHelper()->isAjax(); ?>">
                         <option
                             <?= ($block->getCurrentCategoryId() == $category->getId()) ? 'selected' : ''; ?>
-                                value="<?php echo $categoryHelper->getCategoryUrl($category) ?>">
+                                value="<?php echo $block->getCategoryHelper()->getCategoryUrl($category) ?>">
                             <?php echo $category->getName() ?>
                         </option>
-                        <? if ($dataHelper->getShowAllSubcategories()): ?>
+                        <? if ($block->getDataHelper()->getShowAllSubcategories()): ?>
                             <?= $block->getSelectList($block->getChildCategories($category)); ?>
                         <?endif;?>
                     </select>

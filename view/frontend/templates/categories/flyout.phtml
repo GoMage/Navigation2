@@ -1,22 +1,20 @@
-<?php
-$dataHelper = $this->helper('GoMage\Navigation\Helper\Data');
-$categories = $this->getStoreCategories(true, false, true);
-$categoryHelper = $this->getCategoryHelper();
-$dataHelper->isShowCheckboxes();
-?>
 <div class="block block-gan-categories gan-sidebar-position gan-categories-flyout"
-     style="background-color: <?=$dataHelper->getNavigationViewBlockCategoriesBackgroundColor()?>"
+     style="background-color: <?=$block->getDataHelper()->getNavigationViewBlockCategoriesBackgroundColor()?>"
 >
     <div class="block-title gan-categories-title" data-role="navigation-filter" data-type="categories-content">
         <strong><?php echo __('Categories') ?></strong>
     </div>
     <div class="block-content block-content-gan-categories">
-        <div <? echo ($dataHelper->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
-            <ul class="gan-categories-list" <?= ($dataHelper->isShowCheckboxes()) ? :''; ?>>
+        <div <? echo ($block->getDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
+            <ul class="gan-categories-list" <?= ($block->getDataHelper()->isShowCheckboxes()) ? :''; ?>>
                 <?php
-                foreach($categories as $category):
+                foreach($block->getStoreCategories(true, false, true) as $category):
                      if (!$category->getIsActive()) continue;?>
-                    <li data-ajax="<?= (int)$dataHelper->isAjax(); ?>" data-role="navigation-filter" data-type="categories-li" data-url="<?= $categoryHelper->getCategoryUrl($category) ?>">
+                    <li
+                            data-ajax="<?= (int)$block->getDataHelper()->isAjax(); ?>"
+                            data-role="navigation-filter"
+                            data-type="categories-li"
+                            data-url="<?= $block->getCategoryHelper()->getCategoryUrl($category) ?>">
                         <a class="<?= ($block->getCurrentCategoryId() == $category->getId()) ? 'active' : ''; ?>"
                            href="#"> <?= $category->getName() ?></a>
                     </li>

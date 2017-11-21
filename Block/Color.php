@@ -29,8 +29,6 @@ class Color extends \Magento\Config\Block\System\Config\Form\Field
                 $(document).ready(function () {
                     var $el = $("#' . $element->getHtmlId() . '");
                     $el.css("backgroundColor", "'. $value .'");
-
-                    // Attach the color picker
                     $el.ColorPicker({
                         color: "'. $value .'",
                         onChange: function (hsb, hex, rgb) {
@@ -40,6 +38,7 @@ class Color extends \Magento\Config\Block\System\Config\Form\Field
                 });
             });
             </script>';
+
         return $html;
     }
 }

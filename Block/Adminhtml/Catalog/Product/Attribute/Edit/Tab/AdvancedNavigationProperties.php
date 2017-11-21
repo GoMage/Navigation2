@@ -292,7 +292,8 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
         $tooltipText = [];
         $tooltipData = unserialize($attributeObject->getData('gomage_tooltip_text'));
         foreach ($this->storeManager->getStores() as $store) {
-            $tooltipText['tooltip_text_store_' . $store->getId()] = (!empty($tooltipData[$store->getId()])) ? html_entity_decode($tooltipData[$store->getId()], ENT_QUOTES) : '';
+            $tooltipText['tooltip_text_store_' . $store->getId()] = (!empty($tooltipData[$store->getId()])) ?
+                html_entity_decode($tooltipData[$store->getId()],ENT_QUOTES) : '';
 
             $fieldset->addField(
                 'tooltip_text_store_' . $store->getId(),

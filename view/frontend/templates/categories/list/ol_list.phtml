@@ -1,0 +1,11 @@
+<?foreach ($data as $category):?>
+    <?php $active = ($currentCategoryId == $category['entity_id']) ? 'active' : '';?>
+    <ol <?=$checkboxes?>>
+        <li data-ajax="<?=$isAjax?>" data-role="navigation-filter" data-type="categories-li" data-url="<?=$category['url']?>">
+            <a class="<?=$active?>" href="<?=$category['url']?>"><?=$category['name']?></a>
+            <?if (is_array($category['children'])):?>
+                <?=$categoriesBlock->getOlList($category['children']);?>
+            <?endif;?>
+        </li>
+    </ol>
+<?endforeach;?>

@@ -76,29 +76,6 @@ class FilterRenderer extends Template implements FilterRendererInterface
     }
 
     /**
-     * @return null
-     */
-    protected function _initPreferredFilterItems()
-    {
-        $preferredBrand = $this->_getPreferredBrand();
-
-        if (!$preferredBrand) {
-            $this->_preferredItems = [];
-            return;
-        }
-
-        $this->_preferredItems = explode(",", $preferredBrand);
-    }
-
-    /**
-     * @return mixed
-     */
-    protected function _getPreferredBrand()
-    {
-        return $this->_getCategory()->getData('preferred_brand');
-    }
-
-    /**
      * @return \GoMage\CategoryGrid\Model\Category
      */
     protected function _getCategory()
@@ -113,36 +90,23 @@ class FilterRenderer extends Template implements FilterRendererInterface
     public function render(FilterInterface $filter)
     {
         if (!$this->_dataHelper->isEnable()) {
-            $this->setTemplate('Magento_LayeredNavigation::layer/filter.phtml');
-            $this->assign('filterItems', $filter->getItems());
-            $html = $this->_toHtml();
-            $this->assign('filterItems', []);
-            return $html;
+            return $this->setOriginaltemplate($filter);
         }
 
         $this->setTemplate($filter->getGomageFilterTemplate());
 
-        $filtersPreferred = [];
-        $filtersCommon = [];
+        $filters = [];
         $key = -1;
 
         foreach ($filter->getItems() as $item) {
-            $key++;
 
+            $key++;
             $this->checkIsActive($item, $filter->getRequestVar());
             $item->setGomageUrl($this->_urlHelper->getItemUrl($item));
             $item->setGomageValue($this->_urlHelper->getItemValue($item));
-
-            if ($this->_isPreferred($item)) {
-                $item->setIsPreferred(true);
-                $filtersPreferred[$key] = $item;
-                continue;
-            }
-
-            $filtersCommon[$key] = $item;
+            $filters[$key] = $item;
         }
 
-        $filters = $filtersPreferred + $filtersCommon;
         $this->assign('filterItems', $filters);
 
         $html = $this->_toHtml();
@@ -150,17 +114,13 @@ class FilterRenderer extends Template implements FilterRendererInterface
         return $html;
     }
 
-    /**
-     * @param \GoMage\Navigation\Model\Catalog\Layer\Filter\Item $item
-     * @return boolean
-     */
-    public function _isPreferred($item)
+    protected function setOriginalTemplate($filter)
     {
-        if (is_null($this->_preferredItems)) {
-            $this->_initPreferredFilterItems();
-        }
-
-        return in_array($item->getValue(), $this->_preferredItems);
+        $this->setTemplate('Magento_LayeredNavigation::layer/filter.phtml');
+        $this->assign('filterItems', $filter->getItems());
+        $html = $this->_toHtml();
+        $this->assign('filterItems', []);
+        return $html;
     }
 
     /**

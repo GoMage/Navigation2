@@ -1,0 +1,15 @@
+<?foreach ($data as $category):?>
+    <?php $name = ($categoriesBlock->getDataHelper()->isShowImageName()) ? $category['name'] : ''; ?>
+    <ol>
+        <li>
+            <a href="<?=$category['url']?>">
+                <img
+                        src="<?=$categoriesBlock->getCategoryImage($category['entity_id'])?>"
+                        width="<?=$width?>"
+                        height="<?=$height?>"><?=$name?></a>
+            <?php if (is_array($category['children']))
+                $categoriesBlock->getImageCategoriesList($category['children']);
+            ?>
+        </li>
+    </ol>
+<?endforeach;?>
