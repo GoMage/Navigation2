@@ -270,76 +270,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_SHOP_BY);
     }
 
-    public function isShowAjaxLoader()
-    {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
-            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_ENABLE);
-    }
-
-    public function isSpinnerTypeImage()
-    {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
-            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_SPINNER_TYPE);
-    }
-
-    public function getLoaderImage()
-    {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
-            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_IMAGE);
-    }
-
-    public function getLoaderBackgroundColor()
-    {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
-            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_BACKGROUND);
-    }
-
-    public function getLoaderBorderColor()
-    {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
-            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_BORDER_COLOR);
-    }
-
-    public function getLoaderTextColor()
-    {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
-            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_TEXT_COLOR);
-    }
-
-    public function getLoaderSpinnerColor()
-    {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
-            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_TEXT_COLOR);
-    }
-
-    public function getLoaderWindowWidth()
-    {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
-            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_WINDOW_WIDTH);
-    }
-
-    public function getLoaderWindowHeight()
-    {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
-            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_WINDOW_HEIGHT);
-    }
-
-    public function getLoaderText()
-    {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
-            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_TEXT);
-    }
-
     public function getNavigationViewBlockBackgroundColor()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
@@ -513,23 +443,5 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         }
 
         return $place[$type];
-    }
-
-    public function getLoaderImageAlignment()
-    {
-        $value = $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
-            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_ALIGNMENT);
-
-        $alignment[\GoMage\Navigation\Model\Config\Source\Alignment::LEFT] = 'left';
-        $alignment[\GoMage\Navigation\Model\Config\Source\Alignment::RIGHT] = 'right';
-        $alignment[\GoMage\Navigation\Model\Config\Source\Alignment::TOP] = 'top';
-        $alignment[\GoMage\Navigation\Model\Config\Source\Alignment::BOTTOM] = 'bottom';
-
-        if (empty($alignment[$value])) {
-            throw new Exception(__('Alignment position is not set for ' . (int) $value . ' type'));
-        }
-
-        return $alignment[$value];
     }
 }

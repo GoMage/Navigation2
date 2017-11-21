@@ -13,7 +13,7 @@ class Loader extends \Magento\Framework\View\Element\Template
 
     public function __construct(
         Template\Context $context,
-        \GoMage\Navigation\Helper\Data $helper,
+        \GoMage\Navigation\Helper\LoaderData $helper,
         \GoMage\Navigation\Model\Config\Source\Alignment $alignmentConfig,
         array $data = []
     ) {
