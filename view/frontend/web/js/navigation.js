@@ -188,7 +188,7 @@ define([
         },
 
         _processCategoriesContent: function () {
-            $('.gan-categories-title').next().children().toggle();
+            $('.gan-categories-title').parent().find('.block-content-in').toggle();
         },
 
         _processRemoveItem: function (element) {
