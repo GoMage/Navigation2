@@ -124,7 +124,7 @@ define([
 
         _bindAjaxAutoload: function () {
 
-            if (typeof($('div.pages:eq(1)')) == 'undefined')
+            if (typeof($('div.pages:eq(1)').offset().top) == 'undefined')
                 return ;
 
             if ($(window).scrollTop() >= $('div.pages:eq(1)').offset().top - $(window).height()) {
