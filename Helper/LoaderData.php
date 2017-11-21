@@ -113,4 +113,22 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
             . SystemConfigInterface::SYSTEM_LOADER_CONFIG_TEXT);
     }
+
+    public function getLoaderImageAlignment()
+    {
+        $value = $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_ALIGNMENT);
+
+        $alignment[\GoMage\Navigation\Model\Config\Source\Alignment::LEFT] = 'left';
+        $alignment[\GoMage\Navigation\Model\Config\Source\Alignment::RIGHT] = 'right';
+        $alignment[\GoMage\Navigation\Model\Config\Source\Alignment::TOP] = 'top';
+        $alignment[\GoMage\Navigation\Model\Config\Source\Alignment::BOTTOM] = 'bottom';
+
+        if (empty($alignment[$value])) {
+            throw new Exception(__('Alignment position is not set for ' . (int) $value . ' type'));
+        }
+
+        return $alignment[$value];
+    }
 }
