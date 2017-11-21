@@ -5,17 +5,17 @@
         <strong><?php echo __('Categories') ?></strong>
     </div>
     <div class="block-content block-content-gan-categories">
-        <div class="gan-categories-list-dropdown" <? echo ($block->getDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
+        <div class="gan-categories-list-dropdown" <? echo ($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
             <?php
             foreach($block->getStoreCategories(true, false, true) as $category):
                 if (!$category->getIsActive()) continue;?>
-                    <select data-role="navigation-filter" data-type="categories-select" data-ajax="<?= (int)$block->getDataHelper()->isAjax(); ?>">
+                    <select data-role="navigation-filter" data-type="categories-select" data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>">
                         <option
                             <?= ($block->getCurrentCategoryId() == $category->getId()) ? 'selected' : ''; ?>
                                 value="<?php echo $block->getCategoryHelper()->getCategoryUrl($category) ?>">
                             <?php echo $category->getName() ?>
                         </option>
-                        <? if ($block->getDataHelper()->getShowAllSubcategories()): ?>
+                        <? if ($block->getCategoriesDataHelper()->getShowAllSubcategories()): ?>
                             <?= $block->getSelectList($block->getChildCategories($category)); ?>
                         <?endif;?>
                     </select>

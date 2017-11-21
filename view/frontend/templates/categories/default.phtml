@@ -1,24 +1,24 @@
 <div class="block block-gan-categories gan-sidebar-position
-    <?php if($block->getDataHelper()->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::DEFAULTS) echo 'gan-categories-default'; ?>
-    <?php if($block->getDataHelper()->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK) echo 'gan-categories-default gan-categories-in-block'; ?>
+    <?php if($block->getCategoriesDataHelper()->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::DEFAULTS) echo 'gan-categories-default'; ?>
+    <?php if($block->getCategoriesDataHelper()->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK) echo 'gan-categories-default gan-categories-in-block'; ?>
     "
     style="background-color: <?=$block->getDataHelper()->getNavigationViewBlockCategoriesBackgroundColor()?>"
 >
     <div class="block-title gan-categories-title" data-role="navigation-filter" data-type="categories-content">
         <strong><?php echo __('Categories') ?></strong>
     </div>
-    <div class="block-content block-content-gan-categories"<?php if($block->getDataHelper()->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK && $block->getDataHelper()->getMaxBlockHeightCategories()): ?> style="max-height:<?php echo $block->getDataHelper()->getMaxBlockHeightCategories(); ?>px;"<?endif;?>>
-        <div <? echo ($block->getDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
-            <ul class="gan-categories-list" <?= ($block->getDataHelper()->isShowCheckboxes()) ? :''; ?>>
+    <div class="block-content block-content-gan-categories"<?php if($block->getCategoriesDataHelper()->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK && $block->getCategoriesDataHelper()->getMaxBlockHeightCategories()): ?> style="max-height:<?php echo $block->getCategoriesDataHelper()->getMaxBlockHeightCategories(); ?>px;"<?endif;?>>
+        <div <? echo ($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
+            <ul class="gan-categories-list" <?= ($block->getCategoriesDataHelper()->isShowCheckboxes()) ? :''; ?>>
                 <?php
                 foreach($block->getStoreCategories(true, false, true) as $category):
                      if (!$category->getIsActive()) continue;?>
-                    <li data-ajax="<?= (int)$block->getDataHelper()->isAjax(); ?>" data-role="navigation-filter"
+                    <li data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>" data-role="navigation-filter"
                         data-type="categories-li" data-url="<?= $block->getCategoryHelper()->getCategoryUrl($category) ?>">
                         <a class="<?= ($block->getCurrentCategoryId() == $category->getId()) ? 'active' : ''; ?>"
                            href="#"> <?= $category->getName() ?></a>
                     </li>
-                    <? if ($block->getDataHelper()->getShowAllSubcategories()): ?>
+                    <? if ($block->getCategoriesDataHelper()->getShowAllSubcategories()): ?>
                         <?= $block->getOlList($block->getChildCategories($category)); ?>
                     <? endif; ?>
                 <?php endforeach; ?>

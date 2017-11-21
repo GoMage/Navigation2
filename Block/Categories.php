@@ -34,7 +34,7 @@ class Categories extends \Magento\Framework\View\Element\Template
         \Magento\Catalog\Model\Indexer\Category\Flat\State $categoryFlatState,
         \Magento\Theme\Block\Html\Topmenu $topMenu,
         \GoMage\Navigation\Helper\Data $dataHelper,
-        \GoMage\Navigation\Helper\Data $categoriesHelper,
+        \GoMage\Navigation\Helper\CategoryData $categoriesHelper,
         \GoMage\Navigation\Model\Config\Source\Category\Templates $templates,
         \Magento\Catalog\Model\ResourceModel\Category $categoryResource,
         \Magento\Catalog\Model\Layer\Resolver $layerResolver
@@ -185,7 +185,7 @@ class Categories extends \Magento\Framework\View\Element\Template
 
     protected function _beforeToHtml()
     {
-        if (!$this->getCategoriesDataHelper()->isEnable() || !$this->getCategoriesDataHelper()->isShowCategories() || !$this->canShowCategories) {
+        if (!$this->getDataHelper()->isEnable() || !$this->getCategoriesDataHelper()->isShowCategories() || !$this->canShowCategories) {
             return parent::_beforeToHtml();
         }
 
@@ -197,7 +197,7 @@ class Categories extends \Magento\Framework\View\Element\Template
 
     protected function setLocation()
     {
-        if (!$this->getCategoriesDataHelper()->isEnable() || !$this->getCategoriesDataHelper()->isShowCategories()) {
+        if (!$this->getDataHelper()->isEnable() || !$this->getCategoriesDataHelper()->isShowCategories()) {
             return;
         }
 

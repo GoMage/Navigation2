@@ -10,10 +10,11 @@
  */
 
 $helper = $this->helper('GoMage\Navigation\Helper\Data');
+$categoryHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
 $render = $this->getLayout()->createBlock('GoMage\Navigation\Block\Navigation\FilterRenderer');
 $state = $this->getLayout()->createBlock('GoMage\Navigation\Block\Navigation\State');
 $categoriesHtml = '';
-if ($helper->isShowCategoryInShopBy()) {
+if ($categoryHelper->isShowCategoryInShopBy()) {
     $categories = $this->getLayout()->createBlock('GoMage\Navigation\Block\Categories');
     $categoriesHtml = $categories->toHtml();
 }
@@ -25,7 +26,7 @@ $block->setChild('state',$state);
     <div class="block filter gan-sidebar-position" data-role="navigation" data-mage-init='{"navigation": {
                         "addFilterResultsToUrl": "<?php echo $helper->isAddFilterResultsToUrl()?>",
                         "navigationPlace": "<?php echo $helper->getShowShopByIn(); ?>",
-                        "categoriesPlace": "<?php echo $helper->getCategoriesBlockLocation(); ?>",
+                        "categoriesPlace": "<?php echo $categoryHelper->getCategoriesBlockLocation(); ?>",
                         "backToTopSpeed": "<?php echo $helper->getBackToTopSpeed(); ?>",
                         "backToTopAction": "<?php echo $helper->getBackToTopAction(); ?>",
                         "ajaxAutoload": "<?php echo $helper->isUseAutoScrolling(); ?>"

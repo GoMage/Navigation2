@@ -5,13 +5,13 @@
         <strong><?php echo __('Categories') ?></strong>
     </div>
     <div class="block-content block-content-gan-categories">
-        <div <? echo ($block->getDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
-            <ul class="gan-categories-list" <?= ($block->getDataHelper()->isShowCheckboxes()) ? :''; ?>>
+        <div <? echo ($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
+            <ul class="gan-categories-list" <?= ($block->getCategoriesDataHelper()->isShowCheckboxes()) ? :''; ?>>
                 <?php
                 foreach($block->getStoreCategories(true, false, true) as $category):
                      if (!$category->getIsActive()) continue;?>
                     <li
-                            data-ajax="<?= (int)$block->getDataHelper()->isAjax(); ?>"
+                            data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>"
                             data-role="navigation-filter"
                             data-type="categories-li"
                             data-url="<?= $block->getCategoryHelper()->getCategoryUrl($category) ?>">

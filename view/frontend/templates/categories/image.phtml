@@ -5,20 +5,20 @@
         <strong><?php echo __('Categories') ?></strong>
     </div>
     <div class="block-content block-content-gan-categories">
-        <div <? echo ($block->getDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
-            <ul class="gan-categories-list gan-categories-list-img<?=($block->getDataHelper()->getCategoriesImageAlignment()) ? ' gan-categories-list-alignment-' . $block->getDataHelper()->getCategoriesImageAlignment() : '';?>">
+        <div <? echo ($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
+            <ul class="gan-categories-list gan-categories-list-img<?=($block->getCategoriesDataHelper()->getCategoriesImageAlignment()) ? ' gan-categories-list-alignment-' . $block->getCategoriesDataHelper()->getCategoriesImageAlignment() : '';?>">
                 <?php
                 foreach($block->getStoreCategories(true, false, true) as $category):
                     if (!$category->getIsActive()) continue;?>
-                    <li data-ajax="<?= (int)$block->getDataHelper()->isAjax(); ?>" data-role="navigation-filter"
-                        data-type="categories-li" data-url="<?= $block->getCategoryhelper()->getCategoryUrl($category) ?>">
+                    <li data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>" data-role="navigation-filter"
+                        data-type="categories-li" data-url="<?= $block->getCategoryHelper()->getCategoryUrl($category) ?>">
                         <a class="<?= ($block->getCurrentCategoryId() == $category->getId()) ? 'selected' : ''; ?>"
                             href="#">
-                            <img width="<?=($block->getDataHelper()->getCategoriesImageWidth()) ? $block->getDataHelper()->getCategoriesImageWidth() : '';?>"
-                                 height="<?=($block->getDataHelper()->getCategoriesImageHeight()) ? $block->getDataHelper()->getCategoriesImageHeight() : '';?>"
+                            <img width="<?=($block->getCategoriesDataHelper()->getCategoriesImageWidth()) ? $block->getCategoriesDataHelper()->getCategoriesImageWidth() : '';?>"
+                                 height="<?=($block->getCategoriesDataHelper()->getCategoriesImageHeight()) ? $block->getCategoriesDataHelper()->getCategoriesImageHeight() : '';?>"
                                  src="<?= $block->getCategoryImage($category->getEntityId()) ?>"
                             >
-                            <?php if($block->getDataHelper()->isShowImageName()): ?>
+                            <?php if($block->getCategoriesDataHelper()->isShowImageName()): ?>
                                 <span><?= $category->getName();?></span>
                             <?endif;?>
                         </a>
