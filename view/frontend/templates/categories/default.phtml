@@ -15,7 +15,7 @@
                      if (!$category->getIsActive()) continue;?>
                     <li data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>" data-role="navigation-filter"
                         data-type="categories-li" data-url="<?= $block->getCategoryHelper()->getCategoryUrl($category) ?>">
-                        <a class="<?= ($block->getCurrentCategoryId() == $category->getId()) ? 'active' : ''; ?>"
+                        <a class="<?= ($block->getCurrentCategoryId() == $category->getId()) ? 'selected' : ''; ?>"
                            href="#"> <?= $category->getName() ?></a>
                     </li>
                     <? if ($block->getCategoriesDataHelper()->getShowAllSubcategories()): ?>

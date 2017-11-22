@@ -6,15 +6,13 @@
     </div>
     <div class="block-content block-content-gan-categories">
         <div class="block-content-in"<? echo ($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? ' style="display:none;"' : '';?>>
-            <ul class="gan-categories-list gan-categories-list-img<?=($block->getCategoriesDataHelper()->getCategoriesImageAlignment()) ? ' gan-categories-list-alignment-' . $block->getCategoriesDataHelper()->getCategoriesImageAlignment() : '';?>">
+            <ul class="gan-categories-list gan-categories-list-img<?=($block->getCategoriesDataHelper()->getCategoriesImageAlignment()) ? ' gan-categories-list-alignment-' . $block->getCategoriesDataHelper()->getCategoriesImageAlignment() : '';?><?=($block->getCategoriesDataHelper()->isShowCheckboxes()) ? ' gan-categories-list-img-checkbox' : '';?>">
                 <?php
                 foreach($block->getStoreCategories(true, false, true) as $category):
                     if (!$category->getIsActive()) continue;?>
                     <li data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>" data-role="navigation-filter"
                         data-type="categories-li" data-url="<?= $block->getCategoryHelper()->getCategoryUrl($category) ?>">
-                        <a class="<?= ($block->getCurrentCategoryId() == $category->getId()) ? 'selected' : ''; ?>
-                                  <?=($block->getCategoriesDataHelper()->isShowCheckboxes()) ? 'checkbox' : '';?>"
-                            href="#">
+                        <a href="#" <?= ($block->getCurrentCategoryId() == $category->getId()) ? ' class="selected"' : ''; ?>>
                             <img width="<?=($block->getCategoriesDataHelper()->getCategoriesImageWidth()) ? $block->getCategoriesDataHelper()->getCategoriesImageWidth() : '';?>"
                                  height="<?=($block->getCategoriesDataHelper()->getCategoriesImageHeight()) ? $block->getCategoriesDataHelper()->getCategoriesImageHeight() : '';?>"
                                  src="<?= $block->getCategoryImage($category->getEntityId()) ?>"
