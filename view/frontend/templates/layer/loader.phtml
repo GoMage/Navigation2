@@ -12,8 +12,8 @@
                     <img alt="Loading..." align="<?=$block->getImageAlignment()?>"
                          src="<?= $image ?>">
                 <?else:?>
-                    <!-- put spinner -->
-                    <?//=$block->getHelper->getLoaderSpinnerColor()?>
+
+                    <?$block->getHelper()->getLoaderSpinnerColor()?>
 
                 <?endif; ?>
                 <?=$block->getHelper()->getLoaderText();?>
