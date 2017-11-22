@@ -9,7 +9,8 @@
                     if (!$category->getIsActive()) continue;?>
                     <li data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>" data-role="navigation-filter"
                         data-type="categories-li" data-url="<?= $block->getCategoryHelper()->getCategoryUrl($category) ?>">
-                        <a class="<?= ($block->getCurrentCategoryId() == $category->getId()) ? 'selected' : ''; ?>"
+                        <a class="<?= ($block->getCurrentCategoryId() == $category->getId()) ? 'selected' : ''; ?>
+                                  <?=($block->getCategoriesDataHelper()->isShowCheckboxes()) ? 'checkbox' : '';?>""
                             href="#">
                             <img width="<?=($block->getCategoriesDataHelper()->getCategoriesImageWidth()) ? $block->getCategoriesDataHelper()->getCategoriesImageWidth() : '';?>"
                                  height="<?=($block->getCategoriesDataHelper()->getCategoriesImageHeight()) ? $block->getCategoriesDataHelper()->getCategoriesImageHeight() : '';?>"
