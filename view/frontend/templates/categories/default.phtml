@@ -16,7 +16,7 @@
                     <li data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>" data-role="navigation-filter"
                         data-type="categories-li" data-url="<?= $block->getCategoryHelper()->getCategoryUrl($category) ?>">
                         <a href="#"<?= ($block->getCurrentCategoryId() == $category->getId()) ? ' class="selected"' : ''; ?>>
-                            <?= $category->getName() ?>
+                            <span><?= $category->getName() ?></span>
                         </a>
                     </li>
                     <? if ($block->getCategoriesDataHelper()->getShowAllSubcategories()): ?>
