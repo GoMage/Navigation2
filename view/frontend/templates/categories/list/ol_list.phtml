@@ -2,11 +2,16 @@
     <ol <?=$checkboxes?>>
         <?foreach ($data as $category):?>
             <?php $active = ($currentCategoryId == $category['entity_id']) ? 'active' : '';?>
-                <li data-ajax="<?=$isAjax?>" data-role="navigation-filter" data-type="categories-li" data-url="<?=$category['url']?>"<?if (is_array($category['children'])):?> class="parent"<?endif;?>>
+                <li
+                        data-ajax="<?=$isAjax?>"
+                        data-role="navigation-filter"
+                        data-type="categories-li"
+                        data-url="<?=$category['url']?>"
+                        <? if (!empty(($category['children']))): ?> class="parent"<? endif; ?>>
                     <a class="<?=$active?>" href="<?=$category['url']?>"><?=$category['name']?></a>
-                    <?if (is_array($category['children'])):?>
-                        <?=$categoriesBlock->getOlList($category['children']);?>
-                    <?endif;?>
+                    <? if (!empty(($category['children']))): ?>
+                        <?= $categoriesBlock->getOlList($category['children']); ?>
+                    <? endif; ?>
                 </li>
         <?endforeach;?>
     </ol>
