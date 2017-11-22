@@ -22,6 +22,9 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
     protected $canShowNavigation = false;
 
     protected $catalogLayer;
+    protected $categoryHelper;
+    protected $categoriesHtml;
+    protected $navigationViewHelper;
 
     /**
      * Navigation constructor.
@@ -39,6 +42,8 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         \Magento\Catalog\Model\Layer\AvailabilityFlagInterface $visibilityFlag,
         \Magento\Framework\App\RequestInterface $request,
         \GoMage\Navigation\Helper\Data $dataHelper,
+        \GoMage\Navigation\Helper\CategoryData $categoryHelper,
+        \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper,
         array $data = []
     ) {
     
@@ -47,6 +52,8 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         $this->visibilityFlag = $visibilityFlag;
         $this->request = $request;
         $this->dataHelper = $dataHelper;
+        $this->categoryHelper = $categoryHelper;
+        $this->navigationViewHelper = $navigationViewHelper;
 
         parent::__construct($context, $layerResolver, $filterList, $visibilityFlag, $data);
         $this->setLocation();
@@ -55,6 +62,38 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
     public function getDataHelper()
     {
         return $this->dataHelper;
+    }
+
+    public function getCategoryDataHelper()
+    {
+        return $this->categoryHelper;
+    }
+
+    public function getNavigationViewHelper()
+    {
+        return $this->navigationViewHelper;
+    }
+
+    public function getRenderBlock()
+    {
+        return $this->getLayout()->createBlock('GoMage\Navigation\Block\Navigation\FilterRenderer');
+    }
+
+    public function getStateBlock()
+    {
+        $state = $this->getLayout()->createBlock('GoMage\Navigation\Block\Navigation\State');
+        $this->setChild('state',$state);
+        return $state;
+    }
+
+    public function getCategoriesHtml()
+    {
+
+        if (empty($this->categoriesHtml) && $this->getCategoryDataHelper()->isShowCategoryInShopBy()) {
+            $this->categoriesHtml = $this->getLayout()->createBlock('GoMage\Navigation\Block\Categories')->toHtml();
+        }
+
+        return $this->categoriesHtml;
     }
 
     protected function getPageLayout()
@@ -74,9 +113,24 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
     {
         $data = [];
         $cnt = 0;
+
+        if ($this->getCategoryDataHelper()->isShowCategoryInShopBy() &&
+            !$this->getCategoryDataHelper()->isCategoriesShowCollapsed()) {
+            $data[] = $cnt;
+            $cnt++;
+        }
+
+        if ($this->getCategoryDataHelper()->isShowCategoryInShopBy() &&
+            $this->getCategoryDataHelper()->isCategoriesShowCollapsed()) {
+            $cnt = 1;
+        }
+
+
+
+
         foreach ($this->getFilters() as $filter) {
             if ($filter->getItemsCount()) {
-                if ($filter->getGomageIsCollapsed()) {
+                if (!$filter->getGomageIsCollapsed()) {
                     $data[] = $cnt;
                 }
                 $cnt++;

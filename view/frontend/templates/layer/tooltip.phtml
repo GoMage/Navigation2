@@ -1,9 +1,9 @@
 <? if($filter->getGomageIsShowTooltip()):?>
 
-    <? $test = $block->getHelper()->isNavigationViewTooltipShowOnClick(); ?>
-    <? $test = $block->getHelper()->isNavigationViewTooltipShowOnMouseOver(); ?>
-    <? $test = $block->getHelper()->isNavigationViewTooltipHideOnMouseOut(); ?>
-    <? $test = $block->getHelper()->isNavigationViewTooltipHideOnCloseButton(); ?>
+    <? $test = $block->getNavigationViewHelper()->isNavigationViewTooltipShowOnClick(); ?>
+    <? $test = $block->getNavigationViewHelper()->isNavigationViewTooltipShowOnMouseOver(); ?>
+    <? $test = $block->getNavigationViewHelper()->isNavigationViewTooltipHideOnMouseOut(); ?>
+    <? $test = $block->getNavigationViewHelper()->isNavigationViewTooltipHideOnCloseButton(); ?>
 
     <div>
         tooltip

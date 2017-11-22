@@ -15,6 +15,7 @@ class Categories extends \Magento\Framework\View\Element\Template
     protected $pageLayout;
     protected $canShowCategories;
     protected $catalogLayer;
+    protected $navigationViewHelper;
 
     /**
      * Categories constructor.
@@ -23,7 +24,8 @@ class Categories extends \Magento\Framework\View\Element\Template
      * @param \Magento\Catalog\Model\Indexer\Category\Flat\State $categoryFlatState
      * @param \Magento\Theme\Block\Html\Topmenu $topMenu
      * @param \GoMage\Navigation\Helper\Data $dataHelper
-     * @param \GoMage\Navigation\Helper\Data $categoriesHelper
+     * @param \GoMage\Navigation\Helper\CategoryData $categoriesHelper
+     * @param \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper
      * @param \GoMage\Navigation\Model\Config\Source\Category\Templates $templates
      * @param \Magento\Catalog\Model\ResourceModel\Category $categoryResource
      * @param \Magento\Catalog\Model\Layer\Resolver $layerResolver
@@ -35,6 +37,7 @@ class Categories extends \Magento\Framework\View\Element\Template
         \Magento\Theme\Block\Html\Topmenu $topMenu,
         \GoMage\Navigation\Helper\Data $dataHelper,
         \GoMage\Navigation\Helper\CategoryData $categoriesHelper,
+        \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper,
         \GoMage\Navigation\Model\Config\Source\Category\Templates $templates,
         \Magento\Catalog\Model\ResourceModel\Category $categoryResource,
         \Magento\Catalog\Model\Layer\Resolver $layerResolver
@@ -48,6 +51,7 @@ class Categories extends \Magento\Framework\View\Element\Template
         $this->categoriesHelper = $categoriesHelper;
         $this->templates = $templates;
         $this->categoryResource = $categoryResource;
+        $this->navigationViewHelper = $navigationViewHelper;
         parent::__construct($context);
         $this->setLocation();
     }
@@ -75,14 +79,19 @@ class Categories extends \Magento\Framework\View\Element\Template
         return $this->dataHelper;
     }
 
-    public function getCurrentCategoryId()
-    {
-        return $this->catalogLayer->getCurrentCategory()->getId();
-    }
-
     public function getCategoryHelper()
     {
         return $this->categoryHelper;
+    }
+
+    public function getNavigationViewHelper()
+    {
+        return $this->navigationViewHelper;
+    }
+
+    public function getCurrentCategoryId()
+    {
+        return $this->catalogLayer->getCurrentCategory()->getId();
     }
 
     public function getStoreCategories($sorted = false, $asCollection = false, $toLoad = true)

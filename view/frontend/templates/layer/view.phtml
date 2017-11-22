@@ -9,31 +9,20 @@
  * @var $block \GoMage\Navigation\Block\Navigation
  */
 
-$helper = $this->helper('GoMage\Navigation\Helper\Data');
-$categoryHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
-$render = $this->getLayout()->createBlock('GoMage\Navigation\Block\Navigation\FilterRenderer');
-$state = $this->getLayout()->createBlock('GoMage\Navigation\Block\Navigation\State');
-$categoriesHtml = '';
-if ($categoryHelper->isShowCategoryInShopBy()) {
-    $categories = $this->getLayout()->createBlock('GoMage\Navigation\Block\Categories');
-    $categoriesHtml = $categories->toHtml();
-}
-
-$block->setChild('state',$state);
 ?>
 
 <?php if ($block->canShowBlock()): ?>
     <div class="block filter gan-sidebar-position" data-role="navigation" data-mage-init='{"navigation": {
-                        "addFilterResultsToUrl": "<?php echo $helper->isAddFilterResultsToUrl()?>",
-                        "navigationPlace": "<?php echo $helper->getShowShopByIn(); ?>",
-                        "categoriesPlace": "<?php echo $categoryHelper->getCategoriesBlockLocation(); ?>",
-                        "backToTopSpeed": "<?php echo $helper->getBackToTopSpeed(); ?>",
-                        "backToTopAction": "<?php echo $helper->getBackToTopAction(); ?>",
-                        "ajaxAutoload": "<?php echo $helper->isUseAutoScrolling(); ?>"
+                        "addFilterResultsToUrl": "<?php echo $block->getDataHelper()->isAddFilterResultsToUrl()?>",
+                        "navigationPlace": "<?php echo $block->getDataHelper()->getShowShopByIn(); ?>",
+                        "categoriesPlace": "<?php echo $block->getCategoryDataHelper()->getCategoriesBlockLocation(); ?>",
+                        "backToTopSpeed": "<?php echo $block->getDataHelper()->getBackToTopSpeed(); ?>",
+                        "backToTopAction": "<?php echo $block->getDataHelper()->getBackToTopAction(); ?>",
+                        "ajaxAutoload": "<?php echo $block->getDataHelper()->isUseAutoScrolling(); ?>"
                         }}'>
-        <div class="block-content filter-content" style="background-color: <?=$helper->getNavigationViewBlockBackgroundColor()?>; ">
-            <?if ($helper->isShowAppliedValuesInResults()):?>
-                <?php echo $state->toHtml() ?>
+        <div class="block-content filter-content" style="background-color: <?=$block->getNavigationViewHelper()->getNavigationViewBlockBackgroundColor()?>; ">
+            <?if ($block->getDataHelper()->isShowAppliedValuesInResults()):?>
+                <?php echo $block->getStateBlock()->toHtml() ?>
                 <?php if ($block->getLayer()->getState()->getFilters()): ?>
                     <div class="block-actions filter-actions">
                         <a href="<?php /* @escapeNotVerified */ echo $block->getClearUrl() ?>"
@@ -53,12 +42,20 @@ $block->setChild('state',$state);
                 <?php foreach ($block->getFilters() as $filter): ?>
                     <?php if (!$wrapOptions): ?>
                         <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle"><?php /* @escapeNotVerified */ echo __('Shopping Options') ?></strong>
-                        <dl class="filter-options" id="narrow-by-list" data-role="content" data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": <?php echo json_encode($block->getExpandedFilters());?>, "multipleCollapsible": true}}'>
-                        <?if(!empty($categoriesHtml)):?>
+                        <dl class="filter-options"
+                            id="narrow-by-list"
+                            data-role="content"
+                            data-mage-init='{"accordion":{
+                            "openedState": "active",
+                            "collapsible": true,
+                            "active": <?php echo json_encode($block->getExpandedFilters());?>,
+                            "multipleCollapsible": true
+                            }}'>
+                        <?if(!empty($block->getCategoriesHtml())):?>
                             <div data-role="collapsible" class="filter-options-item <?= $block->getItemClass() ?>"
                                  style="<?= $block->getItemWidthStyle() ?>">
                                 <dt data-role="title" role="heading" aria-level="3" class="filter-options-title"><?php echo 'Categories'; ?></dt>
-                                <dd data-role="content" class="filter-options-content"><?php /* @escapeNotVerified */ echo $categoriesHtml; ?></dd>
+                                <dd data-role="content" class="filter-options-content"><?php /* @escapeNotVerified */ echo $block->getCategoriesHtml(); ?></dd>
                             </div>
                         <?endif;?>
 
@@ -68,7 +65,7 @@ $block->setChild('state',$state);
                             <div data-role="collapsible" class="filter-options-item <?= $block->getItemClass() ?>"
                                  style="<?= $block->getItemWidthStyle() ?>">
                                 <dt data-role="title" role="heading" aria-level="3" class="filter-options-title"><?php echo $block->escapeHtml(__($filter->getName())) ?></dt>
-                                <dd data-role="content" class="filter-options-content"><?php /* @escapeNotVerified */ echo $render->render($filter); ?></dd>
+                                <dd data-role="content" class="filter-options-content"><?php /* @escapeNotVerified */ echo $block->getRenderBlock()->render($filter); ?></dd>
                             </div>
                         <?php endif; ?>
                 <?php endforeach; ?>

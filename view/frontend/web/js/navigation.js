@@ -415,6 +415,7 @@ define([
                         $('#gan-more-button').hide();
                     }
 
+                    this.options.showMore = false;
 
                 }.bind(this)
             });

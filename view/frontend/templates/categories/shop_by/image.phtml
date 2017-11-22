@@ -2,7 +2,7 @@
      style="background-color: <?=$block->getDataHelper()->getNavigationViewBlockCategoriesBackgroundColor()?>"
 >
     <div class="block-content block-content-gan-categories">
-        <div <? echo ($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
+        <div>
             <ul class="gan-categories-list gan-categories-list-img<?=($block->getCategoriesDataHelper()->getCategoriesImageAlignment()) ? ' gan-categories-list-alignment-' . $block->getCategoriesDataHelper()->getCategoriesImageAlignment() : '';?>">
                 <?php
                 foreach($block->getStoreCategories(true, false, true) as $category):

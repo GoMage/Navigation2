@@ -2,10 +2,10 @@
     <?php if($block->getCategoriesDataHelper()->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::DEFAULTS) echo 'gan-categories-default'; ?>
     <?php if($block->getCategoriesDataHelper()->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK) echo 'gan-categories-default gan-categories-in-block'; ?>
     "
-    style="background-color: <?=$block->getDataHelper()->getNavigationViewBlockCategoriesBackgroundColor()?>"
+    style="background-color: <?=$block->getNavigationViewHelper()->getNavigationViewBlockCategoriesBackgroundColor()?>"
 >
     <div class="block-content block-content-gan-categories"<?php if($block->getCategoriesDataHelper()->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK && $block->getCategoriesDataHelper()->getMaxBlockHeightCategories()): ?> style="max-height:<?php echo $block->getCategoriesDataHelper()->getMaxBlockHeightCategories(); ?>px;"<?endif;?>>
-        <div <? echo ($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
+        <div>
             <ul class="gan-categories-list" <?= ($block->getCategoriesDataHelper()->isShowCheckboxes()) ? :''; ?>>
                 <?php
                 foreach($block->getStoreCategories(true, false, true) as $category):

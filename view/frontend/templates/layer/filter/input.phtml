@@ -7,18 +7,46 @@
 
 $filter = reset($filterItems)->getFilter();
 $attributeModel = $filter->getAttributeModel();
-
+$priceValues = explode(';', $filter->getSingleValue());
 ?>
 
 <div class="gan-filter gan-filter-input">
     <?=$block->getTooltip($filter)->toHtml()?>
     <form>
+        <input style="display: none;"
+               data-role="navigation-filter"
+               data-active=""
+               data-from="<?php echo $filter->getMinBasePrice(); ?>"
+               data-to="<?php echo $filter->getMaxBasePrice(); ?>"
+               data-code="<?php echo $filter->getAttributeModel()->getAttributeCode(); ?>"
+               data-param="<?php echo $filter->getRequestVar() ?>"
+            <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+                data-ajax="1"
+            <?else:?>
+                data-ajax="0"
+            <?endif;?>
+               id="<?php echo $filter->getAttributeModel()->getAttributeCode(); ?>"
+               value="<?php echo $filter->getSingleValue() ?>"/>
         <fieldset class="gan-filter-input-fieldset">
 
             <div class="gan-filter-input-fields">
                 <div class="from-wrapper">
                     <label>
-                        <input data-role="navigation-filter" type="text" name="<?php echo $attributeModel->getAttributeCode();?>_from" value="<?php echo $filter->getMinBasePrice(); ?>" />
+                        <input
+                                id="price-from"
+                            <?php if(!$filter->getGomageIsShowFilterButton()):?>
+                                data-role="navigation-filter"
+                                data-type="input-price"
+                            <?endif;?>
+                            <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+                                data-ajax="1"
+                            <?else:?>
+                                data-ajax="0"
+                            <?endif;?>
+                                type="text"
+                                value="<?php echo $priceValues[0]; ?>"
+                                name="<?php echo $attributeModel->getAttributeCode();?>_from"
+                                />
                     </label>
                 </div>
                 <div class="to-text-wrapper">
@@ -26,14 +54,44 @@ $attributeModel = $filter->getAttributeModel();
                 </div>
                 <div class="to-wrapper">
                     <label>
-                        <input data-role="navigation-filter" type="text" name="<?php echo $attributeModel->getAttributeCode();?>_to" value="<?php echo $filter->getMaxBasePrice(); ?>" />
+                        <input id="price-to"
+                            <?php if(!$filter->getGomageIsShowFilterButton()):?>
+                               data-role="navigation-filter"
+                               data-type="input-price"
+                            <?endif;?>
+                            <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+                                data-ajax="1"
+                            <?else:?>
+                                data-ajax="0"
+                            <?endif;?>
+                                type="text"
+                                value="<?php echo $priceValues[1]; ?>"
+                                name="<?php echo $attributeModel->getAttributeCode();?>_to"
+                                />
                     </label>
                 </div>
             </div>
 
-            <div class="gan-filter-input-actions">
-                <button class="button" type="submit"><span><?php echo $attributeModel->getFrontendLabel(); ?></span></button>
-            </div>
+            <?php if($filter->getGomageIsShowFilterButton()):?>
+                <div class="gan-filter-input-actions">
+                    <button
+                            id="price-button"
+                            data-role="navigation-filter"
+                            data-type="price-button"
+                            class="button"
+                            type="submit"
+                        <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+                            data-ajax="1"
+                        <?else:?>
+                            data-ajax="0"
+                        <?endif;?>
+                        <?$block->getNavigationViewHelper()->isNavigationViewButtonsGradient(); $block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2();?>
+                            style="background-color: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>; color: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsTextColor()?>"
+                    >
+                        <span><?php echo $filter->getAttributeModel()->getFrontendLabel(); ?></span>
+                    </button>
+                </div>
+            <?php endif;?>
 
         </fieldset>
     </form>

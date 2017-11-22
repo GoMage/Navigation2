@@ -1,11 +1,11 @@
 <div class="block block-gan-categories gan-categories-image gan-sidebar-position"
-     style="background-color: <?=$block->getDataHelper()->getNavigationViewBlockCategoriesBackgroundColor()?>"
+     style="background-color: <?=$block->getNavigationViewHelper()->getNavigationViewBlockCategoriesBackgroundColor()?>"
 >
     <div class="block-title gan-categories-title" data-role="navigation-filter" data-type="categories-content">
         <strong><?php echo __('Categories') ?></strong>
     </div>
     <div class="block-content block-content-gan-categories">
-        <div class="block-content-in"<? echo ($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? ' style="display:none;"' : '';?>>
+        <div class="block-content-in">
             <ul class="gan-categories-list gan-categories-list-img<?=($block->getCategoriesDataHelper()->getCategoriesImageAlignment()) ? ' gan-categories-list-alignment-' . $block->getCategoriesDataHelper()->getCategoriesImageAlignment() : '';?><?=($block->getCategoriesDataHelper()->isShowCheckboxes()) ? ' gan-categories-list-img-checkbox' : '';?>">
                 <?php
                 foreach($block->getStoreCategories(true, false, true) as $category):

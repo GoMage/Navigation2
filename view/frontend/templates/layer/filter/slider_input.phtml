@@ -7,18 +7,20 @@
  */
 
 $filter = reset($filterItems)->getFilter();
-$dataHelper = $this->helper('GoMage\Navigation\Helper\Data');
 
-$block->getHelper()->getNavigationViewSliderLineColor();
-$block->getHelper()->getNavigationViewSliderLineHeight();
-$block->getHelper()->getNavigationViewSliderElementColor();
-$block->getHelper()->getNavigationViewSliderElementWidth();
-$block->getHelper()->getNavigationViewSliderElementHeight();
-$block->getHelper()->getNavigationViewSliderElementRadius();
+
+$block->getNavigationViewHelper()->getNavigationViewSliderLineColor();
+$block->getNavigationViewHelper()->getNavigationViewSliderLineHeight();
+$block->getNavigationViewHelper()->getNavigationViewSliderElementColor();
+$block->getNavigationViewHelper()->getNavigationViewSliderElementWidth();
+$block->getNavigationViewHelper()->getNavigationViewSliderElementHeight();
+$block->getNavigationViewHelper()->getNavigationViewSliderElementRadius();
+
+$priceValues = explode(';', $filter->getSingleValue());
+
 ?>
 
 <div class="gan-filter gan-filter-slider gan-filter-slider-input">
-    <?php $attributeModel = $filter->getAttributeModel(); ?>
     <div class="layout">
         <?=$block->getTooltip($filter)->toHtml()?>
         <div class="layout-slider">
@@ -30,7 +32,7 @@ $block->getHelper()->getNavigationViewSliderElementRadius();
                        data-to="<?php echo $filter->getMaxBasePrice(); ?>"
                        data-step="<?php echo $block->getStep(); ?>"
                        data-skin="<?php echo $block->getSliderSkin(); ?>"
-                       data-code="<?php echo $attributeModel->getAttributeCode(); ?>"
+                       data-code="<?php echo $filter->getAttributeModel()->getAttributeCode(); ?>"
                        data-dimension="&nbsp;<?php echo $filter->getCurrencySymbol(); ?>"
                        data-param="<?php echo $filter->getRequestVar() ?>"
                         <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
@@ -38,10 +40,10 @@ $block->getHelper()->getNavigationViewSliderElementRadius();
                         <?else:?>
                             data-ajax="0"
                         <?endif;?>
-                       id="<?php echo $attributeModel->getAttributeCode(); ?>"
+                       id="<?php echo $filter->getAttributeModel()->getAttributeCode(); ?>"
                        data-type="slider"
                        type="slider"
-                       name="<?php echo $attributeModel->getAttributeCode(); ?>"
+                       name="<?php echo $filter->getAttributeModel()->getAttributeCode(); ?>"
                        value="<?php echo $filter->getSingleValue() ?>"/>
             </span>
         </div>
@@ -52,7 +54,13 @@ $block->getHelper()->getNavigationViewSliderElementRadius();
                 <div class="gan-filter-input-fields">
                     <div class="from-wrapper">
                         <label>
-                            <input id="price-from" <?php if(!$filter->getGomageIsShowFilterButton()):?>data-role="navigation-filter" data-type="input-price" <?php endif;?> type="text" value="<?php echo $filter->getMinBasePrice(); ?>" />
+                            <input id="price-from"
+                                   <?php if(!$filter->getGomageIsShowFilterButton()):?>
+                                       data-role="navigation-filter"
+                                       data-type="input-price"
+                                   <?php endif;?>
+                                   type="text"
+                                   value="<?php echo $priceValues[0]; ?>" />
                         </label>
                     </div>
                     <div class="to-text-wrapper">
@@ -60,17 +68,23 @@ $block->getHelper()->getNavigationViewSliderElementRadius();
                     </div>
                     <div class="to-wrapper">
                         <label>
-                            <input id="price-to" <?php if(!$filter->getGomageIsShowFilterButton()):?>data-role="navigation-filter" data-type="input-price" <?php endif;?> type="text" value="<?php echo $filter->getMaxBasePrice(); ?>" />
+                            <input id="price-to"
+                                   <?php if(!$filter->getGomageIsShowFilterButton()):?>
+                                       data-role="navigation-filter"
+                                       data-type="input-price"
+                                   <?php endif;?>
+                                   type="text"
+                                   value="<?php echo $priceValues[1]; ?>" />
                         </label>
                     </div>
                 </div>
                 <?php if($filter->getGomageIsShowFilterButton()):?>
                     <div class="gan-filter-input-actions">
                         <button id="price-button" data-role="navigation-filter" data-type="price-button" class="button" type="submit"
-                            <?$dataHelper->isNavigationViewButtonsGradient(); $dataHelper->getNavigationViewButtonsBackgroundColor2();?>
-                        style="background-color: <?=$dataHelper->getNavigationViewButtonsBackgroundColor()?>; color: <?=$dataHelper->getNavigationViewButtonsTextColor()?>"
+                            <?$block->getNavigationViewHelper()->isNavigationViewButtonsGradient(); $block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2();?>
+                        style="background-color: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>; color: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsTextColor()?>"
                         >
-                            <span><?php echo $attributeModel->getFrontendLabel(); ?></span>
+                            <span><?php echo $filter->getAttributeModel()->getFrontendLabel(); ?></span>
                         </button>
                     </div>
                 <?php endif;?>

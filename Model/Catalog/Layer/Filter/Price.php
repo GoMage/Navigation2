@@ -158,7 +158,12 @@ class Price extends \Magento\Catalog\Model\Layer\Filter\Price implements FilterI
 
     protected function _initItems()
     {
-        if ($this->getGomageFilterTemplate() != $this->filterTemplates->get(\GoMage\Navigation\Model\Config\Source\Navigation::SLIDER)) {
+
+        $itemsArray[] = $this->filterTemplates->get(\GoMage\Navigation\Model\Config\Source\Navigation::SLIDER);
+        $itemsArray[] = $this->filterTemplates->get(\GoMage\Navigation\Model\Config\Source\Navigation::SLIDER_INPUT);
+        $itemsArray[] = $this->filterTemplates->get(\GoMage\Navigation\Model\Config\Source\Navigation::INPUT);
+
+        if (!in_array($this->getGomageFilterTemplate(), $itemsArray)) {
             return parent::_initItems();
         }
 

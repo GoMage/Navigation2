@@ -1,11 +1,11 @@
 <div class="block block-gan-categories gan-sidebar-position gan-categories-flyout"
-     style="background-color: <?=$block->getDataHelper()->getNavigationViewBlockCategoriesBackgroundColor()?>"
+     style="background-color: <?=$block->getNavigationViewHelper()->getNavigationViewBlockCategoriesBackgroundColor()?>"
 >
     <div class="block-title gan-categories-title" data-role="navigation-filter" data-type="categories-content">
         <strong><?php echo __('Categories') ?></strong>
     </div>
     <div class="block-content block-content-gan-categories">
-        <div class="block-content-in"<? echo ($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? ' style="display:none;"' : '';?>>
+        <div class="block-content-in">
             <ul class="gan-categories-list">
                 <?php
                 foreach($block->getStoreCategories(true, false, true) as $category):

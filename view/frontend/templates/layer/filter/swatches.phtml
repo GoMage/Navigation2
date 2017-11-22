@@ -10,10 +10,9 @@
 ?>
 
 <?php
-$helper = $this->helper('GoMage\Navigation\Helper\Data');
 $filter = reset($filterItems)->getFilter();
 $swatchData = $block->getSwatch()->setSwatchFilter($filter)->getSwatchData();
-$swatchData = $helper->prepareSwatchesData($swatchData, $filterItems);
+$swatchData = $block->prepareSwatchesData($swatchData, $filterItems);
 ?>
 
 <div class="swatch-attribute swatch-layered <?php /* @escapeNotVerified */

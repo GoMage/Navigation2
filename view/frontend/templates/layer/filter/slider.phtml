@@ -7,12 +7,12 @@
 
 $filter = reset($filterItems)->getFilter();
 
-$block->getHelper()->getNavigationViewSliderLineColor();
-$block->getHelper()->getNavigationViewSliderLineHeight();
-$block->getHelper()->getNavigationViewSliderElementColor();
-$block->getHelper()->getNavigationViewSliderElementWidth();
-$block->getHelper()->getNavigationViewSliderElementHeight();
-$block->getHelper()->getNavigationViewSliderElementRadius();
+$block->getNavigationViewHelper()->getNavigationViewSliderLineColor();
+$block->getNavigationViewHelper()->getNavigationViewSliderLineHeight();
+$block->getNavigationViewHelper()->getNavigationViewSliderElementColor();
+$block->getNavigationViewHelper()->getNavigationViewSliderElementWidth();
+$block->getNavigationViewHelper()->getNavigationViewSliderElementHeight();
+$block->getNavigationViewHelper()->getNavigationViewSliderElementRadius();
 
 ?>
 
@@ -34,7 +34,7 @@ $block->getHelper()->getNavigationViewSliderElementRadius();
                            data-code="<?php echo $attributeCode; ?>"
                            data-dimension="&nbsp;<?php echo $filter->getCurrencySymbol(); ?>"
                            data-param="<?php echo $filter->getRequestVar() ?>"
-                           data-ajax="0"
+                           data-ajax="1"
                            id="<?php echo $attributeCode; ?>"
                            data-type="slider"
                            type="slider"

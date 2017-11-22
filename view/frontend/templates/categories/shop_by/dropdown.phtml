@@ -1,8 +1,8 @@
 <div class="block block-gan-categories gan-categories-dropdown gan-sidebar-position"
-     style="background-color: <?=$block->getDataHelper()->getNavigationViewBlockCategoriesBackgroundColor()?>"
+     style="background-color: <?=$block->getNavigationViewHelper()->getNavigationViewBlockCategoriesBackgroundColor()?>"
 >
     <div class="block-content block-content-gan-categories">
-        <div class="gan-categories-list-dropdown" <? echo ($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
+        <div class="gan-categories-list-dropdown" >
             <select data-role="navigation-filter" data-type="categories-select" data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>">
             <?php
             foreach($block->getStoreCategories(true, false, true) as $category):

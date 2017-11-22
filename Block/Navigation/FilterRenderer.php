@@ -44,6 +44,7 @@ class FilterRenderer extends Template implements FilterRendererInterface
 
     protected $storeManager;
     public $tooltip;
+    protected $navigationViewHelper;
 
     /**
      * FilterRenderer constructor.
@@ -60,6 +61,7 @@ class FilterRenderer extends Template implements FilterRendererInterface
         \Magento\Framework\App\RequestInterface $request,
         \GoMage\Navigation\Helper\Url $urlHelper,
         \GoMage\Navigation\Helper\Data $dataHelper,
+        \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
 
                 array $data = []
@@ -71,8 +73,19 @@ class FilterRenderer extends Template implements FilterRendererInterface
         $this->_dataHelper = $dataHelper;
         $this->_renderLayered = $renderLayered;
         $this->storeManager = $storeManager;
-        
+        $this->navigationViewHelper = $navigationViewHelper;
+
         parent::__construct($context, $data);
+    }
+
+    public function getHelper()
+    {
+        return $this->_dataHelper;
+    }
+
+    public function getNavigationViewHelper()
+    {
+        return $this->navigationViewHelper;
     }
 
     /**
@@ -181,8 +194,16 @@ class FilterRenderer extends Template implements FilterRendererInterface
         return $tooltip;
     }
 
-    public function getHelper()
+    public function prepareSwatchesData($data, $items)
     {
-        return $this->_dataHelper;
+
+        foreach ($items as $item) {
+            $data['options'][$item->getValue()]['link'] = $item->getGomageUrl();
+            $data['options'][$item->getValue()]['gomage_value'] = $item->getGomageValue();
+            $data['options'][$item->getValue()]['is_active'] = $item->getIsActive();
+            $data['options'][$item->getValue()]['is_show'] = $item->isShowAppliedValues();
+        }
+
+        return $data;
     }
 }
