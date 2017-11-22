@@ -24,4 +24,20 @@ class Templates
 
         return $templates[$type];
     }
+
+    public function getShowShopByInTemplate($type)
+    {
+        $templates = [
+            \GoMage\Navigation\Model\Config\Source\Navigation::DEFAULTS => 'GoMage_Navigation::categories/shop_by/default.phtml',
+            \GoMage\Navigation\Model\Config\Source\Navigation::DROP_DOWN => 'GoMage_Navigation::categories/shop_by/dropdown.phtml',
+            \GoMage\Navigation\Model\Config\Source\Navigation::IMAGE => 'GoMage_Navigation::categories/shop_by/image.phtml',
+            \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK => 'GoMage_Navigation::categories/shop_by/default.phtml',
+        ];
+
+        if (empty($templates[$type])) {
+            throw new Exception(__('Template is not set for ' . (int) $type . ' filter type'));
+        }
+
+        return $templates[$type];
+    }
 }

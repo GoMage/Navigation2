@@ -233,27 +233,57 @@
                 </field>
                 <field id="is_image" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Show Image Name</label>
+                    <comment><![CDATA[
+                        <script type="text/javascript">
+                            jQuery(document).ready(function() {
+
+                                if(jQuery('#gomage_navigation_category_shop_by').val() == 1) {
+                                    jQuery('#gomage_navigation_category_navigation option[value="8"]').attr('disabled', 'disabled');
+                                }
+
+                                jQuery('#gomage_navigation_category_shop_by').change(function() {
+                                    if (jQuery('#gomage_navigation_category_shop_by').val() == 1) {
+                                        jQuery('#gomage_navigation_category_navigation').val(0);
+                                        jQuery('#gomage_navigation_category_navigation option[value="8"]').attr('disabled', 'disabled');
+                                    } else {
+                                        jQuery('#gomage_navigation_category_navigation').val(0);
+                                        jQuery('#gomage_navigation_category_navigation option[value="8"]').removeAttr('disabled', 'disabled');
+                                    }
+
+                                    jQuery('#row_gomage_navigation_category_is_image').hide();
+                                    jQuery('#row_gomage_navigation_category_image_alignment').hide();
+                                    jQuery('#row_gomage_navigation_category_image_width').hide();
+                                    jQuery('#row_gomage_navigation_category_image_height').hide();
+
+                                });
+                            });
+                        </script>
+                    ]]>
+                    </comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="navigation">9</field>
+                    </depends>
                 </field>
                 <field id="image_alignment" translate="label" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Image Alignment</label>
                     <source_model>GoMage\Navigation\Model\Config\Source\Image\Alignment</source_model>
                     <depends>
-                        <field id="image">1</field>
+                        <field id="navigation">9</field>
                     </depends>
                 </field>
                 <field id="image_width" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Image Width, px</label>
                     <frontend_class>validate-number</frontend_class>
                     <depends>
-                        <field id="image">1</field>
+                        <field id="navigation">9</field>
                     </depends>
                 </field>
                 <field id="image_height" translate="label" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Image Height, px</label>
                     <frontend_class>validate-number</frontend_class>
                     <depends>
-                        <field id="image">1</field>
+                        <field id="navigation">9</field>
                     </depends>
                 </field>
             </group>

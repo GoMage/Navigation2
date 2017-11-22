@@ -12,10 +12,6 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     protected $scopeConfig;
 
-    protected $request;
-
-    protected $filters;
-
     /**
      * CategoryData constructor.
      * @param Context $context
