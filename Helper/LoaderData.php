@@ -86,7 +86,7 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_TEXT_COLOR);
+            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_SPINNER_COLOR);
     }
 
     public function getLoaderWindowWidth()

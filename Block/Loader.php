@@ -37,19 +37,4 @@ class Loader extends \Magento\Framework\View\Element\Template
 
         return false;
     }
-
-    public function getImageAlignment()
-    {
-        return $this->helper->getLoaderImageAlignment();
-    }
-
-    public function getBackgroundColor()
-    {
-        return $this->helper->getLoaderBackgroundColor();
-    }
-
-    public function getBorderColor()
-    {
-        return $this->helper->getLoaderBorderColor();
-    }
 }
