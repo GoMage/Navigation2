@@ -18,8 +18,8 @@
                         <a href="#"<?= ($block->getCurrentCategoryId() == $category->getId()) ? ' class="selected"' : ''; ?>>
                             <?= $category->getName() ?>
                         </a>
+                        <?= $block->getOlList($block->getChildCategories($category)); ?>
                     </li>
-                    <?= $block->getOlList($block->getChildCategories($category)); ?>
                 <?php endforeach; ?>
             </ul>
         </div>
