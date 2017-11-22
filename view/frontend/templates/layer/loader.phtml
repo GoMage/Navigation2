@@ -1,7 +1,7 @@
 <?if($block->getHelper()->isShowAjaxLoader()):?>
-    <div id="gomage-loader" class="loading-mask ng-scope" style="display: none;">
-        <div class="popup popup-loading" >
-            <div class="popup-inner" style="
+    <div id="gomage-loader" class="gan-loader ng-scope">
+        <div class="gan-loader-content">
+            <div class="gan-loader-content-in" style="
                     background-color: <?=$block->getHelper()->getLoaderBackgroundColor();?>;
                     border-color: <?=$block->getHelper()->getLoaderBorderColor();?>;
                     color: <?=$block->getHelper()->getLoaderTextColor();?>;
@@ -9,14 +9,23 @@
                     height: <?=$block->getHelper()->getLoaderWindowHeight();?>px;
                     ">
                 <? if ($block->getHelper()->isSpinnerTypeImage() && ($image = $block->getLoaderImage()) && !empty($image)): ?>
-                    <img alt="Loading..." align="<?=$block->getImageAlignment()?>"
-                         src="<?= $image ?>">
+                    <div class="gan-loader-img">
+                        <img alt="<?php echo __('Loading...') ?>" align="<?=$block->getImageAlignment()?>"
+                            src="<?= $image ?>">
+                     </div>
                 <?else:?>
 
                     <?$block->getHelper()->getLoaderSpinnerColor()?>
+                    <!-- put spinner -->
+
+                    <div class="gan-loader-img">
+                        <svg class="gan-loader-spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg" stroke="<?//=$block->getHelper->getLoaderSpinnerColor()?>"><circle class="gan-loader-spinner-circle" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg>
+                    </div>
 
                 <?endif; ?>
-                <?=$block->getHelper()->getLoaderText();?>
+                <div class="gan-loader-text">
+                    <?=$block->getHelper()->getLoaderText();?>
+                </div>
             </div>
         </div>
     </div>
