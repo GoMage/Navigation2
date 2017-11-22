@@ -1,28 +1,21 @@
-<div class="block block-gan-categories gan-categories-image gan-sidebar-position"
-     style="background-color: <?=$block->getDataHelper()->getNavigationViewBlockCategoriesBackgroundColor()?>"
->
-    <div class="block-content block-content-gan-categories">
-        <div>
-            <ul class="gan-categories-list gan-categories-list-img<?=($block->getCategoriesDataHelper()->getCategoriesImageAlignment()) ? ' gan-categories-list-alignment-' . $block->getCategoriesDataHelper()->getCategoriesImageAlignment() : '';?>">
-                <?php
-                foreach($block->getStoreCategories(true, false, true) as $category):
-                    if (!$category->getIsActive()) continue;?>
-                    <li data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>" data-role="navigation-filter"
-                        data-type="categories-li" data-url="<?= $block->getCategoryHelper()->getCategoryUrl($category) ?>">
-                        <a class="<?= ($block->getCurrentCategoryId() == $category->getId()) ? 'selected' : ''; ?>
-                                  <?=($block->getCategoriesDataHelper()->isShowCheckboxes()) ? 'checkbox' : '';?>""
-                            href="#">
-                            <img width="<?=($block->getCategoriesDataHelper()->getCategoriesImageWidth()) ? $block->getCategoriesDataHelper()->getCategoriesImageWidth() : '';?>"
-                                 height="<?=($block->getCategoriesDataHelper()->getCategoriesImageHeight()) ? $block->getCategoriesDataHelper()->getCategoriesImageHeight() : '';?>"
-                                 src="<?= $block->getCategoryImage($category->getEntityId()) ?>"
-                            >
-                            <?php if($block->getCategoriesDataHelper()->isShowImageName()): ?>
-                                <span><?= $category->getName();?></span>
-                            <?endif;?>
-                        </a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    </div>
-</div>
+<ul class="gan-categories-list gan-categories-list-img gan-categories-list-img-in-block
+    <?=($block->getCategoriesDataHelper()->getCategoriesImageAlignment()) ? ' gan-categories-list-alignment-' . $block->getCategoriesDataHelper()->getCategoriesImageAlignment() : '';?>
+    <?=($block->getCategoriesDataHelper()->isShowCheckboxes()) ? ' gan-categories-list-img-checkbox' : '';?>
+    ">
+    <?php
+    foreach($block->getStoreCategories(true, false, true) as $category):
+        if (!$category->getIsActive()) continue;?>
+        <li data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>" data-role="navigation-filter"
+            data-type="categories-li" data-url="<?= $block->getCategoryHelper()->getCategoryUrl($category) ?>">
+            <a href="#"<?= ($block->getCurrentCategoryId() == $category->getId()) ? ' class="selected"' : ''; ?>>
+                <img width="<?=($block->getCategoriesDataHelper()->getCategoriesImageWidth()) ? $block->getCategoriesDataHelper()->getCategoriesImageWidth() : '';?>"
+                     height="<?=($block->getCategoriesDataHelper()->getCategoriesImageHeight()) ? $block->getCategoriesDataHelper()->getCategoriesImageHeight() : '';?>"
+                     src="<?= $block->getCategoryImage($category->getEntityId()) ?>"
+                >
+                <?php if($block->getCategoriesDataHelper()->isShowImageName()): ?>
+                    <span><?= $category->getName();?></span>
+                <?endif;?>
+            </a>
+        </li>
+    <?php endforeach; ?>
+</ul>

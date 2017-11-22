@@ -1,19 +1,16 @@
-<div class="block block-gan-categories gan-categories-dropdown gan-sidebar-position"
-     style="background-color: <?=$block->getNavigationViewHelper()->getNavigationViewBlockCategoriesBackgroundColor()?>"
->
-    <div class="block-content block-content-gan-categories">
-        <div class="gan-categories-list-dropdown" >
-            <select data-role="navigation-filter" data-type="categories-select" data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>">
-            <?php
-            foreach($block->getStoreCategories(true, false, true) as $category):
-                if (!$category->getIsActive()) continue;?>
-                    <option
-                        <?= ($block->getCurrentCategoryId() == $category->getId()) ? 'selected' : ''; ?>
-                            value="<?php echo $block->getCategoryHelper()->getCategoryUrl($category) ?>">
-                        <?php echo $category->getName() ?>
-                    </option>
-            <?php endforeach; ?>
-            </select>
-        </div>
-    </div>
+<div class="gan-filter gan-filter-categories gan-filter-dropdown">
+
+    <select data-role="navigation-filter" data-type="categories-select" data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>">
+        <option value=""><?php echo __('Select Filter') ?></option>
+    <?php
+    foreach($block->getStoreCategories(true, false, true) as $category):
+        if (!$category->getIsActive()) continue;?>
+            <option
+                <?= ($block->getCurrentCategoryId() == $category->getId()) ? 'selected' : ''; ?>
+                    value="<?php echo $block->getCategoryHelper()->getCategoryUrl($category) ?>">
+                <?php echo $category->getName() ?>
+            </option>
+    <?php endforeach; ?>
+    </select>
+
 </div>

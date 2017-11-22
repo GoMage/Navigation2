@@ -3,8 +3,25 @@
 
 /* Filter type = default
 -------------------------------------------------- */
+.gan-filter{
+  word-wrap: break-word;
+  font-size: 14px;
+  line-height: 1.43;
+}
+.gan-filter li a{
+  display: block;
+  color: #636363;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+}
+.gan-filter li a:hover{
+  color: #3399CC;
+  background: none;
+}
 .gan-filter-default a.active{
   font-weight: 700;
+  cursor: default;
 }
 
 /* Filter type = input
@@ -95,13 +112,15 @@
 div.block.block-gan-categories{
   margin-bottom: 40px;
 }
-.block-gan-categories .block-title{
+.block-gan-categories .block-title,
+.block-gan-filter .block-title{
   margin: 0 0 20px;
 }
 .gan-categories-title{
   cursor: pointer;
 }
-.block-gan-categories .block-title strong{
+.block-gan-categories .block-title strong,
+.block-gan-filter .block-title strong{
   font-size: 18px;
   font-weight: 300;
 }
@@ -118,23 +137,30 @@ div.block.block-gan-categories{
   font-size: 14px;
   line-height: 1.43;
 }
+.gan-categories-list a{
+  color: #636363;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+}
+.gan-categories-list a:hover{
+  color: #3399CC;
+  background-color: transparent;
+}
 
 /* Default */
 .gan-categories-default .gan-categories-list li{
   position: relative;
   display: block;
   border-top: 1px solid #ccc;
-  padding: 5px 0;
 }
 .gan-categories-default .gan-categories-list > li:first-child{
   border-top: 0;
 }
 .gan-categories-default .gan-categories-list li a{
   display: block;
-  text-decoration: none;
-}
-.gan-categories-default .gan-categories-list li a:hover{
-  text-decoration: underline;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 .gan-categories-default .gan-categories-list ol a{
   padding-left: 15px;
@@ -147,6 +173,9 @@ div.block.block-gan-categories{
 }
 .gan-categories-default .gan-categories-list ol ol ol ol a{
   padding-left: 60px;
+}
+.gan-categories-default .gan-categories-list ol ol ol ol ol a{
+  padding-left: 75px;
 }
 
 /* In block */
@@ -162,6 +191,15 @@ div.block.block-gan-categories{
 }
 .gan-categories-list-dropdown select:last-child{
   margin-bottom: 0;
+}
+.gan-categories-list-dropdown select option[selected]{
+  color: #3399CC;
+}
+
+/* Image */
+.gan-categories-list-img .selected img{
+  padding: 1px;
+  border: 1px solid #E26703;
 }
 
 /* Image Vertical */
@@ -200,18 +238,22 @@ div.block.block-gan-categories{
   margin-left: 10px;
 }
 
-/* Checkobox */
+/* Checkobox
+-------------------------------------------------- */
 .gan-categories-list-img-checkbox a,
-.gan-categories-list-checkbox a{
+.gan-categories-list-checkbox a span,
+.gan-filter-checkbox a span{
   display: block;
   padding-left: 24px;
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAMAAABFNRROAAAAVFBMVEWOj4/19fWus7nLz9Xt7e3p6enh4uPy8vLq6uvm5+fc3d/a3N7R1Nm7vsHw8PDj5OXd3+HV2NzU1dbCxMbU19vN0dfN0dbMzc3Ky8zGx8i0ub2yt7z2uHxIAAAAWUlEQVQI113ORw6AMAxEUQK20zud+9+TkAgh8ndvM5qhi309GlunbZpKJqr8ajU60NG0mFmRxK3qipoQAFKVDV44zrlq8gi87FNVRnCsJKv2pEkKIZB1X/7dEeEDBGM7114AAAAASUVORK5CYII=) 0 0 no-repeat;
 }
-.gan-categories-list-checkbox a{
+.gan-categories-list-checkbox a span,
+.gan-filter-checkbox a span{
   background-position: 0 4px;
 }
 .gan-categories-list-img-checkbox a.selected,
-.gan-categories-list-checkbox a.selected{
+.gan-categories-list-checkbox a.selected span,
+.gan-filter-checkbox a.active span{
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAMAAABFNRROAAAAeFBMVEWOj4/09PWus7n5+fnM0NZKX5f29vbs7u9ld6ZHXJTq6uvg4ujn5+ff4ufd4OPV2d3b29y4v9OwudDGycyMmbtEWpLh4uLP1OLc3d7Jz93V1da8w9a6wdXNz9HJzNDKy8yjrsidp8CQnb13hqtuf6phc6RecaFXap010WsIAAAAZ0lEQVQI113ORw7EMAhA0WEILum993r/GyY2yiZ/9wRC/D4BhyjA6G8aly1kOU/yKhLxKkgL5fMsCiI4dRdbZc0se1LYWoW7rhQlorYaPE10IJS8KXOiFAVfmWIvX0G6rhE/AqbPlzeVkQSFlpxeQgAAAABJRU5ErkJggg==);
 }
 
@@ -220,29 +262,32 @@ div.block.block-gan-categories{
   position: relative;
   display: block;
   border-top: 1px solid #ccc;
-  padding: 5px 0;
 }
 .gan-categories-flyout .gan-categories-list li:first-child{
   border-top: 0;
 }
+.gan-categories-flyout .gan-categories-list li a{
+  display: block;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
 .gan-categories-flyout .gan-categories-list ol{
   position: absolute;
   display: none;
-  width: 300px;
+  width: 210px;
   left: 100px;
   top: 5px;
   border: 1px solid #ccc;
   background: #fbfbfb;
-  width: 300px;
   z-index: 999;
 }
 .gan-categories-flyout .gan-categories-list li:hover > ol{
   display: block;
 }
-.gan-categories-flyout .gan-categories-list li a{
-  display: block;
-  text-decoration: none;
+.gan-categories-flyout .gan-categories-list ol li a{
+  padding-left: 10px;
+  padding-right: 10px;
 }
-.gan-categories-flyout .gan-categories-list li a:hover{
-  text-decoration: underline;
+.gan-categories-flyout .gan-categories-list ol li.parent > a{
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAMAAAC67D+PAAAACVBMVEUAAABufoTQ2d2wVR0nAAAAAXRSTlMAQObYZgAAAB9JREFUeAFjgAImBjiLEcFixMpiQrAYESxGOAtI4AAACbEALGqz2CoAAAAASUVORK5CYII=) no-repeat 100% 100%;
 }
