@@ -4,6 +4,9 @@
 .block-gan-filter .filter-options-item{
   position: relative;
 }
+.block-gan-filter .filter-options{
+  display: block;
+}
 
 /* Filter type = default
 -------------------------------------------------- */
@@ -538,6 +541,7 @@ body.ajax-loading .block-search{
   background: #fff;
   border: 1px solid #ccc;
   overflow: auto;
+  box-sizing: border-box;
 }
 .filter-options-content .gan-tooltip{
   position: absolute;
@@ -556,10 +560,39 @@ body.ajax-loading .block-search{
   position: absolute;
   right: 5px;
   text-decoration: none;
-  top: 9px;
+  top: 5px;
 }
 .gan-tooltip-text{
   color: #636363;
   font-size: 14px;
   line-height: 1.5;
+  word-wrap: break-word;
+}
+@media all and (max-width: 768px){
+  .gan-tooltip-content{
+    left: auto;
+    right: 0;
+    padding-left: 0;
+    padding-right: 30px;
+  }
+  .gan-tooltip-content-in{
+    max-width: calc(100vw - 100px);
+  }
+}
+
+/* Buttons
+-------------------------------------------------- */
+button.gan-custom-button{
+  border: 1px solid #ccc;
+  background: #fff;
+  box-shadow: none;
+  border-radius: 5px;
+  padding: 0 12px;
+  color: #519cde;
+  text-align: center;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 23px;
+  box-sizing: border-box;
+  text-transform: uppercase;
 }

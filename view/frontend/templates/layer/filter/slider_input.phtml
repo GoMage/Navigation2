@@ -80,9 +80,14 @@ $priceValues = explode(';', $filter->getSingleValue());
                 </div>
                 <?php if($filter->getGomageIsShowFilterButton()):?>
                     <div class="gan-filter-input-actions">
-                        <button id="price-button" data-role="navigation-filter" data-type="price-button" class="button" type="submit"
-                            <?$block->getNavigationViewHelper()->isNavigationViewButtonsGradient(); $block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2();?>
-                        style="background-color: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>; color: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsTextColor()?>"
+                        <button id="price-button" data-role="navigation-filter" data-type="price-button" class="gan-custom-button" type="submit"
+                            style="
+                                <?if ($block->getNavigationViewHelper()->isNavigationViewButtonsGradient()):?>
+                                    background: linear-gradient(to bottom, #<?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>, #<?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2();?>);
+                                <?else:?>
+                                    background-color: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>;
+                                <?endif;?>
+                                color: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsTextColor()?>"
                         >
                             <span><?php echo $filter->getAttributeModel()->getFrontendLabel(); ?></span>
                         </button>

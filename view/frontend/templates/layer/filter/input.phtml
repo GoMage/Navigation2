@@ -78,15 +78,20 @@ $priceValues = explode(';', $filter->getSingleValue());
                             id="price-button"
                             data-role="navigation-filter"
                             data-type="price-button"
-                            class="button"
+                            class="gan-custom-button"
                             type="submit"
                         <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
                             data-ajax="1"
                         <?else:?>
                             data-ajax="0"
                         <?endif;?>
-                        <?$block->getNavigationViewHelper()->isNavigationViewButtonsGradient(); $block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2();?>
-                            style="background-color: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>; color: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsTextColor()?>"
+                            style="
+                                <?if ($block->getNavigationViewHelper()->isNavigationViewButtonsGradient()):?>
+                                    background: linear-gradient(to bottom, #<?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>, #<?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2();?>);
+                                <?else:?>
+                                    background-color:<?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>;
+                                <?endif;?>
+                                color: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsTextColor()?>"
                     >
                         <span><?php echo $filter->getAttributeModel()->getFrontendLabel(); ?></span>
                     </button>
