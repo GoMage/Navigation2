@@ -27,8 +27,8 @@ $filter = reset($filterItems)->getFilter();
                    <?endif;?>
                    data-type="<?php echo (int) $filter->getGomageFilterType(); ?>"
                    <?php if($item->getIsActive()):?>
-                    data-active="1">
-                    <?php endif;?>
+                    data-active="1"
+                    <?php endif;?>>
                     <span class="filter-label-text"><?php echo $item->getLabel() ?></span>
                     <? if ($block->getHelper()->isShowValueQty()): ?>
                         <span class="count"><?php echo $item->getCount() ?><span class="filter-count-label">

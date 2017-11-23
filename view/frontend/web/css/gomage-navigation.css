@@ -113,6 +113,16 @@
   overflow: auto;
 }
 
+/* Filter type = Dropdown
+-------------------------------------------------- */
+.gan-filter-dropdown select{
+  width: 100%;
+}
+.gan-filter-dropdown select option[selected]{
+  color: #3399CC;
+}
+
+
 /* Categories block
 -------------------------------------------------- */
 
