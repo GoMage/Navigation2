@@ -23,7 +23,7 @@ define([
             productToolbarContainer: 'div.toolbar-products',
             categoriesContainer: 'div.gan-categories',
             loader: '#gomage-loader',
-            productLoader: '<div id="product-loader">Loading ...</div>',
+            productLoader: '<div id="product-loader" class="gan-product-loader"><svg class="gan-loader-spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="gan-loader-spinner-circle" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><span>Loading...</span></div>',
             showMore: false
         },
 
@@ -444,7 +444,7 @@ define([
 
         _ajaxSendShowMore: function () {
 
-            $(this.options.productListContainer).append(this.options.productLoader);
+            $(this.options.productListContainer).after(this.options.productLoader);
         },
 
         /**

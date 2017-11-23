@@ -468,3 +468,26 @@ body.ajax-loading .logo,
 body.ajax-loading .block-search{
   position: static;
 }
+
+/* Small loadrer
+-------------------------------------------------- */
+.gan-product-loader{
+  text-align: center;
+  margin: 20px 0;
+  font-size: 14px;
+  font-weight: 700;
+}
+.gan-product-loader .gan-loader-spinner{
+  width: 30px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  stroke: #000;
+}
+
+/* More button
+-------------------------------------------------- */
+.gan-more-button{
+  text-align: center;
+  margin: 20px 0;
+}
