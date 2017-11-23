@@ -316,6 +316,9 @@ div.block.block-gan-categories{
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-pack          : center;
+  -webkit-justify-content: center;
+  justify-content        : center;
   -ms-flex-align     : center;
   -webkit-align-items: center;
   align-items        : center;
@@ -328,6 +331,7 @@ div.block.block-gan-categories{
   max-width: calc(100vw - 20px);
   max-height: calc(100vh - 20px);
   box-sizing: border-box;
+  overflow: hidden;
 }
 .gan-loader-img{
   -webkit-flex: 0 0;
@@ -335,8 +339,52 @@ div.block.block-gan-categories{
   flex        : 0 0;
   margin-right: 10px;
 }
+.gan-loader-spinner-wrap{
+  -webkit-flex: 0 0 65px;
+  -ms-flex    : 0 0 65px;
+  flex        : 0 0 65px;
+  margin-right: 10px;
+}
+.gan-loader-spinner-wrap ~ .gan-loader-text{
+  max-width: calc(100% - 75px);
+}
 .gan-loader-img img{
   max-width: none;
+  vertical-align: top;
+}
+.gan-loader-img-right .gan-loader-img{
+  -ms-flex-order: 10;
+  -webkit-order : 10;
+  order         : 10;
+  margin-left: 10px;
+  margin-right: 0;
+}
+.gan-loader-img-top,
+.gan-loader-img-bottom{
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap    : wrap;
+  flex-wrap        : wrap;
+}
+.gan-loader-img-top .gan-loader-text,
+.gan-loader-img-bottom .gan-loader-text{
+  text-align: center;
+}
+.gan-loader-img-top .gan-loader-img,
+.gan-loader-img-bottom .gan-loader-img{
+  -webkit-flex: 0 0 100%;
+  -ms-flex    : 0 0 100%;
+  flex        : 0 0 100%;  
+  text-align: center;
+  margin-right: 0;
+}
+.gan-loader-img-top .gan-loader-img{
+  margin-bottom: 10px;
+}
+.gan-loader-img-bottom .gan-loader-img{
+  -ms-flex-order: 10;
+  -webkit-order : 10; 
+  order         : 10;
+  margin-top: 10px;
 }
 .gan-loader-text{
   word-wrap: break-word;
@@ -344,7 +392,8 @@ div.block.block-gan-categories{
   -ms-flex    : 1 1;
   flex        : 1 1;
   font-size: 14px;
-  font-weight: 700;  
+  font-weight: 700;
+  max-width: 100%;
 }
 .gan-loader-spinner{
   stroke: #000;
