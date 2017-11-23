@@ -9,19 +9,18 @@
                     height: <?=$block->getHelper()->getLoaderWindowHeight();?>px;
                     ">
                 <? if ($block->getHelper()->isSpinnerTypeImage() && ($image = $block->getLoaderImage()) && !empty($image)): ?>
-                    <div class="gan-loader-img">
-                        <img alt="<?=__('Loading...') ?>" align="<?=$block->getHelper()->getLoaderImageAlignment()?>"
-                            src="<?= $image ?>">
+                    <div class="gan-loader-img gan-loader-img-<?=$block->getImageAlignment()?>">
+                        <img alt="<?php echo __('Loading...') ?>" src="<?= $image ?>">
                      </div>
                 <?else:?>
-
-                    <?=$block->getHelper()->getLoaderSpinnerColor()?>
-
-
                     <div class="gan-loader-img">
-                        <svg class="gan-loader-spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg" stroke="<?//=$block->getHelper->getLoaderSpinnerColor()?>"><circle class="gan-loader-spinner-circle" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg>
+                        <svg class="gan-loader-spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="gan-loader-spinner-circle" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg>
                     </div>
-
+                    <style type="text/css">
+                    .gan-loader-spinner{
+                        stroke: <?=$block->getHelper()->getLoaderSpinnerColor()?>;
+                    }
+                    </style>
                 <?endif; ?>
                 <div class="gan-loader-text">
                     <?=$block->getHelper()->getLoaderText();?>

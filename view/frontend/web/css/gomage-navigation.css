@@ -320,10 +320,14 @@ div.block.block-gan-categories{
   -webkit-align-items: center;
   align-items        : center;
   border: 1px solid #ccc;
-  box-shadow: 3px 3px 3px #999;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .4);
   padding: 10px;
   background: #fff;
   text-align: left;
+  color: #000;
+  max-width: calc(100vw - 20px);
+  max-height: calc(100vh - 20px);
+  box-sizing: border-box;
 }
 .gan-loader-img{
   -webkit-flex: 0 0;
@@ -331,17 +335,19 @@ div.block.block-gan-categories{
   flex        : 0 0;
   margin-right: 10px;
 }
+.gan-loader-img img{
+  max-width: none;
+}
 .gan-loader-text{
   word-wrap: break-word;
   -webkit-flex: 1 1;
   -ms-flex    : 1 1;
   flex        : 1 1;
   font-size: 14px;
-  font-weight: 700;
-  color: #000;
+  font-weight: 700;  
 }
 .gan-loader-spinner{
-  stroke: #e51c23;
+  stroke: #000;
   -webkit-animation: rotation 1.4s linear infinite;
   animation: rotation 1.4s linear infinite;
 }
