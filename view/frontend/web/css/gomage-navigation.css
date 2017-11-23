@@ -114,7 +114,8 @@ div.block.block-gan-categories{
 }
 .block-gan-categories .block-title,
 .block-gan-filter .block-title{
-  margin: 0 0 20px;
+  margin: 0 0 15px;
+  padding: 10px 10px 0;
 }
 .gan-categories-title{
   cursor: pointer;
@@ -123,6 +124,9 @@ div.block.block-gan-categories{
 .block-gan-filter .block-title strong{
   font-size: 18px;
   font-weight: 300;
+}
+.block-gan-categories .block-content{
+  padding: 0 10px 10px;
 }
 
 .gan-categories-list,

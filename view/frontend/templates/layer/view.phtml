@@ -19,9 +19,9 @@
                         "backToTopSpeed": "<?php echo $block->getDataHelper()->getBackToTopSpeed(); ?>",
                         "backToTopAction": "<?php echo $block->getDataHelper()->getBackToTopAction(); ?>",
                         "ajaxAutoload": "<?php echo $block->getDataHelper()->isUseAutoScrolling(); ?>"
-                        }}'>
+                        }}' style="background-color: <?=$block->getNavigationViewHelper()->getNavigationViewBlockBackgroundColor()?>; ">
         <div class="block-title"><strong><?php /* @escapeNotVerified */ echo __('Add Filter') ?></strong></div>
-        <div class="block-content filter-content" style="background-color: <?=$block->getNavigationViewHelper()->getNavigationViewBlockBackgroundColor()?>; ">
+        <div class="block-content filter-content">
             <?if ($block->getDataHelper()->isShowAppliedValuesInResults()):?>
                 <?php echo $block->getStateBlock()->toHtml() ?>
                 <?php if ($block->getLayer()->getState()->getFilters()): ?>
