@@ -533,10 +533,11 @@ body.ajax-loading .block-search{
   padding-left: 30px;
 }
 .gan-tooltip-content-in{
-  padding: 3px 16px 3px 7px;
+  padding: 8px 20px 8px 8px;
   position: relative;
   background: #fff;
   border: 1px solid #ccc;
+  overflow: auto;
 }
 .filter-options-content .gan-tooltip{
   position: absolute;
@@ -555,11 +556,9 @@ body.ajax-loading .block-search{
   position: absolute;
   right: 5px;
   text-decoration: none;
-  top: 2px;
+  top: 9px;
 }
 .gan-tooltip-text{
-  max-height: 100%;
-  overflow: auto;
   color: #636363;
   font-size: 14px;
   line-height: 1.5;
