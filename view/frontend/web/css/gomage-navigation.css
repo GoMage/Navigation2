@@ -543,7 +543,7 @@ body.ajax-loading .block-search{
   top: 12px;
   right: 39px;
 }
-.gan-tooltip:hover .gan-tooltip-content{
+.gan-tooltip.__opened .gan-tooltip-content{
   display: block;
 }
 .gan-tooltip-close{
