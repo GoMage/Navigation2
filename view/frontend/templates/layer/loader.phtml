@@ -9,7 +9,7 @@
                     height: <?=$block->getHelper()->getLoaderWindowHeight();?>px;
                     ">
                 <? if ($block->getHelper()->isSpinnerTypeImage() && ($image = $block->getLoaderImage()) && !empty($image)): ?>
-                    <div class="gan-loader-img gan-loader-img-<?=$block->getImageAlignment()?>">
+                    <div class="gan-loader-img gan-loader-img-<?=$block->getHelper()->getImageAlignment()?>">
                         <img alt="<?php echo __('Loading...') ?>" src="<?= $image ?>">
                      </div>
                 <?else:?>
