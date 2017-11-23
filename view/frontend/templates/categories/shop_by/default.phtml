@@ -10,7 +10,7 @@
         <li class="item" data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>" data-role="navigation-filter"
             data-type="categories-li" data-url="<?= $block->getCategoryHelper()->getCategoryUrl($category) ?>">
             <a href="#"<?= ($block->getCurrentCategoryId() == $category->getId()) ? ' class="active"' : ''; ?>>
-                <span><?= $category->getName() ?></span>
+                <span class="filter-label-wrap"><?= $category->getName() ?></span>
             </a>
         </li>
     <?php endforeach; ?>

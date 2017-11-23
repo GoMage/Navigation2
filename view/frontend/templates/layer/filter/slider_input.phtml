@@ -8,14 +8,6 @@
 
 $filter = reset($filterItems)->getFilter();
 
-
-$block->getNavigationViewHelper()->getNavigationViewSliderLineColor();
-$block->getNavigationViewHelper()->getNavigationViewSliderLineHeight();
-$block->getNavigationViewHelper()->getNavigationViewSliderElementColor();
-$block->getNavigationViewHelper()->getNavigationViewSliderElementWidth();
-$block->getNavigationViewHelper()->getNavigationViewSliderElementHeight();
-$block->getNavigationViewHelper()->getNavigationViewSliderElementRadius();
-
 $priceValues = explode(';', $filter->getSingleValue());
 
 ?>
@@ -83,10 +75,9 @@ $priceValues = explode(';', $filter->getSingleValue());
                         <button id="price-button" data-role="navigation-filter" data-type="price-button" class="gan-custom-button" type="submit"
                                 style="
                                     <?if($block->getNavigationViewHelper()->isNavigationViewButtonsGradient() && !empty($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2())):?>
-                                        background-color: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>;
-                                        background-color2: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2()?>;
+                                        background: linear-gradient(to bottom, <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>, <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2()?>);
                                     <?elseif(!empty($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor())):?>
-                                        background-color: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>;
+                                        background: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>;
                                     <?endif;?>
                                     <?if(!empty($block->getNavigationViewHelper()->getNavigationViewButtonsTextColor())):?>
                                         color: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsTextColor()?>
@@ -100,3 +91,40 @@ $priceValues = explode(';', $filter->getSingleValue());
         </form>
     </div>
 </div>
+<style type="text/css">
+    
+    .gan-filter-slider .jslider .jslider-bg,
+    .gan-filter-slider .jslider .jslider-bg .f,
+    .gan-filter-slider .jslider .jslider-bg .r,
+    .gan-filter-slider .jslider .jslider-bg .l,
+    .gan-filter-slider .jslider .jslider-bg .v{
+
+        /* Slider Line Height */
+        height: <?=$block->getNavigationViewHelper()->getNavigationViewSliderLineHeight()?>px;        
+        
+    }
+    
+    .gan-filter-slider .jslider .jslider-bg .v{
+        
+        /* Slider Line Color */
+        background: <?=$block->getNavigationViewHelper()->getNavigationViewSliderLineColor()?>;
+
+    }
+    
+    .gan-filter-slider .jslider_round_plastic .jslider-pointer{
+        
+        /* Slider Element Color */
+        background: <?=$block->getNavigationViewHelper()->getNavigationViewSliderElementColor()?>;
+        
+        /* Slider Element Width */
+        width: <?=$block->getNavigationViewHelper()->getNavigationViewSliderElementWidth()?>px;
+        
+        /* Slider Element Height */
+        height: <?=$block->getNavigationViewHelper()->getNavigationViewSliderElementHeight()?>px;
+        
+        /* Slider Element Radius */
+        border-radius: <?=$block->getNavigationViewHelper()->getNavigationViewSliderElementRadius()?>px;
+
+    }
+    
+</style>

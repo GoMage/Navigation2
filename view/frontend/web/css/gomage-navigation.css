@@ -72,6 +72,13 @@
 .gan-filter-slider-input .layout{
   margin-bottom: 20px;
 }
+.gan-filter-slider .jslider{
+  top: auto;
+  height: auto;
+}
+.gan-filter-slider .jslider .jslider-bg{
+  height: 3px;
+}
 .gan-filter-slider .jslider .jslider-bg .f,
 .gan-filter-slider .jslider .jslider-bg .r,
 .gan-filter-slider .jslider .jslider-bg .l{
@@ -87,22 +94,24 @@
   width: 14px;
   height: 23px;
   margin-left: 0;
-  -webkit-transform: translateX(-50%);
-  -ms-transform    : translateX(-50%);
-  transform        : translateX(-50%);
-  top: -8px;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform    : translate(-50%, -50%);
+  transform        : translate(-50%, -50%);
+  top: 50%;
+  z-index: 20;
 }
 .gan-filter-slider .jslider .jslider-label{
   color: #636363;
   font-size: 14px;
   line-height: 1.5;
-  top: 20px;
+  top: 100%;
 }
 .gan-filter-slider .jslider .jslider-value{
-  top: 20px;
+  top: 100%;
   color: #636363;
   font-size: 14px;
   line-height: 1.5;
+  z-index: 10;
 }
 
 /* Filter type = In block
@@ -263,18 +272,18 @@ div.block.block-gan-categories{
 -------------------------------------------------- */
 .gan-categories-list-img-checkbox a,
 .gan-categories-list-checkbox a span,
-.gan-filter-checkbox a span{
+.gan-filter-checkbox .filter-label-wrap{
   display: block;
   padding-left: 24px;
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAMAAABFNRROAAAAVFBMVEWOj4/19fWus7nLz9Xt7e3p6enh4uPy8vLq6uvm5+fc3d/a3N7R1Nm7vsHw8PDj5OXd3+HV2NzU1dbCxMbU19vN0dfN0dbMzc3Ky8zGx8i0ub2yt7z2uHxIAAAAWUlEQVQI113ORw6AMAxEUQK20zud+9+TkAgh8ndvM5qhi309GlunbZpKJqr8ajU60NG0mFmRxK3qipoQAFKVDV44zrlq8gi87FNVRnCsJKv2pEkKIZB1X/7dEeEDBGM7114AAAAASUVORK5CYII=) 0 0 no-repeat;
 }
 .gan-categories-list-checkbox a span,
-.gan-filter-checkbox a span{
+.gan-filter-checkbox .filter-label-wrap{
   background-position: 0 4px;
 }
 .gan-categories-list-img-checkbox a.selected,
 .gan-categories-list-checkbox a.selected span,
-.gan-filter-checkbox a.active span{
+.gan-filter-checkbox a.active .filter-label-wrap{
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAMAAABFNRROAAAAeFBMVEWOj4/09PWus7n5+fnM0NZKX5f29vbs7u9ld6ZHXJTq6uvg4ujn5+ff4ufd4OPV2d3b29y4v9OwudDGycyMmbtEWpLh4uLP1OLc3d7Jz93V1da8w9a6wdXNz9HJzNDKy8yjrsidp8CQnb13hqtuf6phc6RecaFXap010WsIAAAAZ0lEQVQI113ORw7EMAhA0WEILum993r/GyY2yiZ/9wRC/D4BhyjA6G8aly1kOU/yKhLxKkgL5fMsCiI4dRdbZc0se1LYWoW7rhQlorYaPE10IJS8KXOiFAVfmWIvX0G6rhE/AqbPlzeVkQSFlpxeQgAAAABJRU5ErkJggg==);
 }
 
@@ -568,9 +577,10 @@ body.ajax-loading .block-search{
   font-weight: 700;
   line-height: 18px;
   position: absolute;
-  right: 5px;
+  right: 0;
   text-decoration: none;
-  top: 5px;
+  top: 0;
+  padding: 5px;
 }
 .gan-tooltip-text{
   color: #636363;

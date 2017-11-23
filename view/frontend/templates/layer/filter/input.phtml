@@ -87,10 +87,9 @@ $priceValues = explode(';', $filter->getSingleValue());
                         <?endif;?>
                             style="
                             <?if($block->getNavigationViewHelper()->isNavigationViewButtonsGradient() && !empty($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2())):?>
-                                    background-color: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>;
-                                        background-color2: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2()?>;
+                                    background: linear-gradient(to bottom, <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>, <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2()?>);
                                     <?elseif(!empty($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor())):?>
-                                    background-color: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>;
+                                    background: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>;
                                     <?endif;?>
                             <?if(!empty($block->getNavigationViewHelper()->getNavigationViewButtonsTextColor())):?>
                                     color: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsTextColor()?>
