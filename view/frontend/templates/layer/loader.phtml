@@ -10,7 +10,7 @@
                     ">
                 <? if ($block->getHelper()->isSpinnerTypeImage() && ($image = $block->getLoaderImage()) && !empty($image)): ?>
                     <div class="gan-loader-img">
-                        <img alt="<?php echo __('Loading...') ?>" align="<?=$block->getImageAlignment()?>"
+                        <img alt="<?=__('Loading...') ?>" align="<?=$block->getHelper()->getLoaderImageAlignment()?>"
                             src="<?= $image ?>">
                      </div>
                 <?else:?>
