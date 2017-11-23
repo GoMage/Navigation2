@@ -86,14 +86,18 @@ $priceValues = explode(';', $filter->getSingleValue());
                             data-ajax="0"
                         <?endif;?>
                             style="
-                                <?if ($block->getNavigationViewHelper()->isNavigationViewButtonsGradient()):?>
-                                    background: linear-gradient(to bottom, #<?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>, #<?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2();?>);
-                                <?else:?>
-                                    background-color:<?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>;
-                                <?endif;?>
-                                color: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsTextColor()?>"
-                    >
-                        <span><?php echo $filter->getAttributeModel()->getFrontendLabel(); ?></span>
+                            <?if($block->getNavigationViewHelper()->isNavigationViewButtonsGradient() && !empty($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2())):?>
+                                    background-color: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>;
+                                        background-color2: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2()?>;
+                                    <?elseif(!empty($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor())):?>
+                                    background-color: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>;
+                                    <?endif;?>
+                            <?if(!empty($block->getNavigationViewHelper()->getNavigationViewButtonsTextColor())):?>
+                                    color: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsTextColor()?>
+                                    <?endif;?>
+                                    ">
+
+                        <span><?php echo __('Filter'); ?></span>
                     </button>
                 </div>
             <?php endif;?>
