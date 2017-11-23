@@ -80,7 +80,7 @@ $priceValues = explode(';', $filter->getSingleValue());
                 </div>
                 <?php if($filter->getGomageIsShowFilterButton()):?>
                     <div class="gan-filter-input-actions">
-                        <button id="price-button" data-role="navigation-filter" data-type="price-button" class="button" type="submit"
+                        <button id="price-button" data-role="navigation-filter" data-type="price-button" class="gan-custom-button" type="submit"
                                 style="
                                     <?if($block->getNavigationViewHelper()->isNavigationViewButtonsGradient() && !empty($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2())):?>
                                         background-color: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>;
