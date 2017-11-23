@@ -5,10 +5,13 @@
     <? $test = $block->getNavigationViewHelper()->isNavigationViewTooltipHideOnMouseOut(); ?>
     <? $test = $block->getNavigationViewHelper()->isNavigationViewTooltipHideOnCloseButton(); ?>
 
-    <div>
-        tooltip
-        <div style="display: none; width: <?=$filter->getGomageTooltipWidth();?>px; height: <?=$filter->getGomageTooltipHeight();?>px;">
-            <?=$block->getTooltipText($filter->getGomageTooltipText());?>
+    <div class="gan-tooltip">
+        <div class="gan-tooltip-toggle">?</div>
+        <div class="gan-tooltip-content">
+            <div class="gan-tooltip-content-in" style="width: <?=$filter->getGomageTooltipWidth();?>px; height: <?=$filter->getGomageTooltipHeight();?>px;">
+                <div class="gan-tooltip-text"><?=$block->getTooltipText($filter->getGomageTooltipText());?></div>
+                <div class="gan-tooltip-close">✕</div>
+            </div>
         </div>
     </div>
 <?endif;?>

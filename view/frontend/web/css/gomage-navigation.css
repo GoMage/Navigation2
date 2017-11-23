@@ -1,6 +1,10 @@
 /* GoMage Advanced Navigation M2
 -------------------------------------------------- */
 
+.block-gan-filter .filter-options-item{
+  position: relative;
+}
+
 /* Filter type = default
 -------------------------------------------------- */
 .gan-filter{
@@ -490,4 +494,73 @@ body.ajax-loading .block-search{
 .gan-more-button{
   text-align: center;
   margin: 20px 0;
+}
+
+/* To top button
+-------------------------------------------------- */
+.gan-to-top-button{
+  text-align: right;
+  margin: 20px 0;
+}
+
+/* Tooltips
+-------------------------------------------------- */
+.gan-tooltip{
+  position: relative;
+  z-index: 2;
+}
+.gan-tooltip-toggle{
+  width: 16px;
+  height: 16px;
+  font-size: 12px;
+  line-height: 16px;
+  padding-left: 3px;
+  cursor: help;
+  font-family: Arial,Helvetica,sans-serif;
+  font-weight: 700;
+  background: #fff;
+  border: 1px solid #ccc;
+  color: #519cde;
+  border-radius: 100%;
+  box-sizing: border-box;
+}
+.gan-tooltip-content{
+  display: none;
+  z-index: 999;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding-left: 30px;
+}
+.gan-tooltip-content-in{
+  padding: 3px 16px 3px 7px;
+  position: relative;
+  background: #fff;
+  border: 1px solid #ccc;
+}
+.filter-options-content .gan-tooltip{
+  position: absolute;
+  top: 12px;
+  right: 39px;
+}
+.gan-tooltip:hover .gan-tooltip-content{
+  display: block;
+}
+.gan-tooltip-close{
+  color: #000;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+  position: absolute;
+  right: 5px;
+  text-decoration: none;
+  top: 2px;
+}
+.gan-tooltip-text{
+  max-height: 100%;
+  overflow: auto;
+  color: #636363;
+  font-size: 14px;
+  line-height: 1.5;
 }
