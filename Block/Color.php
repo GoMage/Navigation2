@@ -8,8 +8,8 @@ class Color extends \Magento\Config\Block\System\Config\Form\Field
 {
 
     /**
+     * Color constructor.
      * @param \Magento\Backend\Block\Template\Context $context
-     * @param Registry $coreRegistry
      * @param array $data
      */
     public function __construct(
@@ -19,6 +19,10 @@ class Color extends \Magento\Config\Block\System\Config\Form\Field
         parent::__construct($context, $data);
     }
 
+    /**
+     * @param \Magento\Framework\Data\Form\Element\AbstractElement $element
+     * @return string
+     */
     protected function _getElementHtml(\Magento\Framework\Data\Form\Element\AbstractElement $element)
     {
         $html = $element->getElementHtml();

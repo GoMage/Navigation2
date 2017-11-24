@@ -4,17 +4,59 @@ namespace GoMage\Navigation\Block;
 
 class Categories extends \Magento\Framework\View\Element\Template
 {
-
+    /**
+     * @var \Magento\Catalog\Helper\Category
+     */
     protected $categoryHelper;
+
+    /**
+     * @var \Magento\Catalog\Model\Indexer\Category\Flat\State
+     */
     protected $categoryFlatConfig;
+
+    /**
+     * @var \Magento\Theme\Block\Html\Topmenu
+     */
     protected $topMenu;
+
+    /**
+     * @var \GoMage\Navigation\Helper\Data
+     */
     protected $dataHelper;
+
+    /**
+     * @var \GoMage\Navigation\Helper\CategoryData
+     */
     protected $categoriesHelper;
+
+    /**
+     * @var \GoMage\Navigation\Model\Config\Source\Category\Templates
+     */
     protected $templates;
+
+    /**
+     * @var \Magento\Catalog\Model\ResourceModel\Category
+     */
     protected $categoryResource;
+
+    /**
+     * @var
+     */
     protected $pageLayout;
+
+    /**
+     * @var
+     */
     protected $canShowCategories;
+
+    /**
+     * @var \Magento\Catalog\Model\Layer
+     */
     protected $catalogLayer;
+
+    /**
+     * @var \GoMage\Navigation\Helper\NavigationViewData
+     */
     protected $navigationViewHelper;
 
     /**
@@ -56,6 +98,9 @@ class Categories extends \Magento\Framework\View\Element\Template
         $this->setLocation();
     }
 
+    /**
+     * @return mixed
+     */
     protected function getPageLayout()
     {
         if (empty($this->pageLayout)) {
@@ -69,36 +114,61 @@ class Categories extends \Magento\Framework\View\Element\Template
         return $this->pageLayout;
     }
 
+    /**
+     * @return \GoMage\Navigation\Helper\CategoryData
+     */
     public function getCategoriesDataHelper()
     {
         return $this->categoriesHelper;
     }
 
+    /**
+     * @return \GoMage\Navigation\Helper\Data
+     */
     public function getDataHelper()
     {
         return $this->dataHelper;
     }
 
+    /**
+     * @return \Magento\Catalog\Helper\Category
+     */
     public function getCategoryHelper()
     {
         return $this->categoryHelper;
     }
 
+    /**
+     * @return \GoMage\Navigation\Helper\NavigationViewData
+     */
     public function getNavigationViewHelper()
     {
         return $this->navigationViewHelper;
     }
 
+    /**
+     * @return mixed
+     */
     public function getCurrentCategoryId()
     {
         return $this->catalogLayer->getCurrentCategory()->getId();
     }
 
+    /**
+     * @param bool $sorted
+     * @param bool $asCollection
+     * @param bool $toLoad
+     * @return \Magento\Framework\Data\Tree\Node\Collection
+     */
     public function getStoreCategories($sorted = false, $asCollection = false, $toLoad = true)
     {
         return $this->getCategoryHelper()->getStoreCategories($sorted, $asCollection, $toLoad);
     }
 
+    /**
+     * @param $category
+     * @return array
+     */
     public function getChildCategories($category)
     {
         $data = [];
@@ -125,6 +195,9 @@ class Categories extends \Magento\Framework\View\Element\Template
         return $data;
     }
 
+    /**
+     * @return \Magento\Framework\View\Element\BlockInterface
+     */
     protected function getListBlock()
     {
         $block = $this->getLayout()->createBlock('\Magento\Framework\View\Element\Template');
@@ -136,6 +209,10 @@ class Categories extends \Magento\Framework\View\Element\Template
         return $block;
     }
 
+    /**
+     * @param $data
+     * @return string
+     */
     public function getOlList($data)
     {
         $block = $this->getListBlock();
@@ -145,6 +222,10 @@ class Categories extends \Magento\Framework\View\Element\Template
         return $block->toHtml();
     }
 
+    /**
+     * @param $data
+     * @return string
+     */
     public function getSelectList($data)
     {
         $block = $this->getListBlock();
@@ -154,6 +235,10 @@ class Categories extends \Magento\Framework\View\Element\Template
         return $block->toHtml();
     }
 
+    /**
+     * @param $data
+     * @return string
+     */
     public function getImageCategoriesList($data)
     {
         $block = $this->getListBlock();
@@ -169,6 +254,10 @@ class Categories extends \Magento\Framework\View\Element\Template
         return $block->toHtml();
     }
 
+    /**
+     * @param $level
+     * @return string
+     */
     public function addLevelSuffix($level)
     {
         $suffix = '';
@@ -179,11 +268,19 @@ class Categories extends \Magento\Framework\View\Element\Template
         return $suffix;
     }
 
+    /**
+     * @param $category
+     * @return int
+     */
     public function getProductsCount($category)
     {
         return $this->categoryResource->getProductCount($category);
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function getCategoryImage($id)
     {
         $category = \Magento\Framework\App\ObjectManager::getInstance()
@@ -192,6 +289,9 @@ class Categories extends \Magento\Framework\View\Element\Template
         return $category->getImageUrl();
     }
 
+    /**
+     * @return $this
+     */
     protected function _beforeToHtml()
     {
         if (!$this->getDataHelper()->isEnable() || !$this->getCategoriesDataHelper()->isShowCategories() || !$this->canShowCategories) {
@@ -208,6 +308,9 @@ class Categories extends \Magento\Framework\View\Element\Template
         return parent::_beforeToHtml();
     }
 
+    /**
+     * Set block location according settings
+     */
     protected function setLocation()
     {
         if (!$this->getDataHelper()->isEnable() || !$this->getCategoriesDataHelper()->isShowCategories()) {
@@ -279,6 +382,9 @@ class Categories extends \Magento\Framework\View\Element\Template
         }
     }
 
+    /**
+     * @param $parent
+     */
     protected function moveBlock($parent)
     {
         $this->getLayout()->unsetChild('sidebar.main', 'gomage.categories');

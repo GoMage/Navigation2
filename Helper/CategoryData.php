@@ -40,6 +40,9 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
         );
     }
 
+    /**
+     * @return mixed
+     */
     public function isShowCategories()
     {
 
@@ -48,6 +51,9 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_ENABLE);
     }
 
+    /**
+     * @return mixed
+     */
     public function getCategoriesBlockLocation()
     {
 
@@ -56,6 +62,9 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_BLOCK_LOCATION);
     }
 
+    /**
+     * @return mixed
+     */
     public function getCategoriesNavigationType()
     {
 
@@ -64,6 +73,9 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_NAVIGATION_TYPE);
     }
 
+    /**
+     * @return mixed
+     */
     public function getShowAllSubcategories()
     {
 
@@ -72,6 +84,9 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_SHOW_ALL_SUBCATEGORIES);
     }
 
+    /**
+     * @return mixed
+     */
     public function isHideEmptyCategories()
     {
 
@@ -80,6 +95,9 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_HIDE_EMPTY_CATEGORIES);
     }
 
+    /**
+     * @return mixed
+     */
     public function isCategoriesShowCollapsed()
     {
 
@@ -88,6 +106,9 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IS_SHOW_COLLAPSED);
     }
 
+    /**
+     * @return mixed
+     */
     public function getMaxBlockHeightCategories()
     {
 
@@ -96,6 +117,9 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_MAX_BLOCK_HEIGHT);
     }
 
+    /**
+     * @return mixed
+     */
     public function getCategoriesImageAlignment()
     {
 
@@ -104,6 +128,9 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IMAGE_ALIGNMENT);
     }
 
+    /**
+     * @return mixed
+     */
     public function getCategoriesImageWidth()
     {
 
@@ -112,6 +139,9 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IMAGE_WIDTH);
     }
 
+    /**
+     * @return mixed
+     */
     public function getCategoriesImageHeight()
     {
 
@@ -120,6 +150,9 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IMAGE_HEIGHT);
     }
 
+    /**
+     * @return mixed
+     */
     public function isShowImageName()
     {
 
@@ -128,6 +161,9 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IMAGE_NAME);
     }
 
+    /**
+     * @return mixed
+     */
     public function isShowCheckboxes()
     {
 
@@ -136,6 +172,9 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CHECKBOX);
     }
 
+    /**
+     * @return mixed
+     */
     public function isAjax()
     {
 
@@ -144,6 +183,9 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_FILTER_ACTION);
     }
 
+    /**
+     * @return mixed
+     */
     public function isShowCategoryInShopBy()
     {
 

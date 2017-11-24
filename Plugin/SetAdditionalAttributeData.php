@@ -5,20 +5,58 @@ namespace GoMage\Navigation\Plugin;
 class SetAdditionalAttributeData
 {
 
+    /**
+     * @var \GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory
+     */
     protected $navigationAttributeCollectionFactory;
+
+    /**
+     * @var \GoMage\Navigation\Model\Config\Source\Filter\Templates
+     */
     protected $filterTemplates;
+
+    /**
+     * @var \GoMage\Navigation\Helper\Data
+     */
     protected $dataHelper;
 
+    /**
+     * @var \GoMage\Navigation\Helper\CategoryData
+     */
+    protected $categoryDataHelper;
+
+    /**
+     * @var \GoMage\Navigation\Model\Config\Source\Category\Templates
+     */
+    protected $categoryTemplates;
+
+    /**
+     * SetAdditionalAttributeData constructor.
+     * @param \GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory $navigationAttributeCollectionFactory
+     * @param \GoMage\Navigation\Model\Config\Source\Filter\Templates $filterTemplates
+     * @param \GoMage\Navigation\Helper\Data $dataHelper
+     * @param \GoMage\Navigation\Helper\CategoryData $categoryDataHelper
+     * @param \GoMage\Navigation\Model\Config\Source\Category\Templates $categoryTemplates
+     */
     public function __construct(
         \GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory $navigationAttributeCollectionFactory,
         \GoMage\Navigation\Model\Config\Source\Filter\Templates $filterTemplates,
-        \GoMage\Navigation\Helper\Data $dataHelper
+        \GoMage\Navigation\Helper\Data $dataHelper,
+        \GoMage\Navigation\Helper\CategoryData $categoryDataHelper,
+        \GoMage\Navigation\Model\Config\Source\Category\Templates $categoryTemplates
     ) {
         $this->navigationAttributeCollectionFactory = $navigationAttributeCollectionFactory;
         $this->filterTemplates = $filterTemplates;
         $this->dataHelper = $dataHelper;
+        $this->categoryDataHelper = $categoryDataHelper;
+        $this->categoryTemplates = $categoryTemplates;
     }
 
+    /**
+     * @param $filterList
+     * @param $result
+     * @return mixed
+     */
     public function afterGetFilters($filterList, $result)
     {
 
@@ -27,6 +65,12 @@ class SetAdditionalAttributeData
         }
 
         foreach ($result as $filter) {
+
+            if ($filter->getRequestVar() == 'cat' && empty($filter->getData('is_gomage_loaded'))) {
+                $this->setCategoryFilterData($filter);
+                continue;
+            }
+
             if (empty($filter->getAttributeModel()->getAttributeId()) || !empty($filter->getData('is_gomage_loaded'))) {
                 continue;
             }
@@ -39,7 +83,9 @@ class SetAdditionalAttributeData
         return $result;
     }
 
-    //collect all ids and do one request
+    /**
+     * @param $filter
+     */
     protected function setAdditionalData($filter)
     {
         $model = $filter->getAttributeModel();
@@ -62,6 +108,9 @@ class SetAdditionalAttributeData
         }
     }
 
+    /**
+     * @param $filter
+     */
     protected function setTemplateData($filter)
     {
         if ($filter->getSwatchInputType()) {
@@ -73,8 +122,25 @@ class SetAdditionalAttributeData
         $filter->addData(['gomage_filter_template' => $this->filterTemplates->get($filterType)]);
     }
 
+    /**
+     * @param $filter
+     */
     protected function setFlag($filter)
     {
         $filter->addData(['is_gomage_loaded' => true]);
+    }
+
+    /**
+     * @param $filter
+     */
+    protected function setCategoryFilterData($filter)
+    {
+        if(!$this->categoryDataHelper->isShowCategories() || !$this->categoryDataHelper->isShowCategoryInShopBy()) {
+            return ;
+        }
+
+        $filterType = $this->categoryDataHelper->getCategoriesNavigationType();
+        $filter->addData(['gomage_filter_template' => $this->filterTemplates->get($filterType)]);
+        $this->setFlag($filter);
     }
 }

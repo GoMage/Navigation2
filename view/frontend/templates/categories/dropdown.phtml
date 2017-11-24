@@ -1,19 +1,22 @@
 <div class="block block-gan-categories gan-categories-dropdown"
-     style="background-color: <?=$block->getNavigationViewHelper()->getNavigationViewBlockCategoriesBackgroundColor()?>"
+     style="background-color: <?=$block->escapeHtmlAttr($block->getNavigationViewHelper()->getNavigationViewBlockCategoriesBackgroundColor())?>"
 >
     <div class="block-title gan-categories-title" data-role="navigation-filter" data-type="categories-content">
-        <strong><?php echo __('Categories') ?></strong>
+        <strong><?= __('Categories') ?></strong>
     </div>
     <div class="block-content block-content-gan-categories">
-        <div class="gan-categories-list-dropdown block-content-in" <? echo ($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
+        <div class="gan-categories-list-dropdown block-content-in" <?=($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
             <?php
             foreach($block->getStoreCategories(true, false, true) as $category):
                 if (!$category->getIsActive()) continue;?>
-                    <select data-role="navigation-filter" data-type="categories-select" data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>">
+                    <select
+                            data-role="navigation-filter"
+                            data-type="categories-select"
+                            data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>">
                         <option
                             <?= ($block->getCurrentCategoryId() == $category->getId()) ? 'selected' : ''; ?>
-                                value="<?php echo $block->getCategoryHelper()->getCategoryUrl($category) ?>">
-                            <?php echo $category->getName() ?>
+                                value="<?= $block->escapeUrl($block->getCategoryHelper()->getCategoryUrl($category)) ?>">
+                            <?= $block->escapeHtml($category->getName()) ?>
                         </option>
                         <? if ($block->getCategoriesDataHelper()->getShowAllSubcategories()): ?>
                             <?= $block->getSelectList($block->getChildCategories($category)); ?>

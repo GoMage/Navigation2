@@ -25,6 +25,10 @@ class Templates
         return $templates[$type];
     }
 
+    /**
+     * @param $type
+     * @return mixed
+     */
     public function getShowShopByInTemplate($type)
     {
         $templates = [

@@ -1,11 +1,11 @@
 <div class="block block-gan-categories gan-categories-flyout"
-     style="background-color: <?=$block->getNavigationViewHelper()->getNavigationViewBlockCategoriesBackgroundColor()?>"
+     style="background-color: <?=$block->escapeHtmlAttr($block->getNavigationViewHelper()->getNavigationViewBlockCategoriesBackgroundColor())?>"
 >
     <div class="block-title gan-categories-title" data-role="navigation-filter" data-type="categories-content">
-        <strong><?php echo __('Categories') ?></strong>
+        <strong><?= __('Categories') ?></strong>
     </div>
     <div class="block-content block-content-gan-categories">
-        <div class="block-content-in" <? echo ($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
+        <div class="block-content-in" <?= ($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
             <ul class="gan-categories-list">
                 <?php
                 foreach($block->getStoreCategories(true, false, true) as $category):
@@ -14,9 +14,9 @@
                             data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>"
                             data-role="navigation-filter"
                             data-type="categories-li"
-                            data-url="<?= $block->getCategoryHelper()->getCategoryUrl($category) ?>">
+                            data-url="<?= $block->escapeUrl($block->getCategoryHelper()->getCategoryUrl($category)) ?>">
                         <a href="#"<?= ($block->getCurrentCategoryId() == $category->getId()) ? ' class="selected"' : ''; ?>>
-                            <?= $category->getName() ?>
+                            <?= $block->escapeHtml($category->getName()) ?>
                         </a>
                         <?= $block->getOlList($block->getChildCategories($category)); ?>
                     </li>

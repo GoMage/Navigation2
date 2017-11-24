@@ -4,12 +4,39 @@ namespace GoMage\Navigation\Model\Catalog\Layer\Filter;
 
 class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements FilterInterface
 {
+    /**
+     * @var
+     */
     protected $attributeProperties;
+
+    /**
+     * @var \Magento\Framework\App\RequestInterface
+     */
     protected $request;
+
+    /**
+     * @var \Magento\Catalog\Model\Session
+     */
     protected $catalogSession;
+
+    /**
+     * @var \GoMage\Navigation\Helper\Data
+     */
     protected $helper;
+
+    /**
+     * @var
+     */
     protected $productCollectionFactory;
+
+    /**
+     * @var \Magento\Catalog\Model\Layer\Category\CollectionFilter
+     */
     protected $filter;
+
+    /**
+     * @var
+     */
     protected $options;
 
     /**
@@ -21,6 +48,10 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
      * @param \Magento\Catalog\Model\ResourceModel\Layer\Filter\AttributeFactory $filterAttributeFactory
      * @param \Magento\Framework\Stdlib\StringUtils $string
      * @param \Magento\Framework\Filter\StripTags $tagFilter
+     * @param \Magento\Framework\App\RequestInterface $request
+     * @param \Magento\Catalog\Model\Session $catalogSession
+     * @param \GoMage\Navigation\Helper\Data $helper
+     * @param \Magento\Catalog\Model\Layer\Category\CollectionFilter $filter
      * @param array $data
      */
     public function __construct(
@@ -35,7 +66,6 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         \Magento\Catalog\Model\Session $catalogSession,
         \GoMage\Navigation\Helper\Data $helper,
         \Magento\Catalog\Model\Layer\Category\CollectionFilter $filter,
-        //\Magento\Catalog\Model\ResourceModel\CollectionFactory $productCollectionFactory,
         array $data = []
     ) {
     
@@ -47,7 +77,6 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         $this->catalogSession = $catalogSession;
         $this->helper = $helper;
         $this->filter = $filter;
-        //$this->productCollectionFactory = $productCollectionFactory;
         parent::__construct($filterItemFactory, $storeManager, $layer, $itemDataBuilder, $filterAttributeFactory, $string, $tagFilter, $data);
     }
 
@@ -67,28 +96,9 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         return false;
     }
 
-
     /**
-     * @return mixed
-     */
-    public function canShowCheckbox()
-    {
-        return true;
-    }
-
-    /**
-     * @return bool
-     */
-    public function canShowMinimized()
-    {
-        return true;
-    }
-
-    /**
-     * Apply attribute option filter to product collection
-     *
-     * @param   \Magento\Framework\App\RequestInterface $request
-     * @return  $this
+     * @param \Magento\Framework\App\RequestInterface $request
+     * @return $this
      */
     public function apply(\Magento\Framework\App\RequestInterface $request)
     {
@@ -131,6 +141,9 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         return $this;
     }
 
+    /**
+     * @return array
+     */
     public function getUsedOptions()
     {
         return explode('_', $this->request->getParam($this->_requestVar));
@@ -138,9 +151,6 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
 
 
     /**
-     * Get data array for building attribute filter items
-     *
-     * @throws \Magento\Framework\Exception\LocalizedException
      * @return array
      */
     protected function _getItemsData()
@@ -200,6 +210,10 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         return $this->itemDataBuilder->build();
     }
 
+    /**
+     * @param $filter
+     * @return array
+     */
     protected function getFormattedFilters($filter)
     {
         $filters = explode('_', $filter);
@@ -209,15 +223,26 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
 
         if (empty($this->options)) {
             foreach ($this->getAttributeModel()->getFrontend()->getSelectOptions() as $option) {
-                $this->options[mb_strtolower(str_replace(' ', '+', $option['label']))] = $option['value'];
+                $this->options[$this->formatItemName($option['label'])] = $option['value'];
             }
         }
 
         $params = [];
         foreach ($filters as $item) {
-            $params[] = $this->options[htmlentities($item)];
+            if (isset($this->options[$item])) {
+                $params[] = $this->options[$item];
+            }
         }
 
         return $params;
+    }
+
+    /**
+     * @param $name
+     * @return mixed|string
+     */
+    protected function formatItemName($name)
+    {
+        return mb_strtolower(str_replace(' ', '+', htmlentities($name)));
     }
 }

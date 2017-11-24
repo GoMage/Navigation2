@@ -7,9 +7,22 @@ use Magento\Framework\View\Element\Template;
 class BackToTop extends \Magento\Framework\View\Element\Template
 {
 
+    /**
+     * @var \GoMage\Navigation\Helper\Data
+     */
     protected $helper;
+
+    /**
+     * @var
+     */
     protected $alignmentConfig;
 
+    /**
+     * BackToTop constructor.
+     * @param Template\Context $context
+     * @param \GoMage\Navigation\Helper\Data $helper
+     * @param array $data
+     */
     public function __construct(
         Template\Context $context,
         \GoMage\Navigation\Helper\Data $helper,
@@ -24,6 +37,9 @@ class BackToTop extends \Magento\Framework\View\Element\Template
         parent::__construct($context, $data);
     }
 
+    /**
+     * @return \GoMage\Navigation\Helper\Data
+     */
     public function getHelper()
     {
         return $this->helper;

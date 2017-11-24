@@ -11,30 +11,30 @@ use Magento\Catalog\Model\Product\ProductList\Toolbar;
 <div class="modes">
     <?php $_modes = $block->getModes(); ?>
     <?php if ($_modes && count($_modes) > 1): ?>
-    <strong class="modes-label" id="modes-label"><?php /* @escapeNotVerified */ echo __('View as') ?></strong>
+    <strong class="modes-label" id="modes-label"><?= __('View as') ?></strong>
     <?php foreach ($block->getModes() as $_code => $_label): ?>
         <?php if ($block->isModeActive($_code)): ?>
-            <strong title="<?php /* @escapeNotVerified */ echo $_label ?>"
-                class="modes-mode active mode-<?php /* @escapeNotVerified */ echo strtolower($_code); ?>"
+            <strong title="<?=$block->escapeHtml($_label) ?>"
+                class="modes-mode active mode-<?= $block->escapeHtmlAttr(strtolower($_code)); ?>"
                     data-role="navigation-filter"
                     data-param="product_list_mode"
                     data-ajax="1"
                     data-active="1"
-                    data-value="<?php /* @escapeNotVerified */ echo strtolower($_code); ?>">
-                <span><?php /* @escapeNotVerified */ echo $_label ?></span>
+                    data-value="<?= $block->escapeHtmlAttr(strtolower($_code)); ?>">
+                <span><?= $block->escapeHtml($_label) ?></span>
             </strong>
         <?php else: ?>
-            <a class="modes-mode mode-<?php /* @escapeNotVerified */ echo strtolower($_code); ?>"
-               title="<?php /* @escapeNotVerified */ echo $_label ?>"
+            <a class="modes-mode mode-<?= $block->escapeHtml(strtolower($_code)); ?>"
+               title="<?= $block->escapeHtml($_label) ?>"
                href="#"
-               id="mode-<?php /* @escapeNotVerified */ echo strtolower($_code); ?>"
-               aria-labelledby="modes-label mode-<?php /* @escapeNotVerified */ echo strtolower($_code); ?>"
+               id="mode-<?= $block->escapeHtml(strtolower($_code)); ?>"
+               aria-labelledby="modes-label mode-<?= $block->escapeHtml(strtolower($_code)); ?>"
                data-role="navigation-filter"
-               data-value="<?php /* @escapeNotVerified */ echo strtolower($_code); ?>"
+               data-value="<?= $block->escapeHtml(strtolower($_code)); ?>"
                data-param="product_list_mode"
                data-ajax="1"
                data-active="">
-                <span><?php /* @escapeNotVerified */ echo $_label ?></span>
+                <span><?= $block->escapeHtml($_label) ?></span>
             </a>
             <?php endif; ?>
         <?php endforeach; ?>

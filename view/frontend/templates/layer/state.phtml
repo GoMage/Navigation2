@@ -9,21 +9,21 @@
     <strong class="block-subtitle filter-current-subtitle"
             role="heading"
             aria-level="2"
-            data-count="<?php echo count($_filters); ?>"><?php /* @escapeNotVerified */ echo __('Applied Filters:') ?></strong>
+            data-count="<?=(int)count($_filters); ?>"><?= __('Applied Filters:') ?></strong>
     <ol class="items">
         <?php foreach ($_filters as $_filter): ?>
             <li class="item">
-                <span class="filter-label"><?php echo $block->escapeHtml(__($_filter->getName())); ?></span>
+                <span class="filter-label"><?=$block->escapeHtml(__($_filter->getName())); ?></span>
                 <div class="filter-value-wrap">
-                    <span class="filter-value"><?php /* @escapeNotVerified */ echo $block->stripTags($_filter->getLabel()) ?></span>
-                    <?php $currentFilterName = $block->escapeHtml(__($_filter->getName())) . " " . $block->stripTags($_filter->getLabel()); ?>
+                    <span class="filter-value"><?= $block->escapeHtml($_filter->getLabel()) ?></span>
+                    <?php $currentFilterName = $block->escapeHtml(__($_filter->getName())) . " " . $block->escapeHtml($_filter->getLabel()); ?>
                     <a class="action remove"
                        href="#"
-                       title="<?php /* @escapeNotVerified */ echo $block->escapeHtml(__('Remove')) . " " . $currentFilterName;?>"
+                       title="<?= $block->escapeHtml(__('Remove') . " " . $currentFilterName);?>"
                        data-role="navigation-filter"
-                       data-value="<?php echo $_filter->getRemoveValue() ?>"
-                       data-url="<?php /* @escapeNotVerified */ echo $_filter->getRemoveUrl() ?>"
-                       data-param="<?php echo $_filter->getFilter()->getRequestVar() ?>"
+                       data-value="<?=$block->escapeHtmlAttr($_filter->getRemoveValue()) ?>"
+                       data-url="<?= $block->escapeHtmlAttr($_filter->getRemoveUrl()) ?>"
+                       data-param="<?=$block->escapeHtmlAttr($_filter->getFilter()->getRequestVar()) ?>"
                         <?if ($_filter->getFilter()->getGomageIsAjax() || is_null($_filter->getFilter()->getGomageIsAjax())):?>
                             data-ajax="1"
                         <?else:?>
@@ -31,7 +31,7 @@
                         <?endif;?>
                        data-type="remove-item"
                        data-active="1">
-                        <span><?php /* @escapeNotVerified */ echo __('Remove This Item') ?></span>
+                        <span><?= __('Remove This Item') ?></span>
                     </a>
                 </div>
             </li>

@@ -11,14 +11,14 @@ $state = $this->getLayout()->createBlock('GoMage\Navigation\Block\Navigation\Sta
 <?php if ($block->getCollection()->getSize()): ?>
 
     <?if ($helper->isEnable()):?>
-    <div class="toolbar toolbar-products" data-mage-init='<?php /* @escapeNotVerified */ echo $block->getWidgetOptionsJson(); ?>'>
+    <div class="toolbar toolbar-products" data-mage-init='<?= $block->getWidgetOptionsJson(); ?>'>
         <?php if ($block->isExpanded()): ?>
             <?php include ($block->getTemplateFile('GoMage_Navigation::product/list/toolbar/viewmode.phtml')) ?>
         <?php endif; ?>
 
         <?php include ($block->getTemplateFile('GoMage_Navigation::product/list/toolbar/amount.phtml')) ?>
 
-        <?php echo $block->getPagerHtml() ?>
+        <?=$block->getPagerHtml() ?>
 
         <?php include ($block->getTemplateFile('GoMage_Navigation::product/list/toolbar/limiter.phtml')) ?>
 

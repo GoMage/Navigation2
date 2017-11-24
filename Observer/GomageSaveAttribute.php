@@ -72,6 +72,10 @@ class GomageSaveAttribute implements \Magento\Framework\Event\ObserverInterface
         return $this;
     }
 
+    /**
+     * @param $data
+     * @return string
+     */
     protected function prepareTooltipData($data)
     {
         if (!is_array($data)) {

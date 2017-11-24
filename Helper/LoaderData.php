@@ -40,6 +40,9 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
         );
     }
 
+    /**
+     * @return mixed
+     */
     public function isShowAjaxLoader()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
@@ -47,6 +50,9 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_LOADER_CONFIG_ENABLE);
     }
 
+    /**
+     * @return mixed
+     */
     public function isSpinnerTypeImage()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
@@ -54,6 +60,9 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_LOADER_CONFIG_SPINNER_TYPE);
     }
 
+    /**
+     * @return mixed
+     */
     public function getLoaderImage()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
@@ -61,6 +70,9 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_LOADER_CONFIG_IMAGE);
     }
 
+    /**
+     * @return mixed
+     */
     public function getLoaderBackgroundColor()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
@@ -68,6 +80,9 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_LOADER_CONFIG_BACKGROUND);
     }
 
+    /**
+     * @return mixed
+     */
     public function getLoaderBorderColor()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
@@ -75,6 +90,9 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_LOADER_CONFIG_BORDER_COLOR);
     }
 
+    /**
+     * @return mixed
+     */
     public function getLoaderTextColor()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
@@ -82,6 +100,9 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_LOADER_CONFIG_TEXT_COLOR);
     }
 
+    /**
+     * @return mixed
+     */
     public function getLoaderSpinnerColor()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
@@ -89,6 +110,9 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_LOADER_CONFIG_SPINNER_COLOR);
     }
 
+    /**
+     * @return mixed
+     */
     public function getLoaderWindowWidth()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
@@ -96,6 +120,9 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_LOADER_CONFIG_WINDOW_WIDTH);
     }
 
+    /**
+     * @return mixed
+     */
     public function getLoaderWindowHeight()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
@@ -103,6 +130,9 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_LOADER_CONFIG_WINDOW_HEIGHT);
     }
 
+    /**
+     * @return mixed
+     */
     public function getLoaderText()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
@@ -110,6 +140,9 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_LOADER_CONFIG_TEXT);
     }
 
+    /**
+     * @return mixed
+     */
     public function getLoaderImageAlignment()
     {
         $value = $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP

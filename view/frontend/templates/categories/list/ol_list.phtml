@@ -1,14 +1,14 @@
 <?if(!empty($data)):?>
-    <ol <?=$checkboxes?>>
+    <ol <?=$block->escapeHtmlAttr($checkboxes)?>>
         <?foreach ($data as $category):?>
             <?php $active = ($currentCategoryId == $category['entity_id']) ? ' class="selected"' : '';?>
                 <li
-                        data-ajax="<?=$isAjax?>"
+                        data-ajax="<?=$block->escapeHtmlAttr($isAjax)?>"
                         data-role="navigation-filter"
                         data-type="categories-li"
-                        data-url="<?=$category['url']?>"
+                        data-url="<?=$block->escapeUrl($category['url'])?>"
                         <? if (!empty(($category['children']))): ?> class="parent"<? endif; ?>>
-                    <a href="<?=$category['url']?>"<?=$active?>><span><?=$category['name']?></span></a>
+                    <a href="<?=$block->escapeUrl($category['url'])?>"<?=$block->escapeHtml($active)?>><span><?=$block->escapeHtml($category['name'])?></span></a>
                     <? if (!empty(($category['children']))): ?>
                         <?= $categoriesBlock->getOlList($category['children']); ?>
                     <? endif; ?>

@@ -23,34 +23,43 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
      *
      * @var \Magento\Theme\Block\Html\Pager
      */
-    protected $_htmlPagerBlock;
+    protected $htmlPagerBlock;
 
     /**
      * Url
      *
      * @var \Magento\Framework\UrlInterface
      */
-    protected $_url;
+    protected $url;
 
     /**
      * Url
      *
      * @var \Magento\Framework\App\Request\Http
      */
-    protected $_request;
+    protected $request;
 
     /**
      * Url
      *
      * @var \Magento\Framework\Escaper
      */
-    protected $_escaper;
+    protected $escaper;
 
     /**
      * @var \GoMage\Navigation\Helper\Data
      */
-    protected $_dataHelper;
+    protected $dataHelper;
 
+    /**
+     * Url constructor.
+     * @param Context $context
+     * @param \Magento\Framework\UrlInterface $url
+     * @param \Magento\Theme\Block\Html\Pager $htmlPagerBlock
+     * @param \Magento\Framework\App\Request\Http $request
+     * @param \Magento\Framework\Escaper $escaper
+     * @param Data $dataHelper
+     */
     public function __construct(
         Context $context,
         \Magento\Framework\UrlInterface $url,
@@ -60,11 +69,11 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
         \GoMage\Navigation\Helper\Data $dataHelper
     ) {
     
-        $this->_url = $url;
-        $this->_htmlPagerBlock = $htmlPagerBlock;
-        $this->_request = $request;
-        $this->_escaper = $escaper;
-        $this->_dataHelper = $dataHelper;
+        $this->url = $url;
+        $this->htmlPagerBlock = $htmlPagerBlock;
+        $this->request = $request;
+        $this->escaper = $escaper;
+        $this->dataHelper = $dataHelper;
         parent::__construct($context);
     }
 
@@ -79,7 +88,7 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
         }
 
         $paramValues = [];
-        $queryParams = is_array($this->_request->getParams()) ? $this->_request->getParams() : [];
+        $queryParams = is_array($this->request->getParams()) ? $this->request->getParams() : [];
         if (!empty($queryParams[$item->getFilter()->getRequestVar()])) {
             $paramValues = explode('_', $queryParams[$item->getFilter()->getRequestVar()]);
         }
@@ -90,26 +99,34 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
 
         $query = [
             $item->getFilter()->getRequestVar() => implode('_', $paramValues),
-            $this->_htmlPagerBlock->getPageVarName() => null,
+            $this->htmlPagerBlock->getPageVarName() => null,
         ];
 
-        $url = $this->_url->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true, '_query' => $query]);
+        $url = $this->url->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true, '_query' => $query]);
 
-        return $this->_escaper->escapeUrl($url);
+        return $this->escaper->escapeUrl($url);
     }
 
+    /**
+     * @param $item
+     * @return string
+     */
     public function getItemPriceUrl($item)
     {
         $query = [
             $item->getFilter()->getRequestVar() => $item->getValue(),
-            $this->_htmlPagerBlock->getPageVarName() => null,
+            $this->htmlPagerBlock->getPageVarName() => null,
         ];
 
-        $url = $this->_url->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true, '_query' => $query]);
+        $url = $this->url->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true, '_query' => $query]);
 
-        return $this->_escaper->escapeUrl($url);
+        return $this->escaper->escapeUrl($url);
     }
 
+    /**
+     * @param $item
+     * @return string
+     */
     public function getItemValue($item)
     {
         if ($item->getFilter()->getFilterType() == \GoMage\Navigation\Model\Catalog\Layer\Filter\Price::FILTER_TYPE) {
@@ -117,7 +134,7 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
         }
 
         $paramValues = [];
-        $queryParams = is_array($this->_request->getParams()) ? $this->_request->getParams() : [];
+        $queryParams = is_array($this->request->getParams()) ? $this->request->getParams() : [];
         if (!empty($queryParams[$item->getFilter()->getRequestVar()])) {
             $paramValues = explode('_', $queryParams[$item->getFilter()->getRequestVar()]);
         }
@@ -129,15 +146,22 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
         return implode('_', $paramValues);
     }
 
+    /**
+     * @param $item
+     * @return mixed
+     */
     public function getItemPriceValue($item)
     {
         return $item->getValue();
     }
 
+    /**
+     * @param $item
+     */
     public function getRemoveUrl($item)
     {
         $paramValues = [];
-        $queryParams = is_array($this->_request->getParams()) ? $this->_request->getParams() : [];
+        $queryParams = is_array($this->request->getParams()) ? $this->request->getParams() : [];
         if (!empty($queryParams[$item->getFilter()->getRequestVar()])) {
             $paramValues = explode('_', $queryParams[$item->getFilter()->getRequestVar()]);
         }
@@ -159,17 +183,21 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
             $query[$item->getFilter()->getRequestVar()] = null;
         }
 
-        $query[$this->_htmlPagerBlock->getPageVarName()] = null;
+        $query[$this->htmlPagerBlock->getPageVarName()] = null;
 
-        $url = $this->_url->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true, '_query' => $query]);
+        $url = $this->url->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true, '_query' => $query]);
 
-        return $this->_escaper->escapeUrl($url);
+        return $this->escaper->escapeUrl($url);
     }
 
+    /**
+     * @param $item
+     * @return string
+     */
     public function getRemoveValue($item)
     {
         $paramValues = [];
-        $queryParams = is_array($this->_request->getParams()) ? $this->_request->getParams() : [];
+        $queryParams = is_array($this->request->getParams()) ? $this->request->getParams() : [];
         if (!empty($queryParams[$item->getFilter()->getRequestVar()])) {
             $paramValues = explode('_', $queryParams[$item->getFilter()->getRequestVar()]);
         }
@@ -187,12 +215,16 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
         return implode('_', $paramValues);
     }
 
+    /**
+     * @param $item
+     * @return mixed|string
+     */
     protected function getItemFormattedValue($item)
     {
-        if (!$this->_dataHelper->isUseFriendlyUrls()) {
+        if (!$this->dataHelper->isUseFriendlyUrls()) {
             return $item->getValue();
         }
 
-        return mb_strtolower(str_replace(' ', '+', html_entity_decode($item->getLabel())));
+        return mb_strtolower(str_replace(' ', '+', htmlentities($item->getLabel())));
     }
 }

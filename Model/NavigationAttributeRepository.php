@@ -14,8 +14,22 @@ use Magento\Framework\Api\SearchResultsInterfaceFactory;
 
 class NavigationAttributeRepository implements \GoMage\Navigation\Api\NavigationAttributeRepositoryInterface
 {
+    /**
+     * @var \GoMage\Navigation\Model\NavigationAttributeFactory
+     */
     protected $objectFactory;
+
+    /**
+     * @var CollectionFactory
+     */
     protected $collectionFactory;
+
+    /**
+     * NavigationAttributeRepository constructor.
+     * @param \GoMage\Navigation\Model\NavigationAttributeFactory $objectFactory
+     * @param CollectionFactory $collectionFactory
+     * @param SearchResultsInterfaceFactory $searchResultsFactory
+     */
     public function __construct(
         NavigationAttributeFactory $objectFactory,
         CollectionFactory $collectionFactory,
@@ -26,7 +40,12 @@ class NavigationAttributeRepository implements \GoMage\Navigation\Api\Navigation
         $this->collectionFactory    = $collectionFactory;
         $this->searchResultsFactory = $searchResultsFactory;
     }
-    
+
+    /**
+     * @param NavigationAttributeInterface $object
+     * @return NavigationAttributeInterface
+     * @throws CouldNotSaveException
+     */
     public function save(NavigationAttributeInterface $object)
     {
         try {
@@ -37,6 +56,11 @@ class NavigationAttributeRepository implements \GoMage\Navigation\Api\Navigation
         return $object;
     }
 
+    /**
+     * @param $id
+     * @return NavigationAttribute
+     * @throws NoSuchEntityException
+     */
     public function getById($id)
     {
         $object = $this->objectFactory->create();
@@ -47,6 +71,11 @@ class NavigationAttributeRepository implements \GoMage\Navigation\Api\Navigation
         return $object;
     }
 
+    /**
+     * @param NavigationAttributeInterface $object
+     * @return bool
+     * @throws CouldNotDeleteException
+     */
     public function delete(NavigationAttributeInterface $object)
     {
         try {
@@ -57,11 +86,19 @@ class NavigationAttributeRepository implements \GoMage\Navigation\Api\Navigation
         return true;
     }
 
+    /**
+     * @param $id
+     * @return bool
+     */
     public function deleteById($id)
     {
         return $this->delete($this->getById($id));
     }
 
+    /**
+     * @param SearchCriteriaInterface $criteria
+     * @return \Magento\Framework\Api\SearchResultsInterface
+     */
     public function getList(SearchCriteriaInterface $criteria)
     {
         $searchResults = $this->searchResultsFactory->create();

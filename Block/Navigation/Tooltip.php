@@ -6,10 +6,29 @@ use Magento\Framework\View\Element\Template;
 
 class Tooltip extends \Magento\Framework\View\Element\Template
 {
+    /**
+     * @var \Magento\Store\Model\StoreManagerInterface
+     */
     protected $storeManager;
+
+    /**
+     * @var \GoMage\Navigation\Helper\Data
+     */
     protected $helper;
+
+    /**
+     * @var \GoMage\Navigation\Helper\NavigationViewData
+     */
     protected $navigationViewHelper;
 
+    /**
+     * Tooltip constructor.
+     * @param Template\Context $context
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \GoMage\Navigation\Helper\Data $helper
+     * @param \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper
+     * @param array $data
+     */
     public function __construct(
         Template\Context $context,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
@@ -25,6 +44,10 @@ class Tooltip extends \Magento\Framework\View\Element\Template
         parent::__construct($context, $data);
     }
 
+    /**
+     * @param $data
+     * @return string
+     */
     public function getTooltipText($data)
     {
         $data = unserialize($data);
@@ -35,11 +58,17 @@ class Tooltip extends \Magento\Framework\View\Element\Template
         return '';
     }
 
+    /**
+     * @return \GoMage\Navigation\Helper\Data
+     */
     public function getHelper()
     {
         return $this->helper;
     }
 
+    /**
+     * @return \GoMage\Navigation\Helper\NavigationViewData
+     */
     public function getNavigationViewHelper()
     {
         return $this->navigationViewHelper;

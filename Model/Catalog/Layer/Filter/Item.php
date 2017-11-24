@@ -5,11 +5,6 @@ namespace GoMage\Navigation\Model\Catalog\Layer\Filter;
 class Item extends \Magento\Catalog\Model\Layer\Filter\Item
 {
     /**
-     * @var boolean
-     */
-    protected $_isPreferred = false;
-
-    /**
      * @var \GoMage\Navigation\Helper\Url
      */
     protected $urlHelper;
@@ -19,7 +14,14 @@ class Item extends \Magento\Catalog\Model\Layer\Filter\Item
      */
     protected $dataHelper;
 
-
+    /**
+     * Item constructor.
+     * @param \Magento\Framework\UrlInterface $url
+     * @param \Magento\Theme\Block\Html\Pager $htmlPagerBlock
+     * @param \GoMage\Navigation\Helper\Url $urlHelper
+     * @param \GoMage\Navigation\Helper\Data $dataHelper
+     * @param array $data
+     */
     public function __construct(
         \Magento\Framework\UrlInterface $url,
         \Magento\Theme\Block\Html\Pager $htmlPagerBlock,
@@ -34,8 +36,6 @@ class Item extends \Magento\Catalog\Model\Layer\Filter\Item
     }
 
     /**
-     * Get url for remove item from filter
-     *
      * @return string
      */
     public function getRemoveUrl()
@@ -47,11 +47,17 @@ class Item extends \Magento\Catalog\Model\Layer\Filter\Item
         return $this->urlHelper->getRemoveUrl($this);
     }
 
+    /**
+     * @return string
+     */
     public function getRemoveValue()
     {
         return $this->urlHelper->getRemoveValue($this);
     }
 
+    /**
+     * @return bool
+     */
     public function isShowAppliedValues()
     {
         if ($this->dataHelper->isShowAppliedValuesInResults() == \GoMage\Navigation\Model\Config\Source\Result::REMOVE && $this->getIsActive()) {

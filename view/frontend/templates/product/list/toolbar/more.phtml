@@ -14,11 +14,11 @@
 <? if ($block->getMoreUrl()) : ?>
     <div class="gan-more-button" id="gan-more-button">
         <button
-                id="<?php echo $block->getType(); ?>"
-                class="<?php echo $block->getType(); ?>"
+                id="<?= $block->escapeHtmlAttr($block->getType()); ?>"
+                class="<?= $block->escapeHtmlAttr($block->getType()); ?>"
                 data-role="navigation-filter"
                 data-ajax="1"
-                data-type="<?php echo $block->getType(); ?>"
-        ><span><?php echo __('Show more products') ?></span></button>
+                data-type="<?= $block->escapeHtmlAttr($block->getType()); ?>"
+        ><span><?= __('Show more products') ?></span></button>
     </div>
 <?php endif; ?>

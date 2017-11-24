@@ -11,19 +11,49 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
      */
     protected $request;
 
+    /**
+     * @var array
+     */
     protected $activeFilters;
 
+    /**
+     * @var \GoMage\Navigation\Helper\Data
+     */
     protected $dataHelper;
 
+    /**
+     * @var
+     */
     protected $pageRepository;
 
+    /**
+     * @var
+     */
     protected $pageLayout;
 
+    /**
+     * @var bool
+     */
     protected $canShowNavigation = false;
 
+    /**
+     * @var \Magento\Catalog\Model\Layer
+     */
     protected $catalogLayer;
+
+    /**
+     * @var \GoMage\Navigation\Helper\CategoryData
+     */
     protected $categoryHelper;
+
+    /**
+     * @var string
+     */
     protected $categoriesHtml;
+
+    /**
+     * @var \GoMage\Navigation\Helper\NavigationViewData
+     */
     protected $navigationViewHelper;
 
     /**
@@ -33,6 +63,9 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
      * @param \Magento\Catalog\Model\Layer\FilterList $filterList
      * @param \Magento\Catalog\Model\Layer\AvailabilityFlagInterface $visibilityFlag
      * @param \Magento\Framework\App\RequestInterface $request
+     * @param \GoMage\Navigation\Helper\Data $dataHelper
+     * @param \GoMage\Navigation\Helper\CategoryData $categoryHelper
+     * @param \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper
      * @param array $data
      */
     public function __construct(
@@ -59,26 +92,41 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         $this->setLocation();
     }
 
+    /**
+     * @return \GoMage\Navigation\Helper\Data
+     */
     public function getDataHelper()
     {
         return $this->dataHelper;
     }
 
+    /**
+     * @return \GoMage\Navigation\Helper\CategoryData
+     */
     public function getCategoryDataHelper()
     {
         return $this->categoryHelper;
     }
 
+    /**
+     * @return \GoMage\Navigation\Helper\NavigationViewData
+     */
     public function getNavigationViewHelper()
     {
         return $this->navigationViewHelper;
     }
 
+    /**
+     * @return \Magento\Framework\View\Element\BlockInterface
+     */
     public function getRenderBlock()
     {
         return $this->getLayout()->createBlock('GoMage\Navigation\Block\Navigation\FilterRenderer');
     }
 
+    /**
+     * @return \Magento\Framework\View\Element\BlockInterface
+     */
     public function getStateBlock()
     {
         $state = $this->getLayout()->createBlock('GoMage\Navigation\Block\Navigation\State');
@@ -86,6 +134,9 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         return $state;
     }
 
+    /**
+     * @return string
+     */
     public function getCategoriesHtml()
     {
 
@@ -96,6 +147,9 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         return $this->categoriesHtml;
     }
 
+    /**
+     * @return mixed
+     */
     protected function getPageLayout()
     {
         if (empty($this->pageLayout)) {
@@ -109,6 +163,9 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         return $this->pageLayout;
     }
 
+    /**
+     * @return array
+     */
     public function getExpandedFilters()
     {
         $data = [];
@@ -125,9 +182,6 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
             $cnt = 1;
         }
 
-
-
-
         foreach ($this->getFilters() as $filter) {
             if ($filter->getItemsCount()) {
                 if (!$filter->getGomageIsCollapsed()) {
@@ -140,6 +194,9 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         return $data;
     }
 
+    /**
+     * @return int
+     */
     public function getFiltersWithItemsCount()
     {
         $cnt = 0;
@@ -152,6 +209,9 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         return $cnt;
     }
 
+    /**
+     * @return string
+     */
     public function getItemWidthStyle()
     {
         $itemStyle = '';
@@ -163,6 +223,9 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         return $itemStyle;
     }
 
+    /**
+     * @return string
+     */
     public function getItemClass()
     {
         $itemClass = '';
@@ -179,6 +242,9 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         return $itemClass;
     }
 
+    /**
+     * @return string
+     */
     public function getContainerClass()
     {
         $containerClass = '';
@@ -195,6 +261,9 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         return $containerClass;
     }
 
+    /**
+     * @return $this
+     */
     protected function _beforeToHtml()
     {
         if (!$this->getDataHelper()->isEnable()) {
@@ -209,6 +278,9 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         return parent::_beforeToHtml();
     }
 
+    /**
+     * Set block location according settings
+     */
     protected function setLocation()
     {
         if (!$this->getDataHelper()->isEnable()) {
@@ -269,6 +341,9 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         }
     }
 
+    /**
+     * @param $parent
+     */
     protected function moveBlock($parent)
     {
         $this->getLayout()->unsetChild('sidebar.main', 'catalog.leftnav');

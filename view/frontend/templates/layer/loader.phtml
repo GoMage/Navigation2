@@ -1,29 +1,37 @@
 <?if($block->getHelper()->isShowAjaxLoader()):?>
     <div id="gomage-loader" class="gan-loader ng-scope">
         <div class="gan-loader-content">
-            <div class="gan-loader-content-in<? if ($block->getHelper()->isSpinnerTypeImage() && ($image = $block->getLoaderImage()) && !empty($image)): ?> gan-loader-img-<?=$block->getHelper()->getLoaderImageAlignment()?><?endif; ?>" style="
-                    background-color: <?=$block->getHelper()->getLoaderBackgroundColor();?>;
-                    border-color: <?=$block->getHelper()->getLoaderBorderColor();?>;
-                    color: <?=$block->getHelper()->getLoaderTextColor();?>;
-                    width: <?=$block->getHelper()->getLoaderWindowWidth();?>px;
-                    height: <?=$block->getHelper()->getLoaderWindowHeight();?>px;
+            <div class="gan-loader-content-in
+            <? if ($block->getHelper()->isSpinnerTypeImage() && ($image = $block->getLoaderImage()) && !empty($image)): ?> gan-loader-img-<?=$block->escapeHtmlAttr($block->getHelper()->getLoaderImageAlignment())?><?endif; ?>"
+                 style="
+                    background-color: <?=$block->escapeHtmlAttr($block->getHelper()->getLoaderBackgroundColor());?>;
+                    border-color: <?=$block->escapeHtmlAttr($block->getHelper()->getLoaderBorderColor());?>;
+                    color: <?=$block->escapeHtmlAttr($block->getHelper()->getLoaderTextColor());?>;
+                    width: <?=$block->escapeHtmlAttr($block->getHelper()->getLoaderWindowWidth());?>px;
+                    height: <?=$block->escapeHtmlAttr($block->getHelper()->getLoaderWindowHeight());?>px;
                     ">
                 <? if ($block->getHelper()->isSpinnerTypeImage() && ($image = $block->getLoaderImage()) && !empty($image)): ?>
                     <div class="gan-loader-img">
-                        <img alt="<?php echo __('Loading...') ?>" src="<?= $image ?>">
+                        <img alt="<?= __('Loading...') ?>" src="<?= $block->escapeUrl($image) ?>">
                      </div>
                 <?else:?>
                     <div class="gan-loader-spinner-wrap">
-                        <svg class="gan-loader-spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="gan-loader-spinner-circle" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg>
+                        <svg class="gan-loader-spinner"
+                             width="65px"
+                             height="65px"
+                             viewBox="0 0 66 66"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <circle class="gan-loader-spinner-circle" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                        </svg>
                     </div>
                     <style type="text/css">
                     .gan-loader-spinner{
-                        stroke: <?=$block->getHelper()->getLoaderSpinnerColor()?>;
+                        stroke: <?=$block->escapeHtmlAttr($block->getHelper()->getLoaderSpinnerColor())?>;
                     }
                     </style>
                 <?endif; ?>
                 <div class="gan-loader-text">
-                    <?=$block->getHelper()->getLoaderText();?>
+                    <?=$block->escapeHtml($block->getHelper()->getLoaderText());?>
                 </div>
             </div>
         </div>

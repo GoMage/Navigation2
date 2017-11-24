@@ -9,6 +9,9 @@ class NavigationAttribute extends \Magento\Framework\Model\AbstractModel impleme
         $this->_init('GoMage\Navigation\Model\ResourceModel\NavigationAttribute');
     }
 
+    /**
+     * @return array
+     */
     public function getIdentities()
     {
         return [$this->getId()];

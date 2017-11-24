@@ -7,35 +7,32 @@ use Magento\Framework\App\Helper\Context;
 
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
-
-
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
-    protected $_scopeConfig;
+    protected $scopeConfig;
 
-    protected $_request;
-
-    protected $filters;
+    /**
+     * @var \Magento\Framework\App\Request\Http
+     */
+    protected $request;
 
     /**
      * Data constructor.
+     * @param Context $context
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-     * @param Url $urlHelper
-     * @param \Magento\Framework\UrlInterface $urlHelper
+     * @param \Magento\Framework\App\Request\Http $request
      */
     public function __construct(
         Context $context,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Framework\App\Request\Http $request
-        //\Magento\Framework\UrlInterface $url,
     ) {
     
         parent::__construct($context);
-        $this->_scopeConfig = $scopeConfig;
-        $this->_request = $request;
+        $this->scopeConfig = $scopeConfig;
+        $this->request = $request;
     }
-
 
     /**
      * @param $param
@@ -44,7 +41,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getScopeData($param, $section = SystemConfigInterface::SYSTEM_CONFIG_SECTION)
     {
-        return $this->_scopeConfig->getValue(
+        return $this->scopeConfig->getValue(
             $section . SystemConfigInterface::SYSTEM_CONFIG_SLASH. $param,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
@@ -70,6 +67,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CONFIG_FIELD_SHOW_SHOP_BY_IN);
     }
 
+    /**
+     * @return int
+     */
     public function isUseAutoScrolling()
     {
         return (int) $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
@@ -77,6 +77,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_AUTOSCROLLING);
     }
 
+    /**
+     * @return int
+     */
     public function isUseBackToTopButton()
     {
         return (int) $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
@@ -84,6 +87,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_BACK_TO_TOP);
     }
 
+    /**
+     * @return int
+     */
     public function getBackToTopSpeed()
     {
         return (int) $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
@@ -91,6 +97,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_BACK_TO_TOP_SPEED);
     }
 
+    /**
+     * @return int
+     */
     public function getBackToTopAction()
     {
         return (int) $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
@@ -98,6 +107,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_BACK_TO_TOP_ACTION);
     }
 
+    /**
+     * @return mixed
+     */
     public function getContentFilterType()
     {
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
@@ -126,6 +138,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CONFIG_FIELD_PAGER);
     }
 
+    /**
+     * @return mixed
+     */
     public function isShowValueQty()
     {
 
@@ -134,6 +149,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CONFIG_FIELD_QTY);
     }
 
+    /**
+     * @return mixed
+     */
     public function isAddFilterResultsToUrl()
     {
 
@@ -142,6 +160,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_HASH);
     }
 
+    /**
+     * @return mixed
+     */
     public function isUseFriendlyUrls()
     {
 
@@ -150,6 +171,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_FRIENDLY_URLS);
     }
 
+    /**
+     * @return mixed
+     */
     public function isShowAppliedValuesInResults()
     {
 

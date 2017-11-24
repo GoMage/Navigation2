@@ -20,20 +20,20 @@ $filter = reset($filterItems)->getFilter();
                         <? if (!empty($filter->isActive())): ?>
                             data-active="1"
                         <? endif; ?>
-                           data-from="<?php echo $filter->getMinBasePrice(); ?>"
-                           data-to="<?php echo $filter->getMaxBasePrice(); ?>"
-                           data-step="<?php echo $block->getStep(); ?>"
-                           data-skin="<?php echo $block->getSliderSkin(); ?>"
-                           data-code="<?php echo $attributeCode; ?>"
-                           data-dimension="&nbsp;<?php echo $filter->getCurrencySymbol(); ?>"
-                           data-param="<?php echo $filter->getRequestVar() ?>"
+                           data-from="<?= $block->escapeHtmlAttr($filter->getMinBasePrice()); ?>"
+                           data-to="<?= $block->escapeHtmlAttr($filter->getMaxBasePrice()); ?>"
+                           data-step="<?= $block->escapeHtmlAttr($block->getStep()); ?>"
+                           data-skin="<?= $block->escapeHtmlAttr($block->getSliderSkin()); ?>"
+                           data-code="<?= $block->escapeHtmlAttr($attributeCode); ?>"
+                           data-dimension="&nbsp;<?= $block->escapeHtmlAttr($filter->getCurrencySymbol()); ?>"
+                           data-param="<?= $block->escapeHtmlAttr($filter->getRequestVar()) ?>"
                            data-ajax="1"
-                           id="<?php echo $attributeCode; ?>"
+                           id="<?= $block->escapeHtmlAttr($attributeCode); ?>"
                            data-type="slider"
                            type="slider"
-                           name="<?php echo $attributeCode; ?>"
-                           value="<?php echo $filter->getSingleValue() ?>"
-                           data-value="<?php echo str_replace(';', '-', $filter->getSingleValue()); ?>"
+                           name="<?= $block->escapeHtmlAttr($attributeCode); ?>"
+                           value="<?= $block->escapeHtmlAttr($filter->getSingleValue()) ?>"
+                           data-value="<?= $block->escapeHtmlAttr(str_replace(';', '-', $filter->getSingleValue())); ?>"
                     />
                 </span>
             </div>
@@ -43,13 +43,13 @@ $filter = reset($filterItems)->getFilter();
     
     <?if($block->getNavigationViewHelper()->getNavigationViewSliderLineHeight() < $block->getNavigationViewHelper()->getNavigationViewSliderElementHeight()):?>
     .gan-filter-slider .layout{
-        padding-bottom:<?=$block->getNavigationViewHelper()->getNavigationViewSliderElementHeight()?>px;
-        margin-left: <?=($block->getNavigationViewHelper()->getNavigationViewSliderElementWidth() / 2)?>px;
-        margin-right: <?=($block->getNavigationViewHelper()->getNavigationViewSliderElementWidth() / 2)?>px;
+        padding-bottom:<?=$block->escapeHtmlAttr($block->getNavigationViewHelper()->getNavigationViewSliderElementHeight())?>px;
+        margin-left: <?=$block->escapeHtmlAttr(($block->getNavigationViewHelper()->getNavigationViewSliderElementWidth() / 2))?>px;
+        margin-right: <?=$block->escapeHtmlAttr(($block->getNavigationViewHelper()->getNavigationViewSliderElementWidth() / 2))?>px;
     }
     .gan-filter-slider .jslider .jslider-label,
     .gan-filter-slider .jslider .jslider-value{
-        margin-top: <?= (($block->getNavigationViewHelper()->getNavigationViewSliderElementHeight() - $block->getNavigationViewHelper()->getNavigationViewSliderLineHeight()) / 2 + 10) ?>px;
+        margin-top: <?= $block->escapeHtmlAttr((($block->getNavigationViewHelper()->getNavigationViewSliderElementHeight() - $block->getNavigationViewHelper()->getNavigationViewSliderLineHeight()) / 2 + 10)) ?>px;
     }
     <?endif;?>
 
@@ -60,30 +60,30 @@ $filter = reset($filterItems)->getFilter();
     .gan-filter-slider .jslider .jslider-bg .v{
 
         /* Slider Line Height */
-        height: <?=$block->getNavigationViewHelper()->getNavigationViewSliderLineHeight()?>px;        
+        height: <?=$block->escapeHtmlAttr($block->getNavigationViewHelper()->getNavigationViewSliderLineHeight())?>px;
         
     }
     
     .gan-filter-slider .jslider .jslider-bg .v{
         
         /* Slider Line Color */
-        background: <?=$block->getNavigationViewHelper()->getNavigationViewSliderLineColor()?>;
+        background: <?=$block->escapeHtmlAttr($block->getNavigationViewHelper()->getNavigationViewSliderLineColor())?>;
 
     }
     
     .gan-filter-slider .jslider_round_plastic .jslider-pointer{
         
         /* Slider Element Color */
-        background: <?=$block->getNavigationViewHelper()->getNavigationViewSliderElementColor()?>;
+        background: <?=$block->escapeHtmlAttr($block->getNavigationViewHelper()->getNavigationViewSliderElementColor())?>;
         
         /* Slider Element Width */
-        width: <?=$block->getNavigationViewHelper()->getNavigationViewSliderElementWidth()?>px;
+        width: <?=$block->escapeHtmlAttr($block->getNavigationViewHelper()->getNavigationViewSliderElementWidth())?>px;
         
         /* Slider Element Height */
-        height: <?=$block->getNavigationViewHelper()->getNavigationViewSliderElementHeight()?>px;
+        height: <?=$block->escapeHtmlAttr($block->getNavigationViewHelper()->getNavigationViewSliderElementHeight())?>px;
         
         /* Slider Element Radius */
-        border-radius: <?=$block->getNavigationViewHelper()->getNavigationViewSliderElementRadius()?>px;
+        border-radius: <?=$block->escapeHtmlAttr($block->getNavigationViewHelper()->getNavigationViewSliderElementRadius())?>px;
 
     }
     

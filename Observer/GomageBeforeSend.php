@@ -10,30 +10,42 @@ class GomageBeforeSend implements ObserverInterface
     /**
      * @var \Magento\Framework\App\RequestInterface
      */
-    protected $_request;
+    protected $request;
 
     /**
      * @var \Magento\Framework\App\ResponseInterface
      */
-    protected $_response;
+    protected $response;
 
     /**
      * @var \Magento\Framework\App\ActionFlag
      */
-    protected $_actionFlag;
+    protected $actionFlag;
 
     /**
      * @var \Magento\Framework\View\LayoutInterface
      */
-    protected $_layout;
+    protected $layout;
 
     /**
      * @var \Magento\Framework\Event\ManagerInterface
      */
-    protected $_eventManager;
+    protected $eventManager;
+
+    /**
+     * @var \GoMage\Navigation\Helper\Data
+     */
     protected $dataHelper;
 
-
+    /**
+     * GomageBeforeSend constructor.
+     * @param \Magento\Framework\App\RequestInterface $request
+     * @param \Magento\Framework\App\ResponseInterface $response
+     * @param \Magento\Framework\App\ActionFlag $actionFlag
+     * @param \Magento\Framework\View\LayoutInterface $layout
+     * @param \Magento\Framework\Event\ManagerInterface $eventManager
+     * @param \GoMage\Navigation\Helper\Data $dataHelper
+     */
     public function __construct(
         \Magento\Framework\App\RequestInterface $request,
         \Magento\Framework\App\ResponseInterface $response,
@@ -43,11 +55,11 @@ class GomageBeforeSend implements ObserverInterface
         \GoMage\Navigation\Helper\Data $dataHelper
     ) {
     
-        $this->_request = $request;
-        $this->_response = $response;
-        $this->_actionFlag = $actionFlag;
-        $this->_layout = $layout;
-        $this->_eventManager = $eventManager;
+        $this->request = $request;
+        $this->response = $response;
+        $this->actionFlag = $actionFlag;
+        $this->layout = $layout;
+        $this->eventManager = $eventManager;
         $this->dataHelper = $dataHelper;
     }
 
@@ -58,27 +70,27 @@ class GomageBeforeSend implements ObserverInterface
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
-        if ($this->_request->getRouteName() == 'catalog' && $this->_request->isAjax() &&
-            (($this->_request->getParam('gan_ajax_filter') ||
-                $this->_request->getParam('gan_ajax_cat') ||
-                $this->_request->getParam('gan_ajax_more')
+        if ($this->request->getRouteName() == 'catalog' && $this->request->isAjax() &&
+            (($this->request->getParam('gan_ajax_filter') ||
+                $this->request->getParam('gan_ajax_cat') ||
+                $this->request->getParam('gan_ajax_more')
             ))) {
                 $result = new DataObject();
 
-                if ($this->_request->getParam('gan_ajax_more')) {
-                    $result->setData('content', $this->_layout->renderElement('category.products'));
+                if ($this->request->getParam('gan_ajax_more')) {
+                    $result->setData('content', $this->layout->renderElement('category.products'));
                 }
 
-                if ($this->_request->getParam('gan_ajax_filter') && !$this->_request->getParam('gan_ajax_more')) {
-                    $result->setData('content', $this->_layout->renderElement('main.content'));
+                if ($this->request->getParam('gan_ajax_filter') && !$this->request->getParam('gan_ajax_more')) {
+                    $result->setData('content', $this->layout->renderElement('main.content'));
                 }
 
-                if ($this->_request->getParam('gan_ajax_cat')) {
-                    $result->setData('content', $this->_layout->renderElement('main.content'));
-                    $result->setData('breadcrumbs', $this->_layout->renderElement('breadcrumbs'));
+                if ($this->request->getParam('gan_ajax_cat')) {
+                    $result->setData('content', $this->layout->renderElement('main.content'));
+                    $result->setData('breadcrumbs', $this->layout->renderElement('breadcrumbs'));
                 }
 
-                $this->_response->representJson($result->toJson());
+                $this->response->representJson($result->toJson());
         }
 
         return $this;

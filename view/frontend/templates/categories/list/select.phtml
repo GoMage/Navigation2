@@ -1,7 +1,7 @@
 <? foreach ($data as $category): ?>
     <?php $selected = ($currentCategoryId == $category['entity_id']) ? 'selected' : ''; ?>
-    <option <?= $selected ?>
-            value="<?= $category['url'] ?>"> <?= $categoriesBlock->addlevelSuffix($category['level']) . $category['name'] ?></option>
+    <option <?= $block->escapeHtmlAttr($selected) ?>
+            value="<?= $block->escapeUrl($category['url']) ?>"> <?= $block->escapeHtml($categoriesBlock->addlevelSuffix($category['level']) . $category['name']) ?></option>
     <?php if (is_array($category['children']))
         $categoriesBlock->getSelectList($category['children']);
     ?>

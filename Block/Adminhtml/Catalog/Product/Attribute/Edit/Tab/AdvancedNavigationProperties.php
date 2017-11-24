@@ -24,9 +24,24 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
     \Magento\Backend\Block\Widget\Tab\TabInterface
 {
 
+    /**
+     * @var \GoMage\Navigation\Model\Config\Source\Navigation
+     */
     protected $_sourceNavigation;
+
+    /**
+     * @var array
+     */
     protected $_yesNoSource;
+
+    /**
+     * @var \GoMage\Navigation\Model\Config\Source\Image\Alignment
+     */
     protected $_sourceImageAlignment;
+
+    /**
+     * @var \Magento\Store\Model\StoreManagerInterface
+     */
     protected $storeManager;
 
     /**

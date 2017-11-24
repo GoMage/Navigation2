@@ -11,7 +11,7 @@ $filter = reset($filterItems)->getFilter();
 <div class="gan-filter gan-filter-dropdown">
     <?=$block->getTooltip($filter)->toHtml()?>
     <select data-role="navigation-filter"
-            data-param="<?php echo $filter->getRequestVar() ?>"
+            data-param="<?= $block->escapeHtmlAttr($filter->getRequestVar()) ?>"
             data-type="select"
             <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
                 data-ajax="1"
@@ -22,12 +22,12 @@ $filter = reset($filterItems)->getFilter();
                 data-active="1"
             <? endif; ?>
     >
-        <option value=""><?php echo __('Select Filter') ?></option>
+        <option value=""><?= __('Select Filter') ?></option>
         <?php foreach ($filterItems as $item): ?>
             <?php if ($item->getCount() > 0 && $item->isShowAppliedValues()): ?>
-                <option value="<?php echo $item->getValueString() ?>"
+                <option value="<?= $block->escapeHtml($item->getValueString()) ?>"
                         <?php if ($item->getIsActive()): ?>selected="selected" data-active="1"<?php endif ?>>
-                    <?php echo $item->getLabel() . ' (' . $item->getCount() . ')' ?>
+                    <?= $block->escapeHtml($item->getLabel() . ' (' . $item->getCount() . ')') ?>
                 </option>
             <?php endif; ?>
         <?php endforeach ?>

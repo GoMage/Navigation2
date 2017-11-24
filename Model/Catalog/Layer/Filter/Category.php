@@ -7,11 +7,110 @@ use GoMage\Navigation\Model\Config\Source\NavigationInterface;
 class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements FilterInterface
 {
     /**
-     * {@inheritdoc}
+     * Active Category Id
+     *
+     * @var int
      */
-    public function isAjax()
+    protected $_categoryId;
+
+    /**
+     * Applied Category
+     *
+     * @var \Magento\Catalog\Model\Category
+     */
+    protected $_appliedCategory;
+
+    /**
+     * Core data
+     *
+     * @var \Magento\Framework\Escaper
+     */
+    protected $_escaper;
+
+    /**
+     * Core registry
+     *
+     * @var \Magento\Framework\Registry
+     */
+    protected $_coreRegistry;
+
+    /**
+     * @var CategoryDataProvider
+     */
+    private $dataProvider;
+
+    /**
+     * @var \Magento\Framework\Registry
+     */
+    private $coreRegistry;
+
+    /**
+     * @var \Magento\Framework\App\RequestInterface
+     */
+    protected $request;
+
+    /**
+     * @var \GoMage\Navigation\Helper\Data
+     */
+    protected $helper;
+
+    /**
+     * @var \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory
+     */
+    protected $categoryCollectionFactory;
+
+    public function __construct(
+        \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Catalog\Model\Layer $layer,
+        \Magento\Catalog\Model\Layer\Filter\Item\DataBuilder $itemDataBuilder,
+        \Magento\Framework\Escaper $escaper,
+        \Magento\Catalog\Model\Layer\Filter\DataProvider\CategoryFactory $categoryDataProviderFactory,
+        \Magento\Framework\Registry $coreRegistry,
+        \Magento\Framework\App\RequestInterface $request,
+        \GoMage\Navigation\Helper\Data $helper,
+        \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory,
+        array $data = []
+    ) {
+        parent::__construct($filterItemFactory, $storeManager, $layer, $itemDataBuilder, $escaper, $categoryDataProviderFactory, $data);
+        $this->_escaper = $escaper;
+        $this->_requestVar = 'cat';
+        $this->coreRegistry = $coreRegistry;
+        $this->request = $request;
+        $this->helper = $helper;
+        $this->categoryCollectionFactory = $categoryCollectionFactory;
+        $this->dataProvider = $categoryDataProviderFactory->create(['layer' => $this->getLayer()]);
+    }
+
+    public function apply(\Magento\Framework\App\RequestInterface $request)
     {
-        return false;
+        if (!$this->helper->isEnable()) {
+            return parent::apply($request);
+        }
+
+        if(empty($request->getParam($this->getRequestVar()))) {
+            return parent::apply($request);
+        }
+
+        $filters = $this->getFormattedFilters();
+
+        if(empty($filters)) {
+            return parent::apply($request);
+        }
+
+        $this->getLayer()->getProductCollection()->addCategoriesFilter(['in' => $filters]);
+
+        foreach ($filters as $filter) {
+
+            $this->dataProvider->setCategoryId($filter);
+            $category = $this->dataProvider->getCategory();
+            $this->getLayer()->getState()->addFilter($this->_createItem($category->getName(), $filter));
+        }
+
+        $mainCategory = $this->coreRegistry->registry('current_category');
+        $this->dataProvider->setCategoryId($mainCategory->getId());
+
+        return $this;
     }
 
     /**
@@ -31,15 +130,66 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
     }
 
     /**
-     * return array
+     * @return array
      */
     public function _getItemsData()
     {
-        return [];
+        $productCollection = $this->getLayer()->getProductCollection();
+        $optionsFacetedData = $productCollection->getFacetedData('category');
+        $category = $this->coreRegistry->registry('current_category');
+        $categories = $category->getChildrenCategories();
+
+        foreach ($categories as $category) {
+
+            $count = (!empty($optionsFacetedData[$category->getId()]['count'])) ? $optionsFacetedData[$category->getId()]['count'] : 0;
+
+            if ($category->getIsActive() && $count > 0)
+            {
+                $this->itemDataBuilder->addItemData(
+                    $category->getName(),
+                    $category->getId(),
+                    $count
+                );
+            }
+        }
+
+        return $this->itemDataBuilder->build();
     }
 
-    public function isFilterInState()
+    protected function getFormattedFilters()
     {
-        return ;
+        $filters = explode('_', $this->request->getParam($this->getRequestVar()));
+
+        if (!$this->helper->isUseFriendlyUrls()) {
+            return $filters;
+        }
+
+        $collection = $this->categoryCollectionFactory->create();
+        $collection->addAttributeToSelect('name');
+        $collection->addIsActiveFilter();
+
+        $categoriesName = [];
+        foreach ($collection as $category) {
+            $categoriesName[$this->formatCategoryName($category->getName())] = $category->getId();
+        }
+
+        $params = [];
+        foreach ($filters as $item) {
+
+            if(isset($categoriesName[$item])) {
+                $params[] = $categoriesName[$item];
+            }
+        }
+
+        return $params;
+    }
+
+    /**
+     * @param $name
+     * @return mixed|string
+     */
+    protected function formatCategoryName($name)
+    {
+        return mb_strtolower(str_replace(' ', '+', htmlentities($name)));
     }
 }
