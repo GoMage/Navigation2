@@ -8,7 +8,7 @@
         <strong><?php echo __('Categories') ?></strong>
     </div>
     <div class="block-content block-content-gan-categories"<?php if($block->getCategoriesDataHelper()->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK && $block->getCategoriesDataHelper()->getMaxBlockHeightCategories()): ?> style="max-height:<?php echo $block->getCategoriesDataHelper()->getMaxBlockHeightCategories(); ?>px;"<?endif;?>>
-        <div class="block-content-in">
+        <div class="block-content-in"<? echo ($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? ' style="display:none;"' : '';?>>
             <ul class="gan-categories-list<?= ($block->getCategoriesDataHelper()->isShowCheckboxes()) ? ' gan-categories-list-checkbox' : '' ; ?>">
                 <?php
                 foreach($block->getStoreCategories(true, false, true) as $category):

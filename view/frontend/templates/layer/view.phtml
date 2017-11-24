@@ -11,6 +11,8 @@
 
 ?>
 
+<?$block->getContainerClass();?>
+
 <?php if ($block->canShowBlock()): ?>
     <div class="block filter block-gan-filter gan-sidebar-position" data-role="navigation" data-mage-init='{"navigation": {
                         "addFilterResultsToUrl": "<?php echo $block->getDataHelper()->isAddFilterResultsToUrl()?>",

@@ -5,7 +5,7 @@
         <strong><?php echo __('Categories') ?></strong>
     </div>
     <div class="block-content block-content-gan-categories">
-        <div class="gan-categories-list-dropdown block-content-in">
+        <div class="gan-categories-list-dropdown block-content-in" <? echo ($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
             <?php
             foreach($block->getStoreCategories(true, false, true) as $category):
                 if (!$category->getIsActive()) continue;?>

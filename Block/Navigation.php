@@ -179,6 +179,22 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         return $itemClass;
     }
 
+    public function getContainerClass()
+    {
+        $containerClass = '';
+        if ($this->getDataHelper()->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
+            $this->getDataHelper()->getContentFilterType() == \GoMage\Navigation\Model\Config\Source\Content\Filter\Type::COLUMNS) {
+            $containerClass = 'gan-column-container';
+        }
+
+        if ($this->getDataHelper()->getShowShopByIn() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
+            $this->getDataHelper()->getContentFilterType() == \GoMage\Navigation\Model\Config\Source\Content\Filter\Type::ROWS) {
+            $containerClass = 'gan-row-container';
+        }
+
+        return $containerClass;
+    }
+
     protected function _beforeToHtml()
     {
         if (!$this->getDataHelper()->isEnable()) {
