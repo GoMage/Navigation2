@@ -41,6 +41,18 @@ $filter = reset($filterItems)->getFilter();
 </div>
 <style type="text/css">
     
+    <?if($block->getNavigationViewHelper()->getNavigationViewSliderLineHeight() < $block->getNavigationViewHelper()->getNavigationViewSliderElementHeight()):?>
+    .gan-filter-slider .layout{
+        padding-bottom:<?=$block->getNavigationViewHelper()->getNavigationViewSliderElementHeight()?>px;
+        margin-left: <?=($block->getNavigationViewHelper()->getNavigationViewSliderElementWidth() / 2)?>px;
+        margin-right: <?=($block->getNavigationViewHelper()->getNavigationViewSliderElementWidth() / 2)?>px;
+    }
+    .gan-filter-slider .jslider .jslider-label,
+    .gan-filter-slider .jslider .jslider-value{
+        margin-top: <?= (($block->getNavigationViewHelper()->getNavigationViewSliderElementHeight() - $block->getNavigationViewHelper()->getNavigationViewSliderLineHeight()) / 2 + 10) ?>px;
+    }
+    <?endif;?>
+
     .gan-filter-slider .jslider .jslider-bg,
     .gan-filter-slider .jslider .jslider-bg .f,
     .gan-filter-slider .jslider .jslider-bg .r,

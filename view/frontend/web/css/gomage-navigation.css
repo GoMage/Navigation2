@@ -105,6 +105,7 @@
   font-size: 14px;
   line-height: 1.5;
   top: 100%;
+  margin-top: 10px;
 }
 .gan-filter-slider .jslider .jslider-value{
   top: 100%;
@@ -112,6 +113,8 @@
   font-size: 14px;
   line-height: 1.5;
   z-index: 10;
+  margin-top: 10px;
+  padding-top: 0;
 }
 
 /* Filter type = In block
