@@ -7,6 +7,18 @@
 .block-gan-filter .filter-options{
   display: block;
 }
+.block-gan-filter .filter-options-title{
+  padding-right: 50px;
+  word-wrap: break-word;
+}
+
+/* Filter Columns
+-------------------------------------------------- */
+.gan-column-container .filter-options{
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
 
 /* Filter type = default
 -------------------------------------------------- */
@@ -568,7 +580,7 @@ body.ajax-loading .block-search{
 .filter-options-content .gan-tooltip{
   position: absolute;
   top: 12px;
-  right: 39px;
+  right: 30px;
 }
 .gan-tooltip.__opened .gan-tooltip-content{
   display: block;
