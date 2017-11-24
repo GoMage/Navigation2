@@ -8,9 +8,9 @@
     <? $test = $block->getNavigationViewHelper()->getNavigationViewTooltipWindowBackgroundColor(); ?>
 
     <div class="gan-tooltip">
-        <div class="gan-tooltip-toggle">?</div>
+        <div class="gan-tooltip-toggle" style="color: <?=$block->getNavigationViewHelper()->getNavigationViewTooltipBackgroundColor();?>">?</div>
         <div class="gan-tooltip-content">
-            <div class="gan-tooltip-content-in" style="width: <?=$filter->getGomageTooltipWidth();?>px; height: <?=$filter->getGomageTooltipHeight();?>px;">
+            <div class="gan-tooltip-content-in" style="width: <?=$filter->getGomageTooltipWidth();?>px; height: <?=$filter->getGomageTooltipHeight();?>px; background: <?=$block->getNavigationViewHelper()->getNavigationViewTooltipWindowBackgroundColor();?>;">
                 <div class="gan-tooltip-text"><?=$block->getTooltipText($filter->getGomageTooltipText());?></div>
                 <?if($block->getNavigationViewHelper()->isNavigationViewTooltipHideOnCloseButton()):?>
                     <div class="gan-tooltip-close">✕</div>

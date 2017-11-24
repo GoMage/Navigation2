@@ -7,12 +7,7 @@
 $filter = reset($filterItems)->getFilter();
 
 ?>
-
-<? if($filter->getGomageIsCheckbox()):?>
-    checkboxes
-<?endif;?>
-
-<ol class="items gan-filter gan-filter-default <?php if($filter->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK) echo 'gan-filter-in-block'; ?> " <?php if($filter->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK && $filter->getGomageMaxBlockHeight()): ?>style="max-height:<?php echo $filter->getGomageMaxBlockHeight(); ?>px;"<?endif;?>>
+<ol class="items gan-filter gan-filter-default<?php if($filter->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK) echo ' gan-filter-in-block'; ?><? if($filter->getGomageIsCheckbox()):?> gan-filter-checkbox<?endif;?>" <?php if($filter->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK && $filter->getGomageMaxBlockHeight()): ?>style="max-height:<?php echo $filter->getGomageMaxBlockHeight(); ?>px;"<?endif;?>>
     <?=$block->getTooltip($filter)->toHtml()?>
     <?php foreach ($filterItems as $item): ?>
         <li class="item">
@@ -32,13 +27,15 @@ $filter = reset($filterItems)->getFilter();
                    <?endif;?>
                    data-type="<?php echo (int) $filter->getGomageFilterType(); ?>"
                    <?php if($item->getIsActive()):?>
-                    data-active="1">
-                    <?php endif;?>
-                    <span class="filter-label-text"><?php echo $item->getLabel() ?></span>
-                    <? if ($block->getHelper()->isShowValueQty()): ?>
-                        <span class="count"><?php echo $item->getCount() ?><span class="filter-count-label">
-                        <?php if ($item->getCount() == 1): ?><?php echo __('item') ?><?php else: ?><?php echo __('items') ?><?php endif; ?></span></span>
-                    <? endif; ?>
+                    data-active="1"
+                    <?php endif;?>>
+                    <span class="filter-label-wrap">
+                        <span class="filter-label-text"><?php echo $item->getLabel() ?></span>
+                        <? if ($block->getHelper()->isShowValueQty()): ?>
+                            <span class="count"><?php echo $item->getCount() ?><span class="filter-count-label">
+                            <?php if ($item->getCount() == 1): ?><?php echo __('item') ?><?php else: ?><?php echo __('items') ?><?php endif; ?></span></span>
+                        <? endif; ?>
+                    </span>
                 </a>
             <?php endif; ?>
         </li>
