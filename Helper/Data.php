@@ -20,18 +20,14 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * Data constructor.
      * @param Context $context
-     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-     * @param \Magento\Framework\App\Request\Http $request
      */
     public function __construct(
-        Context $context,
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
-        \Magento\Framework\App\Request\Http $request
+        Context $context
     ) {
     
         parent::__construct($context);
-        $this->scopeConfig = $scopeConfig;
-        $this->request = $request;
+        $this->scopeConfig = $context->getScopeConfig();
+        $this->request = $context->getRequest();
     }
 
     /**

@@ -62,7 +62,6 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
      * @param \Magento\Catalog\Model\Layer\Resolver $layerResolver
      * @param \Magento\Catalog\Model\Layer\FilterList $filterList
      * @param \Magento\Catalog\Model\Layer\AvailabilityFlagInterface $visibilityFlag
-     * @param \Magento\Framework\App\RequestInterface $request
      * @param \GoMage\Navigation\Helper\Data $dataHelper
      * @param \GoMage\Navigation\Helper\CategoryData $categoryHelper
      * @param \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper
@@ -73,7 +72,6 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         \Magento\Catalog\Model\Layer\Resolver $layerResolver,
         \Magento\Catalog\Model\Layer\FilterList $filterList,
         \Magento\Catalog\Model\Layer\AvailabilityFlagInterface $visibilityFlag,
-        \Magento\Framework\App\RequestInterface $request,
         \GoMage\Navigation\Helper\Data $dataHelper,
         \GoMage\Navigation\Helper\CategoryData $categoryHelper,
         \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper,
@@ -83,7 +81,7 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         $this->catalogLayer = $layerResolver->get();
         $this->filterList = $filterList;
         $this->visibilityFlag = $visibilityFlag;
-        $this->request = $request;
+        $this->request = $context->getRequest();
         $this->dataHelper = $dataHelper;
         $this->categoryHelper = $categoryHelper;
         $this->navigationViewHelper = $navigationViewHelper;

@@ -54,7 +54,6 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * Url constructor.
      * @param Context $context
-     * @param \Magento\Framework\UrlInterface $url
      * @param \Magento\Theme\Block\Html\Pager $htmlPagerBlock
      * @param \Magento\Framework\App\Request\Http $request
      * @param \Magento\Framework\Escaper $escaper
@@ -62,14 +61,13 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function __construct(
         Context $context,
-        \Magento\Framework\UrlInterface $url,
         \Magento\Theme\Block\Html\Pager $htmlPagerBlock,
         \Magento\Framework\App\Request\Http $request,
         \Magento\Framework\Escaper $escaper,
         \GoMage\Navigation\Helper\Data $dataHelper
     ) {
     
-        $this->url = $url;
+        $this->url = $context->getUrlBuilder();
         $this->htmlPagerBlock = $htmlPagerBlock;
         $this->request = $request;
         $this->escaper = $escaper;

@@ -58,32 +58,28 @@ class FilterRenderer extends Template implements FilterRendererInterface
      * @param Template\Context $context
      * @param \Magento\Framework\Registry $coreRegistry
      * @param \Magento\Swatches\Block\LayeredNavigation\RenderLayered $renderLayered
-     * @param \Magento\Framework\App\RequestInterface $request
      * @param \GoMage\Navigation\Helper\Url $urlHelper
      * @param \GoMage\Navigation\Helper\Data $dataHelper
      * @param \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param array $data
      */
     public function __construct(
         Template\Context $context,
         \Magento\Framework\Registry $coreRegistry,
         \Magento\Swatches\Block\LayeredNavigation\RenderLayered $renderLayered,
-        \Magento\Framework\App\RequestInterface $request,
         \GoMage\Navigation\Helper\Url $urlHelper,
         \GoMage\Navigation\Helper\Data $dataHelper,
         \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
 
                 array $data = []
     ) {
     
         $this->coreRegistry = $coreRegistry;
-        $this->request = $request;
+        $this->request = $context->getRequest();
         $this->urlHelper = $urlHelper;
         $this->dataHelper = $dataHelper;
         $this->renderLayered = $renderLayered;
-        $this->storeManager = $storeManager;
+        $this->storeManager = $context->getStoreManager();
         $this->navigationViewHelper = $navigationViewHelper;
 
         parent::__construct($context, $data);

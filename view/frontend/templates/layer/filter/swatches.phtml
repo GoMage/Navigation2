@@ -77,7 +77,12 @@ $cnt = 0;
                                  option-label="<?=$block->escapeHtmlAttr($data['label']) ?>"
                                  option-tooltip-thumb=""
                                  option-tooltip-value="<?=$block->escapeHtmlAttr($swatchData['swatches'][$option]['value']) ?>"
-                                 style="background: <?=$block->escapeHtmlAttr($swatchData['swatches'][$option]['value']) ?> no-repeat center; background-size: initial;"></div>
+                                 style="
+                                         background: <?=$block->escapeHtmlAttr($swatchData['swatches'][$option]['value']) ?> no-repeat center;
+                                         background-size: initial;
+                                        <?= $block->escapeHtmlAttr(!empty($filter->getGomageImageWidth()) ? 'width:' . $filter->getGomageImageWidth() . 'px' : '');?>;
+                                        <?= $block->escapeHtmlAttr(!empty($filter->getGomageImageHeight()) ? 'height:' . $filter->getGomageImageWidth() . 'px' : '');?>;
+                                         "></div>
                             <?php break;
                         case '0':
                         default:

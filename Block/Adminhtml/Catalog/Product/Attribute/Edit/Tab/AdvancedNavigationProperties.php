@@ -61,11 +61,10 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
         \GoMage\Navigation\Model\Config\Source\Navigation $sourceNavigation,
         \GoMage\Navigation\Model\Config\Source\Image\Alignment $sourceImageAlignment,
         Yesno $yesNo,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
         array $data = []
     ) {
 
-        $this->storeManager = $storeManager;
+        $this->storeManager = $context->getStoreManager();
         $this->_sourceNavigation = $sourceNavigation;
         $this->_sourceImageAlignment = $sourceImageAlignment;
         $this->_yesNoSource = $yesNo->toOptionArray();
@@ -225,17 +224,6 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
                 'name'   => 'gomage_is_checkbox',
                 'label'  => __('Show Checkboxes'),
                 'title'  => __('Show Checkboxes'),
-                'values' => $this->_yesNoSource,
-            ]
-        );
-
-        $fieldset->addField(
-            'gomage_is_show_image_name',
-            'select',
-            [
-                'name'   => 'gomage_is_show_image_name',
-                'label'  => __('Show Image Name'),
-                'title'  => __('Show Image Name'),
                 'values' => $this->_yesNoSource,
             ]
         );
