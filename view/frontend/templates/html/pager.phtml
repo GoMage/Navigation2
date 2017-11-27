@@ -39,8 +39,8 @@ $moreButton = $this->getLayout()->createBlock('GoMage\Navigation\Block\Product\P
                        href="<?= $block->escapeUrl($block->getPreviousPageUrl()) ?>"
                        title="<?= $text ? $text : __('Previous') ?>"
                        data-role="navigation-filter"
-                       data-value="<?=$block->escapeHtmlAttr($block->getCollection()->getCurPage(-1)) ?>"
-                       data-param="<?=$block->escapeHtmlAttr($block->getPageVarName()) ?>"
+                       data-value="<?=$block->escapeHtml($block->getCollection()->getCurPage(-1)) ?>"
+                       data-param="<?=$block->escapeHtml($block->getPageVarName()) ?>"
                        data-ajax="1"
                        data-active="">
                         <span class="label"><?= __('Page') ?></span>
@@ -54,7 +54,7 @@ $moreButton = $this->getLayout()->createBlock('GoMage\Navigation\Block\Product\P
                     <a class="page first" href="<?= $block->escapeUrl($block->getFirstPageUrl()) ?>"
                        data-role="navigation-filter"
                        data-value="1"
-                       data-param="<?=$block->escapeHtmlAttr($block->getPageVarName()) ?>"
+                       data-param="<?=$block->escapeHtml($block->getPageVarName()) ?>"
                        data-ajax="1"
                        data-active="">
                         <span class="label"><?= __('Page') ?></span>
@@ -88,8 +88,8 @@ $moreButton = $this->getLayout()->createBlock('GoMage\Navigation\Block\Product\P
                     <li class="item">
                         <a href="<?= $block->escapeUrl($block->getPageUrl($_page)) ?>" class="page"
                            data-role="navigation-filter"
-                           data-value="<?=$block->escapeHtmlAttr($_page) ?>"
-                           data-param="<?=$block->escapeHtmlAttr($block->getPageVarName()) ?>"
+                           data-value="<?=$block->escapeHtml($_page) ?>"
+                           data-param="<?=$block->escapeHtml($block->getPageVarName()) ?>"
                            data-ajax="1"
                            data-active="">
                             <span class="label"><?= __('Page') ?></span>
@@ -103,8 +103,8 @@ $moreButton = $this->getLayout()->createBlock('GoMage\Navigation\Block\Product\P
                 <li class="item">
                     <a class="page next jump" title="" href="<?= $block->escapeUrl($block->getNextJumpUrl()) ?>"
                        data-role="navigation-filter"
-                       data-value="<?=$block->escapeHtmlAttr($block->getNextJumpPage()) ?>"
-                       data-param="<?=$block->escapeHtmlAttr($block->getPageVarName()) ?>"
+                       data-value="<?=$block->escapeHtml($block->getNextJumpPage()) ?>"
+                       data-param="<?=$block->escapeHtml($block->getPageVarName()) ?>"
                        data-ajax="1"
                        data-active="">
                         <span>...</span>
@@ -116,8 +116,8 @@ $moreButton = $this->getLayout()->createBlock('GoMage\Navigation\Block\Product\P
               <li class="item">
                   <a class="page last" href="<?= $block->escapeUrl($block->getLastPageUrl()) ?>"
                      data-role="navigation-filter"
-                     data-value="<?=$block->escapeHtmlAttr($block->getCollection()->getLastPageNumber()) ?>"
-                     data-param="<?=$block->escapeHtmlAttr($block->getPageVarName()) ?>"
+                     data-value="<?=$block->escapeHtml($block->getCollection()->getLastPageNumber()) ?>"
+                     data-param="<?=$block->escapeHtml($block->getPageVarName()) ?>"
                      data-ajax="1"
                      data-active="">
                       <span class="label"><?= __('Page') ?></span>
@@ -133,8 +133,8 @@ $moreButton = $this->getLayout()->createBlock('GoMage\Navigation\Block\Product\P
                        href="<?= $block->escapeUrl($block->getNextPageUrl()) ?>"
                        title="<?= $block->escapeHtml($text ? $text : __('Next')) ?>"
                        data-role="navigation-filter"
-                       data-value="<?=$block->escapeHtmlAttr($block->getCollection()->getCurPage(+1)) ?>"
-                       data-param="<?=$block->escapeHtmlAttr($block->getPageVarName()) ?>"
+                       data-value="<?=$block->escapeHtml($block->getCollection()->getCurPage(+1)) ?>"
+                       data-param="<?=$block->escapeHtml($block->getPageVarName()) ?>"
                        data-ajax="1"
                        data-active="">
                         <span class="label"><?= __('Page') ?></span>
@@ -151,7 +151,7 @@ $moreButton = $this->getLayout()->createBlock('GoMage\Navigation\Block\Product\P
             <strong class="limiter-label"><?= __('Show') ?></strong>
             <select id="limiter" data-mage-init='{"redirectUrl": {"event":"change"}}' class="limiter-options" data-role="navigation-filter" data-type="select" data-param="product_list_limit" >
                 <?php foreach ($block->getAvailableLimit() as $_key => $_limit): ?>
-                    <option value="<?= $block->escapeHtmlAttr(($block->getLimitUrl($_key))) ?>"<?php if ($block->isLimitCurrent($_key)): ?>
+                    <option value="<?= $block->escapeHtml(($block->getLimitUrl($_key))) ?>"<?php if ($block->isLimitCurrent($_key)): ?>
                         selected="selected"<?php endif ?>>
                         <?= $block->escapeHtml($_limit) ?>
                     </option>
