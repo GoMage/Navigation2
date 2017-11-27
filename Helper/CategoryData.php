@@ -15,14 +15,12 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * CategoryData constructor.
      * @param Context $context
-     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      */
     public function __construct(
-        Context $context,
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+        Context $context
     ) {
 
-        $this->scopeConfig = $scopeConfig;
+        $this->scopeConfig = $context->getScopeConfig();
         parent::__construct($context);
     }
 
