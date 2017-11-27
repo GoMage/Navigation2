@@ -49,6 +49,11 @@ class Price extends \Magento\Catalog\Model\Layer\Filter\Price implements FilterI
     protected $dataHelper;
 
     /**
+     * @var \GoMage\Navigation\Helper\Url
+     */
+    protected $urlHelper;
+
+    /**
      * Price constructor.
      * @param \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
@@ -83,6 +88,7 @@ class Price extends \Magento\Catalog\Model\Layer\Filter\Price implements FilterI
         \Magento\Framework\App\RequestInterface $request,
         \GoMage\Navigation\Model\Config\Source\Filter\Templates $filterTemplates,
         \GoMage\Navigation\Helper\Data $dataHelper,
+        \GoMage\Navigation\Helper\Url $urlHelper,
         array $data = []
     ) {
     
@@ -108,6 +114,7 @@ class Price extends \Magento\Catalog\Model\Layer\Filter\Price implements FilterI
         $this->request = $request;
         $this->filterTemplates = $filterTemplates;
         $this->dataHelper = $dataHelper;
+        $this->urlHelper = $urlHelper;
     }
 
     /**
@@ -232,5 +239,13 @@ class Price extends \Magento\Catalog\Model\Layer\Filter\Price implements FilterI
         }
 
         return true;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRemoveUrl()
+    {
+        return $this->urlHelper->getFilterRemoveUrl($this);
     }
 }

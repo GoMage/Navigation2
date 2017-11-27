@@ -18,6 +18,10 @@
                         "categoriesPlace": "<?= $block->escapeHtmlAttr($block->getCategoryDataHelper()->getCategoriesBlockLocation()); ?>",
                         "backToTopSpeed": "<?= $block->escapeHtmlAttr($block->getDataHelper()->getBackToTopSpeed()); ?>",
                         "backToTopAction": "<?= $block->escapeHtmlAttr($block->getDataHelper()->getBackToTopAction()); ?>",
+                        "tooltipOpenOnClick": "<?= $block->escapeHtmlAttr($block->getNavigationViewHelper()->isNavigationViewTooltipShowOnClick()); ?>",
+                        "tooltipOpenOnMouseOver": "<?= $block->escapeHtmlAttr($block->getNavigationViewHelper()->isNavigationViewTooltipShowOnMouseOver()); ?>",
+                        "tooltipCloseButton": "<?= $block->escapeHtmlAttr($block->getNavigationViewHelper()->isNavigationViewTooltipHideOnCloseButton()); ?>",
+                        "tooltipCloseOnMouseOut": "<?= $block->escapeHtmlAttr($block->getNavigationViewHelper()->isNavigationViewTooltipHideOnMouseOut()); ?>",
                         "ajaxAutoload": "<?= $block->escapeHtmlAttr($block->getDataHelper()->isUseAutoScrolling()); ?>"
                         }}' style="background-color: <?=$block->getNavigationViewHelper()->getNavigationViewBlockBackgroundColor()?>; ">
         <div class="block-title"><strong><?= __('Add Filter') ?></strong></div>

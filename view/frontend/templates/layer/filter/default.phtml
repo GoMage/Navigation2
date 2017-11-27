@@ -14,7 +14,13 @@ $filter = reset($filterItems)->getFilter();
         style="max-height:<?= $block->escapeHtmlAttr($filter->getGomageMaxBlockHeight()); ?>px;"
     <?endif;?>>
     <?=$block->getTooltip($filter)->toHtml()?>
+    <?$optionsLimit = ($filter->getGomageVisibleOptions()) ? $filter->getGomageVisibleOptions() : false;
+      $cnt = 0;
+    ?>
     <?php foreach ($filterItems as $item): ?>
+        <? if (!empty($optionsLimit) && $cnt >= $optionsLimit) {
+            break;
+        } ?>
         <li class="item">
             <?php if ($item->getCount() > 0 && $item->isShowAppliedValues()): ?>
                 <a <?php if(!$item->getIsActive()):?> href="<?= $block->escapeUrl($item->getGomageUrl()); ?> <?endif;?>"
@@ -35,7 +41,7 @@ $filter = reset($filterItems)->getFilter();
                     data-active="1"
                     <?php endif;?>>
                     <span class="filter-label-wrap">
-                        <span class="filter-label-text"><?= $block->escapeHtml($item->getLabel()) ?></span>
+                        <span class="filter-label-text"><?= $block->escapeHtml($item->getLabel(), ['span']) ?></span>
                         <? if ($block->getHelper()->isShowValueQty()): ?>
                             <span class="count"><?= (int) $item->getCount() ?><span class="filter-count-label">
                             <?php if ($item->getCount() == 1): ?><?= __('item') ?><?php else: ?><?= __('items') ?><?php endif; ?></span></span>
@@ -44,5 +50,23 @@ $filter = reset($filterItems)->getFilter();
                 </a>
             <?php endif; ?>
         </li>
+        <?$cnt++;?>
     <?php endforeach ?>
+    <?if($filter->isActive() && $filter->getGomageIsReset()):?>
+        <a
+            data-role="navigation-filter"
+            data-value=""
+            data-url="<?= $block->escapeUrl($filter->getRemoveUrl()) ?>"
+            data-param="<?=$block->escapeHtmlAttr($filter->getRequestVar()) ?>"
+        <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+            data-ajax="1"
+        <?else:?>
+            data-ajax="0"
+        <?endif;?>
+            data-type="remove-item"
+            data-active="1"
+            href="#">
+            <?= __('Reset'); ?>
+        </a>
+    <?endif;?>
 </ol>

@@ -39,6 +39,30 @@ define([
             if (this.options.ajaxAutoload == true) {
                 $(window).on('scroll', {}, $.proxy(this._bindAjaxAutoload, this));
             }
+
+            if (this.options.tooltipOpenOnClick == true) {
+                $('.gan-tooltip-toggle').on('click', function () {
+                    $(this).closest('.gan-tooltip').addClass('__opened');
+                });
+            }
+
+            if (this.options.tooltipOpenOnMouseOver == true) {
+                $('.gan-tooltip').on('mouseover', function () {
+                    $(this).addClass('__opened');
+                });
+            }
+
+            if (this.options.tooltipCloseButton == true) {
+                $('.gan-tooltip-close').on('click', function () {
+                    $(this).closest('.gan-tooltip').removeClass('__opened');
+                });
+            }
+
+            if (this.options.tooltipCloseOnMouseOut == true) {
+                $('.gan-tooltip').on('mouseout', function () {
+                    $(this).removeClass('__opened');
+                });
+            }
         },
 
         _initFilters: function () {
@@ -124,7 +148,7 @@ define([
 
         _bindAjaxAutoload: function () {
 
-            if (typeof($('div.pages:eq(1)').offset().top) == 'undefined')
+            if (typeof($('div.pages:eq(1)').offset()) == 'undefined')
                 return ;
 
             if ($(window).scrollTop() >= $('div.pages:eq(1)').offset().top - $(window).height()) {

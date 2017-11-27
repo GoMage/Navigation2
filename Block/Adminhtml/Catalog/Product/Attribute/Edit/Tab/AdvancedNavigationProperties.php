@@ -150,6 +150,19 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
 
         $this->_addElementTypes($fieldset);
 
+        $templates = $this->_sourceNavigation->toOptionArray();
+        if ($attributeObject->getBackendModel() != 'Magento\Catalog\Model\Product\Attribute\Backend\Price') {
+            foreach ($templates as $key => $template) {
+                if(in_array($template['value'], [
+                    \GoMage\Navigation\Model\Config\Source\NavigationInterface::INPUT,
+                    \GoMage\Navigation\Model\Config\Source\NavigationInterface::SLIDER,
+                    \GoMage\Navigation\Model\Config\Source\NavigationInterface::SLIDER_INPUT,
+                ])) {
+                    unset($templates[$key]);
+                }
+            }
+        }
+
         $fieldset->addField(
             'gomage_filter_type',
             'select',
@@ -157,7 +170,7 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
                 'name'   => 'gomage_filter_type',
                 'label'  => __('Filter Type'),
                 'title'  => __('Filter Type'),
-                'values' => $this->_sourceNavigation->toOptionArray(),
+                'values' => $templates,
             ]
         );
 

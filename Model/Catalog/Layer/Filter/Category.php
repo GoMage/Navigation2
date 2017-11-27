@@ -59,6 +59,11 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
      */
     protected $categoryCollectionFactory;
 
+    /**
+     * @var \GoMage\Navigation\Helper\CategoryData
+     */
+    protected $categoryHelper;
+
     public function __construct(
         \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
@@ -69,6 +74,7 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
         \Magento\Framework\Registry $coreRegistry,
         \Magento\Framework\App\RequestInterface $request,
         \GoMage\Navigation\Helper\Data $helper,
+        \GoMage\Navigation\Helper\CategoryData $categoryHelper,
         \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory,
         array $data = []
     ) {
@@ -78,6 +84,7 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
         $this->coreRegistry = $coreRegistry;
         $this->request = $request;
         $this->helper = $helper;
+        $this->categoryHelper = $categoryHelper;
         $this->categoryCollectionFactory = $categoryCollectionFactory;
         $this->dataProvider = $categoryDataProviderFactory->create(['layer' => $this->getLayer()]);
     }
@@ -134,6 +141,10 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
      */
     public function _getItemsData()
     {
+        if(!$this->categoryHelper->isShowCategoryInShopBy()) {
+            return [];
+        }
+
         $productCollection = $this->getLayer()->getProductCollection();
         $optionsFacetedData = $productCollection->getFacetedData('category');
         $category = $this->coreRegistry->registry('current_category');
@@ -191,5 +202,17 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
     protected function formatCategoryName($name)
     {
         return mb_strtolower(str_replace(' ', '+', htmlentities($name)));
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActive()
+    {
+        if ($this->request->getParam($this->_requestVar)) {
+            return true;
+        }
+
+        return false;
     }
 }

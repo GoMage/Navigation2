@@ -40,6 +40,11 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
     protected $options;
 
     /**
+     * @var \GoMage\Navigation\Helper\Url
+     */
+    protected $urlHelper;
+
+    /**
      * Attribute constructor.
      * @param \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
@@ -51,6 +56,7 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
      * @param \Magento\Framework\App\RequestInterface $request
      * @param \Magento\Catalog\Model\Session $catalogSession
      * @param \GoMage\Navigation\Helper\Data $helper
+     * @param \GoMage\Navigation\Helper\Url $urlHelper
      * @param \Magento\Catalog\Model\Layer\Category\CollectionFilter $filter
      * @param array $data
      */
@@ -65,6 +71,7 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         \Magento\Framework\App\RequestInterface $request,
         \Magento\Catalog\Model\Session $catalogSession,
         \GoMage\Navigation\Helper\Data $helper,
+        \GoMage\Navigation\Helper\Url $urlHelper,
         \Magento\Catalog\Model\Layer\Category\CollectionFilter $filter,
         array $data = []
     ) {
@@ -77,6 +84,7 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         $this->catalogSession = $catalogSession;
         $this->helper = $helper;
         $this->filter = $filter;
+        $this->urlHelper = $urlHelper;
         parent::__construct($filterItemFactory, $storeManager, $layer, $itemDataBuilder, $filterAttributeFactory, $string, $tagFilter, $data);
     }
 
@@ -88,7 +96,7 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         if ($additional_data = $this->getData('attribute_model')->getData('additional_data')) {
             if (json_decode($additional_data)) {
                 $data = json_decode($additional_data);
-                if ($data->swatch_input_type) {
+                if (!empty($data->swatch_input_type)) {
                     return $data->swatch_input_type;
                 }
             }
@@ -244,5 +252,25 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
     protected function formatItemName($name)
     {
         return mb_strtolower(str_replace(' ', '+', htmlentities($name)));
+    }
+
+    /**
+     * @return string
+     */
+    public function getRemoveUrl()
+    {
+        return $this->urlHelper->getFilterRemoveUrl($this);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActive()
+    {
+        if ($this->request->getParam($this->_requestVar)) {
+            return true;
+        }
+
+        return false;
     }
 }

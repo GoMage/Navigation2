@@ -23,13 +23,37 @@ $filter = reset($filterItems)->getFilter();
             <? endif; ?>
     >
         <option value=""><?= __('Select Filter') ?></option>
+        <?$optionsLimit = ($filter->getGomageVisibleOptions()) ? $filter->getGomageVisibleOptions() : false;
+        $cnt = 0;
+        ?>
         <?php foreach ($filterItems as $item): ?>
+            <? if (!empty($optionsLimit) && $cnt >= $optionsLimit) {
+                break;
+            } ?>
             <?php if ($item->getCount() > 0 && $item->isShowAppliedValues()): ?>
                 <option value="<?= $block->escapeHtml($item->getValueString()) ?>"
                         <?php if ($item->getIsActive()): ?>selected="selected" data-active="1"<?php endif ?>>
-                    <?= $block->escapeHtml($item->getLabel() . ' (' . $item->getCount() . ')') ?>
+                    <?= $block->escapeHtml($item->getLabel() . ' (' . $item->getCount() . ')', ['span']) ?>
                 </option>
             <?php endif; ?>
+            <?$cnt++;?>
         <?php endforeach ?>
     </select>
+    <?if($filter->isActive() && $filter->getGomageIsReset()):?>
+        <a
+                data-role="navigation-filter"
+                data-value=""
+                data-url="<?= $block->escapeUrl($filter->getRemoveUrl()) ?>"
+                data-param="<?=$block->escapeHtmlAttr($filter->getRequestVar()) ?>"
+            <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+                data-ajax="1"
+            <?else:?>
+                data-ajax="0"
+            <?endif;?>
+                data-type="remove-item"
+                data-active="1"
+                href="#">
+            <?= __('Reset'); ?>
+        </a>
+    <?endif;?>
 </div>

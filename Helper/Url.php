@@ -155,8 +155,10 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
         return $item->getValue();
     }
 
+
     /**
      * @param $item
+     * @return string
      */
     public function getRemoveUrl($item)
     {
@@ -213,6 +215,22 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
         }
 
         return implode('_', $paramValues);
+    }
+
+    /**
+     * @param $filter
+     * @return string
+     */
+    public function getFilterRemoveUrl($filter)
+    {
+        $queryParams = is_array($this->request->getParams()) ? $this->request->getParams() : [];
+        if (!empty($queryParams[$filter->getRequestVar()])) {
+            $queryParams[$filter->getRequestVar()] = null;
+        }
+
+        $url = $this->url->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true, '_query' => $queryParams]);
+
+        return $this->escaper->escapeUrl($url);
     }
 
     /**

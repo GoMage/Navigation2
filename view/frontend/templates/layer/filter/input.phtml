@@ -100,6 +100,23 @@ $priceValues = explode(';', $filter->getSingleValue());
                     </button>
                 </div>
             <?php endif;?>
+            <?if($filter->isActive() && $filter->getGomageIsReset()):?>
+                <a
+                        data-role="navigation-filter"
+                        data-value=""
+                        data-url="<?= $block->escapeUrl($filter->getRemoveUrl()) ?>"
+                        data-param="<?=$block->escapeHtmlAttr($filter->getRequestVar()) ?>"
+                    <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+                        data-ajax="1"
+                    <?else:?>
+                        data-ajax="0"
+                    <?endif;?>
+                        data-type="remove-item"
+                        data-active="1"
+                        href="#">
+                    <?= __('Reset'); ?>
+                </a>
+            <?endif;?>
 
         </fieldset>
     </form>
