@@ -1,14 +1,21 @@
+<?
+/**
+ * @var $categoriesBlock \GoMage\Navigation\Block\Categories
+ */
+
+?>
+
 <?if(!empty($data)):?>
-    <ol <?=$block->escapeHtmlAttr($checkboxes)?>>
+    <ol <?=$categoriesBlock->escapeHtmlAttr($checkboxes)?>>
         <?foreach ($data as $category):?>
-            <?php $active = ($currentCategoryId == $category['entity_id']) ? ' class="selected"' : '';?>
+            <? $active = ($currentCategoryId == $category['entity_id']) ? ' class="selected"' : '';?>
                 <li
-                        data-ajax="<?=$block->escapeHtmlAttr($isAjax)?>"
+                        data-ajax="<?=$categoriesBlock->escapeHtmlAttr($isAjax)?>"
                         data-role="navigation-filter"
                         data-type="categories-li"
-                        data-url="<?=$block->escapeUrl($category['url'])?>"
+                        data-url="<?=$categoriesBlock->escapeUrl($category['url'])?>"
                         <? if (!empty(($category['children']))): ?> class="parent"<? endif; ?>>
-                    <a href="<?=$block->escapeUrl($category['url'])?>"<?=$block->escapeHtml($active)?>><span><?=$block->escapeHtml($category['name'])?></span></a>
+                    <a href="<?=$categoriesBlock->escapeUrl($category['url'])?>"<?=$categoriesBlock->escapeHtml($active)?>><span><?=$categoriesBlock->escapeHtml($category['name'])?></span></a>
                     <? if (!empty(($category['children']))): ?>
                         <?= $categoriesBlock->getOlList($category['children']); ?>
                     <? endif; ?>

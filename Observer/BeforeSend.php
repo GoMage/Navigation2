@@ -5,7 +5,7 @@ namespace GoMage\Navigation\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\DataObject;
 
-class GomageBeforeSend implements ObserverInterface
+class BeforeSend implements ObserverInterface
 {
     /**
      * @var \Magento\Framework\App\RequestInterface

@@ -7,6 +7,7 @@ class Templates
     /**
      * @param $type
      * @return mixed
+     * @throws \Exception
      */
     public function get($type)
     {
@@ -19,7 +20,7 @@ class Templates
         ];
 
         if (empty($templates[$type])) {
-            throw new Exception(__('Template is not set for ' . (int) $type . ' filter type'));
+            throw new \Exception(__('Template is not set for ' . (int) $type . ' filter type'));
         }
 
         return $templates[$type];
@@ -28,6 +29,7 @@ class Templates
     /**
      * @param $type
      * @return mixed
+     * @throws \Exception
      */
     public function getShowShopByInTemplate($type)
     {
@@ -39,7 +41,7 @@ class Templates
         ];
 
         if (empty($templates[$type])) {
-            throw new Exception(__('Template is not set for ' . (int) $type . ' filter type'));
+            throw new \Exception(__('Template is not set for ' . (int) $type . ' filter type'));
         }
 
         return $templates[$type];

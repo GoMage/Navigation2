@@ -21,4 +21,24 @@ class Alignment implements \Magento\Framework\Option\ArrayInterface
             ['value' => self::BOTTOM, 'label' => __('Bottom')],
         ];
     }
+
+    /**
+     * @param $value
+     * @return mixed
+     * @throws \Exception
+     */
+    public function getAlignment($value)
+    {
+
+        $alignment[static::LEFT] = 'left';
+        $alignment[static::RIGHT] = 'right';
+        $alignment[static::TOP] = 'top';
+        $alignment[static::BOTTOM] = 'bottom';
+
+        if (empty($alignment[$value])) {
+            throw new \Exception(__('Alignment position is not set for ' . (int) $value . ' type'));
+        }
+
+        return $alignment[$value];
+    }
 }

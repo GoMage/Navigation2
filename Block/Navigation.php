@@ -22,12 +22,7 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
     protected $dataHelper;
 
     /**
-     * @var
-     */
-    protected $pageRepository;
-
-    /**
-     * @var
+     * @var string
      */
     protected $pageLayout;
 

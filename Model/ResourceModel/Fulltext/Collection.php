@@ -9,7 +9,7 @@ class Collection extends \Magento\CatalogSearch\Model\ResourceModel\Fulltext\Col
     /**
      * @var array
      */
-    protected $_addedFilters = [];
+    protected $addedFilters = [];
 
     /**
      * @param string $field
@@ -19,7 +19,7 @@ class Collection extends \Magento\CatalogSearch\Model\ResourceModel\Fulltext\Col
     public function addFieldToFilter($field, $condition = null)
     {
         if (is_string($field)) {
-            $this->_addedFilters[$field] = $condition;
+            $this->addedFilters[$field] = $condition;
         }
         return parent::addFieldToFilter($field, $condition);
     }
@@ -30,9 +30,8 @@ class Collection extends \Magento\CatalogSearch\Model\ResourceModel\Fulltext\Col
      */
     public function addCategoriesFilter(array $categoriesFilter)
     {
-        if (is_array($categoriesFilter)) {
-            $this->_addedFilters['category_id'] = $categoriesFilter;
-        }
+
+        $this->addedFilters['category_id'] = $categoriesFilter;
 
         return parent::addCategoriesFilter($categoriesFilter);
     }
@@ -44,7 +43,7 @@ class Collection extends \Magento\CatalogSearch\Model\ResourceModel\Fulltext\Col
     public function addAdditionalFilter($field, $condition = null)
     {
         if (is_string($field)) {
-            $this->_addedFilters[$field] = $condition;
+            $this->addedFilters[$field] = $condition;
         }
     }
 
@@ -53,7 +52,7 @@ class Collection extends \Magento\CatalogSearch\Model\ResourceModel\Fulltext\Col
      */
     public function getAddedFilters()
     {
-        return $this->_addedFilters;
+        return $this->addedFilters;
     }
 
     /**

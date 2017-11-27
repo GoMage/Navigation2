@@ -1,3 +1,9 @@
+<?
+/**
+ * @var $block \GoMage\Navigation\Block\Categories
+ */
+?>
+
 <div class="block block-gan-categories gan-categories-flyout"
      style="background-color: <?=$block->escapeHtmlAttr($block->getNavigationViewHelper()->getNavigationViewBlockCategoriesBackgroundColor())?>"
 >
@@ -7,8 +13,8 @@
     <div class="block-content block-content-gan-categories">
         <div class="block-content-in" <?= ($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
             <ul class="gan-categories-list">
-                <?php
-                foreach($block->getStoreCategories(true, false, true) as $category):
+                <?
+                foreach($block->getStoreCategories() as $category):
                      if (!$category->getIsActive()) continue;?>
                     <li
                             data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>"
@@ -20,7 +26,7 @@
                         </a>
                         <?= $block->getOlList($block->getChildCategories($category)); ?>
                     </li>
-                <?php endforeach; ?>
+                <? endforeach; ?>
             </ul>
         </div>
     </div>

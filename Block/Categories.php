@@ -40,12 +40,12 @@ class Categories extends \Magento\Framework\View\Element\Template
     protected $categoryResource;
 
     /**
-     * @var
+     * @var string
      */
     protected $pageLayout;
 
     /**
-     * @var
+     * @var bool
      */
     protected $canShowCategories;
 
@@ -155,14 +155,11 @@ class Categories extends \Magento\Framework\View\Element\Template
     }
 
     /**
-     * @param bool $sorted
-     * @param bool $asCollection
-     * @param bool $toLoad
      * @return \Magento\Framework\Data\Tree\Node\Collection
      */
-    public function getStoreCategories($sorted = false, $asCollection = false, $toLoad = true)
+    public function getStoreCategories()
     {
-        return $this->getCategoryHelper()->getStoreCategories($sorted, $asCollection, $toLoad);
+        return $this->getCategoryHelper()->getStoreCategories(true, false, true);
     }
 
     /**
@@ -255,20 +252,6 @@ class Categories extends \Magento\Framework\View\Element\Template
     }
 
     /**
-     * @param $level
-     * @return string
-     */
-    public function addLevelSuffix($level)
-    {
-        $suffix = '';
-        for ($i = 1; $i < $level; $i++) {
-            $suffix .= '&nbsp;&nbsp;';
-        }
-
-        return $suffix;
-    }
-
-    /**
      * @param $category
      * @return int
      */
@@ -283,6 +266,7 @@ class Categories extends \Magento\Framework\View\Element\Template
      */
     public function getCategoryImage($id)
     {
+        //Find solution to foreach categories with all data in template
         $category = \Magento\Framework\App\ObjectManager::getInstance()
             ->create('Magento\Catalog\Model\Category')->load($id);
 

@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  *
  * @var $block \GoMage\Navigation\Block\Navigation\FilterRenderer
@@ -18,7 +18,7 @@ $filter = reset($filterItems)->getFilter();
             <?else:?>
                 data-ajax="0"
             <?endif;?>
-            <?php if (!empty($filter->getUsedOptions())): ?>
+            <? if (!empty($filter->getUsedOptions())): ?>
                 data-active="1"
             <? endif; ?>
     >
@@ -26,18 +26,18 @@ $filter = reset($filterItems)->getFilter();
         <?$optionsLimit = ($filter->getGomageVisibleOptions()) ? $filter->getGomageVisibleOptions() : false;
         $cnt = 0;
         ?>
-        <?php foreach ($filterItems as $item): ?>
+        <? foreach ($filterItems as $item): ?>
             <? if (!empty($optionsLimit) && $cnt >= $optionsLimit) {
                 break;
             } ?>
-            <?php if ($item->getCount() > 0 && $item->isShowAppliedValues()): ?>
+            <? if ($item->getCount() > 0 && $item->isShowAppliedValues()): ?>
                 <option value="<?= $block->escapeHtml($item->getValueString()) ?>"
-                        <?php if ($item->getIsActive()): ?>selected="selected" data-active="1"<?php endif ?>>
+                        <? if ($item->getIsActive()): ?>selected="selected" data-active="1"<? endif ?>>
                     <?= $block->escapeHtml($item->getLabel() . ' (' . $item->getCount() . ')', ['span']) ?>
                 </option>
-            <?php endif; ?>
+            <? endif; ?>
             <?$cnt++;?>
-        <?php endforeach ?>
+        <? endforeach ?>
     </select>
     <?if($filter->isActive() && $filter->getGomageIsReset()):?>
         <a

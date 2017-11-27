@@ -2,7 +2,7 @@
 
 namespace GoMage\Navigation\Observer;
 
-class GomageSaveAttribute implements \Magento\Framework\Event\ObserverInterface
+class SaveAttribute implements \Magento\Framework\Event\ObserverInterface
 {
     /**
      * @var \GoMage\Navigation\Model\NavigationAttributeRepository

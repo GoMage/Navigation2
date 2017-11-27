@@ -44,7 +44,7 @@ class FilterRenderer extends Template implements FilterRendererInterface
     protected $storeManager;
 
     /**
-     * @var
+     * @var \GoMage\Navigation\Block\Navigation\Tooltip
      */
     public $tooltip;
 

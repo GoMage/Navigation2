@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
     <event name="catalog_entity_attribute_save_after">
-        <observer name="gomage_save_attribute" instance="GoMage\Navigation\Observer\GomageSaveAttribute" />
+        <observer name="gomage_save_attribute" instance="GoMage\Navigation\Observer\SaveAttribute" />
     </event>
     <event name="catalog_entity_attribute_load_after">
-        <observer name="gomage_load_attribute" instance="GoMage\Navigation\Observer\GomageLoadAttribute" />
+        <observer name="gomage_load_attribute" instance="GoMage\Navigation\Observer\LoadAttribute" />
     </event>
 </config>

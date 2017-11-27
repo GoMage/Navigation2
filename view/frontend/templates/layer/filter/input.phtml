@@ -1,5 +1,5 @@
 
-<?php
+<?
 /**
  *
  * @var $block \GoMage\Navigation\Block\Navigation\FilterRenderer
@@ -34,7 +34,7 @@ $priceValues = explode(';', $filter->getSingleValue());
                     <label>
                         <input
                                 id="price-from"
-                            <?php if(!$filter->getGomageIsShowFilterButton()):?>
+                            <? if(!$filter->getGomageIsShowFilterButton()):?>
                                 data-role="navigation-filter"
                                 data-type="input-price"
                             <?endif;?>
@@ -55,7 +55,7 @@ $priceValues = explode(';', $filter->getSingleValue());
                 <div class="to-wrapper">
                     <label>
                         <input id="price-to"
-                            <?php if(!$filter->getGomageIsShowFilterButton()):?>
+                            <? if(!$filter->getGomageIsShowFilterButton()):?>
                                data-role="navigation-filter"
                                data-type="input-price"
                             <?endif;?>
@@ -72,7 +72,7 @@ $priceValues = explode(';', $filter->getSingleValue());
                 </div>
             </div>
 
-            <?php if($filter->getGomageIsShowFilterButton()):?>
+            <? if($filter->getGomageIsShowFilterButton()):?>
                 <div class="gan-filter-input-actions">
                     <button
                             id="price-button"
@@ -99,7 +99,7 @@ $priceValues = explode(';', $filter->getSingleValue());
                         <span><?= __('Filter'); ?></span>
                     </button>
                 </div>
-            <?php endif;?>
+            <? endif;?>
             <?if($filter->isActive() && $filter->getGomageIsReset()):?>
                 <a
                         data-role="navigation-filter"

@@ -1,8 +1,15 @@
+<?
+/**
+ * @var $categoriesBlock \GoMage\Navigation\Block\Categories
+ */
+
+?>
+
 <? foreach ($data as $category): ?>
-    <?php $selected = ($currentCategoryId == $category['entity_id']) ? 'selected' : ''; ?>
-    <option <?= $block->escapeHtmlAttr($selected) ?>
-            value="<?= $block->escapeUrl($category['url']) ?>"> <?= $block->escapeHtml($categoriesBlock->addlevelSuffix($category['level']) . $category['name']) ?></option>
-    <?php if (is_array($category['children']))
+    <? $selected = ($currentCategoryId == $category['entity_id']) ? 'selected' : ''; ?>
+    <option <?= $categoriesBlock->escapeHtmlAttr($selected) ?>
+            value="<?= $categoriesBlock->escapeUrl($category['url']) ?>"> <?= $categoriesBlock->escapeHtml(str_repeat('&nbsp;&nbsp;', $category['level']) . $category['name']) ?></option>
+    <? if (is_array($category['children']))
         $categoriesBlock->getSelectList($category['children']);
     ?>
 <? endforeach; ?>

@@ -1,4 +1,4 @@
-<?php
+<?
 
 /**
  * Template for filter items block
@@ -47,10 +47,10 @@ $priceValues = explode(';', $filter->getSingleValue());
                     <div class="from-wrapper">
                         <label>
                             <input id="price-from"
-                                   <?php if(!$filter->getGomageIsShowFilterButton()):?>
+                                   <? if(!$filter->getGomageIsShowFilterButton()):?>
                                        data-role="navigation-filter"
                                        data-type="input-price"
-                                   <?php endif;?>
+                                   <? endif;?>
                                    type="text"
                                    value="<?= $block->escapeHtml($priceValues[0]); ?>" />
                         </label>
@@ -61,16 +61,16 @@ $priceValues = explode(';', $filter->getSingleValue());
                     <div class="to-wrapper">
                         <label>
                             <input id="price-to"
-                                   <?php if(!$filter->getGomageIsShowFilterButton()):?>
+                                   <? if(!$filter->getGomageIsShowFilterButton()):?>
                                        data-role="navigation-filter"
                                        data-type="input-price"
-                                   <?php endif;?>
+                                   <? endif;?>
                                    type="text"
                                    value="<?= $block->escapeHtmlAttr($priceValues[1]); ?>" />
                         </label>
                     </div>
                 </div>
-                <?php if($filter->getGomageIsShowFilterButton()):?>
+                <? if($filter->getGomageIsShowFilterButton()):?>
                     <div class="gan-filter-input-actions">
                         <button id="price-button" data-role="navigation-filter" data-type="price-button" class="gan-custom-button" type="submit"
                                 style="
@@ -86,7 +86,7 @@ $priceValues = explode(';', $filter->getSingleValue());
                             <span><?= __('Filter'); ?></span>
                         </button>
                     </div>
-                <?php endif;?>
+                <? endif;?>
             </fieldset>
         </form>
         <?if($filter->isActive() && $filter->getGomageIsReset()):?>

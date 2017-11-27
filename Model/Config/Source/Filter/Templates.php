@@ -5,8 +5,9 @@ namespace GoMage\Navigation\Model\Config\Source\Filter;
 class Templates
 {
     /**
-     * @param int $filterType
-     * @return array
+     * @param $filterType
+     * @return mixed
+     * @throws \Exception
      */
     public function get($filterType)
     {
@@ -23,7 +24,7 @@ class Templates
         ];
 
         if (empty($templates[$filterType])) {
-            throw new Exception(__('Template is not set for ' . (int) $filterType . ' filter type'));
+            throw new \Exception(__('Template is not set for ' . (int) $filterType . ' filter type'));
         }
 
         return $templates[$filterType];

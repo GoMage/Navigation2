@@ -13,11 +13,6 @@ class BackToTop extends \Magento\Framework\View\Element\Template
     protected $helper;
 
     /**
-     * @var
-     */
-    protected $alignmentConfig;
-
-    /**
      * BackToTop constructor.
      * @param Template\Context $context
      * @param \GoMage\Navigation\Helper\Data $helper

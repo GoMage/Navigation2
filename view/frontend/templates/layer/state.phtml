@@ -1,30 +1,30 @@
-<?php
+<?
 /**
  * @var $block \GoMage\Navigation\Block\Navigation\State
  */
 ?>
-<?php $_filters = $block->getActiveFilters() ?>
-<?php if (!empty($_filters)): ?>
+<? $filters = $block->getActiveFilters() ?>
+<? if (!empty($filters)): ?>
 <div class="filter-current active">
     <strong class="block-subtitle filter-current-subtitle"
             role="heading"
             aria-level="2"
-            data-count="<?=(int)count($_filters); ?>"><?= __('Applied Filters:') ?></strong>
+            data-count="<?=(int)count($filters); ?>"><?= __('Applied Filters:') ?></strong>
     <ol class="items">
-        <?php foreach ($_filters as $_filter): ?>
+        <? foreach ($filters as $filter): ?>
             <li class="item">
-                <span class="filter-label"><?=$block->escapeHtml(__($_filter->getName())); ?></span>
+                <span class="filter-label"><?=$block->escapeHtml(__($filter->getName())); ?></span>
                 <div class="filter-value-wrap">
-                    <span class="filter-value"><?= $block->escapeHtml($_filter->getLabel(), ['span']) ?></span>
-                    <?php $currentFilterName = $block->escapeHtml(__($_filter->getName()) . " " . $_filter->getLabel()); ?>
+                    <span class="filter-value"><?= $block->escapeHtml($filter->getLabel(), ['span']) ?></span>
+                    <? $currentFilterName = $block->escapeHtml(__($filter->getName()) . " " . $filter->getLabel()); ?>
                     <a class="action remove"
                        href="#"
                        title="<?= $block->escapeHtml(__('Remove') . " " . $currentFilterName);?>"
                        data-role="navigation-filter"
-                       data-value="<?=$block->escapeHtmlAttr($_filter->getRemoveValue()) ?>"
-                       data-url="<?= $block->escapeHtmlAttr($_filter->getRemoveUrl()) ?>"
-                       data-param="<?=$block->escapeHtmlAttr($_filter->getFilter()->getRequestVar()) ?>"
-                        <?if ($_filter->getFilter()->getGomageIsAjax() || is_null($_filter->getFilter()->getGomageIsAjax())):?>
+                       data-value="<?=$block->escapeHtmlAttr($filter->getRemoveValue()) ?>"
+                       data-url="<?= $block->escapeHtmlAttr($filter->getRemoveUrl()) ?>"
+                       data-param="<?=$block->escapeHtmlAttr($filter->getFilter()->getRequestVar()) ?>"
+                        <?if ($filter->getFilter()->getGomageIsAjax() || is_null($filter->getFilter()->getGomageIsAjax())):?>
                             data-ajax="1"
                         <?else:?>
                             data-ajax="0"
@@ -35,7 +35,7 @@
                     </a>
                 </div>
             </li>
-        <?php endforeach; ?>
+        <? endforeach; ?>
     </ol>
 </div>
-<?php endif; ?>
+<? endif; ?>

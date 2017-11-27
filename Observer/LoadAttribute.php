@@ -2,7 +2,7 @@
 
 namespace GoMage\Navigation\Observer;
 
-class GomageLoadAttribute implements \Magento\Framework\Event\ObserverInterface
+class LoadAttribute implements \Magento\Framework\Event\ObserverInterface
 {
     /**
      * @var \GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory

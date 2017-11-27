@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  *
  * @var $block \Gomage\Navigation\Block\Navigation\FilterRenderer
@@ -8,27 +8,27 @@ $filter = reset($filterItems)->getFilter();
 
 ?>
 <ol class="items gan-filter gan-filter-default
-<?php if($filter->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK) echo ' gan-filter-in-block'; ?>
+<? if($filter->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK) echo ' gan-filter-in-block'; ?>
 <? if($filter->getGomageIsCheckbox()):?> gan-filter-checkbox<?endif;?>"
-    <?php if($filter->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK && $filter->getGomageMaxBlockHeight()): ?>
+    <? if($filter->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK && $filter->getGomageMaxBlockHeight()): ?>
         style="max-height:<?= $block->escapeHtmlAttr($filter->getGomageMaxBlockHeight()); ?>px;"
     <?endif;?>>
     <?=$block->getTooltip($filter)->toHtml()?>
     <?$optionsLimit = ($filter->getGomageVisibleOptions()) ? $filter->getGomageVisibleOptions() : false;
       $cnt = 0;
     ?>
-    <?php foreach ($filterItems as $item): ?>
+    <? foreach ($filterItems as $item): ?>
         <? if (!empty($optionsLimit) && $cnt >= $optionsLimit) {
             break;
         } ?>
         <li class="item">
-            <?php if ($item->getCount() > 0 && $item->isShowAppliedValues()): ?>
-                <a <?php if(!$item->getIsActive()):?> href="<?= $block->escapeUrl($item->getGomageUrl()); ?> <?endif;?>"
-                    <?php if($item->getIsActive()):?>
+            <? if ($item->getCount() > 0 && $item->isShowAppliedValues()): ?>
+                <a <? if(!$item->getIsActive()):?> href="<?= $block->escapeUrl($item->getGomageUrl()); ?> <?endif;?>"
+                    <? if($item->getIsActive()):?>
                         class="active"
                     <?endif;?>
                    data-role="navigation-filter"
-                   data-url="<?php if(!$item->getIsActive()):?><?= $block->escapeUrl($item->getGomageUrl()) ?> <?endif;?>"
+                   data-url="<? if(!$item->getIsActive()):?><?= $block->escapeUrl($item->getGomageUrl()) ?> <?endif;?>"
                    data-value="<?= $block->escapeHtmlAttr($item->getGomageValue()) ?>"
                    data-param="<?= $block->escapeHtmlAttr($filter->getRequestVar()) ?>"
                    <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
@@ -37,21 +37,21 @@ $filter = reset($filterItems)->getFilter();
                         data-ajax="0"
                    <?endif;?>
                    data-type="<?= (int) $filter->getGomageFilterType(); ?>"
-                   <?php if($item->getIsActive()):?>
+                   <? if($item->getIsActive()):?>
                     data-active="1"
-                    <?php endif;?>>
+                    <? endif;?>>
                     <span class="filter-label-wrap">
                         <span class="filter-label-text"><?= $block->escapeHtml($item->getLabel(), ['span']) ?></span>
                         <? if ($block->getHelper()->isShowValueQty()): ?>
                             <span class="count"><?= (int) $item->getCount() ?><span class="filter-count-label">
-                            <?php if ($item->getCount() == 1): ?><?= __('item') ?><?php else: ?><?= __('items') ?><?php endif; ?></span></span>
+                            <? if ($item->getCount() == 1): ?><?= __('item') ?><? else: ?><?= __('items') ?><? endif; ?></span></span>
                         <? endif; ?>
                     </span>
                 </a>
-            <?php endif; ?>
+            <? endif; ?>
         </li>
         <?$cnt++;?>
-    <?php endforeach ?>
+    <? endforeach ?>
     <?if($filter->isActive() && $filter->getGomageIsReset()):?>
         <a
             data-role="navigation-filter"

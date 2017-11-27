@@ -27,17 +27,17 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
     /**
      * @var \GoMage\Navigation\Model\Config\Source\Navigation
      */
-    protected $_sourceNavigation;
+    protected $sourceNavigation;
 
     /**
      * @var array
      */
-    protected $_yesNoSource;
+    protected $yesNoSource;
 
     /**
      * @var \GoMage\Navigation\Model\Config\Source\Image\Alignment
      */
-    protected $_sourceImageAlignment;
+    protected $sourceImageAlignment;
 
     /**
      * @var \Magento\Store\Model\StoreManagerInterface
@@ -65,9 +65,9 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
     ) {
 
         $this->storeManager = $context->getStoreManager();
-        $this->_sourceNavigation = $sourceNavigation;
-        $this->_sourceImageAlignment = $sourceImageAlignment;
-        $this->_yesNoSource = $yesNo->toOptionArray();
+        $this->sourceNavigation = $sourceNavigation;
+        $this->sourceImageAlignment = $sourceImageAlignment;
+        $this->yesNoSource = $yesNo->toOptionArray();
         parent::__construct($context, $registry, $formFactory, $data);
     }
 
@@ -149,7 +149,7 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
 
         $this->_addElementTypes($fieldset);
 
-        $templates = $this->_sourceNavigation->toOptionArray();
+        $templates = $this->sourceNavigation->toOptionArray();
         if ($attributeObject->getBackendModel() != 'Magento\Catalog\Model\Product\Attribute\Backend\Price') {
             foreach ($templates as $key => $template) {
                 if(in_array($template['value'], [
@@ -180,7 +180,7 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
                 'name'   => 'gomage_is_show_filter_button',
                 'label'  => __('Show Filter Button'),
                 'title'  => __('Show Filter Button'),
-                'values' => $this->_yesNoSource,
+                'values' => $this->yesNoSource,
             ]
         );
 
@@ -202,7 +202,7 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
                 'name'   => 'gomage_is_ajax',
                 'label'  => __('Use Ajax'),
                 'title'  => __('Use Ajax'),
-                'values' => $this->_yesNoSource,
+                'values' => $this->yesNoSource,
             ]
         );
 
@@ -213,7 +213,7 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
                 'name'   => 'gomage_is_collapsed',
                 'label'  => __('Show Collapsed'),
                 'title'  => __('Show Collapsed'),
-                'values' => $this->_yesNoSource,
+                'values' => $this->yesNoSource,
             ]
         );
 
@@ -224,7 +224,7 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
                 'name'   => 'gomage_is_checkbox',
                 'label'  => __('Show Checkboxes'),
                 'title'  => __('Show Checkboxes'),
-                'values' => $this->_yesNoSource,
+                'values' => $this->yesNoSource,
             ]
         );
 
@@ -235,7 +235,7 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
                 'name'   => 'gomage_options_alignment',
                 'label'  => __('Options Alignment'),
                 'title'  => __('Options Alignment'),
-                'values' => $this->_sourceImageAlignment->toOptionArray(),
+                'values' => $this->sourceImageAlignment->toOptionArray(),
             ]
         );
 
@@ -279,7 +279,7 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
                 'name'   => 'gomage_is_show_tooltip',
                 'label'  => __('Show Tooltip'),
                 'title'  => __('Show Tooltip'),
-                'values' => $this->_yesNoSource,
+                'values' => $this->yesNoSource,
             ]
         );
 
@@ -329,7 +329,7 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
                 'name'   => 'gomage_is_reset',
                 'label'  => __('Show Reset Link'),
                 'title'  => __('Show Reset Link'),
-                'values' => $this->_yesNoSource,
+                'values' => $this->yesNoSource,
             ]
         );
 
@@ -340,7 +340,7 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
                 'name'   => 'gomage_is_exclude_categories',
                 'label'  => __('Exclude Categories'),
                 'title'  => __('Exclude Categories'),
-                'values' => $this->_yesNoSource,
+                'values' => $this->yesNoSource,
             ]
         );
 

@@ -13,14 +13,22 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
     protected $scopeConfig;
 
     /**
+     * @var \GoMage\Navigation\Model\Config\Source\Alignment
+     */
+    protected $alignment;
+
+    /**
      * LoaderData constructor.
      * @param Context $context
+     * @param \GoMage\Navigation\Model\Config\Source\Alignment $alignment
      */
     public function __construct(
-        Context $context
+        Context $context,
+        \GoMage\Navigation\Model\Config\Source\Alignment $alignment
     ) {
 
         $this->scopeConfig = $context->getScopeConfig();
+        $this->alignment = $alignment;
         parent::__construct($context);
     }
 
@@ -147,15 +155,6 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
             . SystemConfigInterface::SYSTEM_LOADER_CONFIG_ALIGNMENT);
 
-        $alignment[\GoMage\Navigation\Model\Config\Source\Alignment::LEFT] = 'left';
-        $alignment[\GoMage\Navigation\Model\Config\Source\Alignment::RIGHT] = 'right';
-        $alignment[\GoMage\Navigation\Model\Config\Source\Alignment::TOP] = 'top';
-        $alignment[\GoMage\Navigation\Model\Config\Source\Alignment::BOTTOM] = 'bottom';
-
-        if (empty($alignment[$value])) {
-            throw new Exception(__('Alignment position is not set for ' . (int) $value . ' type'));
-        }
-
-        return $alignment[$value];
+        return $this->alignment->getAlignment($value);
     }
 }

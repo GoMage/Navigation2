@@ -196,7 +196,7 @@ class Price extends \Magento\Catalog\Model\Layer\Filter\Price implements FilterI
             return parent::_initItems();
         }
 
-        $items[] = $this->_createItem('slider', '10-20', 1);
+        $items[] = $this->_createItem('slider', $this->getMinBasePrice() . '-' . $this->getMaxBasePrice(), 1);
         $this->_items = $items;
         return $this;
     }

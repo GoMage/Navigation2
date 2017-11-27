@@ -1,13 +1,20 @@
+<?
+/**
+ * @var $categoriesBlock \GoMage\Navigation\Block\Categories
+ */
+
+?>
+
 <?foreach ($data as $category):?>
-    <?php $name = ($categoriesBlock->getDataHelper()->isShowImageName()) ? $category['name'] : ''; ?>
+    <? $name = ($categoriesBlock->getDataHelper()->isShowImageName()) ? $category['name'] : ''; ?>
     <ol>
         <li>
-            <a href="<?=$block->escapeUrl($category['url'])?>">
+            <a href="<?=$categoriesBlock->escapeUrl($category['url'])?>">
                 <img
-                        src="<?=$block->escapeUrl($categoriesBlock->getCategoryImage($category['entity_id']))?>"
-                        width="<?=$block->escapeHtmlAttr($width)?>"
-                        height="<?=$block->escapeHtmlAttr($height)?>"><?=$block->escapeHtml($name)?></a>
-            <?php if (is_array($category['children']))
+                        src="<?=$categoriesBlock->escapeUrl($categoriesBlock->getCategoryImage($category['entity_id']))?>"
+                        width="<?=$categoriesBlock->escapeHtmlAttr($width)?>"
+                        height="<?=$categoriesBlock->escapeHtmlAttr($height)?>"><?=$categoriesBlock->escapeHtml($name)?></a>
+            <? if (is_array($category['children']))
                 $categoriesBlock->getImageCategoriesList($category['children']);
             ?>
         </li>

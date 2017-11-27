@@ -1,3 +1,8 @@
+<?
+/**
+ * @var $block \GoMage\Navigation\Block\Categories
+ */
+?>
 <div class="block block-gan-categories gan-categories-image"
      style="background-color: <?=$block->escapeHtmlAttr($block->getNavigationViewHelper()->getNavigationViewBlockCategoriesBackgroundColor())?>"
 >
@@ -7,8 +12,8 @@
     <div class="block-content block-content-gan-categories">
         <div class="block-content-in" <?= ($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
             <ul class="gan-categories-list gan-categories-list-img<?=($block->getCategoriesDataHelper()->getCategoriesImageAlignment()) ? ' gan-categories-list-alignment-' . $block->escapeHtmlAttr($block->getCategoriesDataHelper()->getCategoriesImageAlignment()) : '';?><?=($block->getCategoriesDataHelper()->isShowCheckboxes()) ? ' gan-categories-list-img-checkbox' : '';?>">
-                <?php
-                foreach($block->getStoreCategories(true, false, true) as $category):
+                <?
+                foreach($block->getStoreCategories() as $category):
                     if (!$category->getIsActive()) continue;?>
                     <li
                             data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>"
@@ -20,12 +25,12 @@
                                  height="<?=($block->getCategoriesDataHelper()->getCategoriesImageHeight()) ? $block->escapeHtmlAttr($block->getCategoriesDataHelper()->getCategoriesImageHeight()) : '';?>"
                                  src="<?= $block->escapeHtmlAttr($block->getCategoryImage($category->getEntityId())) ?>"
                             >
-                            <?php if($block->getCategoriesDataHelper()->isShowImageName()): ?>
+                            <? if($block->getCategoriesDataHelper()->isShowImageName()): ?>
                                 <span><?= $block->escapeHtml($category->getName());?></span>
                             <?endif;?>
                         </a>
                     </li>
-                <?php endforeach; ?>
+                <? endforeach; ?>
             </ul>
         </div>
     </div>

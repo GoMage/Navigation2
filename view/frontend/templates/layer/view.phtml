@@ -1,9 +1,9 @@
-<?php
+<?
 
 // @codingStandardsIgnoreFile
 
 ?>
-<?php
+<?
 /**
  *
  * @var $block \GoMage\Navigation\Block\Navigation
@@ -11,7 +11,7 @@
 
 ?>
 
-<?php if ($block->canShowBlock()): ?>
+<? if ($block->canShowBlock()): ?>
     <div class="block filter block-gan-filter <?=$block->escapeHtmlAttr($block->getContainerClass());?>" data-role="navigation" data-mage-init='{"navigation": {
                         "addFilterResultsToUrl": "<?= $block->escapeHtmlAttr($block->getDataHelper()->isAddFilterResultsToUrl())?>",
                         "navigationPlace": "<?= $block->escapeHtmlAttr($block->getDataHelper()->getShowShopByIn()); ?>",
@@ -28,7 +28,7 @@
         <div class="block-content filter-content">
             <?if ($block->getDataHelper()->isShowAppliedValuesInResults()):?>
                 <?= $block->getStateBlock()->toHtml() ?>
-                <?php if ($block->getLayer()->getState()->getFilters()): ?>
+                <? if ($block->getLayer()->getState()->getFilters()): ?>
                     <div class="block-actions filter-actions">
                         <a href="<?= $block->escapeUrl($block->getClearUrl()) ?>"
                            class="action clear filter-clear"
@@ -38,12 +38,12 @@
                             <span><?= __('Clear All') ?></span>
                         </a>
                     </div>
-                <?php endif; ?>
-            <?php endif;?>
-            <?php $wrapOptions = false; ?>
+                <? endif; ?>
+            <? endif;?>
+            <? $wrapOptions = false; ?>
 
-                <?php foreach ($block->getFilters() as $filter): ?>
-                    <?php if (!$wrapOptions): ?>
+                <? foreach ($block->getFilters() as $filter): ?>
+                    <? if (!$wrapOptions): ?>
                         <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle"><?= __('Shopping Options') ?></strong>
                         <dl class="filter-options"
                             id="narrow-by-list"
@@ -55,20 +55,20 @@
                             "multipleCollapsible": true
                             }}'>
 
-                        <?php $wrapOptions = true; endif; ?>
+                        <? $wrapOptions = true; endif; ?>
 
-                        <?php if ($filter->getItemsCount()): ?>
+                        <? if ($filter->getItemsCount()): ?>
                             <div data-role="collapsible" class="filter-options-item <?= $block->escapeHtmlAttr($block->getItemClass()) ?>"
                                  style="<?= $block->escapeHtmlAttr($block->getItemWidthStyle()) ?>">
                                 <dt data-role="title" role="heading" aria-level="3" class="filter-options-title"><?= $block->escapeHtml(__($filter->getName())) ?></dt>
                                 <dd data-role="content" class="filter-options-content"><?= $block->getRenderBlock()->render($filter); ?></dd>
                             </div>
-                        <?php endif; ?>
-                <?php endforeach; ?>
-                <?php if ($wrapOptions): ?>
+                        <? endif; ?>
+                <? endforeach; ?>
+                <? if ($wrapOptions): ?>
                     </dl>
-                <?php endif; ?>
+                <? endif; ?>
 
         </div>
     </div>
-<?php endif; ?>
+<? endif; ?>

@@ -12,19 +12,20 @@ class Navigation extends Generic
     /**
      * @var Yesno
      */
-    protected $_yesNo;
+    protected $yesNo;
 
     /**
      * @var SourceNavigation
      */
-    protected $_navigation;
+    protected $navigation;
 
     /**
      * @var Alignment
      */
-    protected $_alignment;
+    protected $alignment;
 
     /**
+     * Navigation constructor.
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Framework\Data\FormFactory $formFactory
@@ -42,9 +43,9 @@ class Navigation extends Generic
         Alignment $alignment,
         array $data = []
     ) {
-        $this->_yesNo      = $yesNo;
-        $this->_navigation = $navigation;
-        $this->_alignment  = $alignment;
+        $this->yesNo      = $yesNo;
+        $this->navigation = $navigation;
+        $this->alignment  = $alignment;
         parent::__construct($context, $registry, $formFactory, $data);
     }
 
@@ -67,7 +68,7 @@ class Navigation extends Generic
             ['legend' => __('Advanced Navigation Properties'), 'collapsable' => true]
         );
 
-        $yesno = $this->_yesNo->toOptionArray();
+        $yesno = $this->yesNo->toOptionArray();
 
         $fieldset->addField(
             'navigation',
@@ -76,7 +77,7 @@ class Navigation extends Generic
                 'name'   => 'navigation',
                 'label'  => __('Filter Type'),
                 'title'  => __('Filter Type'),
-                'values' => $this->_navigation->toOptionArray(),
+                'values' => $this->navigation->toOptionArray(),
             ]
         );
 
@@ -138,13 +139,13 @@ class Navigation extends Generic
         );
 
         $fieldset->addField(
-            'image_alignment',
+            'imagealignment',
             'select',
             [
-                'name'   => 'image_alignment',
+                'name'   => 'imagealignment',
                 'label'  => __('Image Alignment'),
                 'title'  => __('Image Alignment'),
-                'values' => $this->_alignment->toOptionArray(),
+                'values' => $this->alignment->toOptionArray(),
             ]
         );
 
@@ -236,7 +237,7 @@ class Navigation extends Generic
         );
 
         $this->_eventManager->dispatch(
-            'adminhtml_catalog_product_attribute_edit_navigation_prepare_form',
+            'adminhtml_catalog_product_attribute_editnavigation_prepare_form',
             ['form' => $form, 'attribute' => $attributeObject]
         );
 

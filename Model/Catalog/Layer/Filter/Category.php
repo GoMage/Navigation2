@@ -7,34 +7,6 @@ use GoMage\Navigation\Model\Config\Source\NavigationInterface;
 class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements FilterInterface
 {
     /**
-     * Active Category Id
-     *
-     * @var int
-     */
-    protected $_categoryId;
-
-    /**
-     * Applied Category
-     *
-     * @var \Magento\Catalog\Model\Category
-     */
-    protected $_appliedCategory;
-
-    /**
-     * Core data
-     *
-     * @var \Magento\Framework\Escaper
-     */
-    protected $_escaper;
-
-    /**
-     * Core registry
-     *
-     * @var \Magento\Framework\Registry
-     */
-    protected $_coreRegistry;
-
-    /**
      * @var CategoryDataProvider
      */
     private $dataProvider;
@@ -79,7 +51,6 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
         array $data = []
     ) {
         parent::__construct($filterItemFactory, $storeManager, $layer, $itemDataBuilder, $escaper, $categoryDataProviderFactory, $data);
-        $this->_escaper = $escaper;
         $this->_requestVar = 'cat';
         $this->coreRegistry = $coreRegistry;
         $this->request = $request;

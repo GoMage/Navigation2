@@ -5,11 +5,6 @@ namespace GoMage\Navigation\Model\Catalog\Layer\Filter;
 class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements FilterInterface
 {
     /**
-     * @var
-     */
-    protected $attributeProperties;
-
-    /**
      * @var \Magento\Framework\App\RequestInterface
      */
     protected $request;
@@ -25,17 +20,12 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
     protected $helper;
 
     /**
-     * @var
-     */
-    protected $productCollectionFactory;
-
-    /**
      * @var \Magento\Catalog\Model\Layer\Category\CollectionFilter
      */
     protected $filter;
 
     /**
-     * @var
+     * @var array
      */
     protected $options;
 

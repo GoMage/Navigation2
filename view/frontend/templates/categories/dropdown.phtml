@@ -1,3 +1,9 @@
+<?
+/**
+ * @var $block \GoMage\Navigation\Block\Categories
+ */
+?>
+
 <div class="block block-gan-categories gan-categories-dropdown"
      style="background-color: <?=$block->escapeHtmlAttr($block->getNavigationViewHelper()->getNavigationViewBlockCategoriesBackgroundColor())?>"
 >
@@ -6,8 +12,8 @@
     </div>
     <div class="block-content block-content-gan-categories">
         <div class="gan-categories-list-dropdown block-content-in" <?=($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
-            <?php
-            foreach($block->getStoreCategories(true, false, true) as $category):
+            <?
+            foreach($block->getStoreCategories() as $category):
                 if (!$category->getIsActive()) continue;?>
                     <select
                             data-role="navigation-filter"
@@ -22,7 +28,7 @@
                             <?= $block->getSelectList($block->getChildCategories($category)); ?>
                         <?endif;?>
                     </select>
-            <?php endforeach; ?>
+            <? endforeach; ?>
         </div>
     </div>
 </div>
