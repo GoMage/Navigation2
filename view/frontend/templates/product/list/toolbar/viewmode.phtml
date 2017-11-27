@@ -15,12 +15,12 @@ use Magento\Catalog\Model\Product\ProductList\Toolbar;
     <?php foreach ($block->getModes() as $_code => $_label): ?>
         <?php if ($block->isModeActive($_code)): ?>
             <strong title="<?=$block->escapeHtml($_label) ?>"
-                class="modes-mode active mode-<?= $block->escapeHtmlAttr(strtolower($_code)); ?>"
+                class="modes-mode active mode-<?= $block->escapeHtml(strtolower($_code)); ?>"
                     data-role="navigation-filter"
                     data-param="product_list_mode"
                     data-ajax="1"
                     data-active="1"
-                    data-value="<?= $block->escapeHtmlAttr(strtolower($_code)); ?>">
+                    data-value="<?= $block->escapeHtml(strtolower($_code)); ?>">
                 <span><?= $block->escapeHtml($_label) ?></span>
             </strong>
         <?php else: ?>
