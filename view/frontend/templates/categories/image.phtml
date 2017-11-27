@@ -4,14 +4,14 @@
  */
 ?>
 <div class="block block-gan-categories gan-categories-image"
-     style="background-color: <?=$block->escapeHtmlAttr($block->getNavigationViewHelper()->getNavigationViewBlockCategoriesBackgroundColor())?>"
+     style="background-color: <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewBlockCategoriesBackgroundColor())?>"
 >
     <div class="block-title gan-categories-title" data-role="navigation-filter" data-type="categories-content">
         <strong><?= __('Categories') ?></strong>
     </div>
     <div class="block-content block-content-gan-categories">
         <div class="block-content-in" <?= ($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
-            <ul class="gan-categories-list gan-categories-list-img<?=($block->getCategoriesDataHelper()->getCategoriesImageAlignment()) ? ' gan-categories-list-alignment-' . $block->escapeHtmlAttr($block->getCategoriesDataHelper()->getCategoriesImageAlignment()) : '';?><?=($block->getCategoriesDataHelper()->isShowCheckboxes()) ? ' gan-categories-list-img-checkbox' : '';?>">
+            <ul class="gan-categories-list gan-categories-list-img<?=($block->getCategoriesDataHelper()->getCategoriesImageAlignment()) ? ' gan-categories-list-alignment-' . $block->escapeHtml($block->getCategoriesDataHelper()->getCategoriesImageAlignment()) : '';?><?=($block->getCategoriesDataHelper()->isShowCheckboxes()) ? ' gan-categories-list-img-checkbox' : '';?>">
                 <?
                 foreach($block->getStoreCategories() as $category):
                     if (!$category->getIsActive()) continue;?>
@@ -21,9 +21,9 @@
                             data-type="categories-li"
                             data-url="<?= $block->escapeUrl($block->getCategoryHelper()->getCategoryUrl($category)) ?>">
                         <a href="#" <?= ($block->getCurrentCategoryId() == $category->getId()) ? ' class="selected"' : ''; ?>>
-                            <img width="<?=($block->getCategoriesDataHelper()->getCategoriesImageWidth()) ? $block->escapeHtmlAttr($block->getCategoriesDataHelper()->getCategoriesImageWidth()) : '';?>"
-                                 height="<?=($block->getCategoriesDataHelper()->getCategoriesImageHeight()) ? $block->escapeHtmlAttr($block->getCategoriesDataHelper()->getCategoriesImageHeight()) : '';?>"
-                                 src="<?= $block->escapeHtmlAttr($block->getCategoryImage($category->getEntityId())) ?>"
+                            <img width="<?=($block->getCategoriesDataHelper()->getCategoriesImageWidth()) ? $block->escapeHtml($block->getCategoriesDataHelper()->getCategoriesImageWidth()) : '';?>"
+                                 height="<?=($block->getCategoriesDataHelper()->getCategoriesImageHeight()) ? $block->escapeHtml($block->getCategoriesDataHelper()->getCategoriesImageHeight()) : '';?>"
+                                 src="<?= $block->escapeHtml($block->getCategoryImage($category->getEntityId())) ?>"
                             >
                             <? if($block->getCategoriesDataHelper()->isShowImageName()): ?>
                                 <span><?= $block->escapeHtml($category->getName());?></span>

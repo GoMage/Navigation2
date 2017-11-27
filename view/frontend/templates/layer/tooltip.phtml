@@ -5,12 +5,12 @@
 ?>
 <? if($filter->getGomageIsShowTooltip()):?>
     <div class="gan-tooltip">
-        <div class="gan-tooltip-toggle" style="color: <?=$block->escapeHtmlAttr($block->getNavigationViewHelper()->getNavigationViewTooltipBackgroundColor());?>">?</div>
+        <div class="gan-tooltip-toggle" style="color: <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewTooltipBackgroundColor());?>">?</div>
         <div class="gan-tooltip-content">
             <div class="gan-tooltip-content-in" style="
-                    width: <?=$block->escapeHtmlAttr($filter->getGomageTooltipWidth());?>px;
-                    height: <?=$block->escapeHtmlAttr($filter->getGomageTooltipHeight());?>px;
-                    background: <?=$block->escapeHtmlAttr($block->getNavigationViewHelper()->getNavigationViewTooltipWindowBackgroundColor());?>;">
+                    width: <?=$block->escapeHtml($filter->getGomageTooltipWidth());?>px;
+                    height: <?=$block->escapeHtml($filter->getGomageTooltipHeight());?>px;
+                    background: <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewTooltipWindowBackgroundColor());?>;">
                 <div class="gan-tooltip-text"><?=$block->getTooltipText($filter->getGomageTooltipText());?></div>
                 <?if($block->getNavigationViewHelper()->isNavigationViewTooltipHideOnCloseButton()):?>
                     <div class="gan-tooltip-close">✕</div>

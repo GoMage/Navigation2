@@ -7,13 +7,13 @@
     <div id="gomage-loader" class="gan-loader ng-scope">
         <div class="gan-loader-content">
             <div class="gan-loader-content-in
-            <? if ($block->getHelper()->isSpinnerTypeImage() && ($image = $block->getLoaderImage()) && !empty($image)): ?> gan-loader-img-<?=$block->escapeHtmlAttr($block->getHelper()->getLoaderImageAlignment())?><?endif; ?>"
+            <? if ($block->getHelper()->isSpinnerTypeImage() && ($image = $block->getLoaderImage()) && !empty($image)): ?> gan-loader-img-<?=$block->escapeHtml($block->getHelper()->getLoaderImageAlignment())?><?endif; ?>"
                  style="
-                    background-color: <?=$block->escapeHtmlAttr($block->getHelper()->getLoaderBackgroundColor());?>;
-                    border-color: <?=$block->escapeHtmlAttr($block->getHelper()->getLoaderBorderColor());?>;
-                    color: <?=$block->escapeHtmlAttr($block->getHelper()->getLoaderTextColor());?>;
-                    width: <?=$block->escapeHtmlAttr($block->getHelper()->getLoaderWindowWidth());?>px;
-                    height: <?=$block->escapeHtmlAttr($block->getHelper()->getLoaderWindowHeight());?>px;
+                    background-color: <?=$block->escapeHtml($block->getHelper()->getLoaderBackgroundColor());?>;
+                    border-color: <?=$block->escapeHtml($block->getHelper()->getLoaderBorderColor());?>;
+                    color: <?=$block->escapeHtml($block->getHelper()->getLoaderTextColor());?>;
+                    width: <?=$block->escapeHtml($block->getHelper()->getLoaderWindowWidth());?>px;
+                    height: <?=$block->escapeHtml($block->getHelper()->getLoaderWindowHeight());?>px;
                     ">
                 <? if ($block->getHelper()->isSpinnerTypeImage() && ($image = $block->getLoaderImage()) && !empty($image)): ?>
                     <div class="gan-loader-img">
@@ -31,7 +31,7 @@
                     </div>
                     <style type="text/css">
                     .gan-loader-spinner{
-                        stroke: <?=$block->escapeHtmlAttr($block->getHelper()->getLoaderSpinnerColor())?>;
+                        stroke: <?=$block->escapeHtml($block->getHelper()->getLoaderSpinnerColor())?>;
                     }
                     </style>
                 <?endif; ?>

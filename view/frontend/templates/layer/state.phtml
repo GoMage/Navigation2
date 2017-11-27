@@ -21,9 +21,9 @@
                        href="#"
                        title="<?= $block->escapeHtml(__('Remove') . " " . $currentFilterName);?>"
                        data-role="navigation-filter"
-                       data-value="<?=$block->escapeHtmlAttr($filter->getRemoveValue()) ?>"
-                       data-url="<?= $block->escapeHtmlAttr($filter->getRemoveUrl()) ?>"
-                       data-param="<?=$block->escapeHtmlAttr($filter->getFilter()->getRequestVar()) ?>"
+                       data-value="<?=$block->escapeHtml($filter->getRemoveValue()) ?>"
+                       data-url="<?= $block->escapeHtml($filter->getRemoveUrl()) ?>"
+                       data-param="<?=$block->escapeHtml($filter->getFilter()->getRequestVar()) ?>"
                         <?if ($filter->getFilter()->getGomageIsAjax() || is_null($filter->getFilter()->getGomageIsAjax())):?>
                             data-ajax="1"
                         <?else:?>

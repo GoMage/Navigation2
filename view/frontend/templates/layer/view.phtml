@@ -12,17 +12,17 @@
 ?>
 
 <? if ($block->canShowBlock()): ?>
-    <div class="block filter block-gan-filter <?=$block->escapeHtmlAttr($block->getContainerClass());?>" data-role="navigation" data-mage-init='{"navigation": {
-                        "addFilterResultsToUrl": "<?= $block->escapeHtmlAttr($block->getDataHelper()->isAddFilterResultsToUrl())?>",
-                        "navigationPlace": "<?= $block->escapeHtmlAttr($block->getDataHelper()->getShowShopByIn()); ?>",
-                        "categoriesPlace": "<?= $block->escapeHtmlAttr($block->getCategoryDataHelper()->getCategoriesBlockLocation()); ?>",
-                        "backToTopSpeed": "<?= $block->escapeHtmlAttr($block->getDataHelper()->getBackToTopSpeed()); ?>",
-                        "backToTopAction": "<?= $block->escapeHtmlAttr($block->getDataHelper()->getBackToTopAction()); ?>",
-                        "tooltipOpenOnClick": "<?= $block->escapeHtmlAttr($block->getNavigationViewHelper()->isNavigationViewTooltipShowOnClick()); ?>",
-                        "tooltipOpenOnMouseOver": "<?= $block->escapeHtmlAttr($block->getNavigationViewHelper()->isNavigationViewTooltipShowOnMouseOver()); ?>",
-                        "tooltipCloseButton": "<?= $block->escapeHtmlAttr($block->getNavigationViewHelper()->isNavigationViewTooltipHideOnCloseButton()); ?>",
-                        "tooltipCloseOnMouseOut": "<?= $block->escapeHtmlAttr($block->getNavigationViewHelper()->isNavigationViewTooltipHideOnMouseOut()); ?>",
-                        "ajaxAutoload": "<?= $block->escapeHtmlAttr($block->getDataHelper()->isUseAutoScrolling()); ?>"
+    <div class="block filter block-gan-filter <?=$block->escapeHtml($block->getContainerClass());?>" data-role="navigation" data-mage-init='{"navigation": {
+                        "addFilterResultsToUrl": "<?= $block->escapeHtml($block->getDataHelper()->isAddFilterResultsToUrl())?>",
+                        "navigationPlace": "<?= $block->escapeHtml($block->getDataHelper()->getShowShopByIn()); ?>",
+                        "categoriesPlace": "<?= $block->escapeHtml($block->getCategoryDataHelper()->getCategoriesBlockLocation()); ?>",
+                        "backToTopSpeed": "<?= $block->escapeHtml($block->getDataHelper()->getBackToTopSpeed()); ?>",
+                        "backToTopAction": "<?= $block->escapeHtml($block->getDataHelper()->getBackToTopAction()); ?>",
+                        "tooltipOpenOnClick": "<?= $block->escapeHtml($block->getNavigationViewHelper()->isNavigationViewTooltipShowOnClick()); ?>",
+                        "tooltipOpenOnMouseOver": "<?= $block->escapeHtml($block->getNavigationViewHelper()->isNavigationViewTooltipShowOnMouseOver()); ?>",
+                        "tooltipCloseButton": "<?= $block->escapeHtml($block->getNavigationViewHelper()->isNavigationViewTooltipHideOnCloseButton()); ?>",
+                        "tooltipCloseOnMouseOut": "<?= $block->escapeHtml($block->getNavigationViewHelper()->isNavigationViewTooltipHideOnMouseOut()); ?>",
+                        "ajaxAutoload": "<?= $block->escapeHtml($block->getDataHelper()->isUseAutoScrolling()); ?>"
                         }}' style="background-color: <?=$block->getNavigationViewHelper()->getNavigationViewBlockBackgroundColor()?>; ">
         <div class="block-title"><strong><?= __('Add Filter') ?></strong></div>
         <div class="block-content filter-content">
@@ -58,8 +58,8 @@
                         <? $wrapOptions = true; endif; ?>
 
                         <? if ($filter->getItemsCount()): ?>
-                            <div data-role="collapsible" class="filter-options-item <?= $block->escapeHtmlAttr($block->getItemClass()) ?>"
-                                 style="<?= $block->escapeHtmlAttr($block->getItemWidthStyle()) ?>">
+                            <div data-role="collapsible" class="filter-options-item <?= $block->escapeHtml($block->getItemClass()) ?>"
+                                 style="<?= $block->escapeHtml($block->getItemWidthStyle()) ?>">
                                 <dt data-role="title" role="heading" aria-level="3" class="filter-options-title"><?= $block->escapeHtml(__($filter->getName())) ?></dt>
                                 <dd data-role="content" class="filter-options-content"><?= $block->getRenderBlock()->render($filter); ?></dd>
                             </div>

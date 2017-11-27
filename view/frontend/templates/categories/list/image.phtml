@@ -12,8 +12,8 @@
             <a href="<?=$categoriesBlock->escapeUrl($category['url'])?>">
                 <img
                         src="<?=$categoriesBlock->escapeUrl($categoriesBlock->getCategoryImage($category['entity_id']))?>"
-                        width="<?=$categoriesBlock->escapeHtmlAttr($width)?>"
-                        height="<?=$categoriesBlock->escapeHtmlAttr($height)?>"><?=$categoriesBlock->escapeHtml($name)?></a>
+                        width="<?=$categoriesBlock->escapeHtml($width)?>"
+                        height="<?=$categoriesBlock->escapeHtml($height)?>"><?=$categoriesBlock->escapeHtml($name)?></a>
             <? if (is_array($category['children']))
                 $categoriesBlock->getImageCategoriesList($category['children']);
             ?>

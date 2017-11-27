@@ -13,8 +13,8 @@ $optionsLimit = ($filter->getGomageVisibleOptions()) ? $filter->getGomageVisible
 $cnt = 0;
 ?>
 
-<div class="swatch-attribute swatch-layered <?=$block->escapeHtmlAttr($swatchData['attribute_code']) ?>"
-     attribute-code="<?=$block->escapeHtmlAttr($swatchData['attribute_code']) ?>" attribute-id="<?=$block->escapeHtmlAttr($swatchData['attribute_id']) ?>">
+<div class="swatch-attribute swatch-layered <?=$block->escapeHtml($swatchData['attribute_code']) ?>"
+     attribute-code="<?=$block->escapeHtml($swatchData['attribute_code']) ?>" attribute-id="<?=$block->escapeHtml($swatchData['attribute_id']) ?>">
     <div class="swatch-attribute-options clearfix">
         <?=$block->getTooltip($filter)->toHtml()?>
         <? foreach ($swatchData['options'] as $option => $data): ?>
@@ -28,11 +28,11 @@ $cnt = 0;
             <a  href="<?=$block->escapeUrl($data['link']) ?>"
                data-role="navigation-filter"
                 data-value="<?= (!empty($data['gomage_value'])) ? $data['gomage_value'] : $option; ?>"
-               data-param="<?= $block->escapeHtmlAttr($filter->getRequestVar()) ?>"
+               data-param="<?= $block->escapeHtml($filter->getRequestVar()) ?>"
                 <? if($filter->getGomageIsAjax()):?>
                 data-ajax="1"
                 <?endif;?>
-               data-type="<?= $block->escapeHtmlAttr($filter->getSwatchInputType()); ?>"
+               data-type="<?= $block->escapeHtml($filter->getSwatchInputType()); ?>"
                 <? if (!empty($data['is_active'])) : ?>
                 <? $selected = 'selected';?>
                data-active="1"
@@ -42,11 +42,11 @@ $cnt = 0;
                     <? switch ($swatchData['swatches'][$option]['type']) {
                         case '3':
                             ?>
-                            <div class="<?= $block->escapeHtmlAttr($selected);?> swatch-option <?=$block->escapeHtmlAttr($data['custom_style']) ?>"
+                            <div class="<?= $block->escapeHtml($selected);?> swatch-option <?=$block->escapeHtml($data['custom_style']) ?>"
 
                                  option-type="3"
-                                 option-id="<?=$block->escapeHtmlAttr($option) ?>"
-                                 option-label="<?=$block->escapeHtmlAttr($data['label']) ?>"
+                                 option-id="<?=$block->escapeHtml($option) ?>"
+                                 option-label="<?=$block->escapeHtml($data['label']) ?>"
                                  option-tooltip-thumb=""
                                  option-tooltip-value=""
                             ></div>
@@ -57,39 +57,39 @@ $cnt = 0;
                             $swatchData['swatches'][$option]['value']); ?>
                             <? $swatchImagePath = $block->getSwatch()->getSwatchPath('swatch_image',
                             $swatchData['swatches'][$option]['value']); ?>
-                            <div class="<?= $block->escapeHtmlAttr($selected);?> swatch-option image <?=$block->escapeHtmlAttr($data['custom_style']) ?>"
+                            <div class="<?= $block->escapeHtml($selected);?> swatch-option image <?=$block->escapeHtml($data['custom_style']) ?>"
                                  option-type="2"
-                                 option-id="<?=$block->escapeHtmlAttr($option) ?>"
-                                 option-label="<?=$block->escapeHtmlAttr($data['label']) ?>"
-                                 option-tooltip-thumb="<?=$block->escapeHtmlAttr($swatchThumbPath) ?>"
+                                 option-id="<?=$block->escapeHtml($option) ?>"
+                                 option-label="<?=$block->escapeHtml($data['label']) ?>"
+                                 option-tooltip-thumb="<?=$block->escapeHtml($swatchThumbPath) ?>"
                                  option-tooltip-value=""
                                  style="background: url(<?=$block->escapeUrl($swatchImagePath) ?>) no-repeat center; background-size: initial;"></div>
                             <? break;
                         case '1':
                             ?>
-                            <div class="<?= $block->escapeHtmlAttr($selected);?> swatch-option color <?=$block->escapeHtmlAttr($data['custom_style']) ?>"
+                            <div class="<?= $block->escapeHtml($selected);?> swatch-option color <?=$block->escapeHtml($data['custom_style']) ?>"
                                  option-type="1"
-                                 option-id="<?=$block->escapeHtmlAttr($option) ?>"
-                                 option-label="<?=$block->escapeHtmlAttr($data['label']) ?>"
+                                 option-id="<?=$block->escapeHtml($option) ?>"
+                                 option-label="<?=$block->escapeHtml($data['label']) ?>"
                                  option-tooltip-thumb=""
-                                 option-tooltip-value="<?=$block->escapeHtmlAttr($swatchData['swatches'][$option]['value']) ?>"
+                                 option-tooltip-value="<?=$block->escapeHtml($swatchData['swatches'][$option]['value']) ?>"
                                  style="
-                                         background: <?=$block->escapeHtmlAttr($swatchData['swatches'][$option]['value']) ?> no-repeat center;
+                                         background: <?=$block->escapeHtml($swatchData['swatches'][$option]['value']) ?> no-repeat center;
                                          background-size: initial;
-                                        <?= $block->escapeHtmlAttr(!empty($filter->getGomageImageWidth()) ? 'width:' . $filter->getGomageImageWidth() . 'px' : '');?>;
-                                        <?= $block->escapeHtmlAttr(!empty($filter->getGomageImageHeight()) ? 'height:' . $filter->getGomageImageWidth() . 'px' : '');?>;
+                                        <?= $block->escapeHtml(!empty($filter->getGomageImageWidth()) ? 'width:' . $filter->getGomageImageWidth() . 'px' : '');?>;
+                                        <?= $block->escapeHtml(!empty($filter->getGomageImageHeight()) ? 'height:' . $filter->getGomageImageWidth() . 'px' : '');?>;
                                          "></div>
                             <? break;
                         case '0':
                         default:
                             ?>
-                            <div class="<?= $block->escapeHtmlAttr($selected);?> swatch-option text <?=$block->escapeHtmlAttr($data['custom_style']) ?>"
+                            <div class="<?= $block->escapeHtml($selected);?> swatch-option text <?=$block->escapeHtml($data['custom_style']) ?>"
                                  option-type="0"
-                                 option-id="<?=$block->escapeHtmlAttr($option) ?>"
-                                 option-label="<?=$block->escapeHtmlAttr($data['label']) ?>"
+                                 option-id="<?=$block->escapeHtml($option) ?>"
+                                 option-label="<?=$block->escapeHtml($data['label']) ?>"
                                  option-tooltip-thumb=""
                                  option-tooltip-value=""
-                            ><?=$block->escapeHtmlAttr($swatchData['swatches'][$option]['value']) ?></div>
+                            ><?=$block->escapeHtml($swatchData['swatches'][$option]['value']) ?></div>
                             <? break;
                     } ?>
                 <? } ?>
@@ -102,7 +102,7 @@ $cnt = 0;
                 data-role="navigation-filter"
                 data-value=""
                 data-url="<?= $block->escapeUrl($filter->getRemoveUrl()) ?>"
-                data-param="<?=$block->escapeHtmlAttr($filter->getRequestVar()) ?>"
+                data-param="<?=$block->escapeHtml($filter->getRequestVar()) ?>"
             <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
                 data-ajax="1"
             <?else:?>
@@ -118,7 +118,7 @@ $cnt = 0;
 
 <script>
     require(["jquery", "jquery/ui", "Magento_Swatches/js/swatch-renderer"], function ($) {
-        $('.swatch-layered.<?=$block->escapeHtmlAttr($swatchData['attribute_code']) ?>')
+        $('.swatch-layered.<?=$block->escapeHtml($swatchData['attribute_code']) ?>')
             .find('[option-type="1"], [option-type="2"], [option-type="0"], [option-type="3"]')
             .SwatchRendererTooltip();
     });

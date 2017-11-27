@@ -7,7 +7,7 @@
 
 <? foreach ($data as $category): ?>
     <? $selected = ($currentCategoryId == $category['entity_id']) ? 'selected' : ''; ?>
-    <option <?= $categoriesBlock->escapeHtmlAttr($selected) ?>
+    <option <?= $categoriesBlock->escapeHtml($selected) ?>
             value="<?= $categoriesBlock->escapeUrl($category['url']) ?>"> <?= $categoriesBlock->escapeHtml(str_repeat('&nbsp;&nbsp;', $category['level']) . $category['name']) ?></option>
     <? if (is_array($category['children']))
         $categoriesBlock->getSelectList($category['children']);

@@ -6,11 +6,11 @@
 ?>
 
 <?if(!empty($data)):?>
-    <ol <?=$categoriesBlock->escapeHtmlAttr($checkboxes)?>>
+    <ol <?=$categoriesBlock->escapeHtml($checkboxes)?>>
         <?foreach ($data as $category):?>
             <? $active = ($currentCategoryId == $category['entity_id']) ? ' class="selected"' : '';?>
                 <li
-                        data-ajax="<?=$categoriesBlock->escapeHtmlAttr($isAjax)?>"
+                        data-ajax="<?=$categoriesBlock->escapeHtml($isAjax)?>"
                         data-role="navigation-filter"
                         data-type="categories-li"
                         data-url="<?=$categoriesBlock->escapeUrl($category['url'])?>"

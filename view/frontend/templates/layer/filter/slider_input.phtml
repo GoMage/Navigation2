@@ -20,23 +20,23 @@ $priceValues = explode(';', $filter->getSingleValue());
                 <input style="display: none;"
                        data-role="navigation-filter"
                        data-active=""
-                       data-from="<?= $block->escapeHtmlAttr($filter->getMinBasePrice()); ?>"
-                       data-to="<?= $block->escapeHtmlAttr($filter->getMaxBasePrice()); ?>"
-                       data-step="<?= $block->escapeHtmlAttr($block->getStep()); ?>"
-                       data-skin="<?= $block->escapeHtmlAttr($block->getSliderSkin()); ?>"
-                       data-code="<?= $block->escapeHtmlAttr($filter->getAttributeModel()->getAttributeCode()); ?>"
-                       data-dimension="&nbsp;<?= $block->escapeHtmlAttr($filter->getCurrencySymbol()); ?>"
-                       data-param="<?= $block->escapeHtmlAttr($filter->getRequestVar()) ?>"
+                       data-from="<?= $block->escapeHtml($filter->getMinBasePrice()); ?>"
+                       data-to="<?= $block->escapeHtml($filter->getMaxBasePrice()); ?>"
+                       data-step="<?= $block->escapeHtml($block->getStep()); ?>"
+                       data-skin="<?= $block->escapeHtml($block->getSliderSkin()); ?>"
+                       data-code="<?= $block->escapeHtml($filter->getAttributeModel()->getAttributeCode()); ?>"
+                       data-dimension="&nbsp;<?= $block->escapeHtml($filter->getCurrencySymbol()); ?>"
+                       data-param="<?= $block->escapeHtml($filter->getRequestVar()) ?>"
                         <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
                             data-ajax="1"
                         <?else:?>
                             data-ajax="0"
                         <?endif;?>
-                       id="<?= $block->escapeHtmlAttr($filter->getAttributeModel()->getAttributeCode()); ?>"
+                       id="<?= $block->escapeHtml($filter->getAttributeModel()->getAttributeCode()); ?>"
                        data-type="slider"
                        type="slider"
-                       name="<?= $block->escapeHtmlAttr($filter->getAttributeModel()->getAttributeCode()); ?>"
-                       value="<?= $block->escapeHtmlAttr($filter->getSingleValue()) ?>"/>
+                       name="<?= $block->escapeHtml($filter->getAttributeModel()->getAttributeCode()); ?>"
+                       value="<?= $block->escapeHtml($filter->getSingleValue()) ?>"/>
             </span>
         </div>
     </div>
@@ -66,7 +66,7 @@ $priceValues = explode(';', $filter->getSingleValue());
                                        data-type="input-price"
                                    <? endif;?>
                                    type="text"
-                                   value="<?= $block->escapeHtmlAttr($priceValues[1]); ?>" />
+                                   value="<?= $block->escapeHtml($priceValues[1]); ?>" />
                         </label>
                     </div>
                 </div>
@@ -75,12 +75,12 @@ $priceValues = explode(';', $filter->getSingleValue());
                         <button id="price-button" data-role="navigation-filter" data-type="price-button" class="gan-custom-button" type="submit"
                                 style="
                                     <?if($block->getNavigationViewHelper()->isNavigationViewButtonsGradient() && !empty($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2())):?>
-                                        background: linear-gradient(to bottom, <?=$block->escapeHtmlAttr($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor())?>, <?=$block->escapeHtmlAttr($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2())?>);
+                                        background: linear-gradient(to bottom, <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor())?>, <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2())?>);
                                     <?elseif(!empty($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor())):?>
-                                        background: <?=$block->escapeHtmlAttr($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor())?>;
+                                        background: <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor())?>;
                                     <?endif;?>
                                     <?if(!empty($block->getNavigationViewHelper()->getNavigationViewButtonsTextColor())):?>
-                                        color: <?=$block->escapeHtmlAttr($block->getNavigationViewHelper()->getNavigationViewButtonsTextColor())?>
+                                        color: <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewButtonsTextColor())?>
                                     <?endif;?>
                         ">
                             <span><?= __('Filter'); ?></span>
@@ -94,7 +94,7 @@ $priceValues = explode(';', $filter->getSingleValue());
                     data-role="navigation-filter"
                     data-value=""
                     data-url="<?= $block->escapeUrl($filter->getRemoveUrl()) ?>"
-                    data-param="<?=$block->escapeHtmlAttr($filter->getRequestVar()) ?>"
+                    data-param="<?=$block->escapeHtml($filter->getRequestVar()) ?>"
                 <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
                     data-ajax="1"
                 <?else:?>
@@ -112,13 +112,13 @@ $priceValues = explode(';', $filter->getSingleValue());
     
     <?if($block->getNavigationViewHelper()->getNavigationViewSliderLineHeight() < $block->getNavigationViewHelper()->getNavigationViewSliderElementHeight()):?>
     .gan-filter-slider .layout{
-        padding-bottom:<?=$block->escapeHtmlAttr($block->getNavigationViewHelper()->getNavigationViewSliderElementHeight())?>px;
-        margin-left: <?=$block->escapeHtmlAttr(($block->getNavigationViewHelper()->getNavigationViewSliderElementWidth() / 2))?>px;
-        margin-right: <?=$block->escapeHtmlAttr(($block->getNavigationViewHelper()->getNavigationViewSliderElementWidth() / 2))?>px;
+        padding-bottom:<?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewSliderElementHeight())?>px;
+        margin-left: <?=$block->escapeHtml(($block->getNavigationViewHelper()->getNavigationViewSliderElementWidth() / 2))?>px;
+        margin-right: <?=$block->escapeHtml(($block->getNavigationViewHelper()->getNavigationViewSliderElementWidth() / 2))?>px;
     }
     .gan-filter-slider .jslider .jslider-label,
     .gan-filter-slider .jslider .jslider-value{
-        margin-top: <?= $block->escapeHtmlAttr((($block->getNavigationViewHelper()->getNavigationViewSliderElementHeight() - $block->getNavigationViewHelper()->getNavigationViewSliderLineHeight()) / 2 + 10)) ?>px;
+        margin-top: <?= $block->escapeHtml((($block->getNavigationViewHelper()->getNavigationViewSliderElementHeight() - $block->getNavigationViewHelper()->getNavigationViewSliderLineHeight()) / 2 + 10)) ?>px;
     }
     <?endif;?>
 
@@ -129,30 +129,30 @@ $priceValues = explode(';', $filter->getSingleValue());
     .gan-filter-slider .jslider .jslider-bg .v{
 
         /* Slider Line Height */
-        height: <?=$block->escapeHtmlAttr($block->getNavigationViewHelper()->getNavigationViewSliderLineHeight())?>px;
+        height: <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewSliderLineHeight())?>px;
         
     }
     
     .gan-filter-slider .jslider .jslider-bg .v{
         
         /* Slider Line Color */
-        background: <?=$block->escapeHtmlAttr($block->getNavigationViewHelper()->getNavigationViewSliderLineColor())?>;
+        background: <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewSliderLineColor())?>;
 
     }
     
     .gan-filter-slider .jslider_round_plastic .jslider-pointer{
         
         /* Slider Element Color */
-        background: <?=$block->escapeHtmlAttr($block->getNavigationViewHelper()->getNavigationViewSliderElementColor())?>;
+        background: <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewSliderElementColor())?>;
         
         /* Slider Element Width */
-        width: <?=$block->escapeHtmlAttr($block->getNavigationViewHelper()->getNavigationViewSliderElementWidth())?>px;
+        width: <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewSliderElementWidth())?>px;
         
         /* Slider Element Height */
-        height: <?=$block->escapeHtmlAttr($block->getNavigationViewHelper()->getNavigationViewSliderElementHeight())?>px;
+        height: <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewSliderElementHeight())?>px;
         
         /* Slider Element Radius */
-        border-radius: <?=$block->escapeHtmlAttr($block->getNavigationViewHelper()->getNavigationViewSliderElementRadius())?>px;
+        border-radius: <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewSliderElementRadius())?>px;
 
     }
     
