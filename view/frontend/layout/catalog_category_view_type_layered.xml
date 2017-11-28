@@ -19,7 +19,11 @@
     </referenceContainer>
     <referenceContainer name="main">
         <block class="GoMage\Navigation\Block\Product\ProductList\More" name="gomage.products.more" />
-        <block class="GoMage\Navigation\Block\BackToTop" name="gomage.back_to_top" />
+        <block class="\Magento\Framework\View\Element\Template" name="gomage.back_to_top" >
+            <action method="setTemplate">
+                <argument name="template" xsi:type="helper" helper="GoMage\Navigation\Helper\Data::isUseBackToTopButton"/>
+            </action>
+        </block>
     </referenceContainer>
     <referenceBlock name="product_list_toolbar_pager">
         <arguments>

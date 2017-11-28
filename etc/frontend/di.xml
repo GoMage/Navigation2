@@ -5,6 +5,7 @@
             <argument name="filters" xsi:type="array">
                 <item name="attribute" xsi:type="string">GoMage\Navigation\Model\Catalog\Layer\Filter\Attribute</item>
                 <item name="price" xsi:type="string">GoMage\Navigation\Model\Catalog\Layer\Filter\Price</item>
+                <item name="decimal" xsi:type="string">GoMage\Navigation\Model\Catalog\Layer\Filter\Decimal</item>
                 <item name="category" xsi:type="string">GoMage\Navigation\Model\Catalog\Layer\Filter\Category</item>
             </argument>
             <argument name="filterableAttributes" xsi:type="object">Magento\Catalog\Model\Layer\Category\FilterableAttributeList</argument>
@@ -36,6 +37,11 @@
     <type name="Magento\CatalogSearch\Model\Layer\Category\ItemCollectionProvider">
         <arguments>
             <argument name="collectionFactory" xsi:type="object">GoMage\Navigation\Model\ResourceModel\Fulltext\CollectionFactory</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Catalog\Model\Layer\Filter\DataProvider\Decimal">
+        <arguments>
+            <argument name="resource" xsi:type="object">GoMage\Navigation\Model\ResourceModel\Layer\Filter\Decimal</argument>
         </arguments>
     </type>
     <type name="Magento\Catalog\Model\Layer\Resolver">

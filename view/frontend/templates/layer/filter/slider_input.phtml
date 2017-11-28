@@ -17,9 +17,13 @@ $priceValues = explode(';', $filter->getSingleValue());
         <?=$block->getTooltip($filter)->toHtml()?>
         <div class="layout-slider">
             <span>
-                <input style="display: none;"
+                <input
+                       class="gan-price"
+                       style="display: none;"
                        data-role="navigation-filter"
-                       data-active=""
+
+                       data-active="1"
+
                        data-from="<?= $block->escapeHtml($filter->getMinBasePrice()); ?>"
                        data-to="<?= $block->escapeHtml($filter->getMaxBasePrice()); ?>"
                        data-step="<?= $block->escapeHtml($block->getStep()); ?>"
@@ -36,7 +40,8 @@ $priceValues = explode(';', $filter->getSingleValue());
                        data-type="slider"
                        type="slider"
                        name="<?= $block->escapeHtml($filter->getAttributeModel()->getAttributeCode()); ?>"
-                       value="<?= $block->escapeHtml($filter->getSingleValue()) ?>"/>
+                       value="<?= $block->escapeHtml($filter->getSingleValue()) ?>"
+                       data-value="<?= str_replace(';', '-', $block->escapeHtml($filter->getSingleValue())) ?>"/>
             </span>
         </div>
     </div>
@@ -46,7 +51,7 @@ $priceValues = explode(';', $filter->getSingleValue());
                 <div class="gan-filter-input-fields">
                     <div class="from-wrapper">
                         <label>
-                            <input id="price-from"
+                            <input class="price-from"
                                    <? if(!$filter->getGomageIsShowFilterButton()):?>
                                        data-role="navigation-filter"
                                        data-type="input-price"
@@ -60,7 +65,7 @@ $priceValues = explode(';', $filter->getSingleValue());
                     </div>
                     <div class="to-wrapper">
                         <label>
-                            <input id="price-to"
+                            <input class="price-to"
                                    <? if(!$filter->getGomageIsShowFilterButton()):?>
                                        data-role="navigation-filter"
                                        data-type="input-price"

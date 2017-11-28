@@ -78,9 +78,15 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isUseBackToTopButton()
     {
-        return (int) $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
+        $value = (int)$this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
             . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_BACK_TO_TOP);
+
+        if ($value) {
+            return 'GoMage_Navigation::layer/back_to_top.phtml';
+        }
+
+        return '';
     }
 
     /**

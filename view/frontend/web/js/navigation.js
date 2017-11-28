@@ -235,11 +235,17 @@ define([
             }
         },
 
-        _processInputPrice: function () {
-            var value = $('#price-from').val() + '-' + $('#price-to').val();
-            var el = $('#price');
-            el.attr("data-value", value);
-            this._runProcessFilterForElement(el);
+        _processInputPrice: function (event) {
+
+            var el = $(event.data.element).parents('.gan-filter.gan-filter-slider.gan-filter-slider-input');
+
+            var price = el.find('.gan-price');
+            var price_from = el.find('.price-from');
+            var price_to = el.find('.price-to');
+
+            var value = price_from.val() + '-' + price_to.val();
+            price.attr("data-value", value);
+            this._runProcessFilterForElement(price);
         },
 
         _processPriceButton: function (event) {
@@ -252,15 +258,15 @@ define([
 
         _processPriceSlider: function (value, event) {
 
-            var el = $('#price');
+            var el = $(event.inputNode.context);
             var filter = new Filter(el);
             var params = this._getParams();
-            params.set('price', value.replace(';', '-'));
+            params.set(el.attr('data-param'), value.replace(';', '-'));
 
             if (filter.isAjax()) {
                 params.set('gan_ajax_filter', 1);
                 return this._ajaxFilter(this.options.baseUrl, params);
-            } else {
+           } else {
                 return $.mage.redirect(this.options.baseUrl + '?' + params.toUrlParams());
             }
         },

@@ -33,7 +33,7 @@ $priceValues = explode(';', $filter->getSingleValue());
                 <div class="from-wrapper">
                     <label>
                         <input
-                                id="price-from"
+                                class="price-from"
                             <? if(!$filter->getGomageIsShowFilterButton()):?>
                                 data-role="navigation-filter"
                                 data-type="input-price"
@@ -54,7 +54,7 @@ $priceValues = explode(';', $filter->getSingleValue());
                 </div>
                 <div class="to-wrapper">
                     <label>
-                        <input id="price-to"
+                        <input class="price-to"
                             <? if(!$filter->getGomageIsShowFilterButton()):?>
                                data-role="navigation-filter"
                                data-type="input-price"
@@ -75,7 +75,7 @@ $priceValues = explode(';', $filter->getSingleValue());
             <? if($filter->getGomageIsShowFilterButton()):?>
                 <div class="gan-filter-input-actions">
                     <button
-                            id="price-button"
+                            class="price-button"
                             data-role="navigation-filter"
                             data-type="price-button"
                             class="gan-custom-button"
