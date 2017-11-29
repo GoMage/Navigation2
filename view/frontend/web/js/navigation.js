@@ -307,41 +307,6 @@ define([
          * @param element
          * @private
          */
-        _processProductMore: function (element) {
-            var element = $('#' + element.currentTarget.id);
-            var filter = new Filter(element);
-            var params = this._getParams();
-            var data = filter.getValue().split("=");
-            if (data) {
-                for (var i = 0; i < data.length; i++) {
-                    i++; params.set(data[i - 1], data[i]);
-                }
-
-                params.set('gan_ajax_more', 1);
-
-                $.ajax({
-                    url: this.options.baseUrl,
-                    type: 'get',
-                    cache: true,
-                    data: params.toUrlParams(),
-                    beforeSend: (this._ajaxSend).bind(this),
-                    complete: (this._ajaxComplete).bind(this),
-                    success: function (response) {
-                        var oldProduct = $(this.options.productListContainer).html();
-                        $(this.options.productsContainer).html(response.products);
-                        var newProduct = $(this.options.productListContainer).html();
-                        $(this.options.productListContainer).html(oldProduct + newProduct);
-                    }.bind(this)
-                });
-            }
-        },
-
-
-        /**
-         *
-         * @param element
-         * @private
-         */
         _runProcessFilterForElement: function (element) {
             var filter = new Filter(element);
             var params = this._getParams();
