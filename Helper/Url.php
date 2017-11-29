@@ -202,7 +202,7 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
             $paramValues = explode('_', $queryParams[$item->getFilter()->getRequestVar()]);
         }
 
-        if ($item->getFilter()->getRequestVar() == 'price') {
+        if ($item->getFilter()->getAttributeModel()->getBackendModel() == 'Magento\Catalog\Model\Product\Attribute\Backend\Price') {
             $position = array_search(implode('-', $item->getValue()), $paramValues);
         } else {
             $position = array_search($this->getItemFormattedValue($item), $paramValues);

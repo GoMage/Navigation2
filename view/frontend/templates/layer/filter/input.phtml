@@ -13,7 +13,9 @@ $priceValues = explode(';', $filter->getSingleValue());
 <div class="gan-filter gan-filter-input">
     <?=$block->getTooltip($filter)->toHtml()?>
     <form>
-        <input style="display: none;"
+        <input
+               class="gan-price"
+               style="display: none;"
                data-role="navigation-filter"
                data-active=""
                data-from="<?= $block->escapeHtml($filter->getMinBasePrice()); ?>"
@@ -105,7 +107,6 @@ $priceValues = explode(';', $filter->getSingleValue());
                         data-role="navigation-filter"
                         data-value=""
                         data-url="<?= $block->escapeUrl($filter->getRemoveUrl()) ?>"
-                        data-param="<?=$block->escapeHtml($filter->getRequestVar()) ?>"
                     <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
                         data-ajax="1"
                     <?else:?>

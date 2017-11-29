@@ -35,6 +35,11 @@ class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements Fil
     protected $filterTemplates;
 
     /**
+     * @var \GoMage\Navigation\Helper\Url
+     */
+    protected $urlHelper;
+
+    /**
      * Decimal constructor.
      * @param \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
@@ -45,6 +50,7 @@ class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements Fil
      * @param \Magento\Framework\App\RequestInterface $request
      * @param \GoMage\Navigation\Helper\Data $dataHelper
      * @param \GoMage\Navigation\Model\Config\Source\Filter\Templates $filterTemplates
+     * @param \GoMage\Navigation\Helper\Url $urlHelper
      * @param array $data
      */
     public function __construct(
@@ -57,6 +63,7 @@ class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements Fil
         \Magento\Framework\App\RequestInterface $request,
         \GoMage\Navigation\Helper\Data $dataHelper,
         \GoMage\Navigation\Model\Config\Source\Filter\Templates $filterTemplates,
+        \GoMage\Navigation\Helper\Url $urlHelper,
         array $data = []
     ) {
         $this->request = $request;
@@ -64,6 +71,7 @@ class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements Fil
         $this->priceCurrency = $priceCurrency;
         $this->dataHelper = $dataHelper;
         $this->filterTemplates = $filterTemplates;
+        $this->urlHelper = $urlHelper;
         parent::__construct($filterItemFactory, $storeManager, $layer, $itemDataBuilder, $priceCurrency, $dataProviderFactory, $data);
         $this->dataProvider = $dataProviderFactory->create(['layer' => $this->getLayer()]);
 
@@ -240,5 +248,13 @@ class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements Fil
         }
 
         return __('%1 - %2', $formattedFromPrice, $this->priceCurrency->format($toPrice));
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRemoveUrl()
+    {
+        return $this->urlHelper->getFilterRemoveUrl($this);
     }
 }

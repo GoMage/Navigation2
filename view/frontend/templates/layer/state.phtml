@@ -23,7 +23,7 @@
                        data-role="navigation-filter"
                        data-value="<?=$block->escapeHtml($filter->getRemoveValue()) ?>"
                        data-url="<?= $block->escapeHtml($filter->getRemoveUrl()) ?>"
-                       data-param="<?=$block->escapeHtml($filter->getFilter()->getRequestVar()) ?>"
+                       data-param-to-remove="<?=$block->escapeHtml($filter->getFilter()->getRequestVar()) ?>"
                         <?if ($filter->getFilter()->getGomageIsAjax() || is_null($filter->getFilter()->getGomageIsAjax())):?>
                             data-ajax="1"
                         <?else:?>

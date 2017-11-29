@@ -21,9 +21,9 @@ $priceValues = explode(';', $filter->getSingleValue());
                        class="gan-price"
                        style="display: none;"
                        data-role="navigation-filter"
-
-                       data-active="1"
-
+                    <? if (!empty($filter->isActive())): ?>
+                        data-active="1"
+                    <? endif; ?>
                        data-from="<?= $block->escapeHtml($filter->getMinBasePrice()); ?>"
                        data-to="<?= $block->escapeHtml($filter->getMaxBasePrice()); ?>"
                        data-step="<?= $block->escapeHtml($block->getStep()); ?>"
@@ -99,7 +99,7 @@ $priceValues = explode(';', $filter->getSingleValue());
                     data-role="navigation-filter"
                     data-value=""
                     data-url="<?= $block->escapeUrl($filter->getRemoveUrl()) ?>"
-                    data-param="<?=$block->escapeHtml($filter->getRequestVar()) ?>"
+                    data-param-to-remove="<?=$block->escapeHtml($filter->getRequestVar()) ?>"
                 <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
                     data-ajax="1"
                 <?else:?>

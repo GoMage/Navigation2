@@ -4,9 +4,10 @@ define([
     "./filter",
     "./params",
     "./slider",
+    "./loader",
     "jquery/ui",
     "mage/translate"
-], function ($, Filter, Params, SliderPrice) {
+], function ($, Filter, Params, SliderPrice, Loader) {
     "use strict";
 
     $.widget('gomage.navigation', {
@@ -22,12 +23,21 @@ define([
             productListContainer: 'ol.product-items',
             productToolbarContainer: 'div.toolbar-products',
             categoriesContainer: 'div.gan-categories',
-            loader: '#gomage-loader',
-            productLoader: '<div id="product-loader" class="gan-product-loader"><svg class="gan-loader-spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="gan-loader-spinner-circle" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><span>Loading...</span></div>',
-            showMore: false
+            loader: new Loader,
+            showMore: false,
+            divPagesEq: 'div.pages:eq(1)',
+            divPagesNextItem: 'li.item.pages-item-next a:eq(1)',
+            productItems: '.product-items',
+            ganCategoriesTitle: '.gan-categories-title',
+            blockContentIn: '.block-content-in',
+            parentInputSlider: '.gan-filter.gan-filter-slider.gan-filter-slider-input',
+            productOlItems: 'ol.products.list.items.product-items',
+            divPages: 'div.pages',
+            moreButton: '#gan-more-button'
         },
 
         _create: function () {
+
             if (!this.options.baseUrl) {
                 this.options.baseUrl = location.protocol + '//' + location.host + location.pathname;
             }
@@ -100,11 +110,8 @@ define([
                         });
                         break;
                     case 'button-more':
-
-                        this._showButtonMore(element);
                         element.unbind('click');
                         element.on('click', {element: element}, $.proxy(this._bindShowMoreProductsButton, this));
-
                         break;
                     case 'select':
                         element.unbind('change');
@@ -148,12 +155,12 @@ define([
 
         _bindAjaxAutoload: function () {
 
-            if (typeof($('div.pages:eq(1)').offset()) == 'undefined')
+            if (typeof($(this.options.divPagesEq).offset()) == 'undefined')
                 return ;
 
-            if ($(window).scrollTop() >= $('div.pages:eq(1)').offset().top - $(window).height()) {
+            if ($(window).scrollTop() >= $(this.options.divPagesEq).offset().top - $(window).height()) {
 
-                var url = $('li.item.pages-item-next a:eq(1)').attr('href');
+                var url = $(this.options.divPagesNextItem).attr('href');
                 if (typeof(url) == 'undefined')
                     return ;
 
@@ -166,7 +173,7 @@ define([
 
         _bindShowMoreProductsButton: function () {
 
-            var url = $('li.item.pages-item-next a:eq(1)').attr('href');
+            var url = $(this.options.divPagesNextItem).attr('href');
             if (typeof(url) == 'undefined')
                 return ;
 
@@ -174,14 +181,13 @@ define([
             params.clear();
             params.set('gan_ajax_more', 1);
             this._ajaxMoreProducts(url, params);
-            this._showButtonMore;
         },
 
         _processBackToTop: function () {
 
             if (this.options.backToTopAction == 1) {
                 $('html, body').animate({
-                    scrollTop: parseInt($(".product-items").offset().top)
+                    scrollTop: parseInt($(this.options.productItems).offset().top)
                 }, this.options.backToTopSpeed);
             }
             else
@@ -212,15 +218,17 @@ define([
         },
 
         _processCategoriesContent: function () {
-            $('.gan-categories-title').parent().find('.block-content-in').toggle();
+            $(this.options.ganCategoriesTitle).parent().find(this.options.blockContentIn).toggle();
         },
 
-        _processRemoveItem: function (element) {
+        _processRemoveItem: function (event) {
 
-            var url = element.currentTarget.attributes['data-url'].nodeValue;
-            var param = element.currentTarget.attributes['data-param'].nodeValue;
-            var value = element.currentTarget.attributes['data-value'].nodeValue;
-            var ajax = Number(element.currentTarget.attributes['data-ajax'].nodeValue);
+            var el = $(event.data.element);
+
+            var url = el.attr('data-url');
+            var param = el.attr('data-param-to-remove');
+            var value = el.attr('data-value');
+            var ajax = Number(el.attr('data-ajax'));
 
             var params = this._getParams();
             params.remove(param);
@@ -237,23 +245,46 @@ define([
 
         _processInputPrice: function (event) {
 
-            var el = $(event.data.element).parents('.gan-filter.gan-filter-slider.gan-filter-slider-input');
+            var el = $(event.data.element).parents(this.options.parentInputSlider);
 
             var price = el.find('.gan-price');
             var price_from = el.find('.price-from');
             var price_to = el.find('.price-to');
 
             var value = price_from.val() + '-' + price_to.val();
-            price.attr("data-value", value);
-            this._runProcessFilterForElement(price);
+
+            var params = this._getParams();
+            params.set(price.attr('data-param'), value);
+
+            var filter = new Filter(price);
+            if (filter.isAjax()) {
+                params.set('gan_ajax_filter', 1);
+                return this._ajaxFilter(this.options.baseUrl, params);
+            } else {
+                return $.mage.redirect(this.options.baseUrl + '?' + params.toUrlParams());
+            }
         },
 
         _processPriceButton: function (event) {
             event.preventDefault();
-            var value = $('#price-from').val() + '-' + $('#price-to').val();
-            var el = $('#price');
-            el.attr("data-value", value);
-            this._runProcessFilterForElement(el);
+
+            var el = $(event.data.element).parents(this.options.parentInputSlider);
+
+            var price = el.find('.gan-price');
+            var price_from = el.find('.price-from');
+            var price_to = el.find('.price-to');
+
+            var value = price_from.val() + '-' + price_to.val();
+            var params = this._getParams();
+            params.set(price.attr('data-param'), value);
+
+            var filter = new Filter(price);
+            if (filter.isAjax()) {
+                params.set('gan_ajax_filter', 1);
+                return this._ajaxFilter(this.options.baseUrl, params);
+            } else {
+                return $.mage.redirect(this.options.baseUrl + '?' + params.toUrlParams());
+            }
         },
 
         _processPriceSlider: function (value, event) {
@@ -269,20 +300,6 @@ define([
            } else {
                 return $.mage.redirect(this.options.baseUrl + '?' + params.toUrlParams());
             }
-        },
-
-        /**
-         *
-         * @param element
-         * @private
-         */
-        _showButtonMore: function (element) {
-
-            /*var url = $('li.item.pages-item-next a:eq(1)').attr('href');
-            if (typeof(url) == 'undefined')
-
-            $(this.options.productToolbarContainer+':eq( 1 )').hide();
-            $('button.'+element.attr('class')+':eq( 1 )').show();*/
         },
 
         /**
@@ -314,7 +331,6 @@ define([
                         $(this.options.productsContainer).html(response.products);
                         var newProduct = $(this.options.productListContainer).html();
                         $(this.options.productListContainer).html(oldProduct + newProduct);
-                        this._showButtonMore(element);
                     }.bind(this)
                 });
             }
@@ -434,15 +450,15 @@ define([
                     if (successCallback) {
                         successCallback.call(this, response);
                     }
-                    var newProducts = $(response.content).find('ol.products.list.items.product-items').html();
-                    var toolbar = $(response.content).find('div.pages').html();
-                    $('div.pages').html(toolbar);
+                    var newProducts = $(response.content).find(this.options.productOlItems).html();
+                    var toolbar = $(response.content).find(this.options.divPages).html();
+                    $(this.options.divPages).html(toolbar);
                     $(this.options.productListContainer).append(newProducts);
                     this.options.showMore = false;
 
-                    var url = $('li.item.pages-item-next a:eq(1)').attr('href');
+                    var url = $(this.options.divPagesNextItem).attr('href');
                     if (typeof(url) == 'undefined') {
-                        $('#gan-more-button').hide();
+                        $(this.options.moreButton).hide();
                     }
 
                     this.options.showMore = false;
@@ -469,12 +485,12 @@ define([
          */
         _ajaxSend: function () {
 
-            $(this.options.loader).show();
+            this.options.loader.show();
         },
 
         _ajaxSendShowMore: function () {
 
-            $(this.options.productListContainer).after(this.options.productLoader);
+            this.options.loader.showProductLoader();
         },
 
         /**
@@ -484,16 +500,16 @@ define([
         _ajaxComplete: function () {
 
             if(this.options.showMore) {
-                $(this.options.mainContainer).find('#product-loader').remove();
+                this.options.loader.removeProductLoader();
                 return ;
             }
 
-            $(this.options.loader).hide();
+            this.options.loader.hide();
         },
 
         _ajaxCompleteShowMore: function () {
 
-            $(this.options.mainContainer).find('#product-loader').remove();
+            this.options.loader.removeProductLoader();
         },
 
         setNavigationUrl: function (params) {
