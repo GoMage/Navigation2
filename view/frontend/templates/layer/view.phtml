@@ -24,7 +24,7 @@
                         "tooltipCloseOnMouseOut": "<?= $block->escapeHtml($block->getNavigationViewHelper()->isNavigationViewTooltipHideOnMouseOut()); ?>",
                         "ajaxAutoload": "<?= $block->escapeHtml($block->getDataHelper()->isUseAutoScrolling()); ?>"
                         }}' style="background-color: <?=$block->getNavigationViewHelper()->getNavigationViewBlockBackgroundColor()?>; ">
-        <div class="block-title"><strong><?= __('Add Filter') ?></strong></div>
+        <div class="block-title"><strong><?= __('Shop By') ?></strong></div>
         <div class="block-content filter-content">
             <?if ($block->getDataHelper()->isShowAppliedValuesInResults()):?>
                 <?= $block->getStateBlock()->toHtml() ?>
