@@ -334,11 +334,11 @@
                     <frontend_model>GoMage\Navigation\Block\Color</frontend_model>
                 </field>
                 <field id="width" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Widow Width, px</label>
+                    <label>Window Width, px</label>
                     <frontend_class>validate-number</frontend_class>
                 </field>
                 <field id="height" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Widow Height, px</label>
+                    <label>Window Height, px</label>
                     <frontend_class>validate-number</frontend_class>
                 </field>
                 <field id="text" translate="label" type="textarea" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
