@@ -188,10 +188,10 @@ define([
             if (this.options.backToTopAction == 1) {
                 $('html, body').animate({
                     scrollTop: parseInt($(this.options.productItems).offset().top)
-                }, this.options.backToTopSpeed);
+                }, parseInt(this.options.backToTopSpeed));
             }
             else
-                $("html, body").animate({ scrollTop: 0 }, this.options.backToTopSpeed);
+                $("html, body").animate({ scrollTop: 0 }, parseInt(this.options.backToTopSpeed));
         },
 
         _processCategory: function (event) {
