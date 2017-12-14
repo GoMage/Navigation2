@@ -34,10 +34,10 @@ class Templates
     public function getShowShopByInTemplate($type)
     {
         $templates = [
-            \GoMage\Navigation\Model\Config\Source\Navigation::DEFAULTS => 'GoMage_Navigation::categories/shop_by/default.phtml',
-            \GoMage\Navigation\Model\Config\Source\Navigation::DROP_DOWN => 'GoMage_Navigation::categories/shop_by/dropdown.phtml',
-            \GoMage\Navigation\Model\Config\Source\Navigation::IMAGE => 'GoMage_Navigation::categories/shop_by/image.phtml',
-            \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK => 'GoMage_Navigation::categories/shop_by/default.phtml',
+            \GoMage\Navigation\Model\Config\Source\Navigation::DEFAULTS => 'GoMage_Navigation::categories/default.phtml',
+            \GoMage\Navigation\Model\Config\Source\Navigation::DROP_DOWN => 'GoMage_Navigation::categories/dropdown.phtml',
+            \GoMage\Navigation\Model\Config\Source\Navigation::IMAGE => 'GoMage_Navigation::categories/image.phtml',
+            \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK => 'GoMage_Navigation::categories/flyout.phtml',
         ];
 
         if (empty($templates[$type])) {

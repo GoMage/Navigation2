@@ -302,7 +302,7 @@ class Categories extends \Magento\Framework\View\Element\Template
         }
 
         if ($this->getCategoriesDataHelper()->isShowCategoryInShopBy()) {
-            $this->getLayout()->unsetChild('sidebar.main', 'gomage.categories');
+            $this->getLayout()->reorderChild('sidebar.main', 'gomage.categories', 0);
             $this->canShowCategories = true;
             return;
         }
