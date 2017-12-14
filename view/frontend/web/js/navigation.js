@@ -31,6 +31,7 @@ define([
             ganCategoriesTitle: '.gan-categories-title',
             blockContentIn: '.block-content-in',
             parentInputSlider: '.gan-filter.gan-filter-slider.gan-filter-slider-input',
+            parentInputGan: '.gan-filter.gan-filter-input',
             productOlItems: 'ol.products.list.items.product-items',
             divPages: 'div.pages',
             moreButton: '#gan-more-button'
@@ -245,15 +246,15 @@ define([
 
         _processInputPrice: function (event) {
 
-            var el = $(event.data.element).parents(this.options.parentInputSlider);
+            var el = $(event.data.element).parents(this.options.parentInputGan);
 
             var price = el.find('.gan-price');
             var price_from = el.find('.price-from');
             var price_to = el.find('.price-to');
 
             var value = price_from.val() + '-' + price_to.val();
-
             var params = this._getParams();
+            params.set('price', value);
             params.set(price.attr('data-param'), value);
 
             var filter = new Filter(price);
@@ -277,7 +278,7 @@ define([
             var value = price_from.val() + '-' + price_to.val();
             var params = this._getParams();
             params.set(price.attr('data-param'), value);
-
+            params.set('price', value);
             var filter = new Filter(price);
             if (filter.isAjax()) {
                 params.set('gan_ajax_filter', 1);
@@ -296,6 +297,7 @@ define([
 
             if (filter.isAjax()) {
                 params.set('gan_ajax_filter', 1);
+                params.set('price', value.replace(';', '-'));
                 return this._ajaxFilter(this.options.baseUrl, params);
            } else {
                 return $.mage.redirect(this.options.baseUrl + '?' + params.toUrlParams());
