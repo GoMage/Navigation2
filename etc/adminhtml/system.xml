@@ -224,7 +224,7 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="is_collapsed" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Show Collapsed (Show Minimized in biznes documentation)</label>
+                    <label>Show Collapsed</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="is_checkbox" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
