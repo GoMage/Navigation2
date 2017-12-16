@@ -21,7 +21,7 @@ class Templates
             \GoMage\Navigation\Model\Config\Source\Navigation::SLIDER => 'GoMage_Navigation::layer/filter/slider.phtml',
             \GoMage\Navigation\Model\Config\Source\Navigation::SLIDER_INPUT  => 'GoMage_Navigation::layer/filter/slider_input.phtml',
             \GoMage\Navigation\Model\Config\Source\Navigation::SWATCHES => 'GoMage_Navigation::layer/filter/swatches.phtml',
-            \GoMage\Navigation\Model\Config\Source\Navigation::IMAGE => 'GoMage_Navigation::layer/filter/image.phtml',
+            \GoMage\Navigation\Model\Config\Source\Navigation::IMAGE => 'GoMage_Navigation::layer/filter/swatches.phtml',
         ];
 
         if (empty($templates[$filterType])) {
