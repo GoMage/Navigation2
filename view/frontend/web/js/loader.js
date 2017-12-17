@@ -24,7 +24,7 @@ define([
         },
 
         showProductLoader: function () {
-            $(this.productListContainer).after(this.productLoader);
+            $(this.productListContainer).append(this.productLoader);
         },
 
         removeProductLoader: function () {
