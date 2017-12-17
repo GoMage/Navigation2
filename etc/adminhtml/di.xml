@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Swatches\Helper\Media">
+        <plugin name="gomage_swatch_resize_image" type="GoMage\Navigation\Plugin\SwatchImageResize" />
+    </type>
+    <type name="Magento\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual">
+        <plugin name="gomage_swatch_visual" type="GoMage\Navigation\Plugin\VisualSwatch" />
+    </type>
+</config>
