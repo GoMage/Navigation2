@@ -44,6 +44,9 @@
             <argument name="resource" xsi:type="object">GoMage\Navigation\Model\ResourceModel\Layer\Filter\Decimal</argument>
         </arguments>
     </type>
+    <type name="Magento\Swatches\Helper\Media">
+        <plugin name="gomage_swatch_resize_image" type="GoMage\Navigation\Plugin\SwatchImageResize" />
+    </type>
     <type name="Magento\Catalog\Model\Layer\Resolver">
         <arguments>
             <argument name="layersPool" xsi:type="array">

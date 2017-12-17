@@ -10,6 +10,8 @@ $filter = reset($filterItems)->getFilter();
 $swatchData = $block->getSwatch()->setSwatchFilter($filter)->getSwatchData();
 $swatchData = $block->prepareSwatchesData($swatchData, $filterItems);
 $optionsLimit = ($filter->getGomageVisibleOptions()) ? $filter->getGomageVisibleOptions() : false;
+$helperImageSwatch = $this->helper('GoMage\Navigation\Helper\ImageSwatchHelper');
+
 $cnt = 0;
 ?>
 
@@ -53,9 +55,11 @@ $cnt = 0;
                             <? break;
                         case '2':
                             ?>
-                            <? $swatchThumbPath = $block->getSwatch()->getSwatchPath('swatch_thumb',
+                            <? $helperImageSwatch->setWidth($filter->getGomageImageWidth()); ?>
+                            <? $helperImageSwatch->setHeight($filter->getGomageImageHeight()); ?>
+                            <? $swatchThumbPath = $helperImageSwatch->getImagePath('swatch_thumb',
                             $swatchData['swatches'][$option]['value']); ?>
-                            <? $swatchImagePath = $block->getSwatch()->getSwatchPath('swatch_image',
+                            <? $swatchImagePath = $helperImageSwatch->getImagePath('swatch_image',
                             $swatchData['swatches'][$option]['value']); ?>
                             <div class="<?= $block->escapeHtml($selected);?> swatch-option image <?=$block->escapeHtml($data['custom_style']) ?>"
                                  option-type="2"
@@ -63,7 +67,10 @@ $cnt = 0;
                                  option-label="<?=$block->escapeHtml($data['label']) ?>"
                                  option-tooltip-thumb="<?=$block->escapeHtml($swatchThumbPath) ?>"
                                  option-tooltip-value=""
-                                 style="background: url(<?=$block->escapeUrl($swatchImagePath) ?>) no-repeat center; background-size: initial;"></div>
+                                 style="background: url(<?=$block->escapeUrl($swatchImagePath) ?>) no-repeat center; background-size: initial;
+                                 <?= $block->escapeHtml(!empty($filter->getGomageImageWidth()) ? 'width:' . $filter->getGomageImageWidth() . 'px' : '');?>;
+                                 <?= $block->escapeHtml(!empty($filter->getGomageImageHeight()) ? 'height:' . $filter->getGomageImageWidth() . 'px' : '');?>;">
+                            </div>
                             <? break;
                         case '1':
                             ?>
