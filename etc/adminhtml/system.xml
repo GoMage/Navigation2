@@ -17,10 +17,6 @@
                     <label>Enable Advanced Navigation (Filter Mode)</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="pager_button" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Enable Pager Button</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                </field>
                 <field id="pagination" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enable Ajax Pagination (Filter Category Pages)</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
