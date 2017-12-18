@@ -82,6 +82,12 @@ class ImageSwatchHelper extends Media
         return $this;
     }
 
+    /**
+     * Generate swatch thumb and small swatch image
+     *
+     * @param string $imageUrl
+     * @return $this
+     */
     public function generateSwatchVariations($imageUrl)
     {
         $absoluteImagePath = $this->mediaDirectory->getAbsolutePath($this->getAttributeSwatchPath($imageUrl));
