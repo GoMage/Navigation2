@@ -81,4 +81,25 @@ class ImageSwatchHelper extends Media
 
         return $this;
     }
+
+    public function generateSwatchVariations($imageUrl)
+    {
+        $absoluteImagePath = $this->mediaDirectory->getAbsolutePath($this->getAttributeSwatchPath($imageUrl));
+        foreach ($this->swatchImageTypes as $swatchType) {
+            $imageConfig = $this->getImageConfig();
+            if ($this->width) {
+                $imageConfig[$swatchType]['width'] = $this->width;
+            }
+            if ($this->width) {
+                $imageConfig[$swatchType]['height'] = $this->height;
+            }
+            $swatchNamePath = $this->generateNamePath($imageConfig, $imageUrl, $swatchType);
+            $image = $this->imageFactory->create($absoluteImagePath);
+            $this->setupImageProperties($image);
+            $image->resize($imageConfig[$swatchType]['width'], $imageConfig[$swatchType]['height']);
+            $this->setupImageProperties($image, true);
+            $image->save($swatchNamePath['path_for_save'], $swatchNamePath['name']);
+        }
+        return $this;
+    }
 }
