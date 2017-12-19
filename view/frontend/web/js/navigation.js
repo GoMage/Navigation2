@@ -34,7 +34,7 @@ define([
             parentInputGan: '.gan-filter.gan-filter-input',
             productOlItems: 'ol.products.list.items.product-items',
             divPages: 'div.pages',
-            moreButton: '#gan-more-button'
+            moreButton: '#gan-more-button',
         },
 
         _create: function () {
@@ -247,8 +247,8 @@ define([
         _processInputPrice: function (event) {
 
             var el = $(event.data.element).parents(this.options.parentInputGan);
-
-            var price = el.find('.gan-price');
+            var t = this.options.parentInputGan;
+            var price = $('.gan-price');
             var price_from = el.find('.price-from');
             var price_to = el.find('.price-to');
 
@@ -271,9 +271,9 @@ define([
 
             var el = $(event.data.element).parents(this.options.parentInputSlider);
 
-            var price = el.find('.gan-price');
-            var price_from = el.find('.price-from');
-            var price_to = el.find('.price-to');
+            var price = $('.gan-price');
+            var price_from = $('.price-from');
+            var price_to = $('.price-to');
 
             var value = price_from.val() + '-' + price_to.val();
             var params = this._getParams();
@@ -300,6 +300,7 @@ define([
                 params.set('price', value.replace(';', '-'));
                 return this._ajaxFilter(this.options.baseUrl, params);
            } else {
+                params.set('price', value.replace(';', '-'));
                 return $.mage.redirect(this.options.baseUrl + '?' + params.toUrlParams());
             }
         },
