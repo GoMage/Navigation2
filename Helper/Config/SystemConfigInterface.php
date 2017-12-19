@@ -21,6 +21,7 @@ interface SystemConfigInterface
     const SYSTEM_CONFIG_FIELD_USE_BACK_TO_TOP_SPEED = 'to_top_speed';
     const SYSTEM_CONFIG_FIELD_USE_BACK_TO_TOP_ACTION = 'to_top_action';
     const SYSTEM_CONFIG_FIELD_PAGER_BUTTON = 'pager_button';
+    const SYSTEM_CONFIG_FIELD_PAGINATION_ENABLED = 'pagination';
     const SYSTEM_CONFIG_FIELD_CONTENT_FILTER_TYPE = 'content_filter_type';
     const SYSTEM_CONFIG_FIELD_PAGER = 'pager';
     const SYSTEM_CONFIG_FIELD_MOBILE = 'mobile';

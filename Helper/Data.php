@@ -4,6 +4,7 @@ namespace GoMage\Navigation\Helper;
 
 use GoMage\Navigation\Helper\Config\SystemConfigInterface;
 use Magento\Framework\App\Helper\Context;
+use function PHPSTORM_META\elementType;
 
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
@@ -227,5 +228,17 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_SETTINGS_GROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
             . SystemConfigInterface::SYSTEM_CONFIG_FIELD_SHOW_APPLIED_VALUES);
+    }
+
+    public function getPagerTheme()
+    {
+        $isAjax = $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_PAGINATION_ENABLED);
+        if ($isAjax) {
+            return 'GoMage_Navigation::html/pager.phtml';
+        } else {
+            return 'Magento_Theme::html/pager.phtml';
+        }
     }
 }
