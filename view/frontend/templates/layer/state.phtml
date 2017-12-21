@@ -15,7 +15,7 @@
             <li class="item">
                 <span class="filter-label"><?=$block->escapeHtml(__($filter->getName())); ?></span>
                 <div class="filter-value-wrap">
-                    <span class="filter-value"><?= $block->escapeHtml($filter->getLabel(), ['span']) ?></span>
+                    <span class="filter-value"><?= html_entity_decode ($block->escapeHtml($filter->getLabel(), ['span'])); ?></span>
                     <? $currentFilterName = $block->escapeHtml(__($filter->getName()) . " " . $filter->getLabel()); ?>
                     <a class="action remove"
                        href="#"
