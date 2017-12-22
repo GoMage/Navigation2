@@ -5,6 +5,10 @@ namespace GoMage\Navigation\Model\Catalog\Layer\Filter;
 class Item extends \Magento\Catalog\Model\Layer\Filter\Item
 {
     /**
+     * @var \Magento\Framework\App\RequestInterface
+     */
+    protected $request;
+    /**
      * @var \GoMage\Navigation\Helper\Url
      */
     protected $urlHelper;
@@ -27,9 +31,10 @@ class Item extends \Magento\Catalog\Model\Layer\Filter\Item
         \Magento\Theme\Block\Html\Pager $htmlPagerBlock,
         \GoMage\Navigation\Helper\Url $urlHelper,
         \GoMage\Navigation\Helper\Data $dataHelper,
+        \Magento\Framework\App\Helper\Context  $context,
         array $data = []
     ) {
-
+        $this->request = $context->getRequest();
         $this->urlHelper = $urlHelper;
         $this->dataHelper = $dataHelper;
         parent::__construct($url, $htmlPagerBlock, $data);
@@ -65,5 +70,21 @@ class Item extends \Magento\Catalog\Model\Layer\Filter\Item
         }
 
         return true;
+    }
+
+    public function getGomageValue ()
+    {
+        $result = $this->getValue();
+        if($result) {
+            if (!$this->isShowAppliedValues() && !$this->request->get('price')) {
+                $result = explode('_', $result);
+                if (isset($result[1]) && null !== $result[1]) {
+                    $result = $result[1];
+                }
+            }
+        }
+
+        return $result;
+
     }
 }
