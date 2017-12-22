@@ -337,50 +337,6 @@
                     <label>Ajax Loader Text</label>
                 </field>
             </group>
-
-            <group id="product" translate="label" type="text" sortOrder="60" showInDefault="1"
-                   showInWebsite="1" showInStore="1">
-                <label>Products Navigation</label>
-                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Show Ajax Loader Window</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                </field>
-
-                <field id="max_symbol" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Maximum Product Name Symbols</label>
-                    <frontend_class>validate-number</frontend_class>
-                </field>
-                <field id="prev_link" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <comment>e.g. %product% - product name, %price% - price, %previous_image%</comment>
-                    <label>Previous Product Link</label>
-                </field>
-                <field id="prev_img" translate="label" type="image" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Previous Product Image</label>
-                    <comment>Allowed file types: jpg, jpeg, gif, png</comment>
-                    <backend_model>GoMage\Navigation\Model\Saveimage</backend_model>
-                    <base_url type="media" scope_info="1">gomage/images</base_url>
-                </field>
-                <field id="next_link" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <comment>e.g. %product% - product name, %price% - price, %next_image%</comment>
-                    <label>Next Product Link</label>
-                </field>
-                <field id="next_img" translate="label" type="image" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Next Product Image</label>
-                    <comment>Allowed file types: jpg, jpeg, gif, png</comment>
-                    <backend_model>GoMage\Navigation\Model\Saveimage</backend_model>
-                    <base_url type="media" scope_info="1">gomage/images</base_url>
-                </field>
-                <field id="category_link" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <comment>e.g. %category%, %category_image%</comment>
-                    <label>Back to Category Link</label>
-                </field>
-                <field id="category_img" translate="label" type="image" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Back to Category Image</label>
-                    <comment>Allowed file types: jpg, jpeg, gif, png</comment>
-                    <backend_model>GoMage\Navigation\Model\Saveimage</backend_model>
-                    <base_url type="media" scope_info="1">gomage/images</base_url>
-                </field>
-            </group>
         </section>
     </system>
 </config>
