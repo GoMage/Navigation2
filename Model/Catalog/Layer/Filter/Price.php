@@ -4,7 +4,7 @@ namespace GoMage\Navigation\Model\Catalog\Layer\Filter;
 
 use GoMage\Navigation\Model\Config\Source\NavigationInterface;
 
-class Price extends \Magento\Catalog\Model\Layer\Filter\Price implements FilterInterface
+class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements FilterInterface
 {
 
     const FILTER_TYPE = 'price';
