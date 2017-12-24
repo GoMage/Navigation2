@@ -2,7 +2,7 @@
 
 namespace GoMage\Navigation\Model\Catalog\Layer\Filter;
 
-class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements FilterInterface
+class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute implements FilterInterface
 {
     /**
      * @var \Magento\Framework\App\RequestInterface
@@ -14,6 +14,10 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
      */
     protected $catalogSession;
 
+    /**
+     * @var \Magento\Framework\Filter\StripTags
+     */
+    private $tagFilter;
     /**
      * @var \GoMage\Navigation\Helper\Data
      */
@@ -55,27 +59,21 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Catalog\Model\Layer $layer,
         \Magento\Catalog\Model\Layer\Filter\Item\DataBuilder $itemDataBuilder,
-        \Magento\Catalog\Model\ResourceModel\Layer\Filter\AttributeFactory $filterAttributeFactory,
-        \Magento\Framework\Stdlib\StringUtils $string,
         \Magento\Framework\Filter\StripTags $tagFilter,
         \Magento\Framework\App\RequestInterface $request,
-        \Magento\Catalog\Model\Session $catalogSession,
         \GoMage\Navigation\Helper\Data $helper,
         \GoMage\Navigation\Helper\Url $urlHelper,
         \Magento\Catalog\Model\Layer\Category\CollectionFilter $filter,
         array $data = []
     ) {
-    
-        $this->_resource = $filterAttributeFactory->create();
-        $this->string = $string;
+
         $this->_requestVar = 'attribute';
-        $this->tagFilter = $tagFilter;
         $this->request = $request;
-        $this->catalogSession = $catalogSession;
+        $this->tagFilter = $tagFilter;
         $this->helper = $helper;
         $this->filter = $filter;
         $this->urlHelper = $urlHelper;
-        parent::__construct($filterItemFactory, $storeManager, $layer, $itemDataBuilder, $filterAttributeFactory, $string, $tagFilter, $data);
+        parent::__construct($filterItemFactory, $storeManager, $layer, $itemDataBuilder,  $tagFilter, $data);
     }
 
     /**
