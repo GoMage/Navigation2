@@ -31,7 +31,8 @@ $filter = reset($filterItems)->getFilter();
                 break;
             } ?>
             <? if ($item->getCount() > 0 && $item->isShowAppliedValues()): ?>
-                <option value="<?= $block->escapeHtml($item->getValueString()) ?>"
+                <option value="<?= $block->escapeHtml($item->getGomageValue()) ?>"
+                        data-param="<?= $block->escapeHtml($filter->getRequestVar()) ?>"
                         <? if ($item->getIsActive()): ?>selected="selected" data-active="1"<? endif ?>>
                     <?= $block->escapeHtml($item->getLabel() . ' (' . $item->getCount() . ')', ['span']) ?>
                 </option>
