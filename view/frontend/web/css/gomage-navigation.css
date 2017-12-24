@@ -631,3 +631,16 @@ button.gan-custom-button{
   box-sizing: border-box;
   text-transform: uppercase;
 }
+
+a.gan_link_more{
+  cursor: pointer;
+}
+a.gan_link_more_less{
+  cursor: pointer;
+}
+.gan_link-more-element{
+  display:none;
+}
+.gan_link_more_less{
+  display: none;
+}

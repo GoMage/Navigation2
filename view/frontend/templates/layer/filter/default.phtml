@@ -18,10 +18,7 @@ $filter = reset($filterItems)->getFilter();
       $cnt = 0;
     ?>
     <? foreach ($filterItems as $item): ?>
-        <? if (!empty($optionsLimit) && $cnt >= $optionsLimit) {
-            break;
-        } ?>
-        <li class="item">
+        <li class="item <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?>">
             <? if ($item->getCount() > 0 && $item->isShowAppliedValues()): ?>
                 <a <? if(!$item->getIsActive()):?> href="<?= $block->escapeUrl($item->getGomageUrl()); ?> <?endif;?>"
                     <? if($item->getIsActive()):?>
@@ -69,4 +66,8 @@ $filter = reset($filterItems)->getFilter();
             <?= __('Reset'); ?>
         </a>
     <?endif;?>
+    <?php if($optionsLimit): ?>
+        <li class="gan_link_more"><a href="javascript:void(0)"><?=__('Link More') ?>&#9660;</a></li>
+        <li class="gan_link_more_less"><a href="javascript:void(0)"><?=__('Less') ?>&#9650;</a></li>
+    <?php endif; ?>
 </ol>

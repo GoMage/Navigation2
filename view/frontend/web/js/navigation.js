@@ -35,6 +35,9 @@ define([
             productOlItems: 'ol.products.list.items.product-items',
             divPages: 'div.pages',
             moreButton: '#gan-more-button',
+            moreLink: '.gan_link_more',
+            moreLinkLess: '.gan_link_more_less',
+            linkMoreElement: '.gan_link-more-element'
         },
 
         _create: function () {
@@ -56,6 +59,16 @@ define([
                     $(this).closest('.gan-tooltip').addClass('__opened');
                 });
             }
+            $(this.options.moreLink).off('click');
+            $(this.options.moreLink).on('click', function () {
+                $(this.options.linkMoreElement).show();
+                $(this.options.moreLinkLess).show();
+                $(this.options.moreLink).hide();
+            });
+            $(this.options.moreLinkLess).off('click');
+            $(this.options.moreLink).off('click');
+            $(this.options.moreLink).on('click', this.moreLink.bind(this));
+            $(this.options.moreLinkLess).on('click', this.moreLinkLess.bind(this));
 
             if (this.options.tooltipOpenOnMouseOver == true) {
                 $('.gan-tooltip').on('mouseover', function () {
@@ -76,6 +89,16 @@ define([
             }
         },
 
+        moreLink: function () {
+            $(this.options.linkMoreElement).show();
+            $(this.options.moreLinkLess).show();
+            $(this.options.moreLink).hide();
+        },
+        moreLinkLess: function () {
+            $(this.options.linkMoreElement).hide();
+            $(this.options.moreLinkLess).hide();
+            $(this.options.moreLink).show();
+        },
         _initFilters: function () {
             var elements = $(this.options.filterControl);
             this._bind(elements);

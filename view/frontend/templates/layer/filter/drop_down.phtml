@@ -27,9 +27,6 @@ $filter = reset($filterItems)->getFilter();
         $cnt = 0;
         ?>
         <? foreach ($filterItems as $item): ?>
-            <? if (!empty($optionsLimit) && $cnt >= $optionsLimit) {
-                break;
-            } ?>
             <? if ($item->getCount() > 0 && $item->isShowAppliedValues()): ?>
                 <option value="<?= $block->escapeHtml($item->getGomageValue()) ?>"
                         data-param="<?= $block->escapeHtml($filter->getRequestVar()) ?>"

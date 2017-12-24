@@ -20,9 +20,6 @@ $cnt = 0;
     <div class="swatch-attribute-options clearfix">
         <?=$block->getTooltip($filter)->toHtml()?>
         <? foreach ($swatchData['options'] as $option => $data): ?>
-            <? if (!empty($optionsLimit) && $cnt >= $optionsLimit) {
-                break;
-            } ?>
             <?
                 if (!$data['is_show']) continue;
                 $selected = '';
@@ -39,7 +36,7 @@ $cnt = 0;
                 <? $selected = 'selected';?>
                data-active="1"
                 <? endif; ?>
-               class="swatch-option-link-layered">
+               class="swatch-option-link-layered <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?>">
                 <? if (isset($swatchData['swatches'][$option]['type'])) { ?>
                     <? switch ($swatchData['swatches'][$option]['type']) {
                         case '3':
@@ -122,7 +119,8 @@ $cnt = 0;
         </a>
     <?endif;?>
 </div>
-
+<a class="gan_link_more"><?=__('Link More') ?>&#9660;</a>
+<a class="gan_link_more_less"><?=__('Less') ?>&#9650;</a>
 <script>
     require(["jquery", "jquery/ui", "Magento_Swatches/js/swatch-renderer"], function ($) {
         $('.swatch-layered.<?=$block->escapeHtml($swatchData['attribute_code']) ?>')
