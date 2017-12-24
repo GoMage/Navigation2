@@ -46,8 +46,8 @@ define([
             $(this.options.navigationContainer).on({
                 'show.navigation': $.proxy(this._initFilters, this)
             });
-
             if (this.options.ajaxAutoload == true) {
+                $(window).off('scroll');
                 $(window).on('scroll', {}, $.proxy(this._bindAjaxAutoload, this));
             }
 
