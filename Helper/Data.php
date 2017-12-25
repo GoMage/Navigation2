@@ -189,7 +189,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $isAjax = $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
             . SystemConfigInterface::SYSTEM_CONFIG_FIELD_PAGINATION_ENABLED);
-        if ($isAjax) {
+        if ($isAjax || $this->isUseAutoScrolling()) {
             return 'GoMage_Navigation::html/pager.phtml';
         } else {
             return 'Magento_Theme::html/pager.phtml';

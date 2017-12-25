@@ -50,8 +50,11 @@ define([
                 'show.navigation': $.proxy(this._initFilters, this)
             });
             if (this.options.ajaxAutoload == true) {
-                $(window).off('scroll');
-                $(window).on('scroll', {}, $.proxy(this._bindAjaxAutoload, this));
+                if(typeof  window.autoAjaxScroll == 'undefined'){
+                    $(window).off('scroll');
+                    $(window).on('scroll', {}, $.proxy(this._bindAjaxAutoload, this));
+                    window.autoAjaxScroll = true;
+                }
             }
 
             if (this.options.tooltipOpenOnClick == true) {
