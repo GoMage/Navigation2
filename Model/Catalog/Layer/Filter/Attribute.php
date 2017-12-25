@@ -63,6 +63,7 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
         \Magento\Framework\App\RequestInterface $request,
         \GoMage\Navigation\Helper\Data $helper,
         \GoMage\Navigation\Helper\Url $urlHelper,
+        \Magento\Catalog\Model\ResourceModel\Layer\Filter\AttributeFactory $filterAttributeFactory,
         \Magento\Catalog\Model\Layer\Category\CollectionFilter $filter,
         array $data = []
     ) {
@@ -73,6 +74,7 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
         $this->helper = $helper;
         $this->filter = $filter;
         $this->urlHelper = $urlHelper;
+        $this->_resource = $filterAttributeFactory->create();
         parent::__construct($filterItemFactory, $storeManager, $layer, $itemDataBuilder,  $tagFilter, $data);
     }
 
@@ -231,6 +233,16 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
         }
 
         return $params;
+    }
+
+    /**
+     * Retrieve resource instance
+     *
+     * @return \Magento\Catalog\Model\ResourceModel\Layer\Filter\Attribute
+     */
+    protected function _getResource()
+    {
+        return $this->_resource;
     }
 
     /**
