@@ -223,16 +223,16 @@
                             jQuery(document).ready(function() {
 
                                 if(jQuery('#gomage_navigation_category_shop_by').val() == 1) {
-                                    jQuery('#gomage_navigation_category_navigation option[value="8"]').attr('disabled', 'disabled');
+                                    jQuery('#gomage_navigation_category_navigation option[value="8"]').hide();
                                 }
 
                                 jQuery('#gomage_navigation_category_shop_by').change(function() {
                                     if (jQuery('#gomage_navigation_category_shop_by').val() == 1) {
                                         jQuery('#gomage_navigation_category_navigation').val(0);
-                                        jQuery('#gomage_navigation_category_navigation option[value="8"]').attr('disabled', 'disabled');
+                                        jQuery('#gomage_navigation_category_navigation option[value="8"]').hide();
                                     } else {
                                         jQuery('#gomage_navigation_category_navigation').val(0);
-                                        jQuery('#gomage_navigation_category_navigation option[value="8"]').removeAttr('disabled', 'disabled');
+                                        jQuery('#gomage_navigation_category_navigation option[value="8"]').show();
                                     }
 
                                     jQuery('#row_gomage_navigation_category_is_image').hide();
