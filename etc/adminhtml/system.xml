@@ -220,8 +220,7 @@
                     <label>Show Image Name</label>
                     <comment><![CDATA[
                         <script type="text/javascript">
-                            jQuery(document).ready(function() {
-
+                            window.onload = function() {
                                 if(jQuery('#gomage_navigation_category_shop_by').val() == 1) {
                                     jQuery('#gomage_navigation_category_navigation option[value="8"]').hide();
                                 }
@@ -241,10 +240,11 @@
                                     jQuery('#row_gomage_navigation_category_image_height').hide();
 
                                 });
-                            });
+                            }
                         </script>
                     ]]>
                     </comment>
+
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <depends>
                         <field id="navigation">9</field>
