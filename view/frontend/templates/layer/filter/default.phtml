@@ -19,7 +19,7 @@ $filter = reset($filterItems)->getFilter();
     ?>
     <? foreach ($filterItems as $item): ?>
         <li class="item <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?>">
-            <? if ($item->getCount() > 0 && $item->isShowAppliedValues()): ?>
+            <? if ($item->getCount() > 0 ): ?>
                 <a <? if(!$item->getIsActive()):?> href="<?= $block->escapeUrl($item->getGomageUrl()); ?> <?endif;?>"
                     <? if($item->getIsActive()):?>
                         class="active"
@@ -36,7 +36,7 @@ $filter = reset($filterItems)->getFilter();
                    data-type="<?= (int) $filter->getGomageFilterType(); ?>"
                    <? if($item->getIsActive()):?>
                     data-active="1"
-                    <? endif;?>>
+                    <? endif;?> <?php if((!$item->isShowAppliedValues())): ?>style="display: none"<?php endif; ?>>
                     <span class="filter-label-wrap">
                         <span class="filter-label-text"><?= html_entity_decode($block->escapeHtml($item->getLabel(), ['span'])) ?></span>
                         <? if ($block->getHelper()->isShowValueQty()): ?>

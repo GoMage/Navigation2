@@ -141,10 +141,6 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
             $paramValues[] = $this->getItemFormattedValue($item);
         }
 
-        if(!$item->isShowAppliedValuesRemove())
-        {
-            return $paramValues[count($paramValues) - 1];
-        }
 
         return implode('_', $paramValues);
     }

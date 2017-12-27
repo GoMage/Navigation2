@@ -21,10 +21,9 @@ $cnt = 0;
         <?=$block->getTooltip($filter)->toHtml()?>
         <? foreach ($swatchData['options'] as $option => $data): ?>
             <?
-                if (!$data['is_show']) continue;
                 $selected = '';
             ?>
-            <a  href="<?=$block->escapeUrl($data['link']) ?>"
+            <a  <?php if(!$data['is_show']): ?> style="display: none" <?php endif; ?> href="<?=$block->escapeUrl($data['link']) ?>"
                data-role="navigation-filter"
                 data-value="<?= (!empty($data['gomage_value'])) ? $data['gomage_value'] : $option; ?>"
                data-param="<?= $block->escapeHtml($filter->getRequestVar()) ?>"
@@ -36,12 +35,12 @@ $cnt = 0;
                 <? $selected = 'selected';?>
                data-active="1"
                 <? endif; ?>
-               class="swatch-option-link-layered <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?>">
+               class="swatch-option-link-layered">
                 <? if (isset($swatchData['swatches'][$option]['type'])) { ?>
                     <? switch ($swatchData['swatches'][$option]['type']) {
                         case '3':
                             ?>
-                            <div class="<?= $block->escapeHtml($selected);?> swatch-option <?=$block->escapeHtml($data['custom_style']) ?>"
+                            <div class="<?= $block->escapeHtml($selected);?> swatch-option  <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?> <?=$block->escapeHtml($data['custom_style']) ?>"
 
                                  option-type="3"
                                  option-id="<?=$block->escapeHtml($option) ?>"
@@ -58,7 +57,7 @@ $cnt = 0;
                             $swatchData['swatches'][$option]['value']); ?>
                             <? $swatchImagePath = $helperImageSwatch->getImagePath('swatch_image',
                             $swatchData['swatches'][$option]['value']); ?>
-                            <div class="<?= $block->escapeHtml($selected);?> swatch-option image <?=$block->escapeHtml($data['custom_style']) ?>"
+                            <div class="<?= $block->escapeHtml($selected);?> swatch-option  <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?> image <?=$block->escapeHtml($data['custom_style']) ?>"
                                  option-type="2"
                                  option-id="<?=$block->escapeHtml($option) ?>"
                                  option-label="<?=$block->escapeHtml($data['label']) ?>"
@@ -71,7 +70,7 @@ $cnt = 0;
                             <? break;
                         case '1':
                             ?>
-                            <div class="<?= $block->escapeHtml($selected);?> swatch-option color <?=$block->escapeHtml($data['custom_style']) ?>"
+                            <div class="<?= $block->escapeHtml($selected);?> swatch-option  <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?> color <?=$block->escapeHtml($data['custom_style']) ?>"
                                  option-type="1"
                                  option-id="<?=$block->escapeHtml($option) ?>"
                                  option-label="<?=$block->escapeHtml($data['label']) ?>"
@@ -87,7 +86,7 @@ $cnt = 0;
                         case '0':
                         default:
                             ?>
-                            <div class="<?= $block->escapeHtml($selected);?> swatch-option text <?=$block->escapeHtml($data['custom_style']) ?>"
+                            <div class="<?= $block->escapeHtml($selected);?> swatch-option  <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?> text <?=$block->escapeHtml($data['custom_style']) ?>"
                                  option-type="0"
                                  option-id="<?=$block->escapeHtml($option) ?>"
                                  option-label="<?=$block->escapeHtml($data['label']) ?>"
@@ -119,8 +118,10 @@ $cnt = 0;
         </a>
     <?endif;?>
 </div>
+<?php if($optionsLimit): ?>
 <a class="gan_link_more"><?=__('More') ?>&#9660;</a>
 <a class="gan_link_more_less"><?=__('Less') ?>&#9650;</a>
+<?php endif; ?>
 <script>
     require(["jquery", "jquery/ui", "Magento_Swatches/js/swatch-renderer"], function ($) {
         $('.swatch-layered.<?=$block->escapeHtml($swatchData['attribute_code']) ?>')

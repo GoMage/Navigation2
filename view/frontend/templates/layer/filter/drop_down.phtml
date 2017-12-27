@@ -28,7 +28,7 @@ $filter = reset($filterItems)->getFilter();
         ?>
         <? foreach ($filterItems as $item): ?>
             <? if ($item->getCount() > 0 && $item->isShowAppliedValues()): ?>
-                <option value="<?= $block->escapeHtml($item->getGomageValue()) ?>"
+                <option <?php if((!$item->isShowAppliedValues())): ?>style="display: none"<?php endif; ?> value="<?= $block->escapeHtml($item->getGomageValue()) ?>"
                         data-param="<?= $block->escapeHtml($filter->getRequestVar()) ?>"
                         <? if ($item->getIsActive()): ?>selected="selected" data-active="1"<? endif ?>>
                     <?= $block->escapeHtml($item->getLabel() . ' (' . $item->getCount() . ')', ['span']) ?>
