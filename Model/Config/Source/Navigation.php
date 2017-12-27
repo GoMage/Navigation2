@@ -16,7 +16,7 @@ class Navigation implements
             ['value' => self::COLOR_PICKER, 'label' => __('Color Picker')],
             ['value' => self::DROP_DOWN, 'label' => __('Dropdown')],
             ['value' => self::IN_BLOCK, 'label' => __('In Block')],
-            ['value' => self::BUTTON, 'label' => __('Button')],
+            ['value' => self::BUTTON, 'label' => __('Swatch')],
             ['value' => self::INPUT, 'label' => __('Input')],
             ['value' => self::SLIDER, 'label' => __('Slider')],
             ['value' => self::SLIDER_INPUT, 'label' => __('Slider & Input')],

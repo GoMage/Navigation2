@@ -1,0 +1,63 @@
+<?
+/**
+ *
+ * @var $block \Gomage\Navigation\Block\Navigation\FilterRenderer
+ */
+
+$filter = reset($filterItems)->getFilter();
+$optionsLimit = ($filter->getGomageVisibleOptions()) ? $filter->getGomageVisibleOptions() : false;
+$cnt = 0;
+
+?>
+<div class="swatch-attribute">
+    <div class="swatch-attribute-options clearfix">
+        <?=$block->getTooltip($filter)->toHtml()?>
+        <? foreach ($filterItems as $item): ?>
+        <? if ($item->getCount() > 0 && $item->isShowAppliedValues()): ?>
+            <div class="swatch-option text <?php if($item->getIsActive()): ?> selected <?php endif; ?> <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?>"  style="background: background-size: initial;
+            <?= $block->escapeHtml(!empty($filter->getGomageImageWidth()) ? 'width:' . $filter->getGomageImageWidth() . 'px;' : '');?>
+            <?= $block->escapeHtml(!empty($filter->getGomageImageHeight()) ? 'height:' . $filter->getGomageImageWidth() . 'px;' : '');?>"
+                <? if($item->getIsActive()):?>
+                    class="active"
+                <?endif;?>
+                 data-role="navigation-filter"
+                 data-url="<? if(!$item->getIsActive()):?><?= $block->escapeUrl($item->getGomageUrl()) ?> <?endif;?>"
+                 data-value="<?= $block->escapeHtml($item->getGomageValue()) ?>"
+                 data-param="<?= $block->escapeHtml($filter->getRequestVar()) ?>"
+                <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+                    data-ajax="1"
+                <?else:?>
+                    data-ajax="0"
+                <?endif;?>
+                 data-type="<?= (int) $filter->getGomageFilterType(); ?>"
+                <? if($item->getIsActive()):?>
+                    data-active="1"
+                <? endif;?>>
+                <?= html_entity_decode($block->escapeHtml($item->getLabel(), ['span'])) ?>
+            </div>
+            <?$cnt++;?>
+        <?php endif; ?>
+        <? endforeach ?>
+    </div>
+    <?if($filter->isActive() && $filter->getGomageIsReset()):?>
+        <a
+                data-role="navigation-filter"
+                data-value=""
+                data-url="<?= $block->escapeUrl($filter->getRemoveUrl()) ?>"
+                data-param="<?=$block->escapeHtml($filter->getRequestVar()) ?>"
+            <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+                data-ajax="1"
+            <?else:?>
+                data-ajax="0"
+            <?endif;?>
+                data-type="remove-item"
+                data-active="1"
+                href="#">
+            <?= __('Reset'); ?>
+        </a>
+    <?endif;?>
+    <?php if($optionsLimit): ?>
+        <a class="gan_link_more"><?=__('More') ?>&#9660;</a>
+        <a class="gan_link_more_less"><?=__('Less') ?>&#9650;</a>
+    <?php endif; ?>
+</div>
