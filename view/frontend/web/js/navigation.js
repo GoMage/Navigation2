@@ -378,6 +378,7 @@ define([
         },
 
         _ajaxFilter: function (url, params, successCallback) {
+            $(window).off('scroll');
             $.ajax({
                 url: url,
                 type: 'get',
@@ -395,7 +396,7 @@ define([
                     $(this.options.breadcrumbsContainer).trigger('contentUpdated');
                     $(this.options.authentication).trigger('bindTrigger');
                     this.setNavigationUrl(params);
-
+                    $(window).on('scroll', {}, $.proxy(this._bindAjaxAutoload, this));
                 }.bind(this)
             });
 
