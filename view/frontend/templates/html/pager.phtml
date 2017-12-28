@@ -28,7 +28,7 @@ $moreButton = $this->getLayout()->createBlock('GoMage\Navigation\Block\Product\P
         </p>
         <?php endif ?>
         <?php if ($block->getLastPageNum() > 1): ?>
-        <div class="pages" <? if (!$helper->isShowPager() || !$helper->isUseAutoScrolling()): ?>style="display: none"<? endif; ?>>
+        <div class="pages" <? if (!$helper->isShowPager() || $helper->isUseAutoScrolling()): ?>style="display: none"<? endif; ?>>
             <strong class="label pages-label" id="paging-label"><?= __('Page') ?></strong>
             <ul class="items pages-items" aria-labelledby="paging-label">
             <?php if (!$block->isFirstPage()): ?>
