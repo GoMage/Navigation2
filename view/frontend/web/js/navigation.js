@@ -185,7 +185,7 @@ define([
             if (typeof($(this.options.divPagesEq).offset()) == 'undefined')
                 return ;
 
-            if ($(window).scrollTop() >= $(this.options.divPagesEq).offset().top - $(window).height()) {
+            if ($(window).scrollTop() >= $('.toolbar-products').last().offset().top) {
 
                 var url = $(this.options.divPagesNextItem).attr('href');
                 if (typeof(url) == 'undefined')
