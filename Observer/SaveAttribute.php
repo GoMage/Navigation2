@@ -64,7 +64,7 @@ class SaveAttribute implements \Magento\Framework\Event\ObserverInterface
             'tooltip_height' => (int) $attribute->getData('gomage_tooltip_height'),
             'tooltip_text' => $this->prepareTooltipData($attribute->getData('gomage_tooltip_text')),
             'is_reset' => (int) $attribute->getData('gomage_is_reset'),
-            'is_exclude_categories' => (int) $attribute->getData('gomage_is_exclude_categories')
+            'is_exclude_categories' =>  $attribute->getData('gomage_is_exclude_categories')
         ]);
 
         $this->navigationAttributeRepository->save($navigationAttribute);

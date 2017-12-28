@@ -43,27 +43,30 @@
             <? $wrapOptions = false; ?>
 
                 <? foreach ($block->getFilters() as $filter): ?>
-                    <? if (!$wrapOptions): ?>
-                        <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle"><?= __('Shopping Options') ?></strong>
-                        <dl class="filter-options"
-                            id="narrow-by-list"
-                            data-role="content"
-                            data-mage-init='{"accordion":{
-                            "openedState": "active",
-                            "collapsible": true,
-                            "active": <?= json_encode($block->getExpandedFilters());?>,
-                            "multipleCollapsible": true
-                            }}'>
+                    <?php $blockRender = $block->getRenderBlock(); ?>
+                    <?php if ($blockRender->renderInCurrentCategory($filter)) : ?>
+                        <? if (!$wrapOptions): ?>
+                            <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle"><?= __('Shopping Options') ?></strong>
+                            <dl class="filter-options"
+                                id="narrow-by-list"
+                                data-role="content"
+                                data-mage-init='{"accordion":{
+                                "openedState": "active",
+                                "collapsible": true,
+                                "active": <?= json_encode($block->getExpandedFilters());?>,
+                                "multipleCollapsible": true
+                                }}'>
 
-                        <? $wrapOptions = true; endif; ?>
+                            <? $wrapOptions = true; endif; ?>
 
-                        <? if ($filter->getItemsCount()): ?>
-                            <div data-role="collapsible" class="filter-options-item <?= $block->escapeHtml($block->getItemClass()) ?>"
-                                 style="<?= $block->escapeHtml($block->getItemWidthStyle()) ?>">
-                                <dt data-role="title" role="heading" aria-level="3" class="filter-options-title"><?= $block->escapeHtml(__($filter->getName())) ?></dt>
-                                <dd data-role="content" class="filter-options-content"><?= $block->getRenderBlock()->render($filter); ?></dd>
-                            </div>
-                        <? endif; ?>
+                            <? if ($filter->getItemsCount()): ?>
+                                <div data-role="collapsible" class="filter-options-item <?= $block->escapeHtml($block->getItemClass()) ?>"
+                                     style="<?= $block->escapeHtml($block->getItemWidthStyle()) ?>">
+                                    <dt data-role="title" role="heading" aria-level="3" class="filter-options-title"><?= $block->escapeHtml(__($filter->getName())) ?></dt>
+                                    <dd data-role="content" class="filter-options-content"><?= $blockRender->render($filter); ?></dd>
+                                </div>
+                            <? endif; ?>
+                    <?php endif; ?>
                 <? endforeach; ?>
                 <? if ($wrapOptions): ?>
                     </dl>

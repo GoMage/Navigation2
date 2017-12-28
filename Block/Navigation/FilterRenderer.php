@@ -101,6 +101,15 @@ class FilterRenderer extends Template implements FilterRendererInterface
         return $this->navigationViewHelper;
     }
 
+    public function renderInCurrentCategory ($filter)
+    {
+        $categories = explode(',',$filter->getData('gomage_is_exclude_categories'));
+        if (in_array($this->_getCategory()->getId(), $categories)) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * @return mixed
      */
@@ -120,12 +129,9 @@ class FilterRenderer extends Template implements FilterRendererInterface
         }
 
         $this->setTemplate($filter->getGomageFilterTemplate());
-
         $filters = [];
         $key = -1;
-
         foreach ($filter->getItems() as $item) {
-
             $key++;
             $this->checkIsActive($item, $filter->getRequestVar());
             $item->setGomageUrl($this->urlHelper->getItemUrl($item));

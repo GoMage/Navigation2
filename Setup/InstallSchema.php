@@ -136,9 +136,9 @@ class InstallSchema implements InstallSchemaInterface
             'Tooltip Text'
         )->addColumn(
             'is_exclude_categories',
-            \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
-            null,
-            ['unsigned' => true, 'nullable' => false, 'default'  => '0'],
+            \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+            255,
+            [],
             'Exclude Categories'
         )->addForeignKey(
             $installer->getFkName(

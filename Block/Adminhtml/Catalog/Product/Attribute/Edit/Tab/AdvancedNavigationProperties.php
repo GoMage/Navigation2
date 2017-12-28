@@ -332,18 +332,15 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
                 'values' => $this->yesNoSource,
             ]
         );
-
         $fieldset->addField(
             'gomage_is_exclude_categories',
-            'select',
+            'text',
             [
                 'name'   => 'gomage_is_exclude_categories',
                 'label'  => __('Exclude Categories'),
                 'title'  => __('Exclude Categories'),
-                'values' => $this->yesNoSource,
             ]
         );
-
         $ajaxData = [];
         if (empty($attributeObject->getData('gomage_is_ajax'))) {
             $ajaxData['gomage_is_ajax'] = 1;
