@@ -19,6 +19,11 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
     protected $layer;
 
     /**
+     * @var \Magento\Framework\Pricing\PriceCurrencyInterface
+     */
+    private $priceCurrency;
+
+    /**
      * @var \Magento\Catalog\Model\Layer\Filter\Dynamic\AlgorithmFactory
      */
     protected $algorithmFactory;
@@ -113,6 +118,7 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
         $this->render = $render;
         $this->request = $request;
         $this->filterTemplates = $filterTemplates;
+        $this->priceCurrency = $priceCurrency;
         $this->dataHelper = $dataHelper;
         $this->urlHelper = $urlHelper;
     }
@@ -163,7 +169,6 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
         if ($value = $this->request->getParam($this->getRequestVar())) {
             return str_replace('-', ';', $value);
         }
-
         return $this->getMinBasePrice() . ';' . $this->getMaxBasePrice();
     }
 
@@ -239,6 +244,25 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
         }
 
         return true;
+    }
+
+    /**
+     * Prepare text of range label
+     *
+     * @param float|string $fromPrice
+     * @param float|string $toPrice
+     * @return float|\Magento\Framework\Phrase
+     */
+    protected function _renderRangeLabel($fromPrice, $toPrice)
+    {
+        $formattedFromPrice = $this->priceCurrency->format($fromPrice);
+        if ($toPrice === '') {
+            return __('%1 and above', $formattedFromPrice);
+        } elseif ($fromPrice == $toPrice && $this->dataProvider->getOnePriceIntervalValue()) {
+            return $formattedFromPrice;
+        } else {
+            return __('%1 - %2', $formattedFromPrice, $this->priceCurrency->format($toPrice));
+        }
     }
 
     /**

@@ -52,6 +52,7 @@ $priceValues = explode(';', $filter->getSingleValue());
                     <div class="from-wrapper">
                         <label>
                             <input class="price-from"
+                                   style="display: none"
                                    <? if(!$filter->getGomageIsShowFilterButton()):?>
                                        data-role="navigation-filter"
                                        data-type="input-price"
@@ -61,11 +62,12 @@ $priceValues = explode(';', $filter->getSingleValue());
                         </label>
                     </div>
                     <div class="to-text-wrapper">
-                        <span><?= __('to')?></span>
+                        <span style="display: none" class="to_slider_or_input"><?= __('to')?></span>
                     </div>
                     <div class="to-wrapper">
                         <label>
                             <input class="price-to"
+                                   style="display: none";
                                    <? if(!$filter->getGomageIsShowFilterButton()):?>
                                        data-role="navigation-filter"
                                        data-type="input-price"
