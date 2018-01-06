@@ -9,6 +9,9 @@
         <css src="GoMage_Navigation::css/gomage-navigation.css" />
     </head>
     <body>
+        <referenceBlock name="head.additional">
+            <block class="Magento\Framework\View\Element\Template" name="go.mage.style" template="GoMage_Navigation::layer/style.phtml"/>
+        </referenceBlock>
     <referenceContainer name="sidebar.main" >
         <block class="GoMage\Navigation\Block\Categories" name="gomage.categories" before="-"/>
         <block class="GoMage\Navigation\Block\Navigation" name="catalog.leftnav" after="gomage.categories">
