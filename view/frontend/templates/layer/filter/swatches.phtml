@@ -11,13 +11,13 @@ $swatchData = $block->getSwatch()->setSwatchFilter($filter)->getSwatchData();
 $swatchData = $block->prepareSwatchesData($swatchData, $filterItems);
 $optionsLimit = ($filter->getGomageVisibleOptions()) ? $filter->getGomageVisibleOptions() : false;
 $helperImageSwatch = $this->helper('GoMage\Navigation\Helper\ImageSwatchHelper');
-
+$helperData = $this->helper('GoMage\Navigation\Helper\Data');
 $cnt = 0;
 ?>
 
 <div class="swatch-attribute swatch-layered <?=$block->escapeHtml($swatchData['attribute_code']) ?>"
      attribute-code="<?=$block->escapeHtml($swatchData['attribute_code']) ?>" attribute-id="<?=$block->escapeHtml($swatchData['attribute_id']) ?>">
-    <div class="swatch-attribute-options clearfix">
+    <div class="swatch-attribute-options clearfix <?php echo $helperData->getOptionsAlignment((int)$filter->getGomageOptionsAlignment()); ?>">
         <?=$block->getTooltip($filter)->toHtml()?>
         <? foreach ($swatchData['options'] as $option => $data): ?>
             <?

@@ -644,3 +644,26 @@ a.gan_link_more_less{
 .gan_link_more_less{
   display: none;
 }
+.gan-align-horizontally li,
+.gan-align-horizontally .swatch-option, .gan-align-horizontally .swatch-option {
+  display:inline;
+  padding-right:5px;
+  padding-bottom:3px;
+}
+.gan-align-default li,
+.gan-align-default a, .gan-align-default .text_gan_swatch_button {
+  display:block;
+  padding-bottom:5px;
+  padding-bottom:3px;
+  overflow: hidden;
+}
+.gan-align-default .swatch-option, .gan-align-default a {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.gan-align-2-columns li, .gan-align-2-columns a ,.gan-align-2-columns .text_gan_swatch_button {
+  width: 45%;
+  padding-bottom:3px;
+  display: inline-block;
+}

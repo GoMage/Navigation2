@@ -7,6 +7,9 @@ use Magento\Framework\App\Helper\Context;
 
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
+    const ALIGNMENT_VERTICAL = 0;
+    const ALIGNMENT_HORIZONTAL = 1;
+    const ALIGNMENT_2COLUMN = 2;
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
@@ -184,6 +187,16 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CONFIG_FIELD_SHOW_APPLIED_VALUES);
     }
 
+    public function getOptionsAlignment($alignmentOption)
+    {
+        if (self::ALIGNMENT_2COLUMN === $alignmentOption) {
+            return 'gan-align-2-columns';
+        } elseif (self::ALIGNMENT_HORIZONTAL === $alignmentOption) {
+            return 'gan-align-horizontally';
+        } else  {
+            return 'gan-align-default';
+        }
+    }
     public function getPagerTheme()
     {
         $isAjax = $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP

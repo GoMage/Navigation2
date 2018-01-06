@@ -7,13 +7,14 @@
 $filter = reset($filterItems)->getFilter();
 $optionsLimit = ($filter->getGomageVisibleOptions()) ? $filter->getGomageVisibleOptions() : false;
 $cnt = 0;
-
+$helperData = $this->helper('GoMage\Navigation\Helper\Data');
 ?>
 <div class="swatch-attribute">
-    <div class="swatch-attribute-options clearfix">
+    <div class="swatch-attribute-options clearfix <?php echo $helperData->getOptionsAlignment((int)$filter->getGomageOptionsAlignment()); ?>">
         <?=$block->getTooltip($filter)->toHtml()?>
         <? foreach ($filterItems as $item): ?>
         <? if ($item->getCount() > 0): ?>
+        <div class="text_gan_swatch_button">
             <div class="swatch-option text <?php if($item->getIsActive()): ?> selected <?php endif; ?> <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?>"  style="background: background-size: initial; <?php if((!$item->isShowAppliedValues())): ?>display: none;<?php endif; ?>
             <?= $block->escapeHtml(!empty($filter->getGomageImageWidth()) ? 'width:' . $filter->getGomageImageWidth() . 'px;' : '');?>
             <?= $block->escapeHtml(!empty($filter->getGomageImageHeight()) ? 'height:' . $filter->getGomageImageWidth() . 'px;' : '');?>"
@@ -35,6 +36,7 @@ $cnt = 0;
                 <? endif;?>>
                 <?= html_entity_decode($block->escapeHtml($item->getLabel(), ['span'])) ?>
             </div>
+        </div>
             <?$cnt++;?>
         <?php endif; ?>
         <? endforeach ?>
