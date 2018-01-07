@@ -129,7 +129,7 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
      */
     public function apply(\Magento\Framework\App\RequestInterface $request)
     {
-        parent::apply($request);
+        $this->filtersPrepare($request);
         if (!$this->isShowAppliedValues()) {
             $this->_items = [];
         }
@@ -271,5 +271,41 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
     public function getRemoveUrl()
     {
         return $this->urlHelper->getFilterRemoveUrl($this);
+    }
+
+    public function filtersPrepare (\Magento\Framework\App\RequestInterface $request) {
+
+        /**
+         * Filter must be string: $fromPrice-$toPrice
+         */
+        $filter = $request->getParam($this->getRequestVar());
+        if (!$filter || is_array($filter)) {
+            return $this;
+        }
+
+        $filterParams = explode(',', $filter);
+        $filter = $this->dataProvider->validateFilter($filterParams[0]);
+        if (!$filter) {
+            return $this;
+        }
+
+        $this->dataProvider->setInterval($filter);
+        $priorFilters = $this->dataProvider->getPriorFilters($filterParams);
+        if ($priorFilters) {
+            $this->dataProvider->setPriorIntervals($priorFilters);
+        }
+
+        list($from, $to) = $filter;
+
+        $this->getLayer()->getProductCollection()->addFieldToFilter(
+            'price',
+            ['from' => $from, 'to' =>  empty($to) || $from == $to ? $to : $to]
+        );
+
+        $this->getLayer()->getState()->addFilter(
+            $this->_createItem($this->_renderRangeLabel(empty($from) ? 0 : $from, $to), $filter)
+        );
+
+        return $this;
     }
 }
