@@ -19,6 +19,7 @@ use Magento\Catalog\Model\Entity\Attribute;
 use Magento\Eav\Block\Adminhtml\Attribute\PropertyLocker;
 use Magento\Framework\Data\FormFactory;
 use Magento\Framework\Registry;
+use GoMage\Navigation\Model\Config\Source\Navigation as SourceNavigation;
 
 class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Generic implements
     \Magento\Backend\Block\Widget\Tab\TabInterface
@@ -137,7 +138,6 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
      */
     protected function _prepareForm()
     {
-
         $attributeObject = $this->_coreRegistry->registry('entity_attribute');
 
         /** @var \Magento\Framework\Data\Form $form */
@@ -162,7 +162,7 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
             }
         }
 
-        $fieldset->addField(
+        $parentField = $fieldset->addField(
             'gomage_filter_type',
             'select',
             [
@@ -239,7 +239,7 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
             ]
         );
 
-        $fieldset->addField(
+        $childWidth = $fieldset->addField(
             'gomage_image_width',
             'text',
             [
@@ -250,7 +250,7 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
             ]
         );
 
-        $fieldset->addField(
+        $childHeight = $fieldset->addField(
             'gomage_image_height',
             'text',
             [
@@ -345,7 +345,29 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
         if (empty($attributeObject->getData('gomage_is_ajax'))) {
             $ajaxData['gomage_is_ajax'] = 1;
         }
-
+        $this->setChild(
+            'form_after',
+            $this->getLayout()->createBlock(
+                'Magento\Backend\Block\Widget\Form\Element\Dependence'
+            )->addFieldMap(
+                $parentField->getHtmlId(),
+                $parentField->getName()
+            )->addFieldMap(
+                $childWidth->getHtmlId(),
+                $childWidth->getName()
+            )->addFieldMap(
+                $childHeight->getHtmlId(),
+                $childHeight->getName()
+            )->addFieldDependence(
+                $childWidth->getName(),
+                $parentField->getName(),
+                (string) SourceNavigation::COLOR_PICKER
+            )->addFieldDependence(
+                $childHeight->getName(),
+                $parentField->getName(),
+                (string) SourceNavigation::COLOR_PICKER
+            )
+        );
         $this->setForm($form);
         $form->setValues($attributeObject->getData() + $tooltipText + $ajaxData);
 
