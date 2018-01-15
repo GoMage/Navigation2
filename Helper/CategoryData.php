@@ -187,8 +187,9 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
     public function isShowCategoryInShopBy()
     {
 
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
-            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_SHOP_BY);
+        return (int) $this->isShowCategories() &&
+               $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+               . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+               . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_SHOP_BY);
     }
 }
