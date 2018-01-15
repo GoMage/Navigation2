@@ -301,12 +301,6 @@ class Categories extends \Magento\Framework\View\Element\Template
             return;
         }
 
-        if ($this->getCategoriesDataHelper()->isShowCategoryInShopBy()) {
-            $this->getLayout()->reorderChild('sidebar.main', 'gomage.categories', 0);
-            $this->canShowCategories = true;
-            return;
-        }
-
         if ($this->getCategoriesDataHelper()->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
             $this->getPageLayout() == '1column') {
             $this->moveBlock('main');
@@ -361,6 +355,11 @@ class Categories extends \Magento\Framework\View\Element\Template
         if ($this->getCategoriesDataHelper()->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
             $this->getPageLayout() == '3columns') {
             $this->moveBlock('main');
+            $this->canShowCategories = true;
+            return;
+        }
+        if ($this->getCategoriesDataHelper()->isShowCategoryInShopBy()) {
+            $this->getLayout()->reorderChild('sidebar.main', 'gomage.categories', 0);
             $this->canShowCategories = true;
             return;
         }
