@@ -41,7 +41,6 @@ define([
         },
 
         _create: function () {
-
             if (!this.options.baseUrl) {
                 this.options.baseUrl = location.protocol + '//' + location.host + location.pathname;
             }
@@ -50,7 +49,7 @@ define([
                 'show.navigation': $.proxy(this._initFilters, this)
             });
             if (this.options.ajaxAutoload == true) {
-                if(typeof  window.autoAjaxScroll == 'undefined'){
+                if(typeof  window.autoAjaxScroll == 'undefined' && window.autoAjaxScroll){
                     $(window).off('scroll');
                     $(window).on('scroll', {}, $.proxy(this._bindAjaxAutoload, this));
                     window.autoAjaxScroll = true;
@@ -403,7 +402,13 @@ define([
                     $(this.options.breadcrumbsContainer).trigger('contentUpdated');
                     $(this.options.authentication).trigger('bindTrigger');
                     this.setNavigationUrl(params);
-                    $(window).on('scroll', {}, $.proxy(this._bindAjaxAutoload, this));
+                    if (this.options.ajaxAutoload == true) {
+                        if(typeof  window.autoAjaxScroll == 'undefined' && window.autoAjaxScroll){
+                            $(window).off('scroll');
+                            $(window).on('scroll', {}, $.proxy(this._bindAjaxAutoload, this));
+                            window.autoAjaxScroll = true;
+                        }
+                    }
                 }.bind(this)
             });
 
