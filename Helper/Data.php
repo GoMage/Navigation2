@@ -55,7 +55,24 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
             . SystemConfigInterface::SYSTEM_CONFIG_FIELD_ENABLE);
     }
+    /**
+     * @param $item
+     * @param $requestVar
+     */
+    public function checkIsActive($item, $requestVar)
+    {
+        $params = $this->request->getParam($requestVar);
+        $params = explode('_', $params);
 
+        $label = mb_strtolower(str_replace(' ', '+', htmlentities($item->getLabel())));
+        if ($this->isUseFriendlyUrls() && in_array($label, $params)) {
+            $item->setIsActive(true);
+        }
+
+        if (!$this->isUseFriendlyUrls() && in_array($item->getValue(), $params)) {
+            $item->setIsActive(true);
+        }
+    }
     /**
      * @return mixed
      */

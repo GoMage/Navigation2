@@ -8,7 +8,7 @@
  *
  * @var $block \GoMage\Navigation\Block\Navigation
  */
-
+$helperData = $this->helper('GoMage\Navigation\Helper\Data');
 ?>
 
 <? if ($block->canShowBlock()): ?>
@@ -41,8 +41,8 @@
                 <? endif; ?>
             <? endif;?>
             <? $wrapOptions = false; ?>
-
                 <? foreach ($block->getFilters() as $filter): ?>
+            <?php $countApplied = 0; ?>
                     <?php $blockRender = $block->getRenderBlock(); ?>
                     <?php if ($blockRender->renderInCurrentCategory($filter)) : ?>
                         <? if (!$wrapOptions): ?>
@@ -60,11 +60,19 @@
                             <? $wrapOptions = true; endif; ?>
 
                             <? if ($filter->getItemsCount()): ?>
-                                <div data-role="collapsible" class="filter-options-item <?= $block->escapeHtml($block->getItemClass()) ?>"
-                                     style="<?= $block->escapeHtml($block->getItemWidthStyle()) ?>">
-                                    <dt data-role="title" role="heading" aria-level="3" class="filter-options-title"><?= $block->escapeHtml(__($filter->getName())) ?></dt>
-                                    <dd data-role="content" class="filter-options-content"><?= $blockRender->render($filter); ?></dd>
-                                </div>
+                                <?php foreach ($filter->getItems() as $item): ?>
+                                    <?php $helperData->checkIsActive($item, $filter->getRequestVar()) ?>
+                                    <?php if($item->isShowAppliedValues()): ?>
+                                        <?php $countApplied ++;  ?>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                                <?php if($countApplied): ?>
+                                    <div data-role="collapsible" class="filter-options-item <?= $block->escapeHtml($block->getItemClass()) ?>"
+                                         style="<?= $block->escapeHtml($block->getItemWidthStyle()) ?>">
+                                        <dt data-role="title" role="heading" aria-level="3" class="filter-options-title"><?= $block->escapeHtml(__($filter->getName())) ?></dt>
+                                        <dd data-role="content" class="filter-options-content"><?= $blockRender->render($filter); ?></dd>
+                                    </div>
+                               <?php endif; ?>
                             <? endif; ?>
                     <?php endif; ?>
                 <? endforeach; ?>
