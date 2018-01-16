@@ -41,6 +41,7 @@ define([
         },
 
         _create: function () {
+
             if (!this.options.baseUrl) {
                 this.options.baseUrl = location.protocol + '//' + location.host + location.pathname;
             }
@@ -331,7 +332,7 @@ define([
                 params.set('gan_ajax_filter', 1);
                 params.set('price', value.replace(';', '-'));
                 return this._ajaxFilter(this.options.baseUrl, params);
-           } else {
+            } else {
                 params.set('price', value.replace(';', '-'));
                 return $.mage.redirect(this.options.baseUrl + '?' + params.toUrlParams());
             }
@@ -403,11 +404,9 @@ define([
                     $(this.options.authentication).trigger('bindTrigger');
                     this.setNavigationUrl(params);
                     if (this.options.ajaxAutoload == true) {
-                        if(typeof  window.autoAjaxScroll == 'undefined' && window.autoAjaxScroll){
-                            $(window).off('scroll');
-                            $(window).on('scroll', {}, $.proxy(this._bindAjaxAutoload, this));
-                            window.autoAjaxScroll = true;
-                        }
+                        $(window).off('scroll');
+                        $(window).on('scroll', {}, $.proxy(this._bindAjaxAutoload, this));
+                        window.autoAjaxScroll = true;
                     }
                 }.bind(this)
             });
