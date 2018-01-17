@@ -37,11 +37,13 @@ define([
             moreButton: '#gan-more-button',
             moreLink: '.gan_link_more',
             moreLinkLess: '.gan_link_more_less',
-            linkMoreElement: '.gan_link-more-element'
+            linkMoreElement: '.gan_link-more-element',
+            ganToolbarAmount: '.gan-toolbar-amount',
+            amountToolbarNumber: 0,
+            ganLastNumber: '.gan-last-number'
         },
 
         _create: function () {
-
             if (!this.options.baseUrl) {
                 this.options.baseUrl = location.protocol + '//' + location.host + location.pathname;
             }
@@ -50,7 +52,7 @@ define([
                 'show.navigation': $.proxy(this._initFilters, this)
             });
             if (this.options.ajaxAutoload == true) {
-                if(typeof  window.autoAjaxScroll == 'undefined' && window.autoAjaxScroll){
+                if(typeof  window.autoAjaxScroll == 'undefined' && !window.autoAjaxScroll){
                     $(window).off('scroll');
                     $(window).on('scroll', {}, $.proxy(this._bindAjaxAutoload, this));
                     window.autoAjaxScroll = true;
@@ -444,7 +446,6 @@ define([
                 return ;
 
             this.options.showMore = true;
-
             $.ajax({
                 url: url,
                 type: 'get',
@@ -461,6 +462,23 @@ define([
                     $(this.options.divPages).html(toolbar);
                     $(this.options.productListContainer).append(newProducts);
                     this.options.showMore = false;
+                    var lastNumber = parseInt($(this.options.ganToolbarAmount).attr('data-last-number'));
+                    var totalNumber = parseInt($(this.options.ganToolbarAmount).attr('data-total-number'));
+                    var page =  parseInt( $(this.options.divPagesNextItem).attr('data-value'));
+                    if( !page ) {
+                        page =  parseInt( $('.gan-last-page a:eq(1)').attr('data-value'));
+                        page = page +1;
+                    }
+                    if (page) {
+                        page = page -1;
+                        page = parseInt(page);
+                        page = page;
+                        if(totalNumber/(lastNumber*page) > 1 ) {
+                            $('.gan-last-number').text(lastNumber*page);
+                        } else {
+                            $('.gan-last-number').text(totalNumber);
+                        }
+                    }
 
                     var url = $(this.options.divPagesNextItem).attr('href');
                     if (typeof(url) == 'undefined') {

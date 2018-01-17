@@ -8,6 +8,7 @@ $helper = $this->helper('GoMage\Navigation\Helper\Data');
 $moreButton = $this->getLayout()->createBlock('GoMage\Navigation\Block\Product\ProductList\More');
 
 ?>
+
 <?php if ($block->getCollection()->getSize()): ?>
 
     <?php if ($block->getUseContainer()): ?>
@@ -138,6 +139,11 @@ $moreButton = $this->getLayout()->createBlock('GoMage\Navigation\Block\Product\P
                        data-active="">
                         <span class="label"><?= __('Page') ?></span>
                         <span><?= $block->escapeHtml($text ? $text : __('Next')) ?></span>
+                    </a>
+                </li>
+             <?php else: ?>
+                <li class="gan-last-page">
+                    <a class="<?= $text ? 'link ' : 'action '?> next" data-value="<?=$block->escapeHtml($block->getCollection()->getCurPage(+1)) ?>"
                     </a>
                 </li>
             <?php endif;?>
