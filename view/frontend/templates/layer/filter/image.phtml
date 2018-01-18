@@ -1,0 +1,82 @@
+<?
+/**
+ *
+ * @var $block \Gomage\Navigation\Block\Navigation\FilterRenderer
+ */
+
+$filter = reset($filterItems)->getFilter();
+$optionsLimit = ($filter->getGomageVisibleOptions()) ? $filter->getGomageVisibleOptions() : false;
+$cnt = 0;
+$helperData = $this->helper('GoMage\Navigation\Helper\Data');
+$categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
+?>
+<ol class="items gan-filter gan-filter-default   <?php echo $helperData->getOptionsAlignment((int)$filter->getGomageOptionsAlignment()); ?>
+<? if($filter->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK) echo ' gan-filter-in-block'; ?>
+<? if($filter->getGomageIsCheckbox()):?> gan-filter-checkbox<?endif;?>"
+    <? if($filter->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK && $filter->getGomageMaxBlockHeight()): ?>
+        style="max-height:<?= $block->escapeHtml($filter->getGomageMaxBlockHeight()); ?>px;"
+    <?endif;?>>
+    <?=$block->getTooltip($filter)->toHtml()?>
+    <?$optionsLimit = ($filter->getGomageVisibleOptions()) ? $filter->getGomageVisibleOptions() : false;
+    $cnt = 0;
+    ?>
+    <? foreach ($filterItems as $item): ?>
+        <li class="item <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?>
+            <? if ($item->getCount() > 0 ): ?>
+                <a <? if(!$item->getIsActive()):?> href="<?= $block->escapeUrl($item->getGomageUrl()); ?> <?endif;?>"
+            <? if($item->getIsActive()):?>
+                class="active"
+            <?endif;?>
+            data-role="navigation-filter"
+            data-url="<? if(!$item->getIsActive()):?><?= $block->escapeUrl($item->getGomageUrl()) ?> <?endif;?>"
+            data-value="<?= $block->escapeHtml($item->getGomageValue()) ?>"
+            data-param="<?= $block->escapeHtml($filter->getRequestVar()) ?>"
+            <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+                data-ajax="1"
+            <?else:?>
+                data-ajax="0"
+            <?endif;?>
+            data-type="<?= (int) $filter->getGomageFilterType(); ?>"
+            <? if($item->getIsActive()):?>
+                data-active="1"
+            <? endif;?> <?php if((!$item->isShowAppliedValues())): ?>style="display: none"<?php endif; ?>>
+            <?php if($filter->getImageCategory($item->getValue())): ?>
+                <img src="<?= $filter->getImageCategory($item->getValue()) ?>"
+                     width="<?=($categoriesHelper->getCategoriesImageWidth()) ? $block->escapeHtml($categoriesHelper->getCategoriesImageWidth()).'px' : '';?>"
+                     height="<?=($categoriesHelper->getCategoriesImageHeight()) ? $block->escapeHtml($categoriesHelper->getCategoriesImageHeight()).'px' : '';?>"
+                >
+            <?php endif; ?>
+            <span class="filter-label-wrap">
+                        <span class="filter-label-text"><?= html_entity_decode($block->escapeHtml($item->getLabel(), ['span'])) ?></span>
+                <? if ($block->getHelper()->isShowValueQty()): ?>
+                    <span class="count"><?= (int) $item->getCount() ?><span class="filter-count-label">
+                            <? if ($item->getCount() == 1): ?><?= __('item') ?><? else: ?><?= __('items') ?><? endif; ?></span></span>
+                <? endif; ?>
+                    </span>
+            </a>
+        <? endif; ?>
+        </li>
+        <?$cnt++;?>
+    <? endforeach ?>
+    <?if($filter->isActive() && $filter->getGomageIsReset()):?>
+        <a
+                data-role="navigation-filter"
+                data-value=""
+                data-url="<?= $block->escapeUrl($filter->getRemoveUrl()) ?>"
+                data-param="<?=$block->escapeHtml($filter->getRequestVar()) ?>"
+            <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+                data-ajax="1"
+            <?else:?>
+                data-ajax="0"
+            <?endif;?>
+                data-type="remove-item"
+                data-active="1"
+                href="#">
+            <?= __('Reset'); ?>
+        </a>
+    <?endif;?>
+    <?php if($optionsLimit): ?>
+        <li class="gan_link_more"><a href="javascript:void(0)"><?=__('More') ?>&#9660;</a></li>
+        <li class="gan_link_more_less"><a href="javascript:void(0)"><?=__('Less') ?>&#9650;</a></li>
+    <?php endif; ?>
+</ol>

@@ -27,6 +27,11 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
     protected $helper;
 
     /**
+     * @var array
+     */
+    protected $imageCategories = [];
+
+    /**
      * @var \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory
      */
     protected $categoryCollectionFactory;
@@ -120,13 +125,14 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
         $optionsFacetedData = $productCollection->getFacetedData('category');
         $category = $this->coreRegistry->registry('current_category');
         $categories = $category->getChildrenCategories();
-
         foreach ($categories as $category) {
 
             $count = (!empty($optionsFacetedData[$category->getId()]['count'])) ? $optionsFacetedData[$category->getId()]['count'] : 0;
 
             if ($category->getIsActive() && $count > 0)
             {
+                $category->load($category->getId());
+                $this->imageCategories[$category->getId()] = $category->getImageUrl();
                 $this->itemDataBuilder->addItemData(
                     $category->getName(),
                     $category->getId(),
@@ -138,6 +144,10 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
         return $this->itemDataBuilder->build();
     }
 
+    public function getImageCategory($id) {
+        $id = (int) $id;
+        return $this->imageCategories[$id];
+    }
     protected function getFormattedFilters()
     {
         $filters = explode('_', $this->request->getParam($this->getRequestVar()));
