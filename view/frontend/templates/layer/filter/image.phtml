@@ -47,7 +47,7 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
                 >
             <?php endif; ?>
 
-            <? if($block->getCategoriesDataHelper()->isShowImageName()): ?>
+            <? if($categoriesHelper->isShowImageName()): ?>
                 <span class="filter-label-wrap">
                             <span class="filter-label-text"><?= html_entity_decode($block->escapeHtml($item->getLabel(), ['span'])) ?></span>
                     <? if ($block->getHelper()->isShowValueQty()): ?>
