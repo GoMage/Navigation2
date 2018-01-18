@@ -46,13 +46,16 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
                      height="<?=($categoriesHelper->getCategoriesImageHeight()) ? $block->escapeHtml($categoriesHelper->getCategoriesImageHeight()).'px' : '';?>"
                 >
             <?php endif; ?>
-            <span class="filter-label-wrap">
-                        <span class="filter-label-text"><?= html_entity_decode($block->escapeHtml($item->getLabel(), ['span'])) ?></span>
-                <? if ($block->getHelper()->isShowValueQty()): ?>
-                    <span class="count"><?= (int) $item->getCount() ?><span class="filter-count-label">
-                            <? if ($item->getCount() == 1): ?><?= __('item') ?><? else: ?><?= __('items') ?><? endif; ?></span></span>
-                <? endif; ?>
-                    </span>
+
+            <? if($block->getCategoriesDataHelper()->isShowImageName()): ?>
+                <span class="filter-label-wrap">
+                            <span class="filter-label-text"><?= html_entity_decode($block->escapeHtml($item->getLabel(), ['span'])) ?></span>
+                    <? if ($block->getHelper()->isShowValueQty()): ?>
+                        <span class="count"><?= (int) $item->getCount() ?><span class="filter-count-label">
+                                <? if ($item->getCount() == 1): ?><?= __('item') ?><? else: ?><?= __('items') ?><? endif; ?></span></span>
+                    <? endif; ?>
+                </span>
+             <?php endif; ?>
             </a>
         <? endif; ?>
         </li>
