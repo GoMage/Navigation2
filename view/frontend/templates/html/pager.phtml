@@ -141,11 +141,6 @@ $moreButton = $this->getLayout()->createBlock('GoMage\Navigation\Block\Product\P
                         <span><?= $block->escapeHtml($text ? $text : __('Next')) ?></span>
                     </a>
                 </li>
-             <?php else: ?>
-                <li class="gan-last-page">
-                    <a class="<?= $text ? 'link ' : 'action '?> next" data-value="<?=$block->escapeHtml($block->getCollection()->getCurPage(+1)) ?>"
-                    </a>
-                </li>
             <?php endif;?>
             </ul>
         </div>
