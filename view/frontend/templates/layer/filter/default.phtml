@@ -14,11 +14,12 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
         style="max-height:<?= $block->escapeHtml($filter->getGomageMaxBlockHeight()); ?>px;"
     <?endif;?>>
     <?=$block->getTooltip($filter)->toHtml()?>
-    <?$optionsLimit = ($filter->getGomageVisibleOptions()) ? $filter->getGomageVisibleOptions() : false;
+    <?$optionsLimit = (int)($filter->getGomageVisibleOptions()) ? $filter->getGomageVisibleOptions() : false;
       $cnt = 0;
     ?>
     <? foreach ($filterItems as $item): ?>
-        <li class="item <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?>
+        <li class="item <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?>" style="<?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'display:none': '' ?>">
+
             <? if ($item->getCount() > 0 ): ?>
                 <a <? if(!$item->getIsActive()):?> href="<?= $block->escapeUrl($item->getGomageUrl()); ?> <?endif;?>"
                     <? if($item->getIsActive()):?>
@@ -67,7 +68,7 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
         </a>
     <?endif;?>
     <?php if($optionsLimit): ?>
-        <li class="gan_link_more"><a href="javascript:void(0)"><?=__('More') ?>&#9660;</a></li>
-        <li class="gan_link_more_less"><a href="javascript:void(0)"><?=__('Less') ?>&#9650;</a></li>
+        <a class="gan_link_more"><?=__('More') ?>&#9660;</a>
+        <a class="gan_link_more_less" style="display: none"><?=__('Less') ?>&#9650;</a>
     <?php endif; ?>
 </ol>

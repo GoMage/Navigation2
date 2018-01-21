@@ -172,18 +172,20 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
 
         if ($this->getCategoryDataHelper()->isShowCategoryInShopBy() &&
             $this->getCategoryDataHelper()->isCategoriesShowCollapsed()) {
-            $cnt = 1;
+            $cnt ++;
         }
 
         foreach ($this->getFilters() as $filter) {
+           if(get_class($filter) == 'GoMage\Navigation\Model\Catalog\Layer\Filter\Category') {
+               continue;
+           }
             if ($filter->getItemsCount()) {
-                if (!$filter->getGomageIsCollapsed()) {
+                if (!(bool) $filter->getGomageIsCollapsed()) {
                     $data[] = $cnt;
                 }
                 $cnt++;
             }
         }
-
         return $data;
     }
 
