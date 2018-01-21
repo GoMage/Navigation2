@@ -162,7 +162,7 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
 
         $categoriesName = [];
         foreach ($collection as $category) {
-            $categoriesName[$this->formatCategoryName($category->getName())] = $category->getId();
+            $categoriesName[html_entity_decode($this->formatCategoryName($category->getName()))] = $category->getId();
         }
 
         $params = [];
