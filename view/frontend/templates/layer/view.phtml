@@ -22,6 +22,7 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                         "tooltipOpenOnMouseOver": "<?= $block->escapeHtml($block->getNavigationViewHelper()->isNavigationViewTooltipShowOnMouseOver()); ?>",
                         "tooltipCloseButton": "<?= $block->escapeHtml($block->getNavigationViewHelper()->isNavigationViewTooltipHideOnCloseButton()); ?>",
                         "tooltipCloseOnMouseOut": "<?= $block->escapeHtml($block->getNavigationViewHelper()->isNavigationViewTooltipHideOnMouseOut()); ?>",
+                        "is_use_friendly": "<?= $block->getDataHelper()->isUseFriendlyUrls() ?>",
                         "ajaxAutoload": "<?= $block->escapeHtml($block->getDataHelper()->isUseAutoScrolling()); ?>"
                         }}' style="background-color: <?=$block->getNavigationViewHelper()->getNavigationViewBlockBackgroundColor()?>; ">
         <div class="block-title"><strong><?= __('Shop By') ?></strong></div>

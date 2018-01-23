@@ -240,13 +240,13 @@ define([
             if(!url)
                 url = event.currentTarget.attributes['data-url'].nodeValue;
 
-
+            var catCount = event.currentTarget.attributes['data-url'].nodeValue;
             var params = this._getParams();
             params.clear();
             params.set('gan_ajax_cat', 1);
 
             if (ajax) {
-                return this._ajaxCategory(url, params);
+                return this._ajaxCategory(url, params, catCount);
             } else {
                 return $.mage.redirect(url);
             }
@@ -415,7 +415,7 @@ define([
 
         },
 
-        _ajaxCategory: function (url, params, successCallback) {
+        _ajaxCategory: function (url, params, catCount, successCallback) {
             $.ajax({
                 url: url,
                 type: 'get',
@@ -434,6 +434,7 @@ define([
                     $(this.options.mainContainer).trigger('contentUpdated');
                     $(this.options.breadcrumbsContainer).trigger('contentUpdated');
                     $(this.options.authentication).trigger('bindTrigger');
+                    $('.gan-last-number').text('catCount');
                     this.setCategoryUrl(url);
 
                 }.bind(this)
@@ -537,12 +538,13 @@ define([
         },
 
         setNavigationUrl: function (params) {
-
+            var friendleuse = '';
             if (this.options.addFilterResultsToUrl == 0)
                 return ;
 
             params.remove('gan_ajax_filter');
-            window.history.pushState(null, '', this.options.baseUrl + '?' + params.toUrlParams());
+            friendleuse = (this.options.is_use_friendly === '1') ? '?' : '#'
+            window.history.pushState(null, '', this.options.baseUrl + friendleuse + params.toUrlParams());
         },
 
         setCategoryUrl: function (url) {
