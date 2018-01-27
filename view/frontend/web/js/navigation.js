@@ -193,8 +193,9 @@ define([
 
             if (typeof($(this.options.divPagesEq).offset()) == 'undefined')
                 return ;
-
-            if ($(window).scrollTop() >= $('.product-item').last().offset().top - 100 ) {
+            console.log($(window).scrollTop());
+            console.log($('.product-item').last().offset().top);
+            if ($(window).scrollTop() >= $('.limiter-options').last().offset().top - 800 ) {
 
                 var url = $(this.options.divPagesNextItem).attr('href');
                 if (typeof(url) == 'undefined')
@@ -479,6 +480,8 @@ define([
                         } else {
                             $('.gan-last-number').text(totalNumber);
                         }
+                    } else {
+                        $('.gan-last-number').text(totalNumber);
                     }
 
                     var url = $(this.options.divPagesNextItem).attr('href');
