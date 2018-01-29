@@ -488,7 +488,9 @@ define([
                     if (typeof(url) == 'undefined') {
                         $(this.options.moreButton).hide();
                     }
-
+                    var element = $(this.options.filterControl)
+                    element.unbind();
+                    element.on('click', {element: element}, $.proxy(this._processFilter, this));
                     this.options.showMore = false;
 
                 }.bind(this)
