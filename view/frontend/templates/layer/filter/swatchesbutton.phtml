@@ -16,8 +16,6 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
         <? if ($item->getCount() > 0): ?>
         <div class="text_gan_swatch_button">
             <div class="swatch-option text <?php if($item->getIsActive()): ?> selected <?php endif; ?> <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?>"  style="background: background-size: initial; <?php if((!$item->isShowAppliedValues())): ?>display: none;<?php endif; ?>
-            <?= $block->escapeHtml(!empty($filter->getGomageImageWidth()) ? 'width:' . $filter->getGomageImageWidth() . 'px;' : '');?>
-            <?= $block->escapeHtml(!empty($filter->getGomageImageHeight()) ? 'height:' . $filter->getGomageImageWidth() . 'px;' : '');?>"
                 <? if($item->getIsActive()):?>
                     class="active"
                 <?endif;?>
