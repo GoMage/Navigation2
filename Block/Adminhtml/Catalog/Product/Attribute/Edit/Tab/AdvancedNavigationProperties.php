@@ -184,7 +184,7 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
             ]
         );
 
-        $fieldset->addField(
+        $blockHeigth = $fieldset->addField(
             'gomage_max_block_height',
             'text',
             [
@@ -194,8 +194,7 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
                 'class' => 'validate-digits'
             ]
         );
-
-        $fieldset->addField(
+            $fieldset->addField(
             'gomage_is_ajax',
             'select',
             [
@@ -358,10 +357,17 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
             )->addFieldMap(
                 $childHeight->getHtmlId(),
                 $childHeight->getName()
+            )->addFieldMap(
+                $blockHeigth->getHtmlId(),
+                $blockHeigth->getName()
             )->addFieldDependence(
                 $childWidth->getName(),
                 $parentField->getName(),
                 (string) SourceNavigation::COLOR_PICKER
+            )->addFieldDependence(
+                $blockHeigth->getName(),
+                $parentField->getName(),
+                (string) SourceNavigation::IN_BLOCK
             )->addFieldDependence(
                 $childHeight->getName(),
                 $parentField->getName(),

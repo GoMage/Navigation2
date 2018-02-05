@@ -65,13 +65,19 @@ class SetAdditionalAttributeData
         }
 
         foreach ($result as $filter) {
-
+            if(get_class($filter) == 'Magento\CatalogSearch\Model\Layer\Filter\Category') {
+                continue;
+            }
             if ($filter->getRequestVar() == 'cat' && empty($filter->getData('is_gomage_loaded'))) {
                 $this->setCategoryFilterData($filter);
                 continue;
             }
 
-            if (empty($filter->getAttributeModel()->getAttributeId()) || !empty($filter->getData('is_gomage_loaded'))) {
+            if(!$filter){
+                continue;
+            }
+
+            if (empty($filter->getAttributeModel()) && empty($filter->getAttributeModel()->getAttributeId()) || !empty($filter->getData('is_gomage_loaded'))) {
                 continue;
             }
 
