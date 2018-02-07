@@ -5,6 +5,11 @@
  * @var $block \Magento\Catalog\Block\Product\ProductList\Toolbar
  */
 use Magento\Catalog\Model\Product\ProductList\Toolbar;
+
+/**
+ * @var \GoMage\Navigation\Helper\Data $helper
+ */
+$helper = $this->helper('GoMage\Navigation\Helper\Data');
 ?>
 
 <?php if ($block->isEnabledViewSwitcher()): ?>
@@ -18,7 +23,7 @@ use Magento\Catalog\Model\Product\ProductList\Toolbar;
                 class="modes-mode active mode-<?= $block->escapeHtml(strtolower($_code)); ?>"
                     data-role="navigation-filter"
                     data-param="product_list_mode"
-                    data-ajax="1"
+                    <?php if($helper->isPaginationAjax()): ?>data-ajax="1" <?php endif; ?>
                     data-active="1"
                     data-value="<?= $block->escapeHtml(strtolower($_code)); ?>">
                 <span><?= $block->escapeHtml($_label) ?></span>
@@ -32,7 +37,7 @@ use Magento\Catalog\Model\Product\ProductList\Toolbar;
                data-role="navigation-filter"
                data-value="<?= $block->escapeHtml(strtolower($_code)); ?>"
                data-param="product_list_mode"
-               data-ajax="1"
+               <?php if($helper->isPaginationAjax()): ?>data-ajax="1" <?php endif; ?>
                data-active="">
                 <span><?= $block->escapeHtml($_label) ?></span>
             </a>

@@ -10,6 +10,11 @@
  * @version      Release: 4.9
  * @since        Class available since Release 3.0
  */
+
+/**
+ * @var \GoMage\Navigation\Helper\Data $helper
+ */
+$helper = $this->helper('GoMage\Navigation\Helper\Data');
 ?>
 <? if ($block->getMoreUrl()) : ?>
     <div class="gan-more-button" id="gan-more-button">
@@ -17,7 +22,7 @@
                 id="<?= $block->escapeHtml($block->getType()); ?>"
                 class="<?= $block->escapeHtml($block->getType()); ?>"
                 data-role="navigation-filter"
-                data-ajax="1"
+                <?php if($helper->isPaginationAjax()): ?>data-ajax="1" <?php endif; ?>
                 data-type="<?= $block->escapeHtml($block->getType()); ?>"
         ><span><?= __('Show more products') ?></span></button>
     </div>

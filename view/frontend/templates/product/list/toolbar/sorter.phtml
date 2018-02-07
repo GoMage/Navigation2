@@ -5,12 +5,17 @@
  * @var $block \Magento\Catalog\Block\Product\ProductList\Toolbar
  */
 use Magento\Catalog\Model\Product\ProductList\Toolbar;
+
+/**
+ * @var \GoMage\Navigation\Helper\Data $helper
+ */
+$helper = $this->helper('GoMage\Navigation\Helper\Data');
 ?>
 <div class="toolbar-sorter sorter">
     <label class="sorter-label" for="sorter"><?= __('Sort By') ?></label>
     <select id="sorter" data-role="navigation-filter"
             data-param="product_list_order"
-            data-ajax="1"
+            <?php if($helper->isPaginationAjax()): ?>data-ajax="1" <?php endif; ?>
             data-active="1" class="sorter-options"
             data-type="select">
         <?php foreach ($block->getAvailableOrders() as $_key => $_order): ?>
@@ -24,11 +29,18 @@ use Magento\Catalog\Model\Product\ProductList\Toolbar;
         <?php endforeach; ?>
     </select>
     <?php if ($block->getCurrentDirection() == 'desc'): ?>
-        <a title="<?= __('Set Ascending Direction') ?>" href="#" class="action sorter-action sort-desc" data-role="navigation-filter" data-param="product_list_dir" data-value="asc" data-ajax="1">
+        <a title="<?= __('Set Ascending Direction') ?>"
+           href="#"
+           class="action sorter-action sort-desc"
+           data-role="navigation-filter"
+           data-param="product_list_dir"
+           data-value="asc"
+           <?php if($helper->isPaginationAjax()): ?>data-ajax="1" <?php endif; ?>>
             <span><?= __('Set Ascending Direction') ?></span>
         </a>
     <?php else: ?>
-        <a title="<?= __('Set Descending Direction') ?>" href="#" class="action sorter-action sort-asc" data-role="navigation-filter" data-param="product_list_dir" data-value="desc" data-ajax="1">
+        <a title="<?= __('Set Descending Direction') ?>" href="#" class="action sorter-action sort-asc" data-role="navigation-filter" data-param="product_list_dir" data-value="desc"
+           <?php if($helper->isPaginationAjax()): ?>data-ajax="1" <?php endif; ?>>
             <span><?= __('Set Descending Direction') ?></span>
         </a>
     <?php endif; ?>

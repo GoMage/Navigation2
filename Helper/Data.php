@@ -214,12 +214,20 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             return 'gan-align-default';
         }
     }
+
+    public function isPaginationAjax ()
+    {
+       return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_PAGINATION_ENABLED);
+    }
+
     public function getPagerTheme()
     {
         $isAjax = $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
             . SystemConfigInterface::SYSTEM_CONFIG_FIELD_PAGINATION_ENABLED);
-        if ($isAjax || $this->isUseAutoScrolling()) {
+        if (($isAjax || $this->isUseAutoScrolling())) {
             return 'GoMage_Navigation::html/pager.phtml';
         } else {
             return 'Magento_Theme::html/pager.phtml';
