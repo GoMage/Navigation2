@@ -94,7 +94,7 @@
                         <frontend_model>GoMage\Navigation\Block\Color</frontend_model>
                     </field>
                     <field id="category_background" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Category Background Color (from category settings)</label>
+                        <label>Category Background Color</label>
                         <frontend_model>GoMage\Navigation\Block\Color</frontend_model>
                     </field>
                 </group>
