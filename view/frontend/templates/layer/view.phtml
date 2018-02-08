@@ -70,7 +70,14 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                                 <?php if($countApplied): ?>
                                     <div data-role="collapsible" class="filter-options-item <?= $block->escapeHtml($block->getItemClass()) ?>"
                                          style="<?= $block->escapeHtml($block->getItemWidthStyle()) ?>">
-                                        <dt data-role="title" role="heading" aria-level="3" class="filter-options-title"><?= $block->escapeHtml(__($filter->getName())) ?></dt>
+                                        <dt data-role="title" role="heading" style="overflow: inherit" aria-level="3" class="filter-options-title">
+                                            <?= $block->escapeHtml(__($filter->getName())) ?>
+                                            <?php
+                                                $tooltip = $this->getLayout()->createBlock('GoMage\Navigation\Block\Navigation\Tooltip');
+                                                $tooltip->assign('filter', $filter);
+                                                echo $tooltip->toHtml();
+                                            ?>
+                                        </dt>
                                         <dd data-role="content" class="filter-options-content"><?= $blockRender->render($filter); ?></dd>
                                     </div>
                                <?php endif; ?>

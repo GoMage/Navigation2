@@ -11,7 +11,6 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
 ?>
 <div class="swatch-attribute">
     <div class="swatch-attribute-options clearfix <?php echo $helperData->getOptionsAlignment((int)$filter->getGomageOptionsAlignment()); ?>">
-        <?=$block->getTooltip($filter)->toHtml()?>
         <? foreach ($filterItems as $item): ?>
         <? if ($item->getCount() > 0): ?>
         <div class="text_gan_swatch_button">

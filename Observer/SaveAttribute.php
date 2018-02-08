@@ -83,7 +83,7 @@ class SaveAttribute implements \Magento\Framework\Event\ObserverInterface
         }
 
         foreach ($data as &$text) {
-            $text = htmlentities($text, ENT_QUOTES);
+            $text = $text;
         }
 
         return serialize($data);

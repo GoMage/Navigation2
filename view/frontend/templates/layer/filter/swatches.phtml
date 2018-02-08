@@ -18,7 +18,6 @@ $cnt = 0;
 <div class="swatch-attribute swatch-layered <?=$block->escapeHtml($swatchData['attribute_code']) ?>"
      attribute-code="<?=$block->escapeHtml($swatchData['attribute_code']) ?>" attribute-id="<?=$block->escapeHtml($swatchData['attribute_id']) ?>">
     <div class="swatch-attribute-options clearfix <?php echo $helperData->getOptionsAlignment((int)$filter->getGomageOptionsAlignment()); ?>">
-        <?=$block->getTooltip($filter)->toHtml()?>
         <? foreach ($swatchData['options'] as $option => $data): ?>
             <?
                 $selected = '';

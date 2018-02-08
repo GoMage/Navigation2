@@ -13,7 +13,6 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
     <? if($filter->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK && $filter->getGomageMaxBlockHeight()): ?>
         style="max-height:<?= $block->escapeHtml($filter->getGomageMaxBlockHeight()); ?>px;"
     <?endif;?>>
-    <?=$block->getTooltip($filter)->toHtml()?>
     <?$optionsLimit = (int)($filter->getGomageVisibleOptions()) ? $filter->getGomageVisibleOptions() : false;
       $cnt = 0;
     ?>
