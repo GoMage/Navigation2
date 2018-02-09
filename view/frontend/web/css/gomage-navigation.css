@@ -577,7 +577,7 @@ body.ajax-loading .block-search{
   overflow: auto;
   box-sizing: border-box;
 }
-.filter-options-content .gan-tooltip{
+.filter-options-title .gan-tooltip{
   position: absolute;
   top: 12px;
   right: 30px;
