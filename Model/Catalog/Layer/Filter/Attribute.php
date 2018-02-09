@@ -9,6 +9,7 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
      */
     protected $request;
 
+    protected $_requestVarOrder;
     /**
      * @var \Magento\Catalog\Model\Session
      */
@@ -69,6 +70,7 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
     ) {
 
         $this->_requestVar = 'attribute';
+        $this->_requestVarOrder = 'product_list_order';
         $this->request = $request;
         $this->tagFilter = $tagFilter;
         $this->helper = $helper;
@@ -123,7 +125,6 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
                 $newCollection->load();
                 $ids = $newCollection->getAllIds();
                 if (!empty($ids)) {
-                    $collection->addAttributeToFilter('entity_id', ['in' => $ids]);
                     $collection->addAdditionalFilter($attribute->getAttributeCode(), ['in' => $filters]);
                 }
             } else {
