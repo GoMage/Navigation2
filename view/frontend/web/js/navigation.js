@@ -60,7 +60,8 @@ define([
             }
 
             if (this.options.tooltipOpenOnClick == true) {
-                $('.gan-tooltip-toggle').on('click', function () {
+                $('.gan-tooltip-toggle').on('click', function (event) {
+                    event.stopPropagation();
                     $(this).closest('.gan-tooltip').addClass('__opened');
                 });
             }
@@ -82,7 +83,8 @@ define([
             }
 
             if (this.options.tooltipCloseButton == true) {
-                $('.gan-tooltip-close').on('click', function () {
+                $('.gan-tooltip-close').on('click', function (event) {
+                    event.stopPropagation();
                     $(this).closest('.gan-tooltip').removeClass('__opened');
                 });
             }

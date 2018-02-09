@@ -112,14 +112,15 @@ $cnt = 0;
             <?endif;?>
                 data-type="remove-item"
                 data-active="1"
-                href="#">
+                href="#"
+                class="gan_link_reset">
             <?= __('Reset'); ?>
         </a>
     <?endif;?>
 </div>
 <?php if($optionsLimit): ?>
 <a class="gan_link_more"><?=__('More') ?>&#9660;</a>
-<a class="gan_link_more_less"><?=__('Less') ?>&#9650;</a>
+<a class="gan_link_more_less" style="display: none"><?=__('Less') ?>&#9650;</a>
 <?php endif; ?>
 <script>
     require(["jquery", "jquery/ui", "Magento_Swatches/js/swatch-renderer"], function ($) {

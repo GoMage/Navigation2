@@ -73,12 +73,13 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
             <?endif;?>
                 data-type="remove-item"
                 data-active="1"
-                href="#">
+                href="#"
+                class="gan_link_reset">
             <?= __('Reset'); ?>
         </a>
     <?endif;?>
     <?php if($optionsLimit): ?>
         <li class="gan_link_more"><a href="javascript:void(0)"><?=__('More') ?>&#9660;</a></li>
-        <li class="gan_link_more_less"><a href="javascript:void(0)"><?=__('Less') ?>&#9650;</a></li>
+        <li class="gan_link_more_less" style="display: none"><a href="javascript:void(0)"><?=__('Less') ?>&#9650;</a></li>
     <?php endif; ?>
 </ol>

@@ -1,15 +1,13 @@
 /* GoMage Advanced Navigation M2
 -------------------------------------------------- */
 
-.block-gan-filter .filter-options-item{
-  position: relative;
-}
 .block-gan-filter .filter-options{
   display: block;
 }
 .block-gan-filter .filter-options-title{
   padding-right: 50px;
   word-wrap: break-word;
+  z-index: auto;
 }
 
 /* Filter Columns
@@ -337,6 +335,14 @@ div.block.block-gan-categories{
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAMAAAC67D+PAAAACVBMVEUAAABufoTQ2d2wVR0nAAAAAXRSTlMAQObYZgAAAB9JREFUeAFjgAImBjiLEcFixMpiQrAYESxGOAtI4AAACbEALGqz2CoAAAAASUVORK5CYII=) no-repeat 100% 100%;
 }
 
+
+/* Fly-out in right col */
+.page-layout-3columns .sidebar-additional .gan-categories-flyout .gan-categories-list ol,
+.page-layout-2columns-right .sidebar-main .gan-categories-flyout .gan-categories-list ol{
+  left: auto;
+  right: 100%;
+}
+
 /* Loader
 -------------------------------------------------- */
 .gan-loader{
@@ -544,7 +550,6 @@ body.ajax-loading .block-search{
 -------------------------------------------------- */
 .gan-tooltip{
   position: relative;
-  z-index: 2;
 }
 .gan-tooltip-toggle{
   width: 16px;
@@ -577,7 +582,7 @@ body.ajax-loading .block-search{
   overflow: auto;
   box-sizing: border-box;
 }
-.filter-options-content .gan-tooltip{
+.filter-options-title .gan-tooltip{
   position: absolute;
   top: 12px;
   right: 30px;
@@ -632,38 +637,130 @@ button.gan-custom-button{
   text-transform: uppercase;
 }
 
-a.gan_link_more{
+
+/* More/less & reset */
+.filter-options-content a.gan_link_more,
+.filter-options-content a.gan_link_more_less,
+.filter-options-content a.gan_link_reset{
   cursor: pointer;
+  clear: both;
+  margin: 10px 0 0;
+  padding: 0;
+  background: none;
+  display: block;
+  color: #636363;
+  text-decoration: none;
 }
-a.gan_link_more_less{
-  cursor: pointer;
+.filter-options-content a.gan_link_more:hover,
+.filter-options-content a.gan_link_more_less:hover,
+.filter-options-content a.gan_link_reset:hover{
+  color: #3399CC;
 }
 .gan_link-more-element{
-  display:none;
+  display: none;
 }
 .gan_link_more_less{
   display: none;
 }
-.gan-align-horizontally li,
-.gan-align-horizontally .swatch-option, .gan-align-horizontally .swatch-option {
-  display:inline;
-  padding-right:5px;
-  padding-bottom:3px;
-}
-.gan-align-default li,
-.gan-align-default a, .gan-align-default .text_gan_swatch_button {
-  display:block;
-  padding-bottom:5px;
-  padding-bottom:3px;
-  overflow: hidden;
-}
-.gan-align-default .swatch-option, .gan-align-default a {
-    margin-left: 20px;
-    margin-top: 20px;
+
+
+/* Swatch & color picker
+-------------------------------------------------- */
+.filter-options-content a.swatch-option-link-layered{
+  background: none;
 }
 
-.gan-align-2-columns li, .gan-align-2-columns a ,.gan-align-2-columns .text_gan_swatch_button {
-  width: 45%;
-  padding-bottom:3px;
+/* Vertical */
+.swatch-attribute-options.gan-align-default .swatch-option-link-layered,
+.swatch-attribute-options.gan-align-default .text_gan_swatch_button{
+  display: block;
+  margin-right: 0;
+}
+.swatch-attribute-options.gan-align-default .swatch-option-link-layered .swatch-option,
+.swatch-attribute-options.gan-align-default .text_gan_swatch_button .swatch-option{
+  float: none;
+  margin-right: 0;
+  max-width: 100%;
+}
+.swatch-attribute-options.gan-align-default .swatch-option-link-layered:after{
+  content: '';
+  clear: both;
+  display: block;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  font-size: 0;
+}
+
+/* 2 cols */
+.gan-filter-default.gan-align-2-columns .item,
+.swatch-attribute-options.gan-align-2-columns .swatch-option-link-layered,
+.swatch-attribute-options.gan-align-2-columns .text_gan_swatch_button{
+  float: left;
+  width: 50%;
+  box-sizing: border-box;
+}
+.swatch-attribute-options.gan-align-2-columns .swatch-option-link-layered .swatch-option,
+.swatch-attribute-options.gan-align-2-columns .text_gan_swatch_button .swatch-option{
+  float: none;
+  max-width: 100%;
+  margin-right: 0;
+}
+.gan-filter-default.gan-align-2-columns .item:nth-child(2n),
+.swatch-attribute-options.gan-align-2-columns .swatch-option-link-layered:nth-child(2n),
+.swatch-attribute-options.gan-align-2-columns .text_gan_swatch_button:nth-child(2n){
+  padding-left: 5px !important;
+}
+.gan-filter-default.gan-align-2-columns .item:nth-child(2n+1),
+.swatch-attribute-options.gan-align-2-columns .swatch-option-link-layered:nth-child(2n+1),
+.swatch-attribute-options.gan-align-2-columns .text_gan_swatch_button:nth-child(2n+1){
+  clear: both;
+  padding-right: 5px !important;
+}
+
+/* Horizontal */
+.gan-filter-default.gan-align-horizontally .item{
   display: inline-block;
+  max-width: 100%;
+  vertical-align: top;
+}
+.swatch-attribute-options.gan-align-horizontally .swatch-option-link-layered .swatch-option,
+.swatch-attribute-options.gan-align-horizontally .text_gan_swatch_button .swatch-option{
+  max-width: 100%;
+}
+
+
+/* 1 col shop by
+-------------------------------------------------- */
+body.page-layout-1column .filter-options-item{
+  display: block;
+  margin-right: 0;
+  position: static;
+  border-bottom: 1px solid #ccc;
+}
+body.page-layout-1column .filter-options-item.active:before,
+body.page-layout-1column .filter-options-item.active:after{
+  display: none;
+}
+body.page-layout-1column .filter-options-title{
+  padding: 10px 50px 0 10px;
+}
+body.page-layout-1column .filter-options-content{
+  background: none;
+  border: 0;
+  box-shadow: none;
+  position: static;
+  width: auto;
+  padding: 10px;
+}
+body.page-layout-1column .filter-options-content .item:hover{
+  background: none;
+}
+body.page-layout-1column .filter-subtitle{
+  display: block;
+}
+body.page-layout-1column .filter-options-title:after{
+  top: 12px;
+  right: 13px;
+  z-index: auto;
 }

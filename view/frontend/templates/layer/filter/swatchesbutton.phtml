@@ -51,12 +51,13 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
             <?endif;?>
                 data-type="remove-item"
                 data-active="1"
-                href="#">
+                href="#"
+                class="gan_link_reset">
             <?= __('Reset'); ?>
         </a>
     <?endif;?>
     <?php if($optionsLimit): ?>
         <a class="gan_link_more"><?=__('More') ?>&#9660;</a>
-        <a class="gan_link_more_less"><?=__('Less') ?>&#9650;</a>
+        <a class="gan_link_more_less" style="display: none"><?=__('Less') ?>&#9650;</a>
     <?php endif; ?>
 </div>
