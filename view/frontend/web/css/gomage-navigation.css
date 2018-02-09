@@ -1,9 +1,6 @@
 /* GoMage Advanced Navigation M2
 -------------------------------------------------- */
 
-.block-gan-filter .filter-options-item{
-  position: relative;
-}
 .block-gan-filter .filter-options{
   display: block;
 }
@@ -336,6 +333,14 @@ div.block.block-gan-categories{
 }
 .gan-categories-flyout .gan-categories-list ol li.parent > a{
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAMAAAC67D+PAAAACVBMVEUAAABufoTQ2d2wVR0nAAAAAXRSTlMAQObYZgAAAB9JREFUeAFjgAImBjiLEcFixMpiQrAYESxGOAtI4AAACbEALGqz2CoAAAAASUVORK5CYII=) no-repeat 100% 100%;
+}
+
+
+/* Fly-out in right col */
+.page-layout-3columns .sidebar-additional .gan-categories-flyout .gan-categories-list ol,
+.page-layout-2columns-right .sidebar-main .gan-categories-flyout .gan-categories-list ol{
+  left: auto;
+  right: 100%;
 }
 
 /* Loader
@@ -722,4 +727,40 @@ button.gan-custom-button{
 .swatch-attribute-options.gan-align-horizontally .swatch-option-link-layered .swatch-option,
 .swatch-attribute-options.gan-align-horizontally .text_gan_swatch_button .swatch-option{
   max-width: 100%;
+}
+
+
+/* 1 col shop by
+-------------------------------------------------- */
+body.page-layout-1column .filter-options-item{
+  display: block;
+  margin-right: 0;
+  position: static;
+  border-bottom: 1px solid #ccc;
+}
+body.page-layout-1column .filter-options-item.active:before,
+body.page-layout-1column .filter-options-item.active:after{
+  display: none;
+}
+body.page-layout-1column .filter-options-title{
+  padding: 10px 50px 0 10px;
+}
+body.page-layout-1column .filter-options-content{
+  background: none;
+  border: 0;
+  box-shadow: none;
+  position: static;
+  width: auto;
+  padding: 10px;
+}
+body.page-layout-1column .filter-options-content .item:hover{
+  background: none;
+}
+body.page-layout-1column .filter-subtitle{
+  display: block;
+}
+body.page-layout-1column .filter-options-title:after{
+  top: 12px;
+  right: 13px;
+  z-index: auto;
 }
