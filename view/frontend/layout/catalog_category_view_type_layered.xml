@@ -13,7 +13,11 @@
             <block class="Magento\Framework\View\Element\Template" name="go.mage.style" template="GoMage_Navigation::layer/style.phtml"/>
         </referenceBlock>
     <referenceContainer name="sidebar.main" >
-        <block class="GoMage\Navigation\Block\Categories" name="gomage.categories" before="-"/>
+        <block class="GoMage\Navigation\Block\Categories" name="gomage.categories">
+            <action method="unsetChild" ifconfig="gomage_navigation/category/shop_by">
+                <argument name="block" xsi:type="helper" helper="GoMage\Navigation\Helper\Data::removeBlocCategoriesOrCategory" />
+            </action>
+        </block>
         <block class="GoMage\Navigation\Block\Navigation" name="catalog.leftnav" after="gomage.categories">
             <block class="GoMage\Navigation\Block\Navigation\State" name="catalog.navigation.state" as="state" />
             <block class="GoMage\Navigation\Block\Navigation\FilterRenderer" name="catalog.navigation.renderer" as="renderer"/>

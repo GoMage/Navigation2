@@ -126,7 +126,12 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
         $productCollection = $this->getLayer()->getProductCollection();
         $optionsFacetedData = $productCollection->getFacetedData('category');
         $category = $this->coreRegistry->registry('current_category');
-        $categories = $category->getChildrenCategories();
+        if( $category ) {
+            $categories = $category->getChildrenCategories();
+        } else  {
+            $category = $this->dataProvider->getCategory();
+            $categories = $category->getChildrenCategories();
+        }
         foreach ($categories as $category) {
 
             $count = (!empty($optionsFacetedData[$category->getId()]['count'])) ? $optionsFacetedData[$category->getId()]['count'] : 0;

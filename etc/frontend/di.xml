@@ -11,6 +11,16 @@
             <argument name="filterableAttributes" xsi:type="object">Magento\Catalog\Model\Layer\Category\FilterableAttributeList</argument>
         </arguments>
     </virtualType>
+    <virtualType name="searchFilterList" type="Magento\Catalog\Model\Layer\FilterList">
+        <arguments>
+            <argument name="filters" xsi:type="array">
+                <item name="attribute" xsi:type="string">GoMage\Navigation\Model\Catalog\Layer\Filter\Attribute</item>
+                <item name="price" xsi:type="string">GoMage\Navigation\Model\Catalog\Layer\Filter\Price</item>
+                <item name="decimal" xsi:type="string">GoMage\Navigation\Model\Catalog\Layer\Filter\Decimal</item>
+                <item name="category" xsi:type="string">GoMage\Navigation\Model\Catalog\Layer\Filter\Category</item>
+            </argument>
+        </arguments>
+    </virtualType>
     <type name="GoMage\Navigation\Block\Navigation">
         <arguments>
             <argument name="filterList" xsi:type="object">categoryFilterList</argument>
