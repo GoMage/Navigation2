@@ -40,7 +40,8 @@ define([
             linkMoreElement: '.gan_link-more-element',
             ganToolbarAmount: '.gan-toolbar-amount',
             amountToolbarNumber: 0,
-            ganLastNumber: '.gan-last-number'
+            ganLastNumber: '.gan-last-number',
+            breadcrumbs: '.breadcrumbs'
         },
 
         _create: function () {
@@ -403,7 +404,8 @@ define([
                         successCallback.call(this, response);
                     }
 
-                    $(this.options.mainContainer).html(response.content);
+                    $(this.options.mainContainer).remove();
+                    $(this.options.breadcrumbs).after(response.content);
                     $(this.options.mainContainer).trigger('contentUpdated');
                     $(this.options.breadcrumbsContainer).trigger('contentUpdated');
                     $(this.options.authentication).trigger('bindTrigger');
@@ -430,10 +432,9 @@ define([
                     if (successCallback) {
                         successCallback.call(this, response);
                     }
-
-                    $(this.options.mainContainer).html(response.content);
+                    $(this.options.mainContainer).remove();
                     $(this.options.breadcrumbsContainer).html(response.breadcrumbs);
-
+                    $(this.options.breadcrumbs).after(response.content);
                     $(this.options.mainContainer).trigger('contentUpdated');
                     $(this.options.breadcrumbsContainer).trigger('contentUpdated');
                     $(this.options.authentication).trigger('bindTrigger');
