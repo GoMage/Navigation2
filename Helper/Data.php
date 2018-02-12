@@ -83,6 +83,15 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CONFIG_FIELD_SHOW_SHOP_BY_IN);
     }
 
+    /**
+     * @return mixed
+     */
+    public function isShowEmptyCategory()
+    {
+        return !($this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_HIDE_EMPTY_CATEGORIES));
+    }
     public function removeBlocCategoriesOrCategory () {
          if( $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH

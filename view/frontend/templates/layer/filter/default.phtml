@@ -19,7 +19,7 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
     <? foreach ($filterItems as $item): ?>
         <li class="item <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?>" style="<?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'display:none': '' ?>">
 
-            <? if ($item->getCount() > 0 ): ?>
+            <? if ($item->getCount() > 0 || ($helperData->isShowEmptyCategory() && $filter->isCategoryFilter())): ?>
                 <a <? if(!$item->getIsActive()):?> href="<?= $block->escapeUrl($item->getGomageUrl()); ?> <?endif;?>"
                     <? if($item->getIsActive()):?>
                         class="active"

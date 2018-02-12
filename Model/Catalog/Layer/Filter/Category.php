@@ -132,11 +132,11 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
             $category = $this->dataProvider->getCategory();
             $categories = $category->getChildrenCategories();
         }
+        $i = 0;
         foreach ($categories as $category) {
 
             $count = (!empty($optionsFacetedData[$category->getId()]['count'])) ? $optionsFacetedData[$category->getId()]['count'] : 0;
-
-            if ($category->getIsActive() && $count > 0)
+            if ($category->getIsActive() && ($count > 0 || $this->helper->isShowEmptyCategory()) )
             {
                 $category->load($category->getId());
                 $this->imageCategories[$category->getId()] = $category->getImageUrl();
@@ -150,7 +150,9 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
 
         return $this->itemDataBuilder->build();
     }
-
+    public function isCategoryFilter() {
+        return true;
+    }
     public function getImageCategory($id) {
         $id = (int) $id;
         return $this->imageCategories[$id];

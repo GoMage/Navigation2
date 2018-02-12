@@ -26,7 +26,7 @@ $filter = reset($filterItems)->getFilter();
         $cnt = 0;
         ?>
         <? foreach ($filterItems as $item): ?>
-            <? if ($item->getCount() > 0): ?>
+            <? if ($item->getCount() > 0 || ($helperData->isShowEmptyCategory() && $filter->isCategoryFilter())): ?>
                 <option <?php if((!$item->isShowAppliedValues())): ?>style="display: none"<?php endif; ?> value="<?= $block->escapeHtml($item->getGomageValue()) ?>"
                         data-param="<?= $block->escapeHtml($filter->getRequestVar()) ?>"
                         <? if ($item->getIsActive()): ?>selected="selected" data-active="1"<? endif ?>>

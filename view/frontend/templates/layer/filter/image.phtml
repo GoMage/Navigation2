@@ -21,7 +21,7 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
     ?>
     <? foreach ($filterItems as $item): ?>
         <li class="item <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?>">
-            <? if ($item->getCount() > 0 ): ?>
+            <? if ($item->getCount() > 0 || ($helperData->isShowEmptyCategory() && $filter->isCategoryFilter())): ?>
                 <a <? if(!$item->getIsActive()):?> href="<?= $block->escapeUrl($item->getGomageUrl()); ?> <?endif;?>"
             <? if($item->getIsActive()):?>
                 class="active"

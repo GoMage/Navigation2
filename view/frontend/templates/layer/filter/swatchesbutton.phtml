@@ -12,7 +12,7 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
 <div class="swatch-attribute">
     <div class="swatch-attribute-options clearfix <?php echo $helperData->getOptionsAlignment((int)$filter->getGomageOptionsAlignment()); ?>">
         <? foreach ($filterItems as $item): ?>
-        <? if ($item->getCount() > 0): ?>
+        <? if ($item->getCount() > 0 || ($helperData->isShowEmptyCategory() && $filter->isCategoryFilter())): ?>
         <div class="text_gan_swatch_button">
             <div class="swatch-option text <?php if($item->getIsActive()): ?> selected <?php endif; ?> <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?>"  style="background: background-size: initial; <?php if((!$item->isShowAppliedValues())): ?>display: none;<?php endif; ?>
                 <? if($item->getIsActive()):?>
