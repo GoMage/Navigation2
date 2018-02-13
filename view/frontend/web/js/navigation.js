@@ -263,7 +263,7 @@ define([
         },
 
         _processRemoveItem: function (event) {
-
+            event.preventDefault();
             var el = $(event.data.element);
 
             var url = el.attr('data-url');
