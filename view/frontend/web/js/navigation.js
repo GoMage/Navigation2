@@ -98,15 +98,15 @@ define([
             }
         },
 
-        moreLink: function () {
-            $(this.options.linkMoreElement).show();
-            $(this.options.moreLinkLess).show();
-            $(this.options.moreLink).hide();
+        moreLink: function (e) {
+            $(e.target).closest('.gan-filter').find(this.options.linkMoreElement).show();
+            $(e.target).closest('.gan-filter').find(this.options.moreLinkLess).show();
+            $(e.target).closest('.gan-filter').find(this.options.moreLink).hide();
         },
-        moreLinkLess: function () {
-            $(this.options.linkMoreElement).hide();
-            $(this.options.moreLinkLess).hide();
-            $(this.options.moreLink).show();
+        moreLinkLess: function (e) {
+            $(e.target).closest('.gan-filter').children(this.options.linkMoreElement).hide();
+            $(e.target).closest('.gan-filter').find(this.options.moreLinkLess).hide();
+            $(e.target).closest('.gan-filter').find(this.options.moreLink).show();
         },
         _initFilters: function () {
             var elements = $(this.options.filterControl);
