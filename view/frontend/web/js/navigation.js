@@ -41,7 +41,8 @@ define([
             ganToolbarAmount: '.gan-toolbar-amount',
             amountToolbarNumber: 0,
             ganLastNumber: '.gan-last-number',
-            breadcrumbs: '.breadcrumbs'
+            breadcrumbs: '.breadcrumbs',
+            toolbar: '.toolbar-products'
         },
 
         _create: function () {
@@ -227,7 +228,7 @@ define([
 
             if (this.options.backToTopAction == 1) {
                 $('html, body').animate({
-                    scrollTop: parseInt($(this.options.productItems).offset().top)
+                    scrollTop: (parseInt($(this.options.toolbar).offset().top))
                 }, parseInt(this.options.backToTopSpeed));
             }
             else
@@ -432,9 +433,10 @@ define([
                     if (successCallback) {
                         successCallback.call(this, response);
                     }
-                    $(this.options.mainContainer).remove();
+
+                    $(this.options.mainContainer).html(response.content);
                     $(this.options.breadcrumbsContainer).html(response.breadcrumbs);
-                    $(this.options.breadcrumbs).after(response.content);
+
                     $(this.options.mainContainer).trigger('contentUpdated');
                     $(this.options.breadcrumbsContainer).trigger('contentUpdated');
                     $(this.options.authentication).trigger('bindTrigger');
