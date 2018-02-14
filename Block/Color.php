@@ -32,6 +32,11 @@ class Color extends \Magento\Config\Block\System\Config\Form\Field
             require(["jquery","jquery/colorpicker/js/colorpicker"], function ($) {
                 $(document).ready(function () {
                     var $el = $("#' . $element->getHtmlId() . '");
+                    $el.on("input", function() {
+                         var hex = $(this).val();
+                         $el.css("backgroundColor",  hex);
+                    })
+                    
                     $el.css("backgroundColor", "'. $value .'");
                     $el.ColorPicker({
                         color: "'. $value .'",

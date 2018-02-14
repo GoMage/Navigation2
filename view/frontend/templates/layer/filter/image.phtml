@@ -78,7 +78,7 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
             <?= __('Reset'); ?>
         </a>
     <?endif;?>
-    <?php if($optionsLimit): ?>
+    <?php if($optionsLimit && count($filterItems) > $optionsLimit): ?>
         <li class="gan_link_more"><a href="javascript:void(0)"><?=__('More') ?>&#9660;</a></li>
         <li class="gan_link_more_less" style="display: none"><a href="javascript:void(0)"><?=__('Less') ?>&#9650;</a></li>
     <?php endif; ?>

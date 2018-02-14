@@ -92,21 +92,21 @@ define([
             }
 
             if (this.options.tooltipCloseOnMouseOut == true) {
-                $('.gan-tooltip').on('mouseout', function () {
+                $('.gan-tooltip').on('mouseleave', function () {
                     $(this).removeClass('__opened');
                 });
             }
         },
 
         moreLink: function (e) {
-            $(e.target).closest('.gan-filter').find(this.options.linkMoreElement).show();
-            $(e.target).closest('.gan-filter').find(this.options.moreLinkLess).show();
-            $(e.target).closest('.gan-filter').find(this.options.moreLink).hide();
+            $(e.target).closest('.filter-options-content').find(this.options.linkMoreElement).show();
+            $(e.target).closest('.filter-options-content').find(this.options.moreLinkLess).show();
+            $(e.target).closest('.filter-options-content').find(this.options.moreLink).hide();
         },
         moreLinkLess: function (e) {
-            $(e.target).closest('.gan-filter').children(this.options.linkMoreElement).hide();
-            $(e.target).closest('.gan-filter').find(this.options.moreLinkLess).hide();
-            $(e.target).closest('.gan-filter').find(this.options.moreLink).show();
+            $(e.target).closest('.filter-options-content').find(this.options.linkMoreElement).hide();
+            $(e.target).closest('.filter-options-content').find(this.options.moreLinkLess).hide();
+            $(e.target).closest('.filter-options-content').find(this.options.moreLink).show();
         },
         _initFilters: function () {
             var elements = $(this.options.filterControl);
@@ -448,10 +448,8 @@ define([
         },
 
         _ajaxMoreProducts: function (url, params, successCallback) {
-
             if (this.options.showMore == true)
                 return ;
-
             this.options.showMore = true;
             $.ajax({
                 url: url,
