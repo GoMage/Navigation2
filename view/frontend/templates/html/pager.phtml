@@ -127,7 +127,7 @@ $moreButton = $this->getLayout()->createBlock('GoMage\Navigation\Block\Product\P
             <?php endif;?>
 
             <?php if (!$block->isLastPage()): ?>
-                <li class="item pages-item-next">
+                <li class="item pages-item-next gomage-pager_navigation">
                     <?php $text = $block->getAnchorTextForNext() ? $block->getAnchorTextForNext() : '';?>
                     <a class="<?= $text ? 'link ' : 'action '?> next"
                        href="<?= $block->escapeUrl($block->getNextPageUrl()) ?>"

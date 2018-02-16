@@ -3,8 +3,8 @@
  * @var $block \GoMage\Navigation\Block\Loader
  */
 ?>
-<? if($block->getHelper()->isShowAjaxLoader()):?>
-    <div id="gomage-loader" class="gan-loader ng-scope">
+    <div id="gomage-loader" data-ajax-loader = "<?php echo (int)$block->getHelper()->isShowAjaxLoader() ?>" class="gan-loader ng-scope">
+    <? if($block->getHelper()->isShowAjaxLoader()):?>
         <div class="gan-loader-content">
             <div class="gan-loader-content-in
             <? if ($block->getHelper()->isSpinnerTypeImage() && ($image = $block->getLoaderImage()) && !empty($image)): ?> gan-loader-img-<?=$block->escapeHtml($block->getHelper()->getLoaderImageAlignment())?><?endif; ?>"
@@ -40,5 +40,5 @@
                 </div>
             </div>
         </div>
+    <? endif;?>
     </div>
-<? endif;?>

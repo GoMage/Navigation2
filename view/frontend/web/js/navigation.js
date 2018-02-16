@@ -197,8 +197,6 @@ define([
 
             if (typeof($(this.options.divPagesEq).offset()) == 'undefined')
                 return ;
-            console.log($(window).scrollTop());
-            console.log($('.product-item').last().offset().top);
             if ($(window).scrollTop() >= $('.limiter-options').last().offset().top - 800 ) {
 
                 var url = $(this.options.divPagesNextItem).attr('href');
@@ -462,10 +460,10 @@ define([
                     if (successCallback) {
                         successCallback.call(this, response);
                     }
-                    var newProducts = $(response.content).find(this.options.productOlItems).html();
+                    var newProducts = $(response.content).find(this.options.productOlItems).first().html();
                     var toolbar = $(response.content).find(this.options.divPages).html();
                     $(this.options.divPages).html(toolbar);
-                    $(this.options.productListContainer).append(newProducts);
+                    $(this.options.productListContainer).first().append(newProducts);
                     this.options.showMore = false;
                     var lastNumber = parseInt($(this.options.ganToolbarAmount).attr('data-last-number'));
                     var totalNumber = parseInt($(this.options.ganToolbarAmount).attr('data-total-number'));
@@ -491,7 +489,7 @@ define([
                     if (typeof(url) == 'undefined') {
                         $(this.options.moreButton).hide();
                     }
-                    var element = $(this.options.filterControl)
+                    var element = $('.pages').find(this.options.filterControl);
                     element.unbind();
                     element.on('click', {element: element}, $.proxy(this._processFilter, this));
                     this.options.showMore = false;
