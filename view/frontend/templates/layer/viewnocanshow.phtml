@@ -1,0 +1,21 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Category layered navigation
+ *
+ * @var $block \Magento\LayeredNavigation\Block\Navigation
+ */
+?>
+    <div class="block filter" data-mage-init='{"navigation": {
+                        "backToTopSpeed": "<?= $block->escapeHtml($block->getDataHelper()->getBackToTopSpeed()); ?>",
+                        "backToTopAction": "<?= $block->escapeHtml($block->getDataHelper()->getBackToTopAction()); ?>"
+                        }}'>
+    </div>
