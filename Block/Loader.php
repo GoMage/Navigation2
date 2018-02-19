@@ -35,7 +35,11 @@ class Loader extends \Magento\Framework\View\Element\Template
     
         $this->helper = $helper;
         $this->alignmentConfig = $alignmentConfig;
-        $this->setTemplate('GoMage_Navigation::layer/loader.phtml');
+        if($helper->isEnabled()) {
+            $this->setTemplate('GoMage_Navigation::layer/loader.phtml');
+        } else {
+            $this->setTemplate('');
+        }
         parent::__construct($context, $data);
     }
 

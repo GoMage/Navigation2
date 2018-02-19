@@ -18,20 +18,31 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
     protected $alignment;
 
     /**
+     * @var  \GoMage\Navigation\Helper\Data
+     */
+    protected $dataHelper;
+
+    /**
      * LoaderData constructor.
      * @param Context $context
      * @param \GoMage\Navigation\Model\Config\Source\Alignment $alignment
      */
     public function __construct(
         Context $context,
-        \GoMage\Navigation\Model\Config\Source\Alignment $alignment
+        \GoMage\Navigation\Model\Config\Source\Alignment $alignment,
+        \GoMage\Navigation\Helper\Data $dataHelper
     ) {
 
+        $this->dataHelper = $dataHelper;
         $this->scopeConfig = $context->getScopeConfig();
         $this->alignment = $alignment;
         parent::__construct($context);
     }
 
+    public function isEnabled($moduleName = null)
+    {
+        return $this->dataHelper->isEnable();
+    }
 
     /**
      * @param $param
