@@ -34,7 +34,7 @@ class More extends Template
         $this->context = $context;
         $this->navigationHelper = $navigationHelper;
 
-        if (!$this->navigationHelper->isUseAutoScrolling()) {
+        if (!$this->navigationHelper->isUseAutoScrolling() && $navigationHelper->isEnable() ) {
             $this->setTemplate('GoMage_Navigation::product/list/toolbar/more.phtml');
         }
     }

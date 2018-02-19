@@ -118,7 +118,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
             . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_BACK_TO_TOP);
 
-        if ($value) {
+        if ($value && $this->isEnable()) {
             return 'GoMage_Navigation::layer/back_to_top.phtml';
         }
 
