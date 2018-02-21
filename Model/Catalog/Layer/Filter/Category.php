@@ -82,8 +82,6 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
         }
 
         $this->getLayer()->getProductCollection()->addCategoriesFilter(['in' => $filters]);
-        $ids = $this->getLayer()->getProductCollection()->getAllIds();
-        $this->getLayer()->getProductCollection()->addCategoryIds();
         foreach ($filters as $filter) {
 
             $this->dataProvider->setCategoryId($filter);

@@ -2,7 +2,7 @@
 /**
  * @var $categoriesBlock \GoMage\Navigation\Block\Categories
  */
-
+$helperDataCat = $this->helper('GoMage\Navigation\Helper\Data');
 ?>
 
 <?if(!empty($data)):?>
@@ -13,7 +13,7 @@
                         data-ajax="<?=$categoriesBlock->escapeHtml($isAjax)?>"
                         data-role="navigation-filter"
                         data-type="categories-li"
-                        data-url="<?=$categoriesBlock->escapeUrl($category['url'])?>"
+                        data-url="<?= $helperDataCat->getUrlCategory(['cat'=>strtolower($category['name'])]) ?>"
                         <? if (!empty(($category['children']))): ?> class="parent"<? endif; ?>>
                     <a href="<?=$categoriesBlock->escapeUrl($category['url'])?>"<?=$categoriesBlock->escapeHtml($active)?>><span><?=$categoriesBlock->escapeHtml($category['name'])?></span></a>
                     <? if (!empty(($category['children']))): ?>

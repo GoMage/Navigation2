@@ -2,6 +2,7 @@
 /**
  * @var $block \GoMage\Navigation\Block\Categories
  */
+$helperData = $this->helper('GoMage\Navigation\Helper\Data');
 ?>
 
 <div class="block block-gan-categories gan-categories-flyout"
@@ -20,7 +21,7 @@
                             data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>"
                             data-role="navigation-filter"
                             data-type="categories-li"
-                            data-url="<?= $block->escapeUrl($block->getCategoryHelper()->getCategoryUrl($category)) ?>">
+                            data-url="<?= $helperData->getUrlCategory(['cat'=>strtolower($category->getName())]) ?>">
                         <a href="#"<?= ($block->getCurrentCategoryId() == $category->getId()) ? ' class="selected"' : ''; ?>>
                             <?= $block->escapeHtml($category->getName()) ?>
                         </a>

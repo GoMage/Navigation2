@@ -268,8 +268,10 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
 
         if ($this->canShowNavigation) {
             $this->setTemplate('GoMage_Navigation::layer/view.phtml');
+        } else {
+            $this->setTemplate('GoMage_Navigation::layer/viewnocanshow.phtml');
         }
-        $this->setTemplate('GoMage_Navigation::layer/viewnocanshow.phtml');
+
         return parent::_beforeToHtml();
     }
 

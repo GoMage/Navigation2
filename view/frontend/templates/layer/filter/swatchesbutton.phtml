@@ -8,6 +8,7 @@ $filter = reset($filterItems)->getFilter();
 $optionsLimit = ($filter->getGomageVisibleOptions()) ? $filter->getGomageVisibleOptions() : false;
 $cnt = 0;
 $helperData = $this->helper('GoMage\Navigation\Helper\Data');
+$categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
 ?>
 <div class="swatch-attribute">
     <div class="swatch-attribute-options clearfix <?php echo $helperData->getOptionsAlignment((int)$filter->getGomageOptionsAlignment()); ?>">
@@ -22,7 +23,7 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                  data-url="<? if(!$item->getIsActive()):?><?= $block->escapeUrl($item->getGomageUrl()) ?> <?endif;?>"
                  data-value="<?= $block->escapeHtml($item->getGomageValue()) ?>"
                  data-param="<?= $block->escapeHtml($filter->getRequestVar()) ?>"
-                <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+                <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax()) && ( ($filter->isCategoryFilter() &&  $categoriesHelper->isAjax()) ||  !$filter->isCategoryFilter())):?>
                     data-ajax="1"
                 <?else:?>
                     data-ajax="0"

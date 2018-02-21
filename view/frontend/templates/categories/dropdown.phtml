@@ -2,6 +2,7 @@
 /**
  * @var $block \GoMage\Navigation\Block\Categories
  */
+$helperData = $this->helper('GoMage\Navigation\Helper\Data');
 ?>
 
 <div class="block block-gan-categories gan-categories-dropdown"
@@ -21,7 +22,7 @@
                             data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>">
                         <option
                             <?= ($block->getCurrentCategoryId() == $category->getId()) ? 'selected' : ''; ?>
-                                value="<?= $block->escapeUrl($block->getCategoryHelper()->getCategoryUrl($category)) ?>">
+                                value="<?= $helperData->getUrlCategory(['cat'=>strtolower($category->getName())]) ?>">
                             <?= $block->escapeHtml($category->getName()) ?>
                         </option>
                         <? if ($block->getCategoriesDataHelper()->getShowAllSubcategories()): ?>

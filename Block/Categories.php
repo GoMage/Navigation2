@@ -281,10 +281,9 @@ class Categories extends \Magento\Framework\View\Element\Template
         if (!$this->getDataHelper()->isEnable() || !$this->getCategoriesDataHelper()->isShowCategories() || !$this->canShowCategories) {
             return parent::_beforeToHtml();
         }
-
         if ($this->getCategoriesDataHelper()->isShowCategoryInShopBy()) {
             $templateFile = $this->templates->getShowShopByInTemplate($this->getCategoriesDataHelper()->getCategoriesNavigationType());
-        } else {
+        } else {;
             $templateFile = $this->templates->get($this->getCategoriesDataHelper()->getCategoriesNavigationType());
         }
         $this->setTemplate($templateFile);

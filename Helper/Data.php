@@ -249,4 +249,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             return 'Magento_Theme::html/pager.phtml';
         }
     }
+    public function getUrlCategory($params)
+    {
+        return $this->_urlBuilder->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true, '_query' => $params]);
+    }
 }
