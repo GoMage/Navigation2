@@ -9,6 +9,8 @@ class Categories extends \Magento\Framework\View\Element\Template
      */
     protected $categoryHelper;
 
+    protected $image = false;
+
     /**
      * @var \Magento\Catalog\Model\Indexer\Category\Flat\State
      */
@@ -269,7 +271,7 @@ class Categories extends \Magento\Framework\View\Element\Template
         //Find solution to foreach categories with all data in template
         $category = \Magento\Framework\App\ObjectManager::getInstance()
             ->create('Magento\Catalog\Model\Category')->load($id);
-
+        $this->image = $category->getData('image');
         return $category->getImageUrl();
     }
 
@@ -367,5 +369,10 @@ class Categories extends \Magento\Framework\View\Element\Template
         $this->getLayout()->unsetChild('sidebar.main', 'gomage.categories');
         $this->getLayout()->setChild($parent, 'gomage.categories', 'gomage.categories.moved');
         $this->getLayout()->reorderChild($parent, 'gomage.categories', 0);
+    }
+
+    public function getImage()
+    {
+        return $this->image;
     }
 }

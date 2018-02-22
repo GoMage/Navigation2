@@ -41,7 +41,7 @@ $categoriesHelperImage = $this->helper('GoMage\Navigation\Helper\ImageSwatchHelp
                 data-active="1"
             <? endif;?> <?php if((!$item->isShowAppliedValues())): ?>style="display: none"<?php endif; ?>>
             <?php if($filter->getImageCategory($item->getValue())): ?>
-                <img src="<?= $filter->getImageCategory($item->getValue()) ?>"
+                <img src="<?= $categoriesHelper->resize($filter->getImageFile($item->getValue()), $filter->getImageCategory($item->getValue())) ?>"
                      width="<?=($categoriesHelper->getCategoriesImageWidth()) ? $block->escapeHtml($categoriesHelper->getCategoriesImageWidth()).'px' : '';?>"
                      height="<?=($categoriesHelper->getCategoriesImageHeight()) ? $block->escapeHtml($categoriesHelper->getCategoriesImageHeight()).'px' : '';?>"
                 >

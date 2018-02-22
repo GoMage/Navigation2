@@ -138,6 +138,7 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
             {
                 $category->load($category->getId());
                 $this->imageCategories[$category->getId()] = $category->getImageUrl();
+                $this->imageCat[$category->getId()] = $category->getData('image');
                 $this->itemDataBuilder->addItemData(
                     $category->getName(),
                     $category->getId(),
@@ -150,6 +151,11 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
     }
     public function isCategoryFilter() {
         return true;
+    }
+
+    public function getImageFile($id)
+    {
+        return $this->imageCat[$id];
     }
     public function getImageCategory($id) {
         $id = (int) $id;
