@@ -61,13 +61,13 @@ $categoriesHelperImage = $this->helper('GoMage\Navigation\Helper\ImageSwatchHelp
         </li>
         <?$cnt++;?>
     <? endforeach ?>
-    <?if($filter->isActive() && $filter->getGomageIsReset()):?>
+    <?if($filter->isActive() && $filter->getGomageIsReset() || ($filter->isActive() &&$filter->isCategoryFilter() && $categoriesHelper->isShowResetLink() )):?>
         <a
                 data-role="navigation-filter"
                 data-value=""
                 data-url="<?= $block->escapeUrl($filter->getRemoveUrl()) ?>"
                 data-param="<?=$block->escapeHtml($filter->getRequestVar()) ?>"
-            <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+            <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax()) && ( ($filter->isCategoryFilter() &&  $categoriesHelper->isAjax()) ||  !$filter->isCategoryFilter()) ):?>
                 data-ajax="1"
             <?else:?>
                 data-ajax="0"

@@ -135,6 +135,12 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_MAX_BLOCK_HEIGHT);
     }
 
+    public function isShowResetLink ()
+    {
+        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SYSTEM_CATEGORIES_RESET_LINK);
+    }
     /**
      * @return mixed
      */
@@ -225,16 +231,15 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
         if( !$height ) {
             $height = 100;
         }
-        $absolutePath = $this->_filesystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath('catalog/category/').$image;
+        $absolutePath = $this->_filesystem->getDirectoryWrite(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath('catalog/category/').$image;
         $imageResized = $this->_filesystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath('resized/' . $width . '/') . $image;
         //create image factory...
         $imageResize = $this->_imageFactory->create();
         $imageResize->open($absolutePath);
-        $imageResize->constrainOnly(TRUE);
-        $imageResize->keepTransparency(TRUE);
-        $imageResize->keepFrame(FALSE);
-        $imageResize->keepAspectRatio(TRUE);
-        $imageResize->keepAspectRatio(TRUE);
+        $imageResize->constrainOnly(true);
+        $imageResize->keepTransparency(true);
+        $imageResize->keepFrame(false);
+        $imageResize->keepAspectRatio(true);
         $imageResize->resize($width, $height);
         //destination folder
         $destination = $imageResized;

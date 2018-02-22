@@ -22,6 +22,11 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
     protected $request;
 
     /**
+     * @var \GoMage\Navigation\Helper\Url
+     */
+    protected $urlHelper;
+
+    /**
      * @var \GoMage\Navigation\Helper\Data
      */
     protected $helper;
@@ -51,6 +56,7 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
         \Magento\Framework\Registry $coreRegistry,
         \Magento\Framework\App\RequestInterface $request,
         \GoMage\Navigation\Helper\Data $helper,
+        \GoMage\Navigation\Helper\Url $urlHelper,
         \GoMage\Navigation\Helper\CategoryData $categoryHelper,
         \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory,
         array $data = []
@@ -63,6 +69,7 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
         $this->categoryHelper = $categoryHelper;
         $this->categoryCollectionFactory = $categoryCollectionFactory;
         $this->dataProvider = $categoryDataProviderFactory->create(['layer' => $this->getLayer()]);
+        $this->urlHelper = $urlHelper;
     }
 
     public function apply(\Magento\Framework\App\RequestInterface $request)
@@ -151,6 +158,14 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
     }
     public function isCategoryFilter() {
         return true;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRemoveUrl()
+    {
+        return $this->urlHelper->getFilterRemoveUrl($this);
     }
 
     public function getImageFile($id)

@@ -31,6 +31,7 @@ interface SystemConfigInterface
     const SYSTEM_CATEGORIES_CONFIG_ENABLE = 'enable';
     const SYSTEM_CATEGORIES_CONFIG_BLOCK_LOCATION = 'place';
     const SYSTEM_CATEGORIES_CONFIG_NAVIGATION_TYPE = 'navigation';
+    const SYSTEM_CATEGORIES_RESET_LINK = 'show_reset_link';
     const SYSTEM_CATEGORIES_CONFIG_FILTER_ACTION = 'action';
     const SYSTEM_CATEGORIES_CONFIG_SHOP_BY = 'shop_by';
     const SYSTEM_CATEGORIES_CONFIG_SHOW_ALL_SUBCATEGORIES = 'show_all';

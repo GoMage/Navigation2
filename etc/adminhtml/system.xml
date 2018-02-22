@@ -193,6 +193,13 @@
                     <label>Show Category in Shop by</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
+                <field id="show_reset_link" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Reset Link</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="shop_by">1</field>
+                    </depends>
+                </field>
                 <field id="max_block_height" translate="label" type="text" sortOrder="51" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Max block height, px</label>
                     <frontend_class>validate-number</frontend_class>

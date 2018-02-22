@@ -66,6 +66,10 @@ class Item extends \Magento\Catalog\Model\Layer\Filter\Item
         return true;
     }
 
+    public function isCategoryFilter() {
+        return false;
+    }
+
     /**
      * @return bool
      */

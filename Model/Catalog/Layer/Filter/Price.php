@@ -161,6 +161,10 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
         return $this->request->getParam($this->getRequestVar());
     }
 
+    public function isCategoryFilter() {
+        return false;
+    }
+
     /**
      * @return mixed|string
      */

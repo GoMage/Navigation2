@@ -96,6 +96,9 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
         return false;
     }
 
+    public function isCategoryFilter() {
+        return false;
+    }
     /**
      * @param \Magento\Framework\App\RequestInterface $request
      * @return $this

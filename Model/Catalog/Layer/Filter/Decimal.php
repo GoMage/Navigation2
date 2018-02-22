@@ -136,6 +136,9 @@ class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements Fil
         return $this->getCollection()->getAllAttributeValues($this->getAttributeModel());
     }
 
+    public function isCategoryFilter() {
+        return false;
+    }
     /**
      * @return bool|int
      */
