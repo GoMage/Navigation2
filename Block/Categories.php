@@ -86,7 +86,6 @@ class Categories extends \Magento\Framework\View\Element\Template
         \Magento\Catalog\Model\ResourceModel\Category $categoryResource,
         \Magento\Catalog\Model\Layer\Resolver $layerResolver
     ) {
-
         $this->catalogLayer = $layerResolver->get();
         $this->categoryHelper = $categoryHelper;
         $this->categoryFlatConfig = $categoryFlatState;
@@ -161,7 +160,7 @@ class Categories extends \Magento\Framework\View\Element\Template
      */
     public function getStoreCategories()
     {
-        return $this->getCategoryHelper()->getStoreCategories(true, false, true);
+        return $this->catalogLayer->getCurrentCategory()->getChildrenCategories();
     }
 
     /**
@@ -266,7 +265,7 @@ class Categories extends \Magento\Framework\View\Element\Template
      * @param $id
      * @return mixed
      */
-    public function getCategoryImage($id)
+        public function getCategoryImage($id)
     {
         //Find solution to foreach categories with all data in template
         $category = \Magento\Framework\App\ObjectManager::getInstance()
