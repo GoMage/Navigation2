@@ -251,13 +251,27 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
     public function getUrlCategory($params)
     {
+        $arrCat = explode('_',$this->request->get('cat'));
         $cat = $this->request->get('cat');
-        if($cat) {
+        if($cat && !in_array($params['cat'], $arrCat)) {
             $params['cat'] = $params['cat'].'_'.$cat;
         }
         return $this->_urlBuilder->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true, '_query' => $params]);
     }
     public function isThisActiveCategory($name) {
-        $this->request->get('cat') == strtolower($name);
+        $arrCat = explode(',',$this->request->get('cat'));
+        if(in_array(strtolower($name),$arrCat)) {
+           return true;
+        }
+        return false;
+    }
+
+    public function isInaCategoryRequest($name) {
+
+        $arrCat = explode(',',$this->request->get('cat'));
+        if(in_array(strtolower($name),$arrCat)) {
+           return true;
+        }
+        return false;
     }
 }

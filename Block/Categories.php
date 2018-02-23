@@ -76,7 +76,7 @@ class Categories extends \Magento\Framework\View\Element\Template
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
-        \Magento\Catalog\Helper\Category $categoryHelper,
+        \GoMage\Navigation\Helper\CategoryHelper $categoryHelper,
         \Magento\Catalog\Model\Indexer\Category\Flat\State $categoryFlatState,
         \Magento\Theme\Block\Html\Topmenu $topMenu,
         \GoMage\Navigation\Helper\Data $dataHelper,
@@ -160,7 +160,7 @@ class Categories extends \Magento\Framework\View\Element\Template
      */
     public function getStoreCategories()
     {
-        return $this->catalogLayer->getCurrentCategory()->getChildrenCategories();
+        return $this->getCategoryHelper()->getStoreCategories(true, false, true);
     }
 
     /**
@@ -175,19 +175,20 @@ class Categories extends \Magento\Framework\View\Element\Template
         } else {
             $subcategories = $category->getChildren();
         }
+        if($subcategories) {
+            foreach ($subcategories as $cat) {
+                if ($this->getCategoriesDataHelper()->isHideEmptyCategories() && !$this->getProductsCount($cat) && !$cat->getChildrenCount()) {
+                    continue;
+                }
 
-        foreach ($subcategories as $cat) {
-            if ($this->getCategoriesDataHelper()->isHideEmptyCategories() && !$this->getProductsCount($cat) && !$cat->getChildrenCount()) {
-                continue;
+                $data[] = [
+                    'entity_id' => $cat['entity_id'],
+                    'url' => $this->getCategoryHelper()->getCategoryUrl($cat),
+                    'name' => $cat->getName(),
+                    'level' => $cat->getLevel(),
+                    'children' => $this->getChildCategories($cat)
+                ];
             }
-
-            $data[] = [
-                'entity_id' => $cat['entity_id'],
-                'url' => $this->getCategoryHelper()->getCategoryUrl($cat),
-                'name' => $cat->getName(),
-                'level' => $cat->getLevel(),
-                'children' => $this->getChildCategories($cat)
-            ];
         }
 
         return $data;

@@ -25,7 +25,7 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                                 value="<?= $helperData->getUrlCategory(['cat'=>strtolower($category->getName())]) ?>">
                             <?= $block->escapeHtml($category->getName()) ?>
                         </option>
-                        <? if ($block->getCategoriesDataHelper()->getShowAllSubcategories()): ?>
+                        <? if ($block->getCategoriesDataHelper()->getShowAllSubcategories() || $helperData->isInaCategoryRequest($category->getName())): ?>
                             <?= $block->getSelectList($block->getChildCategories($category)); ?>
                         <?endif;?>
                     </select>
