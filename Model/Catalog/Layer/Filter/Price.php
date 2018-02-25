@@ -231,10 +231,20 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
      */
     protected function getCleanCollection()
     {
+        $productCollection = $this->getLayer()->getProductCollection();
         $collection = $this->layer->getCollectionProvider()->getCollection($this->layer->getCurrentCategory());
         $collection->updateSearchCriteriaBuilder();
+        $collection = $this->getLayer()->getCollectionProvider()->getCollection($this->getLayer()->getCurrentCategory());
+        $this->getLayer()->prepareProductCollection($collection);
+
+        foreach ($productCollection->getAddedFilters() as $field => $condition) {
+            if ($this->getAttributeModel()->getAttributeCode() == $field) {
+                continue;
+            }
+            $collection->addFieldToFilter($field, $condition);
+        }
         $this->layer->prepareProductCollection($collection);
-        return $collection;
+        return $productCollection;
     }
 
     /**
