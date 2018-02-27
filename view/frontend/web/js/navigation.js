@@ -502,6 +502,9 @@ define([
             var params = new Params();
             this.options.filters.each(function (index, filter) {
                 if (filter.isActive()) {
+                    if(filter.getParam() == 'cat' && filter.getValue() == '') {
+                        return;
+                    }
                     params.set(filter.getParam(), filter.getValue());
                 }
             });
