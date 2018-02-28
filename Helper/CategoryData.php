@@ -219,7 +219,7 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
                . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_SHOP_BY);
     }
 
-    public function resize($image, $absolutePath)
+    public function resize($image)
     {
         $width = $this->getCategoriesImageWidth();
         $height = $this->getCategoriesImageHeight();

@@ -239,7 +239,7 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
     protected function getItemFormattedValue($item)
     {
         if (!$this->dataHelper->isUseFriendlyUrls()) {
-            return $item->getValue();
+            return $item->getLabel();
         }
 
         return mb_strtolower(str_replace(' ', '+', htmlentities($item->getLabel())));

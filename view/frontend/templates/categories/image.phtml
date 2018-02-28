@@ -13,7 +13,7 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
     </div>
     <div class="block-content block-content-gan-categories">
         <div class="block-content-in" <?= ($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
-            <ul class="gan-categories-list gan-categories-list-img<?=($block->getCategoriesDataHelper()->getCategoriesImageAlignment()) ? ' gan-categories-list-alignment-' . $block->escapeHtml($block->getCategoriesDataHelper()->getCategoriesImageAlignment()) : '';?><?=($block->getCategoriesDataHelper()->isShowCheckboxes()) ? ' gan-categories-list-img-checkbox' : '';?>">
+            <ul class="gan-categories-list gan-categories-list-img <?=($block->getCategoriesDataHelper()->getCategoriesImageAlignment()) ? ' gan-categories-list-alignment-' . $block->escapeHtml($block->getCategoriesDataHelper()->getCategoriesImageAlignment()) : '';?><?=($block->getCategoriesDataHelper()->isShowCheckboxes()) ? ' gan-categories-list-img-checkbox' : '';?>">
                 <?
                 foreach($block->getStoreCategories() as $category):
                     if (!$category->getIsActive()) continue;?>
