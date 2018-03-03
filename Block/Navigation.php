@@ -174,18 +174,26 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
             $this->getCategoryDataHelper()->isCategoriesShowCollapsed()) {
             $cnt ++;
         }
-
-        foreach ($this->getFilters() as $filter) {
-           if(get_class($filter) == 'GoMage\Navigation\Model\Catalog\Layer\Filter\Category') {
-               continue;
-           }
-            if ($filter->getItemsCount()) {
-                if (!(bool) $filter->getGomageIsCollapsed()) {
-                    $data[] = $cnt;
-                }
-                $cnt++;
-            }
+        if($this->request->get('collapsed_expanded')) {
+           $filterOpened = explode('_', $this->request->get('collapsed_expanded'));
         }
+
+            foreach ($this->getFilters() as $filter) {
+                if (get_class($filter) == 'GoMage\Navigation\Model\Catalog\Layer\Filter\Category') {
+                    continue;
+                }
+                if ($filter->getItemsCount()) {
+                    if (
+                        (!(bool)$filter->getGomageIsCollapsed() && !$this->request->get('collapsed_expanded'))
+                        || ($this->request->get('collapsed_expanded') && in_array(strtolower($filter->getName()), $filterOpened))
+                    ) {
+                        $data[] = $cnt;
+                    }
+                    $cnt++;
+                }
+            }
+
+
         return $data;
     }
 

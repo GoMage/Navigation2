@@ -42,7 +42,8 @@ define([
             amountToolbarNumber: 0,
             ganLastNumber: '.gan-last-number',
             breadcrumbs: '.breadcrumbs',
-            toolbar: '.toolbar-products'
+            toolbar: '.toolbar-products',
+            collapsedContainer: '.collapsed-apply-settings'
         },
 
         _create: function () {
@@ -102,11 +103,13 @@ define([
             $(e.target).closest('.filter-options-content').find(this.options.linkMoreElement).show();
             $(e.target).closest('.filter-options-content').find(this.options.moreLinkLess).show();
             $(e.target).closest('.filter-options-content').find(this.options.moreLink).hide();
+            $(e.target).closest('.filter-options-content').find(this.options.moreLink).attr('data-show-more',1)
         },
         moreLinkLess: function (e) {
             $(e.target).closest('.filter-options-content').find(this.options.linkMoreElement).hide();
             $(e.target).closest('.filter-options-content').find(this.options.moreLinkLess).hide();
             $(e.target).closest('.filter-options-content').find(this.options.moreLink).show();
+            $(e.target).closest('.filter-options-content').find(this.options.moreLink).attr('data-show-more',0)
         },
         _initFilters: function () {
             var elements = $(this.options.filterControl);
@@ -191,6 +194,13 @@ define([
 
                 }
             }
+            $(this.options.collapsedContainer).on('click', function () {
+                if( $(this).attr('data-collapsed-filter') == 1) {
+                    $(this).attr('data-collapsed-filter', 0)
+                } else {
+                    $(this).attr('data-collapsed-filter', 1)
+                }
+            })
         },
 
         _bindAjaxAutoload: function () {
@@ -508,7 +518,25 @@ define([
                     params.set(filter.getParam(), filter.getValue());
                 }
             });
+            var paramcollapsed = [];
+            var paramsMore = [];
 
+            $(this.options.collapsedContainer).each(function () {
+                if($(this).attr('data-collapsed-filter') == 1) {
+                    paramcollapsed.push($(this).attr('data-collapsed-param'));
+                }
+            });
+
+            $(this.options.moreLink).each(function () {
+                if($(this).attr('data-show-more') == 1) {
+                    paramsMore.push($(this).attr('data-more-value'));
+                }
+            });
+
+            paramcollapsed = paramcollapsed.join('_')
+            paramsMore = paramsMore.join('_')
+            params.set('collapsed_expanded', paramcollapsed);
+            params.set('more_show', paramsMore);
             return params;
         },
 

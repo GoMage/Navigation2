@@ -70,7 +70,7 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                                 <?php if($countApplied): ?>
                                     <div data-role="collapsible" class="filter-options-item <?= $block->escapeHtml($block->getItemClass()) ?>"
                                          style="<?= $block->escapeHtml($block->getItemWidthStyle()) ?>">
-                                        <dt data-role="title" role="heading" style="overflow: inherit" aria-level="3" class="filter-options-title">
+                                        <dt  data-collapsed-param = "<?php echo strtolower($filter->getName()); ?>" data-collapsed-filter ="<?php echo ((int)!$filter->getGomageIsCollapsed()) ?>" data-role="title" role="heading" style="overflow: inherit" aria-level="3" class="filter-options-title collapsed-apply-settings">
                                             <?= $block->escapeHtml(__($filter->getName())) ?>
                                             <?php
                                                 $tooltip = $this->getLayout()->createBlock('GoMage\Navigation\Block\Navigation\Tooltip');

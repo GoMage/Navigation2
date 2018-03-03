@@ -23,7 +23,7 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
       $cnt = 0;
     ?>
     <? foreach ($filterItems as $item): ?>
-        <li class="item <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?>" style="<?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'display:none': '' ?>">
+        <li class="item <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?>" style="<?=((!empty(($optionsLimit) && $cnt >= $optionsLimit)) && !$helperData->isShowMore($filter->getName())) ? 'display:none': '' ?>">
 
             <? if ($item->getCount() > 0 || ($helperData->isShowEmptyCategory() && $filter->isCategoryFilter())): ?>
                 <a <? if(!$item->getIsActive()):?> href="<?= $block->escapeUrl($item->getGomageUrl()); ?> <?endif;?>"
@@ -74,7 +74,7 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
         </a>
     <?endif;?>
     <?php if($optionsLimit && count($filterItems) > $optionsLimit): ?>
-        <a class="gan_link_more"><?=__('More') ?>&#9660;</a>
-        <a class="gan_link_more_less" style="display: none"><?=__('Less') ?>&#9650;</a>
+        <a style=" <?= ($helperData->isShowMore($filter->getName()) ) ? 'display:none': '' ?>" class="gan_link_more" data-show-more = "<?php echo $helperData->isShowMore($filter->getName()) ?>" data-more-value = "<?php echo strtolower($filter->getName()); ?>" data-more-params="more_show"><?=__('More') ?>&#9660;</a>
+        <a class="gan_link_more_less" style=" <?= (!$helperData->isShowMore($filter->getName()) ) ? 'display:none': '' ?>"><?=__('Less') ?>&#9650;</a>
     <?php endif; ?>
 </ol>

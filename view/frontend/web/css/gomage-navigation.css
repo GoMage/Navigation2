@@ -656,9 +656,7 @@ button.gan-custom-button{
 .filter-options-content a.gan_link_reset:hover{
   color: #3399CC;
 }
-.gan_link-more-element{
-  display: none;
-}
+
 .gan_link_more_less{
   display: none;
 }

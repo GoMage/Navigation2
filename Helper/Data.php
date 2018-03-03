@@ -15,6 +15,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     protected $scopeConfig;
 
+    protected $showMore = [];
     /**
      * @var \Magento\Framework\App\Request\Http
      */
@@ -264,6 +265,21 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
            return true;
         }
         return false;
+    }
+
+    public function isRequestMore()
+    {
+        return $this->request->get('more_show');
+    }
+    public function isShowMore($name)
+    {
+            if($this->request->get('more_show'))
+            {
+                $this->showMore = explode('_', $this->request->get('more_show'));
+                return (int) in_array(strtolower($name), $this->showMore);
+
+            }
+            return 0;
     }
 
     public function isInaCategoryRequest($name) {

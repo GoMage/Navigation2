@@ -40,7 +40,7 @@ $cnt = 0;
                         case '3':
                             ?>
                             <div class="<?= $block->escapeHtml($selected);?> swatch-option  <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?> <?=$block->escapeHtml($data['custom_style']) ?>"
-
+                                 style="<?=((!empty(($optionsLimit) && $cnt >= $optionsLimit) && !$helperData->isShowMore($filter->getName()) )) ? 'display:none': '' ?>
                                  option-type="3"
                                  option-id="<?=$block->escapeHtml($option) ?>"
                                  option-label="<?=$block->escapeHtml($data['label']) ?>"
@@ -58,6 +58,7 @@ $cnt = 0;
                             $swatchData['swatches'][$option]['value']); ?>
                             <div class="<?= $block->escapeHtml($selected);?> swatch-option  <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?> image <?=$block->escapeHtml($data['custom_style']) ?>"
                                  option-type="2"
+                                 style="<?=((!empty(($optionsLimit) && $cnt >= $optionsLimit) && !$helperData->isShowMore($filter->getName()) )) ? 'display:none': '' ?>
                                  option-id="<?=$block->escapeHtml($option) ?>"
                                  option-label="<?=$block->escapeHtml($data['label']) ?>"
                                  option-tooltip-thumb="<?=$block->escapeHtml($swatchThumbPath) ?>"
@@ -69,13 +70,14 @@ $cnt = 0;
                             <? break;
                         case '1':
                             ?>
-                            <div class="<?= $block->escapeHtml($selected);?> swatch-option  <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?> color <?=$block->escapeHtml($data['custom_style']) ?>"
+                            <div  class="<?= $block->escapeHtml($selected);?> swatch-option  <?=((!empty($optionsLimit) && $cnt >= $optionsLimit)) ? 'gan_link-more-element': '' ?> color <?=$block->escapeHtml($data['custom_style']) ?>"
                                  option-type="1"
                                  option-id="<?=$block->escapeHtml($option) ?>"
                                  option-label="<?=$block->escapeHtml($data['label']) ?>"
                                  option-tooltip-thumb=""
                                  option-tooltip-value="<?=$block->escapeHtml($swatchData['swatches'][$option]['value']) ?>"
                                  style="
+                                 <?=((!empty(($optionsLimit) && $cnt >= $optionsLimit && !$helperData->isShowMore($filter->getName())))) ? 'display:none': '' ?>;
                                          background: <?=$block->escapeHtml($swatchData['swatches'][$option]['value']) ?> no-repeat center;
                                          background-size: initial;
                                         <?= $block->escapeHtml(!empty($filter->getGomageImageWidth()) ? 'width:' . $filter->getGomageImageWidth() . 'px' : '');?>;
@@ -86,6 +88,7 @@ $cnt = 0;
                         default:
                             ?>
                             <div class="<?= $block->escapeHtml($selected);?> swatch-option  <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?> text <?=$block->escapeHtml($data['custom_style']) ?>"
+                                 style="<?=((!empty(($optionsLimit) && $cnt >= $optionsLimit)) && !$helperData->isShowMore($filter->getName())) ? 'display:none': '' ?>"
                                  option-type="0"
                                  option-id="<?=$block->escapeHtml($option) ?>"
                                  option-label="<?=$block->escapeHtml($data['label']) ?>"
@@ -119,8 +122,8 @@ $cnt = 0;
     <?endif;?>
 </div>
 <?php if($optionsLimit && count($filterItems) > $optionsLimit): ?>
-<a class="gan_link_more"><?=__('More') ?>&#9660;</a>
-<a class="gan_link_more_less" style="display: none"><?=__('Less') ?>&#9650;</a>
+<a style=" <?= ($helperData->isShowMore($filter->getName()) ) ? 'display:none': '' ?>" data-show-more = "<?php echo $helperData->isShowMore($filter->getName()) ?>" data-more-value = "<?php echo strtolower($filter->getName()); ?>" data-more-params="more_show" class="gan_link_more"><?=__('More') ?>&#9660;</a>
+<a class="gan_link_more_less" style=" <?= (!$helperData->isShowMore($filter->getName()) ) ? 'display:none': '' ?>"><?=__('Less') ?>&#9650;</a>
 <?php endif; ?>
 <script>
     require(["jquery", "jquery/ui", "Magento_Swatches/js/swatch-renderer"], function ($) {
