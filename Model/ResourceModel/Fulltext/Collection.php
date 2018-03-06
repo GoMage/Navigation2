@@ -65,4 +65,25 @@ class Collection extends \Magento\CatalogSearch\Model\ResourceModel\Fulltext\Col
         $this->setSearchCriteriaBuilder($searchCriteriaBuilder);
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getMaxBasePrice()
+    {
+
+        $select = $this->getSelect();
+        $priceExpression = $this->getPriceExpression($select) . ' ' . $this->getAdditionalPriceExpression($select);
+        $sqlEndPart = ') * ' . $this->getCurrencyRate() . ', 2)';
+        $select = $this->_getSelectCountSql($select, false);
+        $select->columns(
+            [
+                'max' => 'ROUND(MAX(' . $priceExpression . $sqlEndPart,
+                'min' => 'ROUND(MIN(' . $priceExpression . $sqlEndPart,
+                'std' => $this->getConnection()->getStandardDeviationSql('ROUND((' . $priceExpression . $sqlEndPart),
+            ]
+        );
+
+        return $this;
+    }
 }

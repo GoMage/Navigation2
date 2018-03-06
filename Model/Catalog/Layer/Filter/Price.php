@@ -215,7 +215,12 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
      */
     public function getMinBasePrice()
     {
-        return $this->getCleanCollection()->getMinPrice();
+        $data = $this->getCleanCollection()->getMaxBasePrice()->getData();
+        if(isset($data[0]) && isset($data[0]['min'])) {
+            return $data[0]['min'];
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -223,7 +228,13 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
      */
     public function getMaxBasePrice()
     {
-        return $this->getCleanCollection()->getMaxPrice();
+        $data = $this->getCleanCollection()->getMaxBasePrice()->getData();
+        if(isset($data[0]) && isset($data[0]['max'])) {
+            return $data[0]['max'];
+        } else {
+            return null;
+        }
+
     }
 
     /**
@@ -234,7 +245,6 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
         $productCollection = $this->getLayer()->getProductCollection();
         $collection = $this->layer->getCollectionProvider()->getCollection($this->layer->getCurrentCategory());
         $collection->updateSearchCriteriaBuilder();
-        $collection = $this->getLayer()->getCollectionProvider()->getCollection($this->getLayer()->getCurrentCategory());
         $this->getLayer()->prepareProductCollection($collection);
 
         foreach ($productCollection->getAddedFilters() as $field => $condition) {
@@ -244,7 +254,7 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
             $collection->addFieldToFilter($field, $condition);
         }
         $this->layer->prepareProductCollection($collection);
-        return $productCollection;
+        return $collection;
     }
 
     /**
