@@ -467,13 +467,24 @@ define([
                 beforeSend: (this._ajaxSendShowMore).bind(this),
                 complete: (this._ajaxCompleteShowMore).bind(this),
                 success: function (response) {
+                    var elementHtml = '';
                     if (successCallback) {
                         successCallback.call(this, response);
                     }
+                    $(this.options.productOlItems).find('.product-item').last().each(function () {
+                        this.nextSibling.parentNode.removeChild(this.nextSibling);
+                    });
+
                     var newProducts = $(response.content).find(this.options.productOlItems).first().html();
+                    $(response.content).find(this.options.productOlItems).first().find('.product-item').each(
+                        function () {
+                            elementHtml = elementHtml + '<li class="item product product-item">'+$(this).html()+'</li>';
+                        }
+                    );
+                    console.log(elementHtml);
                     var toolbar = $(response.content).find(this.options.divPages).html();
                     $(this.options.divPages).html(toolbar);
-                    $(this.options.productListContainer).first().append(newProducts);
+                    $(this.options.productListContainer).first().append(elementHtml);
                     this.options.showMore = false;
                     var lastNumber = parseInt($(this.options.ganToolbarAmount).attr('data-last-number'));
                     var totalNumber = parseInt($(this.options.ganToolbarAmount).attr('data-total-number'));
