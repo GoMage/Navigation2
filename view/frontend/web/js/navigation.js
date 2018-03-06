@@ -5,9 +5,10 @@ define([
     "./params",
     "./slider",
     "./loader",
+    "catalogAddToCart",
     "jquery/ui",
     "mage/translate"
-], function ($, Filter, Params, SliderPrice, Loader) {
+], function ($, Filter, Params, SliderPrice, Loader, catalogAddToCart) {
     "use strict";
 
     $.widget('gomage.navigation', {
@@ -514,6 +515,7 @@ define([
                     element.unbind();
                     element.on('click', {element: element}, $.proxy(this._processFilter, this));
                     this.options.showMore = false;
+                    $( "form[data-role='tocart-form']" ).catalogAddToCart();
 
                 }.bind(this)
             });
