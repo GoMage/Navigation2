@@ -231,6 +231,7 @@ define([
             params.clear();
             params.set('gan_ajax_more', 1);
             this._ajaxMoreProducts(url, params);
+            return false;
         },
 
         _processBackToTop: function () {
@@ -449,7 +450,6 @@ define([
                     $(this.options.mainContainer).trigger('contentUpdated');
                     $(this.options.breadcrumbsContainer).trigger('contentUpdated');
                     $(this.options.authentication).trigger('bindTrigger');
-                    $('.gan-last-number').text('catCount');
                     this.setCategoryUrl(url);
 
                 }.bind(this)
@@ -482,7 +482,6 @@ define([
                             elementHtml = elementHtml + '<li class="item product product-item">'+$(this).html()+'</li>';
                         }
                     );
-                    console.log(elementHtml);
                     var toolbar = $(response.content).find(this.options.divPages).html();
                     $(this.options.divPages).html(toolbar);
                     $(this.options.productListContainer).first().append(elementHtml);
@@ -490,6 +489,7 @@ define([
                     var lastNumber = parseInt($(this.options.ganToolbarAmount).attr('data-last-number'));
                     var totalNumber = parseInt($(this.options.ganToolbarAmount).attr('data-total-number'));
                     var page =  parseInt( $(this.options.divPagesNextItem).attr('data-value'));
+                    console.log(page);
                     if( !page ) {
                         page =  parseInt( $('.gan-last-page a:eq(1)').attr('data-value'));
                         page = page +1;

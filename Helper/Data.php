@@ -247,7 +247,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         if (($isAjax || $this->isUseAutoScrolling()) && $this->isEnable()) {
             return 'GoMage_Navigation::html/pager.phtml';
         } else {
-            return 'Magento_Theme::html/pager.phtml';
+            return 'GoMage_Navigation::html/pager_no_ajax.phtml';
         }
     }
     public function getUrlCategory($params)

@@ -424,7 +424,7 @@ div.block.block-gan-categories{
 .gan-loader-img-bottom .gan-loader-img{
   -webkit-flex: 0 0 100%;
   -ms-flex    : 0 0 100%;
-  flex        : 0 0 100%;  
+  flex        : 0 0 100%;
   text-align: center;
   margin-right: 0;
 }
@@ -433,7 +433,7 @@ div.block.block-gan-categories{
 }
 .gan-loader-img-bottom .gan-loader-img{
   -ms-flex-order: 10;
-  -webkit-order : 10; 
+  -webkit-order : 10;
   order         : 10;
   margin-top: 10px;
 }
@@ -761,4 +761,14 @@ body.page-layout-1column .filter-options-title:after{
   top: 12px;
   right: 13px;
   z-index: auto;
+}
+#button-more:active {
+  background: #eeeeee;
+}
+#button-more, #gan-to-top-button-gomage {
+  background: #eeeeee;
+}
+
+#button-more:hover, #gan-to-top-button-gomage:hover {
+  background: #e4e4e4;
 }
