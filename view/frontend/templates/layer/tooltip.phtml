@@ -5,6 +5,7 @@
 ?>
 <? if($filter->getGomageIsShowTooltip()):?>
     <?php $text = $block->getTooltipText($filter->getGomageTooltipText() ); ?>
+    <?php $text = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    ', '    '), '', $text); ?>
     <?php if(strlen($text)> 0  && ($filter->getGomageTooltipWidth()  && $filter->getGomageTooltipHeight())): ?>
         <div class="gan-tooltip">
             <div class="gan-tooltip-toggle" style="color: <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewTooltipBackgroundColor());?>">?</div>
