@@ -762,13 +762,3 @@ body.page-layout-1column .filter-options-title:after{
   right: 13px;
   z-index: auto;
 }
-#button-more:active {
-  background: #eeeeee;
-}
-#button-more, #gan-to-top-button-gomage {
-  background: #eeeeee;
-}
-
-#button-more:hover, #gan-to-top-button-gomage:hover {
-  background: #e4e4e4;
-}

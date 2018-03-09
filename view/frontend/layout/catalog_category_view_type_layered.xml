@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-    <referenceBlock name="head.additional">
-        <block class="Magento\Framework\View\Element\Template" name="go.mage.style" template="GoMage_Navigation::layer/style.phtml"/>
-    </referenceBlock>
-    <referenceContainer name="main">
+        <referenceBlock name="head.additional">
+            <block class="Magento\Framework\View\Element\Template" name="go.mage.style" template="GoMage_Navigation::layer/style.phtml"/>
+        </referenceBlock>
+    <referenceBlock name="main">
         <block class="GoMage\Navigation\Block\Categories" name="gomage.categories">
             <action method="unsetChild" ifconfig="gomage_navigation/category/shop_by">
                 <argument name="block" xsi:type="helper" helper="GoMage\Navigation\Helper\Data::removeBlocCategoriesOrCategory" />
             </action>
         </block>
-    </referenceContainer>
+    </referenceBlock>
     <referenceContainer name="sidebar.main" >
         <block class="GoMage\Navigation\Block\Categories" name="gomage.categories">
             <action method="unsetChild" ifconfig="gomage_navigation/category/shop_by">
@@ -31,15 +31,15 @@
             </action>
         </block>
     </referenceContainer>
-    <referenceContainer name="product_list_toolbar_pager">
+    <referenceBlock name="product_list_toolbar_pager">
         <arguments>
             <argument name="template" xsi:type="helper" helper="GoMage\Navigation\Helper\Data::getPagerTheme"/>
         </arguments>
-    </referenceContainer>
-    <referenceContainer name="product_list_toolbar">
+    </referenceBlock>
+    <referenceBlock name="product_list_toolbar">
         <action method="setTemplate">
             <argument name="template" xsi:type="string">GoMage_Navigation::product/list/toolbar.phtml</argument>
         </action>
-    </referenceContainer>
+    </referenceBlock>
     </body>
 </page>

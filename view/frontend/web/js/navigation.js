@@ -230,6 +230,7 @@ define([
             var params = this._getParams();
             params.clear();
             params.set('gan_ajax_more', 1);
+            $('#button-more').blur();
             this._ajaxMoreProducts(url, params);
             return false;
         },
@@ -243,6 +244,7 @@ define([
             }
             else
                 $("html, body").animate({ scrollTop: 0 }, parseInt(this.options.backToTopSpeed));
+            $('#gan-to-top-button-gomage').blur();
         },
 
         _processCategory: function (event) {
