@@ -250,4 +250,17 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
         return $resizedURL;
 
     }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getCategoryImage($id)
+    {
+        //Find solution to foreach categories with all data in template
+        $category = \Magento\Framework\App\ObjectManager::getInstance()
+            ->create('Magento\Catalog\Model\Category')->load($id);
+        return $category->getData('image');
+    }
+
 }

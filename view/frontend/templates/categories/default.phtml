@@ -27,10 +27,10 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                         <a href="#"<?= ($block->getCurrentCategoryId() == $category->getId()) ? ' class="selected"' : ''; ?>>
                             <span><?= $block->escapeHtml($category->getName()) ?></span>
                         </a>
+                        <? if ($block->getCategoriesDataHelper()->getShowAllSubcategories() || $helperData->isInaCategoryRequest($category->getName())): ?>
+                            <?= $block->getOlList($block->getChildCategories($category)); ?>
+                        <? endif; ?>
                     </li>
-                    <? if ($block->getCategoriesDataHelper()->getShowAllSubcategories() || $helperData->isInaCategoryRequest($category->getName())): ?>
-                        <?= $block->getOlList($block->getChildCategories($category)); ?>
-                    <? endif; ?>
                 <? endforeach; ?>
             </ul>
         </div>

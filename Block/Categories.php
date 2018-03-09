@@ -225,6 +225,19 @@ class Categories extends \Magento\Framework\View\Element\Template
      * @param $data
      * @return string
      */
+    public function getOlImageList($data)
+    {
+        $block = $this->getListBlock();
+        $block->setTemplate('GoMage_Navigation::categories/list/image.phtml');
+        $block->assign('data', $data);
+
+        return $block->toHtml();
+    }
+
+    /**
+     * @param $data
+     * @return string
+     */
     public function getSelectList($data)
     {
         $block = $this->getListBlock();

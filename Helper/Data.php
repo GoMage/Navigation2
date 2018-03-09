@@ -285,7 +285,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     public function isInaCategoryRequest($name) {
 
-        $arrCat = explode(',',$this->request->get('cat'));
+        $arrCat = explode('_',$this->request->get('cat'));
         if(in_array(strtolower($name),$arrCat)) {
            return true;
         }

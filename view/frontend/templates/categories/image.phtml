@@ -34,7 +34,11 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
                                 <span><?= $block->escapeHtml($category->getName());?></span>
                             <?endif;?>
                         </a>
+                        <? if ($block->getCategoriesDataHelper()->getShowAllSubcategories() || $helperData->isInaCategoryRequest($category->getName())): ?>
+                            <?= $block->getOlImageList($block->getChildCategories($category)); ?>
+                        <? endif; ?>
                     </li>
+
                 <? endforeach; ?>
             </ul>
         </div>

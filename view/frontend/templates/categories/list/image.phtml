@@ -2,18 +2,29 @@
 /**
  * @var $categoriesBlock \GoMage\Navigation\Block\Categories
  */
-
+$helperDataCat = $this->helper('GoMage\Navigation\Helper\Data');
+$categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
 ?>
 
 <?foreach ($data as $category):?>
-    <? $name = ($categoriesBlock->getDataHelper()->isShowImageName()) ? $category['name'] : ''; ?>
-    <ol>
-        <li>
+    <? $name = ($categoriesHelper->isShowImageName()) ? $category['name'] : ''; ?>
+    <?php $image = $block->getCategoryImage($category['entity_id']); ?>
+    <?php $image = $block->getImage(); ?>
+    <?php $image =  $categoriesHelper->getCategoryImage($category['entity_id'])  ?>
+    <ol class="testimage">
+        <li data-ajax="<?=$categoriesBlock->escapeHtml($isAjax)?>" data-role="navigation-filter" data-type="categories-li" data-url="<?= $helperDataCat->getUrlCategory(['cat'=>strtolower($category['name'])]) ?>">
             <a href="<?=$categoriesBlock->escapeUrl($category['url'])?>">
-                <img
-                        src="<?=$categoriesBlock->escapeUrl($categoriesBlock->getCategoryImage($category['entity_id']))?>"
-                        width="<?=$categoriesBlock->escapeHtml($width)?>"
-                        height="<?=$categoriesBlock->escapeHtml($height)?>"><?=$categoriesBlock->escapeHtml($name)?></a>
+                <?php if($image): ?>
+                    <img
+                            src="<?= $categoriesHelper->resize($image) ?>"
+                            width="<?=$categoriesBlock->escapeHtml($categoriesHelper->getCategoriesImageWidth())?>"
+                            height="<?=$categoriesBlock->escapeHtml($categoriesHelper->getCategoriesImageHeight())?>">
+                <?php endif; ?>
+                <? if($categoriesHelper->isShowImageName()): ?>
+                    <span><?= $name;?></span>
+                <?endif;?>
+            </a>
+
             <? if (is_array($category['children'])):?>
                 <?=$categoriesBlock->getImageCategoriesList($category['children']);?>
             <?endif;?>
