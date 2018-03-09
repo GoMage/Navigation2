@@ -14,7 +14,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
     protected $scopeConfig;
-
+    protected $assetRepository;
     protected $showMore = [];
     /**
      * @var \Magento\Framework\App\Request\Http
@@ -26,9 +26,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @param Context $context
      */
     public function __construct(
-        Context $context
+        Context $context,
+        \Magento\Framework\View\Asset\Repository $assetRepository
     ) {
-    
+        $this->assetRepository = $assetRepository;
         parent::__construct($context);
         $this->scopeConfig = $context->getScopeConfig();
         $this->request = $context->getRequest();
@@ -289,5 +290,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
            return true;
         }
         return false;
+    }
+
+    public function getAssets()
+    {
+        return $this->assetRepository;
     }
 }

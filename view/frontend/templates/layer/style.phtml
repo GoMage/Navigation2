@@ -1,4 +1,18 @@
 <?php $helperViewData = $this->helper('GoMage\Navigation\Helper\NavigationViewData') ?>
+<?php
+/**
+ * @var GoMage\Navigation\Helper\Data $helperData
+ */
+      $helperData = $this->helper(GoMage\Navigation\Helper\Data::class);
+      $asset = $helperData->getAssets();
+?>
+<?php if($helperData->isEnable()): ?>
+<link rel="stylesheet" type="text/css" href="<?php echo $asset->createAsset('GoMage_Navigation::css/gomage-navigation.css')->getUrl(); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo $asset->createAsset('GoMage_Navigation::css/jslider.blue.css')->getUrl(); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo $asset->createAsset('GoMage_Navigation::css/jslider.css')->getUrl(); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo $asset->createAsset('GoMage_Navigation::css/jslider.plastic.css')->getUrl(); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo $asset->createAsset('GoMage_Navigation::css/jslider.round.css')->getUrl(); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo $asset->createAsset('GoMage_Navigation::css/jslider.round.plastic.css')->getUrl(); ?>">
 <style type="text/css">
 
     <?if($helperViewData->getNavigationViewSliderLineHeight() < $helperViewData->getNavigationViewSliderElementHeight()):?>
@@ -49,3 +63,5 @@
 
     }
 </style>
+
+<?php endif; ?>
