@@ -48,6 +48,7 @@ class FilterRenderer extends Template implements FilterRendererInterface
      */
     public $tooltip;
 
+    protected $layerResolver;
     /**
      * @var \GoMage\Navigation\Helper\NavigationViewData
      */
@@ -67,6 +68,7 @@ class FilterRenderer extends Template implements FilterRendererInterface
         Template\Context $context,
         \Magento\Framework\Registry $coreRegistry,
         \Magento\Swatches\Block\LayeredNavigation\RenderLayered $renderLayered,
+        \Magento\Catalog\Model\Layer\Resolver $layerResolver,
         \GoMage\Navigation\Helper\Url $urlHelper,
         \GoMage\Navigation\Helper\Data $dataHelper,
         \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper,
@@ -81,6 +83,7 @@ class FilterRenderer extends Template implements FilterRendererInterface
         $this->renderLayered = $renderLayered;
         $this->storeManager = $context->getStoreManager();
         $this->navigationViewHelper = $navigationViewHelper;
+        $this->layerResolver = $layerResolver;
 
         parent::__construct($context, $data);
     }
@@ -115,7 +118,11 @@ class FilterRenderer extends Template implements FilterRendererInterface
      */
     protected function _getCategory()
     {
-        return $this->coreRegistry->registry('current_category');
+        $category =  $this->coreRegistry->registry('current_category');
+        if(!$category) {
+            $category = $this->layerResolver->get()->getCurrentCategory();
+        }
+        return $category;
     }
 
     /**

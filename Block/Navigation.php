@@ -72,7 +72,7 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper,
         array $data = []
     ) {
-    
+
         $this->catalogLayer = $layerResolver->get();
         $this->filterList = $filterList;
         $this->visibilityFlag = $visibilityFlag;

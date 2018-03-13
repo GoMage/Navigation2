@@ -36,6 +36,8 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
      */
     protected $imageCategories = [];
 
+    protected $layerResolver;
+
     /**
      * @var \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory
      */
@@ -52,6 +54,7 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
         \Magento\Catalog\Model\Layer $layer,
         \Magento\Catalog\Model\Layer\Filter\Item\DataBuilder $itemDataBuilder,
         \Magento\Framework\Escaper $escaper,
+        \Magento\Catalog\Model\Layer\Resolver $layerResolver,
         \Magento\Catalog\Model\Layer\Filter\DataProvider\CategoryFactory $categoryDataProviderFactory,
         \Magento\Framework\Registry $coreRegistry,
         \Magento\Framework\App\RequestInterface $request,
@@ -64,6 +67,7 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
         parent::__construct($filterItemFactory, $storeManager, $layer, $itemDataBuilder, $escaper, $categoryDataProviderFactory, $data);
         $this->_requestVar = 'cat';
         $this->coreRegistry = $coreRegistry;
+        $this->layerResolver = $layerResolver;
         $this->request = $request;
         $this->helper = $helper;
         $this->categoryHelper = $categoryHelper;
@@ -98,6 +102,9 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
         }
 
         $mainCategory = $this->coreRegistry->registry('current_category');
+        if(!$mainCategory) {
+            $mainCategory = $this->layerResolver->get()->getCurrentCategory();
+        }
         $this->dataProvider->setCategoryId($mainCategory->getId());
 
         return $this;

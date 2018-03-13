@@ -296,4 +296,12 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return $this->assetRepository;
     }
+
+    public function getQuerySearchText()
+    {
+        $query = $this->request->get('q');
+        if(!$query)
+            $query = '';
+        return $query;
+    }
 }

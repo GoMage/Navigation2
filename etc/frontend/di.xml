@@ -21,6 +21,11 @@
             </argument>
         </arguments>
     </virtualType>
+    <virtualType name="GoMage\Navigation\Block\Navigation\Search" type="GoMage\Navigation\Block\Navigation">
+        <arguments>
+            <argument name="filterList" xsi:type="object">searchFilterList</argument>
+        </arguments>
+    </virtualType>
     <type name="GoMage\Navigation\Block\Navigation">
         <arguments>
             <argument name="filterList" xsi:type="object">categoryFilterList</argument>
