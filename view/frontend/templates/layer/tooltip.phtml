@@ -5,8 +5,9 @@
 ?>
 <? if($filter->getGomageIsShowTooltip()):?>
     <?php $text = $block->getTooltipText($filter->getGomageTooltipText() ); ?>
-    <?php $text = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    ', '    '), '', $text); ?>
-    <?php if(strlen($text)> 0  && ($filter->getGomageTooltipWidth()  && $filter->getGomageTooltipHeight())): ?>
+    <?php  $PCREpattern  =  '/\r\n+|\r|\n+|\s+|\t+/u'; ?>
+    <?php $text = preg_replace($PCREpattern, '', $text); ?>
+    <?php if(strlen($text)> 0 ): ?>
         <div class="gan-tooltip">
             <div class="gan-tooltip-toggle" style="color: <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewTooltipBackgroundColor());?>">?</div>
             <div class="gan-tooltip-content">

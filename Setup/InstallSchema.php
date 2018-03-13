@@ -154,7 +154,9 @@ class InstallSchema implements InstallSchemaInterface
         );
 
         $installer->getConnection()->createTable($table);
-
+        $cmsPage = $installer->getTable('cms_page');
+        $installer->getConnection()->addColumn($cmsPage, 'location',  "TINYINT(1) NOT NULL DEFAULT 0");
+        $installer->getConnection()->addColumn($cmsPage, 'navigation_category_id',  "int(10) NOT NULL DEFAULT 0");
         $installer->endSetup();
     }
 }
