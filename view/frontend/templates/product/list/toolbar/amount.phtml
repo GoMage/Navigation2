@@ -16,6 +16,7 @@ $helper = $this->helper('GoMage\Navigation\Helper\Data');
     <p class="toolbar-amount gan-toolbar-amount" id="toolbar-amount"
        data-last-number = "<?php echo $block->getLastNum() ?>"
        data-total-number = "<?php echo $block->getTotalNum() ?>"
+       data-limit-number = "<?php echo $block->getLimit() ?>"
     >
         <?php if ($block->getLastPageNum() > 1): ?>
             <?= __('Items %1-%2 of %3',

@@ -404,6 +404,9 @@ define([
         },
 
         _ajaxFilter: function (url, params, successCallback) {
+            if(this.options.q) {
+                params.set('q', this.options.q)
+            }
             $(window).off('scroll');
             $.ajax({
                 url: url,
@@ -445,7 +448,7 @@ define([
                     if (successCallback) {
                         successCallback.call(this, response);
                     }
-
+                    $(this.options.mainContainer).remove();
                     $(this.options.mainContainer).html(response.content);
                     $(this.options.breadcrumbsContainer).html(response.breadcrumbs);
 
