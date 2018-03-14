@@ -494,7 +494,6 @@ define([
                     var lastNumber = parseInt($(this.options.ganToolbarAmount).attr('data-limit-number'));
                     var totalNumber = parseInt($(this.options.ganToolbarAmount).attr('data-total-number'));
                     var page =  parseInt( $(this.options.divPagesNextItem).attr('data-value'));
-                    console.log(page);
                     if( !page ) {
                         page =  parseInt( $('.gan-last-page a:eq(1)').attr('data-value'));
                         page = page +1;
