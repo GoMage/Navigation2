@@ -449,7 +449,7 @@ define([
                         successCallback.call(this, response);
                     }
                     $(this.options.mainContainer).remove();
-                    $(this.options.mainContainer).html(response.content);
+                    $(this.options.breadcrumbs).after(response.content);
                     $(this.options.breadcrumbsContainer).html(response.breadcrumbs);
 
                     $(this.options.mainContainer).trigger('contentUpdated');
@@ -491,7 +491,7 @@ define([
                     $(this.options.divPages).html(toolbar);
                     $(this.options.productListContainer).first().append(elementHtml);
                     this.options.showMore = false;
-                    var lastNumber = parseInt($(this.options.ganToolbarAmount).attr('data-last-number'));
+                    var lastNumber = parseInt($(this.options.ganToolbarAmount).attr('data-limit-number'));
                     var totalNumber = parseInt($(this.options.ganToolbarAmount).attr('data-total-number'));
                     var page =  parseInt( $(this.options.divPagesNextItem).attr('data-value'));
                     console.log(page);
