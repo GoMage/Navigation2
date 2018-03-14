@@ -9,11 +9,12 @@
     <?php $text = preg_replace($PCREpattern, '', $text); ?>
     <?php if(strlen($text)> 0 ): ?>
         <div class="gan-tooltip">
-            <div class="gan-tooltip-toggle" style="color: <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewTooltipBackgroundColor());?>">?</div>
+            <div class="gan-tooltip-toggle"
+                 style="color: <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewTooltipBackgroundColor());?>">?</div>
             <div class="gan-tooltip-content">
                 <div class="gan-tooltip-content-in" style="
-                        width: <?=$block->escapeHtml($filter->getGomageTooltipWidth());?>px;
-                        height: <?=$block->escapeHtml($filter->getGomageTooltipHeight());?>px;
+                        width: <?= (int)$filter->getGomageTooltipWidth() != 0 ? $block->escapeHtml($filter->getGomageTooltipWidth()).'px': 'auto';?>;
+                        height: <?= (int)$filter->getGomageTooltipHeight() != 0 ? $block->escapeHtml($filter->getGomageTooltipWidth()).'px': 'auto';?>;
                         background: <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewTooltipWindowBackgroundColor());?>;">
                     <div class="gan-tooltip-text"><?=$block->getTooltipText($filter->getGomageTooltipText());?></div>
                     <?if($block->getNavigationViewHelper()->isNavigationViewTooltipHideOnCloseButton()):?>
