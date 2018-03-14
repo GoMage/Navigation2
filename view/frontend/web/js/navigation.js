@@ -450,7 +450,7 @@ define([
                     }
                     $(this.options.mainContainer).remove();
                     $(this.options.breadcrumbs).after(response.content);
-                    $(this.options.breadcrumbsContainer).html(response.breadcrumbs);
+                    $(this.options.breadcrumbsContainer).replaceWith(response.breadcrumbs);
 
                     $(this.options.mainContainer).trigger('contentUpdated');
                     $(this.options.breadcrumbsContainer).trigger('contentUpdated');
