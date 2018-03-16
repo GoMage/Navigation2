@@ -607,6 +607,7 @@ body.ajax-loading .block-search{
   font-size: 14px;
   line-height: 1.5;
   word-wrap: break-word;
+  word-break: normal;
 }
 @media all and (max-width: 768px){
   .gan-tooltip-content{
