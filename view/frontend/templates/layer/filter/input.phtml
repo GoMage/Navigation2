@@ -104,6 +104,7 @@ $priceValues = explode(';', $filter->getSingleValue());
             <?if($filter->isActive() && $filter->getGomageIsReset()):?>
                 <a
                         data-role="navigation-filter"
+                        data-param-to-remove="<?=$block->escapeHtml($filter->getRequestVar()) ?>"
                         data-value=""
                         data-url="<?= $block->escapeUrl($filter->getRemoveUrl()) ?>"
                     <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>

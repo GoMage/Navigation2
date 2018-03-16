@@ -384,8 +384,10 @@ define([
         _processFilter: function (event) {
             event.preventDefault();
             var element = event.data.element;
+            if(element.length > 1 && element.attr('data-param') == 'p') {
+                var element =  event.target.closest('a[data-role="navigation-filter"]')
+            }
             var filter = new Filter(element);
-
             var params = this._getParams();
             if (filter.isClear()) {
                 params.clear();

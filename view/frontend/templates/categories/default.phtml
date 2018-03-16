@@ -19,7 +19,8 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
             <ul class="gan-categories-list<?= ($block->getCategoriesDataHelper()->isShowCheckboxes()) ? ' gan-categories-list-checkbox' : '' ; ?>">
                 <?
                 foreach($block->getStoreCategories() as $category):
-                     if (!$category->getIsActive()) continue;?>
+                     if (!$category->getIsActive() || $block->isHidecategory($category)) continue;?>
+                    <?php $block->setCategoryParent($category) ?>
                     <li data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>"
                         data-role="navigation-filter"
                         data-type="categories-li"
@@ -27,10 +28,10 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                         <a href="#"<?= ($block->getCurrentCategoryId() == $category->getId()) ? ' class="selected"' : ''; ?>>
                             <span><?= $block->escapeHtml($category->getName()) ?></span>
                         </a>
+                        <? if ($block->getCategoriesDataHelper()->getShowAllSubcategories() || $helperData->isInaCategoryRequest($category->getName())): ?>
+                            <?= $block->getOlList($block->getChildCategories($category)); ?>
+                        <? endif; ?>
                     </li>
-                    <? if ($block->getCategoriesDataHelper()->getShowAllSubcategories() || $helperData->isInaCategoryRequest($category->getName())): ?>
-                        <?= $block->getOlList($block->getChildCategories($category)); ?>
-                    <? endif; ?>
                 <? endforeach; ?>
             </ul>
         </div>

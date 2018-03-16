@@ -3,13 +3,14 @@
  * @var $categoriesBlock \GoMage\Navigation\Block\Categories
  */
 
+$helperDataCat = $this->helper('GoMage\Navigation\Helper\Data');
 ?>
 
 <? foreach ($data as $category): ?>
     <? $selected = ($currentCategoryId == $category['entity_id']) ? 'selected' : ''; ?>
     <option <?= $categoriesBlock->escapeHtml($selected) ?>
             value="<?= $categoriesBlock->escapeUrl($category['url']) ?>"> <?= $categoriesBlock->escapeHtml(str_repeat('&nbsp;&nbsp;', $category['level']) . $category['name']) ?></option>
-    <? if (is_array($category['children'])):?>
+    <? if ((is_array($category['children']) && !empty(($category['children']))) || $helperDataCat->isInaCategoryRequest($category['name'])):?>
         <?=$categoriesBlock->getSelectList($category['children']);?>
     <?endif;?>
 <? endforeach; ?>

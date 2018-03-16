@@ -16,7 +16,7 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
             <ul class="gan-categories-list">
                 <?
                 foreach($block->getStoreCategories() as $category):
-                     if (!$category->getIsActive()) continue;?>
+                    if (!$category->getIsActive() || $block->isHidecategory($category)) continue;?>
                     <li
                             data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>"
                             data-role="navigation-filter"

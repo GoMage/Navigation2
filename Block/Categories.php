@@ -11,6 +11,8 @@ class Categories extends \Magento\Framework\View\Element\Template
 
     protected $image = false;
 
+    protected $categoryParent;
+
     /**
      * @var \Magento\Catalog\Model\Indexer\Category\Flat\State
      */
@@ -147,6 +149,16 @@ class Categories extends \Magento\Framework\View\Element\Template
         return $this->navigationViewHelper;
     }
 
+    public function setCategoryParent($category)
+    {
+        $this->categoryParent = $category->getName();
+    }
+
+    public function getCategoryParent($category)
+    {
+       return $this->categoryParent;
+    }
+
     /**
      * @return mixed
      */
@@ -275,6 +287,11 @@ class Categories extends \Magento\Framework\View\Element\Template
         return $this->categoryResource->getProductCount($category);
     }
 
+    public function isHidecategory($category)
+    {
+       return $this->getCategoriesDataHelper()->isHideEmptyCategories() && 
+           !$this->getProductsCount($category) && !$category->getChildrenCount();
+    }
     /**
      * @param $id
      * @return mixed

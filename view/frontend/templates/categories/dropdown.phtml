@@ -15,7 +15,7 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
         <div class="gan-categories-list-dropdown block-content-in" <?=($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
             <?
             foreach($block->getStoreCategories() as $category):
-                if (!$category->getIsActive()) continue;?>
+                if (!$category->getIsActive() || $block->isHidecategory($category)) continue;?>
                     <select
                             data-role="navigation-filter"
                             data-type="categories-select"

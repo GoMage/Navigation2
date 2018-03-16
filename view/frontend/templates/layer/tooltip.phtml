@@ -14,7 +14,7 @@
             <div class="gan-tooltip-content">
                 <div class="gan-tooltip-content-in" style="
                         width: <?= (int)$filter->getGomageTooltipWidth() != 0 ? $block->escapeHtml($filter->getGomageTooltipWidth()).'px': 'auto';?>;
-                        height: <?= (int)$filter->getGomageTooltipHeight() != 0 ? $block->escapeHtml($filter->getGomageTooltipWidth()).'px': 'auto';?>;
+                        height: <?= (int)$filter->getGomageTooltipHeight() != 0 ? $block->escapeHtml($filter->getGomageTooltipHeight()).'px': 'auto';?>;
                         background: <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewTooltipWindowBackgroundColor());?>;">
                     <div class="gan-tooltip-text"><?=$block->getTooltipText($filter->getGomageTooltipText());?></div>
                     <?if($block->getNavigationViewHelper()->isNavigationViewTooltipHideOnCloseButton()):?>

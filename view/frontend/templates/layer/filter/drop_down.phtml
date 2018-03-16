@@ -41,7 +41,7 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
                 data-role="navigation-filter"
                 data-value=""
                 data-url="<?= $block->escapeUrl($filter->getRemoveUrl()) ?>"
-                data-param="<?=$block->escapeHtml($filter->getRequestVar()) ?>"
+                data-param-to-remove="<?=$block->escapeHtml($filter->getRequestVar()) ?>"
             <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax()) && ( ($filter->isCategoryFilter() &&  $categoriesHelper->isAjax()) ||  !$filter->isCategoryFilter()) ):?>
                 data-ajax="1"
             <?else:?>
