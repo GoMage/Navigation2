@@ -208,7 +208,8 @@ class FilterRenderer extends Template implements FilterRendererInterface
         $params = explode('_', $params);
 
         $label = mb_strtolower(str_replace(' ', '+', htmlentities($item->getLabel())));
-        if ($this->dataHelper->isUseFriendlyUrls() && in_array($label, $params)) {
+        $criteria = mb_strtolower(str_replace(' ', '+', $item->getLabel()));
+        if ($this->dataHelper->isUseFriendlyUrls() && in_array($criteria, $params)) {
             $item->setIsActive(true);
         }
 

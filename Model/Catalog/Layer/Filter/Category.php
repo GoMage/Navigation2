@@ -207,7 +207,7 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
                 $params[] = $categoriesName[$item];
             }
         }
-
+        $params = array_unique($params);
         return $params;
     }
 

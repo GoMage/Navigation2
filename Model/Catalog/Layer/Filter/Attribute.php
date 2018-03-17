@@ -235,7 +235,7 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
                 $params[] = $this->options[$item];
             }
         }
-
+        $params = array_unique($params);
         return $params;
     }
 
