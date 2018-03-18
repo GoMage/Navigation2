@@ -334,9 +334,11 @@ class Categories extends \Magento\Framework\View\Element\Template
 
         if ($this->getCategoriesDataHelper()->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
             $this->getPageLayout() == '1column') {
-            $this->moveBlock('main');
+            $this->moveColumn('main');
             $this->canShowCategories = true;
             return;
+        } else {
+            $this->getLayout()->unsetChild('main', 'gomage.categories.column');
         }
 
         if ($this->getCategoriesDataHelper()->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN &&
@@ -391,6 +393,12 @@ class Categories extends \Magento\Framework\View\Element\Template
         }
     }
 
+    public function moveColumn($parent)
+    {
+        $this->getLayout()->unsetChild('main', 'gomage.categories.column');
+        $this->getLayout()->setChild($parent, 'gomage.categories.column', 'gomage.categories.moved');
+        $this->getLayout()->reorderChild($parent, 'gomage.categories.column', 0);
+    }
     /**
      * @param $parent
      */
