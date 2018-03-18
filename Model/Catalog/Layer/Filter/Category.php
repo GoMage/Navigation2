@@ -191,8 +191,14 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
             return $filters;
         }
 
+        $mainCategory = $this->coreRegistry->registry('current_category');
+        if(!$mainCategory) {
+            $mainCategory = $this->layerResolver->get()->getCurrentCategory();
+        }
+
         $collection = $this->categoryCollectionFactory->create();
         $collection->addAttributeToSelect('name');
+        $collection->addFieldToFilter('parent_id', $mainCategory->getId());
         $collection->addIsActiveFilter();
 
         $categoriesName = [];
@@ -201,10 +207,11 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
         }
 
         $params = [];
-        foreach ($filters as $item) {
 
-            if(isset($categoriesName[$item])) {
-                $params[] = $categoriesName[$item];
+        foreach ($filters as $item) {
+            $formatItem = html_entity_decode($this->formatCategoryName($item));
+            if(isset($categoriesName[$formatItem])) {
+                $params[] = $categoriesName[$formatItem];
             }
         }
         $params = array_unique($params);
