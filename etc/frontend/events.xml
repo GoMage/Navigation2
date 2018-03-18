@@ -3,7 +3,4 @@
     <event name="controller_front_send_response_before">
         <observer name="gomage_navigation_before_send" instance="GoMage\Navigation\Observer\BeforeSend" />
     </event>
-    <event name="layout_generate_blocks_after">
-        <observer name="gomage_layout_generate_blocks_after" instance="GoMage\Navigation\Observer\RemoveBlock" />
-    </event>
 </config>
