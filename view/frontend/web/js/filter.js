@@ -14,9 +14,6 @@ define([
             this.value = element.attr('data-value');
         }
         this.param = element.attr('data-param');
-        console.log(element);
-        console.log(this.param);
-        console.log(this.value);
         this.ajax = element.attr('data-ajax');
         this.active = element.attr('data-active');
         this.clear = element.attr('data-clear');

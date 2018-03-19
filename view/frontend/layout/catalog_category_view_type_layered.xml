@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceBlock name="head.additional">
             <block class="Magento\Framework\View\Element\Template" name="go.mage.style" template="GoMage_Navigation::layer/style.phtml"/>
@@ -17,6 +17,7 @@
         <block class="GoMage\Navigation\Block\Loader" name="gomage.loader"/>
     </referenceContainer>
     <referenceContainer name="main">
+        <block class="GoMage\Navigation\Block\Loader" name="gomage.loader"/>
         <block class="GoMage\Navigation\Block\Categories" name="gomage.categories.column">
             <action method="unsetChild" ifconfig="gomage_navigation/category/shop_by">
                 <argument name="block" xsi:type="helper" helper="GoMage\Navigation\Helper\Data::removeBlocCategoriesOrCategory" />
