@@ -10,7 +10,7 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
 ?>
 <ol class="items gan-filter gan-filter-default   <?php echo $helperData->getOptionsAlignment((int)$filter->getGomageOptionsAlignment()); ?>
 <? if($filter->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK || ($filter->isCategoryFilter() && $categoriesHelper->getCategoriesNavigationType() ) ) echo ' gan-filter-in-block'; ?>
-<? if($filter->getGomageIsCheckbox()  || ($filter->isCategoryFilter() && ($categoriesHelper->getCategoriesNavigationType() || $categoriesHelper->isShowCheckboxes()))):?> gan-filter-checkbox<?endif;?>"
+<? if($filter->getGomageIsCheckbox()  || ($filter->isCategoryFilter() && ($categoriesHelper->isShowCheckboxes()))):?> gan-filter-checkbox<?endif;?>"
     <? if($filter->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK && $filter->getGomageMaxBlockHeight() ||$categoriesHelper->getMaxBlockHeightCategories() ): ?>
         <?php if ($filter->isCategoryFilter() && $categoriesHelper->getMaxBlockHeightCategories()): ?>
             style="max-height:<?= $block->escapeHtml($filter->getGomageMaxBlockHeight()); ?>px;"

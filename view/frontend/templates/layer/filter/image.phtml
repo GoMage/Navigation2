@@ -11,7 +11,7 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
 $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
 $categoriesHelperImage = $this->helper('GoMage\Navigation\Helper\ImageSwatchHelper');
 ?>
-<ol class="items gan-filter gan-filter-default <? if($filter->getGomageIsCheckbox()  || ($filter->isCategoryFilter() && ($categoriesHelper->getCategoriesNavigationType() || $categoriesHelper->isShowCheckboxes()))):?> gan-filter-checkbox<?endif;?> <?=($categoriesHelper->getCategoriesImageAlignment()) ? ' gan-categories-list-alignment-' . $categoriesHelper->getCategoriesImageAlignment() : '';?>  <?php echo $helperData->getOptionsAlignment((int)$filter->getGomageOptionsAlignment()); ?>
+<ol class="items gan-filter gan-filter-default <? if($filter->getGomageIsCheckbox()  || ($filter->isCategoryFilter() && ($categoriesHelper->isShowCheckboxes()))):?> gan-filter-checkbox<?endif;?> <?=($categoriesHelper->getCategoriesImageAlignment()) ? ' gan-categories-list-alignment-' . $categoriesHelper->getCategoriesImageAlignment() : '';?>  <?php echo $helperData->getOptionsAlignment((int)$filter->getGomageOptionsAlignment()); ?>
 
 <? if($filter->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK) echo ' gan-filter-in-block'; ?>
 <? if($filter->getGomageIsCheckbox()):?> gan-filter-checkbox<?endif;?>"

@@ -256,10 +256,9 @@ define([
             var url = event.currentTarget.value;
             if(!url)
                 url = event.currentTarget.attributes['data-url'].nodeValue;
-
             var catCount = event.currentTarget.attributes['data-url'].nodeValue;
             var params = this._getParams();
-            params.clear();
+            //params.clear();
             params.set('gan_ajax_cat', 1);
 
             if (ajax) {
@@ -458,6 +457,7 @@ define([
                     $(this.options.breadcrumbsContainer).trigger('contentUpdated');
                     $(this.options.authentication).trigger('bindTrigger');
                     this.setCategoryUrl(url);
+                    this.setNavigationUrl(params);
 
                 }.bind(this)
             });
@@ -567,7 +567,10 @@ define([
             });
 
             paramcollapsed = paramcollapsed.join('_')
-            paramsMore = paramsMore.join('_')
+            paramsMore = paramsMore.join('_');
+            if(!params.get('product_list_dir')) {
+                params.set('product_list_dir', 'desc')
+            }
             params.set('collapsed_expanded', paramcollapsed);
             params.set('more_show', paramsMore);
             return params;
