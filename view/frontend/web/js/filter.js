@@ -14,6 +14,8 @@ define([
             this.value = element.attr('data-value');
         }
         this.param = element.attr('data-param');
+        this.categoiesParam = element.attr('data-param-cat-parent');
+        this.categoiesParamVal = element.attr('data-cat-parent');
         this.ajax = element.attr('data-ajax');
         this.active = element.attr('data-active');
         this.clear = element.attr('data-clear');
@@ -22,7 +24,12 @@ define([
 
     Filter.prototype = {
         constructor: Filter,
-
+        getCategoriesParam: function () {
+            return this.categoiesParam;
+        },
+        getCategoriesValue: function () {
+            return this.categoiesParamVal;
+        },
         isActive: function () {
             return this.active;
         },
@@ -52,4 +59,3 @@ define([
 
     return Filter;
 });
-

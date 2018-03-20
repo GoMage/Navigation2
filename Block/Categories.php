@@ -198,7 +198,8 @@ class Categories extends \Magento\Framework\View\Element\Template
                     'url' => $this->getCategoryHelper()->getCategoryUrl($cat),
                     'name' => $cat->getName(),
                     'level' => $cat->getLevel(),
-                    'children' => $this->getChildCategories($cat)
+                    'children' => $this->getChildCategories($cat),
+                    'parent_cat' => $category->getId()
                 ];
             }
         }

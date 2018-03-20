@@ -19,6 +19,11 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                     if (!$category->getIsActive() || $block->isHidecategory($category)) continue;?>
                     <li
                             data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>"
+                            data-value="<?= strtolower($category->getName()); ?>"
+                            data-param="cat"
+                        <?php if ($helperData->isInaCategoryRequest($category->getName())) : ?>
+                            data-active="1"
+                        <?php endif; ?>
                             data-role="navigation-filter"
                             data-type="categories-li"
                             data-url="<?= $helperData->getUrlCategory(['cat'=>strtolower($category->getName())]) ?>">

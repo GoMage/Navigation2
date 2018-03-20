@@ -8,8 +8,14 @@ $helperDataCat = $this->helper('GoMage\Navigation\Helper\Data');
 
 <? foreach ($data as $category): ?>
     <? $selected = ($currentCategoryId == $category['entity_id']) ? 'selected' : ''; ?>
-    <option <?= $categoriesBlock->escapeHtml($selected) ?>
-            value="<?= $categoriesBlock->escapeUrl($category['url']) ?>"> <?= $categoriesBlock->escapeHtml(str_repeat('&nbsp;&nbsp;', $category['level']) . $category['name']) ?></option>
+    <option  data-value="<?= strtolower($category['name']); ?>"
+             data-param="cat"
+             data-param-cat-parent = "<?php echo 'parent_cat_'.$category['entity_id'] ?>"
+             data-cat-parent = "<?php echo $category['parent_cat'] ?>"
+        <?php if ($helperDataCat->isInaCategoryRequest($category['name'])) : ?>
+            data-active="1"
+        <?php endif; ?> <?= $categoriesBlock->escapeHtml($selected) ?>
+            value="<?= $helperDataCat->getUrlCategory(['cat'=>strtolower($category['name']),'parent_cat_'.$category['entity_id']=>$category['parent_cat'] ]) ?>"> <?= $categoriesBlock->escapeHtml(str_repeat('&nbsp;&nbsp;', $category['level']) . $category['name']) ?></option>
     <? if ((is_array($category['children']) && !empty(($category['children']))) || $helperDataCat->isInaCategoryRequest($category['name'])):?>
         <?=$categoriesBlock->getSelectList($category['children']);?>
     <?endif;?>

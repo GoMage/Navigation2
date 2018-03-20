@@ -91,7 +91,6 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
         if(empty($filters)) {
             return parent::apply($request);
         }
-
         $this->getLayer()->getProductCollection()->addCategoriesFilter(['in' => $filters]);
         foreach ($filters as $filter) {
 
@@ -186,7 +185,6 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
     protected function getFormattedFilters()
     {
         $filters = explode('_', $this->request->getParam($this->getRequestVar()));
-
         if (!$this->helper->isUseFriendlyUrls()) {
             return $filters;
         }
@@ -198,11 +196,19 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
 
         $collection = $this->categoryCollectionFactory->create();
         $collection->addAttributeToSelect('name');
-        $collection->addFieldToFilter('parent_id', $mainCategory->getId());
         $collection->addIsActiveFilter();
 
         $categoriesName = [];
         foreach ($collection as $category) {
+            $parent = explode('/', $category->getPath());
+            if($this->request->getParam('parent_cat_'.$category->getId())) {
+                $requestParent = $this->request->getParam('parent_cat_'.$category->getId());
+            } else {
+                $requestParent = $mainCategory->getId();
+            }
+            if(!in_array($requestParent ,$parent)) {
+                continue;
+            }
             $categoriesName[html_entity_decode($this->formatCategoryName($category->getName()))] = $category->getId();
         }
 
@@ -214,7 +220,7 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
                 $params[] = $categoriesName[$formatItem];
             }
         }
-        $params = array_unique($params);
+       // $params = array_unique($params);
         return $params;
     }
 

@@ -529,14 +529,28 @@ define([
 
         _getParams: function () {
             var params = new Params();
+            var categories = $('.gan-categories-list li, .gan-categories-list-dropdown option');
+            var catActive = [];
             this.options.filters.each(function (index, filter) {
                 if (filter.isActive()) {
                     if(filter.getParam() == 'cat' && filter.getValue() == '') {
                         return;
                     }
                     params.set(filter.getParam(), filter.getValue());
+                    if(filter.getCategoriesParam()) {
+                        params.set(filter.getCategoriesParam(), filter.getCategoriesValue());
+                    }
                 }
             });
+            categories.each(function () {
+                if($(this).attr('data-active') == 1) {
+                    catActive.push($(this).attr('data-value'));
+                }
+            });
+            if(catActive.length > 0) {
+                catActive = catActive.join('_');
+                params.set('cat', catActive);
+            }
             var paramcollapsed = [];
             var paramsMore = [];
 

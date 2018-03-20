@@ -21,6 +21,11 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                             data-type="categories-select"
                             data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>">
                         <option
+                            data-value="<?= strtolower($category->getName()); ?>"
+                            data-param="cat"
+                            <?php if ($helperData->isInaCategoryRequest($category->getName())) : ?>
+                                data-active="1"
+                            <?php endif; ?>
                             <?= ($block->getCurrentCategoryId() == $category->getId()) ? 'selected' : ''; ?>
                                 value="<?= $helperData->getUrlCategory(['cat'=>strtolower($category->getName())]) ?>">
                             <?= $block->escapeHtml($category->getName()) ?>

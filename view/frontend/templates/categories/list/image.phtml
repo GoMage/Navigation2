@@ -12,7 +12,15 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
     <?php $image = $block->getImage(); ?>
     <?php $image =  $categoriesHelper->getCategoryImage($category['entity_id'])  ?>
     <ol class="testimage">
-        <li data-ajax="<?=$categoriesBlock->escapeHtml($isAjax)?>" data-role="navigation-filter" data-type="categories-li" data-url="<?= $helperDataCat->getUrlCategory(['cat'=>strtolower($category['name'])]) ?>">
+        <li  data-value="<?= strtolower($category['name']); ?>"
+             data-param="cat"
+             data-param-cat-parent = "<?php echo 'parent_cat_'.$category['entity_id'] ?>"
+             data-cat-parent = "<?php echo $category['parent_cat'] ?>"
+            <?php if ($helperDataCat->isInaCategoryRequest($category['name'])) : ?>
+                data-active="1"
+            <?php endif; ?>
+            data-ajax="<?=$categoriesBlock->escapeHtml($isAjax)?>" data-role="navigation-filter" data-type="categories-li"
+            data-url="<?= $helperDataCat->getUrlCategory(['cat'=>strtolower($category['name']),'parent_cat_'.$category['entity_id']=>$category['parent_cat'] ]) ?>">
             <a href="<?=$categoriesBlock->escapeUrl($category['url'])?>">
                 <?php if($image): ?>
                     <img
