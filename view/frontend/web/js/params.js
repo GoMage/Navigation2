@@ -54,8 +54,11 @@ define([
             if (this.data.hasOwnProperty('product_list_order')) {
                 result['product_list_order'] = this.data['product_list_order'];
             }
-            if (this.data.hasOwnProperty('product_list_mode')) {
-                result['product_list_mode'] = this.data['product_list_mode'];
+            if (this.data.hasOwnProperty('collapsed_expanded')) {
+                result['collapsed_expanded'] = this.data['collapsed_expanded'];
+            }
+            if (this.data.hasOwnProperty('more_show')) {
+                result['more_show'] = this.data['more_show'];
             }
             this.data = result;
         },

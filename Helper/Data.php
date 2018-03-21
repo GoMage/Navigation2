@@ -283,6 +283,18 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             return 0;
     }
 
+    public function IsCollapsed($name, $isRequest = false)
+    {
+        if($isRequest) {
+            return $this->request->get('collapsed_expanded');
+        }
+        $arrexpanded = explode('_',$this->request->get('collapsed_expanded'));
+        if(in_array(strtolower($name),$arrexpanded)) {
+            return true;
+        }
+        return false;
+    }
+
     public function isInaCategoryRequest($name) {
 
         $arrCat = explode('_',$this->request->get('cat'));
