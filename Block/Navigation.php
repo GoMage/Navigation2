@@ -168,15 +168,15 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
         foreach ($this->getFilters() as $filter) {
             if (get_class($filter) == 'GoMage\Navigation\Model\Catalog\Layer\Filter\Category') {
                 if (($this->getCategoryDataHelper()->isShowCategoryInShopBy() &&
-                    $this->getCategoryDataHelper()->isCategoriesShowCollapsed() && !$this->request->get('collapsed_expanded')) ||
+                     !$this->getCategoryDataHelper()->isCategoriesShowCollapsed() && !$this->request->get('collapsed_expanded')) ||
                     ($this->getCategoryDataHelper()->isShowCategoryInShopBy() && ($this->request->get('collapsed_expanded') && in_array(strtolower($filter->getName()), $filterOpened)))
                 ) {
                     $data[] = $cnt;
                     $cnt ++;
                     break;
                 }
-                if (($this->getCategoryDataHelper()->isShowCategoryInShopBy() &&
-                        $this->getCategoryDataHelper()->isCategoriesShowCollapsed()
+                if ((!$this->getCategoryDataHelper()->isShowCategoryInShopBy() &&
+                        !$this->getCategoryDataHelper()->isCategoriesShowCollapsed()
                         && !$this->request->get('collapsed_expanded')) ||
                     (!$this->getCategoryDataHelper()->isShowCategoryInShopBy() && ($this->request->get('collapsed_expanded') && in_array(strtolower($filter->getName()), $filterOpened)))) {
                     $data[] = $cnt;
@@ -188,8 +188,6 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
                 break;
             }
         }
-
-
             foreach ($this->getFilters() as $filter) {
                 if (get_class($filter) == 'GoMage\Navigation\Model\Catalog\Layer\Filter\Category') {
                     continue;
