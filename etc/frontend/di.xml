@@ -62,6 +62,9 @@
     <type name="Magento\Swatches\Helper\Media">
         <plugin name="gomage_swatch_resize_image" type="GoMage\Navigation\Plugin\SwatchImageResize" />
     </type>
+    <type name="Magento\Catalog\Model\ResourceModel\Product\Collection">
+        <plugin name="gomage_fix_sort_position" type="GoMage\Navigation\Plugin\FixSortPosition" />
+    </type>
     <type name="Magento\Catalog\Model\Layer\Resolver">
         <arguments>
             <argument name="layersPool" xsi:type="array">
