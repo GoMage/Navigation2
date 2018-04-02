@@ -239,7 +239,7 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
         $imageResize->constrainOnly(true);
         $imageResize->keepTransparency(true);
         $imageResize->keepFrame(false);
-        $imageResize->keepAspectRatio(true);
+        $imageResize->keepAspectRatio(false);
         $imageResize->resize($width, $height);
         //destination folder
         $destination = $imageResized;
