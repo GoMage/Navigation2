@@ -608,6 +608,7 @@ body.ajax-loading .block-search{
   line-height: 1.5;
   word-wrap: break-word;
   word-break: normal;
+  white-space: pre-wrap;
 }
 @media all and (max-width: 768px){
   .gan-tooltip-content{
