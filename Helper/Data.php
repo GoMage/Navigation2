@@ -251,6 +251,15 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             return 'GoMage_Navigation::html/pager_no_ajax.phtml';
         }
     }
+    public function getValueCategory($params)
+    {
+        $arrCat = explode('_',$this->request->get('cat'));
+        $cat = $this->request->get('cat');
+        if($cat && !in_array($params['cat'], $arrCat)) {
+            $params['cat'] = $params['cat'].'_'.$cat;
+        }
+       return $params['cat'];
+    }
     public function getUrlCategory($params)
     {
         $arrCat = explode('_',$this->request->get('cat'));

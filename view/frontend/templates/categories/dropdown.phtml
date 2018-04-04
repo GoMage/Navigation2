@@ -19,15 +19,25 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                     <select
                             data-role="navigation-filter"
                             data-type="categories-select"
+                            data-categories = "1"
+                            data-select ="1"
+                            data-value="<?= $helperData->getValueCategory(['cat'=>strtolower($category['name'])]) ?>"
+                            data-url="<?= $helperData->getUrlCategory(['cat'=>strtolower($category->getName())]) ?>"
                             data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>">
+                            <option
+                                    data-type="remove-item"
+                                    data-value=""
+                                    data-param-to-remove="cat"
+                                    value=""
+                            ><?php echo __('Choose Category')?></option>
                         <option
-                            data-value="<?= strtolower($category->getName()); ?>"
+                            data-value="<?= $helperData->getValueCategory(['cat'=>strtolower($category['name'])]) ?>"
                             data-param="cat"
                             <?php if ($helperData->isInaCategoryRequest($category->getName())) : ?>
                                 data-active="1"
                             <?php endif; ?>
-                            <?= ($block->getCurrentCategoryId() == $category->getId()) ? 'selected' : ''; ?>
-                                value="<?= $helperData->getUrlCategory(['cat'=>strtolower($category->getName())]) ?>">
+                            <?= ($helperData->isInaCategoryRequest($category->getName())) ? 'selected' : ''; ?>
+                                value="<?= $helperData->getValueCategory(['cat'=>strtolower($category['name'])]) ?>">
                             <?= $block->escapeHtml($category->getName()) ?>
                         </option>
                         <? if ($block->getCategoriesDataHelper()->getShowAllSubcategories() || $helperData->isInaCategoryRequest($category->getName())): ?>

@@ -215,7 +215,7 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
         $params = [];
 
         foreach ($filters as $item) {
-            $formatItem = html_entity_decode($this->formatCategoryName($item));
+            $formatItem = $this->formatCategoryName($item);
             if(isset($categoriesName[$formatItem])) {
                 $params[] = $categoriesName[$formatItem];
             }
@@ -230,7 +230,7 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
      */
     protected function formatCategoryName($name)
     {
-        return mb_strtolower(str_replace(' ', '+', htmlentities($name)));
+        return mb_strtolower(str_replace(' ', '+', $name));
     }
 
     /**

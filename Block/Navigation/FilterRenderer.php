@@ -209,11 +209,19 @@ class FilterRenderer extends Template implements FilterRendererInterface
 
         $label = mb_strtolower(str_replace(' ', '+', htmlentities($item->getLabel())));
         $criteria = mb_strtolower(str_replace(' ', '+', $item->getLabel()));
-        if ($this->dataHelper->isUseFriendlyUrls() && in_array($criteria, $params)) {
+        if ($this->dataHelper->isUseFriendlyUrls() &&
+            (in_array($criteria, $params)
+                || in_array(html_entity_decode($criteria), $params)
+                || in_array(htmlentities($criteria), $params))
+        ) {
             $item->setIsActive(true);
         }
 
-        if (!$this->dataHelper->isUseFriendlyUrls() && in_array($item->getValue(), $params)) {
+        if (!$this->dataHelper->isUseFriendlyUrls() &&
+                (in_array($criteria, $params)
+                || in_array(html_entity_decode($criteria), $params)
+                || in_array(htmlentities($criteria), $params))
+        ) {
             $item->setIsActive(true);
         }
     }

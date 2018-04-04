@@ -18,7 +18,8 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
                 foreach($block->getStoreCategories() as $category):
                     if (!$category->getIsActive() || $block->isHidecategory($category)) continue;?>
                     <li
-                            data-value="<?= strtolower($category->getName()); ?>"
+                            data-categories = "1"
+                            data-value="<?= $helperData->getValueCategory(['cat'=>strtolower($category['name'])]) ?>"
                             data-param="cat"
                         <?php if ($helperData->isInaCategoryRequest($category->getName())) : ?>
                             data-active="1"

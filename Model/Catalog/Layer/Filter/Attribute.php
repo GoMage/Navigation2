@@ -255,7 +255,7 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
      */
     protected function formatItemName($name)
     {
-        return mb_strtolower(str_replace(' ', '+', htmlentities($name)));
+        return mb_strtolower(str_replace(' ', '+', $name));
     }
 
     /**

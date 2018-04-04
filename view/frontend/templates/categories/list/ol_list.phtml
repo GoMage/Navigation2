@@ -9,6 +9,8 @@ $helperDataCat = $this->helper('GoMage\Navigation\Helper\Data');
         <?foreach ($data as $category):?>
             <? $active = ($currentCategoryId == $category['entity_id']) ? ' class="selected"' : '';?>
                 <li
+                        data-value="<?= $helperDataCat->getValueCategory(['cat'=>strtolower($category['name'])]) ?>"
+                        data-categories = "1"
                         data-value="<?= strtolower($category['name']); ?>"
                         data-param="cat"
                         data-param-cat-parent = "<?php echo 'parent_cat_'.$category['entity_id'] ?>"

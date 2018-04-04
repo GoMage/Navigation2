@@ -136,8 +136,7 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
         if (!empty($queryParams[$item->getFilter()->getRequestVar()])) {
             $paramValues = explode('_', $queryParams[$item->getFilter()->getRequestVar()]);
         }
-
-        if (!in_array($this->getItemFormattedValue($item), $paramValues)) {
+        if (!in_array(html_entity_decode($this->getItemFormattedValue($item)), $paramValues)) {
             $paramValues[] = $this->getItemFormattedValue($item);
         }
 
@@ -242,6 +241,6 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
             return $item->getLabel();
         }
 
-        return mb_strtolower(str_replace(' ', '+', htmlentities($item->getLabel())));
+        return mb_strtolower(str_replace(' ', '+', $item->getLabel()));
     }
 }

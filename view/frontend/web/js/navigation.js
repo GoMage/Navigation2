@@ -248,21 +248,27 @@ define([
         },
 
         _processCategory: function (event) {
-
             event.preventDefault();
             event.stopPropagation();
             var element = event.data.element;
+            var categories;
             var ajax = Number(event.currentTarget.attributes['data-ajax'].nodeValue);
             var url = event.currentTarget.value;
-            if(!url)
+            if(url && event.currentTarget.attributes['data-url'])
                 url = event.currentTarget.attributes['data-url'].nodeValue;
-            var catCount = event.currentTarget.attributes['data-url'].nodeValue;
+            var isCategories = event.currentTarget.attributes['data-categories'];
             var params = this._getParams();
-            //params.clear();
+            if(isCategories && isCategories.nodeValue && url &&  event.currentTarget.attributes['data-select']) {
+                categories = event.currentTarget.attributes['data-value'].nodeValue;
+                params.set('cat', categories);
+            } else if (isCategories && isCategories.nodeValue && !event.currentTarget.attributes['data-select']) {
+                categories = event.currentTarget.attributes['data-value'].nodeValue;
+                params.set('cat', categories);
+            }
             params.set('gan_ajax_cat', 1);
 
             if (ajax) {
-                return this._ajaxCategory(url, params, catCount);
+                return this._ajaxCategory(url, params);
             } else {
                 return $.mage.redirect(url);
             }
@@ -437,7 +443,7 @@ define([
 
         },
 
-        _ajaxCategory: function (url, params, catCount, successCallback) {
+        _ajaxCategory: function (url, params, successCallback) {
             $.ajax({
                 url: url,
                 type: 'get',
@@ -542,15 +548,15 @@ define([
                     }
                 }
             });
-            categories.each(function () {
-                if($(this).attr('data-active') == 1) {
-                    catActive.push($(this).attr('data-value'));
-                }
-            });
-            if(catActive.length > 0) {
-                catActive = catActive.join('_');
-                params.set('cat', catActive);
-            }
+            // categories.each(function () {
+            //     if($(this).attr('data-active') == 1) {
+            //         catActive.push($(this).attr('data-value'));
+            //     }
+            // });
+            // if(catActive.length > 0) {
+            //     catActive = catActive.join('_');
+            //     params.set('cat', catActive);
+            // }
             var paramcollapsed = [];
             var paramsMore = [];
 
@@ -616,7 +622,7 @@ define([
                 return ;
 
             params.remove('gan_ajax_filter');
-            friendleuse = (this.options.is_use_friendly === '1') ? '?' : '#'
+            friendleuse = '?'
             window.history.pushState(null, '', this.options.baseUrl + friendleuse + params.toUrlParams());
         },
 

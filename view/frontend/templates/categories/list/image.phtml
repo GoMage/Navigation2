@@ -11,8 +11,10 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
     <?php $image = $block->getCategoryImage($category['entity_id']); ?>
     <?php $image = $block->getImage(); ?>
     <?php $image =  $categoriesHelper->getCategoryImage($category['entity_id'])  ?>
-    <ol class="testimage">
-        <li  data-value="<?= strtolower($category['name']); ?>"
+    <ol class="gomage-tree-timage">
+        <li
+             data-value="<?= $helperDataCat->getValueCategory(['cat'=>strtolower($category['name'])]) ?>"
+             data-categories = "1"
              data-param="cat"
              data-param-cat-parent = "<?php echo 'parent_cat_'.$category['entity_id'] ?>"
              data-cat-parent = "<?php echo $category['parent_cat'] ?>"
@@ -33,7 +35,7 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
                 <?endif;?>
             </a>
 
-            <? if ((is_array($category['children']) && !empty(($category['children']))) || $helperDataCat->isInaCategoryRequest($category['name'])):?>
+            <? if (($categoriesBlock->getCategoriesDataHelper()->getShowAllSubcategories() && !empty(($category['children']))) || $helperDataCat->isInaCategoryRequest($category['name'])): ?>
                 <?=$categoriesBlock->getImageCategoriesList($category['children']);?>
             <?endif;?>
         </li>
