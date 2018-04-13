@@ -274,10 +274,10 @@ div.block.block-gan-categories{
   -ms-flex-wrap    : wrap;
   flex-wrap        : wrap;
 }
-.gan-categories-list-alignment-2 li{
+.gan-categories-list-alignment-2 > li{
   width: calc(50% - 5px);
 }
-.gan-categories-list-alignment-2 li:nth-child(2n){
+.gan-categories-list-alignment-2 > li:nth-child(2n){
   margin-left: 10px;
 }
 
