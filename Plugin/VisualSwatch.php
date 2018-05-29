@@ -3,6 +3,10 @@
 namespace GoMage\Navigation\Plugin;
 
 
+/**
+ * Class VisualSwatch
+ * @package GoMage\Navigation\Plugin
+ */
 class VisualSwatch
 {
     /**
@@ -16,27 +20,43 @@ class VisualSwatch
     protected $request;
 
     /**
+     * @var \Magento\Framework\UrlInterface
+     */
+    protected $helperData;
+
+    /**
      * VisualSwatch constructor.
      *
      * @param \Magento\Framework\UrlInterface
      */
       public function __construct(
-          \Magento\Framework\View\Element\Context  $context
+          \Magento\Framework\View\Element\Context  $context,
+          \GoMage\Navigation\Helper\Data $helperData
       ) {
             $this->request = $context->getRequest();
             $this->_urlBuilder = $context->getUrlBuilder();
+            $this->helperData = $helperData;
       }
 
-    public function aroundGetJsonConfig(
+    /**
+     * @param \Magento\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual $subject
+     * @param $result
+     * @return string
+     */
+    public function afterGetJsonConfig(
         \Magento\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual $subject,
-        \Closure $proceed
+        $result
     ) {
+          if(!$this->helperData->isEnable())
+          {
+              return $result;
+          }
         $values = [];
         foreach ($subject->getOptionValues() as $value) {
             $values[] = $value->getData();
         }
 
-        $data = [
+        $result = [
             'attributesData' => $values,
             'uploadActionUrl' => $this->getUrl('swatches/iframe/show', [
                 'attribute_id' => $this->request->get('attribute_id')
@@ -45,7 +65,7 @@ class VisualSwatch
             'isReadOnly' => (int)$subject->getReadOnly()
         ];
 
-        return json_encode($data);
+        return json_encode($result);
     }
 
     /**

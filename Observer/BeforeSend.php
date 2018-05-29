@@ -70,14 +70,15 @@ class BeforeSend implements ObserverInterface
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
-        if (($this->request->getRouteName() == 'catalog' || $this->request->getRouteName() == 'catalogsearch') && $this->request->isAjax() &&
+        if (($this->request->getRouteName() == 'catalog' || $this->request->getRouteName() == 'cms' || $this->request->getRouteName() == 'catalogsearch')
+            && $this->request->isAjax() &&
             (($this->request->getParam('gan_ajax_filter') ||
                 $this->request->getParam('gan_ajax_cat') ||
                 $this->request->getParam('gan_ajax_more')
             ))) {
                 $result = new DataObject();
 
-                if ($this->request->getParam('gan_ajax_more') && $this->request->getRouteName() == 'catalog') {
+                if ($this->request->getParam('gan_ajax_more')) {
                     $result->setData('content', $this->layout->renderElement('category.products'));
                 } else if ($this->request->getParam('gan_ajax_more')) {
                     $result->setData('content', $this->layout->renderElement('search.result'));

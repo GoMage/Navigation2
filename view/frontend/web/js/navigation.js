@@ -239,7 +239,7 @@ define([
 
             if (this.options.backToTopAction == 1) {
                 $('html, body').animate({
-                    scrollTop: (parseInt($(this.options.toolbar).offset().top))
+                    scrollTop: (parseInt($(this.options.toolbar).offset().top) - 40)
                 }, parseInt(this.options.backToTopSpeed));
             }
             else
