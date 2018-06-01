@@ -14,7 +14,9 @@
 <link rel="stylesheet" type="text/css" href="<?php echo $asset->createAsset('GoMage_Navigation::css/jslider.round.css')->getUrl(); ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo $asset->createAsset('GoMage_Navigation::css/jslider.round.plastic.css')->getUrl(); ?>">
 <style type="text/css">
-
+    .page-layout-1column .toolbar.toolbar-products {
+        position: static;
+    }
     <?if($helperViewData->getNavigationViewSliderLineHeight() < $helperViewData->getNavigationViewSliderElementHeight()):?>
     .gan-filter-slider .layout {
         padding-bottom: <?=$block->escapeHtml($helperViewData->getNavigationViewSliderElementHeight())?>px;

@@ -27,6 +27,7 @@
                 </arguments>
             </referenceBlock>
             <referenceContainer name="main">
+                <block class="GoMage\Navigation\Block\Loader" name="gomage.loader"/>
                 <block class="GoMage\Navigation\Block\Product\ProductList\More" name="gomage.products.more" />
                 <block class="Magento\Framework\View\Element\Template" name="gomage.back_to_top" >
                     <action method="setTemplate">

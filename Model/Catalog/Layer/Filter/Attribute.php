@@ -225,7 +225,7 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
 
         if (empty($this->options)) {
             foreach ($this->getAttributeModel()->getFrontend()->getSelectOptions() as $option) {
-                $this->options[html_entity_decode($this->formatItemName($option['label']))] = $option['value'];
+                $this->options[html_entity_decode($this->formatItemName($option['label']))] = trim($option['value']);
             }
         }
 

@@ -92,20 +92,19 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
             return parent::apply($request);
         }
         $this->getLayer()->getProductCollection()->addCategoriesFilter(['in' => $filters]);
+        //$this->getLayer()->getProductCollection()->addFieldToFilter('entity_id', ['in' => $ids]);
         foreach ($filters as $filter) {
 
             $this->dataProvider->setCategoryId($filter);
             $category = $this->dataProvider->getCategory();
-            $this->getLayer()->getProductCollection()->addCategoryFilter($category);
+            //$this->getLayer()->getProductCollection()->addCategoryFilter($category);
             $this->getLayer()->getState()->addFilter($this->_createItem($category->getName(), $filter));
         }
-
         $mainCategory = $this->coreRegistry->registry('current_category');
         if(!$mainCategory) {
             $mainCategory = $this->layerResolver->get()->getCurrentCategory();
         }
         $this->dataProvider->setCategoryId($mainCategory->getId());
-
         return $this;
     }
 

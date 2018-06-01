@@ -145,7 +145,6 @@ class FilterRenderer extends Template implements FilterRendererInterface
             $item->setGomageValue($this->urlHelper->getItemValue($item));
             $filters[$key] = $item;
         }
-
         $this->assign('filterItems', $filters);
 
         $html = $this->_toHtml();

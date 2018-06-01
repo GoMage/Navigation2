@@ -214,6 +214,9 @@
                 <field id="show_all" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Show All Subcategories</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field separator="," id="navigation">0,2,3,8</field>
+                    </depends>
                 </field>
                 <field id="is_collapsed" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Show Collapsed</label>

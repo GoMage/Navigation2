@@ -332,7 +332,6 @@ class Categories extends \Magento\Framework\View\Element\Template
         if (!$this->getDataHelper()->isEnable() || !$this->getCategoriesDataHelper()->isShowCategories()) {
             return;
         }
-
         if ($this->getCategoriesDataHelper()->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
             $this->getPageLayout() == '1column') {
             $this->moveColumn('main');
@@ -348,7 +347,6 @@ class Categories extends \Magento\Framework\View\Element\Template
             $this->canShowCategories = true;
             return;
         }
-
         if ($this->getCategoriesDataHelper()->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
             $this->getPageLayout() == '2columns-left') {
             $this->moveBlock('main');
