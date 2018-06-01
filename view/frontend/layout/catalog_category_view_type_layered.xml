@@ -30,6 +30,15 @@
             </action>
         </block>
     </referenceContainer>
-
+    <referenceBlock name="product_list_toolbar_pager">
+        <arguments>
+            <argument name="template" xsi:type="helper" helper="GoMage\Navigation\Helper\Data::getPagerTheme"/>
+        </arguments>
+    </referenceBlock>
+    <referenceBlock name="product_list_toolbar">
+        <action method="setTemplate">
+            <argument name="template" xsi:type="string">GoMage_Navigation::product/list/toolbar.phtml</argument>
+        </action>
+    </referenceBlock>
     </body>
 </page>

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Димасик
- * Date: 23.02.2018
- * Time: 22:29
- */
 
 namespace GoMage\Navigation\Helper;
 use Magento\Catalog\Api\CategoryRepositoryInterface;
