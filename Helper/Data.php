@@ -16,19 +16,26 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     protected $scopeConfig;
     protected $assetRepository;
     protected $showMore = [];
+    const CONTENT = 1;
     /**
      * @var \Magento\Framework\App\Request\Http
      */
     protected $request;
 
+    protected $cmsPage;
+
     /**
      * Data constructor.
      * @param Context $context
+     * @param \Magento\Framework\View\Asset\Repository $assetRepository
+     * @param \Magento\Framework\Registry $registry
      */
     public function __construct(
         Context $context,
-        \Magento\Framework\View\Asset\Repository $assetRepository
+        \Magento\Framework\View\Asset\Repository $assetRepository,
+        \Magento\Cms\Model\Page $cmsPage
     ) {
+        $this->cmsPage = $cmsPage;
         $this->assetRepository = $assetRepository;
         parent::__construct($context);
         $this->scopeConfig = $context->getScopeConfig();
@@ -152,9 +159,15 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getContentFilterType()
     {
+        if($this->cmsPage->getId() && !$this->cmsPage->getLocation() == self::CONTENT) {
+            return false;
+        }
+
         return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_CONTENT_FILTER_TYPE);
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_CONTENT_FILTER_TYPE
+        );
+
     }
 
     /**

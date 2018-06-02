@@ -1,6 +1,6 @@
 <?php
 
-namespace GoMage\Navigation\Block\Navigation;
+namespace GoMage\Navigation\Helper\Block\Navigation;
 
 use GoMage\Navigation\Model\Catalog\Layer\Filter\FilterInterface;
 
