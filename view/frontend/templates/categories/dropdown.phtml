@@ -36,7 +36,9 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                             <?php if ($helperData->isInaCategoryRequest($category->getName())) : ?>
                                 data-active="1"
                             <?php endif; ?>
-                            <?= ($helperData->isInaCategoryRequest($category->getName())) ? 'selected' : ''; ?>
+                            <?php if ($helperData->isInaCategoryRequest($category->getName())) : ?>
+                                class="selected"
+                            <?php endif; ?>
                                 value="<?= $helperData->getValueCategory(['cat'=>strtolower($category['name'])]) ?>">
                             <?= $block->escapeHtml($category->getName()) ?>
                         </option>

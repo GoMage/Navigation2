@@ -254,7 +254,7 @@ define([
             var categories;
             var ajax = Number(event.currentTarget.attributes['data-ajax'].nodeValue);
             var url = event.currentTarget.value;
-            if(url && event.currentTarget.attributes['data-url'])
+            if((url || url === 0) && event.currentTarget.attributes['data-url'])
                 url = event.currentTarget.attributes['data-url'].nodeValue;
             var isCategories = event.currentTarget.attributes['data-categories'];
             var params = this._getParams();
