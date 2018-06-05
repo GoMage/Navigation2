@@ -28,7 +28,9 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                             data-role="navigation-filter"
                             data-type="categories-li"
                             data-url="<?= $helperData->getUrlCategory(['cat'=>strtolower($category->getName())]) ?>">
-                        <a href="#"<?= ($block->getCurrentCategoryId() == $category->getId()) ? ' class="selected"' : ''; ?>>
+                        <a href="#"<?php if ($helperData->isInaCategoryRequest($category->getName())) : ?>
+                            class="selected"
+                        <?php endif; ?>>
                             <?= $block->escapeHtml($category->getName()) ?>
                         </a>
                     <? if ($block->getCategoriesDataHelper()->getShowAllSubcategories() || $helperData->isInaCategoryRequest($category->getName())): ?>

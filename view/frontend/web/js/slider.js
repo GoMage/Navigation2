@@ -1,10 +1,5 @@
 define([
     "jquery",
-    "./slider/jshashtable-2.1_src",
-    "./slider/jquery.numberformatter-1.2.3",
-    "./slider/tmpl",
-    "./slider/jquery.dependClass-0.1",
-    "./slider/draggable-0.1",
     "./slider/jquery.slider"
 ], function ($) {
     "use strict";
