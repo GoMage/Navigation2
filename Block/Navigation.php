@@ -161,7 +161,7 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
     public function getExpandedFilters()
     {
         $data = [];
-        $cnt = 0;
+        $cnt = -1;
         if($this->request->get('collapsed_expanded')) {
             $filterOpened = explode('_', $this->request->get('collapsed_expanded'));
         }

@@ -574,9 +574,6 @@ define([
 
             paramcollapsed = paramcollapsed.join('_')
             paramsMore = paramsMore.join('_');
-            if(!params.get('product_list_dir')) {
-                params.set('product_list_dir', 'desc')
-            }
             params.set('collapsed_expanded', paramcollapsed);
             params.set('more_show', paramsMore);
             return params;

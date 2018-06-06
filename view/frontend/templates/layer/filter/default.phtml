@@ -27,7 +27,7 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
                         class="active"
                     <?endif;?>
                    data-role="navigation-filter"
-                   data-url="<? if(!$item->getIsActive()):?><?= $block->escapeUrl($item->getGomageUrl()) ?> <?endif;?>"
+                   data-url="<? if(!$item->getIsActive()):?><?= $block->escapeUrl($item->getGomageUrl()); ?> <?endif;?>"
                    data-value="<?= $block->escapeHtml($item->getGomageValue()) ?>"
                    data-param="<?= $block->escapeHtml($filter->getRequestVar()) ?>"
                    <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax()) && ( ($filter->isCategoryFilter() &&  $categoriesHelper->isAjax()) ||  !$filter->isCategoryFilter())):?>

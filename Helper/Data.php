@@ -311,7 +311,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             return $this->request->get('collapsed_expanded');
         }
         $arrexpanded = explode('_',$this->request->get('collapsed_expanded'));
-        if(in_array(strtolower($name),$arrexpanded)) {
+        if(in_array($name,$arrexpanded) || $name == $this->request->get('collapsed_expanded')) {
             return true;
         }
         return false;
