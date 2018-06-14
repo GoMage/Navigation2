@@ -38,12 +38,13 @@ $filter = reset($filterItems)->getFilter();
                 </span>
             </div>
         </div>
-    <?if($filter->isActive() && $filter->getGomageIsReset()):?>
+    <?if($filter->isActive() && $filter->getGomageIsReset() || ($filter->isActive() &&$filter->isCategoryFilter() && $categoriesHelper->isShowResetLink() )):?>
         <a
                 data-role="navigation-filter"
                 data-value=""
                 data-url="<?= $block->escapeUrl($filter->getRemoveUrl()) ?>"
-            <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+                data-param-to-remove="<?=$block->escapeHtml($filter->getRequestVar()) ?>"
+            <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax()) && ( ($filter->isCategoryFilter() &&  $categoriesHelper->isAjax()) ||  !$filter->isCategoryFilter()) ):?>
                 data-ajax="1"
             <?else:?>
                 data-ajax="0"
