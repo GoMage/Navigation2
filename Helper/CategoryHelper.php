@@ -7,15 +7,23 @@ use Magento\Framework\Registry;
 class CategoryHelper extends \Magento\Catalog\Helper\Category
 {
     private $registry;
+
+    /**
+     * @var \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory
+     */
+    protected $categoryCollectionFactory;
+
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
         \Magento\Catalog\Model\CategoryFactory $categoryFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\Data\CollectionFactory $dataCollectionFactory,
         Registry $registry,
-        CategoryRepositoryInterface $categoryRepository
+        CategoryRepositoryInterface $categoryRepository,
+        \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
 
     ) {
+        $this->categoryCollectionFactory = $categoryCollectionFactory;
         $this->registry = $registry;
         parent::__construct($context, $categoryFactory, $storeManager, $dataCollectionFactory, $categoryRepository);
     }
@@ -55,5 +63,10 @@ class CategoryHelper extends \Magento\Catalog\Helper\Category
         $storeCategories = $category->getCategories($parent, $recursionLevel, $sorted, $asCollection, $toLoad);
         $this->_storeCategories[$cacheKey] = $storeCategories;
         return $storeCategories;
+    }
+
+    public function getCategoryCollection()
+    {
+        return $this->categoryCollectionFactory;
     }
 }

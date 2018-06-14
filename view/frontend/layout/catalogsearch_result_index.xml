@@ -11,7 +11,7 @@
             <block class="Magento\Framework\View\Element\Template" name="go.mage.style" template="GoMage_Navigation::layer/style.phtml"/>
         </referenceBlock>
             <referenceContainer name="sidebar.main">
-                <block class="GoMage\Navigation\Block\Categories" name="gomage.categories">
+                <block class="GoMage\Navigation\Block\CategoriesSearch" name="gomage.categories">
                     <action method="unsetChild" ifconfig="gomage_navigation/category/shop_by">
                         <argument name="block" xsi:type="helper" helper="GoMage\Navigation\Helper\Data::removeBlocCategoriesOrCategory" />
                     </action>

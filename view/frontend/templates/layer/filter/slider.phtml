@@ -19,6 +19,7 @@ $filter = reset($filterItems)->getFilter();
                         <? if (!empty($filter->isActive())): ?>
                             data-active="1"
                         <? endif; ?>
+                           data-param="<?= $block->escapeHtml($filter->getRequestVar()) ?>"
                            data-from="<?= $block->escapeHtml($filter->getMinBasePrice()); ?>"
                            data-to="<?= $block->escapeHtml($filter->getMaxBasePrice()); ?>"
                            data-step="<?= $block->escapeHtml($block->getStep()); ?>"

@@ -161,48 +161,21 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
     public function getExpandedFilters()
     {
         $data = [];
-        $cnt = -1;
+        $cnt = 0;
         if($this->request->get('collapsed_expanded')) {
             $filterOpened = explode('_', $this->request->get('collapsed_expanded'));
         }
-        foreach ($this->getFilters() as $filter) {
-            if (get_class($filter) == 'GoMage\Navigation\Model\Catalog\Layer\Filter\Category') {
-                if (($this->getCategoryDataHelper()->isShowCategoryInShopBy() &&
-                     !$this->getCategoryDataHelper()->isCategoriesShowCollapsed() && !$this->request->get('collapsed_expanded')) ||
-                    ($this->getCategoryDataHelper()->isShowCategoryInShopBy() && ($this->request->get('collapsed_expanded') && in_array(strtolower($filter->getName()), $filterOpened)))
-                ) {
-                    $data[] = $cnt;
-                    $cnt ++;
-                    break;
-                }
-                if ((!$this->getCategoryDataHelper()->isShowCategoryInShopBy() &&
-                        !$this->getCategoryDataHelper()->isCategoriesShowCollapsed()
-                        && !$this->request->get('collapsed_expanded')) ||
-                    (!$this->getCategoryDataHelper()->isShowCategoryInShopBy() && ($this->request->get('collapsed_expanded') && in_array(strtolower($filter->getName()), $filterOpened)))) {
-                    $data[] = $cnt;
-                    $cnt++;
-                    break;
-
-                }
-                $cnt++;
-                break;
-            }
-        }
             foreach ($this->getFilters() as $filter) {
-                if (get_class($filter) == 'GoMage\Navigation\Model\Catalog\Layer\Filter\Category') {
-                    continue;
-                }
                 if ($filter->getItemsCount()) {
                     if (
                         (!(bool)$filter->getGomageIsCollapsed() && !$this->request->get('collapsed_expanded'))
-                        || ($this->request->get('collapsed_expanded') && in_array(strtolower($filter->getName()), $filterOpened))
+                        || ($this->request->get('collapsed_expanded') && in_array(urlencode(strtolower($filter->getName())), $filterOpened))
                     ) {
                         $data[] = $cnt;
                     }
                     $cnt++;
                 }
             }
-
 
         return $data;
     }

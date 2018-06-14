@@ -23,7 +23,9 @@ $helperDataCat = $this->helper('GoMage\Navigation\Helper\Data');
                         data-type="categories-li"
                         data-url="<?= $helperDataCat->getUrlCategory(['cat'=>strtolower($category['name']),'parent_cat_'.$category['entity_id']=>$category['parent_cat'] ]) ?>"
                         <? if (!empty(($category['children']))): ?> class="parent"<? endif; ?>>
-                    <a href="<?=$categoriesBlock->escapeUrl($category['url'])?>"<?=$categoriesBlock->escapeHtml($active)?>><span><?=$categoriesBlock->escapeHtml($category['name'])?></span></a>
+                    <a <?php if ($helperDataCat->isInaCategoryRequest($category['name'])) : ?>
+                        class="selected"
+                    <?php endif; ?> href="<?=$categoriesBlock->escapeUrl($category['url'])?>"<?=$categoriesBlock->escapeHtml($active)?>><span><?=$categoriesBlock->escapeHtml($category['name'])?></span></a>
                     <? if (($categoriesBlock->getCategoriesDataHelper()->getShowAllSubcategories() && !empty(($category['children']))) || $helperDataCat->isInaCategoryRequest($category['name'])): ?>
                         <?= $categoriesBlock->getOlList($category['children']); ?>
                     <? endif; ?>

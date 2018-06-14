@@ -17,7 +17,7 @@
                 <item name="attribute" xsi:type="string">GoMage\Navigation\Model\Catalog\Layer\Filter\Attribute</item>
                 <item name="price" xsi:type="string">GoMage\Navigation\Model\Catalog\Layer\Filter\Price</item>
                 <item name="decimal" xsi:type="string">GoMage\Navigation\Model\Catalog\Layer\Filter\Decimal</item>
-                <item name="category" xsi:type="string">GoMage\Navigation\Model\Catalog\Layer\Filter\Category</item>
+                <item name="category" xsi:type="string">GoMage\Navigation\Model\Catalog\Layer\Filter\CategorySearch</item>
             </argument>
         </arguments>
     </virtualType>

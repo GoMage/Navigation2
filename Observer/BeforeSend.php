@@ -78,7 +78,7 @@ class BeforeSend implements ObserverInterface
             ))) {
                 $result = new DataObject();
 
-                if ($this->request->getParam('gan_ajax_more')) {
+                if ($this->request->getParam('gan_ajax_more') && $this->request->getRouteName() != 'catalogsearch') {
                     $result->setData('content', $this->layout->renderElement('category.products'));
                 } else if ($this->request->getParam('gan_ajax_more')) {
                     $result->setData('content', $this->layout->renderElement('search.result'));

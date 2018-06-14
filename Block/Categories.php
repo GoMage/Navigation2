@@ -5,7 +5,7 @@ namespace GoMage\Navigation\Block;
 class Categories extends \Magento\Framework\View\Element\Template
 {
     /**
-     * @var \Magento\Catalog\Helper\Category
+     * @var \GoMage\Navigation\Helper\CategoryHelper
      */
     protected $categoryHelper;
 
@@ -66,7 +66,7 @@ class Categories extends \Magento\Framework\View\Element\Template
     /**
      * Categories constructor.
      * @param \Magento\Framework\View\Element\Template\Context $context
-     * @param \Magento\Catalog\Helper\Category $categoryHelper
+     * @param \GoMage\Navigation\Helper\CategoryHelper $categoryHelper
      * @param \Magento\Catalog\Model\Indexer\Category\Flat\State $categoryFlatState
      * @param \Magento\Theme\Block\Html\Topmenu $topMenu
      * @param \GoMage\Navigation\Helper\Data $dataHelper
@@ -134,7 +134,7 @@ class Categories extends \Magento\Framework\View\Element\Template
     }
 
     /**
-     * @return \Magento\Catalog\Helper\Category
+     * @return \GoMage\Navigation\Helper\CategoryHelper
      */
     public function getCategoryHelper()
     {

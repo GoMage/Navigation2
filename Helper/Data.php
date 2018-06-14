@@ -311,19 +311,44 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             return $this->request->get('collapsed_expanded');
         }
         $arrexpanded = explode('_',$this->request->get('collapsed_expanded'));
-        if(in_array($name,$arrexpanded) || $name == $this->request->get('collapsed_expanded')) {
+        if(in_array(urlencode(strtolower($name)), $arrexpanded)) {
             return true;
         }
         return false;
     }
 
-    public function isInaCategoryRequest($name) {
+    public function isInaCategoryRequest($name, $category = null) {
 
-        $arrCat = explode('_',$this->request->get('cat'));
-        if(in_array(strtolower($name),$arrCat)) {
-           return true;
+        if(!$category) {
+            $arrCat = explode('_',$this->request->get('cat'));
+            if(in_array(strtolower($name),$arrCat)) {
+                return true;
+            }
+            return false;
+        } else {
+            $arrCat = explode('_',$this->request->get('cat'));
+            if(is_object($category)) {
+                $parent = $category->getParentCategory();
+                $requestParent = $this->request->get('parent_cat_'.$category->getId());
+                if($parent) {
+                    $parentId = $parent->getId();
+                } else {
+                    $parentId = $category->getId();
+                }
+                if(in_array(strtolower($name),$arrCat) && ($parentId == $requestParent || $requestParent == $category->getId())) {
+                    return true;
+                }
+                return false;
+            } else {
+                $parentId = $category['parent_cat'];
+                $requestParent = $this->request->get('parent_cat_'.$category['entity_id']);
+                if(in_array(strtolower($name),$arrCat) && $parentId == $requestParent) {
+                    return true;
+                }
+                return false;
+            }
+
         }
-        return false;
     }
 
     public function getAssets()

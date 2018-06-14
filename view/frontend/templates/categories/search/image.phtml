@@ -1,0 +1,62 @@
+<?
+/**
+ * @var $block \GoMage\Navigation\Block\Categories
+ */
+$helperData = $this->helper('GoMage\Navigation\Helper\Data');
+$categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
+?>
+<div class="block block-gan-categories gan-categories-image"
+     style="background-color: <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewBlockCategoriesBackgroundColor())?>"
+>
+    <div class="block-title gan-categories-title" data-role="navigation-filter" data-type="categories-content">
+        <strong><?= __('Categories') ?></strong>
+    </div>
+    <div class="block-content block-content-gan-categories">
+        <div class="block-content-in" <?= ($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
+            <ul class="gan-categories-list gan-categories-list-img <?=($block->getCategoriesDataHelper()->getCategoriesImageAlignment()) ? ' gan-categories-list-alignment-' . $block->escapeHtml($block->getCategoriesDataHelper()->getCategoriesImageAlignment()) : '';?><?=($block->getCategoriesDataHelper()->isShowCheckboxes()) ? ' gan-categories-list-img-checkbox' : '';?>">
+                <?
+                foreach($block->getStoreCategories() as $category):
+                    foreach ($block->getCategoriesSearch($category) as $cat):
+                        if (!$category->getIsActive() || $block->isHidecategory($cat)) continue;?>
+                        <li
+                                data-categories = "1"
+                                data-value="<?= $helperData->getValueCategory(['cat'=>strtolower($cat['name'])]) ?>"
+                                data-param="cat"
+                                <?php if($cat->getParentCategory()): ?>
+                                    data-cat-parent = "<?php echo $cat->getParentCategory()->getId() ?>"
+                                <?php else: ?>
+                                    data-cat-parent = "<?php echo $cat->getId() ?>"
+                                <?php endif; ?>
+                                    data-param-cat-parent = "<?php echo 'parent_cat_'.$cat->getId(); ?>"
+                                <?php if ($helperData->isInaCategoryRequest($cat->getName(), $cat)) : ?>
+                                    data-active="1"
+                                <?php endif; ?>
+                                data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>"
+                                data-role="navigation-filter"
+                                data-type="categories-li"
+                                data-url="<?= $helperData->getUrlCategory(['cat'=>strtolower($cat->getName()),'parent_cat_'.$cat->getId()=>$cat->getId()]) ?>">
+                            <a href="#"  <?php if ($helperData->isInaCategoryRequest($cat->getName(), $cat)) : ?>
+                                class="selected"
+                            <?php endif; ?>>
+                                <?php $absPath = $block->getCategoryImage($cat->getEntityId()); ?>
+                                <?php if($absPath): ?>
+                                <img width="<?=($block->getCategoriesDataHelper()->getCategoriesImageWidth()) ? $block->escapeHtml($block->getCategoriesDataHelper()->getCategoriesImageWidth()) : '';?>"
+                                     height="<?=($block->getCategoriesDataHelper()->getCategoriesImageHeight()) ? $block->escapeHtml($block->getCategoriesDataHelper()->getCategoriesImageHeight()) : '';?>"
+                                     src="<?= $categoriesHelper->resize($block->getImage(),$absPath) ?>"
+                                >
+                                <?php endif; ?>
+                                <? if($block->getCategoriesDataHelper()->isShowImageName()): ?>
+                                    <span><?= $block->escapeHtml($cat->getName());?>(<?php echo $category->getName() ?>)</span>
+                                <?endif;?>
+                            </a>
+                            <? if ($block->getCategoriesDataHelper()->getShowAllSubcategories() || $helperData->isInaCategoryRequest($cat->getName(), $cat)): ?>
+                                <?= $block->getOlImageList($block->getChildCategories($cat)); ?>
+                            <? endif; ?>
+                        </li>
+
+                    <? endforeach; ?>
+                <? endforeach; ?>
+            </ul>
+        </div>
+    </div>
+</div>

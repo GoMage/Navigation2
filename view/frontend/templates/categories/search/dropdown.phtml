@@ -1,0 +1,61 @@
+<?
+/**
+ * @var $block \GoMage\Navigation\Block\Categories
+ */
+$helperData = $this->helper('GoMage\Navigation\Helper\Data');
+?>
+
+<div class="block block-gan-categories gan-categories-dropdown"
+     style="background-color: <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewBlockCategoriesBackgroundColor())?>"
+>
+    <div class="block-title gan-categories-title" data-role="navigation-filter" data-type="categories-content">
+        <strong><?= __('Categories') ?></strong>
+    </div>
+    <div class="block-content block-content-gan-categories">
+        <div class="gan-categories-list-dropdown block-content-in" <?=($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
+            <?
+            foreach($block->getStoreCategories() as $category):
+                foreach ($block->getCategoriesSearch($category) as $cat):
+                    if (!$category->getIsActive() || $block->isHidecategory($cat)) continue;?>
+                        <select
+                                data-role="navigation-filter"
+                                data-type="categories-select"
+                                data-categories = "1"
+                                data-parent-search="<?php echo $category->getId(); ?>"
+                                <?php if($cat->getParentCategory()): ?>
+                                    data-cat-parent = "<?php echo $cat->getParentCategory()->getId() ?>"
+                                <?php else: ?>
+                                    data-cat-parent = "<?php echo $cat->getId() ?>"
+                                <?php endif; ?>
+                                data-param-cat-parent = "<?php echo 'parent_cat_'.$cat->getId(); ?>"
+                                data-select ="1"
+                                data-value="<?= $helperData->getValueCategory(['cat'=>strtolower($cat['name'])]) ?>"
+                                data-url="<?= $helperData->getUrlCategory(['cat'=>strtolower($cat->getName()),'parent_cat_'.$cat->getId()=>$cat->getId()]) ?>"
+                                data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>">
+                                <option
+                                        data-type="remove-item"
+                                        data-value=""
+                                        data-param-to-remove="cat"
+                                        value=""
+                                ><?php echo __('Choose Category')?></option>
+                            <option
+                                data-value="<?= $helperData->getValueCategory(['cat'=>strtolower($cat['name'])]) ?>"
+                                data-param="cat"
+                                <?php if ($helperData->isInaCategoryRequest($cat->getName(), $cat)) : ?>
+                                    data-active="1"
+                                <?php endif; ?>
+                                <?php if ($helperData->isInaCategoryRequest($cat->getName(), $cat)) : ?>
+                                    class="selected"
+                                <?php endif; ?>
+                                    value="<?= $helperData->getValueCategory(['cat'=>strtolower($cat['name'])]) ?>">
+                                <?= $block->escapeHtml($category->getName()) ?>(<?php echo $category->getName() ?>)
+                            </option>
+                            <? if ($block->getCategoriesDataHelper()->getShowAllSubcategories() || $helperData->isInaCategoryRequest($cat->getName(), $cat)): ?>
+                                <?= $block->getSelectList($block->getChildCategories($cat)); ?>
+                            <?endif;?>
+                        </select>
+                <? endforeach; ?>
+            <? endforeach; ?>
+        </div>
+    </div>
+</div>

@@ -4,17 +4,21 @@ namespace GoMage\Navigation\Model\Catalog\Layer\Filter;
 
 use GoMage\Navigation\Model\Config\Source\NavigationInterface;
 
+/**
+ * Class Category
+ * @package GoMage\Navigation\Model\Catalog\Layer\Filter
+ */
 class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements FilterInterface
 {
     /**
      * @var CategoryDataProvider
      */
-    private $dataProvider;
+    protected $dataProvider;
 
     /**
      * @var \Magento\Framework\Registry
      */
-    private $coreRegistry;
+    protected $coreRegistry;
 
     /**
      * @var \Magento\Framework\App\RequestInterface
@@ -30,6 +34,11 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
      * @var \GoMage\Navigation\Helper\Data
      */
     protected $helper;
+
+    /**
+     * @var string
+     */
+    protected $imageCat;
 
     /**
      * @var array
@@ -127,7 +136,7 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
     /**
      * @return array
      */
-    public function _getItemsData()
+    protected function _getItemsData()
     {
         if(!$this->categoryHelper->isShowCategoryInShopBy()) {
             return [];

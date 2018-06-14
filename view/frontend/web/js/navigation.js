@@ -265,12 +265,23 @@ define([
                 categories = event.currentTarget.attributes['data-value'].nodeValue;
                 params.set('cat', categories);
             }
-            params.set('gan_ajax_cat', 1);
 
+            if(event.currentTarget.attributes['data-param-cat-parent'])
+            {
+                params.set(event.currentTarget.attributes['data-param-cat-parent'].value, event.currentTarget.attributes['data-cat-parent'].value )
+            }
+            if(event.currentTarget.attributes['data-active']) {
+                params.unset('cat', event.currentTarget.attributes['data-value'].nodeValue);
+                if(event.currentTarget.attributes['data-param-cat-parent'])
+                {
+                    params.unset(event.currentTarget.attributes['data-param-cat-parent'].nodeValue, event.currentTarget.attributes['data-cat-parent'].nodeValue )
+                }
+            }
+            params.set('gan_ajax_cat', 1);
             if (ajax) {
                 return this._ajaxCategory(url, params);
             } else {
-                return $.mage.redirect(url);
+                $.mage.redirect(this.options.baseUrl + '?' + params.toUrlParams());
             }
 
         },
@@ -313,7 +324,6 @@ define([
             var params = this._getParams();
             params.set('price', value);
             params.set(price.attr('data-param'), value);
-
             var filter = new Filter(price);
             if (filter.isAjax()) {
                 params.set('gan_ajax_filter', 1);
@@ -351,7 +361,6 @@ define([
             var filter = new Filter(el);
             var params = this._getParams();
             params.set(el.attr('data-param'), value.replace(';', '-'));
-
             if (filter.isAjax()) {
                 params.set('gan_ajax_filter', 1);
                 params.set('price', value.replace(';', '-'));
@@ -401,7 +410,10 @@ define([
             } else {
                 params.set(filter.getParam(), filter.getValue());
             }
-
+            if(event.currentTarget.attributes['data-param-cat-parent'])
+            {
+                params.set(event.currentTarget.attributes['data-param-cat-parent'].value, event.currentTarget.attributes['data-cat-parent'].value )
+            }
             if (filter.isAjax()) {
                 params.set('gan_ajax_filter', 1);
                 this._ajaxFilter(this.options.baseUrl, params);
@@ -444,6 +456,9 @@ define([
         },
 
         _ajaxCategory: function (url, params, successCallback) {
+            if(this.options.q) {
+                params.set('q', this.options.q)
+            }
             $.ajax({
                 url: url,
                 type: 'get',
@@ -574,6 +589,9 @@ define([
 
             paramcollapsed = paramcollapsed.join('_')
             paramsMore = paramsMore.join('_');
+            if(!params.get('product_list_dir')) {
+                params.set('product_list_dir', 'desc')
+            }
             params.set('collapsed_expanded', paramcollapsed);
             params.set('more_show', paramsMore);
             return params;
