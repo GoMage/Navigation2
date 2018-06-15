@@ -185,8 +185,9 @@ class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements Fil
         if ($value = $this->request->getParam($this->getRequestVar())) {
             return str_replace('-', ';', $value);
         }
+        $value =  $this->_renderItemLabel($this->getMinBasePrice(), $this->getMaxBasePrice());
+        return str_replace('-', ';', $value);
 
-        return $this->getMinBasePrice() . ';' . $this->getMaxBasePrice();
     }
 
     /**
@@ -245,12 +246,11 @@ class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements Fil
      */
     protected function _renderRangeLabel($fromPrice, $toPrice)
     {
-        $formattedFromPrice = $this->priceCurrency->format($fromPrice);
         if ($fromPrice != $toPrice) {
             $toPrice -= .01;
         }
-
-        return __('%1 - %2', $formattedFromPrice, $this->priceCurrency->format($toPrice));
+       return $this->_renderItemLabel($fromPrice, $toPrice);
+       // return __('%1 - %2', $formattedFromPrice, $this->priceCurrency->format($toPrice));
     }
 
     /**

@@ -52,27 +52,7 @@ class CategorySearch extends Category
      */
     protected function _getItemsData()
     {
-        $productCollection = $this->getLayer()->getProductCollection();
-        $ids = $productCollection->getAllIds();
-        if($ids) {
-            $categories = $this->categoryCollectionFactory->create();
-            $categories->addAttributeToFilter('is_anchor', 1);
-            $categories->addAttributeToFilter('is_active', 1);
-            $categories->addAttributeToSelect('name');
-            foreach ($categories as $category) {
-                    if ($category->getIsActive() && ($this->helper->isShowEmptyCategory())) {
-                        $this->imageCategories[$category->getId()] = $category->getImageUrl();
-                        $this->imageCat[$category->getId()] = $category->getData('image');
-                        $this->itemDataBuilder->addItemData(
-                            $category->getName(),
-                            $category->getId(),
-                            0
-                        );
-                    }
-                }
-            }
-
-        return $this->itemDataBuilder->build();
+        return [];
     }
 
     protected function getFormattedFilters()

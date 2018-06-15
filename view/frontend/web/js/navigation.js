@@ -135,9 +135,9 @@ define([
                         var self = this;
                         var slidePrice;
                         element.slider({
-                            from: slider.getFrom(),
-                            to: slider.getTo(),
-                            step: slider.getStep(),
+                            from: parseInt(slider.getFrom()),
+                            to: parseInt(slider.getTo()),
+                            step: 1,
                             smooth: true,
                             round: 0,
                             dimension: slider.getDimension(),
@@ -146,12 +146,6 @@ define([
                                 self._processPriceSlider(value, this);
                             }
                         });
-                        slidePrice =  element.attr('value').split(';')
-                        $('.price-from').val(slidePrice[0]);
-                        $('.price-to').val(slidePrice[1]);
-                        $('.price-to').show();
-                        $('.to_slider_or_input').show();
-                        $('.price-from').show();
                         break;
                     case 'button-more':
                         element.unbind('click');

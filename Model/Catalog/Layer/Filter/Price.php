@@ -173,7 +173,7 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
         if ($value = $this->request->getParam($this->getRequestVar())) {
             return str_replace('-', ';', $value);
         }
-        return $this->getMinBasePrice() . ';' . $this->getMaxBasePrice();
+        return ($this->getMinBasePrice()) . ';' . $this->getMaxBasePrice();
     }
 
     /**
