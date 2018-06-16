@@ -275,7 +275,7 @@ define([
             if (ajax) {
                 return this._ajaxCategory(url, params);
             } else {
-                $.mage.redirect(this.options.baseUrl + '?' + params.toUrlParams());
+                $.mage.redirect(url);
             }
 
         },

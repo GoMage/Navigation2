@@ -64,7 +64,7 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                             <? if ($filter->getItemsCount()): ?>
                                 <?php foreach ($filter->getItems() as $item): ?>
                                     <?php $helperData->checkIsActive($item, $filter->getRequestVar()) ?>
-                                    <?php if($item->isShowAppliedValues()): ?>
+                                    <?php if($item->isShowAppliedValues() && $item->getCount()): ?>
                                         <?php $countApplied ++;  ?>
                                     <?php endif; ?>
                                 <?php endforeach; ?>

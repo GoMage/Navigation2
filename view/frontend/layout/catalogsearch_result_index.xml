@@ -12,9 +12,6 @@
         </referenceBlock>
             <referenceContainer name="sidebar.main">
                 <block class="GoMage\Navigation\Block\CategoriesSearch" name="gomage.categories">
-                    <action method="unsetChild" ifconfig="gomage_navigation/category/shop_by">
-                        <argument name="block" xsi:type="helper" helper="GoMage\Navigation\Helper\Data::removeBlocCategoriesOrCategory" />
-                    </action>
                 </block>
                 <block class="GoMage\Navigation\Block\Navigation\Search" name="catalogsearch.leftnav" before="-">
                     <block class="GoMage\Navigation\Block\Navigation\State" name="catalogsearch.navigation.state" as="state" />

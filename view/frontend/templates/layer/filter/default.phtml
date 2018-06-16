@@ -51,7 +51,7 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
         </li>
         <?$cnt++;?>
     <? endforeach ?>
-    <?if($filter->isActive() && $filter->getGomageIsReset() || ($filter->isActive() &&$filter->isCategoryFilter() && $categoriesHelper->isShowResetLink() )):?>
+    <?if($filter->isActive() && $filter->getGomageIsReset() || ($filter->isActive() && $filter->isCategoryFilter() && $categoriesHelper->isShowResetLink() )):?>
         <a
             data-role="navigation-filter"
             data-value=""

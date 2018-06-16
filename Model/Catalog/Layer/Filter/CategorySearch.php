@@ -15,6 +15,102 @@ namespace GoMage\Navigation\Model\Catalog\Layer\Filter;
  */
 class CategorySearch extends Category
 {
+    /**
+     * @var CategoryDataProvider
+     */
+    protected $dataProvider;
+
+    protected $categoryHelperCore;
+
+    /**
+     * @var \Magento\Framework\Registry
+     */
+    protected $coreRegistry;
+
+    /**
+     * @var \Magento\Framework\App\RequestInterface
+     */
+    protected $request;
+
+    /**
+     * @var \GoMage\Navigation\Helper\Url
+     */
+    protected $urlHelper;
+
+    /**
+     * @var \GoMage\Navigation\Helper\Data
+     */
+    protected $helper;
+
+    /**
+     * @var string
+     */
+    protected $imageCat;
+
+    /**
+     * @var array
+     */
+    protected $imageCategories = [];
+
+    protected $categoryFlatState;
+
+    protected $layerResolver;
+
+    /**
+     * @var \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory
+     */
+    protected $categoryCollectionFactory;
+
+    /**
+     * @var \GoMage\Navigation\Helper\CategoryData
+     */
+    protected $categoryHelper;
+
+    public function __construct(
+        \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Catalog\Model\Layer $layer,
+        \Magento\Catalog\Model\Layer\Filter\Item\DataBuilder $itemDataBuilder,
+        \Magento\Framework\Escaper $escaper,
+        \Magento\Catalog\Model\Layer\Resolver $layerResolver,
+        \Magento\Catalog\Model\Layer\Filter\DataProvider\CategoryFactory $categoryDataProviderFactory,
+        \Magento\Framework\Registry $coreRegistry,
+        \Magento\Framework\App\RequestInterface $request,
+        \GoMage\Navigation\Helper\Data $helper,
+        \GoMage\Navigation\Helper\Url $urlHelper,
+        \GoMage\Navigation\Helper\CategoryData $categoryHelper,
+        \GoMage\Navigation\Helper\CategoryHelper $categoryHelperCore,
+        \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory,
+        \Magento\Catalog\Model\Indexer\Category\Flat\State $categoryFlatState,
+        array $data = []
+    ) {
+        parent::__construct(
+            $filterItemFactory,
+            $storeManager,
+            $layer,
+            $itemDataBuilder,
+            $escaper,
+            $layerResolver,
+            $categoryDataProviderFactory,
+            $coreRegistry,
+            $request,
+            $helper,
+            $urlHelper,
+            $categoryHelper,
+            $categoryCollectionFactory,
+            $data
+        );
+        $this->_requestVar = 'cat';
+        $this->categoryFlatState = $categoryFlatState;
+        $this->coreRegistry = $coreRegistry;
+        $this->layerResolver = $layerResolver;
+        $this->request = $request;
+        $this->helper = $helper;
+        $this->categoryHelperCore = $categoryHelperCore;
+        $this->categoryCollectionFactory = $categoryCollectionFactory;
+        $this->dataProvider = $categoryDataProviderFactory->create(['layer' => $this->getLayer()]);
+        $this->urlHelper = $urlHelper;
+    }
 
     public function apply(\Magento\Framework\App\RequestInterface $request)
     {
@@ -48,11 +144,74 @@ class CategorySearch extends Category
     }
 
     /**
+     * @return \Magento\Framework\Data\Tree\Node\Collection
+     */
+    public function getStoreCategories()
+    {
+        return $this->categoryHelperCore->getStoreCategories(true, false, true);
+    }
+
+    /**
      * @return array
      */
     protected function _getItemsData()
     {
-        return [];
+        $productCollection = $this->getLayer()->getProductCollection();
+        $optionsFacetedData = $productCollection->getFacetedData('category');
+
+            $categories = $this->getStoreCategories();
+            foreach ($categories as $category) {
+                    foreach ( $this->getCategoriesSearch($category, $optionsFacetedData) as $categoriesSearch) {
+                        if ($categoriesSearch->getIsActive() && ($this->helper->isShowEmptyCategory())) {
+                            $this->imageCategories[$categoriesSearch->getId()] = $categoriesSearch->getImageUrl();
+                            $this->imageCat[$categoriesSearch->getId()] = $category->getData('image');
+                            $this->itemDataBuilder->addItemData(
+                                $category->getName(),
+                                $category->getId(),
+                                $optionsFacetedData[$categoriesSearch->getId()]['count']
+                            );
+                        }
+                    }
+                }
+        return $this->itemDataBuilder->build();
+    }
+
+    public function getChildCategoriesObject($category)
+    {
+        if ($this->categoryFlatState->isFlatEnabled() && $category->getUseFlatResource()) {
+            $subcategories = (array)$category->getChildrenNodes();
+            if(!$subcategories) {
+                return [];
+            }
+            return $subcategories;
+        } else {
+             $subcategories = $category->getChildren();
+             if(!$subcategories) {
+                 return [];
+             }
+             return $subcategories;
+        }
+
+    }
+
+    public function  getCategoriesSearch($category, $facetsCategory)
+    {
+            $arrCat = [];
+            $categories = $this->getChildCategoriesObject($category);
+            foreach ($categories as $cat) {
+                if((isset($this->facetsData[$category->getId()])) && $facetsCategory[$category->getId()]['count'] > 0)
+                {
+                    $arrCat[$category->getId()] = $category->setParentId($category->getId());
+                } else {
+                    $arrCatTmp = $this->getCategoriesSearch($cat, $facetsCategory);
+                    if($arrCatTmp) {
+                        $arrCat = $arrCat + $arrCatTmp;
+                    }
+                }
+
+            }
+            return $arrCat;
+
     }
 
     protected function getFormattedFilters()

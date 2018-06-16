@@ -27,7 +27,7 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                             data-categories = "1"
                             data-role="navigation-filter"
                             data-type="categories-li"
-                            data-value="<?= $helperData->getUrlCategory(['cat'=>strtolower($cat->getName()),'parent_cat_'.$cat->getId()=>$cat->getId()]) ?>"
+                            data-value="<?= $helperData->getValueCategory(['cat'=>strtolower($cat['name'])]) ?>"
                             <?php if($cat->getParentCategory()): ?>
                                 data-cat-parent = "<?php echo $cat->getParentCategory()->getId() ?>"
                             <?php else: ?>
@@ -38,7 +38,7 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                             <?php if ($helperData->isInaCategoryRequest($cat->getName(), $cat)) : ?>
                                 data-active="1"
                             <?php endif; ?>
-                            data-url="<?= $helperData->getUrlCategory(['cat'=>strtolower($cat->getName())]) ?>">
+                            data-url="<?= $helperData->getUrlCategory(['cat'=>strtolower($cat->getName()),'parent_cat_'.$cat->getId()=>$cat->getId()]) ?>">
                             <a  href="#"
                                 <?php if ($helperData->isInaCategoryRequest($cat->getName(), $cat)) : ?>
                                    class="selected"
