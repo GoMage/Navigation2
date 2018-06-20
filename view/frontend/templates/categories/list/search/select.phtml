@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * @var $categoriesBlock \GoMage\Navigation\Block\Categories
  */
@@ -6,8 +6,8 @@
 $helperDataCat = $this->helper('GoMage\Navigation\Helper\Data');
 ?>
 
-<? foreach ($data as $category): ?>
-    <? $selected = $helperDataCat->isInaCategoryRequest($category['name'], $category) ? 'selected' : ''; ?>
+<?php foreach ($data as $category): ?>
+    <?php $selected = $helperDataCat->isInaCategoryRequest($category['name'], $category) ? 'selected' : ''; ?>
     <option
             data-value="<?= $helperDataCat->getValueCategory(['cat'=>strtolower($category['name'])]) ?>"
             data-categories = "1"
@@ -19,7 +19,7 @@ $helperDataCat = $this->helper('GoMage\Navigation\Helper\Data');
             data-active="1"
         <?php endif; ?> <?= $categoriesBlock->escapeHtml($selected) ?>
             value="<?= $helperDataCat->getUrlCategory(['cat'=>strtolower($category['name']),'parent_cat_'.$category['entity_id']=>$category['parent_cat'] ]) ?>"> <?= $categoriesBlock->escapeHtml(str_repeat('&nbsp;&nbsp;', $category['level']) . $category['name']) ?></option>
-    <? if (($categoriesBlock->getCategoriesDataHelper()->getShowAllSubcategories() && !empty(($category['children']))) || $helperDataCat->isInaCategoryRequest($category['name'], $category)): ?>
+    <?php if (($categoriesBlock->getCategoriesDataHelper()->getShowAllSubcategories() && !empty(($category['children']))) || $helperDataCat->isInaCategoryRequest($category['name'], $category)): ?>
         <?=$categoriesBlock->getSelectList($category['children']);?>
-    <?endif;?>
-<? endforeach; ?>
+    <?php endif;?>
+<?php endforeach; ?>

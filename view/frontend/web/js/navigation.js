@@ -259,7 +259,9 @@ define([
                 categories = event.currentTarget.attributes['data-value'].nodeValue;
                 params.set('cat', categories);
             }
-
+            if(this.options.q) {
+                params.set('q', this.options.q)
+            }
             if(event.currentTarget.attributes['data-param-cat-parent'])
             {
                 params.set(event.currentTarget.attributes['data-param-cat-parent'].value, event.currentTarget.attributes['data-cat-parent'].value )
@@ -275,7 +277,7 @@ define([
             if (ajax) {
                 return this._ajaxCategory(url, params);
             } else {
-                $.mage.redirect(url);
+                return $.mage.redirect(this.options.baseUrl + '?' + params.toUrlParams());
             }
 
         },
@@ -317,6 +319,12 @@ define([
             var value = price_from.val() + '-' + price_to.val();
             var params = this._getParams();
             params.set('price', value);
+            if(this.options.q) {
+                params.set('q', this.options.q)
+            }
+            if(this.options.q) {
+                params.set('q', this.options.q)
+            }
             params.set(price.attr('data-param'), value);
             var filter = new Filter(price);
             if (filter.isAjax()) {
@@ -335,7 +343,9 @@ define([
             var price = $('.gan-price');
             var price_from = $('.price-from');
             var price_to = $('.price-to');
-
+            if(this.options.q) {
+                params.set('q', this.options.q)
+            }
             var value = price_from.val() + '-' + price_to.val();
             var params = this._getParams();
             params.set(price.attr('data-param'), value);
@@ -355,6 +365,9 @@ define([
             var filter = new Filter(el);
             var params = this._getParams();
             params.set(el.attr('data-param'), value.replace(';', '-'));
+            if(this.options.q) {
+                params.set('q', this.options.q)
+            }
             if (filter.isAjax()) {
                 params.set('gan_ajax_filter', 1);
                 params.set('price', value.replace(';', '-'));
@@ -373,6 +386,9 @@ define([
         _runProcessFilterForElement: function (element) {
             var filter = new Filter(element);
             var params = this._getParams();
+            if(this.options.q) {
+                params.set('q', this.options.q)
+            }
             if (filter.isClear()) {
                 params.clear();
             } else if (filter.isActive() && !element.is('select')) {
@@ -397,6 +413,9 @@ define([
             }
             var filter = new Filter(element);
             var params = this._getParams();
+            if(this.options.q) {
+                params.set('q', this.options.q)
+            }
             if (filter.isClear()) {
                 params.clear();
             } else if (filter.isActive() && !element.is('select')) {

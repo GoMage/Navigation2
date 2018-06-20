@@ -4,6 +4,10 @@ namespace GoMage\Navigation\Model\Catalog\Layer\Filter;
 
 use GoMage\Navigation\Model\Config\Source\NavigationInterface;
 
+/**
+ * Class Price
+ * @package GoMage\Navigation\Model\Catalog\Layer\Filter
+ */
 class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements FilterInterface
 {
 

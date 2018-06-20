@@ -13,6 +13,8 @@ class Categories extends \Magento\Framework\View\Element\Template
 
     protected $categoryParent;
 
+    protected $categoryFactory;
+
     /**
      * @var \Magento\Catalog\Model\Indexer\Category\Flat\State
      */
@@ -300,8 +302,7 @@ class Categories extends \Magento\Framework\View\Element\Template
         public function getCategoryImage($id)
     {
         //Find solution to foreach categories with all data in template
-        $category = \Magento\Framework\App\ObjectManager::getInstance()
-            ->create('Magento\Catalog\Model\Category')->load($id);
+        $category = $this->categoryHelper->getCategoryFactory()->create()->load($id);
         $this->image = $category->getData('image');
         return $category->getImageUrl();
     }

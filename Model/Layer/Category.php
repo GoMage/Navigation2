@@ -1,6 +1,10 @@
 <?php
 namespace GoMage\Navigation\Model\Layer;
 
+/**
+ * Class Category
+ * @package GoMage\Navigation\Model\Layer
+ */
 class Category extends \Magento\Catalog\Model\Layer\Category
 {
     /**

@@ -43,6 +43,23 @@ define([
             }
         },
 
+        removeByValue: function ( key, value) {
+            if (this.data.hasOwnProperty(key)) {
+                var index = this.data[key].indexOf(value);
+                if (index > -1) {
+                    this.data[key].splice(index, 1);
+                }
+                if (this.data[key].length == 0) {
+                   var params = this.data[key].split('_');
+                   index = params.indexOf(value);
+                    if (index > -1) {
+                        params.splice(index, 1);
+                    }
+                    delete params[index];
+                    this.data[key] = params.join('_');
+                }
+            }
+        },
         remove: function (key) {
             if (this.data.hasOwnProperty(key)) {
                 delete this.data[key];

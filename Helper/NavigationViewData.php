@@ -5,6 +5,10 @@ namespace GoMage\Navigation\Helper;
 use GoMage\Navigation\Helper\Config\SystemConfigInterface;
 use Magento\Framework\App\Helper\Context;
 
+/**
+ * Class NavigationViewData
+ * @package GoMage\Navigation\Helper
+ */
 class NavigationViewData extends \Magento\Framework\App\Helper\AbstractHelper
 {
     /**

@@ -1,13 +1,13 @@
-<?
+<?php
 /**
  * @var $block \GoMage\Navigation\Block\Loader
  */
 ?>
     <div id="gomage-loader" data-ajax-loader = "<?php echo (int)$block->getHelper()->isShowAjaxLoader() ?>" class="gan-loader ng-scope">
-    <? if($block->getHelper()->isShowAjaxLoader()):?>
+    <?php if($block->getHelper()->isShowAjaxLoader()):?>
         <div class="gan-loader-content">
             <div class="gan-loader-content-in
-            <? if ($block->getHelper()->isSpinnerTypeImage() && ($image = $block->getLoaderImage()) && !empty($image)): ?> gan-loader-img-<?=$block->escapeHtml($block->getHelper()->getLoaderImageAlignment())?><?endif; ?>"
+            <?php if ($block->getHelper()->isSpinnerTypeImage() && ($image = $block->getLoaderImage()) && !empty($image)): ?> gan-loader-img-<?=$block->escapeHtml($block->getHelper()->getLoaderImageAlignment())?><?php endif; ?>"
                  style="
                     background-color: <?=$block->escapeHtml($block->getHelper()->getLoaderBackgroundColor());?>;
                     border-color: <?=$block->escapeHtml($block->getHelper()->getLoaderBorderColor());?>;
@@ -15,11 +15,11 @@
                     width: <?=$block->escapeHtml($block->getHelper()->getLoaderWindowWidth());?>px;
                     height: <?=$block->escapeHtml($block->getHelper()->getLoaderWindowHeight());?>px;
                     ">
-                <? if ($block->getHelper()->isSpinnerTypeImage() && ($image = $block->getLoaderImage()) && !empty($image)): ?>
+                <?php if ($block->getHelper()->isSpinnerTypeImage() && ($image = $block->getLoaderImage()) && !empty($image)): ?>
                     <div class="gan-loader-img">
                         <img alt="<?= __('Loading...') ?>" src="<?= $block->escapeUrl($image) ?>">
                      </div>
-                <?else:?>
+                <?php else:?>
                     <div class="gan-loader-spinner-wrap">
                         <svg class="gan-loader-spinner"
                              width="65px"
@@ -34,11 +34,11 @@
                         stroke: <?=$block->escapeHtml($block->getHelper()->getLoaderSpinnerColor())?>;
                     }
                     </style>
-                <?endif; ?>
+                <?php endif; ?>
                 <div class="gan-loader-text">
                     <?=$block->getHelper()->getLoaderText();?>
                 </div>
             </div>
         </div>
-    <? endif;?>
+    <?php endif;?>
     </div>

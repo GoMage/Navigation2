@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Template for filter items block
  *
@@ -10,15 +10,15 @@ $filter = reset($filterItems)->getFilter();
 ?>
 
 <div class="gan-filter gan-filter-slider">
-    <? $attributeCode = $filter->getAttributeModel()->getAttributeCode(); ?>
+    <?php $attributeCode = $filter->getAttributeModel()->getAttributeCode(); ?>
         <div class="layout">
             <div class="layout-slider">
                 <span>
                     <input style="display: none;"
                            data-role="navigation-filter"
-                        <? if (!empty($filter->isActive())): ?>
+                        <?php if (!empty($filter->isActive())): ?>
                             data-active="1"
-                        <? endif; ?>
+                        <?php endif; ?>
                            data-param="<?= $block->escapeHtml($filter->getRequestVar()) ?>"
                            data-from="<?= $block->escapeHtml($filter->getMinBasePrice()); ?>"
                            data-to="<?= $block->escapeHtml($filter->getMaxBasePrice()); ?>"
@@ -38,22 +38,22 @@ $filter = reset($filterItems)->getFilter();
                 </span>
             </div>
         </div>
-    <?if($filter->isActive() && $filter->getGomageIsReset() || ($filter->isActive() &&$filter->isCategoryFilter() && $categoriesHelper->isShowResetLink() )):?>
+    <?php if ($filter->isActive() && $filter->getGomageIsReset() || ($filter->isActive() &&$filter->isCategoryFilter() && $categoriesHelper->isShowResetLink() )):?>
         <a
                 data-role="navigation-filter"
                 data-value=""
                 data-url="<?= $block->escapeUrl($filter->getRemoveUrl()) ?>"
                 data-param-to-remove="<?=$block->escapeHtml($filter->getRequestVar()) ?>"
-            <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax()) && ( ($filter->isCategoryFilter() &&  $categoriesHelper->isAjax()) ||  !$filter->isCategoryFilter()) ):?>
+            <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax()) && ( ($filter->isCategoryFilter() &&  $categoriesHelper->isAjax()) ||  !$filter->isCategoryFilter()) ):?>
                 data-ajax="1"
-            <?else:?>
+            <<?php else: ?>
                 data-ajax="0"
-            <?endif;?>
+            <?php endif;?>
                 data-type="remove-item"
                 data-active="1"
                 href="#"
                 class="gan_link_reset">
             <?= __('Reset'); ?>
         </a>
-    <?endif;?>
+    <?php endif;?>
 </div>

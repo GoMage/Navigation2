@@ -2,7 +2,6 @@
 
 namespace GoMage\Navigation\Block;
 
-
 class NavigationCmsBlock extends \GoMage\Navigation\Block\Navigation
 {
     /**

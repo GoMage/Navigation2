@@ -10,8 +10,19 @@ namespace GoMage\Navigation\Plugin;
 
 use Magento\Catalog\Model\ResourceModel\Product\Collection as ProductCollection;
 
+/**
+ * Class FixSortPosition
+ * @package GoMage\Navigation\Plugin
+ */
 class FixSortPosition
 {
+    /**
+     * @param ProductCollection $subject
+     * @param callable $proceed
+     * @param $attribute
+     * @param string $dir
+     * @return ProductCollection
+     */
     public function aroundAddAttributeToSort(ProductCollection $subject, callable $proceed, $attribute, $dir = ProductCollection::SORT_ORDER_ASC)
     {
 

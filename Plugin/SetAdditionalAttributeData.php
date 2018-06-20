@@ -2,6 +2,10 @@
 
 namespace GoMage\Navigation\Plugin;
 
+/**
+ * Class SetAdditionalAttributeData
+ * @package GoMage\Navigation\Plugin
+ */
 class SetAdditionalAttributeData
 {
 

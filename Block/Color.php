@@ -1,9 +1,7 @@
 <?php
  
 namespace GoMage\Navigation\Block;
- 
-use Magento\Framework\Registry;
- 
+
 class Color extends \Magento\Config\Block\System\Config\Form\Field
 {
 

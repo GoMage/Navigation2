@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * @var $block \GoMage\Navigation\Block\Categories
  */
@@ -14,7 +14,7 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
     <div class="block-content block-content-gan-categories">
         <div class="block-content-in" <?= ($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
             <ul class="gan-categories-list gan-categories-list-img <?=($block->getCategoriesDataHelper()->getCategoriesImageAlignment()) ? ' gan-categories-list-alignment-' . $block->escapeHtml($block->getCategoriesDataHelper()->getCategoriesImageAlignment()) : '';?><?=($block->getCategoriesDataHelper()->isShowCheckboxes()) ? ' gan-categories-list-img-checkbox' : '';?>">
-                <?
+                <?php
                 foreach($block->getStoreCategories() as $category):
                     foreach ($block->getCategoriesSearch($category) as $cat):
                         if (!$category->getIsActive() || $block->isHidecategory($cat)) continue;?>
@@ -45,17 +45,17 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
                                      src="<?= $categoriesHelper->resize($block->getImage(),$absPath) ?>"
                                 >
                                 <?php endif; ?>
-                                <? if($block->getCategoriesDataHelper()->isShowImageName()): ?>
+                                <?php if($block->getCategoriesDataHelper()->isShowImageName()): ?>
                                     <span><?= $block->escapeHtml($cat->getName());?>(<?php echo $category->getName() ?>)</span>
-                                <?endif;?>
+                                <?php endif;?>
                             </a>
-                            <? if ($block->getCategoriesDataHelper()->getShowAllSubcategories() || $helperData->isInaCategoryRequest($cat->getName(), $cat)): ?>
+                            <?php if ($block->getCategoriesDataHelper()->getShowAllSubcategories() || $helperData->isInaCategoryRequest($cat->getName(), $cat)): ?>
                                 <?= $block->getOlImageList($block->getChildCategories($cat)); ?>
-                            <? endif; ?>
+                            <?php endif; ?>
                         </li>
 
-                    <? endforeach; ?>
-                <? endforeach; ?>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
             </ul>
         </div>
     </div>

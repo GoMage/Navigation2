@@ -12,6 +12,10 @@ namespace GoMage\Navigation\Helper;
 use Magento\Framework\App\Helper\Context;
 use Magento\Swatches\Helper\Media;
 
+/**
+ * Class ImageSwatchHelper
+ * @package GoMage\Navigation\Helper
+ */
 class ImageSwatchHelper extends Media
 {
     /**

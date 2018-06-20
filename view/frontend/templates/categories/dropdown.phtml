@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * @var $block \GoMage\Navigation\Block\Categories
  */
@@ -13,7 +13,7 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
     </div>
     <div class="block-content block-content-gan-categories">
         <div class="gan-categories-list-dropdown block-content-in" <?=($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
-            <?
+            <?php
             foreach($block->getStoreCategories() as $category):
                 if (!$category->getIsActive() || $block->isHidecategory($category)) continue;?>
                     <select
@@ -42,11 +42,11 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                                 value="<?= $helperData->getValueCategory(['cat'=>strtolower($category['name'])]) ?>">
                             <?= $block->escapeHtml($category->getName()) ?>
                         </option>
-                        <? if ($block->getCategoriesDataHelper()->getShowAllSubcategories() || $helperData->isInaCategoryRequest($category->getName())): ?>
+                        <?php if ($block->getCategoriesDataHelper()->getShowAllSubcategories() || $helperData->isInaCategoryRequest($category->getName())): ?>
                             <?= $block->getSelectList($block->getChildCategories($category)); ?>
-                        <?endif;?>
+                        <?php endif;?>
                     </select>
-            <? endforeach; ?>
+            <?php endforeach; ?>
         </div>
     </div>
 </div>

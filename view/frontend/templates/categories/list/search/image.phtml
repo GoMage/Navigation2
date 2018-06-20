@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * @var $categoriesBlock \GoMage\Navigation\Block\Categories
  */
@@ -6,8 +6,8 @@ $helperDataCat = $this->helper('GoMage\Navigation\Helper\Data');
 $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
 ?>
 
-<?foreach ($data as $category):?>
-    <? $name = ($categoriesHelper->isShowImageName()) ? $category['name'] : ''; ?>
+<?php foreach ($data as $category):?>
+    <?php $name = ($categoriesHelper->isShowImageName()) ? $category['name'] : ''; ?>
     <?php $image = $block->getCategoryImage($category['entity_id']); ?>
     <?php $image = $block->getImage(); ?>
     <?php $image =  $categoriesHelper->getCategoryImage($category['entity_id'])  ?>
@@ -32,14 +32,14 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
                             width="<?=$categoriesBlock->escapeHtml($categoriesHelper->getCategoriesImageWidth())?>"
                             height="<?=$categoriesBlock->escapeHtml($categoriesHelper->getCategoriesImageHeight())?>">
                 <?php endif; ?>
-                <? if($categoriesHelper->isShowImageName()): ?>
+                <?php if($categoriesHelper->isShowImageName()): ?>
                     <span><?= $name;?></span>
-                <?endif;?>
+                <?php endif;?>
             </a>
 
-            <? if (($categoriesBlock->getCategoriesDataHelper()->getShowAllSubcategories() && !empty(($category['children']))) || $helperDataCat->isInaCategoryRequest($category['name'], $category)): ?>
+            <?php if (($categoriesBlock->getCategoriesDataHelper()->getShowAllSubcategories() && !empty(($category['children']))) || $helperDataCat->isInaCategoryRequest($category['name'], $category)): ?>
                 <?=$categoriesBlock->getImageCategoriesList($category['children']);?>
-            <?endif;?>
+            <?php endif;?>
         </li>
     </ol>
-<?endforeach;?>
+<?php endforeach;?>

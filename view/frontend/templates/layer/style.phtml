@@ -17,7 +17,7 @@
     .page-layout-1column .toolbar.toolbar-products {
         position: static;
     }
-    <?if($helperViewData->getNavigationViewSliderLineHeight() < $helperViewData->getNavigationViewSliderElementHeight()):?>
+    <?php if ($helperViewData->getNavigationViewSliderLineHeight() < $helperViewData->getNavigationViewSliderElementHeight()):?>
     .gan-filter-slider .layout {
         padding-bottom: <?=$block->escapeHtml($helperViewData->getNavigationViewSliderElementHeight())?>px;
         margin-left: <?=$block->escapeHtml(($helperViewData->getNavigationViewSliderElementWidth() / 2))?>px;
@@ -29,7 +29,7 @@
         margin-top: <?= $block->escapeHtml((($helperViewData->getNavigationViewSliderElementHeight() - $helperViewData->getNavigationViewSliderLineHeight()) / 2 + 10)) ?>px;
     }
 
-    <?endif;?>
+    <?php endif;?>
 
     .gan-filter-slider .jslider .jslider-bg,
     .gan-filter-slider .jslider .jslider-bg .f,

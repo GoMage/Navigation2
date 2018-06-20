@@ -10,6 +10,10 @@ namespace GoMage\Navigation\Plugin;
 
 use Magento\Framework\Search\Request\FilterInterface;
 
+/**
+ * Class CategoryFilterProcessor
+ * @package GoMage\Navigation\Plugin
+ */
 class CategoryFilterProcessor
 {
     /**

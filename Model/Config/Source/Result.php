@@ -2,11 +2,24 @@
 
 namespace GoMage\Navigation\Model\Config\Source;
 
+/**
+ * Class Result
+ * @package GoMage\Navigation\Model\Config\Source
+ */
 class Result implements \Magento\Framework\Option\ArrayInterface
 {
 
+    /**
+     * @var int
+     */
     const NO = 0;
+    /**
+     * @var int
+     */
     const YES = 1;
+    /**
+     * @var int
+     */
     const REMOVE = 2;
 
     /**

@@ -2,11 +2,24 @@
 
 namespace GoMage\Navigation\Model\Config\Source;
 
+/**
+ * Class Place
+ * @package GoMage\Navigation\Model\Config\Source
+ */
 class Place implements \Magento\Framework\Option\ArrayInterface
 {
 
+    /**
+     * @var int
+     */
     const LEFT_COLUMN = 0;
+    /**
+     * @var int
+     */
     const CONTENT = 1;
+    /**
+     * @var int
+     */
     const RIGHT_COLUMN = 2;
 
     /**

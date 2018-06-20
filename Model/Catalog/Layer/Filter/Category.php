@@ -45,6 +45,9 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
      */
     protected $imageCategories = [];
 
+    /**
+     * @var \Magento\Catalog\Model\Layer\Resolver
+     */
     protected $layerResolver;
 
     /**
@@ -57,6 +60,23 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
      */
     protected $categoryHelper;
 
+    /**
+     * Category constructor.
+     * @param \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \Magento\Catalog\Model\Layer $layer
+     * @param \Magento\Catalog\Model\Layer\Filter\Item\DataBuilder $itemDataBuilder
+     * @param \Magento\Framework\Escaper $escaper
+     * @param \Magento\Catalog\Model\Layer\Resolver $layerResolver
+     * @param \Magento\Catalog\Model\Layer\Filter\DataProvider\CategoryFactory $categoryDataProviderFactory
+     * @param \Magento\Framework\Registry $coreRegistry
+     * @param \Magento\Framework\App\RequestInterface $request
+     * @param \GoMage\Navigation\Helper\Data $helper
+     * @param \GoMage\Navigation\Helper\Url $urlHelper
+     * @param \GoMage\Navigation\Helper\CategoryData $categoryHelper
+     * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
+     * @param array $data
+     */
     public function __construct(
         \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
@@ -85,6 +105,10 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
         $this->urlHelper = $urlHelper;
     }
 
+    /**
+     * @param \Magento\Framework\App\RequestInterface $request
+     * @return $this
+     */
     public function apply(\Magento\Framework\App\RequestInterface $request)
     {
         if (!$this->helper->isEnable()) {
@@ -170,6 +194,10 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
 
         return $this->itemDataBuilder->build();
     }
+
+    /**
+     * @return bool
+     */
     public function isCategoryFilter() {
         return true;
     }
@@ -182,14 +210,27 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
         return $this->urlHelper->getFilterRemoveUrl($this);
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function getImageFile($id)
     {
         return $this->imageCat[$id];
     }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function getImageCategory($id) {
         $id = (int) $id;
         return $this->imageCategories[$id];
     }
+
+    /**
+     * @return array
+     */
     protected function getFormattedFilters()
     {
         $filters = explode('_', $this->request->getParam($this->getRequestVar()));

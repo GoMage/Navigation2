@@ -2,6 +2,10 @@
 
 namespace GoMage\Navigation\Model\Config\Source\Filter;
 
+/**
+ * Class Templates
+ * @package GoMage\Navigation\Model\Config\Source\Filter
+ */
 class Templates
 {
     /**

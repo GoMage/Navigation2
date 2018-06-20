@@ -2,6 +2,10 @@
 
 namespace GoMage\Navigation\Model\Catalog\Layer\Filter;
 
+/**
+ * Class Attribute
+ * @package GoMage\Navigation\Model\Catalog\Layer\Filter
+ */
 class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute implements FilterInterface
 {
     /**
@@ -18,7 +22,7 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
     /**
      * @var \Magento\Framework\Filter\StripTags
      */
-    private $tagFilter;
+    protected $tagFilter;
     /**
      * @var \GoMage\Navigation\Helper\Data
      */
@@ -96,6 +100,9 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
         return false;
     }
 
+    /**
+     * @return bool
+     */
     public function isCategoryFilter() {
         return false;
     }
@@ -164,10 +171,10 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
 //        if (!$this->request->getParam($this->_requestVar)) {
 //            return parent::_getItemsData();
 //        }
-//
-//        if ($this->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::DROP_DOWN) {
-//            return parent::_getItemsData();
-//        }
+
+        if ($this->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::DROP_DOWN) {
+            return parent::_getItemsData();
+        }
         $attribute = $this->getAttributeModel();
         $productCollection = $this->getLayer()
             ->getProductCollection();
@@ -196,7 +203,7 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
                 $optionsFacetedData[$option['value']]['count'] = $optionsCount[$option['value']];
             }
 
-            if (empty($optionsFacetedData[$option['value']]['count'])) {
+            if (empty($optionsFacetedData[$option['value']]['count']) && $option['label'] =='category') {
                 continue;
             }
 
@@ -272,7 +279,6 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
         if ($this->request->getParam($this->_requestVar)) {
             return true;
         }
-
         return false;
     }
 }

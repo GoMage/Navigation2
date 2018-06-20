@@ -2,6 +2,10 @@
 
 namespace GoMage\Navigation\Model\Catalog\Layer\Filter;
 
+/**
+ * Class Decimal
+ * @package GoMage\Navigation\Model\Catalog\Layer\Filter
+ */
 class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements FilterInterface
 {
     /**
@@ -136,6 +140,9 @@ class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements Fil
         return $this->getCollection()->getAllAttributeValues($this->getAttributeModel());
     }
 
+    /**
+     * @return bool
+     */
     public function isCategoryFilter() {
         return false;
     }

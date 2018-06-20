@@ -16,6 +16,10 @@ namespace GoMage\Navigation\Helper;
 
 use Magento\Framework\App\Helper\Context;
 
+/**
+ * Class Url
+ * @package GoMage\Navigation\Helper
+ */
 class Url extends \Magento\Framework\App\Helper\AbstractHelper
 {
     /**

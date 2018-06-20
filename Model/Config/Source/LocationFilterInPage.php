@@ -10,6 +10,10 @@ namespace GoMage\Navigation\Model\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
 
+/**
+ * Class LocationFilterInPage
+ * @package GoMage\Navigation\Model\Config\Source
+ */
 class LocationFilterInPage implements OptionSourceInterface
 {
     /**

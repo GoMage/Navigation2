@@ -5,6 +5,10 @@ namespace GoMage\Navigation\Helper;
 use GoMage\Navigation\Helper\Config\SystemConfigInterface;
 use Magento\Framework\App\Helper\Context;
 
+/**
+ * Class LoaderData
+ * @package GoMage\Navigation\Helper
+ */
 class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
 {
     /**
@@ -39,6 +43,10 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
         parent::__construct($context);
     }
 
+    /**
+     * @param null $moduleName
+     * @return mixed
+     */
     public function isEnabled($moduleName = null)
     {
         return $this->dataHelper->isEnable();

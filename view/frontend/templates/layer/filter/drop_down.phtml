@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  *
  * @var $block \GoMage\Navigation\Block\Navigation\FilterRenderer
@@ -13,46 +13,46 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
     <select data-role="navigation-filter"
             data-param="<?= $block->escapeHtml($filter->getRequestVar()) ?>"
             data-type="select"
-            <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+            <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
                 data-ajax="1"
-            <?else:?>
+            <?php else:?>
                 data-ajax="0"
-            <?endif;?>
-            <? if (!empty($filter->getUsedOptions())): ?>
+            <?php endif;?>
+            <?php if (!empty($filter->getUsedOptions())): ?>
                 data-active="1"
-            <? endif; ?>
+            <?php endif; ?>
     >
         <option value=""><?= __('Select Filter') ?></option>
         <?$optionsLimit = ($filter->getGomageVisibleOptions()) ? $filter->getGomageVisibleOptions() : false;
         $cnt = 0;
         ?>
-        <? foreach ($filterItems as $item): ?>
-            <? if ($item->getCount() > 0 || ($helperData->isShowEmptyCategory() && $filter->isCategoryFilter())): ?>
+        <?php foreach ($filterItems as $item): ?>
+            <?php if ($item->getCount() > 0 || ($helperData->isShowEmptyCategory() && $filter->isCategoryFilter())): ?>
                 <option <?php if((!$item->isShowAppliedValues())): ?>style="display: none"<?php endif; ?> value="<?= $block->escapeHtml($item->getGomageValue()) ?>"
                         data-param="<?= $block->escapeHtml($filter->getRequestVar()) ?>"
-                        <? if ($item->getIsActive()): ?>selected="selected" data-active="1"<? endif ?>>
+                        <?php if ($item->getIsActive()): ?>selected="selected" data-active="1"<?php endif ?>>
                     <?= $block->escapeHtml($item->getLabel() . ' (' . $item->getCount() . ')', ['span']) ?>
                 </option>
-            <? endif; ?>
+            <?php endif; ?>
             <?$cnt++;?>
-        <? endforeach ?>
+        <?php endforeach ?>
     </select>
-    <?if($filter->isActive() && $filter->getGomageIsReset() || ($filter->isActive() &&$filter->isCategoryFilter() && $categoriesHelper->isShowResetLink() )):?>
+    <?php if ($filter->isActive() && $filter->getGomageIsReset() || ($filter->isActive() &&$filter->isCategoryFilter() && $categoriesHelper->isShowResetLink() )):?>
         <a
                 data-role="navigation-filter"
                 data-value=""
                 data-url="<?= $block->escapeUrl($filter->getRemoveUrl()) ?>"
                 data-param-to-remove="<?=$block->escapeHtml($filter->getRequestVar()) ?>"
-            <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax()) && ( ($filter->isCategoryFilter() &&  $categoriesHelper->isAjax()) ||  !$filter->isCategoryFilter()) ):?>
+            <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax()) && ( ($filter->isCategoryFilter() &&  $categoriesHelper->isAjax()) ||  !$filter->isCategoryFilter()) ):?>
                 data-ajax="1"
-            <?else:?>
+            <?php else:?>
                 data-ajax="0"
-            <?endif;?>
+            <?php endif;?>
                 data-type="remove-item"
                 data-active="1"
                 href="#"
                 class="gan_link_reset">
             <?= __('Reset'); ?>
         </a>
-    <?endif;?>
+    <?php endif;?>
 </div>

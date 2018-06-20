@@ -1,11 +1,11 @@
-<?
+<?php
 
 // @codingStandardsIgnoreFile
 
 /** @var $block \Magento\Swatches\Block\LayeredNavigation\RenderLayered */
 ?>
 
-<?
+<?php
 $filter = reset($filterItems)->getFilter();
 $swatchData = $block->getSwatch()->setSwatchFilter($filter)->getSwatchData();
 $swatchData = $block->prepareSwatchesData($swatchData, $filterItems);
@@ -18,25 +18,25 @@ $cnt = 0;
 <div class="swatch-attribute swatch-layered <?=$block->escapeHtml($swatchData['attribute_code']) ?>"
      attribute-code="<?=$block->escapeHtml($swatchData['attribute_code']) ?>" attribute-id="<?=$block->escapeHtml($swatchData['attribute_id']) ?>">
     <div class="swatch-attribute-options clearfix <?php echo $helperData->getOptionsAlignment((int)$filter->getGomageOptionsAlignment()); ?>">
-        <? foreach ($swatchData['options'] as $option => $data): ?>
-            <?
+        <?php foreach ($swatchData['options'] as $option => $data): ?>
+            <?php
                 $selected = '';
             ?>
             <a  <?php if(!$data['is_show']): ?> style="display: none" <?php endif; ?> href="<?=$block->escapeUrl($data['link']) ?>"
                data-role="navigation-filter"
                 data-value="<?= (!empty($data['gomage_value'])) ? $data['gomage_value'] : $option; ?>"
                data-param="<?= $block->escapeHtml($filter->getRequestVar()) ?>"
-                <? if($filter->getGomageIsAjax()):?>
+                <?php if($filter->getGomageIsAjax()):?>
                 data-ajax="1"
-                <?endif;?>
+                <?php endif;?>
                data-type="<?= $block->escapeHtml($filter->getSwatchInputType()); ?>"
-                <? if (!empty($data['is_active'])) : ?>
-                <? $selected = 'selected';?>
+                <?php if (!empty($data['is_active'])) : ?>
+                <?php $selected = 'selected';?>
                data-active="1"
-                <? endif; ?>
+                <?php endif; ?>
                class="swatch-option-link-layered">
-                <? if (isset($swatchData['swatches'][$option]['type'])) { ?>
-                    <? switch ($swatchData['swatches'][$option]['type']) {
+                <?php if (isset($swatchData['swatches'][$option]['type'])) { ?>
+                    <?php switch ($swatchData['swatches'][$option]['type']) {
                         case '3':
                             ?>
                             <div class="<?= $block->escapeHtml($selected);?> swatch-option  <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?> <?=$block->escapeHtml($data['custom_style']) ?>"
@@ -47,14 +47,14 @@ $cnt = 0;
                                  option-tooltip-thumb=""
                                  option-tooltip-value=""
                             ></div>
-                            <? break;
+                            <?php break;
                         case '2':
                             ?>
-                            <? $helperImageSwatch->setWidth($filter->getGomageImageWidth()); ?>
-                            <? $helperImageSwatch->setHeight($filter->getGomageImageHeight()); ?>
-                            <? $swatchThumbPath = $helperImageSwatch->getImagePath('swatch_thumb',
+                            <?php $helperImageSwatch->setWidth($filter->getGomageImageWidth()); ?>
+                            <?php $helperImageSwatch->setHeight($filter->getGomageImageHeight()); ?>
+                            <?php $swatchThumbPath = $helperImageSwatch->getImagePath('swatch_thumb',
                             $swatchData['swatches'][$option]['value']); ?>
-                            <? $swatchImagePath = $helperImageSwatch->getImagePath('swatch_image',
+                            <?php $swatchImagePath = $helperImageSwatch->getImagePath('swatch_image',
                             $swatchData['swatches'][$option]['value']); ?>
                             <div class="<?= $block->escapeHtml($selected);?> swatch-option  <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?> image <?=$block->escapeHtml($data['custom_style']) ?>"
                                  option-type="2"
@@ -67,7 +67,7 @@ $cnt = 0;
                                  <?= $block->escapeHtml(!empty($filter->getGomageImageWidth()) ? 'width:' . $filter->getGomageImageWidth() . 'px' : '');?>;
                                  <?= $block->escapeHtml(!empty($filter->getGomageImageHeight()) ? 'height:' . $filter->getGomageImageWidth() . 'px' : '');?>;">
                             </div>
-                            <? break;
+                            <?php break;
                         case '1':
                             ?>
                             <div  class="<?= $block->escapeHtml($selected);?> swatch-option  <?=((!empty($optionsLimit) && $cnt >= $optionsLimit)) ? 'gan_link-more-element': '' ?> color <?=$block->escapeHtml($data['custom_style']) ?>"
@@ -83,7 +83,7 @@ $cnt = 0;
                                         <?= $block->escapeHtml(!empty($filter->getGomageImageWidth()) ? 'width:' . $filter->getGomageImageWidth() . 'px' : '');?>;
                                         <?= $block->escapeHtml(!empty($filter->getGomageImageHeight()) ? 'height:' . $filter->getGomageImageWidth() . 'px' : '');?>;
                                          "></div>
-                            <? break;
+                            <?php break;
                         case '0':
                         default:
                             ?>
@@ -95,31 +95,31 @@ $cnt = 0;
                                  option-tooltip-thumb=""
                                  option-tooltip-value=""
                             ><?=$block->escapeHtml($swatchData['swatches'][$option]['value']) ?></div>
-                            <? break;
+                            <?php break;
                     } ?>
-                <? } ?>
+                <?php } ?>
             </a>
             <?$cnt++;?>
-        <? endforeach; ?>
+        <?php endforeach; ?>
     </div>
-    <?if($filter->isActive() && $filter->getGomageIsReset()):?>
+    <?php if ($filter->isActive() && $filter->getGomageIsReset()):?>
         <a
                 data-role="navigation-filter"
                 data-value=""
                 data-url="<?= $block->escapeUrl($filter->getRemoveUrl()) ?>"
                  data-param-to-remove="<?=$block->escapeHtml($filter->getRequestVar()) ?>"="<?=$block->escapeHtml($filter->getRequestVar()) ?>"
-            <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+            <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
                 data-ajax="1"
-            <?else:?>
+            <<?php else: ?>
                 data-ajax="0"
-            <?endif;?>
+            <?php endif;?>
                 data-type="remove-item"
                 data-active="1"
                 href="#"
                 class="gan_link_reset">
             <?= __('Reset'); ?>
         </a>
-    <?endif;?>
+    <?php endif;?>
 </div>
 <?php if($optionsLimit && count($filterItems) > $optionsLimit): ?>
 <a style=" <?= ($helperData->isShowMore($filter->getName()) ) ? 'display:none': '' ?>" data-show-more = "<?php echo $helperData->isShowMore($filter->getName()) ?>" data-more-value = "<?php echo strtolower($filter->getName()); ?>" data-more-params="more_show" class="gan_link_more"><?=__('More') ?>&#9660;</a>

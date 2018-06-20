@@ -69,6 +69,7 @@ class NavigationCmsBlock extends \GoMage\Navigation\Block\Navigation
      * @param \GoMage\Navigation\Helper\Data $dataHelper
      * @param \GoMage\Navigation\Helper\CategoryData $categoryHelper
      * @param \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper
+     * @param \Magento\Framework\Registry $registry
      * @param array $data
      */
     public function __construct(

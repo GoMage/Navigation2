@@ -3,7 +3,7 @@
  * @var $block \GoMage\Navigation\Block\Navigation\Tooltip
  */
 ?>
-<? if($filter->getGomageIsShowTooltip()):?>
+<?php if($filter->getGomageIsShowTooltip()):?>
     <?php $text = $block->getTooltipText($filter->getGomageTooltipText() ); ?>
     <?php  $PCREpattern  =  '/\r\n+|\r|\n+|\s+|\t+/u'; ?>
     <?php $text = preg_replace($PCREpattern, '', $text); ?>
@@ -17,11 +17,11 @@
                         height: <?= (int)$filter->getGomageTooltipHeight() != 0 ? $block->escapeHtml($filter->getGomageTooltipHeight()).'px': 'auto';?>;
                         background: <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewTooltipWindowBackgroundColor());?>;">
                     <div class="gan-tooltip-text"><?=$block->getTooltipText($filter->getGomageTooltipText());?></div>
-                    <?if($block->getNavigationViewHelper()->isNavigationViewTooltipHideOnCloseButton()):?>
+                    <?php if ($block->getNavigationViewHelper()->isNavigationViewTooltipHideOnCloseButton()):?>
                         <div class="gan-tooltip-close">✕</div>
-                    <?endif;?>
+                    <?php endif;?>
                 </div>
             </div>
         </div>
     <?php endif; ?>
-<?endif;?>
+<?php endif;?>

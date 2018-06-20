@@ -2,6 +2,10 @@
 
 namespace GoMage\Navigation\Observer;
 
+/**
+ * Class SaveAttribute
+ * @package GoMage\Navigation\Observer
+ */
 class SaveAttribute implements \Magento\Framework\Event\ObserverInterface
 {
     /**

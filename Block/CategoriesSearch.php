@@ -8,10 +8,20 @@
 
 namespace GoMage\Navigation\Block;
 
-
+/**
+ * Class CategoriesSearch
+ * @package GoMage\Navigation\Block
+ */
 class CategoriesSearch extends Categories
 {
+    /**
+     * @var array
+     */
     protected $facetsData=[];
+
+    /**
+     * @var \Magento\Framework\Registry $coreRegistry
+     */
     protected $coreRegistry;
 
     /**

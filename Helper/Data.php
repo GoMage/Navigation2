@@ -5,8 +5,15 @@ namespace GoMage\Navigation\Helper;
 use GoMage\Navigation\Helper\Config\SystemConfigInterface;
 use Magento\Framework\App\Helper\Context;
 
+/**
+ * Class Data
+ * @package GoMage\Navigation\Helper
+ */
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
+    /**
+     *
+     */
     const ALIGNMENT_VERTICAL = 0;
     const ALIGNMENT_HORIZONTAL = 1;
     const ALIGNMENT_2COLUMN = 2;
@@ -28,7 +35,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * Data constructor.
      * @param Context $context
      * @param \Magento\Framework\View\Asset\Repository $assetRepository
-     * @param \Magento\Framework\Registry $registry
+     * @param \Magento\Cms\Model\Page $cmsPage
      */
     public function __construct(
         Context $context,

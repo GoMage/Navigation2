@@ -112,6 +112,10 @@ class CategorySearch extends Category
         $this->urlHelper = $urlHelper;
     }
 
+    /**
+     * @param \Magento\Framework\App\RequestInterface $request
+     * @return $this
+     */
     public function apply(\Magento\Framework\App\RequestInterface $request)
     {
         if (!$this->helper->isEnable()) {
@@ -176,6 +180,10 @@ class CategorySearch extends Category
         return $this->itemDataBuilder->build();
     }
 
+    /**
+     * @param $category
+     * @return array
+     */
     public function getChildCategoriesObject($category)
     {
         if ($this->categoryFlatState->isFlatEnabled() && $category->getUseFlatResource()) {
@@ -194,6 +202,11 @@ class CategorySearch extends Category
 
     }
 
+    /**
+     * @param $category
+     * @param $facetsCategory
+     * @return array
+     */
     public function  getCategoriesSearch($category, $facetsCategory)
     {
             $arrCat = [];
@@ -214,6 +227,9 @@ class CategorySearch extends Category
 
     }
 
+    /**
+     * @return array
+     */
     protected function getFormattedFilters()
     {
         $filters = explode('_', $this->request->getParam($this->getRequestVar()));

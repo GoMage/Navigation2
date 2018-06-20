@@ -12,11 +12,7 @@
 namespace GoMage\Navigation\Block\Adminhtml\Catalog\Product\Attribute\Edit\Tab;
 
 use Magento\Backend\Block\Template\Context;
-use Magento\Backend\Block\Widget\Form;
-use Magento\Backend\Block\Widget\Form\Generic;
 use Magento\Config\Model\Config\Source\Yesno;
-use Magento\Catalog\Model\Entity\Attribute;
-use Magento\Eav\Block\Adminhtml\Attribute\PropertyLocker;
 use Magento\Framework\Data\FormFactory;
 use Magento\Framework\Registry;
 use GoMage\Navigation\Model\Config\Source\Navigation as SourceNavigation;

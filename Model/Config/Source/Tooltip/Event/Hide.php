@@ -2,10 +2,20 @@
 
 namespace GoMage\Navigation\Model\Config\Source\Tooltip\Event;
 
+/**
+ * Class Hide
+ * @package GoMage\Navigation\Model\Config\Source\Tooltip\Event
+ */
 class Hide implements \Magento\Framework\Option\ArrayInterface
 {
 
+    /**
+     *
+     */
     const MOUSE_OUT = 0;
+    /**
+     *
+     */
     const CLOSE_BUTTON = 1;
 
     /**

@@ -2,6 +2,10 @@
 
 namespace GoMage\Navigation\Model\ResourceModel\Layer\Filter;
 
+/**
+ * Class Decimal
+ * @package GoMage\Navigation\Model\ResourceModel\Layer\Filter
+ */
 class Decimal extends \Magento\Catalog\Model\ResourceModel\Layer\Filter\Decimal
 {
 

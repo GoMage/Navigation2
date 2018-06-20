@@ -1,9 +1,9 @@
-<?
+<?php
 
 // @codingStandardsIgnoreFile
 
 ?>
-<?
+<?php
 /**
  *
  * @var $block \GoMage\Navigation\Block\Navigation
@@ -11,7 +11,7 @@
 $helperData = $this->helper('GoMage\Navigation\Helper\Data');
 ?>
 
-<? if ($block->canShowBlock()): ?>
+<?php if ($block->canShowBlock()): ?>
     <div class="block filter block-gan-filter <?=$block->escapeHtml($block->getContainerClass());?>" data-role="navigation" data-mage-init='{"navigation": {
                         "addFilterResultsToUrl": "<?= $block->escapeHtml($block->getDataHelper()->isAddFilterResultsToUrl())?>",
                         "navigationPlace": "<?= $block->escapeHtml($block->getDataHelper()->getShowShopByIn()); ?>",
@@ -28,9 +28,9 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                         }}' style="background-color: <?=$block->getNavigationViewHelper()->getNavigationViewBlockBackgroundColor()?>; ">
         <div class="block-title"><strong><?= __('Shop By') ?></strong></div>
         <div class="block-content filter-content">
-            <?if ($block->getDataHelper()->isShowAppliedValuesInResults()):?>
+            <?php if  ($block->getDataHelper()->isShowAppliedValuesInResults()):?>
                 <?= $block->getStateBlock()->toHtml() ?>
-                <? if ($block->getLayer()->getState()->getFilters()): ?>
+                <?php if ($block->getLayer()->getState()->getFilters()): ?>
                     <div class="block-actions filter-actions">
                         <a href="<?= $block->escapeUrl($block->getClearUrl()) ?>"
                            class="action clear filter-clear"
@@ -40,14 +40,14 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                             <span><?= __('Clear All') ?></span>
                         </a>
                     </div>
-                <? endif; ?>
-            <? endif;?>
-            <? $wrapOptions = false; ?>
-                <? foreach ($block->getFilters() as $filter): ?>
+                <?php endif; ?>
+            <?php endif;?>
+            <?php $wrapOptions = false; ?>
+                <?php foreach ($block->getFilters() as $filter): ?>
             <?php $countApplied = 0; ?>
                     <?php $blockRender = $block->getRenderBlock(); ?>
                     <?php if ($blockRender->renderInCurrentCategory($filter)) : ?>
-                        <? if (!$wrapOptions): ?>
+                        <?php if (!$wrapOptions): ?>
                             <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle"><?= __('Shopping Options') ?></strong>
                             <dl class="filter-options"
                                 id="narrow-by-list"
@@ -59,9 +59,9 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                                 "multipleCollapsible": true
                                 }}'>
 
-                            <? $wrapOptions = true; endif; ?>
+                            <?php $wrapOptions = true; endif; ?>
 
-                            <? if ($filter->getItemsCount()): ?>
+                            <?php if ($filter->getItemsCount()): ?>
                                 <?php foreach ($filter->getItems() as $item): ?>
                                     <?php $helperData->checkIsActive($item, $filter->getRequestVar()) ?>
                                     <?php if($item->isShowAppliedValues() && $item->getCount()): ?>
@@ -82,13 +82,13 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                                         <dd data-role="content" class="filter-options-content"><?= $blockRender->render($filter); ?></dd>
                                     </div>
                                <?php endif; ?>
-                            <? endif; ?>
+                            <?php endif; ?>
                     <?php endif; ?>
-                <? endforeach; ?>
-                <? if ($wrapOptions): ?>
+                <?php endforeach; ?>
+                <?php if ($wrapOptions): ?>
                     </dl>
-                <? endif; ?>
+                <?php endif; ?>
 
         </div>
     </div>
-<? endif; ?>
+<?php endif; ?>

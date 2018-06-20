@@ -16,7 +16,7 @@
  */
 $helper = $this->helper('GoMage\Navigation\Helper\Data');
 ?>
-<? if ($block->getMoreUrl()) : ?>
+<?php if ($block->getMoreUrl()) : ?>
     <div class="gan-more-button" id="gan-more-button">
         <button
                 id="<?= $block->escapeHtml($block->getType()); ?>"
@@ -26,4 +26,4 @@ $helper = $this->helper('GoMage\Navigation\Helper\Data');
                 data-type="<?= $block->escapeHtml($block->getType()); ?>"
         ><span><?= __('Show more products') ?></span></button>
     </div>
-<? endif; ?>
+<?php endif; ?>

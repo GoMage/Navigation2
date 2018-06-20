@@ -1,6 +1,10 @@
 <?php
 namespace GoMage\Navigation\Model\ResourceModel\NavigationAttribute;
 
+/**
+ * Class Collection
+ * @package GoMage\Navigation\Model\ResourceModel\NavigationAttribute
+ */
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
     protected function _construct()

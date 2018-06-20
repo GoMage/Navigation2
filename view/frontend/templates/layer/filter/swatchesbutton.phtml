@@ -12,34 +12,34 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
 ?>
 <div class="swatch-attribute">
     <div class="swatch-attribute-options clearfix <?php echo $helperData->getOptionsAlignment((int)$filter->getGomageOptionsAlignment()); ?>">
-        <? foreach ($filterItems as $item): ?>
-        <? if ($item->getCount() > 0 || ($helperData->isShowEmptyCategory() && $filter->isCategoryFilter())): ?>
+        <?php foreach ($filterItems as $item): ?>
+        <?php if ($item->getCount() > 0 || ($helperData->isShowEmptyCategory() && $filter->isCategoryFilter())): ?>
         <div class="text_gan_swatch_button">
             <div class="swatch-option text <?php if($item->getIsActive()): ?> selected <?php endif; ?> <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?>"  style="background: background-size: initial; <?php if((!$item->isShowAppliedValues()) || (!empty(($optionsLimit) && $cnt >= $optionsLimit) && !$helperData->isShowMore($filter->getName()))  ): ?>display: none;<?php endif; ?>"
-                <? if($item->getIsActive()):?>
+                <?php if($item->getIsActive()):?>
                     class="active"
-                <?endif;?>
+                <?php endif;?>
                  data-role="navigation-filter"
-                 data-url="<? if(!$item->getIsActive()):?><?= $block->escapeUrl($item->getGomageUrl()) ?> <?endif;?>"
+                 data-url="<?php if(!$item->getIsActive()):?><?= $block->escapeUrl($item->getGomageUrl()) ?> <?php endif;?>"
                  data-value="<?= $block->escapeHtml($item->getGomageValue()) ?>"
                  data-param="<?= $block->escapeHtml($filter->getRequestVar()) ?>"
-                <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax()) && ( ($filter->isCategoryFilter() &&  $categoriesHelper->isAjax()) ||  !$filter->isCategoryFilter())):?>
+                <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax()) && ( ($filter->isCategoryFilter() &&  $categoriesHelper->isAjax()) ||  !$filter->isCategoryFilter())):?>
                     data-ajax="1"
-                <?else:?>
+                <?php else:?>
                     data-ajax="0"
-                <?endif;?>
+                <?php endif;?>
                  data-type="<?= (int) $filter->getGomageFilterType(); ?>"
-                <? if($item->getIsActive()):?>
+                <?php if($item->getIsActive()):?>
                     data-active="1"
-                <? endif;?>>
+                <?php endif;?>>
                 <?= html_entity_decode($block->escapeHtml($item->getLabel(), ['span'])) ?>
             </div>
         </div>
             <?$cnt++;?>
         <?php endif; ?>
-        <? endforeach ?>
+        <?php endforeach ?>
     </div>
-    <?if($filter->isActive() && $filter->getGomageIsReset()):?>
+    <?php if ($filter->isActive() && $filter->getGomageIsReset()):?>
         <a
                 data-role="navigation-filter"
                 data-value=""
@@ -47,16 +47,16 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
                 data-param-to-remove="<?=$block->escapeHtml($filter->getRequestVar()) ?>"="<?=$block->escapeHtml($filter->getRequestVar()) ?>"
             <?if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
                 data-ajax="1"
-            <?else:?>
+            <?php else:?>
                 data-ajax="0"
-            <?endif;?>
+            <?php endif;?>
                 data-type="remove-item"
                 data-active="1"
                 href="#"
                 class="gan_link_reset">
             <?= __('Reset'); ?>
         </a>
-    <?endif;?>
+    <?php endif;?>
 <?php if($optionsLimit && count($filterItems) > $optionsLimit): ?>
         <a style=" <?= ($helperData->isShowMore($filter->getName()) ) ? 'display:none': '' ?>" data-show-more = "<?php echo $helperData->isShowMore($filter->getName()) ?>" data-more-value = "<?php echo strtolower($filter->getName()); ?>" data-more-params="more_show" data-more-value = "<?php echo strtolower($filter->getName()); ?>" class="gan_link_more"><?=__('More') ?>&#9660;</a>
         <a class="gan_link_more_less"  style=" <?= (!$helperData->isShowMore($filter->getName()) ) ? 'display:none': '' ?>"><?=__('Less') ?>&#9650;</a>

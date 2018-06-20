@@ -4,15 +4,37 @@ namespace GoMage\Navigation\Helper;
 use Magento\Catalog\Api\CategoryRepositoryInterface;
 use Magento\Framework\Registry;
 
+/**
+ * Class CategoryHelper
+ * @package GoMage\Navigation\Helper
+ */
 class CategoryHelper extends \Magento\Catalog\Helper\Category
 {
+    /**
+     * @var Registry $registry
+     */
     private $registry;
+
+    /**
+     * @var \Magento\Catalog\Model\CategoryFactory $categoryFactory
+     */
+    private $categoryFactory;
 
     /**
      * @var \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory
      */
     protected $categoryCollectionFactory;
 
+    /**
+     * CategoryHelper constructor.
+     * @param \Magento\Framework\App\Helper\Context $context
+     * @param \Magento\Catalog\Model\CategoryFactory $categoryFactory
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \Magento\Framework\Data\CollectionFactory $dataCollectionFactory
+     * @param Registry $registry
+     * @param CategoryRepositoryInterface $categoryRepository
+     * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
+     */
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
         \Magento\Catalog\Model\CategoryFactory $categoryFactory,
@@ -23,6 +45,7 @@ class CategoryHelper extends \Magento\Catalog\Helper\Category
         \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
 
     ) {
+        $this->categoryFactory = $categoryFactory;
         $this->categoryCollectionFactory = $categoryCollectionFactory;
         $this->registry = $registry;
         parent::__construct($context, $categoryFactory, $storeManager, $dataCollectionFactory, $categoryRepository);
@@ -68,5 +91,10 @@ class CategoryHelper extends \Magento\Catalog\Helper\Category
     public function getCategoryCollection()
     {
         return $this->categoryCollectionFactory;
+    }
+
+    public function getCategoryFactory()
+    {
+        return $this->categoryFactory;
     }
 }

@@ -2,8 +2,6 @@
 
 namespace GoMage\Navigation\Block;
 
-use GoMage\Navigation\Model\Config\Source\NavigationInterface;
-
 class Navigation extends \Magento\LayeredNavigation\Block\Navigation
 {
     /**

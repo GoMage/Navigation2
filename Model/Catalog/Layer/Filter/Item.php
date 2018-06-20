@@ -2,6 +2,10 @@
 
 namespace GoMage\Navigation\Model\Catalog\Layer\Filter;
 
+/**
+ * Class Item
+ * @package GoMage\Navigation\Model\Catalog\Layer\Filter
+ */
 class Item extends \Magento\Catalog\Model\Layer\Filter\Item
 {
     /**
@@ -66,6 +70,9 @@ class Item extends \Magento\Catalog\Model\Layer\Filter\Item
         return true;
     }
 
+    /**
+     * @return bool
+     */
     public function isCategoryFilter() {
         return false;
     }

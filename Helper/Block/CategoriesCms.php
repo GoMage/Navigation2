@@ -16,9 +16,10 @@ class CategoriesCms extends Categories
      */
     protected $categoryHelper;
 
+    /**
+     * @var mixed
+     */
     protected $image = false;
-
-    protected $categoryParent;
 
     /**
      * @var \Magento\Cms\Model\Page
@@ -87,6 +88,7 @@ class CategoriesCms extends Categories
      * @param \GoMage\Navigation\Model\Config\Source\Category\Templates $templates
      * @param \Magento\Catalog\Model\ResourceModel\Category $categoryResource
      * @param \Magento\Catalog\Model\Layer\Resolver $layerResolver
+     * @param \Magento\Framework\Registry $registry
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,

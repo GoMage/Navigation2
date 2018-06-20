@@ -2,6 +2,10 @@
 
 namespace GoMage\Navigation\Model\Config\Source;
 
+/**
+ * Class Navigation
+ * @package GoMage\Navigation\Model\Config\Source
+ */
 class Navigation implements
     \Magento\Framework\Option\ArrayInterface,
     \GoMage\Navigation\Model\Config\Source\NavigationInterface

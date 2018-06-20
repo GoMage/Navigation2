@@ -12,6 +12,10 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Api\SearchResultsInterfaceFactory;
 
+/**
+ * Class NavigationAttributeRepository
+ * @package GoMage\Navigation\Model
+ */
 class NavigationAttributeRepository implements \GoMage\Navigation\Api\NavigationAttributeRepositoryInterface
 {
     /**

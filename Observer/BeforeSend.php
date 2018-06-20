@@ -5,6 +5,10 @@ namespace GoMage\Navigation\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\DataObject;
 
+/**
+ * Class BeforeSend
+ * @package GoMage\Navigation\Observer
+ */
 class BeforeSend implements ObserverInterface
 {
     /**

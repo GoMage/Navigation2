@@ -2,7 +2,6 @@
 
 namespace GoMage\Navigation\Plugin;
 
-
 /**
  * Class VisualSwatch
  * @package GoMage\Navigation\Plugin

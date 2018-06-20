@@ -2,6 +2,10 @@
 
 namespace GoMage\Navigation\Model\Config\Source\Category;
 
+/**
+ * Class Templates
+ * @package GoMage\Navigation\Model\Config\Source\Category
+ */
 class Templates
 {
     /**

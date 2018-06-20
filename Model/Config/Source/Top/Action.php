@@ -2,10 +2,21 @@
 
 namespace GoMage\Navigation\Model\Config\Source\Top;
 
+
+/**
+ * Class Action
+ * @package GoMage\Navigation\Model\Config\Source\Top
+ */
 class Action implements \Magento\Framework\Option\ArrayInterface
 {
 
+    /**
+     * @var int
+     */
     const PAGE = 0;
+    /**
+     * @var int
+     */
     const PRODUCTS = 1;
 
     /**
