@@ -11,34 +11,34 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
 $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
 $categoriesHelperImage = $this->helper('GoMage\Navigation\Helper\ImageSwatchHelper');
 ?>
-<ol class="items gan-filter gan-filter-default <?php if($filter->getGomageIsCheckbox()  || ($filter->isCategoryFilter() && ($categoriesHelper->isShowCheckboxes()))):?> gan-filter-checkbox<?endif;?> <?=($categoriesHelper->getCategoriesImageAlignment()) ? ' gan-categories-list-alignment-' . $categoriesHelper->getCategoriesImageAlignment() : '';?>  <?php echo $helperData->getOptionsAlignment((int)$filter->getGomageOptionsAlignment()); ?>
+<ol class="items gan-filter gan-filter-default <?php if($filter->getGomageIsCheckbox()  || ($filter->isCategoryFilter() && ($categoriesHelper->isShowCheckboxes()))):?> gan-filter-checkbox<?php endif;?> <?=($categoriesHelper->getCategoriesImageAlignment()) ? ' gan-categories-list-alignment-' . $categoriesHelper->getCategoriesImageAlignment() : '';?>  <?php echo $helperData->getOptionsAlignment((int)$filter->getGomageOptionsAlignment()); ?>
 
 <?php if($filter->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK) echo ' gan-filter-in-block'; ?>
-<?php if($filter->getGomageIsCheckbox()):?> gan-filter-checkbox<?endif;?>"
+<?php if($filter->getGomageIsCheckbox()):?> gan-filter-checkbox<?php endif;?>"
     <?php if($filter->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK && $filter->getGomageMaxBlockHeight()): ?>
         <?php if ($filter->isCategoryFilter() && $categoriesHelper->getMaxBlockHeightCategories()): ?>
             style="max-height:<?= $block->escapeHtml($filter->getGomageMaxBlockHeight()); ?>px;"
         <?php endif; ?>
-    <?endif;?>>
+    <?php endif;?>>
     <?$optionsLimit = ($filter->getGomageVisibleOptions()) ? $filter->getGomageVisibleOptions() : false;
     $cnt = 0;
     ?>
     <?php foreach ($filterItems as $item): ?>
         <li  class="item <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?>" style="<?=((!empty(($optionsLimit) && $cnt >= $optionsLimit)) || (!empty(($optionsLimit) && $cnt >= $optionsLimit) && !$helperData->isShowMore($filter->getName()) )  ) ? 'display:none': '' ?>">
             <?php if ($item->getCount() > 0 || ($helperData->isShowEmptyCategory() && $filter->isCategoryFilter())): ?>
-                <a <?php if(!$item->getIsActive()):?> href="<?= $block->escapeUrl($item->getGomageUrl()); ?> <?endif;?>"
+                <a <?php if(!$item->getIsActive()):?> href="<?= $block->escapeUrl($item->getGomageUrl()); ?> <?php endif;?>"
             <?php if($item->getIsActive()):?>
                 class="active"
-            <?endif;?>
+            <?php endif;?>
             data-role="navigation-filter"
-            data-url="<?php if(!$item->getIsActive()):?><?= $block->escapeUrl($item->getGomageUrl()) ?> <?endif;?>"
+            data-url="<?php if(!$item->getIsActive()):?><?= $block->escapeUrl($item->getGomageUrl()) ?> <?php endif;?>"
             data-value="<?= $block->escapeHtml($item->getGomageValue()) ?>"
             data-param="<?= $block->escapeHtml($filter->getRequestVar()) ?>"
             <?php if  (($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())) && ( ($filter->isCategoryFilter() &&  $categoriesHelper->isAjax()) ||  !$filter->isCategoryFilter())):?>
                 data-ajax="1"
-            <?else:?>
+            <?php else:?>
                 data-ajax="0"
-            <?endif;?>
+            <?php endif;?>
             data-type="<?= (int) $filter->getGomageFilterType(); ?>"
             <?php if($item->getIsActive()):?>
                 data-active="1"
@@ -72,9 +72,9 @@ $categoriesHelperImage = $this->helper('GoMage\Navigation\Helper\ImageSwatchHelp
                 data-param-to-remove="<?=$block->escapeHtml($filter->getRequestVar()) ?>"
             <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax()) && ( ($filter->isCategoryFilter() &&  $categoriesHelper->isAjax()) ||  !$filter->isCategoryFilter()) ):?>
                 data-ajax="1"
-            <?else:?>
+            <?php else:?>
                 data-ajax="0"
-            <?endif;?>
+            <?php endif;?>
                 data-type="remove-item"
                 data-active="1"
                 href="#"
