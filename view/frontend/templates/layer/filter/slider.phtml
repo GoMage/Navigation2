@@ -46,7 +46,7 @@ $filter = reset($filterItems)->getFilter();
                 data-param-to-remove="<?=$block->escapeHtml($filter->getRequestVar()) ?>"
             <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax()) && ( ($filter->isCategoryFilter() &&  $categoriesHelper->isAjax()) ||  !$filter->isCategoryFilter()) ):?>
                 data-ajax="1"
-            <<?php else: ?>
+            <?php else: ?>
                 data-ajax="0"
             <?php endif;?>
                 data-type="remove-item"

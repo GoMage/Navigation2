@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * Template for filter items block
@@ -82,7 +82,7 @@ $priceValues = explode(';', $filter->getSingleValue());
                                 style="
                                     <?php if ($block->getNavigationViewHelper()->isNavigationViewButtonsGradient() && !empty($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2())):?>
                                         background: linear-gradient(to bottom, <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor())?>, <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2())?>);
-                                    <?elseif(!empty($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor())):?>
+                                    <?php elseif(!empty($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor())):?>
                                         background: <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor())?>;
                                     <?php endif;?>
                                     <?php if (!empty($block->getNavigationViewHelper()->getNavigationViewButtonsTextColor())):?>

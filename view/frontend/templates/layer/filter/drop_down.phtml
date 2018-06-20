@@ -23,7 +23,7 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
             <?php endif; ?>
     >
         <option value=""><?= __('Select Filter') ?></option>
-        <?$optionsLimit = ($filter->getGomageVisibleOptions()) ? $filter->getGomageVisibleOptions() : false;
+        <?php $optionsLimit = ($filter->getGomageVisibleOptions()) ? $filter->getGomageVisibleOptions() : false;
         $cnt = 0;
         ?>
         <?php foreach ($filterItems as $item): ?>

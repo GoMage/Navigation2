@@ -23,7 +23,7 @@ $priceValues = explode(';', $filter->getSingleValue());
                data-param="<?=$block->escapeHtml($filter->getRequestVar()) ?>"
             <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
                 data-ajax="1"
-            <<?php else: ?>
+            <?php else: ?>
                 data-ajax="0"
             <?php endif;?>
                id="<?= $block->escapeHtml($filter->getAttributeModel()->getAttributeCode()); ?>"
@@ -41,7 +41,7 @@ $priceValues = explode(';', $filter->getSingleValue());
                             <?php endif;?>
                             <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
                                 data-ajax="1"
-                            <<?php else: ?>
+                            <?php else: ?>
                                 data-ajax="0"
                             <?php endif;?>
                                 type="text"
@@ -62,7 +62,7 @@ $priceValues = explode(';', $filter->getSingleValue());
                             <?php endif;?>
                             <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
                                 data-ajax="1"
-                            <<?php else: ?>
+                            <?php else: ?>
                                 data-ajax="0"
                             <?php endif;?>
                                 type="text"
@@ -83,13 +83,13 @@ $priceValues = explode(';', $filter->getSingleValue());
                             type="submit"
                         <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
                             data-ajax="1"
-                        <<?php else: ?>
+                        <?php else: ?>
                             data-ajax="0"
                         <?php endif;?>
                             style="
                             <?php if ($block->getNavigationViewHelper()->isNavigationViewButtonsGradient() && !empty($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2())):?>
                                     background: linear-gradient(to bottom, <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>, <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2()?>);
-                                    <?elseif(!empty($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor())):?>
+                                    <?php elseif(!empty($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor())):?>
                                     background: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>;
                                     <?php endif;?>
                             <?php if (!empty($block->getNavigationViewHelper()->getNavigationViewButtonsTextColor())):?>

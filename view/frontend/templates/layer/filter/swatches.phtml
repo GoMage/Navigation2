@@ -110,7 +110,7 @@ $cnt = 0;
                  data-param-to-remove="<?=$block->escapeHtml($filter->getRequestVar()) ?>"="<?=$block->escapeHtml($filter->getRequestVar()) ?>"
             <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
                 data-ajax="1"
-            <<?php else: ?>
+            <?php else: ?>
                 data-ajax="0"
             <?php endif;?>
                 data-type="remove-item"
