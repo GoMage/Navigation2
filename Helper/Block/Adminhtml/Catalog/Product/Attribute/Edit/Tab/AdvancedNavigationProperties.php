@@ -24,7 +24,6 @@ use GoMage\Navigation\Model\Config\Source\Navigation as SourceNavigation;
 class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Generic implements
     \Magento\Backend\Block\Widget\Tab\TabInterface
 {
-
     /**
      * @var \GoMage\Navigation\Model\Config\Source\Navigation
      */
@@ -46,7 +45,6 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
     protected $storeManager;
 
     /**
-     * AdvancedNavigationProperties constructor.
      * @param Context $context
      * @param Registry $registry
      * @param FormFactory $formFactory
@@ -64,7 +62,6 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
         Yesno $yesNo,
         array $data = []
     ) {
-
         $this->storeManager = $context->getStoreManager();
         $this->sourceNavigation = $sourceNavigation;
         $this->sourceImageAlignment = $sourceImageAlignment;

@@ -9,6 +9,9 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 {
     protected function _construct()
     {
-        $this->_init('GoMage\Navigation\Model\NavigationAttribute', 'GoMage\Navigation\Model\ResourceModel\NavigationAttribute');
+        $this->_init(
+            \GoMage\Navigation\Model\NavigationAttribute::class,
+            \GoMage\Navigation\Model\ResourceModel\NavigationAttribute::class
+        );
     }
 }

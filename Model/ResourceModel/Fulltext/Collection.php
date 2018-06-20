@@ -5,7 +5,6 @@ use Magento\Framework\App\ObjectManager;
 
 class Collection extends \Magento\CatalogSearch\Model\ResourceModel\Fulltext\Collection
 {
-
     /**
      * @var array
      */
@@ -71,7 +70,6 @@ class Collection extends \Magento\CatalogSearch\Model\ResourceModel\Fulltext\Col
      */
     public function getMaxBasePrice()
     {
-
         $select = $this->getSelect();
         $priceExpression = $this->getPriceExpression($select) . ' ' . $this->getAdditionalPriceExpression($select);
         $sqlEndPart = ') * ' . $this->getCurrencyRate() . ', 2)';

@@ -6,7 +6,6 @@ use Magento\Framework\View\Element\Template;
 
 class Loader extends \Magento\Framework\View\Element\Template
 {
-
     const LOADER_IMAGE_PATH = 'gomage/navigation/loader/';
 
     /**
@@ -20,7 +19,6 @@ class Loader extends \Magento\Framework\View\Element\Template
     protected $alignmentConfig;
 
     /**
-     * Loader constructor.
      * @param Template\Context $context
      * @param \GoMage\Navigation\Helper\LoaderData $helper
      * @param \GoMage\Navigation\Model\Config\Source\Alignment $alignmentConfig
@@ -32,7 +30,6 @@ class Loader extends \Magento\Framework\View\Element\Template
         \GoMage\Navigation\Model\Config\Source\Alignment $alignmentConfig,
         array $data = []
     ) {
-    
         $this->helper = $helper;
         $this->alignmentConfig = $alignmentConfig;
         if($helper->isEnabled()) {

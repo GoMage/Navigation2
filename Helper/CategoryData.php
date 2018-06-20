@@ -28,7 +28,6 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
     protected $_storeManager;
 
     /**
-     * CategoryData constructor.
      * @param Context $context
      */
     public function __construct(
@@ -53,7 +52,7 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
     public function getScopeData($param, $section = SystemConfigInterface::SYSTEM_CONFIG_SECTION)
     {
         return $this->scopeConfig->getValue(
-            $section . SystemConfigInterface::SYSTEM_CONFIG_SLASH. $param,
+            $section . SystemConfigInterface::SYSTEM_CONFIG_SLASH . $param,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -63,10 +62,11 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isShowCategories()
     {
-
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_ENABLE);
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_ENABLE
+        );
     }
 
     /**
@@ -74,10 +74,11 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getCategoriesBlockLocation()
     {
-
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_BLOCK_LOCATION);
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_BLOCK_LOCATION
+        );
     }
 
     /**
@@ -85,10 +86,11 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getCategoriesNavigationType()
     {
-
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_NAVIGATION_TYPE);
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_NAVIGATION_TYPE
+        );
     }
 
     /**
@@ -96,10 +98,11 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getShowAllSubcategories()
     {
-
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_SHOW_ALL_SUBCATEGORIES);
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_SHOW_ALL_SUBCATEGORIES
+        );
     }
 
     /**
@@ -107,10 +110,11 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isHideEmptyCategories()
     {
-
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_HIDE_EMPTY_CATEGORIES);
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_HIDE_EMPTY_CATEGORIES
+        );
     }
 
     /**
@@ -118,10 +122,11 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isCategoriesShowCollapsed()
     {
-
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IS_SHOW_COLLAPSED);
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IS_SHOW_COLLAPSED
+        );
     }
 
     /**
@@ -129,27 +134,31 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getMaxBlockHeightCategories()
     {
-
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_MAX_BLOCK_HEIGHT);
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_MAX_BLOCK_HEIGHT
+        );
     }
 
     public function isShowResetLink ()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_RESET_LINK);
+            . SystemConfigInterface::SYSTEM_CATEGORIES_RESET_LINK
+        );
     }
     /**
      * @return mixed
      */
     public function getCategoriesImageAlignment()
     {
-
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IMAGE_ALIGNMENT);
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IMAGE_ALIGNMENT
+        );
     }
 
     /**
@@ -157,10 +166,11 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getCategoriesImageWidth()
     {
-
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IMAGE_WIDTH);
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IMAGE_WIDTH
+        );
     }
 
     /**
@@ -168,10 +178,11 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getCategoriesImageHeight()
     {
-
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IMAGE_HEIGHT);
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IMAGE_HEIGHT
+        );
     }
 
     /**
@@ -179,10 +190,11 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isShowImageName()
     {
-
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IMAGE_NAME);
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_IMAGE_NAME
+        );
     }
 
     /**
@@ -190,10 +202,11 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isShowCheckboxes()
     {
-
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CHECKBOX);
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CHECKBOX
+        );
     }
 
     /**
@@ -201,10 +214,11 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isAjax()
     {
-
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_FILTER_ACTION);
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_FILTER_ACTION
+        );
     }
 
     /**
@@ -212,11 +226,12 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isShowCategoryInShopBy()
     {
-
         return (int) $this->isShowCategories() &&
-               $this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+               $this->getScopeData(
+                   SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
                . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-               . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_SHOP_BY);
+               . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_SHOP_BY
+               );
     }
 
     public function resize($image)
@@ -231,8 +246,10 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
         if( !$height ) {
             $height = 100;
         }
-        $absolutePath = $this->_filesystem->getDirectoryWrite(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath('catalog/category/').$image;
-        $imageResized = $this->_filesystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath('resized/' . $width . '/') . $image;
+        $absolutePath = $this->_filesystem->getDirectoryWrite(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)
+                ->getAbsolutePath('catalog/category/') . $image;
+        $imageResized = $this->_filesystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)
+                ->getAbsolutePath('resized/' . $width . '/') . $image;
         //create image factory...
         $imageResize = $this->_imageFactory->create();
         $imageResize->open($absolutePath);
@@ -262,5 +279,4 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
             ->create('Magento\Catalog\Model\Category')->load($id);
         return $category->getData('image');
     }
-
 }

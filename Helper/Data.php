@@ -17,6 +17,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     const ALIGNMENT_VERTICAL = 0;
     const ALIGNMENT_HORIZONTAL = 1;
     const ALIGNMENT_2COLUMN = 2;
+
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
@@ -24,6 +25,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     protected $assetRepository;
     protected $showMore = [];
     const CONTENT = 1;
+
     /**
      * @var \Magento\Framework\App\Request\Http
      */
@@ -32,7 +34,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     protected $cmsPage;
 
     /**
-     * Data constructor.
      * @param Context $context
      * @param \Magento\Framework\View\Asset\Repository $assetRepository
      * @param \Magento\Cms\Model\Page $cmsPage
@@ -51,13 +52,13 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     /**
      * @param $param
+     * @param string $section
      * @return mixed
-     * return comfiguretion module
      */
     public function getScopeData($param, $section = SystemConfigInterface::SYSTEM_CONFIG_SECTION)
     {
         return $this->scopeConfig->getValue(
-            $section . SystemConfigInterface::SYSTEM_CONFIG_SLASH. $param,
+            $section . SystemConfigInterface::SYSTEM_CONFIG_SLASH . $param,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -67,10 +68,13 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isEnable()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_ENABLE);
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_ENABLE
+        );
     }
+
     /**
      * @param $item
      * @param $requestVar
@@ -94,9 +98,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getShowShopByIn()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_SHOW_SHOP_BY_IN);
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_SHOW_SHOP_BY_IN
+        );
     }
 
     /**
@@ -104,26 +110,34 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isShowEmptyCategory()
     {
-        return !($this->getScopeData(SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+        return !($this->getScopeData(
+            SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_HIDE_EMPTY_CATEGORIES));
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_HIDE_EMPTY_CATEGORIES
+        ));
     }
-    public function removeBlocCategoriesOrCategory () {
 
-         if( $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
+    public function removeBlocCategoriesOrCategory ()
+    {
+         if($this->getScopeData(
+             SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_SHOW_SHOP_BY_IN)) {
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_SHOW_SHOP_BY_IN
+         )) {
                 return 'gomage.categories';
          }
     }
+
     /**
      * @return int
      */
     public function isUseAutoScrolling()
     {
-        return (int) $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
+        return (int)$this->getScopeData(
+            SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_AUTOSCROLLING);
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_AUTOSCROLLING
+        );
     }
 
     /**
@@ -131,9 +145,12 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isUseBackToTopButton()
     {
-        $value = (int)$this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
+        $value = (int)$this->getScopeData(
+            SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_BACK_TO_TOP);
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_BACK_TO_TOP
+        );
+
         if ($value && $this->isEnable()) {
             return 'GoMage_Navigation::layer/back_to_top.phtml';
         }
@@ -146,9 +163,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getBackToTopSpeed()
     {
-        return (int) $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
+        return (int)$this->getScopeData(
+            SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_BACK_TO_TOP_SPEED);
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_BACK_TO_TOP_SPEED
+        );
     }
 
     /**
@@ -156,9 +175,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getBackToTopAction()
     {
-        return (int) $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
+        return (int) $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_BACK_TO_TOP_ACTION);
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_BACK_TO_TOP_ACTION
+        );
     }
 
     /**
@@ -170,7 +191,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             return false;
         }
 
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
             . SystemConfigInterface::SYSTEM_CONFIG_FIELD_CONTENT_FILTER_TYPE
         );
@@ -182,9 +204,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isPagerButton()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_PAGER_BUTTON);
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_PAGER_BUTTON
+        );
     }
 
     /**
@@ -192,10 +216,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isShowPager()
     {
-
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_SETTINGS_GROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CONFIG_SETTINGS_GROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_PAGER);
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_PAGER
+        );
     }
 
     /**
@@ -203,10 +228,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isShowValueQty()
     {
-
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_SETTINGS_GROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CONFIG_SETTINGS_GROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_QTY);
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_QTY
+        );
     }
 
     /**
@@ -214,10 +240,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isAddFilterResultsToUrl()
     {
-
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_SETTINGS_GROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CONFIG_SETTINGS_GROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_HASH);
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_HASH
+        );
     }
 
     /**
@@ -225,10 +252,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isUseFriendlyUrls()
     {
-
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_SETTINGS_GROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CONFIG_SETTINGS_GROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_FRIENDLY_URLS);
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_USE_FRIENDLY_URLS
+        );
     }
 
     /**
@@ -236,10 +264,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isShowAppliedValuesInResults()
     {
-
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_SETTINGS_GROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CONFIG_SETTINGS_GROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_SHOW_APPLIED_VALUES);
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_SHOW_APPLIED_VALUES
+        );
     }
 
     public function getOptionsAlignment($alignmentOption)
@@ -255,22 +284,28 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     public function isPaginationAjax ()
     {
-       return $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
+       return $this->getScopeData(
+           SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_PAGINATION_ENABLED);
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_PAGINATION_ENABLED
+       );
     }
 
     public function getPagerTheme()
     {
-        $isAjax = $this->getScopeData(SystemConfigInterface::SYSTEM_CONFIG_CROUP
+        $isAjax = $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_PAGINATION_ENABLED);
+            . SystemConfigInterface::SYSTEM_CONFIG_FIELD_PAGINATION_ENABLED
+        );
+
         if (($isAjax || $this->isUseAutoScrolling()) && $this->isEnable()) {
             return 'GoMage_Navigation::html/pager.phtml';
         } else {
             return 'GoMage_Navigation::html/pager_no_ajax.phtml';
         }
     }
+
     public function getValueCategory($params)
     {
         $arrCat = explode('_',$this->request->get('cat'));
@@ -280,6 +315,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         }
        return $params['cat'];
     }
+
     public function getUrlCategory($params)
     {
         $arrCat = explode('_',$this->request->get('cat'));
@@ -289,6 +325,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         }
         return $this->_urlBuilder->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true, '_query' => $params]);
     }
+
     public function isThisActiveCategory($name) {
         $arrCat = explode(',',$this->request->get('cat'));
         if(in_array(strtolower($name),$arrCat)) {
@@ -301,15 +338,16 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return $this->request->get('more_show');
     }
+
     public function isShowMore($name)
     {
-            if($this->request->get('more_show'))
-            {
-                $this->showMore = explode('_', $this->request->get('more_show'));
-                return (int) in_array(strtolower($name), $this->showMore);
+        if ($this->request->get('more_show')) {
+            $this->showMore = explode('_', $this->request->get('more_show'));
 
-            }
-            return 0;
+            return (int)in_array(strtolower($name), $this->showMore);
+        }
+
+        return 0;
     }
 
     public function IsCollapsed($name, $isRequest = false)
@@ -324,8 +362,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return false;
     }
 
-    public function isInaCategoryRequest($name, $category = null) {
-
+    public function isInaCategoryRequest($name, $category = null)
+    {
         if(!$category) {
             $arrCat = explode('_',$this->request->get('cat'));
             if(in_array(strtolower($name),$arrCat)) {

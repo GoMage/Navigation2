@@ -27,7 +27,6 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
     protected $dataHelper;
 
     /**
-     * LoaderData constructor.
      * @param Context $context
      * @param \GoMage\Navigation\Model\Config\Source\Alignment $alignment
      */
@@ -70,9 +69,11 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isShowAjaxLoader()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_ENABLE);
+            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_ENABLE
+        );
     }
 
     /**
@@ -80,9 +81,11 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isSpinnerTypeImage()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_SPINNER_TYPE);
+            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_SPINNER_TYPE
+        );
     }
 
     /**
@@ -90,9 +93,11 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getLoaderImage()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_IMAGE);
+            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_IMAGE
+        );
     }
 
     /**
@@ -100,9 +105,11 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getLoaderBackgroundColor()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_BACKGROUND);
+            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_BACKGROUND
+        );
     }
 
     /**
@@ -110,9 +117,11 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getLoaderBorderColor()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_BORDER_COLOR);
+            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_BORDER_COLOR
+        );
     }
 
     /**
@@ -120,9 +129,11 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getLoaderTextColor()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_TEXT_COLOR);
+            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_TEXT_COLOR
+        );
     }
 
     /**
@@ -130,9 +141,11 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getLoaderSpinnerColor()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_SPINNER_COLOR);
+            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_SPINNER_COLOR
+        );
     }
 
     /**
@@ -140,9 +153,11 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getLoaderWindowWidth()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_WINDOW_WIDTH);
+            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_WINDOW_WIDTH
+        );
     }
 
     /**
@@ -150,9 +165,11 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getLoaderWindowHeight()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_WINDOW_HEIGHT);
+            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_WINDOW_HEIGHT
+        );
     }
 
     /**
@@ -160,9 +177,11 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getLoaderText()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_TEXT);
+            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_TEXT
+        );
     }
 
     /**
@@ -170,9 +189,11 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getLoaderImageAlignment()
     {
-        $value = $this->getScopeData(SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
+        $value = $this->getScopeData(
+            SystemConfigInterface::SYSTEM_LOADER_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_ALIGNMENT);
+            . SystemConfigInterface::SYSTEM_LOADER_CONFIG_ALIGNMENT
+        );
 
         return $this->alignment->getAlignment($value);
     }

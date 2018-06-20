@@ -246,7 +246,7 @@ class Navigation extends Generic
     }
 
     /**
-     * Initialize form fileds values
+     * Initialize form fields values
      *
      * @return $this
      */

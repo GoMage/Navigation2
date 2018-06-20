@@ -8,7 +8,6 @@ namespace GoMage\Navigation\Model\Config\Source;
  */
 class Place implements \Magento\Framework\Option\ArrayInterface
 {
-
     /**
      * @var int
      */

@@ -19,7 +19,6 @@ class More extends Template
     protected $navigationHelper;
 
     /**
-     * More constructor.
      * @param Template\Context $context
      * @param \GoMage\Navigation\Helper\Data $navigationHelper
      * @param array $data
@@ -29,8 +28,8 @@ class More extends Template
         \GoMage\Navigation\Helper\Data $navigationHelper,
         array $data = []
     ) {
-    
         parent::__construct($context, $data);
+
         $this->context = $context;
         $this->navigationHelper = $navigationHelper;
 
@@ -38,8 +37,6 @@ class More extends Template
             $this->setTemplate('GoMage_Navigation::product/list/toolbar/more.phtml');
         }
     }
-
-
 
     /**
      * @return string

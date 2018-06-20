@@ -23,7 +23,6 @@ class LoadAttribute implements \Magento\Framework\Event\ObserverInterface
         \GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory $navigationAttributeCollectionFactory,
         \Magento\Catalog\Model\Session $catalogSession
     ) {
-    
         $this->navigationAttributeCollectionFactory = $navigationAttributeCollectionFactory;
         $this->catalogSession = $catalogSession;
     }

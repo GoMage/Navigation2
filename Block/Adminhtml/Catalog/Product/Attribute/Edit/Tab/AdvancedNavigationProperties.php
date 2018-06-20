@@ -42,7 +42,6 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
     protected $storeManager;
 
     /**
-     * AdvancedNavigationProperties constructor.
      * @param Context $context
      * @param Registry $registry
      * @param FormFactory $formFactory
@@ -60,7 +59,6 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
         Yesno $yesNo,
         array $data = []
     ) {
-
         $this->storeManager = $context->getStoreManager();
         $this->sourceNavigation = $sourceNavigation;
         $this->sourceImageAlignment = $sourceImageAlignment;

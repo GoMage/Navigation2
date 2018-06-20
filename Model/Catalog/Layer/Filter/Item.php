@@ -19,7 +19,6 @@ class Item extends \Magento\Catalog\Model\Layer\Filter\Item
     protected $dataHelper;
 
     /**
-     * Item constructor.
      * @param \Magento\Framework\UrlInterface $url
      * @param \Magento\Theme\Block\Html\Pager $htmlPagerBlock
      * @param \GoMage\Navigation\Helper\Url $urlHelper
@@ -73,7 +72,8 @@ class Item extends \Magento\Catalog\Model\Layer\Filter\Item
     /**
      * @return bool
      */
-    public function isCategoryFilter() {
+    public function isCategoryFilter()
+    {
         return false;
     }
 

@@ -8,7 +8,6 @@ namespace GoMage\Navigation\Model\Config\Source\Filter;
  */
 class Action implements \Magento\Framework\Option\ArrayInterface
 {
-
     /**
      * @var int
      */

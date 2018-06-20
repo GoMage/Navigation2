@@ -6,7 +6,6 @@ use Magento\Framework\View\Element\Template;
 
 class Loader extends \Magento\Framework\View\Element\Template
 {
-
     const LOADER_IMAGE_PATH = 'gomage/navigation/loader/';
 
     /**

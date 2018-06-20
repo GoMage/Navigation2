@@ -10,7 +10,6 @@ class Navigation implements
     \Magento\Framework\Option\ArrayInterface,
     \GoMage\Navigation\Model\Config\Source\NavigationInterface
 {
-
     /**
      * @return array
      */

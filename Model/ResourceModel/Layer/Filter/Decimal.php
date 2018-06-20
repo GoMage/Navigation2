@@ -8,7 +8,6 @@ namespace GoMage\Navigation\Model\ResourceModel\Layer\Filter;
  */
 class Decimal extends \Magento\Catalog\Model\ResourceModel\Layer\Filter\Decimal
 {
-
     protected function _construct()
     {
         parent::_construct();
@@ -48,5 +47,4 @@ class Decimal extends \Magento\Catalog\Model\ResourceModel\Layer\Filter\Decimal
 
         return $this;
     }
-
 }

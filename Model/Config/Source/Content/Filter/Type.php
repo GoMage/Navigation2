@@ -8,14 +8,7 @@ namespace GoMage\Navigation\Model\Config\Source\Content\Filter;
  */
 class Type implements \Magento\Framework\Option\ArrayInterface
 {
-
-    /**
-     *
-     */
     const ROWS = 0;
-    /**
-     *
-     */
     const COLUMNS = 1;
 
     /**

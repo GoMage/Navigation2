@@ -19,7 +19,6 @@ class SaveAttribute implements \Magento\Framework\Event\ObserverInterface
     protected $navigationAttributeCollectionFactory;
 
     /**
-     * GomageSaveAttribute constructor.
      * @param \GoMage\Navigation\Model\NavigationAttributeRepository $navigationAttributeRepository
      * @param \GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory $navigationAttributeCollectionFactory
      */
@@ -27,7 +26,6 @@ class SaveAttribute implements \Magento\Framework\Event\ObserverInterface
         \GoMage\Navigation\Model\NavigationAttributeRepository $navigationAttributeRepository,
         \GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory $navigationAttributeCollectionFactory
     ) {
-    
         $this->navigationAttributeRepository = $navigationAttributeRepository;
         $this->navigationAttributeCollectionFactory = $navigationAttributeCollectionFactory;
     }

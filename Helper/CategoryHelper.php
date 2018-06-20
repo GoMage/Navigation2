@@ -26,7 +26,6 @@ class CategoryHelper extends \Magento\Catalog\Helper\Category
     protected $categoryCollectionFactory;
 
     /**
-     * CategoryHelper constructor.
      * @param \Magento\Framework\App\Helper\Context $context
      * @param \Magento\Catalog\Model\CategoryFactory $categoryFactory
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
@@ -43,7 +42,6 @@ class CategoryHelper extends \Magento\Catalog\Helper\Category
         Registry $registry,
         CategoryRepositoryInterface $categoryRepository,
         \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
-
     ) {
         $this->categoryFactory = $categoryFactory;
         $this->categoryCollectionFactory = $categoryCollectionFactory;

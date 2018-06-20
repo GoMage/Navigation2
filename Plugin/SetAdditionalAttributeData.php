@@ -8,7 +8,6 @@ namespace GoMage\Navigation\Plugin;
  */
 class SetAdditionalAttributeData
 {
-
     /**
      * @var \GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory
      */
@@ -63,7 +62,6 @@ class SetAdditionalAttributeData
      */
     public function afterGetFilters($filterList, $result)
     {
-
         if (!$this->dataHelper->isEnable()) {
             return $result;
         }

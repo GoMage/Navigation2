@@ -22,7 +22,6 @@ class Tooltip extends \Magento\Framework\View\Element\Template
     protected $navigationViewHelper;
 
     /**
-     * Tooltip constructor.
      * @param Template\Context $context
      * @param \GoMage\Navigation\Helper\Data $helper
      * @param \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper
@@ -34,7 +33,6 @@ class Tooltip extends \Magento\Framework\View\Element\Template
         \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper,
         array $data = []
     ) {
-    
         $this->storeManager = $context->getStoreManager();
         $this->helper = $helper;
         $this->navigationViewHelper = $navigationViewHelper;

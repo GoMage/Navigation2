@@ -9,7 +9,7 @@ class NavigationAttribute extends \Magento\Framework\Model\AbstractModel impleme
 {
     protected function _construct()
     {
-        $this->_init('GoMage\Navigation\Model\ResourceModel\NavigationAttribute');
+        $this->_init(\GoMage\Navigation\Model\ResourceModel\NavigationAttribute::class);
     }
 
     /**

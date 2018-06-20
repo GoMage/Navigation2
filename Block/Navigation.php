@@ -50,7 +50,6 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
     protected $navigationViewHelper;
 
     /**
-     * Navigation constructor.
      * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \Magento\Catalog\Model\Layer\Resolver $layerResolver
      * @param \Magento\Catalog\Model\Layer\FilterList $filterList

@@ -25,7 +25,6 @@ class Navigation extends Generic
     protected $alignment;
 
     /**
-     * Navigation constructor.
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Framework\Data\FormFactory $formFactory
@@ -80,7 +79,6 @@ class Navigation extends Generic
                 'values' => $this->navigation->toOptionArray(),
             ]
         );
-
 
         $fieldset->addField(
             'is_show_button',

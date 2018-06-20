@@ -45,7 +45,6 @@ class Alignment implements \Magento\Framework\Option\ArrayInterface
      */
     public function getAlignment($value)
     {
-
         $alignment[static::LEFT] = 'left';
         $alignment[static::RIGHT] = 'right';
         $alignment[static::TOP] = 'top';

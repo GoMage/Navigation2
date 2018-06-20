@@ -56,7 +56,6 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
     protected $dataHelper;
 
     /**
-     * Url constructor.
      * @param Context $context
      * @param \Magento\Theme\Block\Html\Pager $htmlPagerBlock
      * @param \Magento\Framework\App\Request\Http $request
@@ -70,7 +69,6 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
         \Magento\Framework\Escaper $escaper,
         \GoMage\Navigation\Helper\Data $dataHelper
     ) {
-    
         $this->url = $context->getUrlBuilder();
         $this->htmlPagerBlock = $htmlPagerBlock;
         $this->request = $request;
@@ -156,7 +154,6 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return $item->getValue();
     }
-
 
     /**
      * @param $item

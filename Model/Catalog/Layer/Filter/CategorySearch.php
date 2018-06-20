@@ -66,6 +66,24 @@ class CategorySearch extends Category
      */
     protected $categoryHelper;
 
+    /**
+     * @param \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \Magento\Catalog\Model\Layer $layer
+     * @param \Magento\Catalog\Model\Layer\Filter\Item\DataBuilder $itemDataBuilder
+     * @param \Magento\Framework\Escaper $escaper
+     * @param \Magento\Catalog\Model\Layer\Resolver $layerResolver
+     * @param \Magento\Catalog\Model\Layer\Filter\DataProvider\CategoryFactory $categoryDataProviderFactory
+     * @param \Magento\Framework\Registry $coreRegistry
+     * @param \Magento\Framework\App\RequestInterface $request
+     * @param \GoMage\Navigation\Helper\Data $helper
+     * @param \GoMage\Navigation\Helper\Url $urlHelper
+     * @param \GoMage\Navigation\Helper\CategoryData $categoryHelper
+     * @param \GoMage\Navigation\Helper\CategoryHelper $categoryHelperCore
+     * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
+     * @param \Magento\Catalog\Model\Indexer\Category\Flat\State $categoryFlatState
+     * @param array $data
+     */
     public function __construct(
         \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
@@ -199,7 +217,6 @@ class CategorySearch extends Category
              }
              return $subcategories;
         }
-
     }
 
     /**
@@ -223,8 +240,8 @@ class CategorySearch extends Category
                 }
 
             }
-            return $arrCat;
 
+            return $arrCat;
     }
 
     /**

@@ -29,7 +29,6 @@ class NavigationAttributeRepository implements \GoMage\Navigation\Api\Navigation
     protected $collectionFactory;
 
     /**
-     * NavigationAttributeRepository constructor.
      * @param \GoMage\Navigation\Model\NavigationAttributeFactory $objectFactory
      * @param CollectionFactory $collectionFactory
      * @param SearchResultsInterfaceFactory $searchResultsFactory

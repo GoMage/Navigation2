@@ -8,7 +8,6 @@
 
 namespace GoMage\Navigation\Block;
 
-
 class NavigationCmsBlock extends \GoMage\Navigation\Block\Navigation
 {
     /**
@@ -61,7 +60,6 @@ class NavigationCmsBlock extends \GoMage\Navigation\Block\Navigation
     protected $navigationViewHelper;
 
     /**
-     * Navigation constructor.
      * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \Magento\Catalog\Model\Layer\Resolver $layerResolver
      * @param \Magento\Catalog\Model\Layer\FilterList $filterList

@@ -61,7 +61,6 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
     protected $categoryHelper;
 
     /**
-     * Category constructor.
      * @param \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Catalog\Model\Layer $layer
@@ -198,7 +197,8 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
     /**
      * @return bool
      */
-    public function isCategoryFilter() {
+    public function isCategoryFilter()
+    {
         return true;
     }
 

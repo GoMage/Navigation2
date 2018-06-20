@@ -8,7 +8,6 @@ namespace GoMage\Navigation\Model\Config\Source;
  */
 class Result implements \Magento\Framework\Option\ArrayInterface
 {
-
     /**
      * @var int
      */

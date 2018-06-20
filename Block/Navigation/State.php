@@ -10,7 +10,6 @@ class State extends \Magento\LayeredNavigation\Block\Navigation\State
     protected $dataHelper;
 
     /**
-     * State constructor.
      * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \Magento\Catalog\Model\Layer\Resolver $layerResolver
      * @param \GoMage\Navigation\Helper\Data $dataHelper
@@ -22,7 +21,6 @@ class State extends \Magento\LayeredNavigation\Block\Navigation\State
         \GoMage\Navigation\Helper\Data $dataHelper,
         array $data = []
     ) {
-
         $this->dataHelper = $dataHelper;
         parent::__construct($context, $layerResolver, $data);
     }

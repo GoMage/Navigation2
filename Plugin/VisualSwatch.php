@@ -24,18 +24,17 @@ class VisualSwatch
     protected $helperData;
 
     /**
-     * VisualSwatch constructor.
-     *
-     * @param \Magento\Framework\UrlInterface
+     * @param \Magento\Framework\View\Element\Context $context
+     * @param \GoMage\Navigation\Helper\Data $helperData
      */
-      public function __construct(
-          \Magento\Framework\View\Element\Context  $context,
-          \GoMage\Navigation\Helper\Data $helperData
-      ) {
-            $this->request = $context->getRequest();
-            $this->_urlBuilder = $context->getUrlBuilder();
-            $this->helperData = $helperData;
-      }
+    public function __construct(
+        \Magento\Framework\View\Element\Context $context,
+        \GoMage\Navigation\Helper\Data $helperData
+    ) {
+        $this->request = $context->getRequest();
+        $this->_urlBuilder = $context->getUrlBuilder();
+        $this->helperData = $helperData;
+    }
 
     /**
      * @param \Magento\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual $subject
@@ -46,10 +45,9 @@ class VisualSwatch
         \Magento\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual $subject,
         $result
     ) {
-          if(!$this->helperData->isEnable())
-          {
-              return $result;
-          }
+        if (!$this->helperData->isEnable()) {
+            return $result;
+        }
         $values = [];
         foreach ($subject->getOptionValues() as $value) {
             $values[] = $value->getData();
@@ -61,7 +59,7 @@ class VisualSwatch
                 'attribute_id' => $this->request->get('attribute_id')
             ]),
             'isSortable' => (int)(!$subject->getReadOnly() && !$subject->canManageOptionDefaultOnly()),
-            'isReadOnly' => (int)$subject->getReadOnly()
+            'isReadOnly' => (int)$subject->getReadOnly(),
         ];
 
         return json_encode($result);

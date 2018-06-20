@@ -64,7 +64,6 @@ class LoadLayout implements ObserverInterface
     protected $storeManager;
 
     /**
-     * GomageBeforeSend constructor.
      * @param \Magento\Framework\App\RequestInterface $request
      * @param \GoMage\Navigation\Helper\Data $dataHelper
      */

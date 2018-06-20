@@ -69,7 +69,6 @@ class CategoriesCms extends Categories
     protected $navigationViewHelper;
 
     /**
-     * Categories constructor.
      * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \Magento\Catalog\Helper\Category $categoryHelper
      * @param \Magento\Catalog\Model\Indexer\Category\Flat\State $categoryFlatState
@@ -125,7 +124,6 @@ class CategoriesCms extends Categories
      */
     protected function setLocation()
     {
-
         if (!$this->getDataHelper()->isEnable() || !$this->getCategoriesDataHelper()->isShowCategories()) {
             return;
         }

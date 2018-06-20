@@ -23,7 +23,6 @@ class NavigationViewData extends \Magento\Framework\App\Helper\AbstractHelper
     public function __construct(
         Context $context
     ) {
-
         $this->scopeConfig = $context->getScopeConfig();
         parent::__construct($context);
     }
@@ -46,9 +45,11 @@ class NavigationViewData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getNavigationViewBlockBackgroundColor()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_BACKGROUND);
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_BACKGROUND
+        );
     }
 
     /**
@@ -56,9 +57,11 @@ class NavigationViewData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getNavigationViewBlockCategoriesBackgroundColor()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CATEGORY_BACKGROUND);
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CATEGORY_BACKGROUND
+        );
     }
 
     /**
@@ -66,9 +69,11 @@ class NavigationViewData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getNavigationViewButtonsBackgroundColor()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_BUTTON_BACKGROUND);
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_BUTTON_BACKGROUND
+        );
     }
 
     /**
@@ -86,9 +91,11 @@ class NavigationViewData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getNavigationViewButtonsBackgroundColor2()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_BUTTON_BACKGROUND2);
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_BUTTON_BACKGROUND2
+        );
     }
 
     /**
@@ -96,9 +103,11 @@ class NavigationViewData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getNavigationViewButtonsTextColor()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_BUTTON_TEXT_COLOR);
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_BUTTON_TEXT_COLOR
+        );
     }
 
     /**
@@ -106,9 +115,11 @@ class NavigationViewData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getNavigationViewTooltipBackgroundColor()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_BACKGROUND);
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_BACKGROUND
+        );
     }
 
     /**
@@ -116,9 +127,11 @@ class NavigationViewData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getNavigationViewTooltipWindowBackgroundColor()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_WINDOW_BACKGROUND);
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_WINDOW_BACKGROUND
+        );
     }
 
     /**
@@ -126,9 +139,11 @@ class NavigationViewData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isNavigationViewTooltipShowOnClick()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_SHOW_EVENT);
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_SHOW_EVENT
+        );
     }
 
     /**
@@ -136,9 +151,11 @@ class NavigationViewData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isNavigationViewTooltipShowOnMouseOver()
     {
-        $value = $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
+        $value = $this->getScopeData(
+            SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_SHOW_EVENT);
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_SHOW_EVENT
+        );
 
         return (!$value) ? true : false;
     }
@@ -148,9 +165,11 @@ class NavigationViewData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isNavigationViewTooltipHideOnMouseOut()
     {
-        $value = $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
+        $value = $this->getScopeData(
+            SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_HIDE_EVENT);
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_HIDE_EVENT
+        );
 
         return (!$value) ? true : false;
     }
@@ -160,9 +179,11 @@ class NavigationViewData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isNavigationViewTooltipHideOnCloseButton()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_HIDE_EVENT);
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_HIDE_EVENT
+        );
     }
 
     /**
@@ -170,9 +191,11 @@ class NavigationViewData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getNavigationViewSliderLineColor()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_LINE_COLOR);
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_LINE_COLOR
+        );
     }
 
     /**
@@ -180,9 +203,11 @@ class NavigationViewData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getNavigationViewSliderLineHeight()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_LINE_HEIGHT);
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_LINE_HEIGHT
+        );
     }
 
     /**
@@ -190,9 +215,11 @@ class NavigationViewData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getNavigationViewSliderElementColor()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_ELEMENT_COLOR);
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_ELEMENT_COLOR
+        );
     }
 
     /**
@@ -200,9 +227,11 @@ class NavigationViewData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getNavigationViewSliderElementWidth()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_ELEMENT_WIDTH);
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_ELEMENT_WIDTH
+        );
     }
 
     /**
@@ -210,9 +239,11 @@ class NavigationViewData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getNavigationViewSliderElementHeight()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_ELEMENT_HEIGHT);
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_ELEMENT_HEIGHT
+        );
     }
 
     /**
@@ -220,8 +251,10 @@ class NavigationViewData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getNavigationViewSliderElementRadius()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_ELEMENT_RADIUS);
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_ELEMENT_RADIUS
+        );
     }
 }

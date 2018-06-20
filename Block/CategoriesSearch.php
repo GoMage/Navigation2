@@ -25,7 +25,6 @@ class CategoriesSearch extends Categories
     protected $coreRegistry;
 
     /**
-     * Categories constructor.
      * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \GoMage\Navigation\Helper\CategoryHelper $categoryHelper
      * @param \Magento\Catalog\Model\Indexer\Category\Flat\State $categoryFlatState
@@ -87,7 +86,6 @@ class CategoriesSearch extends Categories
             $templateFile = $this->templates->getShowShopByInTemplateSearch($this->getCategoriesDataHelper()->getCategoriesNavigationType());
         } else {
             $templateFile = $this->templates->getSearch($this->getCategoriesDataHelper()->getCategoriesNavigationType());
-
         }
         $this->setTemplate($templateFile);
 
@@ -124,7 +122,6 @@ class CategoriesSearch extends Categories
         } else {
            return $subcategories = $category->getChildren();
         }
-
     }
 
     public function  getCategoriesSearch($category)
@@ -149,10 +146,9 @@ class CategoriesSearch extends Categories
                 }
 
             }
+
             return $arrCat;
-
         }
-
     }
 
     /**

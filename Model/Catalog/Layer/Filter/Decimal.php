@@ -44,7 +44,6 @@ class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements Fil
     protected $urlHelper;
 
     /**
-     * Decimal constructor.
      * @param \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Catalog\Model\Layer $layer
@@ -78,7 +77,6 @@ class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements Fil
         $this->urlHelper = $urlHelper;
         parent::__construct($filterItemFactory, $storeManager, $layer, $itemDataBuilder, $priceCurrency, $dataProviderFactory, $data);
         $this->dataProvider = $dataProviderFactory->create(['layer' => $this->getLayer()]);
-
     }
 
     /**
@@ -143,7 +141,8 @@ class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements Fil
     /**
      * @return bool
      */
-    public function isCategoryFilter() {
+    public function isCategoryFilter()
+    {
         return false;
     }
     /**

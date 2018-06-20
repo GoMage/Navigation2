@@ -42,7 +42,6 @@ class BeforeSend implements ObserverInterface
     protected $dataHelper;
 
     /**
-     * GomageBeforeSend constructor.
      * @param \Magento\Framework\App\RequestInterface $request
      * @param \Magento\Framework\App\ResponseInterface $response
      * @param \Magento\Framework\App\ActionFlag $actionFlag
@@ -58,7 +57,6 @@ class BeforeSend implements ObserverInterface
         \Magento\Framework\Event\ManagerInterface $eventManager,
         \GoMage\Navigation\Helper\Data $dataHelper
     ) {
-    
         $this->request = $request;
         $this->response = $response;
         $this->actionFlag = $actionFlag;

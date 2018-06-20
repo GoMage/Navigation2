@@ -2,8 +2,6 @@
 
 namespace GoMage\Navigation\Model\Catalog\Layer\Filter;
 
-use GoMage\Navigation\Model\Config\Source\NavigationInterface;
-
 /**
  * Class Price
  * @package GoMage\Navigation\Model\Catalog\Layer\Filter
@@ -63,7 +61,6 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
     protected $urlHelper;
 
     /**
-     * Price constructor.
      * @param \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Catalog\Model\Layer $layer
@@ -100,7 +97,6 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
         \GoMage\Navigation\Helper\Url $urlHelper,
         array $data = []
     ) {
-    
         parent::__construct(
             $filterItemFactory,
             $storeManager,
@@ -165,7 +161,8 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
         return $this->request->getParam($this->getRequestVar());
     }
 
-    public function isCategoryFilter() {
+    public function isCategoryFilter()
+    {
         return false;
     }
 
@@ -301,8 +298,8 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
         return $this->urlHelper->getFilterRemoveUrl($this);
     }
 
-    public function filtersPrepare (\Magento\Framework\App\RequestInterface $request) {
-
+    public function filtersPrepare (\Magento\Framework\App\RequestInterface $request)
+    {
         /**
          * Filter must be string: $fromPrice-$toPrice
          */

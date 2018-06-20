@@ -55,7 +55,6 @@ class FilterRenderer extends Template implements FilterRendererInterface
     protected $navigationViewHelper;
 
     /**
-     * FilterRenderer constructor.
      * @param Template\Context $context
      * @param \Magento\Framework\Registry $coreRegistry
      * @param \Magento\Swatches\Block\LayeredNavigation\RenderLayered $renderLayered
@@ -72,10 +71,8 @@ class FilterRenderer extends Template implements FilterRendererInterface
         \GoMage\Navigation\Helper\Url $urlHelper,
         \GoMage\Navigation\Helper\Data $dataHelper,
         \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper,
-
-                array $data = []
+        array $data = []
     ) {
-    
         $this->coreRegistry = $coreRegistry;
         $this->request = $context->getRequest();
         $this->urlHelper = $urlHelper;
@@ -104,12 +101,13 @@ class FilterRenderer extends Template implements FilterRendererInterface
         return $this->navigationViewHelper;
     }
 
-    public function renderInCurrentCategory ($filter)
+    public function renderInCurrentCategory($filter)
     {
-        $categories = explode(',',$filter->getData('gomage_is_exclude_categories'));
+        $categories = explode(',', $filter->getData('gomage_is_exclude_categories'));
         if (in_array($this->_getCategory()->getId(), $categories)) {
             return false;
         }
+
         return true;
     }
 
@@ -206,7 +204,6 @@ class FilterRenderer extends Template implements FilterRendererInterface
         $params = $this->request->getParam($requestVar);
         $params = explode('_', $params);
 
-        $label = mb_strtolower(str_replace(' ', '+', htmlentities($item->getLabel())));
         $criteria = mb_strtolower(str_replace(' ', '+', $item->getLabel()));
         if ($this->dataHelper->isUseFriendlyUrls() &&
             (in_array($criteria, $params)
@@ -244,7 +241,6 @@ class FilterRenderer extends Template implements FilterRendererInterface
      */
     public function prepareSwatchesData($data, $items)
     {
-
         foreach ($items as $item) {
             $data['options'][$item->getValue()]['link'] = $item->getGomageUrl();
             $data['options'][$item->getValue()]['gomage_value'] = $item->getGomageValue();

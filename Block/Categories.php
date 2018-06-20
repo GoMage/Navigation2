@@ -66,7 +66,6 @@ class Categories extends \Magento\Framework\View\Element\Template
     protected $navigationViewHelper;
 
     /**
-     * Categories constructor.
      * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \GoMage\Navigation\Helper\CategoryHelper $categoryHelper
      * @param \Magento\Catalog\Model\Indexer\Category\Flat\State $categoryFlatState

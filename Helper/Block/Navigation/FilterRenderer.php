@@ -55,7 +55,6 @@ class FilterRenderer extends Template implements FilterRendererInterface
     protected $navigationViewHelper;
 
     /**
-     * FilterRenderer constructor.
      * @param Template\Context $context
      * @param \Magento\Framework\Registry $coreRegistry
      * @param \Magento\Swatches\Block\LayeredNavigation\RenderLayered $renderLayered
@@ -72,10 +71,8 @@ class FilterRenderer extends Template implements FilterRendererInterface
         \GoMage\Navigation\Helper\Url $urlHelper,
         \GoMage\Navigation\Helper\Data $dataHelper,
         \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper,
-
-                array $data = []
+        array $data = []
     ) {
-    
         $this->coreRegistry = $coreRegistry;
         $this->request = $context->getRequest();
         $this->urlHelper = $urlHelper;
@@ -104,7 +101,7 @@ class FilterRenderer extends Template implements FilterRendererInterface
         return $this->navigationViewHelper;
     }
 
-    public function renderInCurrentCategory ($filter)
+    public function renderInCurrentCategory($filter)
     {
         $categories = explode(',',$filter->getData('gomage_is_exclude_categories'));
         if (in_array($this->_getCategory()->getId(), $categories)) {
@@ -206,7 +203,6 @@ class FilterRenderer extends Template implements FilterRendererInterface
         $params = $this->request->getParam($requestVar);
         $params = explode('_', $params);
 
-        $label = mb_strtolower(str_replace(' ', '+', htmlentities($item->getLabel())));
         $criteria = mb_strtolower(str_replace(' ', '+', $item->getLabel()));
         if ($this->dataHelper->isUseFriendlyUrls() &&
             (in_array($criteria, $params)
@@ -216,8 +212,8 @@ class FilterRenderer extends Template implements FilterRendererInterface
             $item->setIsActive(true);
         }
 
-        if (!$this->dataHelper->isUseFriendlyUrls() &&
-                (in_array($criteria, $params)
+        if (!$this->dataHelper->isUseFriendlyUrls()
+            && (in_array($criteria, $params)
                 || in_array(html_entity_decode($criteria), $params)
                 || in_array(htmlentities($criteria), $params))
         ) {

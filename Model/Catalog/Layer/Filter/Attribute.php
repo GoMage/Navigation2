@@ -44,7 +44,6 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
     protected $urlHelper;
 
     /**
-     * Attribute constructor.
      * @param \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Catalog\Model\Layer $layer
@@ -72,7 +71,6 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
         \Magento\Catalog\Model\Layer\Category\CollectionFilter $filter,
         array $data = []
     ) {
-
         $this->_requestVar = 'attribute';
         $this->_requestVarOrder = 'product_list_order';
         $this->request = $request;
@@ -103,7 +101,8 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
     /**
      * @return bool
      */
-    public function isCategoryFilter() {
+    public function isCategoryFilter()
+    {
         return false;
     }
     /**
@@ -157,7 +156,6 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
     {
         return explode('_', $this->request->getParam($this->_requestVar));
     }
-
 
     /**
      * @return array

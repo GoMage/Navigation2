@@ -2,8 +2,6 @@
 
 namespace GoMage\Navigation\Block;
 
-use GoMage\Navigation\Model\Config\Source\NavigationInterface;
-
 class Navigation extends \Magento\LayeredNavigation\Block\Navigation
 {
     /**
@@ -52,7 +50,6 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
     protected $navigationViewHelper;
 
     /**
-     * Navigation constructor.
      * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \Magento\Catalog\Model\Layer\Resolver $layerResolver
      * @param \Magento\Catalog\Model\Layer\FilterList $filterList
@@ -131,7 +128,6 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
      */
     public function getCategoriesHtml()
     {
-
         if (empty($this->categoriesHtml) && $this->getCategoryDataHelper()->isShowCategoryInShopBy()) {
             $this->categoriesHtml = $this->getLayout()->createBlock('GoMage\Navigation\Block\Categories')->toHtml();
         }
