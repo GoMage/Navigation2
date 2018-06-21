@@ -173,7 +173,6 @@ class Navigation extends \Magento\LayeredNavigation\Block\Navigation
                     $cnt++;
                 }
             }
-
         return $data;
     }
 

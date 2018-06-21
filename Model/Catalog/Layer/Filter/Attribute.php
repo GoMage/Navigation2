@@ -166,9 +166,9 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
             return parent::_getItemsData();
         }
 
-//        if (!$this->request->getParam($this->_requestVar)) {
-//            return parent::_getItemsData();
-//        }
+        if (!$this->request->getParam($this->_requestVar)) {
+            return parent::_getItemsData();
+        }
 
         if ($this->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::DROP_DOWN) {
             return parent::_getItemsData();

@@ -124,7 +124,6 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
             return parent::apply($request);
         }
         $this->getLayer()->getProductCollection()->addCategoriesFilter(['in' => $filters]);
-        //$this->getLayer()->getProductCollection()->addFieldToFilter('entity_id', ['in' => $ids]);
         foreach ($filters as $filter) {
 
             $this->dataProvider->setCategoryId($filter);
@@ -246,8 +245,8 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
         $collection = $this->categoryCollectionFactory->create();
         $collection->addAttributeToSelect('name');
         $collection->addIsActiveFilter();
-
         $categoriesName = [];
+
         foreach ($collection as $category) {
             $parent = explode('/', $category->getPath());
             if($this->request->getParam('parent_cat_'.$category->getId())) {
@@ -269,7 +268,7 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
                 $params[] = $categoriesName[$formatItem];
             }
         }
-       // $params = array_unique($params);
+
         return $params;
     }
 

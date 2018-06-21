@@ -44,6 +44,7 @@ define([
             ganLastNumber: '.gan-last-number',
             breadcrumbs: '.breadcrumbs',
             toolbar: '.toolbar-products',
+            listingFilter: '#narrow-by-list',
             collapsedContainer: '.collapsed-apply-settings'
         },
 
@@ -576,24 +577,39 @@ define([
                     }
                 }
             });
-            // categories.each(function () {
-            //     if($(this).attr('data-active') == 1) {
-            //         catActive.push($(this).attr('data-value'));
-            //     }
-            // });
-            // if(catActive.length > 0) {
-            //     catActive = catActive.join('_');
-            //     params.set('cat', catActive);
-            // }
             var paramcollapsed = [];
             var paramsMore = [];
-
+            var index;
+            var collapsedRequest = $(this.options.listingFilter).attr('data-param-collapsed');
+            collapsedRequest = (collapsedRequest) ? (collapsedRequest.split('_')): false ;
             $(this.options.collapsedContainer).each(function () {
-                if($(this).attr('data-collapsed-filter') == 1) {
-                    paramcollapsed.push($(this).attr('data-collapsed-param'));
+                if(!collapsedRequest) {
+                    if($(this).attr('data-collapsed-filter') == 1) {
+                        paramcollapsed.push($(this).attr('data-collapsed-param'));
+                    } else {
+                        collapsedRequest
+                    }
+                }  else {
+                    if($(this).attr('data-collapsed-filter') == 1) {
+                        paramcollapsed.push($(this).attr('data-collapsed-param'));
+                    } else if ($(this).attr('data-collapsed-filter') == 0 && collapsedRequest.indexOf($(this).attr('data-collapsed-param')) > -1) {
+                        index = collapsedRequest.indexOf($(this).attr('data-collapsed-param'));
+                        collapsedRequest.splice(index, 1);
+                    }
                 }
+
             });
 
+            if(collapsedRequest) {
+                collapsedRequest.forEach(function (value, index) {
+                    if(paramcollapsed.indexOf(value) == -1) {
+                        paramcollapsed.push(value);
+                    }
+                });
+            }
+            if(paramcollapsed) {
+                params.unset('collapsed_expanded', paramcollapsed)
+            }
             $(this.options.moreLink).each(function () {
                 if($(this).attr('data-show-more') == 1) {
                     paramsMore.push($(this).attr('data-more-value'));

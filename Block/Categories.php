@@ -316,7 +316,7 @@ class Categories extends \Magento\Framework\View\Element\Template
         }
         if ($this->getCategoriesDataHelper()->isShowCategoryInShopBy()) {
             $templateFile = $this->templates->getShowShopByInTemplate($this->getCategoriesDataHelper()->getCategoriesNavigationType());
-        } else {;
+        } else {
             $templateFile = $this->templates->get($this->getCategoriesDataHelper()->getCategoriesNavigationType());
         }
         $this->setTemplate($templateFile);

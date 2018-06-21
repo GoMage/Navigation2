@@ -48,10 +48,11 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                     <?php $blockRender = $block->getRenderBlock(); ?>
                     <?php if ($blockRender->renderInCurrentCategory($filter)) : ?>
                         <?php if (!$wrapOptions): ?>
-                            <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle"><?= __('Shopping Options') ?></strong>
+                            <strong role="heading" aria-level="2"  class="block-subtitle filter-subtitle"><?= __('Shopping Options') ?></strong>
                             <dl class="filter-options"
                                 id="narrow-by-list"
                                 data-role="content"
+                                data-param-collapsed = "<?php echo $helperData->IsCollapsed($filter->getName(), true) ?>"
                                 data-mage-init='{"accordion":{
                                 "openedState": "active",
                                 "collapsible": true,

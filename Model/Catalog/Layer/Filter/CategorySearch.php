@@ -240,7 +240,6 @@ class CategorySearch extends Category
                 }
 
             }
-
             return $arrCat;
     }
 
@@ -253,15 +252,9 @@ class CategorySearch extends Category
         if (!$this->helper->isUseFriendlyUrls()) {
             return $filters;
         }
-        $mainCategory = $this->coreRegistry->registry('current_category');
-        if(!$mainCategory) {
-            $mainCategory = $this->layerResolver->get()->getCurrentCategory();
-        }
-
         $collection = $this->categoryCollectionFactory->create();
         $collection->addAttributeToSelect('name');
         $collection->addIsActiveFilter();
-
         $categoriesName = [];
         foreach ($collection as $category) {
             $parent = explode('/', $category->getPath());
@@ -275,16 +268,13 @@ class CategorySearch extends Category
             }
             $categoriesName[html_entity_decode($this->formatCategoryName($category->getName()))] = $category->getId();
         }
-
         $params = [];
-
         foreach ($filters as $item) {
             $formatItem = $this->formatCategoryName($item);
             if(isset($categoriesName[$formatItem])) {
                 $params[] = $categoriesName[$formatItem];
             }
         }
-        // $params = array_unique($params);
         return $params;
     }
 }

@@ -256,7 +256,6 @@ class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements Fil
             $toPrice -= .01;
         }
        return $this->_renderItemLabel($fromPrice, $toPrice);
-       // return __('%1 - %2', $formattedFromPrice, $this->priceCurrency->format($toPrice));
     }
 
     /**

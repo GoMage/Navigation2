@@ -350,7 +350,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return 0;
     }
 
-    public function IsCollapsed($name, $isRequest = false)
+    public function IsCollapsed($name = '', $isRequest = false)
     {
         if($isRequest) {
             return $this->request->get('collapsed_expanded');
