@@ -13,9 +13,19 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
     protected $scopeConfig;
 
     /**
+     * @var \Magento\Catalog\Model\CategoryFactoryCategoryFactory
+     */
+    protected $categoryFactory;
+
+    /**
      * @var \Magento\Framework\Filesystem
      */
     protected $_filesystem ;
+
+    /**
+     * @var \Magento\Catalog\Model\ResourceModel\Category
+     */
+    protected $categoryResource;
 
     /**
      * @var \Magento\Framework\Image\AdapterFactory
@@ -34,8 +44,12 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
         Context $context,
         \Magento\Framework\Filesystem $filesystem,
         \Magento\Framework\Image\AdapterFactory $imageFactory ,
-        \Magento\Store\Model\StoreManagerInterface $storeManager
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Catalog\Model\CategoryFactory $categoryFactory,
+        \Magento\Catalog\Model\ResourceModel\Category $categoryResource
     ) {
+        $this->categoryResource = $categoryResource;
+        $this->categoryFactory = $categoryFactory;
         $this->_filesystem = $filesystem;
         $this->_imageFactory = $imageFactory;
         $this->scopeConfig = $context->getScopeConfig();
@@ -275,8 +289,13 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
     public function getCategoryImage($id)
     {
         //Find solution to foreach categories with all data in template
-        $category = \Magento\Framework\App\ObjectManager::getInstance()
-            ->create('Magento\Catalog\Model\Category')->load($id);
+        $category = $this->categoryFactory->create();
+        $this->categoryResource->load($category, $id);
         return $category->getData('image');
+    }
+
+    public function getCategoryResource()
+    {
+        return $this->categoryResource;
     }
 }

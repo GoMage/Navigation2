@@ -5,7 +5,7 @@ use GoMage\Navigation\Api\NavigationAttributeRepositoryInterface;
 use GoMage\Navigation\Api\Data\NavigationAttributeInterface;
 use GoMage\Navigation\Model\NavigationAttributeFactory;
 use GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory;
-
+use GoMage\Navigation\Model\ResourceModel\NavigationAttribute as NavigationAttributeResource;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -24,6 +24,11 @@ class NavigationAttributeRepository implements \GoMage\Navigation\Api\Navigation
     protected $objectFactory;
 
     /**
+     * @var NavigationAttributeResource
+     */
+    protected $navigationAttributeResource;
+
+    /**
      * @var CollectionFactory
      */
     protected $collectionFactory;
@@ -36,7 +41,8 @@ class NavigationAttributeRepository implements \GoMage\Navigation\Api\Navigation
     public function __construct(
         NavigationAttributeFactory $objectFactory,
         CollectionFactory $collectionFactory,
-        SearchResultsInterfaceFactory $searchResultsFactory
+        SearchResultsInterfaceFactory $searchResultsFactory,
+        NavigationAttributeResource $navigationAttributeResource
     ) {
     
         $this->objectFactory        = $objectFactory;
@@ -67,7 +73,7 @@ class NavigationAttributeRepository implements \GoMage\Navigation\Api\Navigation
     public function getById($id)
     {
         $object = $this->objectFactory->create();
-        $object->load($id);
+        $this->navigationAttributeResource->load($object, $id);
         if (!$object->getId()) {
             throw new NoSuchEntityException(__('Object with id "%1" does not exist.', $id));
         }

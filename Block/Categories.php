@@ -301,7 +301,8 @@ class Categories extends \Magento\Framework\View\Element\Template
         public function getCategoryImage($id)
     {
         //Find solution to foreach categories with all data in template
-        $category = $this->categoryHelper->getCategoryFactory()->create()->load($id);
+        $category = $this->categoryHelper->getCategoryFactory()->create();
+        $this->categoryResource->load($category, $id);
         $this->image = $category->getData('image');
         return $category->getImageUrl();
     }

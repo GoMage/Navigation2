@@ -16,6 +16,11 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
     protected $dataProvider;
 
     /**
+     * @var \Magento\Catalog\Model\ResourceModel\Category
+     */
+    protected $categoryResource;
+
+    /**
      * @var \Magento\Framework\Registry
      */
     protected $coreRegistry;
@@ -90,8 +95,10 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
         \GoMage\Navigation\Helper\Url $urlHelper,
         \GoMage\Navigation\Helper\CategoryData $categoryHelper,
         \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory,
+        \Magento\Catalog\Model\ResourceModel\Category $categoryResource,
         array $data = []
     ) {
+        $this->categoryResource = $categoryResource;
         parent::__construct($filterItemFactory, $storeManager, $layer, $itemDataBuilder, $escaper, $categoryDataProviderFactory, $data);
         $this->_requestVar = 'cat';
         $this->coreRegistry = $coreRegistry;
@@ -128,7 +135,6 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
 
             $this->dataProvider->setCategoryId($filter);
             $category = $this->dataProvider->getCategory();
-            //$this->getLayer()->getProductCollection()->addCategoryFilter($category);
             $this->getLayer()->getState()->addFilter($this->_createItem($category->getName(), $filter));
         }
         $mainCategory = $this->coreRegistry->registry('current_category');
@@ -179,7 +185,7 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
             $count = (!empty($optionsFacetedData[$category->getId()]['count'])) ? $optionsFacetedData[$category->getId()]['count'] : 0;
             if ($category->getIsActive() && ($count > 0 || $this->helper->isShowEmptyCategory()) )
             {
-                $category->load($category->getId());
+                $this->categoryResource->load($category, $category->getId());
                 $this->imageCategories[$category->getId()] = $category->getImageUrl();
                 $this->imageCat[$category->getId()] = $category->getData('image');
                 $this->itemDataBuilder->addItemData(
