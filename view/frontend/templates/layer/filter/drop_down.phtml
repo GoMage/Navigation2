@@ -34,7 +34,7 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                     <?= $block->escapeHtml($item->getLabel() . ' (' . $item->getCount() . ')', ['span']) ?>
                 </option>
             <?php endif; ?>
-            <?$cnt++;?>
+            <?php $cnt++;?>
         <?php endforeach ?>
     </select>
     <?php if ($filter->isActive() && $filter->getGomageIsReset() || ($filter->isActive() &&$filter->isCategoryFilter() && $categoriesHelper->isShowResetLink() )):?>

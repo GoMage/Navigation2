@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  *
  * @var $block \Gomage\Navigation\Block\Navigation\FilterRenderer
@@ -35,7 +35,7 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
                 <?= html_entity_decode($block->escapeHtml($item->getLabel(), ['span'])) ?>
             </div>
         </div>
-            <?$cnt++;?>
+            <?php $cnt++;?>
         <?php endif; ?>
         <?php endforeach ?>
     </div>

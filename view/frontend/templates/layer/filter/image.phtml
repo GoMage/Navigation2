@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  *
  * @var $block \Gomage\Navigation\Block\Navigation\FilterRenderer
@@ -20,7 +20,7 @@ $categoriesHelperImage = $this->helper('GoMage\Navigation\Helper\ImageSwatchHelp
             style="max-height:<?= $block->escapeHtml($filter->getGomageMaxBlockHeight()); ?>px;"
         <?php endif; ?>
     <?php endif;?>>
-    <?$optionsLimit = ($filter->getGomageVisibleOptions()) ? $filter->getGomageVisibleOptions() : false;
+    <?php $optionsLimit = ($filter->getGomageVisibleOptions()) ? $filter->getGomageVisibleOptions() : false;
     $cnt = 0;
     ?>
     <?php foreach ($filterItems as $item): ?>
@@ -62,7 +62,7 @@ $categoriesHelperImage = $this->helper('GoMage\Navigation\Helper\ImageSwatchHelp
             </a>
         <?php endif; ?>
         </li>
-        <?$cnt++;?>
+        <?php $cnt++;?>
     <?php endforeach ?>
     <?php if ($filter->isActive() && $filter->getGomageIsReset() || ($filter->isActive() &&$filter->isCategoryFilter() && $categoriesHelper->isShowResetLink() )):?>
         <a
