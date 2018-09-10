@@ -4,6 +4,7 @@ namespace GoMage\Navigation\Model\Config\Source;
 
 /**
  * Class Result
+ *
  * @package GoMage\Navigation\Model\Config\Source
  */
 class Result implements \Magento\Framework\Option\ArrayInterface

@@ -3,13 +3,13 @@
 /**
  * GoMage Advanced Navigation Extension
  *
- * @category     Extension
- * @copyright    Copyright (c) 2010-2016 GoMage (https://www.gomage.com)
- * @author       GoMage
- * @license      https://www.gomage.com/license-agreement/  Single domain license
- * @terms of use https://www.gomage.com/terms-of-use
- * @version      Release: 4.9.1
- * @since        Class available since Release 4.7
+ * @category  Extension
+ * @copyright Copyright (c) 2010-2016 GoMage (https://www.gomage.com)
+ * @author    GoMage
+ * @license   https://www.gomage.com/license-agreement/  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 4.9.1
+ * @since     Class available since Release 4.7
  */
 
 namespace GoMage\Navigation\Helper;
@@ -18,6 +18,7 @@ use Magento\Framework\App\Helper\Context;
 
 /**
  * Class Url
+ *
  * @package GoMage\Navigation\Helper
  */
 class Url extends \Magento\Framework\App\Helper\AbstractHelper
@@ -56,11 +57,11 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
     protected $dataHelper;
 
     /**
-     * @param Context $context
-     * @param \Magento\Theme\Block\Html\Pager $htmlPagerBlock
+     * @param Context                             $context
+     * @param \Magento\Theme\Block\Html\Pager     $htmlPagerBlock
      * @param \Magento\Framework\App\Request\Http $request
-     * @param \Magento\Framework\Escaper $escaper
-     * @param Data $dataHelper
+     * @param \Magento\Framework\Escaper          $escaper
+     * @param Data                                $dataHelper
      */
     public function __construct(
         Context $context,
@@ -239,7 +240,7 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
     protected function getItemFormattedValue($item)
     {
         if (!$this->dataHelper->isUseFriendlyUrls()) {
-            return $item->getLabel();
+            return $item->getValue();
         }
 
         return mb_strtolower(str_replace(' ', '+', $item->getLabel()));

@@ -20,7 +20,7 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
                         if (!$category->getIsActive() || $block->isHidecategory($cat)) continue;?>
                         <li
                                 data-categories = "1"
-                                data-value="<?= $helperData->getValueCategory(['cat'=>strtolower($cat['name'])]) ?>"
+                                data-value="<?= $helperData->getValueCategory(['cat'=>$helperData->isUseFriendlyUrls() ? strtolower($cat['name']):$cat['entity_id']]) ?>"
                                 data-param="cat"
                                 <?php if($cat->getParentCategory()): ?>
                                     data-cat-parent = "<?php echo $cat->getParentCategory()->getId() ?>"
@@ -28,13 +28,13 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
                                     data-cat-parent = "<?php echo $cat->getId() ?>"
                                 <?php endif; ?>
                                     data-param-cat-parent = "<?php echo 'parent_cat_'.$cat->getId(); ?>"
-                                <?php if ($helperData->isInaCategoryRequest($cat->getName(), $cat)) : ?>
+                                <?php if ($helperData->isInaCategoryRequest($helperData->isUseFriendlyUrls() ? $cat->getName(): $cat->getId(), $cat)) : ?>
                                     data-active="1"
                                 <?php endif; ?>
                                 data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>"
                                 data-role="navigation-filter"
                                 data-type="categories-li"
-                                data-url="<?= $helperData->getUrlCategory(['cat'=>strtolower($cat->getName()),'parent_cat_'.$cat->getId()=>$cat->getId()]) ?>">
+                                data-url="<?= $helperData->getUrlCategory(['cat'=>$helperData->isUseFriendlyUrls() ? strtolower($cat->getName()): $cat->getId(),'parent_cat_'.$cat->getId()=>$cat->getId()]) ?>">
                             <a href="#"  <?php if ($helperData->isInaCategoryRequest($cat->getName(), $cat)) : ?>
                                 class="selected"
                             <?php endif; ?>>
@@ -49,7 +49,7 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
                                     <span><?= $block->escapeHtml($cat->getName());?>(<?php echo $category->getName() ?>)</span>
                                 <?php endif;?>
                             </a>
-                            <?php if ($block->getCategoriesDataHelper()->getShowAllSubcategories() || $helperData->isInaCategoryRequest($cat->getName(), $cat)): ?>
+                            <?php if ($block->getCategoriesDataHelper()->getShowAllSubcategories() || $helperData->isInaCategoryRequest($helperData->isUseFriendlyUrls() ? $cat->getName(): $cat->getId(), $cat)): ?>
                                 <?= $block->getOlImageList($block->getChildCategories($cat)); ?>
                             <?php endif; ?>
                         </li>

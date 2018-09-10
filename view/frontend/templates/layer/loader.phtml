@@ -4,20 +4,21 @@
  */
 ?>
     <div id="gomage-loader" data-ajax-loader = "<?php echo (int)$block->getHelper()->isShowAjaxLoader() ?>" class="gan-loader ng-scope">
-    <?php if($block->getHelper()->isShowAjaxLoader()):?>
+    <?php if($block->getHelper()->isShowAjaxLoader()) :?>
         <div class="gan-loader-content">
             <div class="gan-loader-content-in
-            <?php if ($block->getHelper()->isSpinnerTypeImage() && ($image = $block->getLoaderImage()) && !empty($image)): ?> gan-loader-img-<?=$block->escapeHtml($block->getHelper()->getLoaderImageAlignment())?><?php endif; ?>"
+            <?php if ($block->getHelper()->isSpinnerTypeImage() && ($image = $block->getLoaderImage()) && !empty($image)) : ?> gan-loader-img-<?php echo $block->escapeHtml($block->getHelper()->getLoaderImageAlignment())?><?php 
+            endif; ?>"
                  style="
-                    background-color: <?=$block->escapeHtml($block->getHelper()->getLoaderBackgroundColor());?>;
-                    border-color: <?=$block->escapeHtml($block->getHelper()->getLoaderBorderColor());?>;
-                    color: <?=$block->escapeHtml($block->getHelper()->getLoaderTextColor());?>;
-                    width: <?=$block->escapeHtml($block->getHelper()->getLoaderWindowWidth());?>px;
-                    height: <?=$block->escapeHtml($block->getHelper()->getLoaderWindowHeight());?>px;
+                    background-color: <?php echo $block->escapeHtml($block->getHelper()->getLoaderBackgroundColor());?>;
+                    border-color: <?php echo $block->escapeHtml($block->getHelper()->getLoaderBorderColor());?>;
+                    color: <?php echo $block->escapeHtml($block->getHelper()->getLoaderTextColor());?>;
+                    width: <?php echo $block->escapeHtml($block->getHelper()->getLoaderWindowWidth());?>px;
+                    height: <?php echo $block->escapeHtml($block->getHelper()->getLoaderWindowHeight());?>px;
                     ">
-                <?php if ($block->getHelper()->isSpinnerTypeImage() && ($image = $block->getLoaderImage()) && !empty($image)): ?>
+                <?php if ($block->getHelper()->isSpinnerTypeImage() && ($image = $block->getLoaderImage()) && !empty($image)) : ?>
                     <div class="gan-loader-img">
-                        <img alt="<?= __('Loading...') ?>" src="<?= $block->escapeUrl($image) ?>">
+                        <img alt="<?php echo __('Loading...') ?>" src="<?php echo $block->escapeUrl($image) ?>">
                      </div>
                 <?php else:?>
                     <div class="gan-loader-spinner-wrap">
@@ -31,12 +32,12 @@
                     </div>
                     <style type="text/css">
                     .gan-loader-spinner{
-                        stroke: <?=$block->escapeHtml($block->getHelper()->getLoaderSpinnerColor())?>;
+                        stroke: <?php echo $block->escapeHtml($block->getHelper()->getLoaderSpinnerColor())?>;
                     }
                     </style>
                 <?php endif; ?>
                 <div class="gan-loader-text">
-                    <?=$block->getHelper()->getLoaderText();?>
+                    <?php echo $block->getHelper()->getLoaderText();?>
                 </div>
             </div>
         </div>

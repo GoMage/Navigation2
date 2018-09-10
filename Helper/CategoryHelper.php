@@ -6,6 +6,7 @@ use Magento\Framework\Registry;
 
 /**
  * Class CategoryHelper
+ *
  * @package GoMage\Navigation\Helper
  */
 class CategoryHelper extends \Magento\Catalog\Helper\Category
@@ -26,12 +27,12 @@ class CategoryHelper extends \Magento\Catalog\Helper\Category
     protected $categoryCollectionFactory;
 
     /**
-     * @param \Magento\Framework\App\Helper\Context $context
-     * @param \Magento\Catalog\Model\CategoryFactory $categoryFactory
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param \Magento\Framework\Data\CollectionFactory $dataCollectionFactory
-     * @param Registry $registry
-     * @param CategoryRepositoryInterface $categoryRepository
+     * @param \Magento\Framework\App\Helper\Context                           $context
+     * @param \Magento\Catalog\Model\CategoryFactory                          $categoryFactory
+     * @param \Magento\Store\Model\StoreManagerInterface                      $storeManager
+     * @param \Magento\Framework\Data\CollectionFactory                       $dataCollectionFactory
+     * @param Registry                                                        $registry
+     * @param CategoryRepositoryInterface                                     $categoryRepository
      * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
      */
     public function __construct(

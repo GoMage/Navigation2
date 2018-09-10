@@ -19,9 +19,9 @@ class More extends Template
     protected $navigationHelper;
 
     /**
-     * @param Template\Context $context
+     * @param Template\Context               $context
      * @param \GoMage\Navigation\Helper\Data $navigationHelper
-     * @param array $data
+     * @param array                          $data
      */
     public function __construct(
         Template\Context $context,

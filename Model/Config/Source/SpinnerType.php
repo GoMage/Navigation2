@@ -4,6 +4,7 @@ namespace GoMage\Navigation\Model\Config\Source;
 
 /**
  * Class SpinnerType
+ *
  * @package GoMage\Navigation\Model\Config\Source
  */
 class SpinnerType implements \Magento\Framework\Option\ArrayInterface

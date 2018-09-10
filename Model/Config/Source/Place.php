@@ -4,6 +4,7 @@ namespace GoMage\Navigation\Model\Config\Source;
 
 /**
  * Class Place
+ *
  * @package GoMage\Navigation\Model\Config\Source
  */
 class Place implements \Magento\Framework\Option\ArrayInterface

@@ -4,6 +4,7 @@ namespace GoMage\Navigation\Plugin;
 
 /**
  * Class SetAdditionalAttributeData
+ *
  * @package GoMage\Navigation\Plugin
  */
 class SetAdditionalAttributeData
@@ -35,11 +36,12 @@ class SetAdditionalAttributeData
 
     /**
      * SetAdditionalAttributeData constructor.
+     *
      * @param \GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory $navigationAttributeCollectionFactory
-     * @param \GoMage\Navigation\Model\Config\Source\Filter\Templates $filterTemplates
-     * @param \GoMage\Navigation\Helper\Data $dataHelper
-     * @param \GoMage\Navigation\Helper\CategoryData $categoryDataHelper
-     * @param \GoMage\Navigation\Model\Config\Source\Category\Templates $categoryTemplates
+     * @param \GoMage\Navigation\Model\Config\Source\Filter\Templates                      $filterTemplates
+     * @param \GoMage\Navigation\Helper\Data                                               $dataHelper
+     * @param \GoMage\Navigation\Helper\CategoryData                                       $categoryDataHelper
+     * @param \GoMage\Navigation\Model\Config\Source\Category\Templates                    $categoryTemplates
      */
     public function __construct(
         \GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory $navigationAttributeCollectionFactory,
@@ -75,7 +77,7 @@ class SetAdditionalAttributeData
                 continue;
             }
 
-            if(!$filter){
+            if(!$filter) {
                 continue;
             }
 

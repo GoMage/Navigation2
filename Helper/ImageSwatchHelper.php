@@ -14,6 +14,7 @@ use Magento\Swatches\Helper\Media;
 
 /**
  * Class ImageSwatchHelper
+ *
  * @package GoMage\Navigation\Helper
  */
 class ImageSwatchHelper extends Media
@@ -43,7 +44,7 @@ class ImageSwatchHelper extends Media
 
     /**
      * @param string $swatchType
-     * @param array $imageConfig
+     * @param array  $imageConfig
      *
      * @return string
      */
@@ -89,7 +90,7 @@ class ImageSwatchHelper extends Media
     /**
      * Generate swatch thumb and small swatch image
      *
-     * @param string $imageUrl
+     * @param  string $imageUrl
      * @return $this
      */
     public function generateSwatchVariations($imageUrl)

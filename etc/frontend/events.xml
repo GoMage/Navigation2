@@ -6,4 +6,7 @@
     <event name="layout_load_before">
         <observer name="gomage_layout_generate_blocks_after" instance="GoMage\Navigation\Observer\LoadLayout" />
     </event>
+    <event name="catalog_product_collection_apply_limitations_after">
+        <observer name="gomage_layout_generate_blocks_after" instance="GoMage\Navigation\Observer\LimitationAfter" />
+    </event>
 </config>

@@ -20,7 +20,9 @@ interface NavigationInterface
     const IMAGE = 9;
     const PRICE_SLIDER_STEP = 2;
     const TYPE_SLIDER = 'slider';
-    const SLIDER_SKIN = 'round_plastic'; /*** OR classic,plastic,round,round_plastic ****/
+    const SLIDER_SKIN = 'round_plastic'; /***
+ * OR classic,plastic,round,round_plastic 
+****/
 
     const TYPE_DEFAULTS = 'defaults';
     const TYPE_DROP_DOWN = 'select';

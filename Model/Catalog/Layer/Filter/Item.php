@@ -4,6 +4,7 @@ namespace GoMage\Navigation\Model\Catalog\Layer\Filter;
 
 /**
  * Class Item
+ *
  * @package GoMage\Navigation\Model\Catalog\Layer\Filter
  */
 class Item extends \Magento\Catalog\Model\Layer\Filter\Item
@@ -21,9 +22,9 @@ class Item extends \Magento\Catalog\Model\Layer\Filter\Item
     /**
      * @param \Magento\Framework\UrlInterface $url
      * @param \Magento\Theme\Block\Html\Pager $htmlPagerBlock
-     * @param \GoMage\Navigation\Helper\Url $urlHelper
-     * @param \GoMage\Navigation\Helper\Data $dataHelper
-     * @param array $data
+     * @param \GoMage\Navigation\Helper\Url   $urlHelper
+     * @param \GoMage\Navigation\Helper\Data  $dataHelper
+     * @param array                           $data
      */
     public function __construct(
         \Magento\Framework\UrlInterface $url,

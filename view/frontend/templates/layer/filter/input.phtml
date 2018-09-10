@@ -17,17 +17,17 @@ $priceValues = explode(';', $filter->getSingleValue());
                style="display: none;"
                data-role="navigation-filter"
                data-active=""
-               data-from="<?= $block->escapeHtml($filter->getMinBasePrice()); ?>"
-               data-to="<?= $block->escapeHtml($filter->getMaxBasePrice()); ?>"
-               data-code="<?= $block->escapeHtml($filter->getAttributeModel()->getAttributeCode()); ?>"
-               data-param="<?=$block->escapeHtml($filter->getRequestVar()) ?>"
-            <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+               data-from="<?php echo $block->escapeHtml($filter->getMinBasePrice()); ?>"
+               data-to="<?php echo $block->escapeHtml($filter->getMaxBasePrice()); ?>"
+               data-code="<?php echo $block->escapeHtml($filter->getAttributeModel()->getAttributeCode()); ?>"
+               data-param="<?php echo $block->escapeHtml($filter->getRequestVar()) ?>"
+            <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())) :?>
                 data-ajax="1"
             <?php else: ?>
                 data-ajax="0"
             <?php endif;?>
-               id="<?= $block->escapeHtml($filter->getAttributeModel()->getAttributeCode()); ?>"
-               value="<?= $block->escapeHtml($filter->getSingleValue()) ?>"/>
+               id="<?php echo $block->escapeHtml($filter->getAttributeModel()->getAttributeCode()); ?>"
+               value="<?php echo $block->escapeHtml($filter->getSingleValue()) ?>"/>
         <fieldset class="gan-filter-input-fieldset">
 
             <div class="gan-filter-input-fields">
@@ -35,45 +35,45 @@ $priceValues = explode(';', $filter->getSingleValue());
                     <label>
                         <input
                                 class="price-from"
-                            <?php if(!$filter->getGomageIsShowFilterButton()):?>
+                            <?php if(!$filter->getGomageIsShowFilterButton()) :?>
                                 data-role="navigation-filter"
                                 data-type="input-price"
                             <?php endif;?>
-                            <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+                            <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())) :?>
                                 data-ajax="1"
                             <?php else: ?>
                                 data-ajax="0"
                             <?php endif;?>
                                 type="text"
-                                value="<?= $block->escapeHtml($priceValues[0]); ?>"
-                                name="<?= $block->escapeHtml($attributeModel->getAttributeCode());?>_from"
+                                value="<?php echo $block->escapeHtml($priceValues[0]); ?>"
+                                name="<?php echo $block->escapeHtml($attributeModel->getAttributeCode());?>_from"
                                 />
                     </label>
                 </div>
                 <div class="to-text-wrapper">
-                    <span><?= __('to')?></span>
+                    <span><?php echo __('to')?></span>
                 </div>
                 <div class="to-wrapper">
                     <label>
                         <input class="price-to"
-                            <?php if(!$filter->getGomageIsShowFilterButton()):?>
+                            <?php if(!$filter->getGomageIsShowFilterButton()) :?>
                                data-role="navigation-filter"
                                data-type="input-price"
                             <?php endif;?>
-                            <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+                            <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())) :?>
                                 data-ajax="1"
                             <?php else: ?>
                                 data-ajax="0"
                             <?php endif;?>
                                 type="text"
-                                value="<?= $block->escapeHtml($priceValues[1]); ?>"
-                                name="<?= $block->escapeHtml($attributeModel->getAttributeCode());?>_to"
+                                value="<?php echo $block->escapeHtml($priceValues[1]); ?>"
+                                name="<?php echo $block->escapeHtml($attributeModel->getAttributeCode());?>_to"
                                 />
                     </label>
                 </div>
             </div>
 
-            <?php if($filter->getGomageIsShowFilterButton()):?>
+            <?php if($filter->getGomageIsShowFilterButton()) :?>
                 <div class="gan-filter-input-actions">
                     <button
                             class="price-button"
@@ -81,33 +81,33 @@ $priceValues = explode(';', $filter->getSingleValue());
                             data-type="price-button"
                             class="gan-custom-button"
                             type="submit"
-                        <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+                        <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())) :?>
                             data-ajax="1"
                         <?php else: ?>
                             data-ajax="0"
                         <?php endif;?>
                             style="
-                            <?php if ($block->getNavigationViewHelper()->isNavigationViewButtonsGradient() && !empty($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2())):?>
-                                    background: linear-gradient(to bottom, <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>, <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2()?>);
-                                    <?php elseif(!empty($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor())):?>
-                                    background: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>;
+                            <?php if ($block->getNavigationViewHelper()->isNavigationViewButtonsGradient() && !empty($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2())) :?>
+                                    background: linear-gradient(to bottom, <?php echo $block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>, <?php echo $block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2()?>);
+                                    <?php elseif(!empty($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor())) :?>
+                                    background: <?php echo $block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor()?>;
                                     <?php endif;?>
-                            <?php if (!empty($block->getNavigationViewHelper()->getNavigationViewButtonsTextColor())):?>
-                                    color: <?=$block->getNavigationViewHelper()->getNavigationViewButtonsTextColor()?>
-                                    <?php endif;?>
+                            <?php if (!empty($block->getNavigationViewHelper()->getNavigationViewButtonsTextColor())) :?>
+                                    color: <?php echo $block->getNavigationViewHelper()->getNavigationViewButtonsTextColor()?>
+                            <?php endif;?>
                                     ">
 
-                        <span><?= __('Filter'); ?></span>
+                        <span><?php echo __('Filter'); ?></span>
                     </button>
                 </div>
             <?php endif;?>
-            <?php if ($filter->isActive() && $filter->getGomageIsReset()):?>
+            <?php if ($filter->isActive() && $filter->getGomageIsReset()) :?>
                 <a
                         data-role="navigation-filter"
-                        data-param-to-remove="<?=$block->escapeHtml($filter->getRequestVar()) ?>"
+                        data-param-to-remove="<?php echo $block->escapeHtml($filter->getRequestVar()) ?>"
                         data-value=""
-                        data-url="<?= $block->escapeUrl($filter->getRemoveUrl()) ?>"
-                    <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+                        data-url="<?php echo $block->escapeUrl($filter->getRemoveUrl()) ?>"
+                    <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())) :?>
                         data-ajax="1"
                     <?php else: ?>
                         data-ajax="0"
@@ -116,7 +116,7 @@ $priceValues = explode(';', $filter->getSingleValue());
                         data-active="1"
                         href="#"
                         class="gan_link_reset">
-                    <?= __('Reset'); ?>
+                    <?php echo __('Reset'); ?>
                 </a>
             <?php endif;?>
 

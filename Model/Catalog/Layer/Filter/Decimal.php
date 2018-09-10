@@ -4,6 +4,7 @@ namespace GoMage\Navigation\Model\Catalog\Layer\Filter;
 
 /**
  * Class Decimal
+ *
  * @package GoMage\Navigation\Model\Catalog\Layer\Filter
  */
 class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements FilterInterface
@@ -44,17 +45,17 @@ class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements Fil
     protected $urlHelper;
 
     /**
-     * @param \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param \Magento\Catalog\Model\Layer $layer
-     * @param \Magento\Catalog\Model\Layer\Filter\Item\DataBuilder $itemDataBuilder
-     * @param \Magento\Framework\Pricing\PriceCurrencyInterface $priceCurrency
+     * @param \Magento\Catalog\Model\Layer\Filter\ItemFactory                 $filterItemFactory
+     * @param \Magento\Store\Model\StoreManagerInterface                      $storeManager
+     * @param \Magento\Catalog\Model\Layer                                    $layer
+     * @param \Magento\Catalog\Model\Layer\Filter\Item\DataBuilder            $itemDataBuilder
+     * @param \Magento\Framework\Pricing\PriceCurrencyInterface               $priceCurrency
      * @param \Magento\Catalog\Model\Layer\Filter\DataProvider\DecimalFactory $dataProviderFactory
-     * @param \Magento\Framework\App\RequestInterface $request
-     * @param \GoMage\Navigation\Helper\Data $dataHelper
-     * @param \GoMage\Navigation\Model\Config\Source\Filter\Templates $filterTemplates
-     * @param \GoMage\Navigation\Helper\Url $urlHelper
-     * @param array $data
+     * @param \Magento\Framework\App\RequestInterface                         $request
+     * @param \GoMage\Navigation\Helper\Data                                  $dataHelper
+     * @param \GoMage\Navigation\Model\Config\Source\Filter\Templates         $filterTemplates
+     * @param \GoMage\Navigation\Helper\Url                                   $urlHelper
+     * @param array                                                           $data
      */
     public function __construct(
         \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory,
@@ -85,8 +86,9 @@ class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements Fil
      */
     public function apply(\Magento\Framework\App\RequestInterface $request)
     {
-        if (!$this->dataHelper->isEnable() ||
-            $this->getAttributeModel()->getBackendModel() != 'Magento\Catalog\Model\Product\Attribute\Backend\Price') {
+        if (!$this->dataHelper->isEnable() 
+            || $this->getAttributeModel()->getBackendModel() != 'Magento\Catalog\Model\Product\Attribute\Backend\Price'
+        ) {
             return parent::apply($request);
         }
 
@@ -255,7 +257,7 @@ class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements Fil
         if ($fromPrice != $toPrice) {
             $toPrice -= .01;
         }
-       return $this->_renderItemLabel($fromPrice, $toPrice);
+        return $this->_renderItemLabel($fromPrice, $toPrice);
     }
 
     /**

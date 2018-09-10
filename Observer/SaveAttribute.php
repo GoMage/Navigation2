@@ -4,6 +4,7 @@ namespace GoMage\Navigation\Observer;
 
 /**
  * Class SaveAttribute
+ *
  * @package GoMage\Navigation\Observer
  */
 class SaveAttribute implements \Magento\Framework\Event\ObserverInterface
@@ -19,7 +20,7 @@ class SaveAttribute implements \Magento\Framework\Event\ObserverInterface
     protected $navigationAttributeCollectionFactory;
 
     /**
-     * @param \GoMage\Navigation\Model\NavigationAttributeRepository $navigationAttributeRepository
+     * @param \GoMage\Navigation\Model\NavigationAttributeRepository                       $navigationAttributeRepository
      * @param \GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory $navigationAttributeCollectionFactory
      */
     public function __construct(
@@ -49,7 +50,8 @@ class SaveAttribute implements \Magento\Framework\Event\ObserverInterface
             $navigationAttribute->setAttributeId($attribute->getId());
         }
 
-        $navigationAttribute->addData([
+        $navigationAttribute->addData(
+            [
             'filter_type' => (int) $attribute->getData('gomage_filter_type'),
             'is_show_filter_button' => (int) $attribute->getData('gomage_is_show_filter_button'),
             'max_block_height' => (int) $attribute->getData('gomage_max_block_height'),
@@ -67,7 +69,8 @@ class SaveAttribute implements \Magento\Framework\Event\ObserverInterface
             'tooltip_text' => $this->prepareTooltipData($attribute->getData('gomage_tooltip_text')),
             'is_reset' => (int) $attribute->getData('gomage_is_reset'),
             'is_exclude_categories' =>  $attribute->getData('gomage_is_exclude_categories')
-        ]);
+            ]
+        );
 
         $this->navigationAttributeRepository->save($navigationAttribute);
 

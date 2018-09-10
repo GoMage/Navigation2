@@ -4,9 +4,10 @@ namespace GoMage\Navigation\Model\Catalog\Layer\Filter;
 
 /**
  * Class Price
+ *
  * @package GoMage\Navigation\Model\Catalog\Layer\Filter
  */
-class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements FilterInterface
+class Price extends \Magento\Catalog\Model\Layer\Filter\Price implements FilterInterface
 {
 
     const FILTER_TYPE = 'price';
@@ -23,7 +24,7 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
     /**
      * @var \Magento\Framework\Pricing\PriceCurrencyInterface
      */
-    private $priceCurrency;
+    protected $priceCurrency;
 
     /**
      * @var \Magento\Catalog\Model\Layer\Filter\Dynamic\AlgorithmFactory
@@ -61,22 +62,22 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
     protected $urlHelper;
 
     /**
-     * @param \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param \Magento\Catalog\Model\Layer $layer
-     * @param \Magento\Catalog\Model\Layer\Filter\Item\DataBuilder $itemDataBuilder
-     * @param \Magento\Catalog\Model\ResourceModel\Layer\Filter\Price $resource
-     * @param \Magento\Customer\Model\Session $customerSession
-     * @param \Magento\Framework\Search\Dynamic\Algorithm $priceAlgorithm
-     * @param \Magento\Framework\Pricing\PriceCurrencyInterface $priceCurrency
-     * @param \Magento\Catalog\Model\Layer\Filter\Dynamic\AlgorithmFactory $algorithmFactory
+     * @param \Magento\Catalog\Model\Layer\Filter\ItemFactory               $filterItemFactory
+     * @param \Magento\Store\Model\StoreManagerInterface                    $storeManager
+     * @param \Magento\Catalog\Model\Layer                                  $layer
+     * @param \Magento\Catalog\Model\Layer\Filter\Item\DataBuilder          $itemDataBuilder
+     * @param \Magento\Catalog\Model\ResourceModel\Layer\Filter\Price       $resource
+     * @param \Magento\Customer\Model\Session                               $customerSession
+     * @param \Magento\Framework\Search\Dynamic\Algorithm                   $priceAlgorithm
+     * @param \Magento\Framework\Pricing\PriceCurrencyInterface             $priceCurrency
+     * @param \Magento\Catalog\Model\Layer\Filter\Dynamic\AlgorithmFactory  $algorithmFactory
      * @param \Magento\Catalog\Model\Layer\Filter\DataProvider\PriceFactory $dataProviderFactory
-     * @param \Magento\Catalog\Model\Layer\Filter\Price\Range $range
-     * @param \Magento\Catalog\Model\Layer\Filter\Price\Render $render
-     * @param \Magento\Framework\App\RequestInterface $request
-     * @param \GoMage\Navigation\Model\Config\Source\Filter\Templates $filterTemplates
-     * @param \GoMage\Navigation\Helper\Data $dataHelper
-     * @param array $data
+     * @param \Magento\Catalog\Model\Layer\Filter\Price\Range               $range
+     * @param \Magento\Catalog\Model\Layer\Filter\Price\Render              $render
+     * @param \Magento\Framework\App\RequestInterface                       $request
+     * @param \GoMage\Navigation\Model\Config\Source\Filter\Templates       $filterTemplates
+     * @param \GoMage\Navigation\Helper\Data                                $dataHelper
+     * @param array                                                         $data
      */
     public function __construct(
         \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory,
@@ -110,6 +111,7 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
             $dataProviderFactory,
             $data
         );
+
         $this->layer = $layer;
         $this->storeManager = $storeManager;
         $this->algorithmFactory = $algorithmFactory;
@@ -264,7 +266,8 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
     public function isShowAppliedValues()
     {
         if ($this->dataHelper->isShowAppliedValuesInResults() == \GoMage\Navigation\Model\Config\Source\Result::REMOVE && $this->isActive()
-        && $this->filterTemplates->get(\GoMage\Navigation\Model\Config\Source\Navigation::SLIDER)) {
+            && $this->filterTemplates->get(\GoMage\Navigation\Model\Config\Source\Navigation::SLIDER)
+        ) {
             return false;
         }
 
@@ -274,8 +277,8 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
     /**
      * Prepare text of range label
      *
-     * @param float|string $fromPrice
-     * @param float|string $toPrice
+     * @param  float|string $fromPrice
+     * @param  float|string $toPrice
      * @return float|\Magento\Framework\Phrase
      */
     protected function _renderRangeLabel($fromPrice, $toPrice)
@@ -298,7 +301,7 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
         return $this->urlHelper->getFilterRemoveUrl($this);
     }
 
-    public function filtersPrepare (\Magento\Framework\App\RequestInterface $request)
+    public function filtersPrepare(\Magento\Framework\App\RequestInterface $request)
     {
         /**
          * Filter must be string: $fromPrice-$toPrice

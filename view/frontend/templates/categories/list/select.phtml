@@ -7,19 +7,19 @@ $helperDataCat = $this->helper('GoMage\Navigation\Helper\Data');
 ?>
 
 <?php foreach ($data as $category): ?>
-    <?php $selected = ($helperDataCat->isInaCategoryRequest($category['name'])) ? 'selected' : ''; ?>
+    <?php $selected = ($helperDataCat->isInaCategoryRequest($helperDataCat->isUseFriendlyUrls() ? ['cat'=>strtolower($category['name'])]: $category['entity_id'])) ? 'selected' : ''; ?>
     <option
-             data-value="<?= $helperDataCat->getValueCategory(['cat'=>strtolower($category['name'])]) ?>"
+             data-value="<?php echo $helperDataCat->getValueCategory(['cat'=>$helperDataCat->isUseFriendlyUrls() ? strtolower($category['name']):$category['entity_id']]) ?>"
              data-categories = "1"
              data-param="cat"
              data-param-cat-parent = "<?php echo 'parent_cat_'.$category['entity_id'] ?>"
              data-cat-parent = "<?php echo $category['parent_cat'] ?>"
              data-type="categories-select"
-        <?php if ($helperDataCat->isInaCategoryRequest($category['name'])) : ?>
+        <?php if ($helperDataCat->isInaCategoryRequest($helperDataCat->isUseFriendlyUrls() ? $category['name']: $category['entity_id'])) : ?>
             data-active="1"
-        <?php endif; ?> <?= $categoriesBlock->escapeHtml($selected) ?>
-            value="<?= $helperDataCat->getUrlCategory(['cat'=>strtolower($category['name']),'parent_cat_'.$category['entity_id']=>$category['parent_cat'] ]) ?>"> <?= $categoriesBlock->escapeHtml(str_repeat('&nbsp;&nbsp;', $category['level']) . $category['name']) ?></option>
-    <?php if (($categoriesBlock->getCategoriesDataHelper()->getShowAllSubcategories() && !empty(($category['children']))) || $helperDataCat->isInaCategoryRequest($category['name'])): ?>
-        <?=$categoriesBlock->getSelectList($category['children']);?>
+        <?php endif; ?> <?php echo $categoriesBlock->escapeHtml($selected) ?>
+            value="<?php echo $helperDataCat->getUrlCategory(['cat'=>strtolower($helperDataCat->isUseFriendlyUrls() ? $category['name']: $category['entity_id']),'parent_cat_'.$category['entity_id']=>$category['parent_cat'] ]) ?>"> <?php echo $categoriesBlock->escapeHtml(str_repeat('&nbsp;&nbsp;', $category['level']) . $category['name']) ?></option>
+    <?php if (($categoriesBlock->getCategoriesDataHelper()->getShowAllSubcategories() && !empty(($category['children']))) || $helperDataCat->isInaCategoryRequest($helperDataCat->isUseFriendlyUrls() ? $category['name']: $category['entity_id'])) : ?>
+        <?php echo $categoriesBlock->getSelectList($category['children']);?>
     <?php endif;?>
 <?php endforeach; ?>

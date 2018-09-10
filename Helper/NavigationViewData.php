@@ -7,6 +7,7 @@ use Magento\Framework\App\Helper\Context;
 
 /**
  * Class NavigationViewData
+ *
  * @package GoMage\Navigation\Helper
  */
 class NavigationViewData extends \Magento\Framework\App\Helper\AbstractHelper
@@ -18,6 +19,7 @@ class NavigationViewData extends \Magento\Framework\App\Helper\AbstractHelper
 
     /**
      * NavigationViewData constructor.
+     *
      * @param Context $context
      */
     public function __construct(
@@ -81,9 +83,11 @@ class NavigationViewData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isNavigationViewButtonsGradient()
     {
-        return $this->getScopeData(SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_BUTTON_GRADIENT);
+            . SystemConfigInterface::SYSTEM_NAVIGATION_VIEW_CONFIG_BUTTON_GRADIENT
+        );
     }
 
     /**

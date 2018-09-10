@@ -4,6 +4,7 @@ namespace GoMage\Navigation\Model\Config\Source;
 
 /**
  * Class Alignment
+ *
  * @package GoMage\Navigation\Model\Config\Source
  */
 class Alignment implements \Magento\Framework\Option\ArrayInterface

@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <gomage_core>
+            <api>
+                <navigation>
+                    <name>Layered Navigation</name>
+                    <d>
+                        <dyfo>9</dyfo>
+                        <dys>0</dys>
+                        <dyf>2</dyf>
+                        <dyt>1</dyt>
+                        <dm>11</dm>
+                        <dd>15</dd>
+                    </d>
+                    <i>27</i>
+                    <code>nav</code>
+                </navigation>
+            </api>
+        </gomage_core>
+    </default>
+</config>

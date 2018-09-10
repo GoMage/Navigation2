@@ -26,12 +26,12 @@ class Navigation extends Generic
 
     /**
      * @param \Magento\Backend\Block\Template\Context $context
-     * @param \Magento\Framework\Registry $registry
-     * @param \Magento\Framework\Data\FormFactory $formFactory
-     * @param Yesno $yesNo
-     * @param SourceNavigation $navigation
-     * @param Alignment $alignment
-     * @param array $data
+     * @param \Magento\Framework\Registry             $registry
+     * @param \Magento\Framework\Data\FormFactory     $formFactory
+     * @param Yesno                                   $yesNo
+     * @param SourceNavigation                        $navigation
+     * @param Alignment                               $alignment
+     * @param array                                   $data
      */
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
@@ -51,7 +51,7 @@ class Navigation extends Generic
     /**
      * Adding product form elements for editing attribute
      *
-     * @return $this
+     * @return                  $this
      * @SuppressWarnings(PHPMD)
      */
     protected function _prepareForm()

@@ -69,16 +69,16 @@ class CategoriesCms extends Categories
     protected $navigationViewHelper;
 
     /**
-     * @param \Magento\Framework\View\Element\Template\Context $context
-     * @param \Magento\Catalog\Helper\Category $categoryHelper
-     * @param \Magento\Catalog\Model\Indexer\Category\Flat\State $categoryFlatState
-     * @param \Magento\Theme\Block\Html\Topmenu $topMenu
-     * @param \GoMage\Navigation\Helper\Data $dataHelper
-     * @param \GoMage\Navigation\Helper\CategoryData $categoriesHelper
-     * @param \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper
+     * @param \Magento\Framework\View\Element\Template\Context          $context
+     * @param \Magento\Catalog\Helper\Category                          $categoryHelper
+     * @param \Magento\Catalog\Model\Indexer\Category\Flat\State        $categoryFlatState
+     * @param \Magento\Theme\Block\Html\Topmenu                         $topMenu
+     * @param \GoMage\Navigation\Helper\Data                            $dataHelper
+     * @param \GoMage\Navigation\Helper\CategoryData                    $categoriesHelper
+     * @param \GoMage\Navigation\Helper\NavigationViewData              $navigationViewHelper
      * @param \GoMage\Navigation\Model\Config\Source\Category\Templates $templates
-     * @param \Magento\Catalog\Model\ResourceModel\Category $categoryResource
-     * @param \Magento\Catalog\Model\Layer\Resolver $layerResolver
+     * @param \Magento\Catalog\Model\ResourceModel\Category             $categoryResource
+     * @param \Magento\Catalog\Model\Layer\Resolver                     $layerResolver
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
@@ -114,7 +114,6 @@ class CategoriesCms extends Categories
             $templates,
             $categoryResource,
             $layerResolver
-
         );
         $this->setLocation();
     }
@@ -127,8 +126,9 @@ class CategoriesCms extends Categories
         if (!$this->getDataHelper()->isEnable() || !$this->getCategoriesDataHelper()->isShowCategories()) {
             return;
         }
-        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
-            $this->cmsPage->getPageLayout() == '1column') {
+        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT 
+            && $this->cmsPage->getPageLayout() == '1column'
+        ) {
             $this->moveColumn('main');
             $this->canShowCategories = true;
             return;
@@ -136,51 +136,58 @@ class CategoriesCms extends Categories
             $this->getLayout()->unsetChild('main', 'gomage.categories.column');
         }
 
-        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN &&
-            $this->cmsPage->getPageLayout() == '2columns-left') {
+        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN 
+            && $this->cmsPage->getPageLayout() == '2columns-left'
+        ) {
             $this->moveBlock('sidebar.main');
             $this->canShowCategories = true;
             return;
         }
-        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
-            $this->cmsPage->getPageLayout() == '2columns-left') {
+        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT 
+            && $this->cmsPage->getPageLayout() == '2columns-left'
+        ) {
             $this->moveBlock('main');
             $this->getLayout()->reorderChild('main', 'gomage.categories', 0);
             $this->canShowCategories = true;
             return;
         }
 
-        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN &&
-            $this->cmsPage->getPageLayout() == '3columns') {
+        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN 
+            && $this->cmsPage->getPageLayout() == '3columns'
+        ) {
             $this->moveBlock('sidebar.main');
             $this->canShowCategories = true;
             return;
         }
 
-        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN &&
-            $this->cmsPage->getPageLayout() == '2columns-right') {
+        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN 
+            && $this->cmsPage->getPageLayout() == '2columns-right'
+        ) {
             $this->moveBlock('sidebar.main');
             $this->canShowCategories = true;
             return;
         }
 
-        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
-            $this->cmsPage->getPageLayout() == '2columns-right') {
+        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT 
+            && $this->cmsPage->getPageLayout() == '2columns-right'
+        ) {
             $this->moveBlock('main');
             $this->getLayout()->reorderChild('main', 'gomage.categories', 0);
             $this->canShowCategories = true;
             return;
         }
 
-        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN &&
-            $this->cmsPage->getPageLayout() == '3columns') {
+        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN 
+            && $this->cmsPage->getPageLayout() == '3columns'
+        ) {
             $this->moveBlock('sidebar.additional');
             $this->canShowCategories = true;
             return;
         }
 
-        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
-            $this->cmsPage->getPageLayout() == '3columns') {
+        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT 
+            && $this->cmsPage->getPageLayout() == '3columns'
+        ) {
             $this->moveBlock('main');
             $this->canShowCategories = true;
             return;

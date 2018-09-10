@@ -12,7 +12,7 @@ interface FilterRendererInterface
     /**
      * Render filter
      *
-     * @param FilterInterface $filter
+     * @param  FilterInterface $filter
      * @return string
      */
     public function render(FilterInterface $filter);

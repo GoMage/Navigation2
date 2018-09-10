@@ -12,14 +12,15 @@ use Magento\Framework\Search\Request\FilterInterface;
 
 /**
  * Class CategoryFilterProcessor
+ *
  * @package GoMage\Navigation\Plugin
  */
 class CategoryFilterProcessor
 {
     /**
      * @param \Magento\CatalogSearch\Model\Adapter\Mysql\Filter\Preprocessor $subject
-     * @param \Closure $proceed
-     * @param FilterInterface $filter
+     * @param \Closure                                                       $proceed
+     * @param FilterInterface                                                $filter
      * @param $isNegation
      * @param $query
      * @return mixed|string

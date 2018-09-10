@@ -9,41 +9,47 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
 $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
 ?>
 <ol class="items gan-filter gan-filter-default   <?php echo $helperData->getOptionsAlignment((int)$filter->getGomageOptionsAlignment()); ?>
-<?php if($filter->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK || ($filter->isCategoryFilter() && $categoriesHelper->getCategoriesNavigationType() ) ) echo ' gan-filter-in-block'; ?>
-<?php if($filter->getGomageIsCheckbox()  || ($filter->isCategoryFilter() && ($categoriesHelper->isShowCheckboxes()))):?> gan-filter-checkbox<?php endif;?>"
-    <?php if($filter->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK && $filter->getGomageMaxBlockHeight() ||$categoriesHelper->getMaxBlockHeightCategories() ): ?>
-        <?php if ($filter->isCategoryFilter() && $categoriesHelper->getMaxBlockHeightCategories() && $categoriesHelper->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK): ?>
-            style="max-height:<?= $categoriesHelper->getMaxBlockHeightCategories(); ?>px;"
+<?php if($filter->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK || ($filter->isCategoryFilter() && $categoriesHelper->getCategoriesNavigationType() ) ) { echo ' gan-filter-in-block';
+} ?>
+<?php if($filter->getGomageIsCheckbox()  || ($filter->isCategoryFilter() && ($categoriesHelper->isShowCheckboxes()))) :?> gan-filter-checkbox<?php 
+endif;?>"
+    <?php if($filter->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK && $filter->getGomageMaxBlockHeight() ||$categoriesHelper->getMaxBlockHeightCategories() ) : ?>
+        <?php if ($filter->isCategoryFilter() && $categoriesHelper->getMaxBlockHeightCategories() && $categoriesHelper->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK) : ?>
+            style="max-height:<?php echo $categoriesHelper->getMaxBlockHeightCategories(); ?>px;"
         <?php endif; ?>
     <?php endif;?>>
     <?php $optionsLimit = (int)($filter->getGomageVisibleOptions()) ? $filter->getGomageVisibleOptions() : false;
       $cnt = 0;
     ?>
     <?php foreach ($filterItems as $item): ?>
-        <li class="item <?=(!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?>" style="<?=((!empty(($optionsLimit) && $cnt >= $optionsLimit)) && !$helperData->isShowMore($filter->getName())) ? 'display:none': '' ?>">
-            <?php if ($item->getCount() > 0 || ($helperData->isShowEmptyCategory() && $filter->isCategoryFilter())): ?>
-                <a <?php if(!$item->getIsActive()):?> href="<?= $block->escapeUrl($item->getGomageUrl()); ?> <?php endif;?>"
-                    <?php if($item->getIsActive()):?>
+        <li class="item <?php echo (!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?>" style="<?php echo ((!empty(($optionsLimit) && $cnt >= $optionsLimit)) && !$helperData->isShowMore($filter->getName())) ? 'display:none': '' ?>">
+            <?php if ($item->getCount() > 0 || ($helperData->isShowEmptyCategory() && $filter->isCategoryFilter())) : ?>
+                <a <?php if(!$item->getIsActive()) :?> href="<?php echo $block->escapeUrl($item->getGomageUrl()); ?> <?php 
+               endif;?>"
+                    <?php if($item->getIsActive()) :?>
                         class="active"
                     <?php endif;?>
                    data-role="navigation-filter"
-                   data-url="<?php if(!$item->getIsActive()):?><?= $block->escapeUrl($item->getGomageUrl()); ?> <?php endif;?>"
-                   data-value="<?= $block->escapeHtml($item->getGomageValue()) ?>"
-                   data-param="<?= $block->escapeHtml($filter->getRequestVar()) ?>"
-                   <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax()) && ( ($filter->isCategoryFilter() &&  $categoriesHelper->isAjax()) ||  !$filter->isCategoryFilter())):?>
+                   data-url="<?php if(!$item->getIsActive()) :?><?php echo $block->escapeUrl($item->getGomageUrl()); ?> <?php 
+                  endif;?>"
+                   data-value="<?php echo $block->escapeHtml($item->getGomageValue()) ?>"
+                   data-param="<?php echo $block->escapeHtml($filter->getRequestVar()) ?>"
+                    <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax()) && ( ($filter->isCategoryFilter() &&  $categoriesHelper->isAjax()) ||  !$filter->isCategoryFilter())) :?>
                         data-ajax="1"
-                   <?php else:?>
+                    <?php else:?>
                         data-ajax="0"
-                   <?php endif;?>
-                   data-type="<?= (int) $filter->getGomageFilterType(); ?>"
-                   <?php if($item->getIsActive()):?>
+                    <?php endif;?>
+                   data-type="<?php echo (int) $filter->getGomageFilterType(); ?>"
+                    <?php if($item->getIsActive()) :?>
                     data-active="1"
-                    <?php endif;?> <?php if((!$item->isShowAppliedValues())): ?>style="display: none"<?php endif; ?>>
+                    <?php endif;?> <?php if((!$item->isShowAppliedValues())) : ?>style="display: none"<?php 
+                    endif; ?>>
                     <span class="filter-label-wrap">
-                        <span class="filter-label-text"><?= html_entity_decode($block->escapeHtml($item->getLabel(), ['span'])) ?></span>
-                        <?php if ($block->getHelper()->isShowValueQty()): ?>
-                            <span class="count"><?= (int) $item->getCount() ?><span class="filter-count-label">
-                            <?php if ($item->getCount() == 1): ?><?= __('item') ?><?php else: ?><?= __('items') ?><?php endif; ?></span></span>
+                        <span class="filter-label-text"><?php echo html_entity_decode($block->escapeHtml($item->getLabel(), ['span'])) ?></span>
+                        <?php if ($block->getHelper()->isShowValueQty()) : ?>
+                            <span class="count"><?php echo (int) $item->getCount() ?><span class="filter-count-label">
+                            <?php if ($item->getCount() == 1) : ?><?php echo __('item') ?><?php else: ?><?php echo __('items') ?><?php 
+                            endif; ?></span></span>
                         <?php endif; ?>
                     </span>
                 </a>
@@ -51,13 +57,13 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
         </li>
         <?php $cnt++;?>
     <?php endforeach ?>
-    <?php if($filter->isActive() && $filter->getGomageIsReset() || ($filter->isActive() && $filter->isCategoryFilter() && $categoriesHelper->isShowResetLink() )):?>
+    <?php if($filter->isActive() && $filter->getGomageIsReset() || ($filter->isActive() && $filter->isCategoryFilter() && $categoriesHelper->isShowResetLink() )) :?>
         <a
             data-role="navigation-filter"
             data-value=""
-            data-url="<?= $block->escapeUrl($filter->getRemoveUrl()) ?>"
-            data-param-to-remove="<?=$block->escapeHtml($filter->getRequestVar()) ?>"
-        <?php if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax()) && ( ($filter->isCategoryFilter() &&  $categoriesHelper->isAjax()) ||  !$filter->isCategoryFilter()) ):?>
+            data-url="<?php echo $block->escapeUrl($filter->getRemoveUrl()) ?>"
+            data-param-to-remove="<?php echo $block->escapeHtml($filter->getRequestVar()) ?>"
+        <?php if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax()) && ( ($filter->isCategoryFilter() &&  $categoriesHelper->isAjax()) ||  !$filter->isCategoryFilter()) ) :?>
             data-ajax="1"
         <?php else:?>
             data-ajax="0"
@@ -66,11 +72,11 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
             data-active="1"
             href="#"
             class="gan_link_reset">
-            <?= __('Reset'); ?>
+            <?php echo __('Reset'); ?>
         </a>
     <?php endif;?>
-    <?php if($optionsLimit && count($filterItems) > $optionsLimit): ?>
-        <a style=" <?= ($helperData->isShowMore($filter->getName()) ) ? 'display:none': '' ?>" class="gan_link_more" data-show-more = "<?php echo $helperData->isShowMore($filter->getName()) ?>" data-more-value = "<?php echo strtolower($filter->getName()); ?>" data-more-params="more_show"><?=__('More') ?>&#9660;</a>
-        <a class="gan_link_more_less" style=" <?= (!$helperData->isShowMore($filter->getName()) ) ? 'display:none': '' ?>"><?=__('Less') ?>&#9650;</a>
+    <?php if($optionsLimit && count($filterItems) > $optionsLimit) : ?>
+        <a style=" <?php echo ($helperData->isShowMore($filter->getName()) ) ? 'display:none': '' ?>" class="gan_link_more" data-show-more = "<?php echo $helperData->isShowMore($filter->getName()) ?>" data-more-value = "<?php echo strtolower($filter->getName()); ?>" data-more-params="more_show"><?php echo __('More') ?>&#9660;</a>
+        <a class="gan_link_more_less" style=" <?php echo (!$helperData->isShowMore($filter->getName()) ) ? 'display:none': '' ?>"><?php echo __('Less') ?>&#9650;</a>
     <?php endif; ?>
 </ol>

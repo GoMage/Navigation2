@@ -3,21 +3,21 @@
  * @var $block \GoMage\Navigation\Block\Navigation\Tooltip
  */
 ?>
-<?php if($filter->getGomageIsShowTooltip()):?>
-    <?php $text = $block->getTooltipText($filter->getGomageTooltipText() ); ?>
+<?php if($filter->getGomageIsShowTooltip()) :?>
+    <?php $text = $block->getTooltipText($filter->getGomageTooltipText()); ?>
     <?php  $PCREpattern  =  '/\r\n+|\r|\n+|\s+|\t+/u'; ?>
     <?php $text = preg_replace($PCREpattern, '', $text); ?>
-    <?php if(strlen($text)> 0 ): ?>
+    <?php if(strlen($text)> 0 ) : ?>
         <div class="gan-tooltip">
             <div class="gan-tooltip-toggle"
-                 style="color: <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewTooltipBackgroundColor());?>">?</div>
+                 style="color: <?php echo $block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewTooltipBackgroundColor());?>">?</div>
             <div class="gan-tooltip-content">
                 <div class="gan-tooltip-content-in" style="
-                        width: <?= (int)$filter->getGomageTooltipWidth() != 0 ? $block->escapeHtml($filter->getGomageTooltipWidth()).'px': 'auto';?>;
-                        height: <?= (int)$filter->getGomageTooltipHeight() != 0 ? $block->escapeHtml($filter->getGomageTooltipHeight()).'px': 'auto';?>;
-                        background: <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewTooltipWindowBackgroundColor());?>;">
-                    <div class="gan-tooltip-text"><?=$block->getTooltipText($filter->getGomageTooltipText());?></div>
-                    <?php if ($block->getNavigationViewHelper()->isNavigationViewTooltipHideOnCloseButton()):?>
+                        width: <?php echo (int)$filter->getGomageTooltipWidth() != 0 ? $block->escapeHtml($filter->getGomageTooltipWidth()).'px': 'auto';?>;
+                        height: <?php echo (int)$filter->getGomageTooltipHeight() != 0 ? $block->escapeHtml($filter->getGomageTooltipHeight()).'px': 'auto';?>;
+                        background: <?php echo $block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewTooltipWindowBackgroundColor());?>;">
+                    <div class="gan-tooltip-text"><?php echo $block->getTooltipText($filter->getGomageTooltipText());?></div>
+                    <?php if ($block->getNavigationViewHelper()->isNavigationViewTooltipHideOnCloseButton()) :?>
                         <div class="gan-tooltip-close">✕</div>
                     <?php endif;?>
                 </div>

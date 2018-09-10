@@ -7,7 +7,7 @@
 /**
  * Product attribute add/edit form main tab
  *
- * @author      Magento Core Team <core@magentocommerce.com>
+ * @author Magento Core Team <core@magentocommerce.com>
  */
 namespace GoMage\Navigation\Block\Adminhtml\Catalog\Product\Attribute\Edit\Tab;
 
@@ -45,13 +45,13 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
     protected $storeManager;
 
     /**
-     * @param Context $context
-     * @param Registry $registry
-     * @param FormFactory $formFactory
-     * @param \GoMage\Navigation\Model\Config\Source\Navigation $sourceNavigation
+     * @param Context                                                $context
+     * @param Registry                                               $registry
+     * @param FormFactory                                            $formFactory
+     * @param \GoMage\Navigation\Model\Config\Source\Navigation      $sourceNavigation
      * @param \GoMage\Navigation\Model\Config\Source\Image\Alignment $sourceImageAlignment
-     * @param Yesno $yesNo
-     * @param array $data
+     * @param Yesno                                                  $yesNo
+     * @param array                                                  $data
      */
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
@@ -137,7 +137,9 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
     {
         $attributeObject = $this->_coreRegistry->registry('entity_attribute');
 
-        /** @var \Magento\Framework\Data\Form $form */
+        /**
+ * @var \Magento\Framework\Data\Form $form 
+*/
         $form = $this->_formFactory->create(
             ['data' => ['id' => 'edit_form', 'action' => $this->getData('action'), 'method' => 'post']]
         );
@@ -149,11 +151,14 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
         $templates = $this->sourceNavigation->toOptionArray();
         if ($attributeObject->getBackendModel() != 'Magento\Catalog\Model\Product\Attribute\Backend\Price') {
             foreach ($templates as $key => $template) {
-                if(in_array($template['value'], [
+                if(in_array(
+                    $template['value'], [
                     \GoMage\Navigation\Model\Config\Source\NavigationInterface::INPUT,
                     \GoMage\Navigation\Model\Config\Source\NavigationInterface::SLIDER,
                     \GoMage\Navigation\Model\Config\Source\NavigationInterface::SLIDER_INPUT,
-                ])) {
+                    ]
+                )
+                ) {
                     unset($templates[$key]);
                 }
             }
@@ -192,15 +197,15 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
             ]
         );
             $fieldset->addField(
-            'gomage_is_ajax',
-            'select',
-            [
+                'gomage_is_ajax',
+                'select',
+                [
                 'name'   => 'gomage_is_ajax',
                 'label'  => __('Use Ajax'),
                 'title'  => __('Use Ajax'),
                 'values' => $this->yesNoSource,
-            ]
-        );
+                ]
+            );
 
         $fieldset->addField(
             'gomage_is_collapsed',
@@ -305,7 +310,7 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
         $tooltipData = unserialize($attributeObject->getData('gomage_tooltip_text'));
         foreach ($this->storeManager->getStores() as $store) {
             $tooltipText['tooltip_text_store_' . $store->getId()] = (!empty($tooltipData[$store->getId()])) ?
-                html_entity_decode($tooltipData[$store->getId()],ENT_QUOTES) : '';
+                html_entity_decode($tooltipData[$store->getId()], ENT_QUOTES) : '';
 
             $fieldset->addField(
                 'tooltip_text_store_' . $store->getId(),

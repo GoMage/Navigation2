@@ -118,11 +118,11 @@ var Hashtable = (function () {
                 entry = this.entries[i];
                 if (equals(key, entry[0]) ) {
                     switch (mode) {
-                        case EXISTENCE:
+                    case EXISTENCE:
                             return true;
-                        case ENTRY:
+                    case ENTRY:
                             return entry;
-                        case ENTRY_INDEX_AND_VALUE:
+                    case ENTRY_INDEX_AND_VALUE:
                             return [ i, entry[1] ];
                     }
                 }

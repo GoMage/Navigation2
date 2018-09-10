@@ -20,27 +20,27 @@ $priceValues = explode(';', $filter->getSingleValue());
                        class="gan-price"
                        style="display: none;"
                        data-role="navigation-filter"
-                    <?php if (!empty($filter->isActive())): ?>
+                    <?php if (!empty($filter->isActive())) : ?>
                         data-active="1"
                     <?php endif; ?>
-                       data-from="<?= $block->escapeHtml($filter->getMinBasePrice()); ?>"
-                       data-to="<?= $block->escapeHtml($filter->getMaxBasePrice()); ?>"
-                       data-step="<?= $block->escapeHtml($block->getStep()); ?>"
-                       data-skin="<?= $block->escapeHtml($block->getSliderSkin()); ?>"
-                       data-code="<?= $block->escapeHtml($filter->getAttributeModel()->getAttributeCode()); ?>"
-                       data-dimension="&nbsp;<?= $block->escapeHtml($filter->getCurrencySymbol()); ?>"
-                       data-param="<?= $block->escapeHtml($filter->getRequestVar()) ?>"
-                        <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+                       data-from="<?php echo $block->escapeHtml($filter->getMinBasePrice()); ?>"
+                       data-to="<?php echo $block->escapeHtml($filter->getMaxBasePrice()); ?>"
+                       data-step="<?php echo $block->escapeHtml($block->getStep()); ?>"
+                       data-skin="<?php echo $block->escapeHtml($block->getSliderSkin()); ?>"
+                       data-code="<?php echo $block->escapeHtml($filter->getAttributeModel()->getAttributeCode()); ?>"
+                       data-dimension="&nbsp;<?php echo $block->escapeHtml($filter->getCurrencySymbol()); ?>"
+                       data-param="<?php echo $block->escapeHtml($filter->getRequestVar()) ?>"
+                        <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())) :?>
                             data-ajax="1"
                         <?php else:?>
                             data-ajax="0"
                         <?php endif;?>
-                       id="<?= $block->escapeHtml($filter->getAttributeModel()->getAttributeCode()); ?>"
+                       id="<?php echo $block->escapeHtml($filter->getAttributeModel()->getAttributeCode()); ?>"
                        data-type="slider"
                        type="slider"
-                       name="<?= $block->escapeHtml($filter->getAttributeModel()->getAttributeCode()); ?>"
-                       value="<?= $block->escapeHtml($filter->getSingleValue()) ?>"
-                       data-value="<?= str_replace(';', '-', $block->escapeHtml($filter->getSingleValue())) ?>"/>
+                       name="<?php echo $block->escapeHtml($filter->getAttributeModel()->getAttributeCode()); ?>"
+                       value="<?php echo $block->escapeHtml($filter->getSingleValue()) ?>"
+                       data-value="<?php echo str_replace(';', '-', $block->escapeHtml($filter->getSingleValue())) ?>"/>
             </span>
         </div>
     </div>
@@ -52,56 +52,56 @@ $priceValues = explode(';', $filter->getSingleValue());
                         <label>
                             <input class="price-from"
                                    style="display: none"
-                                   <?php if(!$filter->getGomageIsShowFilterButton()):?>
+                                    <?php if(!$filter->getGomageIsShowFilterButton()) :?>
                                        data-role="navigation-filter"
                                        data-type="input-price"
-                                   <?php endif;?>
+                                    <?php endif;?>
                                    type="text"
-                                   value="<?= $block->escapeHtml($priceValues[0]); ?>" />
+                                   value="<?php echo $block->escapeHtml($priceValues[0]); ?>" />
                         </label>
                     </div>
                     <div class="to-text-wrapper">
-                        <span style="display: none" class="to_slider_or_input"><?= __('to')?></span>
+                        <span style="display: none" class="to_slider_or_input"><?php echo __('to')?></span>
                     </div>
                     <div class="to-wrapper">
                         <label>
                             <input class="price-to"
                                    style="display: none";
-                                   <?php if(!$filter->getGomageIsShowFilterButton()):?>
+                                    <?php if(!$filter->getGomageIsShowFilterButton()) :?>
                                        data-role="navigation-filter"
                                        data-type="input-price"
-                                   <?php endif;?>
+                                    <?php endif;?>
                                    type="text"
-                                   value="<?= $block->escapeHtml($priceValues[1]); ?>" />
+                                   value="<?php echo $block->escapeHtml($priceValues[1]); ?>" />
                         </label>
                     </div>
                 </div>
-                <?php if($filter->getGomageIsShowFilterButton()):?>
+                <?php if($filter->getGomageIsShowFilterButton()) :?>
                     <div class="gan-filter-input-actions">
                         <button id="price-button" data-role="navigation-filter" data-type="price-button" class="gan-custom-button" type="submit"
                                 style="
-                                    <?php if ($block->getNavigationViewHelper()->isNavigationViewButtonsGradient() && !empty($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2())):?>
-                                        background: linear-gradient(to bottom, <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor())?>, <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2())?>);
-                                    <?php elseif(!empty($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor())):?>
-                                        background: <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor())?>;
+                                    <?php if ($block->getNavigationViewHelper()->isNavigationViewButtonsGradient() && !empty($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2())) :?>
+                                        background: linear-gradient(to bottom, <?php echo $block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor())?>, <?php echo $block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor2())?>);
+                                    <?php elseif(!empty($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor())) :?>
+                                        background: <?php echo $block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewButtonsBackgroundColor())?>;
                                     <?php endif;?>
-                                    <?php if (!empty($block->getNavigationViewHelper()->getNavigationViewButtonsTextColor())):?>
-                                        color: <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewButtonsTextColor())?>
+                                    <?php if (!empty($block->getNavigationViewHelper()->getNavigationViewButtonsTextColor())) :?>
+                                        color: <?php echo $block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewButtonsTextColor())?>
                                     <?php endif;?>
                         ">
-                            <span><?= __('Filter'); ?></span>
+                            <span><?php echo __('Filter'); ?></span>
                         </button>
                     </div>
                 <?php endif;?>
             </fieldset>
         </form>
-        <?php if ($filter->isActive() && $filter->getGomageIsReset()):?>
+        <?php if ($filter->isActive() && $filter->getGomageIsReset()) :?>
             <a
                     data-role="navigation-filter"
                     data-value=""
-                    data-url="<?= $block->escapeUrl($filter->getRemoveUrl()) ?>"
-                    data-param-to-remove="<?=$block->escapeHtml($filter->getRequestVar()) ?>"
-                <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())):?>
+                    data-url="<?php echo $block->escapeUrl($filter->getRemoveUrl()) ?>"
+                    data-param-to-remove="<?php echo $block->escapeHtml($filter->getRequestVar()) ?>"
+                <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())) :?>
                     data-ajax="1"
                 <?php else:?>
                     data-ajax="0"
@@ -110,7 +110,7 @@ $priceValues = explode(';', $filter->getSingleValue());
                     data-active="1"
                     href="#"
                     class="gan_link_reset">
-                <?= __('Reset'); ?>
+                <?php echo __('Reset'); ?>
             </a>
         <?php endif;?>
     </div>

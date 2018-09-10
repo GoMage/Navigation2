@@ -16,35 +16,35 @@ $filter = reset($filterItems)->getFilter();
                 <span>
                     <input style="display: none;"
                            data-role="navigation-filter"
-                        <?php if (!empty($filter->isActive())): ?>
+                        <?php if (!empty($filter->isActive())) : ?>
                             data-active="1"
                         <?php endif; ?>
-                           data-param="<?= $block->escapeHtml($filter->getRequestVar()) ?>"
-                           data-from="<?= $block->escapeHtml($filter->getMinBasePrice()); ?>"
-                           data-to="<?= $block->escapeHtml($filter->getMaxBasePrice()); ?>"
-                           data-step="<?= $block->escapeHtml($block->getStep()); ?>"
-                           data-skin="<?= $block->escapeHtml($block->getSliderSkin()); ?>"
-                           data-code="<?= $block->escapeHtml($attributeCode); ?>"
-                           data-dimension="&nbsp;<?= $block->escapeHtml($filter->getCurrencySymbol()); ?>"
-                           data-param-to-remove="<?= $block->escapeHtml($filter->getRequestVar()) ?>"
+                           data-param="<?php echo $block->escapeHtml($filter->getRequestVar()) ?>"
+                           data-from="<?php echo $block->escapeHtml($filter->getMinBasePrice()); ?>"
+                           data-to="<?php echo $block->escapeHtml($filter->getMaxBasePrice()); ?>"
+                           data-step="<?php echo $block->escapeHtml($block->getStep()); ?>"
+                           data-skin="<?php echo $block->escapeHtml($block->getSliderSkin()); ?>"
+                           data-code="<?php echo $block->escapeHtml($attributeCode); ?>"
+                           data-dimension="&nbsp;<?php echo $block->escapeHtml($filter->getCurrencySymbol()); ?>"
+                           data-param-to-remove="<?php echo $block->escapeHtml($filter->getRequestVar()) ?>"
                            data-ajax="1"
-                           id="<?= $block->escapeHtml($attributeCode); ?>"
+                           id="<?php echo $block->escapeHtml($attributeCode); ?>"
                            data-type="slider"
                            type="slider"
-                           name="<?= $block->escapeHtml($attributeCode); ?>"
-                           value="<?= $block->escapeHtml($filter->getSingleValue()) ?>"
-                           data-value="<?= $block->escapeHtml(str_replace(';', '-', $filter->getSingleValue())); ?>"
+                           name="<?php echo $block->escapeHtml($attributeCode); ?>"
+                           value="<?php echo $block->escapeHtml($filter->getSingleValue()) ?>"
+                           data-value="<?php echo $block->escapeHtml(str_replace(';', '-', $filter->getSingleValue())); ?>"
                     />
                 </span>
             </div>
         </div>
-    <?php if ($filter->isActive() && $filter->getGomageIsReset() || ($filter->isActive() &&$filter->isCategoryFilter() && $categoriesHelper->isShowResetLink() )):?>
+    <?php if ($filter->isActive() && $filter->getGomageIsReset() || ($filter->isActive() &&$filter->isCategoryFilter() && $categoriesHelper->isShowResetLink() )) :?>
         <a
                 data-role="navigation-filter"
                 data-value=""
-                data-url="<?= $block->escapeUrl($filter->getRemoveUrl()) ?>"
-                data-param-to-remove="<?=$block->escapeHtml($filter->getRequestVar()) ?>"
-            <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax()) && ( ($filter->isCategoryFilter() &&  $categoriesHelper->isAjax()) ||  !$filter->isCategoryFilter()) ):?>
+                data-url="<?php echo $block->escapeUrl($filter->getRemoveUrl()) ?>"
+                data-param-to-remove="<?php echo $block->escapeHtml($filter->getRequestVar()) ?>"
+            <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax()) && ( ($filter->isCategoryFilter() &&  $categoriesHelper->isAjax()) ||  !$filter->isCategoryFilter()) ) :?>
                 data-ajax="1"
             <?php else: ?>
                 data-ajax="0"
@@ -53,7 +53,7 @@ $filter = reset($filterItems)->getFilter();
                 data-active="1"
                 href="#"
                 class="gan_link_reset">
-            <?= __('Reset'); ?>
+            <?php echo __('Reset'); ?>
         </a>
     <?php endif;?>
 </div>

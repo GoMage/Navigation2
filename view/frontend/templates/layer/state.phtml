@@ -4,34 +4,34 @@
  */
 ?>
 <?php $filters = $block->getActiveFilters() ?>
-<?php if (!empty($filters)): ?>
+<?php if (!empty($filters)) : ?>
 <div class="filter-current active">
     <strong class="block-subtitle filter-current-subtitle"
             role="heading"
             aria-level="2"
-            data-count="<?=(int)count($filters); ?>"><?= __('Applied Filters:') ?></strong>
+            data-count="<?php echo (int)count($filters); ?>"><?php echo __('Applied Filters:') ?></strong>
     <ol class="items">
         <?php foreach ($filters as $filter): ?>
             <li class="item">
-                <span class="filter-label"><?=$block->escapeHtml(__($filter->getName())); ?></span>
+                <span class="filter-label"><?php echo $block->escapeHtml(__($filter->getName())); ?></span>
                 <div class="filter-value-wrap">
-                    <span class="filter-value"><?= html_entity_decode ($block->escapeHtml($filter->getLabel(), ['span'])); ?></span>
+                    <span class="filter-value"><?php echo html_entity_decode($block->escapeHtml($filter->getLabel(), ['span'])); ?></span>
                     <?php $currentFilterName = $block->escapeHtml(__($filter->getName()) . " " . $filter->getLabel()); ?>
                     <a class="action remove"
                        href="#"
-                       title="<?= $block->escapeHtml(__('Remove') . " " . $currentFilterName);?>"
+                       title="<?php echo $block->escapeHtml(__('Remove') . " " . $currentFilterName);?>"
                        data-role="navigation-filter"
-                       data-value="<?=$block->escapeHtml($filter->getRemoveValue()) ?>"
-                       data-url="<?= $block->escapeHtml($filter->getRemoveUrl()) ?>"
-                       data-param-to-remove="<?=$block->escapeHtml($filter->getFilter()->getRequestVar()) ?>"
-                        <?php if  ($filter->getFilter()->getGomageIsAjax() || is_null($filter->getFilter()->getGomageIsAjax())):?>
+                       data-value="<?php echo $block->escapeHtml($filter->getRemoveValue()) ?>"
+                       data-url="<?php echo $block->escapeHtml($filter->getRemoveUrl()) ?>"
+                       data-param-to-remove="<?php echo $block->escapeHtml($filter->getFilter()->getRequestVar()) ?>"
+                        <?php if  ($filter->getFilter()->getGomageIsAjax() || is_null($filter->getFilter()->getGomageIsAjax())) :?>
                             data-ajax="1"
                         <?php else:?>
                             data-ajax="0"
                         <?php endif;?>
                        data-type="remove-item"
                        data-active="1">
-                        <span><?= __('Remove This Item') ?></span>
+                        <span><?php echo __('Remove This Item') ?></span>
                     </a>
                 </div>
             </li>

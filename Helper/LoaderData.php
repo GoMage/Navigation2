@@ -7,6 +7,7 @@ use Magento\Framework\App\Helper\Context;
 
 /**
  * Class LoaderData
+ *
  * @package GoMage\Navigation\Helper
  */
 class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
@@ -27,7 +28,7 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
     protected $dataHelper;
 
     /**
-     * @param Context $context
+     * @param Context                                          $context
      * @param \GoMage\Navigation\Model\Config\Source\Alignment $alignment
      */
     public function __construct(

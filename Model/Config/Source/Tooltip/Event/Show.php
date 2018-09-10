@@ -4,6 +4,7 @@ namespace GoMage\Navigation\Model\Config\Source\Tooltip\Event;
 
 /**
  * Class Show
+ *
  * @package GoMage\Navigation\Model\Config\Source\Tooltip\Event
  */
 class Show implements \Magento\Framework\Option\ArrayInterface

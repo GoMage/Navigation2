@@ -4,6 +4,7 @@ namespace GoMage\Navigation\Model\Config\Source\Filter;
 
 /**
  * Class Action
+ *
  * @package GoMage\Navigation\Model\Config\Source\Filter
  */
 class Action implements \Magento\Framework\Option\ArrayInterface

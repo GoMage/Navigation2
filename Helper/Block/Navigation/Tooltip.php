@@ -23,10 +23,11 @@ class Tooltip extends \Magento\Framework\View\Element\Template
 
     /**
      * Tooltip constructor.
-     * @param Template\Context $context
-     * @param \GoMage\Navigation\Helper\Data $helper
+     *
+     * @param Template\Context                             $context
+     * @param \GoMage\Navigation\Helper\Data               $helper
      * @param \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper
-     * @param array $data
+     * @param array                                        $data
      */
     public function __construct(
         Template\Context $context,

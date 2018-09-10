@@ -7,6 +7,7 @@ use Magento\Framework\App\Helper\Context;
 
 /**
  * Class Data
+ *
  * @package GoMage\Navigation\Helper
  */
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
@@ -23,6 +24,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     protected $scopeConfig;
     protected $assetRepository;
+    protected $dataHelperCore;
     protected $showMore = [];
     const CONTENT = 1;
 
@@ -34,15 +36,17 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     protected $cmsPage;
 
     /**
-     * @param Context $context
+     * @param Context                                  $context
      * @param \Magento\Framework\View\Asset\Repository $assetRepository
-     * @param \Magento\Cms\Model\Page $cmsPage
+     * @param \Magento\Cms\Model\Page                  $cmsPage
      */
     public function __construct(
         Context $context,
         \Magento\Framework\View\Asset\Repository $assetRepository,
+        \GoMage\Core\Helper\Data $dataHelperCore,
         \Magento\Cms\Model\Page $cmsPage
     ) {
+        $this->dataHelperCore = $dataHelperCore;
         $this->cmsPage = $cmsPage;
         $this->assetRepository = $assetRepository;
         parent::__construct($context);
@@ -68,7 +72,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isEnable()
     {
-        return $this->getScopeData(
+        return $this->dataHelperCore->isA('GoMage_Navigation') && $this->getScopeData(
             SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
             . SystemConfigInterface::SYSTEM_CONFIG_FIELD_ENABLE
@@ -117,15 +121,16 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         ));
     }
 
-    public function removeBlocCategoriesOrCategory ()
+    public function removeBlocCategoriesOrCategory()
     {
-         if($this->getScopeData(
-             SystemConfigInterface::SYSTEM_CONFIG_CROUP
+        if($this->getScopeData(
+            SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
             . SystemConfigInterface::SYSTEM_CONFIG_FIELD_SHOW_SHOP_BY_IN
-         )) {
-                return 'gomage.categories';
-         }
+        )
+        ) {
+               return 'gomage.categories';
+        }
     }
 
     /**
@@ -282,13 +287,13 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         }
     }
 
-    public function isPaginationAjax ()
+    public function isPaginationAjax()
     {
-       return $this->getScopeData(
-           SystemConfigInterface::SYSTEM_CONFIG_CROUP
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CONFIG_CROUP
             . SystemConfigInterface::SYSTEM_CONFIG_SLASH
             . SystemConfigInterface::SYSTEM_CONFIG_FIELD_PAGINATION_ENABLED
-       );
+        );
     }
 
     public function getPagerTheme()
@@ -308,17 +313,17 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     public function getValueCategory($params)
     {
-        $arrCat = explode('_',$this->request->get('cat'));
+        $arrCat = explode('_', $this->request->get('cat'));
         $cat = $this->request->get('cat');
-        if($cat && !in_array($params['cat'], $arrCat)) {
+        if($cat  && !in_array($params['cat'], $arrCat)) {
             $params['cat'] = $params['cat'].'_'.$cat;
         }
-       return $params['cat'];
+        return $params['cat'];
     }
 
     public function getUrlCategory($params)
     {
-        $arrCat = explode('_',$this->request->get('cat'));
+        $arrCat = explode('_', $this->request->get('cat'));
         $cat = $this->request->get('cat');
         if($cat && !in_array($params['cat'], $arrCat)) {
             $params['cat'] = $params['cat'].'_'.$cat;
@@ -326,10 +331,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return $this->_urlBuilder->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true, '_query' => $params]);
     }
 
-    public function isThisActiveCategory($name) {
-        $arrCat = explode(',',$this->request->get('cat'));
-        if(in_array(strtolower($name),$arrCat)) {
-           return true;
+    public function isThisActiveCategory($name) 
+    {
+        $arrCat = explode(',', $this->request->get('cat'));
+        if(in_array(strtolower($name), $arrCat)) {
+            return true;
         }
         return false;
     }
@@ -355,7 +361,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         if($isRequest) {
             return $this->request->get('collapsed_expanded');
         }
-        $arrexpanded = explode('_',$this->request->get('collapsed_expanded'));
+        $arrexpanded = explode('_', $this->request->get('collapsed_expanded'));
         if(in_array(urlencode(strtolower($name)), $arrexpanded)) {
             return true;
         }
@@ -365,13 +371,13 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function isInaCategoryRequest($name, $category = null)
     {
         if(!$category) {
-            $arrCat = explode('_',$this->request->get('cat'));
-            if(in_array(strtolower($name),$arrCat)) {
+            $arrCat = explode('_', $this->request->get('cat'));
+            if(in_array(strtolower($name), $arrCat)) {
                 return true;
             }
             return false;
         } else {
-            $arrCat = explode('_',$this->request->get('cat'));
+            $arrCat = explode('_', $this->request->get('cat'));
             if(is_object($category)) {
                 $parent = $category->getParentCategory();
                 $requestParent = $this->request->get('parent_cat_'.$category->getId());
@@ -380,14 +386,14 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                 } else {
                     $parentId = $category->getId();
                 }
-                if(in_array(strtolower($name),$arrCat) && ($parentId == $requestParent || $requestParent == $category->getId())) {
+                if(in_array(strtolower($name), $arrCat) && ($parentId == $requestParent || $requestParent == $category->getId())) {
                     return true;
                 }
                 return false;
             } else {
                 $parentId = $category['parent_cat'];
                 $requestParent = $this->request->get('parent_cat_'.$category['entity_id']);
-                if(in_array(strtolower($name),$arrCat) && $parentId == $requestParent) {
+                if(in_array(strtolower($name), $arrCat) && $parentId == $requestParent) {
                     return true;
                 }
                 return false;
@@ -404,8 +410,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getQuerySearchText()
     {
         $query = $this->request->get('q');
-        if(!$query)
+        if(!$query) {
             $query = '';
+        }
         return $query;
     }
 }

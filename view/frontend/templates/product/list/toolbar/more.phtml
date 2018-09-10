@@ -2,13 +2,13 @@
 /**
  * GoMage Advanced Navigation Extension
  *
- * @category     Extension
- * @copyright    Copyright (c) 2010-2015 GoMage (http://www.gomage.com)
- * @author       GoMage
- * @license      http://www.gomage.com/license-agreement/  Single domain license
- * @terms of use http://www.gomage.com/terms-of-use
- * @version      Release: 4.9
- * @since        Class available since Release 3.0
+ * @category  Extension
+ * @copyright Copyright (c) 2010-2015 GoMage (http://www.gomage.com)
+ * @author    GoMage
+ * @license   http://www.gomage.com/license-agreement/  Single domain license
+ * @terms     of use http://www.gomage.com/terms-of-use
+ * @version   Release: 4.9
+ * @since     Class available since Release 3.0
  */
 
 /**
@@ -19,11 +19,12 @@ $helper = $this->helper('GoMage\Navigation\Helper\Data');
 <?php if ($block->getMoreUrl()) : ?>
     <div class="gan-more-button" id="gan-more-button">
         <button
-                id="<?= $block->escapeHtml($block->getType()); ?>"
-                class="<?= $block->escapeHtml($block->getType()); ?>"
+                id="<?php echo $block->escapeHtml($block->getType()); ?>"
+                class="<?php echo $block->escapeHtml($block->getType()); ?>"
                 data-role="navigation-filter"
-                <?php if($helper->isPaginationAjax()): ?>data-ajax="1" <?php endif; ?>
-                data-type="<?= $block->escapeHtml($block->getType()); ?>"
-        ><span><?= __('Show more products') ?></span></button>
+                <?php if($helper->isPaginationAjax()) : ?>data-ajax="1" <?php 
+                endif; ?>
+                data-type="<?php echo $block->escapeHtml($block->getType()); ?>"
+        ><span><?php echo __('Show more products') ?></span></button>
     </div>
 <?php endif; ?>

@@ -155,7 +155,7 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
         );
     }
 
-    public function isShowResetLink ()
+    public function isShowResetLink()
     {
         return $this->getScopeData(
             SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
@@ -241,11 +241,11 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
     public function isShowCategoryInShopBy()
     {
         return (int) $this->isShowCategories() &&
-               $this->getScopeData(
-                   SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
-               . SystemConfigInterface::SYSTEM_CONFIG_SLASH
-               . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_SHOP_BY
-               );
+            $this->getScopeData(
+                SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+                . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+                . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_SHOP_BY
+            );
     }
 
     public function resize($image)
@@ -253,17 +253,17 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
         $width = $this->getCategoriesImageWidth();
         $height = $this->getCategoriesImageHeight();
 
-        if( !$width ) {
+        if(!$width ) {
             $width = 100;
         }
 
-        if( !$height ) {
+        if(!$height ) {
             $height = 100;
         }
         $absolutePath = $this->_filesystem->getDirectoryWrite(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)
-                ->getAbsolutePath('catalog/category/') . $image;
+            ->getAbsolutePath('catalog/category/') . $image;
         $imageResized = $this->_filesystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)
-                ->getAbsolutePath('resized/' . $width . '/') . $image;
+            ->getAbsolutePath('resized/' . $width . '/') . $image;
         //create image factory...
         $imageResize = $this->_imageFactory->create();
         $imageResize->open($absolutePath);

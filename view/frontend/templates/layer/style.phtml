@@ -6,7 +6,7 @@
       $helperData = $this->helper(GoMage\Navigation\Helper\Data::class);
       $asset = $helperData->getAssets();
 ?>
-<?php if($helperData->isEnable()): ?>
+<?php if($helperData->isEnable()) : ?>
 <link rel="stylesheet" type="text/css" href="<?php echo $asset->createAsset('GoMage_Navigation::css/gomage-navigation.css')->getUrl(); ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo $asset->createAsset('GoMage_Navigation::css/jslider.blue.css')->getUrl(); ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo $asset->createAsset('GoMage_Navigation::css/jslider.css')->getUrl(); ?>">
@@ -17,16 +17,16 @@
     .page-layout-1column .toolbar.toolbar-products {
         position: static;
     }
-    <?php if ($helperViewData->getNavigationViewSliderLineHeight() < $helperViewData->getNavigationViewSliderElementHeight()):?>
+    <?php if ($helperViewData->getNavigationViewSliderLineHeight() < $helperViewData->getNavigationViewSliderElementHeight()) :?>
     .gan-filter-slider .layout {
-        padding-bottom: <?=$block->escapeHtml($helperViewData->getNavigationViewSliderElementHeight())?>px;
-        margin-left: <?=$block->escapeHtml(($helperViewData->getNavigationViewSliderElementWidth() / 2))?>px;
-        margin-right: <?=$block->escapeHtml(($helperViewData->getNavigationViewSliderElementWidth() / 2))?>px;
+        padding-bottom: <?php echo $block->escapeHtml($helperViewData->getNavigationViewSliderElementHeight())?>px;
+        margin-left: <?php echo $block->escapeHtml(($helperViewData->getNavigationViewSliderElementWidth() / 2))?>px;
+        margin-right: <?php echo $block->escapeHtml(($helperViewData->getNavigationViewSliderElementWidth() / 2))?>px;
     }
 
     .gan-filter-slider .jslider .jslider-label,
     .gan-filter-slider .jslider .jslider-value {
-        margin-top: <?= $block->escapeHtml((($helperViewData->getNavigationViewSliderElementHeight() - $helperViewData->getNavigationViewSliderLineHeight()) / 2 + 10)) ?>px;
+        margin-top: <?php echo $block->escapeHtml((($helperViewData->getNavigationViewSliderElementHeight() - $helperViewData->getNavigationViewSliderLineHeight()) / 2 + 10)) ?>px;
     }
 
     <?php endif;?>
@@ -38,30 +38,30 @@
     .gan-filter-slider .jslider .jslider-bg .v {
 
         /* Slider Line Height */
-        height: <?=$block->escapeHtml($helperViewData->getNavigationViewSliderLineHeight())?>px;
+        height: <?php echo $block->escapeHtml($helperViewData->getNavigationViewSliderLineHeight())?>px;
 
     }
 
     .gan-filter-slider .jslider .jslider-bg .v {
 
         /* Slider Line Color */
-        background: <?=$block->escapeHtml($helperViewData->getNavigationViewSliderLineColor())?>;
+        background: <?php echo $block->escapeHtml($helperViewData->getNavigationViewSliderLineColor())?>;
 
     }
 
     .gan-filter-slider .jslider_round_plastic .jslider-pointer {
 
         /* Slider Element Color */
-        background: <?=$block->escapeHtml($helperViewData->getNavigationViewSliderElementColor())?>;
+        background: <?php echo $block->escapeHtml($helperViewData->getNavigationViewSliderElementColor())?>;
 
         /* Slider Element Width */
-        width: <?=$block->escapeHtml($helperViewData->getNavigationViewSliderElementWidth())?>px;
+        width: <?php echo $block->escapeHtml($helperViewData->getNavigationViewSliderElementWidth())?>px;
 
         /* Slider Element Height */
-        height: <?=$block->escapeHtml($helperViewData->getNavigationViewSliderElementHeight())?>px;
+        height: <?php echo $block->escapeHtml($helperViewData->getNavigationViewSliderElementHeight())?>px;
 
         /* Slider Element Radius */
-        border-radius: <?=$block->escapeHtml($helperViewData->getNavigationViewSliderElementRadius())?>px;
+        border-radius: <?php echo $block->escapeHtml($helperViewData->getNavigationViewSliderElementRadius())?>px;
 
     }
 </style>

@@ -10,6 +10,7 @@ namespace GoMage\Navigation\Block;
 
 /**
  * Class CategoriesSearch
+ *
  * @package GoMage\Navigation\Block
  */
 class CategoriesSearch extends Categories
@@ -25,16 +26,16 @@ class CategoriesSearch extends Categories
     protected $coreRegistry;
 
     /**
-     * @param \Magento\Framework\View\Element\Template\Context $context
-     * @param \GoMage\Navigation\Helper\CategoryHelper $categoryHelper
-     * @param \Magento\Catalog\Model\Indexer\Category\Flat\State $categoryFlatState
-     * @param \Magento\Theme\Block\Html\Topmenu $topMenu
-     * @param \GoMage\Navigation\Helper\Data $dataHelper
-     * @param \GoMage\Navigation\Helper\CategoryData $categoriesHelper
-     * @param \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper
+     * @param \Magento\Framework\View\Element\Template\Context          $context
+     * @param \GoMage\Navigation\Helper\CategoryHelper                  $categoryHelper
+     * @param \Magento\Catalog\Model\Indexer\Category\Flat\State        $categoryFlatState
+     * @param \Magento\Theme\Block\Html\Topmenu                         $topMenu
+     * @param \GoMage\Navigation\Helper\Data                            $dataHelper
+     * @param \GoMage\Navigation\Helper\CategoryData                    $categoriesHelper
+     * @param \GoMage\Navigation\Helper\NavigationViewData              $navigationViewHelper
      * @param \GoMage\Navigation\Model\Config\Source\Category\Templates $templates
-     * @param \Magento\Catalog\Model\ResourceModel\Category $categoryResource
-     * @param \Magento\Catalog\Model\Layer\Resolver $layerResolver
+     * @param \Magento\Catalog\Model\ResourceModel\Category             $categoryResource
+     * @param \Magento\Catalog\Model\Layer\Resolver                     $layerResolver
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
@@ -118,13 +119,13 @@ class CategoriesSearch extends Categories
     public function getChildCategoriesObject($category)
     {
         if ($this->categoryFlatConfig->isFlatEnabled() && $category->getUseFlatResource()) {
-          return $subcategories = (array)$category->getChildrenNodes();
+            return $subcategories = (array)$category->getChildrenNodes();
         } else {
-           return $subcategories = $category->getChildren();
+            return $subcategories = $category->getChildren();
         }
     }
 
-    public function  getCategoriesSearch($category)
+    public function getCategoriesSearch($category)
     {
         $this->getFacetsData();
         if(!$this->facetsData || !$this->getChildCategoriesObject($category)) {
@@ -135,8 +136,7 @@ class CategoriesSearch extends Categories
             $arrCat = [];
             $categories = $this->getChildCategoriesObject($category);
             foreach ($categories as $cat) {
-                if((isset($this->facetsData[$category->getId()])) && $this->facetsData[$category->getId()]['count'] > 0)
-                {
+                if((isset($this->facetsData[$category->getId()])) && $this->facetsData[$category->getId()]['count'] > 0) {
                     $arrCat[$category->getId()] = $category->setParentId($category->getId());
                 } else {
                     $arrCatTmp = $this->getCategoriesSearch($cat);
@@ -198,12 +198,18 @@ class CategoriesSearch extends Categories
     {
         $block = $this->getListBlock();
         $block->setTemplate('GoMage_Navigation::categories/list/search/image.phtml');
-        $block->assign('alignment',
-            ($this->getCategoriesDataHelper()->getCategoriesImageAlignment()) ? 'alignment:' . $this->getCategoriesDataHelper()->getCategoriesImageAlignment() : '');
-        $block->assign('width',
-            ($this->getCategoriesDataHelper()->getCategoriesImageWidth()) ? $this->getCategoriesDataHelper()->getCategoriesImageWidth() : '');
-        $block->assign('height',
-            ($this->getCategoriesDataHelper()->getCategoriesImageHeight()) ? $this->getCategoriesDataHelper()->getCategoriesImageHeight() : '');
+        $block->assign(
+            'alignment',
+            ($this->getCategoriesDataHelper()->getCategoriesImageAlignment()) ? 'alignment:' . $this->getCategoriesDataHelper()->getCategoriesImageAlignment() : ''
+        );
+        $block->assign(
+            'width',
+            ($this->getCategoriesDataHelper()->getCategoriesImageWidth()) ? $this->getCategoriesDataHelper()->getCategoriesImageWidth() : ''
+        );
+        $block->assign(
+            'height',
+            ($this->getCategoriesDataHelper()->getCategoriesImageHeight()) ? $this->getCategoriesDataHelper()->getCategoriesImageHeight() : ''
+        );
         $block->assign('data', $data);
 
         return $block->toHtml();

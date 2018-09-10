@@ -6,6 +6,7 @@ use GoMage\Navigation\Model\Config\Source\NavigationInterface;
 
 /**
  * Class Category
+ *
  * @package GoMage\Navigation\Model\Catalog\Layer\Filter
  */
 class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements FilterInterface
@@ -66,20 +67,20 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
     protected $categoryHelper;
 
     /**
-     * @param \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param \Magento\Catalog\Model\Layer $layer
-     * @param \Magento\Catalog\Model\Layer\Filter\Item\DataBuilder $itemDataBuilder
-     * @param \Magento\Framework\Escaper $escaper
-     * @param \Magento\Catalog\Model\Layer\Resolver $layerResolver
+     * @param \Magento\Catalog\Model\Layer\Filter\ItemFactory                  $filterItemFactory
+     * @param \Magento\Store\Model\StoreManagerInterface                       $storeManager
+     * @param \Magento\Catalog\Model\Layer                                     $layer
+     * @param \Magento\Catalog\Model\Layer\Filter\Item\DataBuilder             $itemDataBuilder
+     * @param \Magento\Framework\Escaper                                       $escaper
+     * @param \Magento\Catalog\Model\Layer\Resolver                            $layerResolver
      * @param \Magento\Catalog\Model\Layer\Filter\DataProvider\CategoryFactory $categoryDataProviderFactory
-     * @param \Magento\Framework\Registry $coreRegistry
-     * @param \Magento\Framework\App\RequestInterface $request
-     * @param \GoMage\Navigation\Helper\Data $helper
-     * @param \GoMage\Navigation\Helper\Url $urlHelper
-     * @param \GoMage\Navigation\Helper\CategoryData $categoryHelper
-     * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
-     * @param array $data
+     * @param \Magento\Framework\Registry                                      $coreRegistry
+     * @param \Magento\Framework\App\RequestInterface                          $request
+     * @param \GoMage\Navigation\Helper\Data                                   $helper
+     * @param \GoMage\Navigation\Helper\Url                                    $urlHelper
+     * @param \GoMage\Navigation\Helper\CategoryData                           $categoryHelper
+     * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory  $categoryCollectionFactory
+     * @param array                                                            $data
      */
     public function __construct(
         \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory,
@@ -173,31 +174,31 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
         $productCollection = $this->getLayer()->getProductCollection();
         $optionsFacetedData = $productCollection->getFacetedData('category');
         $category = $this->coreRegistry->registry('current_category');
-        if( $category ) {
+        if($category ) {
             $categories = $category->getChildrenCategories();
         } else  {
             $category = $this->dataProvider->getCategory();
             $categories = $category->getChildrenCategories();
         }
-        $i = 0;
-        foreach ($categories as $category) {
+        if ($category->getIsActive()) {
+            foreach ($categories as $category) {
 
-            $count = (!empty($optionsFacetedData[$category->getId()]['count'])) ? $optionsFacetedData[$category->getId()]['count'] : 0;
-            if ($category->getIsActive() && ($count > 0 || $this->helper->isShowEmptyCategory()) )
-            {
-                $this->categoryResource->load($category, $category->getId());
-                $this->imageCategories[$category->getId()] = $category->getImageUrl();
-                $this->imageCat[$category->getId()] = $category->getData('image');
-                $this->itemDataBuilder->addItemData(
-                    $category->getName(),
-                    $category->getId(),
-                    $count
-                );
+                $count = (!empty($optionsFacetedData[$category->getId()]['count'])) ? $optionsFacetedData[$category->getId()]['count'] : 0;
+                if ($category->getIsActive() && ($count > 0 || $this->helper->isShowEmptyCategory())) {
+                    $this->categoryResource->load($category, $category->getId());
+                    $this->imageCategories[$category->getId()] = $category->getImageUrl();
+                    $this->imageCat[$category->getId()] = $category->getData('image');
+                    $this->itemDataBuilder->addItemData(
+                        $category->getName(),
+                        $category->getId(),
+                        $count
+                    );
+                }
             }
         }
-
         return $this->itemDataBuilder->build();
     }
+
 
     /**
      * @return bool
@@ -228,7 +229,8 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
      * @param $id
      * @return mixed
      */
-    public function getImageCategory($id) {
+    public function getImageCategory($id) 
+    {
         $id = (int) $id;
         return $this->imageCategories[$id];
     }
@@ -260,7 +262,7 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
             } else {
                 $requestParent = $mainCategory->getId();
             }
-            if(!in_array($requestParent ,$parent)) {
+            if(!in_array($requestParent, $parent)) {
                 continue;
             }
             $categoriesName[html_entity_decode($this->formatCategoryName($category->getName()))] = $category->getId();

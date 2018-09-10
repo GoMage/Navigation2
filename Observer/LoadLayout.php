@@ -65,7 +65,7 @@ class LoadLayout implements ObserverInterface
 
     /**
      * @param \Magento\Framework\App\RequestInterface $request
-     * @param \GoMage\Navigation\Helper\Data $dataHelper
+     * @param \GoMage\Navigation\Helper\Data          $dataHelper
      */
     public function __construct(
         \Magento\Framework\App\RequestInterface $request,
@@ -88,17 +88,15 @@ class LoadLayout implements ObserverInterface
     /**
      * @param \Magento\Framework\Event\Observer $observer
      * @return $this
-     *
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
         $layout = $observer->getLayout();
-        if($this->cmsPage->getId())
-        {
+        if($this->cmsPage->getId()) {
             if($this->cmsPage->getNavigationCategoryId()) {
                 $categoryId = $this->cmsPage->getNavigationCategoryId();
                 $storeId = $this->storeManager->getStore()->getId();
-                $category = $this->categoryRepository->get($categoryId,$storeId);
+                $category = $this->categoryRepository->get($categoryId, $storeId);
                 $this->registry->register('current_category', $category);
                 $this->registry->register('gomage_cms_page', $this->cmsPage);
                 $layout->getUpdate()->addHandle('product_list_cms_view');

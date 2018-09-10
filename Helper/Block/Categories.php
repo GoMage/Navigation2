@@ -64,16 +64,16 @@ class Categories extends \Magento\Framework\View\Element\Template
     protected $navigationViewHelper;
 
     /**
-     * @param \Magento\Framework\View\Element\Template\Context $context
-     * @param \Magento\Catalog\Helper\Category $categoryHelper
-     * @param \Magento\Catalog\Model\Indexer\Category\Flat\State $categoryFlatState
-     * @param \Magento\Theme\Block\Html\Topmenu $topMenu
-     * @param \GoMage\Navigation\Helper\Data $dataHelper
-     * @param \GoMage\Navigation\Helper\CategoryData $categoriesHelper
-     * @param \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper
+     * @param \Magento\Framework\View\Element\Template\Context          $context
+     * @param \Magento\Catalog\Helper\Category                          $categoryHelper
+     * @param \Magento\Catalog\Model\Indexer\Category\Flat\State        $categoryFlatState
+     * @param \Magento\Theme\Block\Html\Topmenu                         $topMenu
+     * @param \GoMage\Navigation\Helper\Data                            $dataHelper
+     * @param \GoMage\Navigation\Helper\CategoryData                    $categoriesHelper
+     * @param \GoMage\Navigation\Helper\NavigationViewData              $navigationViewHelper
      * @param \GoMage\Navigation\Model\Config\Source\Category\Templates $templates
-     * @param \Magento\Catalog\Model\ResourceModel\Category $categoryResource
-     * @param \Magento\Catalog\Model\Layer\Resolver $layerResolver
+     * @param \Magento\Catalog\Model\ResourceModel\Category             $categoryResource
+     * @param \Magento\Catalog\Model\Layer\Resolver                     $layerResolver
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
@@ -155,7 +155,7 @@ class Categories extends \Magento\Framework\View\Element\Template
 
     public function getCategoryParent($category)
     {
-       return $this->categoryParent;
+        return $this->categoryParent;
     }
 
     /**
@@ -267,12 +267,18 @@ class Categories extends \Magento\Framework\View\Element\Template
     {
         $block = $this->getListBlock();
         $block->setTemplate('GoMage_Navigation::categories/list/image.phtml');
-        $block->assign('alignment',
-            ($this->getCategoriesDataHelper()->getCategoriesImageAlignment()) ? 'alignment:' . $this->getCategoriesDataHelper()->getCategoriesImageAlignment() : '');
-        $block->assign('width',
-            ($this->getCategoriesDataHelper()->getCategoriesImageWidth()) ? $this->getCategoriesDataHelper()->getCategoriesImageWidth() : '');
-        $block->assign('height',
-            ($this->getCategoriesDataHelper()->getCategoriesImageHeight()) ? $this->getCategoriesDataHelper()->getCategoriesImageHeight() : '');
+        $block->assign(
+            'alignment',
+            ($this->getCategoriesDataHelper()->getCategoriesImageAlignment()) ? 'alignment:' . $this->getCategoriesDataHelper()->getCategoriesImageAlignment() : ''
+        );
+        $block->assign(
+            'width',
+            ($this->getCategoriesDataHelper()->getCategoriesImageWidth()) ? $this->getCategoriesDataHelper()->getCategoriesImageWidth() : ''
+        );
+        $block->assign(
+            'height',
+            ($this->getCategoriesDataHelper()->getCategoriesImageHeight()) ? $this->getCategoriesDataHelper()->getCategoriesImageHeight() : ''
+        );
         $block->assign('data', $data);
 
         return $block->toHtml();
@@ -289,14 +295,14 @@ class Categories extends \Magento\Framework\View\Element\Template
 
     public function isHidecategory($category)
     {
-       return $this->getCategoriesDataHelper()->isHideEmptyCategories() && 
+        return $this->getCategoriesDataHelper()->isHideEmptyCategories() && 
            !$this->getProductsCount($category) && !$category->getChildrenCount();
     }
     /**
      * @param $id
      * @return mixed
      */
-        public function getCategoryImage($id)
+    public function getCategoryImage($id)
     {
         //Find solution to foreach categories with all data in template
         $category =  $this->categoryHelper->getCategoryFactory()->create();
@@ -331,8 +337,9 @@ class Categories extends \Magento\Framework\View\Element\Template
         if (!$this->getDataHelper()->isEnable() || !$this->getCategoriesDataHelper()->isShowCategories()) {
             return;
         }
-        if ($this->getCategoriesDataHelper()->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
-            $this->getPageLayout() == '1column') {
+        if ($this->getCategoriesDataHelper()->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT 
+            && $this->getPageLayout() == '1column'
+        ) {
             $this->moveColumn('main');
             $this->canShowCategories = true;
             return;
@@ -340,51 +347,58 @@ class Categories extends \Magento\Framework\View\Element\Template
             $this->getLayout()->unsetChild('main', 'gomage.categories.column');
         }
 
-        if ($this->getCategoriesDataHelper()->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN &&
-            $this->getPageLayout() == '2columns-left') {
+        if ($this->getCategoriesDataHelper()->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN 
+            && $this->getPageLayout() == '2columns-left'
+        ) {
             $this->getLayout()->reorderChild('sidebar.main', 'gomage.categories', 0);
             $this->canShowCategories = true;
             return;
         }
-        if ($this->getCategoriesDataHelper()->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
-            $this->getPageLayout() == '2columns-left') {
+        if ($this->getCategoriesDataHelper()->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT 
+            && $this->getPageLayout() == '2columns-left'
+        ) {
             $this->moveBlock('main');
             $this->getLayout()->reorderChild('main', 'gomage.categories', 0);
             $this->canShowCategories = true;
             return;
         }
 
-        if ($this->getCategoriesDataHelper()->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN &&
-            $this->getPageLayout() == '3columns') {
+        if ($this->getCategoriesDataHelper()->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN 
+            && $this->getPageLayout() == '3columns'
+        ) {
             $this->getLayout()->reorderChild('sidebar.main', 'gomage.categories', 0);
             $this->canShowCategories = true;
             return;
         }
 
-        if ($this->getCategoriesDataHelper()->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN &&
-            $this->getPageLayout() == '2columns-right') {
+        if ($this->getCategoriesDataHelper()->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN 
+            && $this->getPageLayout() == '2columns-right'
+        ) {
             $this->getLayout()->reorderChild('sidebar.main', 'gomage.categories', 0);
             $this->canShowCategories = true;
             return;
         }
 
-        if ($this->getCategoriesDataHelper()->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
-            $this->getPageLayout() == '2columns-right') {
+        if ($this->getCategoriesDataHelper()->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT 
+            && $this->getPageLayout() == '2columns-right'
+        ) {
             $this->moveBlock('main');
             $this->getLayout()->reorderChild('main', 'gomage.categories', 0);
             $this->canShowCategories = true;
             return;
         }
 
-        if ($this->getCategoriesDataHelper()->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN &&
-            $this->getPageLayout() == '3columns') {
+        if ($this->getCategoriesDataHelper()->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN 
+            && $this->getPageLayout() == '3columns'
+        ) {
             $this->moveBlock('sidebar.additional');
             $this->canShowCategories = true;
             return;
         }
 
-        if ($this->getCategoriesDataHelper()->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT &&
-            $this->getPageLayout() == '3columns') {
+        if ($this->getCategoriesDataHelper()->getCategoriesBlockLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT 
+            && $this->getPageLayout() == '3columns'
+        ) {
             $this->moveBlock('main');
             $this->canShowCategories = true;
             return;

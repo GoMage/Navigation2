@@ -4,6 +4,7 @@ namespace GoMage\Navigation\Model\Config\Source;
 
 /**
  * Class Scroll
+ *
  * @package GoMage\Navigation\Model\Config\Source
  */
 class Scroll implements \Magento\Framework\Option\ArrayInterface

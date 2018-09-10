@@ -14,6 +14,7 @@ use Magento\Framework\Api\SearchResultsInterfaceFactory;
 
 /**
  * Class NavigationAttributeRepository
+ *
  * @package GoMage\Navigation\Model
  */
 class NavigationAttributeRepository implements \GoMage\Navigation\Api\NavigationAttributeRepositoryInterface
@@ -35,8 +36,8 @@ class NavigationAttributeRepository implements \GoMage\Navigation\Api\Navigation
 
     /**
      * @param \GoMage\Navigation\Model\NavigationAttributeFactory $objectFactory
-     * @param CollectionFactory $collectionFactory
-     * @param SearchResultsInterfaceFactory $searchResultsFactory
+     * @param CollectionFactory                                   $collectionFactory
+     * @param SearchResultsInterfaceFactory                       $searchResultsFactory
      */
     public function __construct(
         NavigationAttributeFactory $objectFactory,
@@ -128,7 +129,9 @@ class NavigationAttributeRepository implements \GoMage\Navigation\Api\Navigation
         $searchResults->setTotalCount($collection->getSize());
         $sortOrders = $criteria->getSortOrders();
         if ($sortOrders) {
-            /** @var SortOrder $sortOrder */
+            /**
+ * @var SortOrder $sortOrder 
+*/
             foreach ($sortOrders as $sortOrder) {
                 $collection->addOrder(
                     $sortOrder->getField(),

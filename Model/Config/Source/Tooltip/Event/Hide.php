@@ -4,6 +4,7 @@ namespace GoMage\Navigation\Model\Config\Source\Tooltip\Event;
 
 /**
  * Class Hide
+ *
  * @package GoMage\Navigation\Model\Config\Source\Tooltip\Event
  */
 class Hide implements \Magento\Framework\Option\ArrayInterface

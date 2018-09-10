@@ -9,10 +9,10 @@ class SwatchImageResize
     protected $navigationAttributeCollectionFactory;
 
     /**
-     * @param \Magento\Framework\App\Helper\Context $context
+     * @param \Magento\Framework\App\Helper\Context                                        $context
      * @param \GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory $navigationAttributeCollectionFactory
      */
-    public function __construct (
+    public function __construct(
         \Magento\Framework\App\Helper\Context  $context,
         \GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory $navigationAttributeCollectionFactory
     ) {

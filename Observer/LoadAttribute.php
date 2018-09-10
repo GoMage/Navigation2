@@ -16,8 +16,9 @@ class LoadAttribute implements \Magento\Framework\Event\ObserverInterface
 
     /**
      * GomageLoadAttribute constructor.
+     *
      * @param \GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory $navigationAttributeCollectionFactory
-     * @param \Magento\Catalog\Model\Session $catalogSession
+     * @param \Magento\Catalog\Model\Session                                               $catalogSession
      */
     public function __construct(
         \GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory $navigationAttributeCollectionFactory,

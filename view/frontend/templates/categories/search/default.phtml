@@ -6,47 +6,49 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
 ?>
 
 <div class="block block-gan-categories
-    <?=($block->getCategoriesDataHelper()->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::DEFAULTS) ? 'gan-categories-default' : ''; ?>
-    <?=($block->getCategoriesDataHelper()->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK) ? 'gan-categories-default gan-categories-in-block' : ''; ?>
+    <?php echo ($block->getCategoriesDataHelper()->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::DEFAULTS) ? 'gan-categories-default' : ''; ?>
+    <?php echo ($block->getCategoriesDataHelper()->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK) ? 'gan-categories-default gan-categories-in-block' : ''; ?>
     "
-    style="background-color: <?=$block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewBlockCategoriesBackgroundColor())?>"
+    style="background-color: <?php echo $block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewBlockCategoriesBackgroundColor())?>"
 >
     <div class="block-title gan-categories-title" data-role="navigation-filter" data-type="categories-content">
-        <strong><?= __('Categories') ?></strong>
+        <strong><?php echo __('Categories') ?></strong>
     </div>
-    <div class="block-content block-content-gan-categories"<?php if($block->getCategoriesDataHelper()->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK && $block->getCategoriesDataHelper()->getMaxBlockHeightCategories()): ?> style="max-height:<?= $block->escapeHtml($block->getCategoriesDataHelper()->getMaxBlockHeightCategories()); ?>px;"<?php endif;?>>
-        <div class="block-content-in"<?=($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? ' style="display:none;"' : '';?>>
-            <ul class="gan-categories-list<?= ($block->getCategoriesDataHelper()->isShowCheckboxes()) ? ' gan-categories-list-checkbox' : '' ; ?>">
+    <div class="block-content block-content-gan-categories"<?php if($block->getCategoriesDataHelper()->getCategoriesNavigationType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK && $block->getCategoriesDataHelper()->getMaxBlockHeightCategories()) : ?> style="max-height:<?php echo $block->escapeHtml($block->getCategoriesDataHelper()->getMaxBlockHeightCategories()); ?>px;"<?php 
+   endif;?>>
+        <div class="block-content-in"<?php echo ($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? ' style="display:none;"' : '';?>>
+            <ul class="gan-categories-list<?php echo ($block->getCategoriesDataHelper()->isShowCheckboxes()) ? ' gan-categories-list-checkbox' : '' ; ?>">
                 <?php
                 foreach($block->getStoreCategories() as $category):
-                     foreach ($block->getCategoriesSearch($category) as $cat):
-                         if (!$category->getIsActive() || $block->isHidecategory($cat)) continue;?>
+                    foreach ($block->getCategoriesSearch($category) as $cat):
+                        if (!$category->getIsActive() || $block->isHidecategory($cat)) { continue;
+                        }?>
                         <?php $block->setCategoryParent($cat) ?>
-                         <?php $parentCategory = $cat->getParentCategory() ?>
-                        <li data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>"
+                            <?php $parentCategory = $cat->getParentCategory() ?>
+                        <li data-ajax="<?php echo (int)$block->getCategoriesDataHelper()->isAjax(); ?>"
                             data-categories = "1"
                             data-role="navigation-filter"
                             data-type="categories-li"
-                            data-value="<?= $helperData->getValueCategory(['cat'=>strtolower($cat['name'])]) ?>"
-                            <?php if($cat->getParentCategory()): ?>
+                            data-value="<?php echo $helperData->getValueCategory(['cat'=>$helperData->isUseFriendlyUrls() ? strtolower($cat['name']):$cat['entity_id']]) ?>"
+                            <?php if($cat->getParentCategory()) : ?>
                                 data-cat-parent = "<?php echo $cat->getParentCategory()->getId() ?>"
                             <?php else: ?>
                                 data-cat-parent = "<?php echo $cat->getId() ?>"
                             <?php endif; ?>
                             data-param-cat-parent = "<?php echo 'parent_cat_'.$cat->getId(); ?>"
                             data-param="cat"
-                            <?php if ($helperData->isInaCategoryRequest($cat->getName(), $cat)) : ?>
+                            <?php if ($helperData->isInaCategoryRequest($helperData->isUseFriendlyUrls() ? $cat->getName(): $cat->getId(), $cat)) : ?>
                                 data-active="1"
                             <?php endif; ?>
-                            data-url="<?= $helperData->getUrlCategory(['cat'=>strtolower($cat->getName()),'parent_cat_'.$cat->getId()=>$cat->getId()]) ?>">
+                            data-url="<?php echo $helperData->getUrlCategory(['cat'=>$helperData->isUseFriendlyUrls() ? strtolower($cat->getName()): $cat->getId(),'parent_cat_'.$cat->getId()=>$cat->getId()]) ?>">
                             <a  href="#"
                                 <?php if ($helperData->isInaCategoryRequest($cat->getName(), $cat)) : ?>
                                    class="selected"
                                 <?php endif; ?>>
-                                <span><?= $block->escapeHtml($cat->getName()) ?>(<?php echo $category->getName() ?>)</span>
+                                <span><?php echo $block->escapeHtml($cat->getName()) ?>(<?php echo $category->getName() ?>)</span>
                             </a>
-                            <?php if ($block->getCategoriesDataHelper()->getShowAllSubcategories() || $helperData->isInaCategoryRequest($cat->getName(), $cat)): ?>
-                                <?= $block->getOlList($block->getChildCategories($cat)); ?>
+                            <?php if ($block->getCategoriesDataHelper()->getShowAllSubcategories() || $helperData->isInaCategoryRequest($helperData->isUseFriendlyUrls() ? $cat->getName(): $cat->getId(), $cat)) : ?>
+                                <?php echo $block->getOlList($block->getChildCategories($cat)); ?>
                             <?php endif; ?>
                         </li>
                     <?php endforeach; ?>

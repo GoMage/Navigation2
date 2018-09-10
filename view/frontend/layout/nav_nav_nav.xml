@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="main">
+            <!--<block class="Teteruk\DevModelInstall\Block\ShowTab" name = "tabs_cache" template="Teteruk_DevModelInstall::tabs.phtml" />-->
+
+            <!--<block class="Magento\Framework\View\Element\Template" name="test.private"-->
+            <!--template="Teteruk_DevModelInstall::private.phtml">-->
+            <!--<arguments>-->
+            <!--<argument name="jsLayout" xsi:type="array">-->
+            <!--<item name="components" xsi:type="array">-->
+            <!--<item name="custom_section" xsi:type="array">-->
+            <!--<item name="component" xsi:type="string">Teteruk_DevModelInstall/js/view/custom_section</item>-->
+            <!--</item>-->
+            <!--</item>-->
+            <!--</argument>-->
+            <!--</arguments>-->
+            <!--</block>-->
+            <container name="test_container" label="Test Label">
+
+            </container>
+        </referenceContainer>
+    </body>
+</page>

@@ -4,6 +4,7 @@ namespace GoMage\Navigation\Model\Config\Source\Category;
 
 /**
  * Class Navigation
+ *
  * @package GoMage\Navigation\Model\Config\Source\Category
  */
 class Navigation implements

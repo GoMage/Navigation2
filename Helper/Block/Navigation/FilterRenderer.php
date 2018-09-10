@@ -55,13 +55,13 @@ class FilterRenderer extends Template implements FilterRendererInterface
     protected $navigationViewHelper;
 
     /**
-     * @param Template\Context $context
-     * @param \Magento\Framework\Registry $coreRegistry
+     * @param Template\Context                                        $context
+     * @param \Magento\Framework\Registry                             $coreRegistry
      * @param \Magento\Swatches\Block\LayeredNavigation\RenderLayered $renderLayered
-     * @param \GoMage\Navigation\Helper\Url $urlHelper
-     * @param \GoMage\Navigation\Helper\Data $dataHelper
-     * @param \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper
-     * @param array $data
+     * @param \GoMage\Navigation\Helper\Url                           $urlHelper
+     * @param \GoMage\Navigation\Helper\Data                          $dataHelper
+     * @param \GoMage\Navigation\Helper\NavigationViewData            $navigationViewHelper
+     * @param array                                                   $data
      */
     public function __construct(
         Template\Context $context,
@@ -103,7 +103,7 @@ class FilterRenderer extends Template implements FilterRendererInterface
 
     public function renderInCurrentCategory($filter)
     {
-        $categories = explode(',',$filter->getData('gomage_is_exclude_categories'));
+        $categories = explode(',', $filter->getData('gomage_is_exclude_categories'));
         if (in_array($this->_getCategory()->getId(), $categories)) {
             return false;
         }
@@ -204,18 +204,18 @@ class FilterRenderer extends Template implements FilterRendererInterface
         $params = explode('_', $params);
 
         $criteria = mb_strtolower(str_replace(' ', '+', $item->getLabel()));
-        if ($this->dataHelper->isUseFriendlyUrls() &&
-            (in_array($criteria, $params)
-                || in_array(html_entity_decode($criteria), $params)
-                || in_array(htmlentities($criteria), $params))
+        if ($this->dataHelper->isUseFriendlyUrls() 
+            && (in_array($criteria, $params)
+            || in_array(html_entity_decode($criteria), $params)
+            || in_array(htmlentities($criteria), $params))
         ) {
             $item->setIsActive(true);
         }
 
         if (!$this->dataHelper->isUseFriendlyUrls()
             && (in_array($criteria, $params)
-                || in_array(html_entity_decode($criteria), $params)
-                || in_array(htmlentities($criteria), $params))
+            || in_array(html_entity_decode($criteria), $params)
+            || in_array(htmlentities($criteria), $params))
         ) {
             $item->setIsActive(true);
         }

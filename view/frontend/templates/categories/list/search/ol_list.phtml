@@ -9,13 +9,13 @@ $helperDataCat = $this->helper('GoMage\Navigation\Helper\Data');
         <?php foreach ($data as $category):?>
             <?php $active = ($currentCategoryId == $category['entity_id']) ? ' class="selected"' : '';?>
             <li
-                    data-value="<?= $helperDataCat->getValueCategory(['cat'=>strtolower($category['name'])]) ?>"
+                    data-value="<?= $helperDataCat->getValueCategory(['cat'=>$helperDataCat->isUseFriendlyUrls() ? strtolower($category['name']):$category['entity_id']]) ?>"
                     data-categories = "1"
-                    data-value="<?= strtolower($category['name']); ?>"
+                    data-value="<?= $helperDataCat->getValueCategory(['cat'=>$helperDataCat->isUseFriendlyUrls() ? strtolower($category['name']):$category['entity_id']]) ?>"
                     data-param="cat"
                     data-param-cat-parent = "<?php echo 'parent_cat_'.$category['entity_id'] ?>"
                     data-cat-parent = "<?php echo $category['parent_cat'] ?>"
-                <?php if ($helperDataCat->isInaCategoryRequest($category['name'], $category)) : ?>
+                <?php if ($helperDataCat->isInaCategoryRequest($helperDataCat->isUseFriendlyUrls() ? strtolower($category['name']):$category['entity_id'], $category)) : ?>
                     data-active="1"
                 <?php endif; ?>
                     data-ajax="<?=$categoriesBlock->escapeHtml($isAjax)?>"
@@ -23,10 +23,10 @@ $helperDataCat = $this->helper('GoMage\Navigation\Helper\Data');
                     data-type="categories-li"
                     data-url="<?= $helperDataCat->getUrlCategory(['cat'=>strtolower($category['name']),'parent_cat_'.$category['entity_id']=>$category['parent_cat'] ]) ?>"
                 <?php if (!empty(($category['children']))): ?> class="parent"<?php endif; ?>>
-                <a <?php if ($helperDataCat->isInaCategoryRequest($category['name'], $category)) : ?>
+                <a <?php if ($helperDataCat->isInaCategoryRequest($helperDataCat->isUseFriendlyUrls() ? strtolower($category['name']):$category['entity_id'], $category)) : ?>
                     class="selected"
                 <?php endif; ?> href="<?=$categoriesBlock->escapeUrl($category['url'])?>"<?=$categoriesBlock->escapeHtml($active)?>><span><?=$categoriesBlock->escapeHtml($category['name'])?></span></a>
-                <?php if (($categoriesBlock->getCategoriesDataHelper()->getShowAllSubcategories() && !empty(($category['children']))) || $helperDataCat->isInaCategoryRequest($category['name'], $category)): ?>
+                <?php if (($categoriesBlock->getCategoriesDataHelper()->getShowAllSubcategories() && !empty(($category['children']))) || $helperDataCat->isInaCategoryRequest($helperDataCat->isUseFriendlyUrls() ? strtolower($category['name']):$category['entity_id'], $category)): ?>
                     <?= $categoriesBlock->getOlList($category['children']); ?>
                 <?php endif; ?>
             </li>

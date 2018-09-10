@@ -20,10 +20,11 @@ class Loader extends \Magento\Framework\View\Element\Template
 
     /**
      * Loader constructor.
-     * @param Template\Context $context
-     * @param \GoMage\Navigation\Helper\LoaderData $helper
+     *
+     * @param Template\Context                                 $context
+     * @param \GoMage\Navigation\Helper\LoaderData             $helper
      * @param \GoMage\Navigation\Model\Config\Source\Alignment $alignmentConfig
-     * @param array $data
+     * @param array                                            $data
      */
     public function __construct(
         Template\Context $context,

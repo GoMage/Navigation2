@@ -8,27 +8,27 @@
 $helper = $this->helper('GoMage\Navigation\Helper\Data');
 $state = $this->getLayout()->createBlock('GoMage\Navigation\Block\Navigation\State');
 ?>
-<?php if ($block->getCollection()->getSize()): ?>
+<?php if ($block->getCollection()->getSize()) : ?>
 
-    <?php if  ($helper->isEnable()):?>
-    <div class="toolbar toolbar-products" data-mage-init='<?= $block->getWidgetOptionsJson(); ?>'>
-        <?php if ($block->isExpanded()): ?>
+    <?php if  ($helper->isEnable()) :?>
+    <div class="toolbar toolbar-products" data-mage-init='<?php echo $block->getWidgetOptionsJson(); ?>'>
+        <?php if ($block->isExpanded()) : ?>
             <?php  ($block->setTemplate('GoMage_Navigation::product/list/toolbar/viewmode.phtml')) ?>
             <?php echo $block->toHtml(); ?>
         <?php endif; ?>
         <?php  ($block->setTemplate('GoMage_Navigation::product/list/toolbar/amount.phtml')) ?>
         <?php echo $block->toHtml(); ?>
-        <?=$block->getPagerHtml() ?>
+        <?php echo $block->getPagerHtml() ?>
         <?php  ($block->setTemplate('GoMage_Navigation::product/list/toolbar/limiter.phtml')) ?>
         <?php echo $block->toHtml(); ?>
-        <?php if ($block->isExpanded()): ?>
+        <?php if ($block->isExpanded()) : ?>
             <?php  ($block->setTemplate('GoMage_Navigation::product/list/toolbar/sorter.phtml')) ?>
             <?php echo $block->toHtml(); ?>
         <?php endif; ?>
     </div>
     <?php else: ?>
-    <div class="toolbar toolbar-products" data-mage-init='<?= /* @escapeNotVerified */ $block->getWidgetOptionsJson() ?>'>
-        <?php if ($block->isExpanded()): ?>
+    <div class="toolbar toolbar-products" data-mage-init='<?php echo /* @escapeNotVerified */ $block->getWidgetOptionsJson() ?>'>
+        <?php if ($block->isExpanded()) : ?>
             <?php  ($block->setTemplate('Magento_Catalog::product/list/toolbar/viewmode.phtml')) ?>
             <?php echo $block->toHtml(); ?>
         <?php endif; ?>
@@ -36,12 +36,12 @@ $state = $this->getLayout()->createBlock('GoMage\Navigation\Block\Navigation\Sta
         <?php  ($block->setTemplate('GoMage_Navigation::product/list/toolbar/amount.phtml')) ?>
         <?php echo $block->toHtml(); ?>
 
-        <?= $block->getPagerHtml() ?>
+        <?php echo $block->getPagerHtml() ?>
 
         <?php  ($block->setTemplate('GoMage_Navigation::product/list/toolbar/limiter.phtml')) ?>
         <?php echo $block->toHtml(); ?>
 
-        <?php if ($block->isExpanded()): ?>
+        <?php if ($block->isExpanded()) : ?>
             <?php  ($block->setTemplate('GoMage_Navigation::product/list/toolbar/sorter.phtml')) ?>
             <?php echo $block->toHtml(); ?>
         <?php endif; ?>

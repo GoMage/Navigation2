@@ -4,6 +4,7 @@ namespace GoMage\Navigation\Plugin;
 
 /**
  * Class VisualSwatch
+ *
  * @package GoMage\Navigation\Plugin
  */
 class VisualSwatch
@@ -11,7 +12,7 @@ class VisualSwatch
     /**
      * @var \Magento\Framework\UrlInterface
      */
-      protected $_urlBuilder;
+    protected $_urlBuilder;
 
     /**
      * @var \Magento\Framework\UrlInterface
@@ -25,7 +26,7 @@ class VisualSwatch
 
     /**
      * @param \Magento\Framework\View\Element\Context $context
-     * @param \GoMage\Navigation\Helper\Data $helperData
+     * @param \GoMage\Navigation\Helper\Data          $helperData
      */
     public function __construct(
         \Magento\Framework\View\Element\Context $context,
@@ -55,9 +56,11 @@ class VisualSwatch
 
         $result = [
             'attributesData' => $values,
-            'uploadActionUrl' => $this->getUrl('swatches/iframe/show', [
+            'uploadActionUrl' => $this->getUrl(
+                'swatches/iframe/show', [
                 'attribute_id' => $this->request->get('attribute_id')
-            ]),
+                ]
+            ),
             'isSortable' => (int)(!$subject->getReadOnly() && !$subject->canManageOptionDefaultOnly()),
             'isReadOnly' => (int)$subject->getReadOnly(),
         ];
@@ -68,9 +71,9 @@ class VisualSwatch
     /**
      * Generate url by route and parameters
      *
-     * @param   string $route
-     * @param   array $params
-     * @return  string
+     * @param  string $route
+     * @param  array  $params
+     * @return string
      */
     public function getUrl($route = '', $params = [])
     {
