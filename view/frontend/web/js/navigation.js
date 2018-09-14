@@ -1,14 +1,14 @@
 /*jshint jquery:true*/
 define(
     [
-    "jquery",
-    "./filter",
-    "./params",
-    "./slider",
-    "./loader",
-    "catalogAddToCart",
-    "jquery/ui",
-    "mage/translate"
+        "jquery",
+        "./filter",
+        "./params",
+        "./slider",
+        "./loader",
+        "catalogAddToCart",
+        "jquery/ui",
+        "mage/translate"
     ], function ($, Filter, Params, SliderPrice, Loader, catalogAddToCart) {
         "use strict";
 
@@ -88,7 +88,9 @@ define(
                     $(this.options.moreLink).off('click');
                     $(this.options.moreLink).on('click', this.moreLink.bind(this));
                     $(this.options.moreLinkLess).on('click', this.moreLinkLess.bind(this));
+                    $(window).off('popstate');
 
+                    $(window).on('popstate',this.unloadWindow.bind(this));
                     if (this.options.tooltipOpenOnMouseOver == true) {
                         $('.gan-tooltip').on(
                             'mouseover', function () {
@@ -113,6 +115,12 @@ define(
                             }
                         );
                     }
+                },
+
+                unloadWindow: function() {
+                    var curentUrl = window.location.href;
+                    curentUrl = curentUrl + '&gan_ajax_filter=1';
+                    this._ajaxFilterHistory(curentUrl);
                 },
 
                 moreLink: function (e) {
@@ -147,64 +155,64 @@ define(
                         var element = $(elements[index]);
 
                         switch (element.attr('data-type')) {
-                        case 'slider':
-                            var slider = new SliderPrice(element);
-                            var self = this;
-                            var slidePrice;
-                            element.slider(
-                                {
-                                    from: parseInt(slider.getFrom()),
-                                    to: parseInt(slider.getTo()),
-                                    step: 1,
-                                    smooth: true,
-                                    round: 0,
-                                    dimension: slider.getDimension(),
-                                    skin: slider.getSkin(),
-                                    callback: function (value) {
-                                        self._processPriceSlider(value, this);
+                            case 'slider':
+                                var slider = new SliderPrice(element);
+                                var self = this;
+                                var slidePrice;
+                                element.slider(
+                                    {
+                                        from: parseInt(slider.getFrom()),
+                                        to: parseInt(slider.getTo()),
+                                        step: 1,
+                                        smooth: true,
+                                        round: 0,
+                                        dimension: slider.getDimension(),
+                                        skin: slider.getSkin(),
+                                        callback: function (value) {
+                                            self._processPriceSlider(value, this);
+                                        }
                                     }
-                                }
-                            );
+                                );
                                 break;
-                        case 'button-more':
-                            element.unbind('click');
-                            element.on('click', {element: element}, $.proxy(this._bindShowMoreProductsButton, this));
-                            break;
-                        case 'select':
-                            element.unbind('change');
-                            element.on('change', {element: element}, $.proxy(this._processFilter, this));
-                            break;
-                        case 'input-price':
-                            element.unbind('change');
-                            element.on('change', {element: element}, $.proxy(this._processInputPrice, this));
-                            break;
-                        case 'price-button':
-                            element.unbind('click');
-                            element.on('click', {element: element}, $.proxy(this._processPriceButton, this));
-                            break;
-                        case 'remove-item':
-                            element.unbind('click');
-                            element.on('click', {element: element}, $.proxy(this._processRemoveItem, this));
-                            break;
-                        case 'categories-content':
-                            element.unbind('click');
-                            element.on('click', {element: element}, $.proxy(this._processCategoriesContent, this));
-                            break;
-                        case 'categories-select':
-                            element.unbind('change');
-                            element.on('change', {element: element}, $.proxy(this._processCategory, this));
-                            break;
-                        case 'categories-li':
-                            element.unbind('click');
-                            element.on('click', {element: element}, $.proxy(this._processCategory, this));
-                            break;
-                        case 'back-to-top':
-                            element.unbind('click');
-                            element.on('click', {element: element}, $.proxy(this._processBackToTop, this));
-                            break;
-                        default:
-                            element.unbind('click');
-                            element.on('click', {element: element}, $.proxy(this._processFilter, this));
+                            case 'button-more':
+                                element.unbind('click');
+                                element.on('click', {element: element}, $.proxy(this._bindShowMoreProductsButton, this));
+                                break;
+                            case 'select':
+                                element.unbind('change');
+                                element.on('change', {element: element}, $.proxy(this._processFilter, this));
+                                break;
+                            case 'input-price':
+                                element.unbind('change');
+                                element.on('change', {element: element}, $.proxy(this._processInputPrice, this));
+                                break;
+                            case 'price-button':
+                                element.unbind('click');
+                                element.on('click', {element: element}, $.proxy(this._processPriceButton, this));
+                                break;
+                            case 'remove-item':
+                                element.unbind('click');
+                                element.on('click', {element: element}, $.proxy(this._processRemoveItem, this));
+                                break;
+                            case 'categories-content':
+                                element.unbind('click');
+                                element.on('click', {element: element}, $.proxy(this._processCategoriesContent, this));
+                                break;
+                            case 'categories-select':
+                                element.unbind('change');
+                                element.on('change', {element: element}, $.proxy(this._processCategory, this));
+                                break;
+                            case 'categories-li':
+                                element.unbind('click');
+                                element.on('click', {element: element}, $.proxy(this._processCategory, this));
+                                break;
+                            case 'back-to-top':
+                                element.unbind('click');
+                                element.on('click', {element: element}, $.proxy(this._processBackToTop, this));
+                                break;
+                            default:
+                                element.unbind('click');
+                                element.on('click', {element: element}, $.proxy(this._processFilter, this));
 
                         }
                     }
@@ -460,7 +468,41 @@ define(
                         $.mage.redirect(this.options.baseUrl + '?' + params.toUrlParams());
                     }
                 },
+                _ajaxFilterHistory: function (url, successCallback) {
+                    $(window).off('scroll');
+                    $.ajax(
+                        {
+                            url: url,
+                            type: 'get',
+                            cache: true,
+                            beforeSend: (this._ajaxSend).bind(this),
+                            complete: (this._ajaxComplete).bind(this),
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                console.log(jqXHR, textStatus, errorThrown);
+                            },
+                            success: function (response) {
+                                if (successCallback) {
+                                    successCallback.call(this, response);
+                                }
 
+                                $(this.options.mainContainer).remove();
+                                if(response.is_full_page_cache) {
+                                    response.content = $(response.content).find('#maincontent');
+                                }
+                                $(this.options.breadcrumbs).after(response.content);
+                                $(this.options.mainContainer).trigger('contentUpdated');
+                                $(this.options.breadcrumbsContainer).trigger('contentUpdated');
+                                $(this.options.authentication).trigger('bindTrigger');
+                                if (this.options.ajaxAutoload == true) {
+                                    $(window).off('scroll');
+                                    $(window).on('scroll', {}, $.proxy(this._bindAjaxAutoload, this));
+                                    window.autoAjaxScroll = true;
+                                }
+                            }.bind(this)
+                        }
+                    );
+
+                },
                 _ajaxFilter: function (url, params, successCallback) {
                     if(this.options.q) {
                         params.set('q', this.options.q)
@@ -716,7 +758,7 @@ define(
                         return ;
                     }
 
-                    params.remove('gan_ajax_filter');
+                    //params.remove('gan_ajax_filter');
                     friendleuse = '?'
                     window.history.pushState(null, '', this.options.baseUrl + friendleuse + params.toUrlParams());
                 },
