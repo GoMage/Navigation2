@@ -21,7 +21,7 @@ $helperDataCat = $this->helper('GoMage\Navigation\Helper\Data');
                     data-ajax="<?=$categoriesBlock->escapeHtml($isAjax)?>"
                     data-role="navigation-filter"
                     data-type="categories-li"
-                    data-url="<?= $helperDataCat->getUrlCategory(['cat'=>strtolower($category['name']),'parent_cat_'.$category['entity_id']=>$category['parent_cat'] ]) ?>"
+                    data-url="<?= $helperDataCat->getUrlCategory(['cat'=>strtolower((int)$helperDataCat->isUseFriendlyUrls() ? $category['name']: $category['entity_id']),'parent_cat_'.$category['entity_id']=>$category['parent_cat'] ]) ?>"
                 <?php if (!empty(($category['children']))): ?> class="parent"<?php endif; ?>>
                 <a <?php if ($helperDataCat->isInaCategoryRequest($helperDataCat->isUseFriendlyUrls() ? strtolower($category['name']):$category['entity_id'], $category)) : ?>
                     class="selected"

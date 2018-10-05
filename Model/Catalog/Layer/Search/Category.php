@@ -10,7 +10,7 @@ use GoMage\Navigation\Model\Catalog\Layer\Filter\FilterInterface;
  *
  * @package GoMage\Navigation\Model\Catalog\Layer\Filter
  */
-class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements FilterInterface
+class Category extends \Magento\CatalogSearch\Model\Layer\Filter\Category implements FilterInterface
 {
     /**
      * @var CategoryDataProvider

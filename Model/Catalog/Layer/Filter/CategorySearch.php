@@ -6,11 +6,12 @@
  * Time: 06:41
  */
 
-namespace GoMage\Navigation\Model\Catalog\Layer\Filter;
+namespace GoMage\Navigation\Model\Catalog\Layer\Search;
 
 
 /**
  * Class CategorySearch
+ *
  * @package GoMage\Navigation\Model\Catalog\Layer\Filter
  */
 class CategorySearch extends Category
@@ -67,22 +68,22 @@ class CategorySearch extends Category
     protected $categoryHelper;
 
     /**
-     * @param \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param \Magento\Catalog\Model\Layer $layer
-     * @param \Magento\Catalog\Model\Layer\Filter\Item\DataBuilder $itemDataBuilder
-     * @param \Magento\Framework\Escaper $escaper
-     * @param \Magento\Catalog\Model\Layer\Resolver $layerResolver
+     * @param \Magento\Catalog\Model\Layer\Filter\ItemFactory                  $filterItemFactory
+     * @param \Magento\Store\Model\StoreManagerInterface                       $storeManager
+     * @param \Magento\Catalog\Model\Layer                                     $layer
+     * @param \Magento\Catalog\Model\Layer\Filter\Item\DataBuilder             $itemDataBuilder
+     * @param \Magento\Framework\Escaper                                       $escaper
+     * @param \Magento\Catalog\Model\Layer\Resolver                            $layerResolver
      * @param \Magento\Catalog\Model\Layer\Filter\DataProvider\CategoryFactory $categoryDataProviderFactory
-     * @param \Magento\Framework\Registry $coreRegistry
-     * @param \Magento\Framework\App\RequestInterface $request
-     * @param \GoMage\Navigation\Helper\Data $helper
-     * @param \GoMage\Navigation\Helper\Url $urlHelper
-     * @param \GoMage\Navigation\Helper\CategoryData $categoryHelper
-     * @param \GoMage\Navigation\Helper\CategoryHelper $categoryHelperCore
-     * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
-     * @param \Magento\Catalog\Model\Indexer\Category\Flat\State $categoryFlatState
-     * @param array $data
+     * @param \Magento\Framework\Registry                                      $coreRegistry
+     * @param \Magento\Framework\App\RequestInterface                          $request
+     * @param \GoMage\Navigation\Helper\Data                                   $helper
+     * @param \GoMage\Navigation\Helper\Url                                    $urlHelper
+     * @param \GoMage\Navigation\Helper\CategoryData                           $categoryHelper
+     * @param \GoMage\Navigation\Helper\CategoryHelper                         $categoryHelperCore
+     * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory  $categoryCollectionFactory
+     * @param \Magento\Catalog\Model\Indexer\Category\Flat\State               $categoryFlatState
+     * @param array                                                            $data
      */
     public function __construct(
         \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory,
@@ -100,6 +101,7 @@ class CategorySearch extends Category
         \GoMage\Navigation\Helper\CategoryHelper $categoryHelperCore,
         \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory,
         \Magento\Catalog\Model\Indexer\Category\Flat\State $categoryFlatState,
+        \Magento\Catalog\Model\ResourceModel\Category $categoryResource,
         array $data = []
     ) {
         parent::__construct(
@@ -116,6 +118,7 @@ class CategorySearch extends Category
             $urlHelper,
             $categoryHelper,
             $categoryCollectionFactory,
+            $categoryResource,
             $data
         );
         $this->_requestVar = 'cat';
@@ -181,20 +184,20 @@ class CategorySearch extends Category
         $productCollection = $this->getLayer()->getProductCollection();
         $optionsFacetedData = $productCollection->getFacetedData('category');
 
-            $categories = $this->getStoreCategories();
-            foreach ($categories as $category) {
-                    foreach ( $this->getCategoriesSearch($category, $optionsFacetedData) as $categoriesSearch) {
-                        if ($categoriesSearch->getIsActive() && ($this->helper->isShowEmptyCategory())) {
-                            $this->imageCategories[$categoriesSearch->getId()] = $categoriesSearch->getImageUrl();
-                            $this->imageCat[$categoriesSearch->getId()] = $category->getData('image');
-                            $this->itemDataBuilder->addItemData(
-                                $category->getName(),
-                                $category->getId(),
-                                $optionsFacetedData[$categoriesSearch->getId()]['count']
-                            );
-                        }
-                    }
+        $categories = $this->getStoreCategories();
+        foreach ($categories as $category) {
+            foreach ( $this->getCategoriesSearch($category, $optionsFacetedData) as $categoriesSearch) {
+                if ($categoriesSearch->getIsActive() && ($this->helper->isShowEmptyCategory())) {
+                    $this->imageCategories[$categoriesSearch->getId()] = $categoriesSearch->getImageUrl();
+                    $this->imageCat[$categoriesSearch->getId()] = $category->getData('image');
+                    $this->itemDataBuilder->addItemData(
+                        $category->getName(),
+                        $category->getId(),
+                        $optionsFacetedData[$categoriesSearch->getId()]['count']
+                    );
                 }
+            }
+        }
         return $this->itemDataBuilder->build();
     }
 
@@ -211,11 +214,11 @@ class CategorySearch extends Category
             }
             return $subcategories;
         } else {
-             $subcategories = $category->getChildren();
-             if(!$subcategories) {
-                 return [];
-             }
-             return $subcategories;
+            $subcategories = $category->getChildren();
+            if(!$subcategories) {
+                return [];
+            }
+            return $subcategories;
         }
     }
 
@@ -224,23 +227,22 @@ class CategorySearch extends Category
      * @param $facetsCategory
      * @return array
      */
-    public function  getCategoriesSearch($category, $facetsCategory)
+    public function getCategoriesSearch($category, $facetsCategory)
     {
-            $arrCat = [];
-            $categories = $this->getChildCategoriesObject($category);
-            foreach ($categories as $cat) {
-                if((isset($this->facetsData[$category->getId()])) && $facetsCategory[$category->getId()]['count'] > 0)
-                {
-                    $arrCat[$category->getId()] = $category->setParentId($category->getId());
-                } else {
-                    $arrCatTmp = $this->getCategoriesSearch($cat, $facetsCategory);
-                    if($arrCatTmp) {
-                        $arrCat = $arrCat + $arrCatTmp;
-                    }
+        $arrCat = [];
+        $categories = $this->getChildCategoriesObject($category);
+        foreach ($categories as $cat) {
+            if((isset($this->facetsData[$category->getId()])) && $facetsCategory[$category->getId()]['count'] > 0) {
+                $arrCat[$category->getId()] = $category->setParentId($category->getId());
+            } else {
+                $arrCatTmp = $this->getCategoriesSearch($cat, $facetsCategory);
+                if($arrCatTmp) {
+                    $arrCat = $arrCat + $arrCatTmp;
                 }
-
             }
-            return $arrCat;
+
+        }
+        return $arrCat;
     }
 
     /**

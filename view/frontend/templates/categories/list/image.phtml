@@ -13,17 +13,17 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
     <?php $image =  $categoriesHelper->getCategoryImage($category['entity_id'])  ?>
     <ol class="gomage-tree-timage">
         <li
-             data-value="<?= $helperDataCat->getValueCategory(['cat'=>$helperDataCat->isUseFriendlyUrls() ? strtolower($category['name']):$category['entity_id']]) ?>"
+             data-value="<?= $helperDataCat->getValueCategory(['cat'=>(int)$helperDataCat->isUseFriendlyUrls() ? strtolower($category['name']):$category['entity_id']]) ?>"
              data-categories = "1"
              data-param="cat"
              data-param-cat-parent = "<?php echo 'parent_cat_'.$category['entity_id'] ?>"
              data-cat-parent = "<?php echo $category['parent_cat'] ?>"
-            <?php if ($helperDataCat->getValueCategory(['cat'=>$helperDataCat->isUseFriendlyUrls() ? strtolower($category['name']):$category['entity_id']])) : ?>
+            <?php if ($helperDataCat->getValueCategory(['cat'=>(int)$helperDataCat->isUseFriendlyUrls() ? strtolower($category['name']):$category['entity_id']])) : ?>
                 data-active="1"
             <?php endif; ?>
             data-ajax="<?=$categoriesBlock->escapeHtml($isAjax)?>" data-role="navigation-filter" data-type="categories-li"
-            data-url="<?= $helperDataCat->getUrlCategory(['cat'=>strtolower($helperDataCat->isUseFriendlyUrls() ? $category['name']: $category['entity_id']),'parent_cat_'.$category['entity_id']=>$category['parent_cat'] ]) ?>">
-            <a href="<?=$categoriesBlock->escapeUrl($category['url'])?>" <?php if ($helperDataCat->isInaCategoryRequest($helperDataCat->isUseFriendlyUrls() ? $category['name']: $category['entity_id'], $category)) : ?>
+            data-url="<?= $helperDataCat->getUrlCategory(['cat'=>strtolower((int)$helperDataCat->isUseFriendlyUrls() ? $category['name']: $category['entity_id']),'parent_cat_'.$category['entity_id']=>$category['parent_cat'] ]) ?>">
+            <a href="<?=$categoriesBlock->escapeUrl($category['url'])?>" <?php if ($helperDataCat->isInaCategoryRequest((int)$helperDataCat->isUseFriendlyUrls() ? $category['name']: $category['entity_id'], $category)) : ?>
                 class="selected"
             <?php endif; ?>>
                 <?php if($image): ?>
@@ -37,7 +37,7 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
                 <?php endif;?>
             </a>
 
-            <?php if (($categoriesBlock->getCategoriesDataHelper()->getShowAllSubcategories() && !empty(($category['children']))) || $helperDataCat->isInaCategoryRequest($helperDataCat->isUseFriendlyUrls() ? $category['name']: $category['entity_id'], $category)): ?>
+            <?php if (($categoriesBlock->getCategoriesDataHelper()->getShowAllSubcategories() && !empty(($category['children']))) || $helperDataCat->isInaCategoryRequest((int)$helperDataCat->isUseFriendlyUrls() ? $category['name']: $category['entity_id'], $category)): ?>
                 <?=$categoriesBlock->getImageCategoriesList($category['children']);?>
             <?php endif;?>
         </li>

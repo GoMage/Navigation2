@@ -92,4 +92,20 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
 
         </div>
     </div>
+    <?php else: ?>
+    <div class="block filter block-gan-filter <?=$block->escapeHtml($block->getContainerClass());?>" data-role="navigation" data-mage-init='{"navigation": {
+                        "addFilterResultsToUrl": "<?= $block->escapeHtml($block->getDataHelper()->isAddFilterResultsToUrl())?>",
+                        "navigationPlace": "<?= $block->escapeHtml($block->getDataHelper()->getShowShopByIn()); ?>",
+                        "categoriesPlace": "<?= $block->escapeHtml($block->getCategoryDataHelper()->getCategoriesBlockLocation()); ?>",
+                        "backToTopSpeed": "<?= $block->escapeHtml($block->getDataHelper()->getBackToTopSpeed()); ?>",
+                        "backToTopAction": "<?= $block->escapeHtml($block->getDataHelper()->getBackToTopAction()); ?>",
+                        "tooltipOpenOnClick": "<?= $block->escapeHtml($block->getNavigationViewHelper()->isNavigationViewTooltipShowOnClick()); ?>",
+                        "tooltipOpenOnMouseOver": "<?= $block->escapeHtml($block->getNavigationViewHelper()->isNavigationViewTooltipShowOnMouseOver()); ?>",
+                        "tooltipCloseButton": "<?= $block->escapeHtml($block->getNavigationViewHelper()->isNavigationViewTooltipHideOnCloseButton()); ?>",
+                        "tooltipCloseOnMouseOut": "<?= $block->escapeHtml($block->getNavigationViewHelper()->isNavigationViewTooltipHideOnMouseOut()); ?>",
+                        "is_use_friendly": "<?= $block->getDataHelper()->isUseFriendlyUrls() ?>",
+                        "ajaxAutoload": "<?= $block->escapeHtml($block->getDataHelper()->isUseAutoScrolling()); ?>",
+                        "q": "<?= $helperData->getQuerySearchText() ?>"
+                        }}' style="background-color: <?=$block->getNavigationViewHelper()->getNavigationViewBlockBackgroundColor()?>; ">
+    </div>
 <?php endif; ?>

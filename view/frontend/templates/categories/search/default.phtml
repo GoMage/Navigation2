@@ -23,13 +23,14 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                     foreach ($block->getCategoriesSearch($category) as $cat):
                         if (!$category->getIsActive() || $block->isHidecategory($cat)) { continue;
                         }?>
+            <?php $t = $helperData->isUseFriendlyUrls(); ?>
                         <?php $block->setCategoryParent($cat) ?>
                             <?php $parentCategory = $cat->getParentCategory() ?>
                         <li data-ajax="<?php echo (int)$block->getCategoriesDataHelper()->isAjax(); ?>"
                             data-categories = "1"
                             data-role="navigation-filter"
                             data-type="categories-li"
-                            data-value="<?php echo $helperData->getValueCategory(['cat'=>$helperData->isUseFriendlyUrls() ? strtolower($cat['name']):$cat['entity_id']]) ?>"
+                            data-value="<?php echo $helperData->getValueCategory(['cat'=>$helperData->isUseFriendlyUrls() ? strtolower($cat['name']) :$cat['entity_id']]) ?>"
                             <?php if($cat->getParentCategory()) : ?>
                                 data-cat-parent = "<?php echo $cat->getParentCategory()->getId() ?>"
                             <?php else: ?>
@@ -40,7 +41,7 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                             <?php if ($helperData->isInaCategoryRequest($helperData->isUseFriendlyUrls() ? $cat->getName(): $cat->getId(), $cat)) : ?>
                                 data-active="1"
                             <?php endif; ?>
-                            data-url="<?php echo $helperData->getUrlCategory(['cat'=>$helperData->isUseFriendlyUrls() ? strtolower($cat->getName()): $cat->getId(),'parent_cat_'.$cat->getId()=>$cat->getId()]) ?>">
+                            data-url="<?php echo $helperData->getUrlCategory(['cat'=>(int)$helperData->isUseFriendlyUrls() ? strtolower($cat->getName()): $cat->getId(),'parent_cat_'.$cat->getId()=>$cat->getId()]) ?>">
                             <a  href="#"
                                 <?php if ($helperData->isInaCategoryRequest($cat->getName(), $cat)) : ?>
                                    class="selected"
@@ -53,7 +54,7 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                         </li>
                     <?php endforeach; ?>
                 <?php endforeach; ?>
-            </ul>
+            </>
         </div>
     </div>
 </div>

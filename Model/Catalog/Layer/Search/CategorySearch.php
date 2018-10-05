@@ -155,6 +155,7 @@ class CategorySearch extends Category
         $categoryForFacetsData = clone $this->getLayer()->getProductCollection();
         $this->coreRegistry->register('facets_collection', $categoryForFacetsData);
         $this->getLayer()->getProductCollection()->addCategoriesFilter(['in' => $filters]);
+        $t = $this->getLayer()->getProductCollection()->getSelect()->__toString();
         foreach ($filters as $filter) {
             $this->dataProvider->setCategoryId($filter);
             $category = $this->dataProvider->getCategory();
@@ -181,7 +182,8 @@ class CategorySearch extends Category
      */
     protected function _getItemsData()
     {
-        $productCollection = $this->getLayer()->getProductCollection();
+        $productCollection = clone $this->getLayer()->getProductCollection();
+
         $optionsFacetedData = $productCollection->getFacetedData('category');
 
             $categories = $this->getStoreCategories();

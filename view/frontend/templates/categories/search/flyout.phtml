@@ -21,7 +21,7 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                         <li
                                 data-ajax="<?= (int)$block->getCategoriesDataHelper()->isAjax(); ?>"
                                 data-categories = "1"
-                                data-value="<?= $helperData->getValueCategory(['cat'=>$helperData->isUseFriendlyUrls() ? strtolower($cat['name']):$cat['entity_id']]) ?>"
+                                data-value="<?= $helperData->getValueCategory(['cat'=>(int)$helperData->isUseFriendlyUrls() ? strtolower($cat['name']):$cat['entity_id']]) ?>"
                                 <?php if($cat->getParentCategory()): ?>
                                     data-cat-parent = "<?php echo $cat->getParentCategory()->getId() ?>"
                                 <?php else: ?>

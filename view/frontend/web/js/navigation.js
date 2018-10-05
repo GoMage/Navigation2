@@ -764,7 +764,9 @@ define(
                 },
 
                 setCategoryUrl: function (url) {
-
+                    if (this.options.addFilterResultsToUrl == 0) {
+                        return ;
+                    }
                     window.history.pushState(null, '', url);
                 }
             }

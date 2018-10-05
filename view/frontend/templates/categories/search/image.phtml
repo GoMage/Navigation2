@@ -20,7 +20,7 @@ $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
                         if (!$category->getIsActive() || $block->isHidecategory($cat)) continue;?>
                         <li
                                 data-categories = "1"
-                                data-value="<?= $helperData->getValueCategory(['cat'=>$helperData->isUseFriendlyUrls() ? strtolower($cat['name']):$cat['entity_id']]) ?>"
+                                data-value="<?= $helperData->getValueCategory(['cat'=>(int)$helperData->isUseFriendlyUrls() ? strtolower($cat['name']):$cat['entity_id']]) ?>"
                                 data-param="cat"
                                 <?php if($cat->getParentCategory()): ?>
                                     data-cat-parent = "<?php echo $cat->getParentCategory()->getId() ?>"

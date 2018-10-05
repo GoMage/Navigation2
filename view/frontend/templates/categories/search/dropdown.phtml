@@ -30,7 +30,7 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                                 <?php endif; ?>
                                 data-param-cat-parent = "<?php echo 'parent_cat_'.$cat->getId(); ?>"
                                 data-select ="1"
-                                data-value="<?php echo $helperData->getValueCategory(['cat'=>$helperData->isUseFriendlyUrls() ? strtolower($cat['name']):$cat['entity_id']]) ?>"
+                                data-value="<?php echo $helperData->getValueCategory(['cat'=>(int)$helperData->isUseFriendlyUrls() ? strtolower($cat['name']):$cat['entity_id']]) ?>"
                                 data-url="<?php echo $helperData->getUrlCategory(['cat'=>$helperData->isUseFriendlyUrls() ? strtolower($cat->getName()): $cat->getId(),'parent_cat_'.$cat->getId()=>$cat->getId()]) ?>"
                                 data-ajax="<?php echo (int)$block->getCategoriesDataHelper()->isAjax(); ?>">
                                 <option

@@ -190,6 +190,7 @@ class Categories extends \Magento\Framework\View\Element\Template
         }
         if($subcategories) {
             foreach ($subcategories as $cat) {
+                $count = $this->getProductsCount($cat);
                 if ($this->getCategoriesDataHelper()->isHideEmptyCategories() && !$this->getProductsCount($cat) && !$cat->getChildrenCount()) {
                     continue;
                 }
@@ -200,7 +201,8 @@ class Categories extends \Magento\Framework\View\Element\Template
                     'name' => $cat->getName(),
                     'level' => $cat->getLevel(),
                     'children' => $this->getChildCategories($cat),
-                    'parent_cat' => $category->getId()
+                    'parent_cat' => $category->getId(),
+                    'count' => $count
                 ];
             }
         }
