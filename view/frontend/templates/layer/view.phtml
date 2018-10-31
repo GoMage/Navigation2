@@ -1,4 +1,17 @@
 <?php
+/**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
 
 // @codingStandardsIgnoreFile
 
@@ -9,6 +22,7 @@
  * @var $block \GoMage\Navigation\Block\Navigation
  */
 $helperData = $this->helper('GoMage\Navigation\Helper\Data');
+$helperDataCat = $this->helper('GoMage\Navigation\Helper\CategoryData');
 ?>
 
 <?php if ($block->canShowBlock()): ?>
@@ -44,6 +58,10 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
             <?php endif;?>
             <?php $wrapOptions = false; ?>
                 <?php foreach ($block->getFilters() as $filter): ?>
+
+            <?php if($filter->getRequestVar() == 'cat' && !$helperDataCat->isShowCategories()): ?>
+                <?php continue; ?>
+            <?php endif; ?>
             <?php $countApplied = 0; ?>
                     <?php $blockRender = $block->getRenderBlock(); ?>
                     <?php if ($blockRender->renderInCurrentCategory($filter)) : ?>
@@ -52,7 +70,7 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                             <dl class="filter-options"
                                 id="narrow-by-list"
                                 data-role="content"
-                                data-param-collapsed = "<?php echo $helperData->IsCollapsed($filter->getName(), true) ?>"
+                                data-param-collapsed = "<?php echo $helperData->isCollapsed($filter->getName(), true) ?>"
                                 data-mage-init='{"accordion":{
                                 "openedState": "active",
                                 "collapsible": true,
@@ -72,7 +90,7 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                                 <?php if($countApplied): ?>
                                     <div data-role="collapsible" class="filter-options-item <?= $block->escapeHtml($block->getItemClass()) ?>"
                                          style="<?= $block->escapeHtml($block->getItemWidthStyle()) ?>">
-                                        <dt  data-collapsed-param = "<?php echo urlencode(strtolower($filter->getName())); ?>" data-collapsed-filter ="<?php echo ((int)((!$filter->getGomageIsCollapsed() && (int)!$helperData->IsCollapsed($filter->getName(), true)) || (int)$helperData->IsCollapsed($filter->getName()))) ?>" data-role="title" role="heading" style="overflow: inherit" aria-level="3" class="filter-options-title collapsed-apply-settings">
+                                        <dt  data-collapsed-param = "<?php echo urlencode(strtolower($filter->getName())); ?>" data-collapsed-filter ="<?php echo ((int)((!$filter->getGomageIsCollapsed() && (int)!$helperData->isCollapsed($filter->getName(), true)) || (int)$helperData->isCollapsed($filter->getName()))) ?>" data-role="title" role="heading" style="overflow: inherit" aria-level="3" class="filter-options-title collapsed-apply-settings">
                                             <?= $block->escapeHtml(__($filter->getName())) ?>
                                             <?php
                                                 $tooltip = $this->getLayout()->createBlock('GoMage\Navigation\Block\Navigation\Tooltip');

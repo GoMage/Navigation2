@@ -1,6 +1,23 @@
 <?php
 
+/**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
+
 namespace GoMage\Navigation\Observer;
+
+use GoMage\Navigation\Model\NavigationAttributeRepository ;
+use GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory;
 
 /**
  * Class SaveAttribute
@@ -20,12 +37,12 @@ class SaveAttribute implements \Magento\Framework\Event\ObserverInterface
     protected $navigationAttributeCollectionFactory;
 
     /**
-     * @param \GoMage\Navigation\Model\NavigationAttributeRepository                       $navigationAttributeRepository
-     * @param \GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory $navigationAttributeCollectionFactory
+     * @param NavigationAttributeRepository $navigationAttributeRepository
+     * @param CollectionFactory $navigationAttributeCollectionFactory
      */
     public function __construct(
-        \GoMage\Navigation\Model\NavigationAttributeRepository $navigationAttributeRepository,
-        \GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory $navigationAttributeCollectionFactory
+        NavigationAttributeRepository $navigationAttributeRepository,
+        CollectionFactory $navigationAttributeCollectionFactory
     ) {
         $this->navigationAttributeRepository = $navigationAttributeRepository;
         $this->navigationAttributeCollectionFactory = $navigationAttributeCollectionFactory;
@@ -33,7 +50,8 @@ class SaveAttribute implements \Magento\Framework\Event\ObserverInterface
 
     /**
      * @param \Magento\Framework\Event\Observer $observer
-     * @return $this
+     * @return $this|void
+     * @throws \Magento\Framework\Exception\CouldNotSaveException
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
@@ -43,13 +61,10 @@ class SaveAttribute implements \Magento\Framework\Event\ObserverInterface
             ->addFieldToFilter('attribute_id', $attribute->getId())
             ->setPageSize(1)
             ->load();
-
         $navigationAttribute = $navigationAttributeCollection->getFirstItem();
-
         if (!$navigationAttribute->getAttributeId()) {
             $navigationAttribute->setAttributeId($attribute->getId());
         }
-
         $navigationAttribute->addData(
             [
             'filter_type' => (int) $attribute->getData('gomage_filter_type'),
@@ -71,7 +86,6 @@ class SaveAttribute implements \Magento\Framework\Event\ObserverInterface
             'is_exclude_categories' =>  $attribute->getData('gomage_is_exclude_categories')
             ]
         );
-
         $this->navigationAttributeRepository->save($navigationAttribute);
 
         return $this;

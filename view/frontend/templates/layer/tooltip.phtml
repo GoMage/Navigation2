@@ -1,22 +1,40 @@
 <?php
+
+/**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
+
 /**
  * @var $block \GoMage\Navigation\Block\Navigation\Tooltip
  */
 ?>
-<?php if($filter->getGomageIsShowTooltip()) :?>
+<?php if ($filter->getGomageIsShowTooltip()) :?>
     <?php $text = $block->getTooltipText($filter->getGomageTooltipText()); ?>
     <?php  $PCREpattern  =  '/\r\n+|\r|\n+|\s+|\t+/u'; ?>
     <?php $text = preg_replace($PCREpattern, '', $text); ?>
-    <?php if(strlen($text)> 0 ) : ?>
+    <?php if ($text) : ?>
         <div class="gan-tooltip">
             <div class="gan-tooltip-toggle"
-                 style="color: <?php echo $block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewTooltipBackgroundColor());?>">?</div>
+                 style="color: <?php echo $block
+                     ->escapeHtml($block->getNavigationViewHelper()
+                         ->getNavigationViewTooltipBackgroundColor());?>">?</div>
             <div class="gan-tooltip-content">
                 <div class="gan-tooltip-content-in" style="
                         width: <?php echo (int)$filter->getGomageTooltipWidth() != 0 ? $block->escapeHtml($filter->getGomageTooltipWidth()).'px': 'auto';?>;
                         height: <?php echo (int)$filter->getGomageTooltipHeight() != 0 ? $block->escapeHtml($filter->getGomageTooltipHeight()).'px': 'auto';?>;
                         background: <?php echo $block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewTooltipWindowBackgroundColor());?>;">
-                    <div class="gan-tooltip-text"><?php echo $block->getTooltipText($filter->getGomageTooltipText());?></div>
+                    <div class="gan-tooltip-text"><?php echo $block
+                            ->getTooltipText($filter->getGomageTooltipText());?></div>
                     <?php if ($block->getNavigationViewHelper()->isNavigationViewTooltipHideOnCloseButton()) :?>
                         <div class="gan-tooltip-close">✕</div>
                     <?php endif;?>

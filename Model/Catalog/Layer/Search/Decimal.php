@@ -1,5 +1,19 @@
 <?php
 
+/**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
+
 namespace GoMage\Navigation\Model\Catalog\Layer\Search;
 
 use GoMage\Navigation\Model\Catalog\Layer\Filter\FilterInterface;
@@ -47,17 +61,17 @@ class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements Fil
     protected $urlHelper;
 
     /**
-     * @param \Magento\Catalog\Model\Layer\Filter\ItemFactory                 $filterItemFactory
-     * @param \Magento\Store\Model\StoreManagerInterface                      $storeManager
-     * @param \Magento\Catalog\Model\Layer                                    $layer
-     * @param \Magento\Catalog\Model\Layer\Filter\Item\DataBuilder            $itemDataBuilder
-     * @param \Magento\Framework\Pricing\PriceCurrencyInterface               $priceCurrency
+     * @param \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \Magento\Catalog\Model\Layer $layer
+     * @param \Magento\Catalog\Model\Layer\Filter\Item\DataBuilder $itemDataBuilder
+     * @param \Magento\Framework\Pricing\PriceCurrencyInterface $priceCurrency
      * @param \Magento\Catalog\Model\Layer\Filter\DataProvider\DecimalFactory $dataProviderFactory
-     * @param \Magento\Framework\App\RequestInterface                         $request
-     * @param \GoMage\Navigation\Helper\Data                                  $dataHelper
-     * @param \GoMage\Navigation\Model\Config\Source\Filter\Templates         $filterTemplates
-     * @param \GoMage\Navigation\Helper\Url                                   $urlHelper
-     * @param array                                                           $data
+     * @param \Magento\Framework\App\RequestInterface $request
+     * @param \GoMage\Navigation\Helper\Data $dataHelper
+     * @param \GoMage\Navigation\Model\Config\Source\Filter\Templates $filterTemplates
+     * @param \GoMage\Navigation\Helper\Url $urlHelper
+     * @param array $data
      */
     public function __construct(
         \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory,
@@ -78,17 +92,26 @@ class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements Fil
         $this->dataHelper = $dataHelper;
         $this->filterTemplates = $filterTemplates;
         $this->urlHelper = $urlHelper;
-        parent::__construct($filterItemFactory, $storeManager, $layer, $itemDataBuilder, $priceCurrency, $dataProviderFactory, $data);
+        parent::__construct(
+            $filterItemFactory,
+            $storeManager,
+            $layer,
+            $itemDataBuilder,
+            $priceCurrency,
+            $dataProviderFactory,
+            $data
+        );
         $this->dataProvider = $dataProviderFactory->create(['layer' => $this->getLayer()]);
     }
 
     /**
      * @param \Magento\Framework\App\RequestInterface $request
-     * @return $this
+     * @return $this|FilterInterface|\Magento\Catalog\Model\Layer\Filter\Decimal
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function apply(\Magento\Framework\App\RequestInterface $request)
     {
-        if (!$this->dataHelper->isEnable() 
+        if (!$this->dataHelper->isEnable()
             || $this->getAttributeModel()->getBackendModel() != 'Magento\Catalog\Model\Product\Attribute\Backend\Price'
         ) {
             return parent::apply($request);
@@ -108,8 +131,8 @@ class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements Fil
             return $this;
         }
 
-        $from = (int) $filter[0];
-        $to = (int) $filter[1];
+        $from = (int)$filter[0];
+        $to = (int)$filter[1];
 
         $this->dataProvider->getResource()->applyDecimalRangeFilterToCollection($this, $from, $to);
 
@@ -136,6 +159,7 @@ class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements Fil
 
     /**
      * @return mixed
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     protected function getAttributeValuesData()
     {
@@ -149,34 +173,37 @@ class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements Fil
     {
         return false;
     }
+
     /**
      * @return bool|int
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getMinBasePrice()
     {
         $data = $this->getAttributeValuesData();
 
-        if(empty($data)) {
+        if (empty($data)) {
             return false;
         }
 
         $value = min($data);
-        return (int) reset($value);
+        return (int)reset($value);
     }
 
     /**
      * @return bool|int
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getMaxBasePrice()
     {
         $data = $this->getAttributeValuesData();
 
-        if(empty($data)) {
+        if (empty($data)) {
             return false;
         }
 
         $value = max($data);
-        return (int) end($value);
+        return (int)end($value);
     }
 
     /**
@@ -188,25 +215,27 @@ class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements Fil
     }
 
     /**
-     * @return mixed|string
+     * @return mixed
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getSingleValue()
     {
         if ($value = $this->request->getParam($this->getRequestVar())) {
             return str_replace('-', ';', $value);
         }
-        $value =  $this->_renderItemLabel($this->getMinBasePrice(), $this->getMaxBasePrice());
+        $value = $this->_renderItemLabel($this->getMinBasePrice(), $this->getMaxBasePrice());
         return str_replace('-', ';', $value);
-
     }
 
     /**
      * @return array
+     * @throws \Exception
      */
     protected function getTemplatesArray()
     {
         $templatesArray[] = $this->filterTemplates->get(\GoMage\Navigation\Model\Config\Source\Navigation::SLIDER);
-        $templatesArray[] = $this->filterTemplates->get(\GoMage\Navigation\Model\Config\Source\Navigation::SLIDER_INPUT);
+        $templatesArray[] = $this->filterTemplates
+            ->get(\GoMage\Navigation\Model\Config\Source\Navigation::SLIDER_INPUT);
         $templatesArray[] = $this->filterTemplates->get(\GoMage\Navigation\Model\Config\Source\Navigation::INPUT);
 
         return $templatesArray;
@@ -214,6 +243,7 @@ class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements Fil
 
     /**
      * @return $this|\Magento\Catalog\Model\Layer\Filter\AbstractFilter
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     protected function _initItems()
     {
@@ -224,17 +254,22 @@ class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements Fil
         $minPrice = $this->getMinBasePrice();
         $maxPrice = $this->getMaxBasePrice();
 
-        if(empty($minPrice) || empty($maxPrice)) {
+        if (empty($minPrice) || empty($maxPrice)) {
             return parent::_initItems();
         }
 
-        $items[] = $this->_createItem($this->getAttributeModel()->getAttributeCode(), $minPrice . '-' . $maxPrice, 1);
+        $items[] = $this->_createItem(
+            $this->getAttributeModel()->getAttributeCode(),
+            $minPrice . '-' . $maxPrice,
+            1
+        );
         $this->_items = $items;
         return $this;
     }
 
     /**
      * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     protected function getCurrentCurrency()
     {
@@ -243,6 +278,7 @@ class Decimal extends \Magento\Catalog\Model\Layer\Filter\Decimal implements Fil
 
     /**
      * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getCurrencySymbol()
     {

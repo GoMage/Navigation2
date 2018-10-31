@@ -12,38 +12,40 @@ $helper = $this->helper('GoMage\Navigation\Helper\Data');
 ?>
 
 <?php if ($block->isEnabledViewSwitcher()) : ?>
-<div class="modes">
-    <?php $_modes = $block->getModes(); ?>
-    <?php if ($_modes && count($_modes) > 1) : ?>
-    <strong class="modes-label" id="modes-label"><?php echo __('View as') ?></strong>
-    <?php foreach ($block->getModes() as $_code => $_label): ?>
-        <?php if ($block->isModeActive($_code)) : ?>
-            <strong title="<?php echo $block->escapeHtml($_label) ?>"
-                class="modes-mode active mode-<?php echo $block->escapeHtml(strtolower($_code)); ?>"
-                    data-role="navigation-filter"
-                    data-param="product_list_mode"
-                    <?php if($helper->isPaginationAjax()) : ?>data-ajax="1" <?php 
-                    endif; ?>
-                    data-active="1"
-                    data-value="<?php echo $block->escapeHtml(strtolower($_code)); ?>">
-                <span><?php echo $block->escapeHtml($_label) ?></span>
-            </strong>
-        <?php else: ?>
-            <a class="modes-mode mode-<?php echo $block->escapeHtml(strtolower($_code)); ?>"
-               title="<?php echo $block->escapeHtml($_label) ?>"
-               href="#"
-               id="mode-<?php echo $block->escapeHtml(strtolower($_code)); ?>"
-               aria-labelledby="modes-label mode-<?php echo $block->escapeHtml(strtolower($_code)); ?>"
-               data-role="navigation-filter"
-               data-value="<?php echo $block->escapeHtml(strtolower($_code)); ?>"
-               data-param="product_list_mode"
-                <?php if($helper->isPaginationAjax()) : ?>data-ajax="1" <?php 
-                endif; ?>
-               data-active="">
-                <span><?php echo $block->escapeHtml($_label) ?></span>
-            </a>
+    <div class="modes">
+        <?php $_modes = $block->getModes(); ?>
+        <?php if ($_modes && count($_modes) > 1) : ?>
+            <strong class="modes-label" id="modes-label"><?php echo __('View as') ?></strong>
+            <?php foreach ($block->getModes() as $_code => $_label) : ?>
+                <?php if ($block->isModeActive($_code)) : ?>
+                    <strong title="<?php echo $block->escapeHtml($_label) ?>"
+                            class="modes-mode active mode-<?php echo $block->escapeHtml(strtolower($_code)); ?>"
+                            data-role="navigation-filter"
+                            data-param="product_list_mode"
+                            <?php if ($helper->isPaginationAjax()) : ?>
+                                data-ajax="1"
+                            <?php endif; ?>
+                            data-active="1"
+                            data-value="<?php echo $block->escapeHtml(strtolower($_code)); ?>">
+                        <span><?php echo $block->escapeHtml($_label) ?></span>
+                    </strong>
+                <?php else : ?>
+                    <a class="modes-mode mode-<?php echo $block->escapeHtml(strtolower($_code)); ?>"
+                       title="<?php echo $block->escapeHtml($_label) ?>"
+                       href="#"
+                       id="mode-<?php echo $block->escapeHtml(strtolower($_code)); ?>"
+                       aria-labelledby="modes-label mode-<?php echo $block->escapeHtml(strtolower($_code)); ?>"
+                       data-role="navigation-filter"
+                       data-value="<?php echo $block->escapeHtml(strtolower($_code)); ?>"
+                       data-param="product_list_mode"
+                        <?php if ($helper->isPaginationAjax()) : ?>
+                           data-ajax="1"
+                        <?php endif; ?>
+                       data-active="">
+                        <span><?php echo $block->escapeHtml($_label) ?></span>
+                    </a>
+                <?php endif; ?>
+            <?php endforeach; ?>
         <?php endif; ?>
-    <?php endforeach; ?>
-    <?php endif; ?>
-</div>
+    </div>
 <?php endif; ?>

@@ -1,5 +1,19 @@
 <?php
 /**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
+
+/**
  *
  * @var $block \GoMage\Navigation\Block\Navigation\FilterRenderer
  */
@@ -13,9 +27,9 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
     <select data-role="navigation-filter"
             data-param="<?php echo $block->escapeHtml($filter->getRequestVar()) ?>"
             data-type="select"
-            <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())) :?>
+            <?php if ($filter->getGomageIsAjax() || null === ($filter->getGomageIsAjax())) :?>
                 data-ajax="1"
-            <?php else:?>
+            <?php else :?>
                 data-ajax="0"
             <?php endif;?>
             <?php if (!empty($filter->getUsedOptions())) : ?>
@@ -26,28 +40,35 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
         <?php $optionsLimit = ($filter->getGomageVisibleOptions()) ? $filter->getGomageVisibleOptions() : false;
         $cnt = 0;
         ?>
-        <?php foreach ($filterItems as $item): ?>
+        <?php foreach ($filterItems as $item) : ?>
             <?php if ($item->getCount() > 0 || ($helperData->isShowEmptyCategory() && $filter->isCategoryFilter())) : ?>
-                <option <?php if((!$item->isShowAppliedValues())) : ?>style="display: none"<?php 
-               endif; ?> value="<?php echo $block->escapeHtml($item->getGomageValue()) ?>"
+                <option <?php if ((!$item->isShowAppliedValues())) : ?>
+                    style="display: none"
+                <?php endif; ?> value="<?php echo $block->escapeHtml($item->getGomageValue()) ?>"
                         data-param="<?php echo $block->escapeHtml($filter->getRequestVar()) ?>"
-                        <?php if ($item->getIsActive()) : ?>selected="selected" data-active="1"<?php 
-                        endif ?>>
+                        <?php
+                        if ($item->getIsActive()) : ?>
+                            selected="selected" data-active="1"
+                <?php endif ?>>
                     <?php echo $block->escapeHtml($item->getLabel() . ' (' . $item->getCount() . ')', ['span']) ?>
                 </option>
             <?php endif; ?>
             <?php $cnt++;?>
         <?php endforeach ?>
     </select>
-    <?php if ($filter->isActive() && $filter->getGomageIsReset() || ($filter->isActive() &&$filter->isCategoryFilter() && $categoriesHelper->isShowResetLink() )) :?>
+    <?php if ($filter->isActive() && $filter->getGomageIsReset() ||
+        ($filter->isActive() && $filter->isCategoryFilter()
+            && $categoriesHelper->isShowResetLink() )) :?>
         <a
                 data-role="navigation-filter"
                 data-value=""
                 data-url="<?php echo $block->escapeUrl($filter->getRemoveUrl()) ?>"
                 data-param-to-remove="<?php echo $block->escapeHtml($filter->getRequestVar()) ?>"
-            <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax()) && ( ($filter->isCategoryFilter() &&  $categoriesHelper->isAjax()) ||  !$filter->isCategoryFilter()) ) :?>
+            <?php if ($filter->getGomageIsAjax() || null === ($filter->getGomageIsAjax()) &&
+                ( ($filter->isCategoryFilter() && $categoriesHelper->isAjax()) ||
+                    !$filter->isCategoryFilter()) ) :?>
                 data-ajax="1"
-            <?php else:?>
+            <?php else :?>
                 data-ajax="0"
             <?php endif;?>
                 data-type="remove-item"

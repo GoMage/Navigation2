@@ -1,29 +1,45 @@
 <?php
 /**
- * @var $block \GoMage\Navigation\Block\Categories
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
  */
+
 $helperData = $this->helper('GoMage\Navigation\Helper\Data');
 ?>
 
 <div class="block block-gan-categories gan-categories-dropdown"
-     style="background-color: <?php echo $block->escapeHtml($block->getNavigationViewHelper()->getNavigationViewBlockCategoriesBackgroundColor())?>"
+     style="background-color: <?php echo $block->escapeHtml($block->getNavigationViewHelper()
+         ->getNavigationViewBlockCategoriesBackgroundColor())?>"
 >
     <div class="block-title gan-categories-title" data-role="navigation-filter" data-type="categories-content">
         <strong><?php echo __('Categories') ?></strong>
     </div>
     <div class="block-content block-content-gan-categories">
-        <div class="gan-categories-list-dropdown block-content-in" <?php echo ($block->getCategoriesDataHelper()->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
+        <div class="gan-categories-list-dropdown block-content-in" <?php echo ($block->getCategoriesDataHelper()
+            ->isCategoriesShowCollapsed()) ? 'style="display:none;"' : '';?>>
             <?php
-            foreach($block->getStoreCategories() as $category):
-                if (!$category->getIsActive() || $block->isHidecategory($category)) { continue;
+            foreach ($block->getStoreCategories() as $category) :
+                if (!$category->getIsActive() || $block->isHidecategory($category)) {
+                    continue;
                 }?>
                     <select
                             data-role="navigation-filter"
                             data-type="categories-select"
                             data-categories = "1"
                             data-select ="1"
-                            data-value="<?php echo $helperData->getValueCategory(['cat'=>$helperData->isUseFriendlyUrls() ? strtolower($category->getName()): $category->getId()]) ?>"
-                            data-url="<?php echo $helperData->getUrlCategory(['cat'=>strtolower($category->getName())]) ?>"
+                            data-value="<?php echo $helperData->getValueCategory(['cat'=>$helperData
+                                ->isUseFriendlyUrls() ? strtolower($category->getName()): $category->getId()]) ?>"
+                            data-url="<?php echo $helperData
+                                ->getUrlCategory(['cat'=>strtolower($category->getName())]) ?>"
                             data-ajax="<?php echo (int)$block->getCategoriesDataHelper()->isAjax(); ?>">
                             <option
                                     data-type="remove-item"
@@ -32,18 +48,24 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                                     value=""
                             ><?php echo __('Choose Category')?></option>
                         <option
-                            data-value="<?php echo $helperData->getValueCategory(['cat'=>$helperData->isUseFriendlyUrls() ? strtolower($category->getName()): $category->getId()]) ?>"
+                            data-value="<?php echo $helperData->getValueCategory(['cat'=>$helperData
+                                ->isUseFriendlyUrls() ? strtolower($category->getName()): $category->getId()]) ?>"
                             data-param="cat"
-                            <?php if ($helperData->isInaCategoryRequest($helperData->isUseFriendlyUrls() ? $category->getName(): $category->getId(), $category)) : ?>
+                            <?php if ($helperData->isInaCategoryRequest($helperData->isUseFriendlyUrls() ?
+                                $category->getName(): $category->getId(), $category)) : ?>
                                 data-active="1"
                             <?php endif; ?>
-                            <?php if ($helperData->isInaCategoryRequest($helperData->isUseFriendlyUrls() ? $category->getName(): $category->getId())) : ?>
+                            <?php if ($helperData->isInaCategoryRequest($helperData->isUseFriendlyUrls() ?
+                                $category->getName(): $category->getId())) : ?>
                                 class="selected"
                             <?php endif; ?>
-                                value="<?php echo $helperData->getValueCategory(['cat'=>$helperData->isUseFriendlyUrls() ? strtolower($category->getName()): $category->getId()]) ?>">
+                                value="<?php echo $helperData->getValueCategory(['cat'=>$helperData->isUseFriendlyUrls()
+                                    ? strtolower($category->getName()): $category->getId()]) ?>">
                             <?php echo $block->escapeHtml($category->getName()) ?>
                         </option>
-                        <?php if ($block->getCategoriesDataHelper()->getShowAllSubcategories() || $helperData->isInaCategoryRequest($helperData->isUseFriendlyUrls() ? $category->getName(): $category->getId())) : ?>
+                        <?php if ($block->getCategoriesDataHelper()->getShowAllSubcategories() || $helperData
+                                ->isInaCategoryRequest($helperData->isUseFriendlyUrls() ? $category->getName():
+                                    $category->getId())) : ?>
                             <?php echo $block->getSelectList($block->getChildCategories($category)); ?>
                         <?php endif;?>
                     </select>

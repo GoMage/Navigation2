@@ -1,9 +1,22 @@
 <?php
+
+/**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
+
 namespace GoMage\Navigation\Model;
 
-use GoMage\Navigation\Api\NavigationAttributeRepositoryInterface;
 use GoMage\Navigation\Api\Data\NavigationAttributeInterface;
-use GoMage\Navigation\Model\NavigationAttributeFactory;
 use GoMage\Navigation\Model\ResourceModel\NavigationAttribute\CollectionFactory;
 use GoMage\Navigation\Model\ResourceModel\NavigationAttribute as NavigationAttributeResource;
 use Magento\Framework\Api\SearchCriteriaInterface;
@@ -99,6 +112,8 @@ class NavigationAttributeRepository implements \GoMage\Navigation\Api\Navigation
     /**
      * @param $id
      * @return bool
+     * @throws CouldNotDeleteException
+     * @throws NoSuchEntityException
      */
     public function deleteById($id)
     {
@@ -129,9 +144,6 @@ class NavigationAttributeRepository implements \GoMage\Navigation\Api\Navigation
         $searchResults->setTotalCount($collection->getSize());
         $sortOrders = $criteria->getSortOrders();
         if ($sortOrders) {
-            /**
- * @var SortOrder $sortOrder 
-*/
             foreach ($sortOrders as $sortOrder) {
                 $collection->addOrder(
                     $sortOrder->getField(),

@@ -1,9 +1,17 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: Димасик
- * Date: 22.03.2018
- * Time: 7:23
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
  */
 
 namespace GoMage\Navigation\Plugin;
@@ -17,15 +25,13 @@ use Magento\Catalog\Model\ResourceModel\Product\Collection as ProductCollection;
  */
 class FixSortPosition
 {
-    /**
-     * @param ProductCollection $subject
-     * @param callable          $proceed
-     * @param $attribute
-     * @param string            $dir
-     * @return ProductCollection
-     */
-    public function aroundAddAttributeToSort(ProductCollection $subject, callable $proceed, $attribute, $dir = ProductCollection::SORT_ORDER_ASC)
-    {
+
+    public function aroundAddAttributeToSort(
+        ProductCollection $subject,
+        callable $proceed,
+        $attribute,
+        $dir = ProductCollection::SORT_ORDER_ASC
+    ) {
 
         $proceed($attribute, $dir);
 
@@ -34,7 +40,8 @@ class FixSortPosition
             // Let's make sure we're not already sorting by e.entity_id
             $order = $subject->getSelect()->getPart('order');
             $found = array_filter(
-                $order, function ($item) {
+                $order,
+                function ($item) {
                     if (isset($item[0]) && $item[0] === "e.entity_id") {
                         return true;
                     }

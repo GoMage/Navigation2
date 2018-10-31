@@ -1,5 +1,19 @@
 <?php
 
+/**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
+
 namespace GoMage\Navigation\Model\Catalog\Layer\Search;
 
 use GoMage\Navigation\Model\Catalog\Layer\Filter\FilterInterface;
@@ -12,12 +26,15 @@ use GoMage\Navigation\Model\Catalog\Layer\Filter\FilterInterface;
 class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements FilterInterface
 {
 
+    const PRICE_DELTA = 0.001;
     const FILTER_TYPE = 'price';
     /**
      * @var \Magento\Catalog\Model\Layer\Filter\DataProvider\Price
      */
     protected $dataProvider;
 
+    protected $priceMax = false;
+    protected $priceMin = false;
     /**
      * @var \Magento\Catalog\Model\Layer\Resolver
      */
@@ -28,14 +45,12 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
      */
     private $priceCurrency;
 
+    protected $itemsInitiels;
     /**
      * @var \Magento\Catalog\Model\Layer\Filter\Dynamic\AlgorithmFactory
      */
     protected $algorithmFactory;
 
-    /**
-     * @var
-     */
     protected $dataProviderFactory;
 
     /**
@@ -62,24 +77,27 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
      * @var \GoMage\Navigation\Helper\Url
      */
     protected $urlHelper;
+    protected $calculator;
 
     /**
-     * @param \Magento\Catalog\Model\Layer\Filter\ItemFactory               $filterItemFactory
-     * @param \Magento\Store\Model\StoreManagerInterface                    $storeManager
-     * @param \Magento\Catalog\Model\Layer                                  $layer
-     * @param \Magento\Catalog\Model\Layer\Filter\Item\DataBuilder          $itemDataBuilder
-     * @param \Magento\Catalog\Model\ResourceModel\Layer\Filter\Price       $resource
-     * @param \Magento\Customer\Model\Session                               $customerSession
-     * @param \Magento\Framework\Search\Dynamic\Algorithm                   $priceAlgorithm
-     * @param \Magento\Framework\Pricing\PriceCurrencyInterface             $priceCurrency
-     * @param \Magento\Catalog\Model\Layer\Filter\Dynamic\AlgorithmFactory  $algorithmFactory
+     * Price constructor.
+     * @param \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \Magento\Catalog\Model\Layer $layer
+     * @param \Magento\Catalog\Model\Layer\Filter\Item\DataBuilder $itemDataBuilder
+     * @param \Magento\Catalog\Model\ResourceModel\Layer\Filter\Price $resource
+     * @param \Magento\Customer\Model\Session $customerSession
+     * @param \Magento\Framework\Search\Dynamic\Algorithm $priceAlgorithm
+     * @param \Magento\Framework\Pricing\PriceCurrencyInterface $priceCurrency
+     * @param \Magento\Catalog\Model\Layer\Filter\Dynamic\AlgorithmFactory $algorithmFactory
      * @param \Magento\Catalog\Model\Layer\Filter\DataProvider\PriceFactory $dataProviderFactory
-     * @param \Magento\Catalog\Model\Layer\Filter\Price\Range               $range
-     * @param \Magento\Catalog\Model\Layer\Filter\Price\Render              $render
-     * @param \Magento\Framework\App\RequestInterface                       $request
-     * @param \GoMage\Navigation\Model\Config\Source\Filter\Templates       $filterTemplates
-     * @param \GoMage\Navigation\Helper\Data                                $dataHelper
-     * @param array                                                         $data
+     * @param \Magento\Catalog\Model\Layer\Filter\Price\Range $range
+     * @param \Magento\Catalog\Model\Layer\Filter\Price\Render $render
+     * @param \Magento\Framework\App\RequestInterface $request
+     * @param \GoMage\Navigation\Model\Config\Source\Filter\Templates $filterTemplates
+     * @param \GoMage\Navigation\Helper\Data $dataHelper
+     * @param \GoMage\Navigation\Helper\Url $urlHelper
+     * @param array $data
      */
     public function __construct(
         \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory,
@@ -98,6 +116,7 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
         \GoMage\Navigation\Model\Config\Source\Filter\Templates $filterTemplates,
         \GoMage\Navigation\Helper\Data $dataHelper,
         \GoMage\Navigation\Helper\Url $urlHelper,
+        \Magento\Framework\Math\Calculator $calculator,
         array $data = []
     ) {
         parent::__construct(
@@ -113,6 +132,7 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
             $dataProviderFactory,
             $data
         );
+        $this->calculator = $calculator;
         $this->layer = $layer;
         $this->storeManager = $storeManager;
         $this->algorithmFactory = $algorithmFactory;
@@ -128,7 +148,8 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
 
     /**
      * @param \Magento\Framework\App\RequestInterface $request
-     * @return $this
+     * @return $this|FilterInterface|\Magento\CatalogSearch\Model\Layer\Filter\Price
+     * @throws \Exception
      */
     public function apply(\Magento\Framework\App\RequestInterface $request)
     {
@@ -142,6 +163,7 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
 
     /**
      * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     protected function getCurrentCurrency()
     {
@@ -150,6 +172,7 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
 
     /**
      * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getCurrencySymbol()
     {
@@ -164,6 +187,9 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
         return $this->request->getParam($this->getRequestVar());
     }
 
+    /**
+     * @return bool
+     */
     public function isCategoryFilter()
     {
         return false;
@@ -171,6 +197,7 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
 
     /**
      * @return mixed|string
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getSingleValue()
     {
@@ -190,11 +217,13 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
 
     /**
      * @return array
+     * @throws \Exception
      */
     protected function getTemplatesArray()
     {
         $templatesArray[] = $this->filterTemplates->get(\GoMage\Navigation\Model\Config\Source\Navigation::SLIDER);
-        $templatesArray[] = $this->filterTemplates->get(\GoMage\Navigation\Model\Config\Source\Navigation::SLIDER_INPUT);
+        $templatesArray[] = $this->filterTemplates
+            ->get(\GoMage\Navigation\Model\Config\Source\Navigation::SLIDER_INPUT);
         $templatesArray[] = $this->filterTemplates->get(\GoMage\Navigation\Model\Config\Source\Navigation::INPUT);
 
         return $templatesArray;
@@ -202,6 +231,7 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
 
     /**
      * @return $this|\Magento\Catalog\Model\Layer\Filter\AbstractFilter
+     * @throws \Exception
      */
     protected function _initItems()
     {
@@ -209,40 +239,57 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
             return parent::_initItems();
         }
 
-        $items[] = $this->_createItem('slider', $this->getMinBasePrice() . '-' . $this->getMaxBasePrice(), 1);
+        $items[] = $this->_createItem('slider', $this->getMinBasePrice() . '-' .
+            $this->getMaxBasePrice(), 1);
         $this->_items = $items;
         return $this;
     }
 
+    public function calculateBasePrice($price)
+    {
+        $rates = $this->getCurrentCurrencyRate();
+        $price = $this->calculator->deltaRound($price/$rates);
+        return $price;
+    }
+
+    public function getCurrentCurrencyRate()
+    {
+        return $this->_storeManager->getStore()->getCurrentCurrencyRate();
+    }
+
+    public function getMinMaxPrice() {
+        $productCollection = $this->getCleanCollection();
+        $productCollection->getMinMaxPrice();
+        $this->priceMin = floor($productCollection->getMinPriceSearch());
+        $this->priceMax = floor($productCollection->getMaxPriceSearch());
+    }
     /**
-     * @return mixed
+     * @return null
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getMinBasePrice()
     {
-        $data = $this->getCleanCollection()->getMaxBasePrice()->getData();
-        if(isset($data[0]) && isset($data[0]['min'])) {
-            return $data[0]['min'];
-        } else {
-            return null;
+        if($this->priceMin === false) {
+            $this->getMinMaxPrice();
         }
+        return $this->priceMin;
     }
 
     /**
-     * @return mixed
+     * @return null
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getMaxBasePrice()
     {
-        $data = $this->getCleanCollection()->getMaxBasePrice()->getData();
-        if(isset($data[0]) && isset($data[0]['max'])) {
-            return $data[0]['max'];
-        } else {
-            return null;
+        if($this->priceMax === false) {
+            $this->getMinMaxPrice();
         }
-
+        return $this->priceMax;
     }
 
     /**
      * @return mixed
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     protected function getCleanCollection()
     {
@@ -263,10 +310,12 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
 
     /**
      * @return bool
+     * @throws \Exception
      */
     public function isShowAppliedValues()
     {
-        if ($this->dataHelper->isShowAppliedValuesInResults() == \GoMage\Navigation\Model\Config\Source\Result::REMOVE && $this->isActive()
+        if ($this->dataHelper->isShowAppliedValuesInResults()
+            == \GoMage\Navigation\Model\Config\Source\Result::REMOVE && $this->isActive()
             && $this->filterTemplates->get(\GoMage\Navigation\Model\Config\Source\Navigation::SLIDER)
         ) {
             return false;
@@ -302,6 +351,10 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
         return $this->urlHelper->getFilterRemoveUrl($this);
     }
 
+    /**
+     * @param \Magento\Framework\App\RequestInterface $request
+     * @return $this
+     */
     public function filtersPrepare(\Magento\Framework\App\RequestInterface $request)
     {
         /**
@@ -325,16 +378,16 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price implements F
         }
 
         list($from, $to) = $filter;
-
+        $min = $this->calculateBasePrice($from);
+        $max = $this->calculateBasePrice($to);
         $this->getLayer()->getProductCollection()->addFieldToFilter(
             'price',
-            ['from' => $from, 'to' =>  empty($to) || $from == $to ? $to : $to]
+            ['from' => $min, 'to' => empty($max) || $min == $max ? $max: $max + self::PRICE_DELTA]
         );
 
         $this->getLayer()->getState()->addFilter(
             $this->_createItem($this->_renderRangeLabel(empty($from) ? 0 : $from, $to), $filter)
         );
-
         return $this;
     }
 }

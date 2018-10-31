@@ -1,5 +1,19 @@
 <?php
 /**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
+
+/**
  * Template for filter items block
  *
  * @var $block \GoMage\Navigation\Block\Navigation\FilterRenderer
@@ -11,8 +25,8 @@ $filter = reset($filterItems)->getFilter();
 
 <div class="gan-filter gan-filter-slider">
     <?php $attributeCode = $filter->getAttributeModel()->getAttributeCode(); ?>
-        <div class="layout">
-            <div class="layout-slider">
+    <div class="layout">
+        <div class="layout-slider">
                 <span>
                     <input style="display: none;"
                            data-role="navigation-filter"
@@ -25,6 +39,7 @@ $filter = reset($filterItems)->getFilter();
                            data-step="<?php echo $block->escapeHtml($block->getStep()); ?>"
                            data-skin="<?php echo $block->escapeHtml($block->getSliderSkin()); ?>"
                            data-code="<?php echo $block->escapeHtml($attributeCode); ?>"
+                           data-round="<?php echo $block->escapeHtml($block->getRound()); ?>"
                            data-dimension="&nbsp;<?php echo $block->escapeHtml($filter->getCurrencySymbol()); ?>"
                            data-param-to-remove="<?php echo $block->escapeHtml($filter->getRequestVar()) ?>"
                            data-ajax="1"
@@ -33,27 +48,35 @@ $filter = reset($filterItems)->getFilter();
                            type="slider"
                            name="<?php echo $block->escapeHtml($attributeCode); ?>"
                            value="<?php echo $block->escapeHtml($filter->getSingleValue()) ?>"
-                           data-value="<?php echo $block->escapeHtml(str_replace(';', '-', $filter->getSingleValue())); ?>"
+                           data-value="<?php echo $block->escapeHtml(
+                               str_replace(
+                                   ';',
+                                   '-',
+                                   $filter->getSingleValue()
+                               )
+                           ); ?>"
                     />
                 </span>
-            </div>
         </div>
-    <?php if ($filter->isActive() && $filter->getGomageIsReset() || ($filter->isActive() &&$filter->isCategoryFilter() && $categoriesHelper->isShowResetLink() )) :?>
+    </div>
+    <?php if ($filter->isActive() && $filter->getGomageIsReset() ||
+        ($filter->isActive() && $filter->isCategoryFilter() && $categoriesHelper->isShowResetLink())) : ?>
         <a
                 data-role="navigation-filter"
                 data-value=""
                 data-url="<?php echo $block->escapeUrl($filter->getRemoveUrl()) ?>"
                 data-param-to-remove="<?php echo $block->escapeHtml($filter->getRequestVar()) ?>"
-            <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax()) && ( ($filter->isCategoryFilter() &&  $categoriesHelper->isAjax()) ||  !$filter->isCategoryFilter()) ) :?>
+            <?php if ($filter->getGomageIsAjax() || null === ($filter->getGomageIsAjax()) &&
+                (($filter->isCategoryFilter() && $categoriesHelper->isAjax()) || !$filter->isCategoryFilter())) : ?>
                 data-ajax="1"
-            <?php else: ?>
+            <?php else : ?>
                 data-ajax="0"
-            <?php endif;?>
+            <?php endif; ?>
                 data-type="remove-item"
                 data-active="1"
                 href="#"
                 class="gan_link_reset">
             <?php echo __('Reset'); ?>
         </a>
-    <?php endif;?>
+    <?php endif; ?>
 </div>

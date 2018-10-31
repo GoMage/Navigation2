@@ -1,4 +1,19 @@
 <?xml version="1.0"?>
+<!--
+/**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
+-->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
         <css src="Magento_Swatches::css/swatches.css"/>
@@ -27,53 +42,6 @@
                     </block>
                     <block class="Magento\Catalog\Block\Product\ProductList\Toolbar" name="product_list_toolbar" template="GoMage_Navigation::product/list/toolbar.phtml">
                         <block class="Magento\Theme\Block\Html\Pager" name="product_list_toolbar_pager"/>
-                        <!-- The following code shows how to set your own pager increments -->
-                        <!--
-                            <action method="setDefaultListPerPage">
-                            <argument name="limit" xsi:type="string">4</argument>
-                        </action>
-                        <action method="setDefaultGridPerPage">
-                            <argument name="limit" xsi:type="string">3</argument>
-                        </action>
-                        <action method="addPagerLimit">
-                            <argument name="mode" xsi:type="string">list</argument>
-                            <argument name="limit" xsi:type="string">2</argument>
-                        </action>
-                        <action method="addPagerLimit">
-                            <argument name="mode" xsi:type="string">list</argument>
-                            <argument name="limit" xsi:type="string">4</argument>
-                        </action>
-                        <action method="addPagerLimit">
-                            <argument name="mode" xsi:type="string">list</argument>
-                            <argument name="limit" xsi:type="string">6</argument>
-                        </action>
-                        <action method="addPagerLimit">
-                            <argument name="mode" xsi:type="string">list</argument>
-                            <argument name="limit" xsi:type="string">8</argument>
-                        </action>
-                        <action method="addPagerLimit" translate="label">
-                            <argument name="mode" xsi:type="string">list</argument>
-                            <argument name="limit" xsi:type="string">all</argument>
-                            <argument name="label" xsi:type="string">All</argument>
-                        </action>
-                        <action method="addPagerLimit">
-                            <argument name="mode" xsi:type="string">grid</argument>
-                            <argument name="limit" xsi:type="string">3</argument>
-                        </action>
-                        <action method="addPagerLimit">
-                            <argument name="mode" xsi:type="string">grid</argument>
-                            <argument name="limit" xsi:type="string">6</argument>
-                        </action>
-                        <action method="addPagerLimit">
-                            <argument name="mode" xsi:type="string">grid</argument>
-                            <argument name="limit" xsi:type="string">9</argument>
-                        </action>
-                        <action method="addPagerLimit" translate="label">
-                            <argument name="mode" xsi:type="string">grid</argument>
-                            <argument name="limit" xsi:type="string">all</argument>
-                            <argument name="label" xsi:type="string">All</argument>
-                        </action>
-                        -->
                     </block>
                     <action method="setToolbarBlockName">
                         <argument name="name" xsi:type="string">product_list_toolbar</argument>

@@ -1,9 +1,16 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Димасик
- * Date: 01.06.2018
- * Time: 19:26
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
  */
 
 namespace GoMage\Navigation\Block;
@@ -76,17 +83,17 @@ class CategoriesCms extends Categories
     protected $navigationViewHelper;
 
     /**
-     * @param \Magento\Framework\View\Element\Template\Context          $context
-     * @param \Magento\Catalog\Helper\Category                          $categoryHelper
-     * @param \Magento\Catalog\Model\Indexer\Category\Flat\State        $categoryFlatState
-     * @param \Magento\Theme\Block\Html\Topmenu                         $topMenu
-     * @param \GoMage\Navigation\Helper\Data                            $dataHelper
-     * @param \GoMage\Navigation\Helper\CategoryData                    $categoriesHelper
-     * @param \GoMage\Navigation\Helper\NavigationViewData              $navigationViewHelper
+     * @param \Magento\Framework\View\Element\Template\Context $context
+     * @param \Magento\Catalog\Helper\Category $categoryHelper
+     * @param \Magento\Catalog\Model\Indexer\Category\Flat\State $categoryFlatState
+     * @param \Magento\Theme\Block\Html\Topmenu $topMenu
+     * @param \GoMage\Navigation\Helper\Data $dataHelper
+     * @param \GoMage\Navigation\Helper\CategoryData $categoriesHelper
+     * @param \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper
      * @param \GoMage\Navigation\Model\Config\Source\Category\Templates $templates
-     * @param \Magento\Catalog\Model\ResourceModel\Category             $categoryResource
-     * @param \Magento\Catalog\Model\Layer\Resolver                     $layerResolver
-     * @param \Magento\Framework\Registry                               $registry
+     * @param \Magento\Catalog\Model\ResourceModel\Category $categoryResource
+     * @param \Magento\Catalog\Model\Layer\Resolver $layerResolver
+     * @param \Magento\Framework\Registry $registry
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
@@ -134,7 +141,7 @@ class CategoriesCms extends Categories
         if (!$this->getDataHelper()->isEnable() || !$this->getCategoriesDataHelper()->isShowCategories()) {
             return;
         }
-        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT 
+        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT
             && $this->cmsPage->getPageLayout() == '1column'
         ) {
             $this->moveColumn('main');
@@ -144,14 +151,14 @@ class CategoriesCms extends Categories
             $this->getLayout()->unsetChild('main', 'gomage.categories.column');
         }
 
-        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN 
+        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN
             && $this->cmsPage->getPageLayout() == '2columns-left'
         ) {
             $this->moveBlock('sidebar.main');
             $this->canShowCategories = true;
             return;
         }
-        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT 
+        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT
             && $this->cmsPage->getPageLayout() == '2columns-left'
         ) {
             $this->moveBlock('main');
@@ -160,7 +167,7 @@ class CategoriesCms extends Categories
             return;
         }
 
-        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN 
+        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN
             && $this->cmsPage->getPageLayout() == '3columns'
         ) {
             $this->moveBlock('sidebar.main');
@@ -168,7 +175,7 @@ class CategoriesCms extends Categories
             return;
         }
 
-        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN 
+        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN
             && $this->cmsPage->getPageLayout() == '2columns-right'
         ) {
             $this->moveBlock('sidebar.main');
@@ -176,7 +183,7 @@ class CategoriesCms extends Categories
             return;
         }
 
-        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT 
+        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT
             && $this->cmsPage->getPageLayout() == '2columns-right'
         ) {
             $this->moveBlock('main');
@@ -185,7 +192,7 @@ class CategoriesCms extends Categories
             return;
         }
 
-        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN 
+        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN
             && $this->cmsPage->getPageLayout() == '3columns'
         ) {
             $this->moveBlock('sidebar.additional');
@@ -193,7 +200,7 @@ class CategoriesCms extends Categories
             return;
         }
 
-        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT 
+        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT
             && $this->cmsPage->getPageLayout() == '3columns'
         ) {
             $this->moveBlock('main');
@@ -204,6 +211,7 @@ class CategoriesCms extends Categories
 
     /**
      * @param $parent
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     protected function moveBlock($parent)
     {

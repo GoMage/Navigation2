@@ -1,35 +1,64 @@
 <?php
 /**
- * @var $categoriesBlock \GoMage\Navigation\Block\Categories
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
  */
+
 $helperDataCat = $this->helper('GoMage\Navigation\Helper\Data');
 ?>
-<?php if(!empty($data)):?>
-    <ol <?=$categoriesBlock->escapeHtml($checkboxes)?>>
-        <?php foreach ($data as $category):?>
-            <?php $active = ($currentCategoryId == $category['entity_id']) ? ' class="selected"' : '';?>
+<?php if (!empty($data)) : ?>
+    <ol <?php echo $categoriesBlock->escapeHtml($checkboxes) ?>>
+        <?php foreach ($data as $category) : ?>
+            <?php $active = ($currentCategoryId == $category['entity_id']) ? ' class="selected"' : ''; ?>
             <li
-                    data-value="<?= $helperDataCat->getValueCategory(['cat'=>$helperDataCat->isUseFriendlyUrls() ? strtolower($category['name']):$category['entity_id']]) ?>"
-                    data-categories = "1"
-                    data-value="<?= $helperDataCat->getValueCategory(['cat'=>$helperDataCat->isUseFriendlyUrls() ? strtolower($category['name']):$category['entity_id']]) ?>"
+                    data-value="<?php echo $helperDataCat->getValueCategory(
+                        ['cat' => $helperDataCat->isUseFriendlyUrls()
+                        ? strtolower($category['name']) : $category['entity_id']]
+                    ) ?>"
+                    data-categories="1"
+                    data-value="<?php echo $helperDataCat->getValueCategory(
+                        ['cat' => $helperDataCat->isUseFriendlyUrls()
+                        ? strtolower($category['name']) : $category['entity_id']]
+                    ) ?>"
                     data-param="cat"
-                    data-param-cat-parent = "<?php echo 'parent_cat_'.$category['entity_id'] ?>"
-                    data-cat-parent = "<?php echo $category['parent_cat'] ?>"
-                <?php if ($helperDataCat->isInaCategoryRequest($helperDataCat->isUseFriendlyUrls() ? strtolower($category['name']):$category['entity_id'], $category)) : ?>
+                    data-param-cat-parent="<?php echo 'parent_cat_' . $category['entity_id'] ?>"
+                    data-cat-parent="<?php echo $category['parent_cat'] ?>"
+                <?php if ($helperDataCat->isInaCategoryRequest($helperDataCat->isUseFriendlyUrls() ?
+                    strtolower($category['name']) : $category['entity_id'], $category)) : ?>
                     data-active="1"
                 <?php endif; ?>
-                    data-ajax="<?=$categoriesBlock->escapeHtml($isAjax)?>"
+                    data-ajax="<?php echo $categoriesBlock->escapeHtml($isAjax) ?>"
                     data-role="navigation-filter"
                     data-type="categories-li"
-                    data-url="<?= $helperDataCat->getUrlCategory(['cat'=>strtolower((int)$helperDataCat->isUseFriendlyUrls() ? $category['name']: $category['entity_id']),'parent_cat_'.$category['entity_id']=>$category['parent_cat'] ]) ?>"
-                <?php if (!empty(($category['children']))): ?> class="parent"<?php endif; ?>>
-                <a <?php if ($helperDataCat->isInaCategoryRequest($helperDataCat->isUseFriendlyUrls() ? strtolower($category['name']):$category['entity_id'], $category)) : ?>
+                    data-url="<?php echo $helperDataCat->getUrlCategory(['cat' => strtolower((int)$helperDataCat
+                        ->isUseFriendlyUrls() ? $category['name'] : $category['entity_id']),
+                        'parent_cat_' . $category['entity_id'] => $category['parent_cat']]) ?>"
+                <?php if (!empty(($category['children']))) :
+                    ?> class="parent"
+                <?php endif; ?>>
+                <a <?php if ($helperDataCat->isInaCategoryRequest($helperDataCat->isUseFriendlyUrls() ?
+                    strtolower($category['name']) : $category['entity_id'], $category)) : ?>
                     class="selected"
-                <?php endif; ?> href="<?=$categoriesBlock->escapeUrl($category['url'])?>"<?=$categoriesBlock->escapeHtml($active)?>><span><?=$categoriesBlock->escapeHtml($category['name'])?></span></a>
-                <?php if (($categoriesBlock->getCategoriesDataHelper()->getShowAllSubcategories() && !empty(($category['children']))) || $helperDataCat->isInaCategoryRequest($helperDataCat->isUseFriendlyUrls() ? strtolower($category['name']):$category['entity_id'], $category)): ?>
-                    <?= $categoriesBlock->getOlList($category['children']); ?>
+                <?php endif; ?> href="<?php echo $categoriesBlock->escapeUrl($category['url']) ?>
+"<?php echo $categoriesBlock
+                    ->escapeHtml($active) ?>><span>
+                        <?php echo $categoriesBlock->escapeHtml($category['name']) ?></span></a>
+                <?php if (($categoriesBlock->getCategoriesDataHelper()->getShowAllSubcategories()
+                        && !empty(($category['children']))) ||
+                    $helperDataCat->isInaCategoryRequest($helperDataCat->isUseFriendlyUrls() ?
+                        strtolower($category['name']) : $category['entity_id'], $category)) : ?>
+                    <?php echo $categoriesBlock->getOlList($category['children']); ?>
                 <?php endif; ?>
             </li>
-        <?php endforeach;?>
+        <?php endforeach; ?>
     </ol>
-<?php endif;?>
+<?php endif; ?>

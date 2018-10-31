@@ -1,5 +1,19 @@
 <?php
 
+/**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
+
 namespace GoMage\Navigation\Helper;
 
 use GoMage\Navigation\Helper\Config\SystemConfigInterface;
@@ -13,14 +27,14 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
     protected $scopeConfig;
 
     /**
-     * @var \Magento\Catalog\Model\CategoryFactoryCategoryFactory
+     * @var \Magento\Catalog\Model\CategoryFactory
      */
     protected $categoryFactory;
 
     /**
      * @var \Magento\Framework\Filesystem
      */
-    protected $_filesystem ;
+    protected $_filesystem;
 
     /**
      * @var \Magento\Catalog\Model\ResourceModel\Category
@@ -37,13 +51,10 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     protected $_storeManager;
 
-    /**
-     * @param Context $context
-     */
     public function __construct(
         Context $context,
         \Magento\Framework\Filesystem $filesystem,
-        \Magento\Framework\Image\AdapterFactory $imageFactory ,
+        \Magento\Framework\Image\AdapterFactory $imageFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Catalog\Model\CategoryFactory $categoryFactory,
         \Magento\Catalog\Model\ResourceModel\Category $categoryResource
@@ -56,7 +67,6 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
         $this->_storeManager = $storeManager;
         parent::__construct($context);
     }
-
 
     /**
      * @param $param
@@ -163,6 +173,7 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CATEGORIES_RESET_LINK
         );
     }
+
     /**
      * @return mixed
      */
@@ -240,12 +251,13 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isShowCategoryInShopBy()
     {
-        return (int) $this->isShowCategories() &&
+
+        return !((int)$this->isShowCategories() &&
             $this->getScopeData(
                 SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
                 . SystemConfigInterface::SYSTEM_CONFIG_SLASH
                 . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_SHOP_BY
-            );
+            ));
     }
 
     public function resize($image)
@@ -253,17 +265,17 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
         $width = $this->getCategoriesImageWidth();
         $height = $this->getCategoriesImageHeight();
 
-        if(!$width ) {
+        if (!$width) {
             $width = 100;
         }
 
-        if(!$height ) {
+        if (!$height) {
             $height = 100;
         }
         $absolutePath = $this->_filesystem->getDirectoryWrite(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)
-            ->getAbsolutePath('catalog/category/') . $image;
+                ->getAbsolutePath('catalog/category/') . $image;
         $imageResized = $this->_filesystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)
-            ->getAbsolutePath('resized/' . $width . '/') . $image;
+                ->getAbsolutePath('resized/' . $width . '/') . $image;
         //create image factory...
         $imageResize = $this->_imageFactory->create();
         $imageResize->open($absolutePath);
@@ -277,9 +289,9 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
         //save image
         $imageResize->save($destination);
 
-        $resizedURL = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'resized/' . $width . '/' . $image;;
+        $resizedURL = $this->_storeManager->getStore()
+                ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'resized/' . $width . '/' . $image;
         return $resizedURL;
-
     }
 
     /**

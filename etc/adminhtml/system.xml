@@ -1,4 +1,19 @@
 <?xml version="1.0"?>
+<!--
+/**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
+-->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../../../../Magento/Config/etc/system_file.xsd">
     <system>
@@ -189,10 +204,6 @@
                     <label>Category Filter Action</label>
                     <source_model>GoMage\Navigation\Model\Config\Source\Filter\Action</source_model>
                 </field>
-                <field id="shop_by" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Show Category in Shop by</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                </field>
                 <field id="show_reset_link" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Show Reset Link</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -338,6 +349,16 @@
                 </field>
                 <field id="text" translate="label" type="textarea" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Ajax Loader Text</label>
+                </field>
+            </group>
+            <group id="price_slider" translate="label" type="text" sortOrder="60" showInDefault="1"
+                   showInWebsite="1" showInStore="1">
+                <label>Settings Price Slider</label>
+                <field id="round" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Round</label>
+                </field>
+                <field id="step" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Step</label>
                 </field>
             </group>
         </section>

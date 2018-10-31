@@ -18,7 +18,7 @@ class CategoriesSearch extends Categories
     /**
      * @var array
      */
-    protected $facetsData=[];
+    protected $facetsData = [];
 
     /**
      * @var \Magento\Framework\Registry $coreRegistry
@@ -26,16 +26,18 @@ class CategoriesSearch extends Categories
     protected $coreRegistry;
 
     /**
-     * @param \Magento\Framework\View\Element\Template\Context          $context
-     * @param \GoMage\Navigation\Helper\CategoryHelper                  $categoryHelper
-     * @param \Magento\Catalog\Model\Indexer\Category\Flat\State        $categoryFlatState
-     * @param \Magento\Theme\Block\Html\Topmenu                         $topMenu
-     * @param \GoMage\Navigation\Helper\Data                            $dataHelper
-     * @param \GoMage\Navigation\Helper\CategoryData                    $categoriesHelper
-     * @param \GoMage\Navigation\Helper\NavigationViewData              $navigationViewHelper
+     * CategoriesSearch constructor.
+     * @param \Magento\Framework\View\Element\Template\Context $context
+     * @param \GoMage\Navigation\Helper\CategoryHelper $categoryHelper
+     * @param \Magento\Catalog\Model\Indexer\Category\Flat\State $categoryFlatState
+     * @param \Magento\Theme\Block\Html\Topmenu $topMenu
+     * @param \GoMage\Navigation\Helper\Data $dataHelper
+     * @param \GoMage\Navigation\Helper\CategoryData $categoriesHelper
+     * @param \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper
      * @param \GoMage\Navigation\Model\Config\Source\Category\Templates $templates
-     * @param \Magento\Catalog\Model\ResourceModel\Category             $categoryResource
-     * @param \Magento\Catalog\Model\Layer\Resolver                     $layerResolver
+     * @param \Magento\Catalog\Model\ResourceModel\Category $categoryResource
+     * @param \Magento\Catalog\Model\Layer\Resolver $layerResolver
+     * @param \Magento\Framework\Registry $coreRegistry
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
@@ -76,27 +78,34 @@ class CategoriesSearch extends Categories
     }
 
     /**
-     * @return $this
+     * @return $this|\Magento\Framework\View\Element\Template
+     * @throws \Exception
      */
     protected function _beforeToHtml()
     {
-        if (!$this->getDataHelper()->isEnable() || !$this->getCategoriesDataHelper()->isShowCategories() || !$this->canShowCategories) {
+        if (!$this->getDataHelper()->isEnable()
+            || !$this->getCategoriesDataHelper()->isShowCategories() || !$this->canShowCategories) {
             return parent::_beforeToHtml();
         }
         if ($this->getCategoriesDataHelper()->isShowCategoryInShopBy()) {
-            $templateFile = $this->templates->getShowShopByInTemplateSearch($this->getCategoriesDataHelper()->getCategoriesNavigationType());
+            $templateFile = $this->templates
+                ->getShowShopByInTemplateSearch($this->getCategoriesDataHelper()->getCategoriesNavigationType());
         } else {
-            $templateFile = $this->templates->getSearch($this->getCategoriesDataHelper()->getCategoriesNavigationType());
+            $templateFile = $this->templates
+                ->getSearch($this->getCategoriesDataHelper()->getCategoriesNavigationType());
         }
         $this->setTemplate($templateFile);
 
         return $this;
     }
 
+    /**
+     * @return array
+     */
     public function getFacetsData()
     {
-        if(!$this->facetsData) {
-            if(!$this->coreRegistry->registry('facets_collection')) {
+        if (!$this->facetsData) {
+            if (!$this->coreRegistry->registry('facets_collection')) {
                 $productCollection = $this->catalogLayer->getProductCollection();
             } else {
                 $productCollection = $this->coreRegistry->registry('facets_collection');
@@ -105,7 +114,6 @@ class CategoriesSearch extends Categories
             $this->facetsData = $facedsData;
         }
         return $this->facetsData;
-
     }
 
     /**
@@ -116,6 +124,10 @@ class CategoriesSearch extends Categories
         return $this->catalogLayer->getCurrentCategory()->getId();
     }
 
+    /**
+     * @param $category
+     * @return array
+     */
     public function getChildCategoriesObject($category)
     {
         if ($this->categoryFlatConfig->isFlatEnabled() && $category->getUseFlatResource()) {
@@ -125,10 +137,14 @@ class CategoriesSearch extends Categories
         }
     }
 
+    /**
+     * @param $category
+     * @return array
+     */
     public function getCategoriesSearch($category)
     {
         $this->getFacetsData();
-        if(!$this->facetsData || !$this->getChildCategoriesObject($category)) {
+        if (!$this->facetsData || !$this->getChildCategoriesObject($category)) {
             $productCollection = $this->catalogLayer->getProductCollection();
             $this->facetsData = $productCollection->getFacetedData('category');
             return [];
@@ -136,15 +152,15 @@ class CategoriesSearch extends Categories
             $arrCat = [];
             $categories = $this->getChildCategoriesObject($category);
             foreach ($categories as $cat) {
-                if((isset($this->facetsData[$category->getId()])) && $this->facetsData[$category->getId()]['count'] > 0) {
+                if ((isset($this->facetsData[$category->getId()]))
+                    && $this->facetsData[$category->getId()]['count'] > 0) {
                     $arrCat[$category->getId()] = $category->setParentId($category->getId());
                 } else {
                     $arrCatTmp = $this->getCategoriesSearch($cat);
-                    if($arrCatTmp) {
+                    if ($arrCatTmp) {
                         $arrCat = $arrCat + $arrCatTmp;
                     }
                 }
-
             }
 
             return $arrCat;
@@ -154,6 +170,7 @@ class CategoriesSearch extends Categories
     /**
      * @param $data
      * @return string
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getOlList($data)
     {
@@ -167,6 +184,7 @@ class CategoriesSearch extends Categories
     /**
      * @param $data
      * @return string
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getOlImageList($data)
     {
@@ -180,6 +198,7 @@ class CategoriesSearch extends Categories
     /**
      * @param $data
      * @return string
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getSelectList($data)
     {
@@ -193,6 +212,7 @@ class CategoriesSearch extends Categories
     /**
      * @param $data
      * @return string
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getImageCategoriesList($data)
     {
@@ -200,15 +220,18 @@ class CategoriesSearch extends Categories
         $block->setTemplate('GoMage_Navigation::categories/list/search/image.phtml');
         $block->assign(
             'alignment',
-            ($this->getCategoriesDataHelper()->getCategoriesImageAlignment()) ? 'alignment:' . $this->getCategoriesDataHelper()->getCategoriesImageAlignment() : ''
+            ($this->getCategoriesDataHelper()->getCategoriesImageAlignment()) ?
+                'alignment:' . $this->getCategoriesDataHelper()->getCategoriesImageAlignment() : ''
         );
         $block->assign(
             'width',
-            ($this->getCategoriesDataHelper()->getCategoriesImageWidth()) ? $this->getCategoriesDataHelper()->getCategoriesImageWidth() : ''
+            ($this->getCategoriesDataHelper()->getCategoriesImageWidth()) ?
+                $this->getCategoriesDataHelper()->getCategoriesImageWidth() : ''
         );
         $block->assign(
             'height',
-            ($this->getCategoriesDataHelper()->getCategoriesImageHeight()) ? $this->getCategoriesDataHelper()->getCategoriesImageHeight() : ''
+            ($this->getCategoriesDataHelper()->getCategoriesImageHeight()) ?
+                $this->getCategoriesDataHelper()->getCategoriesImageHeight() : ''
         );
         $block->assign('data', $data);
 

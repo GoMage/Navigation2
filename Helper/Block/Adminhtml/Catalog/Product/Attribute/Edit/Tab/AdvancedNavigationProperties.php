@@ -1,7 +1,16 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
  */
 
 /**
@@ -9,6 +18,7 @@
  *
  * @author Magento Core Team <core@magentocommerce.com>
  */
+
 namespace GoMage\Navigation\Block\Adminhtml\Catalog\Product\Attribute\Edit\Tab;
 
 use Magento\Backend\Block\Template\Context;
@@ -44,15 +54,6 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
      */
     protected $storeManager;
 
-    /**
-     * @param Context                                                $context
-     * @param Registry                                               $registry
-     * @param FormFactory                                            $formFactory
-     * @param \GoMage\Navigation\Model\Config\Source\Navigation      $sourceNavigation
-     * @param \GoMage\Navigation\Model\Config\Source\Image\Alignment $sourceImageAlignment
-     * @param Yesno                                                  $yesNo
-     * @param array                                                  $data
-     */
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Framework\Registry $registry,
@@ -61,7 +62,8 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
         \GoMage\Navigation\Model\Config\Source\Image\Alignment $sourceImageAlignment,
         Yesno $yesNo,
         array $data = []
-    ) {
+    )
+    {
         $this->storeManager = $context->getStoreManager();
         $this->sourceNavigation = $sourceNavigation;
         $this->sourceImageAlignment = $sourceImageAlignment;
@@ -128,18 +130,13 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
         return $this->_coreRegistry->registry('current_widget_instance');
     }
 
-    /**
-     * Prepare form before rendering HTML
-     *
-     * @return $this
-     */
     protected function _prepareForm()
     {
         $attributeObject = $this->_coreRegistry->registry('entity_attribute');
 
         /**
- * @var \Magento\Framework\Data\Form $form 
-*/
+         * @var \Magento\Framework\Data\Form $form
+         */
         $form = $this->_formFactory->create(
             ['data' => ['id' => 'edit_form', 'action' => $this->getData('action'), 'method' => 'post']]
         );
@@ -151,11 +148,12 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
         $templates = $this->sourceNavigation->toOptionArray();
         if ($attributeObject->getBackendModel() != 'Magento\Catalog\Model\Product\Attribute\Backend\Price') {
             foreach ($templates as $key => $template) {
-                if(in_array(
-                    $template['value'], [
-                    \GoMage\Navigation\Model\Config\Source\NavigationInterface::INPUT,
-                    \GoMage\Navigation\Model\Config\Source\NavigationInterface::SLIDER,
-                    \GoMage\Navigation\Model\Config\Source\NavigationInterface::SLIDER_INPUT,
+                if (in_array(
+                    $template['value'],
+                    [
+                        \GoMage\Navigation\Model\Config\Source\NavigationInterface::INPUT,
+                        \GoMage\Navigation\Model\Config\Source\NavigationInterface::SLIDER,
+                        \GoMage\Navigation\Model\Config\Source\NavigationInterface::SLIDER_INPUT,
                     ]
                 )
                 ) {
@@ -168,9 +166,9 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
             'gomage_filter_type',
             'select',
             [
-                'name'   => 'gomage_filter_type',
-                'label'  => __('Filter Type'),
-                'title'  => __('Filter Type'),
+                'name' => 'gomage_filter_type',
+                'label' => __('Filter Type'),
+                'title' => __('Filter Type'),
                 'values' => $templates,
             ]
         );
@@ -179,9 +177,9 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
             'gomage_is_show_filter_button',
             'select',
             [
-                'name'   => 'gomage_is_show_filter_button',
-                'label'  => __('Show Filter Button'),
-                'title'  => __('Show Filter Button'),
+                'name' => 'gomage_is_show_filter_button',
+                'label' => __('Show Filter Button'),
+                'title' => __('Show Filter Button'),
                 'values' => $this->yesNoSource,
             ]
         );
@@ -196,24 +194,24 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
                 'class' => 'validate-digits'
             ]
         );
-            $fieldset->addField(
-                'gomage_is_ajax',
-                'select',
-                [
-                'name'   => 'gomage_is_ajax',
-                'label'  => __('Use Ajax'),
-                'title'  => __('Use Ajax'),
+        $fieldset->addField(
+            'gomage_is_ajax',
+            'select',
+            [
+                'name' => 'gomage_is_ajax',
+                'label' => __('Use Ajax'),
+                'title' => __('Use Ajax'),
                 'values' => $this->yesNoSource,
-                ]
-            );
+            ]
+        );
 
         $fieldset->addField(
             'gomage_is_collapsed',
             'select',
             [
-                'name'   => 'gomage_is_collapsed',
-                'label'  => __('Show Collapsed'),
-                'title'  => __('Show Collapsed'),
+                'name' => 'gomage_is_collapsed',
+                'label' => __('Show Collapsed'),
+                'title' => __('Show Collapsed'),
                 'values' => $this->yesNoSource,
             ]
         );
@@ -222,9 +220,9 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
             'gomage_is_checkbox',
             'select',
             [
-                'name'   => 'gomage_is_checkbox',
-                'label'  => __('Show Checkboxes'),
-                'title'  => __('Show Checkboxes'),
+                'name' => 'gomage_is_checkbox',
+                'label' => __('Show Checkboxes'),
+                'title' => __('Show Checkboxes'),
                 'values' => $this->yesNoSource,
             ]
         );
@@ -233,9 +231,9 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
             'gomage_options_alignment',
             'select',
             [
-                'name'   => 'gomage_options_alignment',
-                'label'  => __('Options Alignment'),
-                'title'  => __('Options Alignment'),
+                'name' => 'gomage_options_alignment',
+                'label' => __('Options Alignment'),
+                'title' => __('Options Alignment'),
                 'values' => $this->sourceImageAlignment->toOptionArray(),
             ]
         );
@@ -277,9 +275,9 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
             'gomage_is_show_tooltip',
             'select',
             [
-                'name'   => 'gomage_is_show_tooltip',
-                'label'  => __('Show Tooltip'),
-                'title'  => __('Show Tooltip'),
+                'name' => 'gomage_is_show_tooltip',
+                'label' => __('Show Tooltip'),
+                'title' => __('Show Tooltip'),
                 'values' => $this->yesNoSource,
             ]
         );
@@ -327,9 +325,9 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
             'gomage_is_reset',
             'select',
             [
-                'name'   => 'gomage_is_reset',
-                'label'  => __('Show Reset Link'),
-                'title'  => __('Show Reset Link'),
+                'name' => 'gomage_is_reset',
+                'label' => __('Show Reset Link'),
+                'title' => __('Show Reset Link'),
                 'values' => $this->yesNoSource,
             ]
         );
@@ -337,9 +335,9 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
             'gomage_is_exclude_categories',
             'text',
             [
-                'name'   => 'gomage_is_exclude_categories',
-                'label'  => __('Exclude Categories'),
-                'title'  => __('Exclude Categories'),
+                'name' => 'gomage_is_exclude_categories',
+                'label' => __('Exclude Categories'),
+                'title' => __('Exclude Categories'),
             ]
         );
         $ajaxData = [];
@@ -365,15 +363,15 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
             )->addFieldDependence(
                 $childWidth->getName(),
                 $parentField->getName(),
-                (string) SourceNavigation::COLOR_PICKER
+                (string)SourceNavigation::COLOR_PICKER
             )->addFieldDependence(
                 $blockHeigth->getName(),
                 $parentField->getName(),
-                (string) SourceNavigation::IN_BLOCK
+                (string)SourceNavigation::IN_BLOCK
             )->addFieldDependence(
                 $childHeight->getName(),
                 $parentField->getName(),
-                (string) SourceNavigation::COLOR_PICKER
+                (string)SourceNavigation::COLOR_PICKER
             )
         );
         $this->setForm($form);

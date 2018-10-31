@@ -1,5 +1,19 @@
 <?php
 
+/**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
+
 namespace GoMage\Navigation\Helper;
 
 use GoMage\Navigation\Helper\Config\SystemConfigInterface;
@@ -28,8 +42,10 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
     protected $dataHelper;
 
     /**
-     * @param Context                                          $context
+     * LoaderData constructor.
+     * @param Context $context
      * @param \GoMage\Navigation\Model\Config\Source\Alignment $alignment
+     * @param Data $dataHelper
      */
     public function __construct(
         Context $context,
@@ -44,18 +60,17 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
-     * @param null $moduleName
-     * @return mixed
+     * @return bool
      */
-    public function isEnabled($moduleName = null)
+    public function isEnabled()
     {
         return $this->dataHelper->isEnable();
     }
 
     /**
      * @param $param
+     * @param string $section
      * @return mixed
-     * return comfiguretion module
      */
     public function getScopeData($param, $section = SystemConfigInterface::SYSTEM_CONFIG_SECTION)
     {
@@ -187,6 +202,7 @@ class LoaderData extends \Magento\Framework\App\Helper\AbstractHelper
 
     /**
      * @return mixed
+     * @throws \Exception
      */
     public function getLoaderImageAlignment()
     {

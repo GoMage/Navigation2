@@ -56,13 +56,6 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
      */
     protected $dataHelper;
 
-    /**
-     * @param Context                             $context
-     * @param \Magento\Theme\Block\Html\Pager     $htmlPagerBlock
-     * @param \Magento\Framework\App\Request\Http $request
-     * @param \Magento\Framework\Escaper          $escaper
-     * @param Data                                $dataHelper
-     */
     public function __construct(
         Context $context,
         \Magento\Theme\Block\Html\Pager $htmlPagerBlock,
@@ -139,10 +132,9 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
         if (!empty($queryParams[$item->getFilter()->getRequestVar()])) {
             $paramValues = explode('_', $queryParams[$item->getFilter()->getRequestVar()]);
         }
-        if (!in_array(html_entity_decode($this->getItemFormattedValue($item)), $paramValues)) {
+        if (!in_array($this->getItemFormattedValue($item), $paramValues)) {
             $paramValues[] = $this->getItemFormattedValue($item);
         }
-
 
         return implode('_', $paramValues);
     }
@@ -179,7 +171,7 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
         }
 
         $query = [];
-        if (count($paramValues) > 0) {
+        if ($paramValues) {
             $query[$item->getFilter()->getRequestVar()] = implode('_', $paramValues);
         } else {
             $query[$item->getFilter()->getRequestVar()] = null;
@@ -204,7 +196,8 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
             $paramValues = explode('_', $queryParams[$item->getFilter()->getRequestVar()]);
         }
 
-        if ($item->getFilter()->getAttributeModel()->getBackendModel() == 'Magento\Catalog\Model\Product\Attribute\Backend\Price') {
+        if ($item->getFilter()->getAttributeModel()->getBackendModel() ==
+            'Magento\Catalog\Model\Product\Attribute\Backend\Price') {
             $position = array_search(implode('-', $item->getValue()), $paramValues);
         } else {
             $position = array_search($this->getItemFormattedValue($item), $paramValues);
@@ -242,7 +235,9 @@ class Url extends \Magento\Framework\App\Helper\AbstractHelper
         if (!$this->dataHelper->isUseFriendlyUrls()) {
             return $item->getValue();
         }
-
-        return mb_strtolower(str_replace(' ', '+', $item->getLabel()));
+        if($item->getSearchValue()) {
+            return urlencode(mb_strtolower($item->getSearchValue()));
+        }
+        return urlencode(mb_strtolower($item->getLabel()));
     }
 }

@@ -1,5 +1,19 @@
 <?php
 /**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
+
+/**
  *
  * @var $block \Gomage\Navigation\Block\Navigation\FilterRenderer
  */
@@ -11,57 +25,78 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
 $categoriesHelper = $this->helper('GoMage\Navigation\Helper\CategoryData');
 ?>
 <div class="swatch-attribute">
-    <div class="swatch-attribute-options clearfix <?php echo $helperData->getOptionsAlignment((int)$filter->getGomageOptionsAlignment()); ?>">
-        <?php foreach ($filterItems as $item): ?>
-        <?php if ($item->getCount() > 0 || ($helperData->isShowEmptyCategory() && $filter->isCategoryFilter())) : ?>
-        <div class="text_gan_swatch_button">
-            <div class="swatch-option text <?php if($item->getIsActive()) : ?> selected <?php 
-           endif; ?> <?php echo (!empty($optionsLimit) && $cnt >= $optionsLimit) ? 'gan_link-more-element': '' ?>"  style="background: background-size: initial; <?php if((!$item->isShowAppliedValues()) || (!empty(($optionsLimit) && $cnt >= $optionsLimit) && !$helperData->isShowMore($filter->getName()))  ) : ?>display: none;<?php 
-           endif; ?>"
-                <?php if($item->getIsActive()) :?>
-                    class="active"
-                <?php endif;?>
-                 data-role="navigation-filter"
-                 data-url="<?php if(!$item->getIsActive()) :?><?php echo $block->escapeUrl($item->getGomageUrl()) ?> <?php 
-                endif;?>"
-                 data-value="<?php echo $block->escapeHtml($item->getGomageValue()) ?>"
-                 data-param="<?php echo $block->escapeHtml($filter->getRequestVar()) ?>"
-                <?php if  ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax()) && ( ($filter->isCategoryFilter() &&  $categoriesHelper->isAjax()) ||  !$filter->isCategoryFilter())) :?>
-                    data-ajax="1"
-                <?php else:?>
-                    data-ajax="0"
-                <?php endif;?>
-                 data-type="<?php echo (int) $filter->getGomageFilterType(); ?>"
-                <?php if($item->getIsActive()) :?>
-                    data-active="1"
-                <?php endif;?>>
-                <?php echo html_entity_decode($block->escapeHtml($item->getLabel(), ['span'])) ?>
-            </div>
-        </div>
-            <?php $cnt++;?>
-        <?php endif; ?>
+    <div class="swatch-attribute-options clearfix <?php echo $helperData
+        ->getOptionsAlignment((int)$filter->getGomageOptionsAlignment()); ?>">
+        <?php foreach ($filterItems as $item) : ?>
+            <?php if ($item->getCount() > 0 || ($helperData->isShowEmptyCategory() && $filter->isCategoryFilter())) : ?>
+                <div class="text_gan_swatch_button">
+                    <div class="swatch-option text <?php
+                    if ($item->getIsActive()) :
+                        ?> selected <?php
+                    endif; ?> <?php echo (!empty($optionsLimit) && $cnt >= $optionsLimit)
+                        ? 'gan_link-more-element' : '' ?>"
+                         style="background: background-size: initial; <?php if ((!$item->isShowAppliedValues()) ||
+                             (!empty(($optionsLimit) && $cnt >= $optionsLimit) && !$helperData
+                                     ->isShowMore($filter->getName()))) :
+                                ?>display: none;
+                            <?php endif; ?>"
+                        <?php if ($item->getIsActive()) : ?>
+                            class="active"
+                        <?php endif; ?>
+                         data-role="navigation-filter"
+                         data-url="<?php
+                            if (!$item->getIsActive()) : ?>
+
+                        <?php echo $block->escapeUrl($item->getGomageUrl()) ?> <?php
+                            endif; ?>"
+                         data-value="<?php echo $block->escapeHtml($item->getGomageValue()) ?>"
+                         data-param="<?php echo $block->escapeHtml($filter->getRequestVar()) ?>"
+                        <?php if ($filter->getGomageIsAjax() || null === ($filter->getGomageIsAjax()) && (($filter
+                                        ->isCategoryFilter()
+                                    && $categoriesHelper->isAjax()) || !$filter->isCategoryFilter())) : ?>
+                            data-ajax="1"
+                        <?php else : ?>
+                            data-ajax="0"
+                        <?php endif; ?>
+                         data-type="<?php echo (int)$filter->getGomageFilterType(); ?>"
+                        <?php if ($item->getIsActive()) : ?>
+                            data-active="1"
+                        <?php endif; ?>>
+                        <?php echo html_entity_decode($block->escapeHtml($item->getLabel(), ['span'])) ?>
+                    </div>
+                </div>
+                <?php $cnt++; ?>
+            <?php endif; ?>
         <?php endforeach ?>
     </div>
-    <?php if ($filter->isActive() && $filter->getGomageIsReset()) :?>
+    <?php if ($filter->isActive() && $filter->getGomageIsReset()) : ?>
         <a
                 data-role="navigation-filter"
                 data-value=""
                 data-url="<?php echo $block->escapeUrl($filter->getRemoveUrl()) ?>"
-                data-param-to-remove="<?php echo $block->escapeHtml($filter->getRequestVar()) ?>"="<?php echo $block->escapeHtml($filter->getRequestVar()) ?>"
-            <?php if ($filter->getGomageIsAjax() || is_null($filter->getGomageIsAjax())) :?>
-                data-ajax="1"
-            <?php else:?>
-                data-ajax="0"
-            <?php endif;?>
-                data-type="remove-item"
-                data-active="1"
-                href="#"
-                class="gan_link_reset">
-            <?php echo __('Reset'); ?>
+                data-param-to-remove="<?php echo $block->escapeHtml($filter->getRequestVar()) ?>"="<?php echo $block
+                ->escapeHtml($filter->getRequestVar()) ?>"
+        <?php if ($filter->getGomageIsAjax() || null === ($filter->getGomageIsAjax())) : ?>
+            data-ajax="1"
+        <?php else : ?>
+            data-ajax="0"
+        <?php endif; ?>
+        data-type="remove-item"
+        data-active="1"
+        href="#"
+        class="gan_link_reset">
+        <?php echo __('Reset'); ?>
         </a>
-    <?php endif;?>
-<?php if($optionsLimit && count($filterItems) > $optionsLimit) : ?>
-        <a style=" <?php echo ($helperData->isShowMore($filter->getName()) ) ? 'display:none': '' ?>" data-show-more = "<?php echo $helperData->isShowMore($filter->getName()) ?>" data-more-value = "<?php echo strtolower($filter->getName()); ?>" data-more-params="more_show" data-more-value = "<?php echo strtolower($filter->getName()); ?>" class="gan_link_more"><?php echo __('More') ?>&#9660;</a>
-        <a class="gan_link_more_less"  style=" <?php echo (!$helperData->isShowMore($filter->getName()) ) ? 'display:none': '' ?>"><?php echo __('Less') ?>&#9650;</a>
-<?php endif; ?>
+    <?php endif; ?>
+    <?php if ($optionsLimit && count($filterItems) > $optionsLimit) : ?>
+        <a style=" <?php echo ($helperData->isShowMore($filter->getName())) ? 'display:none' : '' ?>"
+           data-show-more="<?php echo $helperData->isShowMore($filter->getName()) ?>"
+           data-more-value="<?php echo strtolower($filter->getName()); ?>" data-more-params="more_show"
+           data-more-value="<?php echo strtolower($filter->getName()); ?>"
+           class="gan_link_more"><?php echo __('More') ?>&#9660;</a>
+        <a class="gan_link_more_less"
+           style=" <?php echo (!$helperData->isShowMore($filter->getName())) ?
+               'display:none' : '' ?>"><?php echo __('Less') ?>
+            &#9650;</a>
+    <?php endif; ?>
 </div>

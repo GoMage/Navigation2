@@ -1,5 +1,19 @@
 <?php
 /**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
+
+/**
  * Product list toolbar
  *
  * @var $block \Magento\Catalog\Block\Product\ProductList\Toolbar
@@ -14,16 +28,17 @@ $helper = $this->helper('GoMage\Navigation\Helper\Data');
     <label class="sorter-label" for="sorter"><?php echo __('Sort By') ?></label>
     <select id="sorter" data-role="navigation-filter"
             data-param="product_list_order"
-            <?php if($helper->isPaginationAjax()) : ?>data-ajax="1" <?php 
-            endif; ?>
+            <?php if ($helper->isPaginationAjax()) : ?>
+                data-ajax="1"
+        <?php endif; ?>
             data-active="1" class="sorter-options"
             data-type="select">
-        <?php foreach ($block->getAvailableOrders() as $_key => $_order): ?>
+        <?php foreach ($block->getAvailableOrders() as $_key => $_order) : ?>
             <option value="<?php echo $block->escapeHtml($_key) ?>"
                 <?php if ($block->isOrderCurrent($_key)) : ?>
                     selected="selected"
                 <?php endif; ?>
-                >
+            >
                 <?php echo $block->escapeHtml(__($_order)) ?>
             </option>
         <?php endforeach; ?>
@@ -35,14 +50,17 @@ $helper = $this->helper('GoMage\Navigation\Helper\Data');
            data-role="navigation-filter"
            data-param="product_list_dir"
            data-value="asc"
-            <?php if($helper->isPaginationAjax()) : ?>data-ajax="1" <?php 
-            endif; ?>>
+            <?php if ($helper->isPaginationAjax()) : ?>
+               data-ajax="1"
+            <?php endif; ?>>
             <span><?php echo __('Set Ascending Direction') ?></span>
         </a>
-    <?php else: ?>
-        <a title="<?php echo __('Set Descending Direction') ?>" href="#" class="action sorter-action sort-asc" data-role="navigation-filter" data-param="product_list_dir" data-value="desc"
-            <?php if($helper->isPaginationAjax()) : ?>data-ajax="1" <?php 
-            endif; ?>>
+    <?php else : ?>
+        <a title="<?php echo __('Set Descending Direction') ?>" href="#" class="action sorter-action sort-asc"
+           data-role="navigation-filter" data-param="product_list_dir" data-value="desc"
+            <?php if ($helper->isPaginationAjax()) : ?>
+                data-ajax="1"
+            <?php endif; ?>>
             <span><?php echo __('Set Descending Direction') ?></span>
         </a>
     <?php endif; ?>

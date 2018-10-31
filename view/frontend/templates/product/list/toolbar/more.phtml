@@ -22,8 +22,9 @@ $helper = $this->helper('GoMage\Navigation\Helper\Data');
                 id="<?php echo $block->escapeHtml($block->getType()); ?>"
                 class="<?php echo $block->escapeHtml($block->getType()); ?>"
                 data-role="navigation-filter"
-                <?php if($helper->isPaginationAjax()) : ?>data-ajax="1" <?php 
-                endif; ?>
+                <?php if ($helper->isPaginationAjax()) : ?>
+                    data-ajax="1"
+            <?php endif; ?>
                 data-type="<?php echo $block->escapeHtml($block->getType()); ?>"
         ><span><?php echo __('Show more products') ?></span></button>
     </div>

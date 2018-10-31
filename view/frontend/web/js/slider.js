@@ -1,7 +1,21 @@
+/**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
+
 define(
     [
-    "jquery",
-    "./slider/jquery.slider"
+        "jquery",
+        "./slider/jquery.slider"
     ], function ($) {
         "use strict";
 
@@ -21,6 +35,7 @@ define(
             this.ajax = element.attr('data-ajax');
             this.active = element.attr('data-active');
             this.clear = element.attr('data-clear');
+            this.round = element.attr('data-round');
         }
 
         SliderPrice.prototype = {
@@ -31,6 +46,10 @@ define(
              */
             isActive: function () {
                 return this.active;
+            },
+
+            getRound: function () {
+                return this.round;
             },
 
             /**
@@ -66,14 +85,14 @@ define(
              * @returns {*|String|tinymce.html.Node}
              */
             getFrom: function () {
-                return parseInt(this.from);
+                return parseFloat(this.from);
             },
             /**
              *
              * @returns {*|String|tinymce.html.Node}
              */
             getTo: function () {
-                return parseInt(this.to);
+                return parseFloat(this.to);
             },
             /**
              *

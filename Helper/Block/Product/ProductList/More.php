@@ -1,12 +1,26 @@
 <?php
 
+/**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
+
 namespace GoMage\Navigation\Block\Product\ProductList;
 
 use Magento\Framework\View\Element\Template;
 
 class More extends Template
 {
-    const BLOCK_MORE= 'button-more';
+    const BLOCK_MORE = 'button-more';
 
     /**
      * @var Template\Context
@@ -19,9 +33,9 @@ class More extends Template
     protected $navigationHelper;
 
     /**
-     * @param Template\Context               $context
+     * @param Template\Context $context
      * @param \GoMage\Navigation\Helper\Data $navigationHelper
-     * @param array                          $data
+     * @param array $data
      */
     public function __construct(
         Template\Context $context,
@@ -32,7 +46,7 @@ class More extends Template
         $this->context = $context;
         $this->navigationHelper = $navigationHelper;
 
-        if (!$this->navigationHelper->isUseAutoScrolling() && $navigationHelper->isEnable() ) {
+        if (!$this->navigationHelper->isUseAutoScrolling() && $navigationHelper->isEnable()) {
             $this->setTemplate('GoMage_Navigation::product/list/toolbar/more.phtml');
         }
     }
@@ -54,7 +68,7 @@ class More extends Template
     }
 
     /**
-     * @return bool|Mage_Page_Block_Html_Pager
+     * @return bool
      */
     public function getPagerBlock()
     {
@@ -62,7 +76,7 @@ class More extends Template
         if (!$toolbar || !$toolbar->getCollection()) {
             return false;
         }
-        $pagerBlock =$toolbar->getChildBlock('product_list_toolbar_pager');
+        $pagerBlock = $toolbar->getChildBlock('product_list_toolbar_pager');
         if ($pagerBlock) {
             $pagerBlock->setAvailableLimit($toolbar->getAvailableLimit());
             $pagerBlock->setUseContainer(false)

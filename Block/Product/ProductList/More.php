@@ -1,5 +1,18 @@
 <?php
 
+/**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
 namespace GoMage\Navigation\Block\Product\ProductList;
 
 use Magento\Framework\View\Element\Template;
@@ -33,7 +46,7 @@ class More extends Template
         $this->context = $context;
         $this->navigationHelper = $navigationHelper;
 
-        if (!$this->navigationHelper->isUseAutoScrolling() && $navigationHelper->isEnable() ) {
+        if (!$this->navigationHelper->isUseAutoScrolling() && $navigationHelper->isEnable()) {
             $this->setTemplate('GoMage_Navigation::product/list/toolbar/more.phtml');
         }
     }
@@ -55,7 +68,7 @@ class More extends Template
     }
 
     /**
-     * @return bool|Mage_Page_Block_Html_Pager
+     * @return bool
      */
     public function getPagerBlock()
     {

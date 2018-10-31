@@ -1,5 +1,19 @@
 <?php
 
+/**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
+
 namespace GoMage\Navigation\Block\Adminhtml\Catalog\Product\Attribute\Edit\Tab;
 
 use Magento\Backend\Block\Widget\Form\Generic;
@@ -7,6 +21,19 @@ use Magento\Config\Model\Config\Source\Yesno;
 use GoMage\Navigation\Model\Config\Source\Navigation as SourceNavigation;
 use GoMage\Navigation\Model\Config\Source\Image\Alignment;
 
+/**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
 class Navigation extends Generic
 {
     /**
@@ -26,12 +53,12 @@ class Navigation extends Generic
 
     /**
      * @param \Magento\Backend\Block\Template\Context $context
-     * @param \Magento\Framework\Registry             $registry
-     * @param \Magento\Framework\Data\FormFactory     $formFactory
-     * @param Yesno                                   $yesNo
-     * @param SourceNavigation                        $navigation
-     * @param Alignment                               $alignment
-     * @param array                                   $data
+     * @param \Magento\Framework\Registry $registry
+     * @param \Magento\Framework\Data\FormFactory $formFactory
+     * @param Yesno $yesNo
+     * @param SourceNavigation $navigation
+     * @param Alignment $alignment
+     * @param array $data
      */
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
@@ -41,18 +68,17 @@ class Navigation extends Generic
         SourceNavigation $navigation,
         Alignment $alignment,
         array $data = []
-    ) {
-        $this->yesNo      = $yesNo;
+    )
+    {
+        $this->yesNo = $yesNo;
         $this->navigation = $navigation;
-        $this->alignment  = $alignment;
+        $this->alignment = $alignment;
         parent::__construct($context, $registry, $formFactory, $data);
     }
 
     /**
-     * Adding product form elements for editing attribute
-     *
-     * @return                  $this
-     * @SuppressWarnings(PHPMD)
+     * @return $this|Generic
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     protected function _prepareForm()
     {
@@ -73,9 +99,9 @@ class Navigation extends Generic
             'navigation',
             'select',
             [
-                'name'   => 'navigation',
-                'label'  => __('Filter Type'),
-                'title'  => __('Filter Type'),
+                'name' => 'navigation',
+                'label' => __('Filter Type'),
+                'title' => __('Filter Type'),
                 'values' => $this->navigation->toOptionArray(),
             ]
         );
@@ -84,9 +110,9 @@ class Navigation extends Generic
             'is_show_button',
             'select',
             [
-                'name'   => 'is_show_button',
-                'label'  => __('Show Filter Button'),
-                'title'  => __('Show Filter Button'),
+                'name' => 'is_show_button',
+                'label' => __('Show Filter Button'),
+                'title' => __('Show Filter Button'),
                 'values' => $yesno,
             ]
         );
@@ -95,11 +121,11 @@ class Navigation extends Generic
             'is_ajax',
             'select',
             [
-                'name'   => 'is_ajax',
-                'label'  => __('Use Ajax'),
-                'title'  => __('Use Ajax'),
+                'name' => 'is_ajax',
+                'label' => __('Use Ajax'),
+                'title' => __('Use Ajax'),
                 'values' => $yesno,
-                'value'  => $attributeObject->getData('is_ajax'),
+                'value' => $attributeObject->getData('is_ajax'),
             ]
         );
 
@@ -107,9 +133,9 @@ class Navigation extends Generic
             'is_collapsed',
             'select',
             [
-                'name'   => 'is_collapsed',
-                'label'  => __('Show Collapsed'),
-                'title'  => __('Show Collapsed'),
+                'name' => 'is_collapsed',
+                'label' => __('Show Collapsed'),
+                'title' => __('Show Collapsed'),
                 'values' => $yesno,
             ]
         );
@@ -118,9 +144,9 @@ class Navigation extends Generic
             'is_checkbox',
             'select',
             [
-                'name'   => 'is_checkbox',
-                'label'  => __('Show Checkboxes'),
-                'title'  => __('Show Checkboxes'),
+                'name' => 'is_checkbox',
+                'label' => __('Show Checkboxes'),
+                'title' => __('Show Checkboxes'),
                 'values' => $yesno,
             ]
         );
@@ -129,9 +155,9 @@ class Navigation extends Generic
             'is_image',
             'select',
             [
-                'name'   => 'is_image',
-                'label'  => __('Show Image'),
-                'title'  => __('Show Image'),
+                'name' => 'is_image',
+                'label' => __('Show Image'),
+                'title' => __('Show Image'),
                 'values' => $yesno,
             ]
         );
@@ -140,9 +166,9 @@ class Navigation extends Generic
             'imagealignment',
             'select',
             [
-                'name'   => 'imagealignment',
-                'label'  => __('Image Alignment'),
-                'title'  => __('Image Alignment'),
+                'name' => 'imagealignment',
+                'label' => __('Image Alignment'),
+                'title' => __('Image Alignment'),
                 'values' => $this->alignment->toOptionArray(),
             ]
         );
@@ -151,7 +177,7 @@ class Navigation extends Generic
             'image_width',
             'text',
             [
-                'name'  => 'image_width',
+                'name' => 'image_width',
                 'label' => __('Image Width, px'),
                 'title' => __('Image Width, px'),
                 'class' => 'validate-number'
@@ -162,7 +188,7 @@ class Navigation extends Generic
             'image_height',
             'text',
             [
-                'name'  => 'image_height',
+                'name' => 'image_height',
                 'label' => __('Image Height, px'),
                 'title' => __('Image Height, px'),
                 'class' => 'validate-number'
@@ -173,7 +199,7 @@ class Navigation extends Generic
             'limit',
             'text',
             [
-                'name'  => 'limit',
+                'name' => 'limit',
                 'label' => __('Visible Options per Attribute'),
                 'title' => __('Visible Options per Attribute'),
                 'class' => 'validate-number'
@@ -184,9 +210,9 @@ class Navigation extends Generic
             'is_tooltip',
             'select',
             [
-                'name'   => 'is_tooltip',
-                'label'  => __('Show Tooltip'),
-                'title'  => __('Show Tooltip'),
+                'name' => 'is_tooltip',
+                'label' => __('Show Tooltip'),
+                'title' => __('Show Tooltip'),
                 'values' => $yesno,
             ]
         );
@@ -195,7 +221,7 @@ class Navigation extends Generic
             'tooltip_width',
             'text',
             [
-                'name'  => 'tooltip_width',
+                'name' => 'tooltip_width',
                 'label' => __('Tooltip Window Width, px'),
                 'title' => __('Tooltip Window Width, px'),
                 'class' => 'validate-number'
@@ -206,7 +232,7 @@ class Navigation extends Generic
             'tooltip_height',
             'text',
             [
-                'name'  => 'tooltip_height',
+                'name' => 'tooltip_height',
                 'label' => __('Tooltip Window Height, px'),
                 'title' => __('Tooltip Window Height, px'),
                 'class' => 'validate-number'
@@ -217,7 +243,7 @@ class Navigation extends Generic
             'tooltip_text',
             'textarea',
             [
-                'name'  => 'tooltip_text',
+                'name' => 'tooltip_text',
                 'label' => __('Tooltip Text'),
                 'title' => __('Tooltip Text'),
             ]
@@ -227,9 +253,9 @@ class Navigation extends Generic
             'is_reset',
             'select',
             [
-                'name'   => 'is_reset',
-                'label'  => __('Show Reset Link'),
-                'title'  => __('Show Reset Link'),
+                'name' => 'is_reset',
+                'label' => __('Show Reset Link'),
+                'title' => __('Show Reset Link'),
                 'values' => $yesno,
             ]
         );

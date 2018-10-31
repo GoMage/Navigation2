@@ -1,9 +1,18 @@
 <?php
 /**
- * Pager template
+ * GoMage.com
  *
- * @var $block \Magento\Theme\Block\Html\Pager
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
  */
+
 $helper = $this->helper('GoMage\Navigation\Helper\Data');
 $moreButton = $this->getLayout()->createBlock('GoMage\Navigation\Block\Product\ProductList\More');
 ?>
@@ -65,7 +74,8 @@ $moreButton = $this->getLayout()->createBlock('GoMage\Navigation\Block\Product\P
 
             <?php if ($block->canShowPreviousJump()) : ?>
                 <li class="item">
-                    <a class="page previous jump" title="" href="<?php echo $block->escapeUrl($block->getPreviousJumpUrl()) ?>"
+                    <a class="page previous jump" title="" href="<?php echo $block
+                        ->escapeUrl($block->getPreviousJumpUrl()) ?>"
                        data-role="navigation-filter"
                        data-value="<?php echo $block->escapeUrl($block->getPreviousJumpPage()) ?>"
                        data-param="<?php echo $block->escapeUrl($block->getPageVarName()) ?>"

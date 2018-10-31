@@ -1,3 +1,19 @@
+<?php
+/**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
+
+?>
 <?php $helperViewData = $this->helper('GoMage\Navigation\Helper\NavigationViewData') ?>
 <?php
 /**
@@ -6,18 +22,25 @@
       $helperData = $this->helper(GoMage\Navigation\Helper\Data::class);
       $asset = $helperData->getAssets();
 ?>
-<?php if($helperData->isEnable()) : ?>
-<link rel="stylesheet" type="text/css" href="<?php echo $asset->createAsset('GoMage_Navigation::css/gomage-navigation.css')->getUrl(); ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo $asset->createAsset('GoMage_Navigation::css/jslider.blue.css')->getUrl(); ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo $asset->createAsset('GoMage_Navigation::css/jslider.css')->getUrl(); ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo $asset->createAsset('GoMage_Navigation::css/jslider.plastic.css')->getUrl(); ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo $asset->createAsset('GoMage_Navigation::css/jslider.round.css')->getUrl(); ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo $asset->createAsset('GoMage_Navigation::css/jslider.round.plastic.css')->getUrl(); ?>">
+<?php if ($helperData->isEnable()) : ?>
+<link rel="stylesheet" type="text/css" href="<?php echo $asset
+    ->createAsset('GoMage_Navigation::css/gomage-navigation.css')->getUrl(); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo $asset
+    ->createAsset('GoMage_Navigation::css/jslider.blue.css')->getUrl(); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo $asset
+    ->createAsset('GoMage_Navigation::css/jslider.css')->getUrl(); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo $asset
+    ->createAsset('GoMage_Navigation::css/jslider.plastic.css')->getUrl(); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo $asset
+    ->createAsset('GoMage_Navigation::css/jslider.round.css')->getUrl(); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo $asset
+    ->createAsset('GoMage_Navigation::css/jslider.round.plastic.css')->getUrl(); ?>">
 <style type="text/css">
     .page-layout-1column .toolbar.toolbar-products {
         position: static;
     }
-    <?php if ($helperViewData->getNavigationViewSliderLineHeight() < $helperViewData->getNavigationViewSliderElementHeight()) :?>
+    <?php if ($helperViewData->getNavigationViewSliderLineHeight() < $helperViewData
+    ->getNavigationViewSliderElementHeight()) :?>
     .gan-filter-slider .layout {
         padding-bottom: <?php echo $block->escapeHtml($helperViewData->getNavigationViewSliderElementHeight())?>px;
         margin-left: <?php echo $block->escapeHtml(($helperViewData->getNavigationViewSliderElementWidth() / 2))?>px;
@@ -26,7 +49,9 @@
 
     .gan-filter-slider .jslider .jslider-label,
     .gan-filter-slider .jslider .jslider-value {
-        margin-top: <?php echo $block->escapeHtml((($helperViewData->getNavigationViewSliderElementHeight() - $helperViewData->getNavigationViewSliderLineHeight()) / 2 + 10)) ?>px;
+        margin-top: <?php echo $block->escapeHtml((($helperViewData
+        ->getNavigationViewSliderElementHeight() - $helperViewData
+        ->getNavigationViewSliderLineHeight()) / 2 + 10)) ?>px;
     }
 
     <?php endif;?>

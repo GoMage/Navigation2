@@ -1,14 +1,31 @@
 <?php
 
+/**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
+
 namespace GoMage\Navigation\Model\Catalog\Layer\Filter;
+
+use GoMage\Navigation\Model\Catalog\Layer\Filter\FilterInterface;
 
 /**
  * Class Attribute
  *
  * @package GoMage\Navigation\Model\Catalog\Layer\Filter
  */
-class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements FilterInterface
+class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute implements FilterInterface
 {
+    protected $itemsInitiels;
     /**
      * @var \Magento\Framework\App\RequestInterface
      */
@@ -44,23 +61,6 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
      */
     protected $urlHelper;
 
-    protected $ids;
-
-    /**
-     * @param \Magento\Catalog\Model\Layer\Filter\ItemFactory                    $filterItemFactory
-     * @param \Magento\Store\Model\StoreManagerInterface                         $storeManager
-     * @param \Magento\Catalog\Model\Layer                                       $layer
-     * @param \Magento\Catalog\Model\Layer\Filter\Item\DataBuilder               $itemDataBuilder
-     * @param \Magento\Catalog\Model\ResourceModel\Layer\Filter\AttributeFactory $filterAttributeFactory
-     * @param \Magento\Framework\Stdlib\StringUtils                              $string
-     * @param \Magento\Framework\Filter\StripTags                                $tagFilter
-     * @param \Magento\Framework\App\RequestInterface                            $request
-     * @param \Magento\Catalog\Model\Session                                     $catalogSession
-     * @param \GoMage\Navigation\Helper\Data                                     $helper
-     * @param \GoMage\Navigation\Helper\Url                                      $urlHelper
-     * @param \Magento\Catalog\Model\Layer\Category\CollectionFilter             $filter
-     * @param array                                                              $data
-     */
     public function __construct(
         \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
@@ -72,7 +72,6 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         \GoMage\Navigation\Helper\Url $urlHelper,
         \Magento\Catalog\Model\ResourceModel\Layer\Filter\AttributeFactory $filterAttributeFactory,
         \Magento\Catalog\Model\Layer\Category\CollectionFilter $filter,
-        \Magento\Framework\Stdlib\StringUtils $string,
         array $data = []
     ) {
         $this->_requestVar = 'attribute';
@@ -83,9 +82,7 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         $this->filter = $filter;
         $this->urlHelper = $urlHelper;
         $this->_resource = $filterAttributeFactory->create();
-        parent::__construct($filterItemFactory, $storeManager, $layer, $itemDataBuilder, $filterAttributeFactory, $string, $tagFilter, $data);
-
-
+        parent::__construct($filterItemFactory, $storeManager, $layer, $itemDataBuilder, $tagFilter, $data);
     }
 
     /**
@@ -111,10 +108,7 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
     {
         return false;
     }
-    /**
-     * @param \Magento\Framework\App\RequestInterface $request
-     * @return $this
-     */
+
     public function apply(\Magento\Framework\App\RequestInterface $request)
     {
         if (!$this->helper->isEnable()) {
@@ -131,23 +125,7 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
             $attribute = $this->getAttributeModel();
             $collection = $this->getLayer()
                 ->getProductCollection();
-
-            if (!empty($this->getSwatchInputType())) {
-                $newCollection = $this->getLayer()->getCollectionProvider()->getCollection($this->getLayer()->getCurrentCategory());
-                $newCollection->updateSearchCriteriaBuilder();
-                $this->getLayer()->prepareProductCollection($newCollection);
-                $newCollection->addFieldToFilter($attribute->getAttributeCode(), ['in' => $filters]);
-                $newCollection->load();
-                $ids = $newCollection->getAllIds();
-                if (!empty($ids)) {
-                    $collection->addAttributeToFilter('entity_id', ['in' => $ids]);
-                    $this->ids = $ids;
-                    $collection->addAdditionalFilter($attribute->getAttributeCode(), ['in' => $filters]);
-                }
-            } else {
-                $collection->addFieldToFilter($attribute->getAttributeCode(), ['in' => $filters]);
-            }
-
+            $collection->addFieldToFilter($attribute->getAttributeCode(), ['in' => $filters]);
             foreach ($filters as $filterItem) {
                 $text = $this->getOptionText($filterItem);
                 $this->getLayer()->getState()->addFilter($this->_createItem($text, $filterItem));
@@ -165,11 +143,71 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         return explode('_', $this->request->getParam($this->_requestVar));
     }
 
+    protected function _getItemsData()
+    {
+        if (!$this->helper->isEnable()) {
+            return parent::_getItemsData();
+        }
+        if (!$this->request->getParam($this->_requestVar) ||
+            $this->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::DROP_DOWN) {
+            $attribute = $this->getAttributeModel();
+            /** @var \Magento\CatalogSearch\Model\ResourceModel\Fulltext\Collection $productCollection */
+            $productCollection = $this->getLayer()
+                ->getProductCollection();
+            $optionsFacetedData = $productCollection->getFacetedData($attribute->getAttributeCode());
 
-    /**
-     * @param $filter
-     * @return array
-     */
+            $isAttributeFilterable =
+                $this->getAttributeIsFilterable($attribute) === static::ATTRIBUTE_OPTIONS_ONLY_WITH_RESULTS;
+
+            if (count($optionsFacetedData) === 0 && !$isAttributeFilterable) {
+                return $this->itemDataBuilder->build();
+            }
+
+            $productSize = $productCollection->getSize();
+
+            $options = $attribute->getFrontend()
+                ->getSelectOptions();
+            foreach ($options as $option) {
+                $this->buildOptionData($option, $isAttributeFilterable, $optionsFacetedData, $productSize);
+            }
+
+            return $this->itemDataBuilder->build();
+        }
+
+        $attribute = $this->getAttributeModel();
+        /**
+         * @var \Magento\CatalogSearch\Model\ResourceModel\Fulltext\Collection $productCollection
+         */
+        $productCollection = $this->getLayer()
+            ->getProductCollection();
+        $isAttributeFilterable =
+        $this->getAttributeIsFilterable($attribute) === static::ATTRIBUTE_OPTIONS_ONLY_WITH_RESULTS;
+        $collection = $this->getLayer()->getCollectionProvider()
+            ->getCollection($this->getLayer()->getCurrentCategory());
+        $collection->updateSearchCriteriaBuilder();
+        $this->getLayer()->prepareProductCollection($collection);
+
+        foreach ($productCollection->getAddedFilters() as $field => $condition) {
+            if ($this->getAttributeModel()->getAttributeCode() == $field) {
+                continue;
+            }
+            $collection->addFieldToFilter($field, $condition);
+        }
+        $optionsFacetedData = $collection->getFacetedData($attribute->getAttributeCode());
+        if (count($optionsFacetedData) === 0 && !$isAttributeFilterable) {
+            return $this->itemDataBuilder->build();
+        }
+
+        $productSize = $productCollection->getSize();
+
+        $options = $attribute->getFrontend()
+            ->getSelectOptions();
+        foreach ($options as $option) {
+            $this->buildOptionData($option, $isAttributeFilterable, $optionsFacetedData, $productSize);
+        }
+        return $this->itemDataBuilder->build();
+    }
+
     protected function getFormattedFilters($filter)
     {
         $filters = explode('_', $filter);
@@ -179,7 +217,7 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
 
         if (empty($this->options)) {
             foreach ($this->getAttributeModel()->getFrontend()->getSelectOptions() as $option) {
-                $this->options[html_entity_decode($this->formatItemName($option['label']))] = trim($option['value']);
+                $this->options[urlencode(mb_strtolower($option['label']))] = trim($option['value']);
             }
         }
 
@@ -209,7 +247,7 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
      */
     protected function formatItemName($name)
     {
-        return mb_strtolower(str_replace(' ', '+', $name));
+        return mb_strtolower(urlencode($name));
     }
 
     /**
@@ -231,4 +269,70 @@ class Attribute extends \Magento\Catalog\Model\Layer\Filter\Attribute implements
         return false;
     }
 
+    /**
+     * Build option data
+     *
+     * @param  array   $option
+     * @param  boolean $isAttributeFilterable
+     * @param  array   $optionsFacetedData
+     * @param  int     $productSize
+     * @return void
+     */
+    private function buildOptionData($option, $isAttributeFilterable, $optionsFacetedData, $productSize)
+    {
+        $value = $this->getOptionValue($option);
+        if ($value === false) {
+            return;
+        }
+        $count = $this->getOptionCount($value, $optionsFacetedData);
+        if ($isAttributeFilterable && (!$this->isOptionReducesResults($count, $productSize) || $count === 0)) {
+            return;
+        }
+
+        $this->itemDataBuilder->addItemData(
+            $option['label'],
+            $value,
+            $count
+        );
+    }
+
+    /**
+     * Retrieve count of the options
+     *
+     * @param  int|string $value
+     * @param  array      $optionsFacetedData
+     * @return int
+     */
+    private function getOptionCount($value, $optionsFacetedData)
+    {
+        return isset($optionsFacetedData[$value]['count'])
+            ? (int)$optionsFacetedData[$value]['count']
+            : 0;
+    }
+
+    /**
+     * Retrieve option value if it exists
+     *
+     * @param  array $option
+     * @return bool|string
+     */
+    private function getOptionValue($option)
+    {
+        if (empty($option['value']) && !is_numeric($option['value'])) {
+            return false;
+        }
+        return $option['value'];
+    }
+
+    /**
+     * Checks whether the option reduces the number of results
+     *
+     * @param  int $optionCount Count of search results with this option
+     * @param  int $totalSize   Current search results count
+     * @return bool
+     */
+    protected function isOptionReducesResults($optionCount, $totalSize)
+    {
+        return true;
+    }
 }

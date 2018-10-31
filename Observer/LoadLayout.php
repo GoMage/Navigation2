@@ -12,6 +12,20 @@ use Magento\Catalog\Model\CategoryRepository;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\DataObject;
 
+/**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
+
 class LoadLayout implements ObserverInterface
 {
     /**
@@ -64,8 +78,14 @@ class LoadLayout implements ObserverInterface
     protected $storeManager;
 
     /**
+     * LoadLayout constructor.
      * @param \Magento\Framework\App\RequestInterface $request
-     * @param \GoMage\Navigation\Helper\Data          $dataHelper
+     * @param \GoMage\Navigation\Helper\Data $dataHelper
+     * @param \Magento\Framework\Registry $registry
+     * @param \Magento\Cms\Model\Page $cmsPage
+     * @param \Magento\Catalog\Model\CategoryFactory $categoryFactory
+     * @param CategoryRepository $categoryRepository
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      */
     public function __construct(
         \Magento\Framework\App\RequestInterface $request,
@@ -87,13 +107,13 @@ class LoadLayout implements ObserverInterface
 
     /**
      * @param \Magento\Framework\Event\Observer $observer
-     * @return $this
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
         $layout = $observer->getLayout();
-        if($this->cmsPage->getId()) {
-            if($this->cmsPage->getNavigationCategoryId()) {
+        if ($this->cmsPage->getId()) {
+            if ($this->cmsPage->getNavigationCategoryId()) {
                 $categoryId = $this->cmsPage->getNavigationCategoryId();
                 $storeId = $this->storeManager->getStore()->getId();
                 $category = $this->categoryRepository->get($categoryId, $storeId);

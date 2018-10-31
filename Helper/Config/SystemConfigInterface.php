@@ -1,5 +1,19 @@
 <?php
 
+/**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
+
 namespace GoMage\Navigation\Helper\Config;
 
 /**
@@ -55,13 +69,15 @@ interface SystemConfigInterface
     const SYSTEM_LOADER_CONFIG_WINDOW_HEIGHT = 'height';
     const SYSTEM_LOADER_CONFIG_TEXT = 'text';
     const SYSTEM_NAVIGATION_VIEW_CONFIG_BACKGROUND = 'block' . self::SYSTEM_CONFIG_SLASH . 'background';
-    const SYSTEM_NAVIGATION_VIEW_CONFIG_CATEGORY_BACKGROUND = 'block' . self::SYSTEM_CONFIG_SLASH . 'category_background';
+    const SYSTEM_NAVIGATION_VIEW_CONFIG_CATEGORY_BACKGROUND = 'block' . self::SYSTEM_CONFIG_SLASH .
+    'category_background';
     const SYSTEM_NAVIGATION_VIEW_CONFIG_BUTTON_BACKGROUND = 'button' . self::SYSTEM_CONFIG_SLASH . 'background';
     const SYSTEM_NAVIGATION_VIEW_CONFIG_BUTTON_GRADIENT = 'button' . self::SYSTEM_CONFIG_SLASH . 'gradient';
     const SYSTEM_NAVIGATION_VIEW_CONFIG_BUTTON_BACKGROUND2 = 'button' . self::SYSTEM_CONFIG_SLASH . 'background2';
     const SYSTEM_NAVIGATION_VIEW_CONFIG_BUTTON_TEXT_COLOR = 'button' . self::SYSTEM_CONFIG_SLASH . 'color';
     const SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_BACKGROUND = 'tooltip' . self::SYSTEM_CONFIG_SLASH . 'background';
-    const SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_WINDOW_BACKGROUND = 'tooltip' . self::SYSTEM_CONFIG_SLASH . 'window_background';
+    const SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_WINDOW_BACKGROUND = 'tooltip' . self::SYSTEM_CONFIG_SLASH .
+    'window_background';
     const SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_SHOW_EVENT = 'tooltip' . self::SYSTEM_CONFIG_SLASH . 'show_event';
     const SYSTEM_NAVIGATION_VIEW_CONFIG_TOOLTIP_HIDE_EVENT = 'tooltip' . self::SYSTEM_CONFIG_SLASH . 'hide_event';
     const SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_LINE_COLOR = 'slider' . self::SYSTEM_CONFIG_SLASH . 'line_color';
@@ -70,4 +86,7 @@ interface SystemConfigInterface
     const SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_ELEMENT_WIDTH = 'slider' . self::SYSTEM_CONFIG_SLASH . 'element_width';
     const SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_ELEMENT_HEIGHT = 'slider' . self::SYSTEM_CONFIG_SLASH . 'element_height';
     const SYSTEM_NAVIGATION_VIEW_CONFIG_SLIDER_ELEMENT_RADIUS = 'slider' . self::SYSTEM_CONFIG_SLASH . 'element_radius';
+    const SLIDER_GROUP = 'price_slider';
+    const SLIDER_ROUND = 'round';
+    const SLIDER_STEP = 'step';
 }

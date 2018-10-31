@@ -1,10 +1,25 @@
 <?php
 
+/**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
+
 namespace GoMage\Navigation\Block\Navigation;
 
 use GoMage\Navigation\Model\Catalog\Layer\Filter\FilterInterface;
 use Magento\Framework\View\Element\Template;
 use GoMage\Navigation\Model\Config\Source\NavigationInterface;
+use  GoMage\Navigation\Helper\Config\SystemConfigInterface;
 
 class FilterRenderer extends Template implements FilterRendererInterface
 {
@@ -48,6 +63,9 @@ class FilterRenderer extends Template implements FilterRendererInterface
      */
     public $tooltip;
 
+    /**
+     * @var \Magento\Catalog\Model\Layer\Resolver
+     */
     protected $layerResolver;
     /**
      * @var \GoMage\Navigation\Helper\NavigationViewData
@@ -55,13 +73,15 @@ class FilterRenderer extends Template implements FilterRendererInterface
     protected $navigationViewHelper;
 
     /**
-     * @param Template\Context                                        $context
-     * @param \Magento\Framework\Registry                             $coreRegistry
+     * FilterRenderer constructor.
+     * @param Template\Context $context
+     * @param \Magento\Framework\Registry $coreRegistry
      * @param \Magento\Swatches\Block\LayeredNavigation\RenderLayered $renderLayered
-     * @param \GoMage\Navigation\Helper\Url                           $urlHelper
-     * @param \GoMage\Navigation\Helper\Data                          $dataHelper
-     * @param \GoMage\Navigation\Helper\NavigationViewData            $navigationViewHelper
-     * @param array                                                   $data
+     * @param \Magento\Catalog\Model\Layer\Resolver $layerResolver
+     * @param \GoMage\Navigation\Helper\Url $urlHelper
+     * @param \GoMage\Navigation\Helper\Data $dataHelper
+     * @param \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper
+     * @param array $data
      */
     public function __construct(
         Template\Context $context,
@@ -72,7 +92,8 @@ class FilterRenderer extends Template implements FilterRendererInterface
         \GoMage\Navigation\Helper\Data $dataHelper,
         \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper,
         array $data = []
-    ) {
+    )
+    {
         $this->coreRegistry = $coreRegistry;
         $this->request = $context->getRequest();
         $this->urlHelper = $urlHelper;
@@ -101,6 +122,10 @@ class FilterRenderer extends Template implements FilterRendererInterface
         return $this->navigationViewHelper;
     }
 
+    /**
+     * @param $filter
+     * @return bool
+     */
     public function renderInCurrentCategory($filter)
     {
         $categories = explode(',', $filter->getData('gomage_is_exclude_categories'));
@@ -116,8 +141,8 @@ class FilterRenderer extends Template implements FilterRendererInterface
      */
     protected function _getCategory()
     {
-        $category =  $this->coreRegistry->registry('current_category');
-        if(!$category) {
+        $category = $this->coreRegistry->registry('current_category');
+        if (!$category) {
             $category = $this->layerResolver->get()->getCurrentCategory();
         }
         return $category;
@@ -163,12 +188,25 @@ class FilterRenderer extends Template implements FilterRendererInterface
         return $html;
     }
 
+
     /**
      * @return int
      */
     public function getStep()
     {
-        return NavigationInterface::PRICE_SLIDER_STEP;
+        return $this->dataHelper->getScopeData(SystemConfigInterface::SLIDER_GROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SLIDER_STEP);
+    }
+
+    /**
+     * @return int
+     */
+    public function getRound()
+    {
+        return $this->dataHelper->getScopeData(SystemConfigInterface::SLIDER_GROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SLIDER_ROUND);
     }
 
     /**
@@ -204,19 +242,15 @@ class FilterRenderer extends Template implements FilterRendererInterface
         $params = $this->request->getParam($requestVar);
         $params = explode('_', $params);
 
-        $criteria = mb_strtolower(str_replace(' ', '+', $item->getLabel()));
-        if ($this->dataHelper->isUseFriendlyUrls() 
+        $criteria = urlencode(mb_strtolower( $item->getLabel()));
+        if ($this->dataHelper->isUseFriendlyUrls()
             && (in_array($criteria, $params)
-            || in_array(html_entity_decode($criteria), $params)
-            || in_array(htmlentities($criteria), $params))
+                || in_array($criteria, $params))
         ) {
             $item->setIsActive(true);
         }
 
-        if (!$this->dataHelper->isUseFriendlyUrls() 
-            && (in_array($criteria, $params)
-            || in_array(html_entity_decode($criteria), $params)
-            || in_array(htmlentities($criteria), $params))
+        if (!$this->dataHelper->isUseFriendlyUrls() && in_array($criteria, $params)
         ) {
             $item->setIsActive(true);
         }
@@ -225,6 +259,7 @@ class FilterRenderer extends Template implements FilterRendererInterface
     /**
      * @param $filter
      * @return \Magento\Framework\View\Element\BlockInterface
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getTooltip($filter)
     {

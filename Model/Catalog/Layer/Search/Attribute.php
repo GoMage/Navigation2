@@ -1,5 +1,19 @@
 <?php
 
+/**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
+
 namespace GoMage\Navigation\Model\Catalog\Layer\Search;
 
 use GoMage\Navigation\Model\Catalog\Layer\Filter\FilterInterface;
@@ -17,6 +31,7 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
     protected $request;
 
     protected $_requestVarOrder;
+    protected $itemsInitiels;
     /**
      * @var \Magento\Catalog\Model\Session
      */
@@ -46,21 +61,6 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
      */
     protected $urlHelper;
 
-    /**
-     * @param \Magento\Catalog\Model\Layer\Filter\ItemFactory                    $filterItemFactory
-     * @param \Magento\Store\Model\StoreManagerInterface                         $storeManager
-     * @param \Magento\Catalog\Model\Layer                                       $layer
-     * @param \Magento\Catalog\Model\Layer\Filter\Item\DataBuilder               $itemDataBuilder
-     * @param \Magento\Catalog\Model\ResourceModel\Layer\Filter\AttributeFactory $filterAttributeFactory
-     * @param \Magento\Framework\Stdlib\StringUtils                              $string
-     * @param \Magento\Framework\Filter\StripTags                                $tagFilter
-     * @param \Magento\Framework\App\RequestInterface                            $request
-     * @param \Magento\Catalog\Model\Session                                     $catalogSession
-     * @param \GoMage\Navigation\Helper\Data                                     $helper
-     * @param \GoMage\Navigation\Helper\Url                                      $urlHelper
-     * @param \Magento\Catalog\Model\Layer\Category\CollectionFilter             $filter
-     * @param array                                                              $data
-     */
     public function __construct(
         \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
@@ -82,7 +82,7 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
         $this->filter = $filter;
         $this->urlHelper = $urlHelper;
         $this->_resource = $filterAttributeFactory->create();
-        parent::__construct($filterItemFactory, $storeManager, $layer, $itemDataBuilder,  $tagFilter, $data);
+        parent::__construct($filterItemFactory, $storeManager, $layer, $itemDataBuilder, $tagFilter, $data);
     }
 
     /**
@@ -108,10 +108,7 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
     {
         return false;
     }
-    /**
-     * @param \Magento\Framework\App\RequestInterface $request
-     * @return $this
-     */
+
     public function apply(\Magento\Framework\App\RequestInterface $request)
     {
         if (!$this->helper->isEnable()) {
@@ -128,29 +125,12 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
             $attribute = $this->getAttributeModel();
             $collection = $this->getLayer()
                 ->getProductCollection();
-
-            if (!empty($this->getSwatchInputType())) {
-                $newCollection = $this->getLayer()->getCollectionProvider()->getCollection($this->getLayer()->getCurrentCategory());
-                $newCollection->updateSearchCriteriaBuilder();
-                $this->getLayer()->prepareProductCollection($newCollection);
-                $newCollection->addFieldToFilter($attribute->getAttributeCode(), ['in' => $filters]);
-                $newCollection->load();
-                $ids = $newCollection->getAllIds();
-                if (!empty($ids)) {
-                    $collection->addAttributeToFilter('entity_id', ['in' => $ids]);
-                    $collection->addAdditionalFilter($attribute->getAttributeCode(), ['in' => $filters]);
-                }
-            } else {
-                $collection->addFieldToFilter($attribute->getAttributeCode(), ['in' => $filters]);
-            }
-
+            $collection->addFieldToFilter($attribute->getAttributeCode(), ['in' => $filters]);
             foreach ($filters as $filterItem) {
                 $text = $this->getOptionText($filterItem);
                 $this->getLayer()->getState()->addFilter($this->_createItem($text, $filterItem));
             }
-            $t = $collection->getSelect()->__toString();
         }
-
 
         return $this;
     }
@@ -163,9 +143,6 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
         return explode('_', $this->request->getParam($this->_requestVar));
     }
 
-    /**
-     * @return array
-     */
     protected function _getItemsData()
     {
         if (!$this->helper->isEnable()) {
@@ -179,55 +156,18 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
         if ($this->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::DROP_DOWN) {
             return parent::_getItemsData();
         }
-        //        $attribute = $this->getAttributeModel();
-        //        $productCollection = clone $this->getLayer()
-        //            ->getProductCollection($this->getLayer()->getCurrentCategory());
-        //
-        //        $collection = $this->getLayer()->getCollectionProvider()->getCollection($this->getLayer()->getCurrentCategory());
-        //        $collection->updateSearchCriteriaBuilder();
-        //        $this->getLayer()->prepareProductCollection($collection);
-        //
-        //        foreach ($productCollection->getAddedFilters() as $field => $condition) {
-        //            if ($this->getAttributeModel()->getAttributeCode() == $field) {
-        //                continue;
-        //            }
-        //            $collection->addFieldToFilter($field, $condition);
-        //        }
-        //        $optionsFacetedData = $collection->getFacetedData($attribute->getAttributeCode());
-        //
-        //        $optionsCount = $this->_getResource()->getCount($this);
-        //        $usedOptions = $this->getUsedOptions();
-        //        foreach ($attribute->getFrontend()->getSelectOptions() as $option) {
-        //            if (empty($option['value'])) {
-        //                continue;
-        //            }
-        //
-        //            if (in_array($option['value'], $usedOptions) && !empty($optionsCount[$option['value']])) {
-        //                $optionsFacetedData[$option['value']]['count'] = $optionsCount[$option['value']];
-        //            }
-        //
-        //            if (empty($optionsFacetedData[$option['value']]['count']) && $option['label'] =='category') {
-        //                continue;
-        //            }
-        //
-        //            $this->itemDataBuilder->addItemData(
-        //                $this->tagFilter->filter($option['label']),
-        //                $option['value'],
-        //                isset($optionsFacetedData[$option['value']]['count']) ? $optionsFacetedData[$option['value']]['count'] : 0
-        //            );
-        //        }
-        //
-        //        return $this->itemDataBuilder->build();
+
         $attribute = $this->getAttributeModel();
         /**
- * @var \Magento\CatalogSearch\Model\ResourceModel\Fulltext\Collection $productCollection 
-*/
+         * @var \Magento\CatalogSearch\Model\ResourceModel\Fulltext\Collection $productCollection
+         */
         $productCollection = $this->getLayer()
             ->getProductCollection();
 
         $isAttributeFilterable =
         $this->getAttributeIsFilterable($attribute) === static::ATTRIBUTE_OPTIONS_ONLY_WITH_RESULTS;
-        $collection = $this->getLayer()->getCollectionProvider()->getCollection($this->getLayer()->getCurrentCategory());
+        $collection = $this->getLayer()->getCollectionProvider()
+            ->getCollection($this->getLayer()->getCurrentCategory());
         $collection->updateSearchCriteriaBuilder();
         $this->getLayer()->prepareProductCollection($collection);
 
@@ -249,14 +189,10 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
         foreach ($options as $option) {
             $this->buildOptionData($option, $isAttributeFilterable, $optionsFacetedData, $productSize);
         }
-
-        return $this->itemDataBuilder->build();
+        $this->itemsInitiels = $this->itemDataBuilder->build();
+        return $this->itemsInitiels;
     }
 
-    /**
-     * @param $filter
-     * @return array
-     */
     protected function getFormattedFilters($filter)
     {
         $filters = explode('_', $filter);
@@ -266,7 +202,7 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
 
         if (empty($this->options)) {
             foreach ($this->getAttributeModel()->getFrontend()->getSelectOptions() as $option) {
-                $this->options[html_entity_decode($this->formatItemName($option['label']))] = trim($option['value']);
+                $this->options[$this->formatItemName($option['label'])] = trim($option['value']);
             }
         }
 
@@ -296,7 +232,7 @@ class Attribute extends \Magento\CatalogSearch\Model\Layer\Filter\Attribute impl
      */
     protected function formatItemName($name)
     {
-        return mb_strtolower(str_replace(' ', '+', $name));
+        return urlencode(mb_strtolower($name));
     }
 
     /**

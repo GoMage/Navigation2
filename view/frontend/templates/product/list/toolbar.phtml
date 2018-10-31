@@ -1,5 +1,19 @@
 <?php
 /**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
+
+/**
  * Product list toolbar
  *
  * @var $block \Magento\Catalog\Block\Product\ProductList\Toolbar
@@ -10,7 +24,7 @@ $state = $this->getLayout()->createBlock('GoMage\Navigation\Block\Navigation\Sta
 ?>
 <?php if ($block->getCollection()->getSize()) : ?>
 
-    <?php if  ($helper->isEnable()) :?>
+    <?php if ($helper->isEnable()) :?>
     <div class="toolbar toolbar-products" data-mage-init='<?php echo $block->getWidgetOptionsJson(); ?>'>
         <?php if ($block->isExpanded()) : ?>
             <?php  ($block->setTemplate('GoMage_Navigation::product/list/toolbar/viewmode.phtml')) ?>
@@ -27,7 +41,8 @@ $state = $this->getLayout()->createBlock('GoMage\Navigation\Block\Navigation\Sta
         <?php endif; ?>
     </div>
     <?php else: ?>
-    <div class="toolbar toolbar-products" data-mage-init='<?php echo /* @escapeNotVerified */ $block->getWidgetOptionsJson() ?>'>
+    <div class="toolbar toolbar-products" data-mage-init='<?php echo /* @escapeNotVerified */
+    $block->getWidgetOptionsJson() ?>'>
         <?php if ($block->isExpanded()) : ?>
             <?php  ($block->setTemplate('Magento_Catalog::product/list/toolbar/viewmode.phtml')) ?>
             <?php echo $block->toHtml(); ?>

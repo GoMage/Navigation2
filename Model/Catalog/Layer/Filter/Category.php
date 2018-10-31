@@ -1,15 +1,30 @@
 <?php
 
+/**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
+
 namespace GoMage\Navigation\Model\Catalog\Layer\Filter;
 
 use GoMage\Navigation\Model\Config\Source\NavigationInterface;
+use GoMage\Navigation\Model\Catalog\Layer\Filter\FilterInterface;
 
 /**
  * Class Category
  *
  * @package GoMage\Navigation\Model\Catalog\Layer\Filter
  */
-class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements FilterInterface
+class Category extends \Magento\CatalogSearch\Model\Layer\Filter\Category implements FilterInterface
 {
     /**
      * @var CategoryDataProvider
@@ -67,26 +82,28 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
     protected $categoryHelper;
 
     /**
-     * @param \Magento\Catalog\Model\Layer\Filter\ItemFactory                  $filterItemFactory
-     * @param \Magento\Store\Model\StoreManagerInterface                       $storeManager
-     * @param \Magento\Catalog\Model\Layer                                     $layer
-     * @param \Magento\Catalog\Model\Layer\Filter\Item\DataBuilder             $itemDataBuilder
-     * @param \Magento\Framework\Escaper                                       $escaper
-     * @param \Magento\Catalog\Model\Layer\Resolver                            $layerResolver
+     * Category constructor.
+     * @param \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \Magento\Catalog\Model\Layer $layer
+     * @param \Magento\Catalog\Model\Layer\Filter\Item\DataBuilder $itemDataBuilder
+     * @param \Magento\Framework\Escaper $escaper
+     * @param \Magento\Catalog\Model\Layer\Resolver $layerResolver
      * @param \Magento\Catalog\Model\Layer\Filter\DataProvider\CategoryFactory $categoryDataProviderFactory
-     * @param \Magento\Framework\Registry                                      $coreRegistry
-     * @param \Magento\Framework\App\RequestInterface                          $request
-     * @param \GoMage\Navigation\Helper\Data                                   $helper
-     * @param \GoMage\Navigation\Helper\Url                                    $urlHelper
-     * @param \GoMage\Navigation\Helper\CategoryData                           $categoryHelper
-     * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory  $categoryCollectionFactory
-     * @param array                                                            $data
+     * @param \Magento\Framework\Registry $coreRegistry
+     * @param \Magento\Framework\App\RequestInterface $request
+     * @param \GoMage\Navigation\Helper\Data $helper
+     * @param \GoMage\Navigation\Helper\Url $urlHelper
+     * @param \GoMage\Navigation\Helper\CategoryData $categoryHelper
+     * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
+     * @param \Magento\Catalog\Model\ResourceModel\Category $categoryResource
+     * @param array $data
      */
     public function __construct(
         \Magento\Catalog\Model\Layer\Filter\ItemFactory $filterItemFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Catalog\Model\Layer $layer,
-        \Magento\Catalog\Model\Layer\Filter\Item\DataBuilder $itemDataBuilder,
+        \GoMage\Navigation\Model\Layer\Filter\Item\DataBuilder $itemDataBuilder,
         \Magento\Framework\Escaper $escaper,
         \Magento\Catalog\Model\Layer\Resolver $layerResolver,
         \Magento\Catalog\Model\Layer\Filter\DataProvider\CategoryFactory $categoryDataProviderFactory,
@@ -100,7 +117,15 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
         array $data = []
     ) {
         $this->categoryResource = $categoryResource;
-        parent::__construct($filterItemFactory, $storeManager, $layer, $itemDataBuilder, $escaper, $categoryDataProviderFactory, $data);
+        parent::__construct(
+            $filterItemFactory,
+            $storeManager,
+            $layer,
+            $itemDataBuilder,
+            $escaper,
+            $categoryDataProviderFactory,
+            $data
+        );
         $this->_requestVar = 'cat';
         $this->coreRegistry = $coreRegistry;
         $this->layerResolver = $layerResolver;
@@ -122,24 +147,23 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
             return parent::apply($request);
         }
 
-        if(empty($request->getParam($this->getRequestVar()))) {
+        if (empty($request->getParam($this->getRequestVar()))) {
             return parent::apply($request);
         }
 
         $filters = $this->getFormattedFilters();
 
-        if(empty($filters)) {
+        if (empty($filters)) {
             return parent::apply($request);
         }
         $this->getLayer()->getProductCollection()->addCategoriesFilter(['in' => $filters]);
         foreach ($filters as $filter) {
-
             $this->dataProvider->setCategoryId($filter);
             $category = $this->dataProvider->getCategory();
             $this->getLayer()->getState()->addFilter($this->_createItem($category->getName(), $filter));
         }
         $mainCategory = $this->coreRegistry->registry('current_category');
-        if(!$mainCategory) {
+        if (!$mainCategory) {
             $mainCategory = $this->layerResolver->get()->getCurrentCategory();
         }
         $this->dataProvider->setCategoryId($mainCategory->getId());
@@ -161,44 +185,37 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
     {
         return $this;
     }
-
-    /**
-     * @return array
-     */
-    protected function _getItemsData()
+        /**
+         * Get data array for building category filter items
+         *
+         * @return array
+         */
+        protected function _getItemsData()
     {
-        if(!$this->categoryHelper->isShowCategoryInShopBy()) {
-            return [];
-        }
-
+        /** @var \Magento\CatalogSearch\Model\ResourceModel\Fulltext\Collection $productCollection */
         $productCollection = $this->getLayer()->getProductCollection();
         $optionsFacetedData = $productCollection->getFacetedData('category');
-        $category = $this->coreRegistry->registry('current_category');
-        if($category ) {
-            $categories = $category->getChildrenCategories();
-        } else  {
-            $category = $this->dataProvider->getCategory();
-            $categories = $category->getChildrenCategories();
-        }
+        $category = $this->dataProvider->getCategory();
+        $categories = $category->getChildrenCategories();
+
         if ($category->getIsActive()) {
             foreach ($categories as $category) {
-
-                $count = (!empty($optionsFacetedData[$category->getId()]['count'])) ? $optionsFacetedData[$category->getId()]['count'] : 0;
-                if ($category->getIsActive() && ($count > 0 || $this->helper->isShowEmptyCategory())) {
+                if ($category->getIsActive()
+                    && isset($optionsFacetedData[$category->getId()])
+                ) {
                     $this->categoryResource->load($category, $category->getId());
                     $this->imageCategories[$category->getId()] = $category->getImageUrl();
                     $this->imageCat[$category->getId()] = $category->getData('image');
                     $this->itemDataBuilder->addItemData(
                         $category->getName(),
                         $category->getId(),
-                        $count
+                        $optionsFacetedData[$category->getId()]['count']
                     );
                 }
             }
         }
         return $this->itemDataBuilder->build();
     }
-
 
     /**
      * @return bool
@@ -237,6 +254,7 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
 
     /**
      * @return array
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     protected function getFormattedFilters()
     {
@@ -246,7 +264,7 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
         }
 
         $mainCategory = $this->coreRegistry->registry('current_category');
-        if(!$mainCategory) {
+        if (!$mainCategory) {
             $mainCategory = $this->layerResolver->get()->getCurrentCategory();
         }
 
@@ -257,22 +275,22 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
 
         foreach ($collection as $category) {
             $parent = explode('/', $category->getPath());
-            if($this->request->getParam('parent_cat_'.$category->getId())) {
+            if ($this->request->getParam('parent_cat_'.$category->getId())) {
                 $requestParent = $this->request->getParam('parent_cat_'.$category->getId());
             } else {
                 $requestParent = $mainCategory->getId();
             }
-            if(!in_array($requestParent, $parent)) {
+            if (!in_array($requestParent, $parent)) {
                 continue;
             }
-            $categoriesName[html_entity_decode($this->formatCategoryName($category->getName()))] = $category->getId();
+            $categoriesName[$this->formatCategoryName($category->getName())] = $category->getId();
         }
 
         $params = [];
 
         foreach ($filters as $item) {
-            $formatItem = $this->formatCategoryName($item);
-            if(isset($categoriesName[$formatItem])) {
+            $formatItem = $item;
+            if (isset($categoriesName[$formatItem])) {
                 $params[] = $categoriesName[$formatItem];
             }
         }
@@ -286,7 +304,7 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
      */
     protected function formatCategoryName($name)
     {
-        return mb_strtolower(str_replace(' ', '+', $name));
+        return mb_strtolower(urlencode($name));
     }
 
     /**
@@ -299,5 +317,48 @@ class Category extends \Magento\Catalog\Model\Layer\Filter\Category implements F
         }
 
         return false;
+    }
+
+    /**
+     * @return $this|\Magento\Catalog\Model\Layer\Filter\AbstractFilter
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    protected function _initItems()
+    {
+        $data = $this->_getItemsData();
+        $items = [];
+        foreach ($data as $itemData) {
+            $items[] = $this->_createItem(
+                $itemData['label'],
+                $itemData['value'],
+                $itemData['count'],
+                $itemData['parent_label'],
+                $itemData['id'],
+                $itemData['search_value']
+            );
+        }
+        $this->_items = $items;
+        return $this;
+    }
+
+    /**
+     * @param string $label
+     * @param mixed $value
+     * @param int $count
+     * @param null $categoryName
+     * @param null $id
+     * @param null $searchValue
+     * @return \Magento\Catalog\Model\Layer\Filter\Item
+     */
+    protected function _createItem($label, $value, $count = 0, $categoryName = null, $id = null, $searchValue = null)
+    {
+        return $this->_filterItemFactory->create()
+            ->setFilter($this)
+            ->setLabel($label)
+            ->setValue($value)
+            ->setCatId($id)
+            ->setCatName($categoryName)
+            ->setSearchValue($searchValue)
+            ->setCount($count);
     }
 }

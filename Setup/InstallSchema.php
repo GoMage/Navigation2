@@ -1,5 +1,19 @@
 <?php
 
+/**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
+
 namespace GoMage\Navigation\Setup;
 
 use Magento\Framework\Setup\InstallSchemaInterface;
@@ -11,10 +25,7 @@ use Magento\Framework\Setup\SchemaSetupInterface;
  */
 class InstallSchema implements InstallSchemaInterface
 {
-    /**
-     * @param SchemaSetupInterface   $setup
-     * @param ModuleContextInterface $context
-     */
+
     public function install(SchemaSetupInterface $setup, ModuleContextInterface $context)
     {
         $installer = $setup;
@@ -155,8 +166,19 @@ class InstallSchema implements InstallSchemaInterface
 
         $installer->getConnection()->createTable($table);
         $cmsPage = $installer->getTable('cms_page');
-        $installer->getConnection()->addColumn($cmsPage, 'location',  "TINYINT(1) NOT NULL DEFAULT 0");
-        $installer->getConnection()->addColumn($cmsPage, 'navigation_category_id',  "int(10) NOT NULL DEFAULT 0");
+        $installer->getConnection()
+            ->addColumn($cmsPage, 'location', "TINYINT(1) NOT NULL DEFAULT 0");
+        $installer->getConnection()
+            ->addColumn($cmsPage, 'navigation_category_id', "int(10) NOT NULL DEFAULT 0");
+        $installer->getConnection()->createTable($table);
+        $data = [
+            'scope' => 'default',
+            'scope_id' => 0,
+            'path' => 'section/GoMage_Navigation/ms',
+            'value' => 'GoMage_Navigation',
+        ];
+        $setup->getConnection()
+            ->insertOnDuplicate($setup->getTable('core_config_data'), $data, ['value']);
         $installer->endSetup();
     }
 }

@@ -1,5 +1,19 @@
 <?php
 /**
+ * GoMage.com
+ *
+ * GoMage Navigation M2
+ *
+ * @category  Extension
+ * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
+ * @author    GoMage.com
+ * @license   https://www.gomage.com/licensing  Single domain license
+ * @terms     of use https://www.gomage.com/terms-of-use
+ * @version   Release: 2.0.0
+ * @since     Class available since Release 2.0.0
+ */
+
+/**
  * @var $block \GoMage\Navigation\Block\Navigation\State
  */
 ?>
@@ -11,12 +25,14 @@
             aria-level="2"
             data-count="<?php echo (int)count($filters); ?>"><?php echo __('Applied Filters:') ?></strong>
     <ol class="items">
-        <?php foreach ($filters as $filter): ?>
+        <?php foreach ($filters as $filter) : ?>
             <li class="item">
                 <span class="filter-label"><?php echo $block->escapeHtml(__($filter->getName())); ?></span>
                 <div class="filter-value-wrap">
-                    <span class="filter-value"><?php echo html_entity_decode($block->escapeHtml($filter->getLabel(), ['span'])); ?></span>
-                    <?php $currentFilterName = $block->escapeHtml(__($filter->getName()) . " " . $filter->getLabel()); ?>
+                    <span class="filter-value"><?php echo html_entity_decode($block
+                            ->escapeHtml($filter->getLabel(), ['span'])); ?></span>
+                    <?php $currentFilterName = $block->escapeHtml(__($filter->getName()) . " " . $filter
+                            ->getLabel()); ?>
                     <a class="action remove"
                        href="#"
                        title="<?php echo $block->escapeHtml(__('Remove') . " " . $currentFilterName);?>"
@@ -24,9 +40,10 @@
                        data-value="<?php echo $block->escapeHtml($filter->getRemoveValue()) ?>"
                        data-url="<?php echo $block->escapeHtml($filter->getRemoveUrl()) ?>"
                        data-param-to-remove="<?php echo $block->escapeHtml($filter->getFilter()->getRequestVar()) ?>"
-                        <?php if  ($filter->getFilter()->getGomageIsAjax() || is_null($filter->getFilter()->getGomageIsAjax())) :?>
+                        <?php if ($filter->getFilter()->getGomageIsAjax() || null === ($filter->getFilter()
+                                ->getGomageIsAjax())) :?>
                             data-ajax="1"
-                        <?php else:?>
+                        <?php else :?>
                             data-ajax="0"
                         <?php endif;?>
                        data-type="remove-item"
