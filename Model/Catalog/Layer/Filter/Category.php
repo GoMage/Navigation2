@@ -192,6 +192,10 @@ class Category extends \Magento\CatalogSearch\Model\Layer\Filter\Category implem
          */
         protected function _getItemsData()
     {
+        if (!$this->helper->isEnable()) {
+            return parent::_getItemsData();
+        }
+
         /** @var \Magento\CatalogSearch\Model\ResourceModel\Fulltext\Collection $productCollection */
         $productCollection = $this->getLayer()->getProductCollection();
         $optionsFacetedData = $productCollection->getFacetedData('category');
