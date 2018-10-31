@@ -75,6 +75,9 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getScopeData($param, $section = SystemConfigInterface::SYSTEM_CONFIG_SECTION)
     {
+        $t =$this->scopeConfig->getValue(
+        $section . SystemConfigInterface::SYSTEM_CONFIG_SLASH . $param,
+        \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
         return $this->scopeConfig->getValue(
             $section . SystemConfigInterface::SYSTEM_CONFIG_SLASH . $param,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE

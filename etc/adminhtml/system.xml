@@ -20,6 +20,22 @@
         <tab id="gomage" sortOrder="999" translate="label">
             <label>gomage</label>
         </tab>
+        <section id="gomage_settings" translate="label" type="text" sortOrder="1000" showInDefault="1">
+            <label>Activation Navigation</label>
+            <tab>gomage</tab>
+            <resource>GoMage_Navigation::settings_navigation</resource>
+            <group id="navigation" translate="label" type="text" sortOrder="10" showInDefault="1">
+                <label>GoMage Navigation v.2.0.0</label>
+                <field id="key" translate="label comment" type="text" sortOrder="10" showInDefault="1">
+                    <label>Activation Key</label>
+                </field>
+                <field id="websites" translate="label comment" type="checkbox" sortOrder="20" showInDefault="1">
+                    <label>Select Websites</label>
+                    <source_model>Magento\Config\Model\Config\Source\Website</source_model>
+                    <frontend_model>GoMage\Navigation\Block\Adminhtml\Form\Element\Website</frontend_model>
+                </field>
+            </group>
+        </section>
         <section id="gomage_navigation" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
                  showInStore="1">
             <label>Advanced Navigation</label>
@@ -353,7 +369,7 @@
             </group>
             <group id="price_slider" translate="label" type="text" sortOrder="60" showInDefault="1"
                    showInWebsite="1" showInStore="1">
-                <label>Settings Price Slider</label>
+                <label>Price slider settings</label>
                 <field id="round" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Round</label>
                 </field>

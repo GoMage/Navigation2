@@ -30,7 +30,7 @@ $categoriesHelperImage = $this->helper('GoMage\Navigation\Helper\ImageSwatchHelp
     ?> gan-filter-checkbox
             <?php endif; ?>
 <?php echo ($categoriesHelper->getCategoriesImageAlignment()) ?
-    ' gan-categories-list-alignment-' . $categoriesHelper->getCategoriesImageAlignment() : ''; ?>
+    ' gan-categories-list-alignment-' . $categoriesHelper->getCategoriesImageAlignment().' ' : ''; ?>
 <?php echo $helperData->getOptionsAlignment((int)$filter->getGomageOptionsAlignment()); ?>
 
 <?php if ($filter->getGomageFilterType() == \GoMage\Navigation\Model\Config\Source\Navigation::IN_BLOCK) {

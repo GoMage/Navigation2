@@ -24,7 +24,6 @@
             <module name="Magento_LayeredNavigation"/>
             <module name="Magento_LayeredNavigationStaging"/>
             <module name="Magento_SwatchesLayeredNavigation"/>
-            <module name="GoMage_Core"/>
         </sequence>
     </module>
 </config>
