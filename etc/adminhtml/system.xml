@@ -21,7 +21,7 @@
             <label>gomage</label>
         </tab>
         <section id="gomage_settings" translate="label" type="text" sortOrder="1000" showInDefault="1">
-            <label>Activation Navigation</label>
+            <label>Activation</label>
             <tab>gomage</tab>
             <resource>GoMage_Navigation::settings_navigation</resource>
             <group id="navigation" translate="label" type="text" sortOrder="10" showInDefault="1">
