@@ -17,14 +17,13 @@
 namespace GoMage\Navigation\Helper;
 
 use GoMage\Navigation\Helper\Config\SystemConfigInterface;
-use Magento\Framework\App\Helper\Context;
 
 /**
  * Class Data
  *
  * @package GoMage\Navigation\Helper
  */
-class Data extends \Magento\Framework\App\Helper\AbstractHelper
+class Data
 {
     /**
      *
@@ -47,6 +46,67 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     protected $_jsonHelper;
     protected $_systemStore;
     protected $_dateTime;
+    /**
+     * Helper module name
+     *
+     * @var string
+     */
+    protected $_moduleName;
+
+    /**
+     * Request object
+     *
+     * @var \Magento\Framework\App\RequestInterface
+     */
+    protected $_request;
+
+    /**
+     * @var \Magento\Framework\Module\Manager
+     */
+    protected $_moduleManager;
+
+    /**
+     * @var \Psr\Log\LoggerInterface
+     */
+    protected $_logger;
+
+    /**
+     * @var \Magento\Framework\UrlInterface
+     */
+    protected $_urlBuilder;
+
+    /**
+     * @var \Magento\Framework\HTTP\Header
+     */
+    protected $_httpHeader;
+
+    /**
+     * Event manager
+     *
+     * @var \Magento\Framework\Event\ManagerInterface
+     */
+    protected $_eventManager;
+
+    /**
+     * @var \Magento\Framework\HTTP\PhpEnvironment\RemoteAddress
+     */
+    protected $_remoteAddress;
+
+    /**
+     * @var \Magento\Framework\Url\EncoderInterface
+     */
+    protected $urlEncoder;
+
+    /**
+     * @var \Magento\Framework\Url\DecoderInterface
+     */
+    protected $urlDecoder;
+
+
+    /**
+     * @var \Magento\Framework\Cache\ConfigInterface
+     */
+    protected $_cacheConfig;
     const CONTENT = 1;
 
     /**
@@ -56,12 +116,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     protected $cmsPage;
 
-    public function __construct(
-        Context $context,
-        \Magento\Framework\View\Asset\Repository $assetRepository,
-        \Magento\Framework\Encryption\Encryptor $encryptor,
-        \Magento\Cms\Model\Page $cmsPage
-    ) {
+    public function __construct() {
         $this->_objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $this->_storeManager = $this->_objectManager->get('Magento\Store\Model\StoreManager');
         $this->_moduleList = $this->_objectManager->get('Magento\Framework\Module\ModuleList');
@@ -72,12 +127,22 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $this->_storeManager               = $this->_objectManager->get('Magento\Store\Model\StoreManager');
         $this->_systemStore                = $this->_objectManager->get('Magento\Store\Model\System\Store');
         $this->_dateTime                   = $this->_objectManager->get('Magento\Framework\Stdlib\DateTime\DateTime');
-        $this->_encryptor = $encryptor;
-        $this->cmsPage = $cmsPage;
-        $this->assetRepository = $assetRepository;
-        parent::__construct($context);
+        $this->cmsPage                     = $this->_objectManager->get('Magento\Cms\Model\Page');
+        $this->_encryptor                  = $this->_objectManager->get('Magento\Framework\Encryption\Encryptor');
+        $this->assetRepository                  = $this->_objectManager->get('Magento\Framework\View\Asset\Repository');
+        $context                  = $this->_objectManager->get('Magento\Framework\App\Helper\Context');
+
+        $this->_moduleManager = $context->getModuleManager();
+        $this->_logger = $context->getLogger();
+        $this->_request = $context->getRequest();
+        $this->_urlBuilder = $context->getUrlBuilder();
+        $this->_httpHeader = $context->getHttpHeader();
+        $this->_eventManager = $context->getEventManager();
+        $this->_remoteAddress = $context->getRemoteAddress();
+        $this->_cacheConfig = $context->getCacheConfig();
+        $this->urlEncoder = $context->getUrlEncoder();
+        $this->urlDecoder = $context->getUrlDecoder();
         $this->scopeConfig = $context->getScopeConfig();
-        $this->request = $context->getRequest();
     }
 
     /**
@@ -716,5 +781,57 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             ->setGroups($groups)
             ->save();
 
+    }
+
+
+    /**
+     * Retrieve request object
+     *
+     * @return \Magento\Framework\App\RequestInterface
+     */
+    protected function _getRequest()
+    {
+        return $this->_request;
+    }
+
+    /**
+     * Retrieve helper module name
+     *
+     * @return string
+     */
+    protected function _getModuleName()
+    {
+        if (!$this->_moduleName) {
+            $class = get_class($this);
+            $this->_moduleName = substr($class, 0, strpos($class, '\\Helper'));
+        }
+        return str_replace('\\', '_', $this->_moduleName);
+    }
+
+    /**
+     * Check whether or not the module output is enabled in Configuration
+     *
+     * @param string $moduleName Full module name
+     * @return boolean
+     * use \Magento\Framework\Module\Manager::isOutputEnabled()
+     */
+    public function isModuleOutputEnabled($moduleName = null)
+    {
+        if ($moduleName === null) {
+            $moduleName = $this->_getModuleName();
+        }
+        return $this->_moduleManager->isOutputEnabled($moduleName);
+    }
+
+    /**
+     * Retrieve url
+     *
+     * @param   string $route
+     * @param   array $params
+     * @return  string
+     */
+    protected function _getUrl($route, $params = [])
+    {
+        return $this->_urlBuilder->getUrl($route, $params);
     }
 }
