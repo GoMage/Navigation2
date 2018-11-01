@@ -18,7 +18,7 @@ namespace GoMage\Navigation\Plugin;
 
 use Magento\Framework\Search\Request\FilterInterface;
 use Magento\Framework\App\ResourceConnection;
-use Magento\CatalogSearch\Model\Adapter\Mysql\Filter\AliasResolver;
+use GoMage\Navigation\Model\Adapter\Mysql\Filter\AliasResolver;
 
 /**
  * Class CategoryFilterProcessor

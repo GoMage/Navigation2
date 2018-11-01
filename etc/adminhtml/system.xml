@@ -208,10 +208,10 @@
                     <label>Category Navigation</label>
                     <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
                 </field>
-                <field id="place" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Category Block Location</label>
-                    <source_model>GoMage\Navigation\Model\Config\Source\Place</source_model>
-                </field>
+                <!--<field id="place" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">-->
+                    <!--<label>Category Block Location</label>-->
+                    <!--<source_model>GoMage\Navigation\Model\Config\Source\Place</source_model>-->
+                <!--</field>-->
                 <field id="navigation" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Navigation Type</label>
                     <source_model>GoMage\Navigation\Model\Config\Source\Category\Navigation</source_model>
@@ -234,10 +234,10 @@
                         <field id="navigation">3</field>
                     </depends>
                 </field>
-                <field id="hide_empty" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Hide Empty Categories</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                </field>
+                <!--<field id="hide_empty" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">-->
+                    <!--<label>Hide Empty Categories</label>-->
+                    <!--<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>-->
+                <!--</field>-->
                 <field id="show_all" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Show All Subcategories</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
