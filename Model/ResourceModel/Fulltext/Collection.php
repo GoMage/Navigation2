@@ -293,6 +293,9 @@ class Collection extends \Magento\CatalogSearch\Model\ResourceModel\Fulltext\Col
             'catalog_product_collection_apply_limitations_after',
             ['collection' => $this]
         );
+        if($this->isSearchFilter) {
+            $this->getSelect()->distinct();
+        }
         return $this;
     }
     /**

@@ -205,42 +205,6 @@ class Category extends \Magento\CatalogSearch\Model\Layer\Filter\Category implem
         return $this;
     }
 
-    public function getCategoryChildrenOfsset($categoryRoot, $optionsFacetedData)
-    {
-        /** @var \Magento\CatalogSearch\Model\ResourceModel\Fulltext\Collection $productCollection */
-        $categoryName = '';
-        $categories = $categoryRoot->getChildrenCategories();
-        $categoryName .=  '/'. $categoryRoot->getName();
-        $categoryName = trim($categoryName, '/');
-        if ($categoryRoot->getIsActive()) {
-            foreach ($categories as $category) {
-                if ($category->getIsActive()
-                    && isset($optionsFacetedData[$category->getId()])
-                ) {
-                    $this->categoryResource->load($category, $category->getId());
-                    $this->imageCategories[$category->getId()] = $category->getImageUrl();
-                    $this->imageCat[$category->getId()] = $category->getData('image');
-                    $categoryNameUseParent = $categoryName. '/'.$category->getName();
-                    $categoryLabel = $this
-                        ->formatCategoryName(str_replace('/','-', $categoryNameUseParent));
-                    $this->itemDataBuilder->addItemData(
-                        $categoryLabel,
-                        $category->getId(),
-                        $optionsFacetedData[$category->getId()]['count'],
-                        $categoryNameUseParent,
-                        $category->getId(),
-                        $categoryLabel
-                    );
-                }
-
-                if (!isset($optionsFacetedData[$category->getId()]['count'])
-                    || (isset($optionsFacetedData[$category->getId()]['count'])
-                        && !$optionsFacetedData[$category->getId()]['count'])) {
-                    $this->getCategoryChildrenOfsset($category, $categoryName);
-                }
-            }
-        }
-    }
     /**
      * @return array
      * @throws \Magento\Framework\Exception\StateException
@@ -256,12 +220,8 @@ class Category extends \Magento\CatalogSearch\Model\Layer\Filter\Category implem
         $categoryCollection->addAttributeToSelect('name')
             ->addAttributeToSelect('image');
         $items = $categoryCollection->getItems();
-        $collectionSize = $productCollection->getSize();
         if ($categoryRoot->getIsActive()) {
             foreach ($items as $key=>$category) {
-                if(!$category->getIsActive()) {
-                    continue;
-                }
                 $path = explode('/', $category->getPath());
                 $namePath = '';
                 foreach ($path as $item) {
@@ -279,7 +239,6 @@ class Category extends \Magento\CatalogSearch\Model\Layer\Filter\Category implem
                 $categoryLabel = str_replace('/','-', $namePath);
                 if ($category->getIsActive()
                     && isset($optionsFacetedData[$category->getId()])
-                    && $this->isOptionReducesResults($optionsFacetedData[$category->getId()]['count'], $collectionSize)
                 ) {
                     $this->imageCategories[$category->getId()] = $category->getImageUrl();
                     $this->imageCat[$category->getId()] = $category->getData('image');

@@ -30,6 +30,7 @@ class Templates
      */
     public function get($filterType)
     {
+        $filterType = (int)$filterType;
         $templates = [
             \GoMage\Navigation\Model\Config\Source\Navigation::DEFAULTS =>
                 'GoMage_Navigation::layer/filter/default.phtml',

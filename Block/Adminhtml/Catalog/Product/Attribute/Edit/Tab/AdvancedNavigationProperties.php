@@ -328,16 +328,16 @@ class AdvancedNavigationProperties extends \Magento\Backend\Block\Widget\Form\Ge
             );
         }
 
-        $fieldset->addField(
-            'gomage_is_reset',
-            'select',
-            [
-                'name' => 'gomage_is_reset',
-                'label' => __('Show Reset Link'),
-                'title' => __('Show Reset Link'),
-                'values' => $this->yesNoSource,
-            ]
-        );
+//        $fieldset->addField(
+//            'gomage_is_reset',
+//            'select',
+//            [
+//                'name' => 'gomage_is_reset',
+//                'label' => __('Show Reset Link'),
+//                'title' => __('Show Reset Link'),
+//                'values' => $this->yesNoSource,
+//            ]
+//        );
         $fieldset->addField(
             'gomage_is_exclude_categories',
             'text',
