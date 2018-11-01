@@ -117,18 +117,18 @@
             <group id="view" translate="label" type="text" sortOrder="30" showInDefault="1"
                    showInWebsite="1" showInStore="1">
                 <label>Navigation View</label>
-                <!--<group id="block" translate="label" type="text" sortOrder="10" showInDefault="1"-->
-                       <!--showInWebsite="1" showInStore="1">-->
-                    <!--<label>Block</label>-->
-                    <!--<field id="background" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">-->
-                        <!--<label>Block Background Color</label>-->
-                        <!--<frontend_model>GoMage\Navigation\Block\Color</frontend_model>-->
-                    <!--</field>-->
+                <group id="block" translate="label" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Block</label>
+                    <field id="background" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Block Background Color</label>
+                        <frontend_model>GoMage\Navigation\Block\Color</frontend_model>
+                    </field>
                     <!--<field id="category_background" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">-->
                         <!--<label>Category Background Color</label>-->
                         <!--<frontend_model>GoMage\Navigation\Block\Color</frontend_model>-->
                     <!--</field>-->
-                <!--</group>-->
+                </group>
                 <group id="button" translate="label" type="text" sortOrder="20" showInDefault="1"
                        showInWebsite="1" showInStore="1">
                     <label>Button</label>
