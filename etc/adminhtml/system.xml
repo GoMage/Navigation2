@@ -10,8 +10,8 @@
  * @author    GoMage.com
  * @license   https://www.gomage.com/licensing  Single domain license
  * @terms     of use https://www.gomage.com/terms-of-use
- * @version   Release: 2.0.0
- * @since     Class available since Release 2.0.0
+ * @version   Release: 1.0.0
+ * @since     Class available since Release 1.0.0
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -25,7 +25,7 @@
             <tab>gomage</tab>
             <resource>GoMage_Navigation::settings_navigation</resource>
             <group id="navigation" translate="label" type="text" sortOrder="10" showInDefault="1">
-                <label>GoMage Navigation v.2.0.0</label>
+                <label>GoMage Navigation v.1.0.0</label>
                 <field id="key" translate="label comment" type="text" sortOrder="10" showInDefault="1">
                     <label>Activation Key</label>
                 </field>

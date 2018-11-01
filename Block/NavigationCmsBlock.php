@@ -10,8 +10,8 @@
  * @author    GoMage.com
  * @license   https://www.gomage.com/licensing  Single domain license
  * @terms     of use https://www.gomage.com/terms-of-use
- * @version   Release: 2.0.0
- * @since     Class available since Release 2.0.0
+ * @version   Release: 1.0.0
+ * @since     Class available since Release 1.0.0
  */
 namespace GoMage\Navigation\Block;
 
@@ -117,7 +117,7 @@ class NavigationCmsBlock extends \GoMage\Navigation\Block\Navigation
         if (!$this->getDataHelper()->isEnable()) {
             return ;
         }
-        if ($this->cmsPage->getLocation() === \GoMage\Navigation\Model\Config\Source\Place::CONTENT
+        if ((int)$this->cmsPage->getLocation() === \GoMage\Navigation\Model\Config\Source\Place::CONTENT
             && $this->cmsPage->getPageLayout() ==='1column'
         ) {
             $this->moveBlock('main');
@@ -125,14 +125,14 @@ class NavigationCmsBlock extends \GoMage\Navigation\Block\Navigation
             return ;
         }
 
-        if ($this->cmsPage->getLocation() === \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN
+        if ((int)$this->cmsPage->getLocation() === \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN
             && $this->cmsPage->getPageLayout() === '2columns-left'
         ) {
             $this->canShowNavigation = true;
             return ;
         }
 
-        if ($this->cmsPage->getLocation() === \GoMage\Navigation\Model\Config\Source\Place::CONTENT
+        if ((int)$this->cmsPage->getLocation() === \GoMage\Navigation\Model\Config\Source\Place::CONTENT
             && $this->cmsPage->getPageLayout() === '2columns-left'
         ) {
             $this->moveBlock('main');
@@ -140,21 +140,21 @@ class NavigationCmsBlock extends \GoMage\Navigation\Block\Navigation
             return ;
         }
 
-        if ($this->cmsPage->getLocation() === \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN
+        if ((int)$this->cmsPage->getLocation() === \GoMage\Navigation\Model\Config\Source\Place::LEFT_COLUMN
             && $this->cmsPage->getPageLayout() === '3columns'
         ) {
             $this->canShowNavigation = true;
             return ;
         }
 
-        if ($this->cmsPage->getLocation() === \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN
+        if ((int)$this->cmsPage->getLocation() === \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN
             && $this->cmsPage->getPageLayout() === '2columns-right'
         ) {
             $this->canShowNavigation = true;
             return ;
         }
 
-        if ($this->cmsPage->getLocation() === \GoMage\Navigation\Model\Config\Source\Place::CONTENT
+        if ((int)$this->cmsPage->getLocation() === \GoMage\Navigation\Model\Config\Source\Place::CONTENT
             && $this->cmsPage->getPageLayout() === '2columns-right'
         ) {
             $this->moveBlock('main');
@@ -162,7 +162,7 @@ class NavigationCmsBlock extends \GoMage\Navigation\Block\Navigation
             return ;
         }
 
-        if ($this->cmsPage->getLocation() === \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN
+        if ((int)$this->cmsPage->getLocation() === \GoMage\Navigation\Model\Config\Source\Place::RIGHT_COLUMN
             && $this->cmsPage->getPageLayout() === '3columns'
         ) {
             $this->moveBlock('sidebar.additional');
@@ -170,7 +170,7 @@ class NavigationCmsBlock extends \GoMage\Navigation\Block\Navigation
             return ;
         }
 
-        if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT
+        if ((int)$this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT
             && $this->cmsPage->getPageLayout()== '3columns'
         ) {
             $this->moveBlock('main');
