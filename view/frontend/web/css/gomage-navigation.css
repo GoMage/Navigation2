@@ -18,6 +18,20 @@
   display: flex;
 }
 
+/* Filter current
+-------------------------------------------------- */
+@media all and (max-width: 768px){
+  .block.filter .filter-current{
+    margin: 5px 0 0;
+  }
+  .block.filter .filter-current.active+.block-actions{
+    margin: -35px 0 25px;
+  }
+  .block.filter .filter-current-subtitle:before{
+    right: 13px;
+  }
+}
+
 /* Filter type = default
 -------------------------------------------------- */
 .gan-filter{
