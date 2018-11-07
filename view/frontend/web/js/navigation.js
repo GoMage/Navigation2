@@ -575,6 +575,9 @@ define(
                                     successCallback.call(this, response);
                                 }
                                 $(this.options.mainContainer).remove();
+                                if(response.is_full_page_cache) {
+                                    response.content = $(response.content).find('#maincontent');
+                                }
                                 $(this.options.breadcrumbs).after(response.content);
                                 $(this.options.breadcrumbsContainer).replaceWith(response.breadcrumbs);
 

@@ -35,11 +35,13 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                             data-role="navigation-filter"
                             data-type="categories-select"
                             data-categories = "1"
+                            data-param="cat"
                             data-select ="1"
                             data-value="<?php echo $helperData->getValueCategory(['cat'=>$helperData
-                                ->isUseFriendlyUrls() ? strtolower($category->getName()): $category->getId()]) ?>"
+                                ->isUseFriendlyUrls() ? urlencode(mb_strtolower($category->getName())):
+                                $category->getId()]) ?>"
                             data-url="<?php echo $helperData
-                                ->getUrlCategory(['cat'=>strtolower($category->getName())]) ?>"
+                                ->getUrlCategory(['cat'=>urlencode(mb_strtolower($category->getName()))]) ?>"
                             data-ajax="<?php echo (int)$block->getCategoriesDataHelper()->isAjax(); ?>">
                             <option
                                     data-type="remove-item"
@@ -49,22 +51,24 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                             ><?php echo __('Choose Category')?></option>
                         <option
                             data-value="<?php echo $helperData->getValueCategory(['cat'=>$helperData
-                                ->isUseFriendlyUrls() ? strtolower($category->getName()): $category->getId()]) ?>"
+                                ->isUseFriendlyUrls() ? urlencode(mb_strtolower($category->getName())):
+                                $category->getId()]) ?>"
                             data-param="cat"
                             <?php if ($helperData->isInaCategoryRequest($helperData->isUseFriendlyUrls() ?
-                                $category->getName(): $category->getId(), $category)) : ?>
+                                urlencode(mb_strtolower($category->getName())): $category->getId(), $category)) : ?>
                                 data-active="1"
                             <?php endif; ?>
                             <?php if ($helperData->isInaCategoryRequest($helperData->isUseFriendlyUrls() ?
-                                $category->getName(): $category->getId())) : ?>
+                                urlencode(mb_strtolower($category->getName())): $category->getId())) : ?>
                                 class="selected"
                             <?php endif; ?>
                                 value="<?php echo $helperData->getValueCategory(['cat'=>$helperData->isUseFriendlyUrls()
-                                    ? strtolower($category->getName()): $category->getId()]) ?>">
+                                    ? urlencode(mb_strtolower($category->getName())): $category->getId()]) ?>">
                             <?php echo $block->escapeHtml($category->getName()) ?>
                         </option>
                         <?php if ($block->getCategoriesDataHelper()->getShowAllSubcategories() || $helperData
-                                ->isInaCategoryRequest($helperData->isUseFriendlyUrls() ? $category->getName():
+                                ->isInaCategoryRequest($helperData->isUseFriendlyUrls() ?
+                                    urlencode(mb_strtolower($category->getName())):
                                     $category->getId())) : ?>
                             <?php echo $block->getSelectList($block->getChildCategories($category)); ?>
                         <?php endif;?>

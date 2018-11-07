@@ -123,6 +123,18 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * @return mixed
      */
+    public function isFlyout()
+    {
+        return $this->getScopeData(
+            SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
+            . SystemConfigInterface::SYSTEM_CONFIG_SLASH
+            . SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_NAVIGATION_TYPE
+        ) === \GoMage\Navigation\Model\Config\Source\Navigation::FLY_OUT ;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getShowAllSubcategories()
     {
         return $this->getScopeData(
@@ -255,7 +267,7 @@ class CategoryData extends \Magento\Framework\App\Helper\AbstractHelper
     public function isShowCategoryInShopBy()
     {
 
-        return !((int)$this->isShowCategories() &&
+        return ((int)$this->isShowCategories() &&
             $this->getScopeData(
                 SystemConfigInterface::SYSTEM_CATEGORIES_CONFIG_CROUP
                 . SystemConfigInterface::SYSTEM_CONFIG_SLASH

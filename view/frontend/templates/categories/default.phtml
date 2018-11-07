@@ -51,24 +51,26 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                         data-role="navigation-filter"
                         data-type="categories-li"
                         data-value="<?php echo $helperData->getValueCategory(['cat'=>$helperData->isUseFriendlyUrls() ?
-                            strtolower($category->getName()): $category->getId()]) ?>"
+                            urlencode(mb_strtolower($category->getName())): $category->getId()]) ?>"
                         data-param="cat"
                         <?php if ($helperData->isInaCategoryRequest($helperData->isUseFriendlyUrls() ?
-                            $category->getName(): $category->getId())) : ?>
+                            urlencode(mb_strtolower($category->getName())): $category->getId())) : ?>
                             data-active="1"
                         <?php endif; ?>
                         data-url="<?php echo $helperData->getUrlCategory(['cat'=>$helperData->isUseFriendlyUrls() ?
-                            strtolower($category->getName()): $category->getId()]) ?>">
+                            urlencode(mb_strtolower($category->getName())): $category->getId()]) ?>">
                         <a  href="#"
-                            <?php if ($helperData->isInaCategoryRequest($helperData->isUseFriendlyUrls() ?
-                                $category->getName(): $category->getId())) : ?>
-                               class="selected"
-                            <?php endif; ?>>
+                            class="<?php if ($helperData->isInaCategoryRequest($helperData->isUseFriendlyUrls() ?
+                                urlencode(mb_strtolower($category->getName())): $category->getId())) : ?> selected
+                            <?php endif; ?> <?php if ($helperData->isInaCategoryRequest($helperData->isUseFriendlyUrls() ?
+                                urlencode(mb_strtolower($category->getName())): $category->getId())) : ?>
+                           active
+                        <?php endif; ?>">
                             <span><?php echo $block->escapeHtml($category->getName()) ?></span>
                         </a>
                         <?php if ($block->getCategoriesDataHelper()->getShowAllSubcategories() || $helperData
-                                ->isInaCategoryRequest($helperData->isUseFriendlyUrls() ? $category
-                                    ->getName(): $category->getId())) : ?>
+                                ->isInaCategoryRequest($helperData->isUseFriendlyUrls() ?
+                                    urlencode(mb_strtolower($category->getName())): $category->getId())) : ?>
                             <?php echo $block->getOlList($block->getChildCategories($category)); ?>
                         <?php endif; ?>
                     </li>

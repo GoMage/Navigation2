@@ -167,10 +167,12 @@ class Category extends \Magento\CatalogSearch\Model\Layer\Filter\Category implem
             return parent::apply($request);
         }
         $productCollection  =  $this->getLayer()->getProductCollection();
-        $productCollectionFacets = clone $this->getLayer()->getProductCollection();
-        $facetsData = $productCollectionFacets->addCategoryFilter($this->layerResolver->get()->getCurrentCategory())
-            ->getFacetedData('category');
-        $this->coreRegistry->register('category_facets_without_filter', $facetsData);
+        if($this->categoryHelper->isShowCategoryInShopBy()) {
+            $productCollectionFacets = clone $this->getLayer()->getProductCollection();
+            $facetsData = $productCollectionFacets->addCategoryFilter($this->layerResolver->get()->getCurrentCategory())
+                ->getFacetedData('category');
+            $this->coreRegistry->register('category_facets_without_filter', $facetsData);
+        }
         $productCollection->addCategoriesFilterSearch($filters);
         foreach ($filters as $filter) {
             $filterCode = isset($this->valueSearch[$filter]) ? $this->valueSearch[$filter] : null;
@@ -212,15 +214,14 @@ class Category extends \Magento\CatalogSearch\Model\Layer\Filter\Category implem
     protected function _getItemsData()
     {
         /** @var \Magento\CatalogSearch\Model\ResourceModel\Fulltext\Collection $productCollection */
-        $productCollection = $this->getLayer()->getProductCollection();
         $optionsFacetedData = $this->coreRegistry->registry('category_facets_without_filter')
             ?: $this->getLayer()->getProductCollection()->getFacetedData('category');
         $categoryRoot = $this->dataProvider->getCategory();
+        if ($categoryRoot->getIsActive() && $this->categoryHelper->isShowCategoryInShopBy()) {
         $categoryCollection = $this->categoryCatalogHelper->getStoreCategories('entity_id', true, false);
         $categoryCollection->addAttributeToSelect('name')
-            ->addAttributeToSelect('image');
+            ->addAttributeToSelect('image')->addFieldToFilter('parent');
         $items = $categoryCollection->getItems();
-        if ($categoryRoot->getIsActive()) {
             foreach ($items as $key=>$category) {
                 $path = explode('/', $category->getPath());
                 $namePath = '';
@@ -249,6 +250,25 @@ class Category extends \Magento\CatalogSearch\Model\Layer\Filter\Category implem
                         $namePath,
                         $category->getId(),
                         $categoryLabel
+                    );
+                }
+            }
+        } elseif ($categoryRoot->getIsActive()) {
+            $categories = $categoryRoot->getChildrenCategories();
+
+            foreach ($categories as $category) {
+                if (($category->getIsActive()
+                    && isset($optionsFacetedData[$category->getId()]) &&
+                    $optionsFacetedData[$category->getId()]['count'] > 0) ||
+                    (isset($optionsFacetedData[$category->getId()]) && !$this->categoryHelper->isHideEmptyCategories())
+                ) {
+                    $this->categoryResource->load($category, $category->getId());
+                    $this->imageCategories[$category->getId()] = $category->getImageUrl();
+                    $this->imageCat[$category->getId()] = $category->getData('image');
+                    $this->itemDataBuilder->addItemData(
+                        $category->getName(),
+                        $category->getId(),
+                        $optionsFacetedData[$category->getId()]['count']
                     );
                 }
             }

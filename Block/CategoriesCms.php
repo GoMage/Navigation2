@@ -73,21 +73,8 @@ class CategoriesCms extends Categories
      * @var \GoMage\Navigation\Helper\NavigationViewData
      */
     protected $navigationViewHelper;
+    protected $coreRegistry;
 
-    /**
-     * CategoriesCms constructor.
-     * @param \Magento\Framework\View\Element\Template\Context $context
-     * @param \GoMage\Navigation\Helper\CategoryHelper $categoryHelper
-     * @param \Magento\Catalog\Model\Indexer\Category\Flat\State $categoryFlatState
-     * @param \Magento\Theme\Block\Html\Topmenu $topMenu
-     * @param \GoMage\Navigation\Helper\Data $dataHelper
-     * @param \GoMage\Navigation\Helper\CategoryData $categoriesHelper
-     * @param \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper
-     * @param \GoMage\Navigation\Model\Config\Source\Category\Templates $templates
-     * @param \Magento\Catalog\Model\ResourceModel\Category $categoryResource
-     * @param \Magento\Catalog\Model\Layer\Resolver $layerResolver
-     * @param \Magento\Framework\Registry $registry
-     */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
         \GoMage\Navigation\Helper\CategoryHelper $categoryHelper,
@@ -99,7 +86,8 @@ class CategoriesCms extends Categories
         \GoMage\Navigation\Model\Config\Source\Category\Templates $templates,
         \Magento\Catalog\Model\ResourceModel\Category $categoryResource,
         \Magento\Catalog\Model\Layer\Resolver $layerResolver,
-        \Magento\Framework\Registry $registry
+        \Magento\Framework\Registry $registry,
+        \Magento\Catalog\Model\Layer $layer
     ) {
         $this->catalogLayer = $layerResolver->get();
         $this->categoryHelper = $categoryHelper;
@@ -121,7 +109,8 @@ class CategoriesCms extends Categories
             $navigationViewHelper,
             $templates,
             $categoryResource,
-            $layerResolver
+            $layerResolver,
+            $registry
         );
         $this->setLocation();
     }
@@ -131,7 +120,12 @@ class CategoriesCms extends Categories
      */
     protected function setLocation()
     {
-        if (!$this->getDataHelper()->isEnable() || !$this->getCategoriesDataHelper()->isShowCategories()) {
+        if (!$this->getDataHelper()->isEnable() ||  $this->getCategoriesDataHelper()->isShowCategoryInShopBy()) {
+            if($this->getLayout()->isBlock('gomage.categories')) {
+                $this->getLayout()->unsetElement('gomage.categories');
+            } elseif ($this->getLayout()->isBlock('gomage.categories.column')) {
+                $this->getLayout()->unsetElement('gomage.categories.column');
+            }
             return;
         }
         if ($this->cmsPage->getLocation() == \GoMage\Navigation\Model\Config\Source\Place::CONTENT

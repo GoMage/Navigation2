@@ -71,6 +71,9 @@ class Category extends \Magento\CatalogSearch\Model\Layer\Filter\Category implem
      */
     protected $layerResolver;
 
+    protected $catInfo;
+    protected $valueSearch;
+
     /**
      * @var \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory
      */
@@ -158,9 +161,13 @@ class Category extends \Magento\CatalogSearch\Model\Layer\Filter\Category implem
         }
         $this->getLayer()->getProductCollection()->addCategoriesFilter(['in' => $filters]);
         foreach ($filters as $filter) {
+            $filterCode = isset($this->valueSearch[$filter]) ? $this->valueSearch[$filter] : null;
             $this->dataProvider->setCategoryId($filter);
             $category = $this->dataProvider->getCategory();
-            $this->getLayer()->getState()->addFilter($this->_createItem($category->getName(), $filter));
+            $this->getLayer()->getState()->addFilter($this->_createItem(isset($this->catInfo[$filter])
+                ? $this->catInfo[$filter] :$category->getName(),
+                $filter, 0, null, null,
+                $this->reFormatCategoryName($filterCode)));
         }
         $mainCategory = $this->coreRegistry->registry('current_category');
         if (!$mainCategory) {
@@ -204,8 +211,10 @@ class Category extends \Magento\CatalogSearch\Model\Layer\Filter\Category implem
 
         if ($category->getIsActive()) {
             foreach ($categories as $category) {
-                if ($category->getIsActive()
-                    && isset($optionsFacetedData[$category->getId()])
+                if (($category->getIsActive()
+                        && isset($optionsFacetedData[$category->getId()]) &&
+                        $optionsFacetedData[$category->getId()]['count'] > 0) ||
+                    (isset($optionsFacetedData[$category->getId()]) && !$this->categoryHelper->isHideEmptyCategories())
                 ) {
                     $this->categoryResource->load($category, $category->getId());
                     $this->imageCategories[$category->getId()] = $category->getImageUrl();
@@ -274,29 +283,79 @@ class Category extends \Magento\CatalogSearch\Model\Layer\Filter\Category implem
 
         $collection = $this->categoryCollectionFactory->create();
         $collection->addAttributeToSelect('name');
-        $collection->addIsActiveFilter();
-        $categoriesName = [];
-
-        foreach ($collection as $category) {
-            $parent = explode('/', $category->getPath());
-            if ($this->request->getParam('parent_cat_'.$category->getId())) {
-                $requestParent = $this->request->getParam('parent_cat_'.$category->getId());
-            } else {
-                $requestParent = $mainCategory->getId();
+        $names = [];
+        foreach ($filters as $filter) {
+            $items = explode('-', $filter);
+            if(!$items) {
+                $items[] = $filter;
             }
-            if (!in_array($requestParent, $parent)) {
-                continue;
-            }
-            $categoriesName[$this->formatCategoryName($category->getName())] = $category->getId();
+            foreach ($items as $item)
+                $names[] = $this->reFormatCategoryName($item);
         }
-
-        $params = [];
-
-        foreach ($filters as $item) {
-            $formatItem = $item;
-            if (isset($categoriesName[$formatItem])) {
-                $params[] = $categoriesName[$formatItem];
+        $collection->addAttributeToFilter('name', ['in'=>[$names]]);
+        $collection->addIsActiveFilter();
+        $items = $collection->getItems();
+        $catInfo = [];
+        $catName = [];
+        $valueSearch = [];
+        foreach ($filters as $filter) {
+            $filterPath = explode('-', $filter);
+            $lastChild = $filterPath[count($filterPath) - 1];
+            $rootPath = $this->reFormatCategoryName($filterPath[0]);
+            $lastChild = $this->reFormatCategoryName($lastChild);
+            $pathEnd = [];
+            $strName = '';
+            $nameEnd = '';
+            foreach ($items as $item) {
+                if (count($filterPath) === 1) {
+                    $formatedLabelSingleCategory = $this->reFormatCategoryName($filterPath[0]);
+                    if ($formatedLabelSingleCategory === mb_strtolower($item->getName())) {
+                        $catInfo[$filter] = $item->getId();
+                    }
+                    continue;
+                }
+                if ($lastChild === mb_strtolower($item->getName())) {
+                    $pathEnd[$item->getId()] = $item->getPath();
+                    if(count($pathEnd) === 1) {
+                        $nameEnd = $item->getName();
+                    }
+                    continue;
+                }
+                if (in_array(mb_strtolower($this->formatCategoryName($item->getName())), $filterPath)) {
+                    if (!isset($catInfo[$filter]) && mb_strtolower($item->getName()) === $rootPath) {
+                        $strName .= $item->getName();
+                        $catInfo[$filter][] = $item->getId();
+                    } else if (isset($catInfo[$filter])) {
+                        $arrChild = explode('/', $item->getPath());
+                        $result = array_intersect($catInfo[$filter], $arrChild);
+                        if (count($result) === count($catInfo[$filter])) {
+                            $strName .='/'.$item->getName();
+                            $catInfo[$filter][] = $item->getId();
+                        }
+                    }
+                }
             }
+            if ($pathEnd) {
+                foreach ($pathEnd as $key => $path) {
+                    $pathInfoArray = explode('/', $path);
+                    if (!isset($catInfo[$filter]) || !is_array($catInfo[$filter])) {
+                        continue;
+                    }
+                    $result = array_intersect($catInfo[$filter], $pathInfoArray);
+                    if (count($result) === count($catInfo[$filter])) {
+                        $strName .='/'.$nameEnd;
+                        $catInfo[$filter] = $key;
+                        $catName[$key] = $strName;
+                        $valueSearch[$key] = $filter;
+                    }
+                }
+            }
+        }
+        $this->valueSearch = $valueSearch;
+        $this->catInfo = $catName;
+        $params = [];
+        foreach ($catInfo as $key => $item) {
+            $params[] = $item;
         }
 
         return $params;
@@ -364,5 +423,10 @@ class Category extends \Magento\CatalogSearch\Model\Layer\Filter\Category implem
             ->setCatName($categoryName)
             ->setSearchValue($searchValue)
             ->setCount($count);
+    }
+
+    protected function reFormatCategoryName($name)
+    {
+        return urldecode(mb_strtolower($name));
     }
 }

@@ -1,19 +1,4 @@
 <?xml version="1.0"?>
-<!--
-/**
- * GoMage.com
- *
- * GoMage Navigation M2
- *
- * @category  Extension
- * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
- * @author    GoMage.com
- * @license   https://www.gomage.com/licensing  Single domain license
- * @terms     of use https://www.gomage.com/terms-of-use
- * @version   Release: 1.0.0
- * @since     Class available since Release 1.0.0
- */
--->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
         <css src="Magento_Swatches::css/swatches.css"/>
@@ -23,23 +8,33 @@
             <block class="Magento\Framework\View\Element\Template" name="go.mage.style" template="GoMage_Navigation::layer/style.phtml"/>
         </referenceBlock>
         <referenceContainer name="sidebar.main" >
-            <block class="GoMage\Navigation\Block\NavigationCmsBlock" name="catalog.leftnav">
+            <block class="GoMage\Navigation\Block\NavigationCmsBlock" name="catalog.leftnav" after="gomage.categories">
                 <block class="GoMage\Navigation\Block\Navigation\State" name="catalog.navigation.state" as="state" />
                 <block class="GoMage\Navigation\Block\Navigation\FilterRenderer" name="catalog.navigation.renderer" as="renderer"/>
+            </block>
+            <block class="GoMage\Navigation\Block\CategoriesCms" before="-" name="gomage.categories">
+                <action method="unsetChild" ifconfig="gomage_navigation/category/shop_by">
+                    <argument name="block" xsi:type="helper" helper="GoMage\Navigation\Helper\Data::removeBlocCategoriesOrCategory" />
+                </action>
             </block>
             <block class="GoMage\Navigation\Block\Loader" name="gomage.loader"/>
         </referenceContainer>
         <referenceContainer name="main">
-           <block class="GoMage\Navigation\Block\NavigationCmsBlock" name="catalog.leftnav">
+            <block class="GoMage\Navigation\Block\NavigationCmsBlock" name="catalog.leftnav" after="gomage.categories">
                 <block class="GoMage\Navigation\Block\Navigation\State" name="catalog.navigation.state" as="state" />
                 <block class="GoMage\Navigation\Block\Navigation\FilterRenderer" name="catalog.navigation.renderer" as="renderer"/>
             </block>
             <block class="GoMage\Navigation\Block\Loader" name="gomage.loader"/>
-            <!--<block class="GoMage\Navigation\Block\CategoriesCms" name="gomage.categories.column">-->
-                <!--<action method="unsetChild" ifconfig="gomage_navigation/category/shop_by">-->
-                    <!--<argument name="block" xsi:type="helper" helper="GoMage\Navigation\Helper\Data::removeBlocCategoriesOrCategory" />-->
-                <!--</action>-->
-            <!--</block>-->
+            <block class="GoMage\Navigation\Block\CategoriesCms" name="gomage.categories.column">
+                <action method="unsetChild" ifconfig="gomage_navigation/category/shop_by">
+                    <argument name="block" xsi:type="helper" helper="GoMage\Navigation\Helper\Data::removeBlocCategoriesOrCategory" />
+                </action>
+            </block>
+            <block class="GoMage\Navigation\Block\CategoriesCms" name="gomage.categories">
+                <action method="unsetChild" ifconfig="gomage_navigation/category/shop_by">
+                    <argument name="block" xsi:type="helper" helper="GoMage\Navigation\Helper\Data::removeBlocCategoriesOrCategory" />
+                </action>
+            </block>
             <block class="GoMage\Navigation\Block\Loader" name="gomage.loader"/>
         </referenceContainer>
         <referenceBlock name="product_list_toolbar_pager">

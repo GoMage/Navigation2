@@ -150,7 +150,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             . SystemConfigInterface::SYSTEM_CONFIG_FIELD_SHOW_SHOP_BY_IN
         )
         ) {
-            return 'gomage.categories';
+            return '';
         }
     }
 
@@ -392,29 +392,19 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         if (!$category) {
             $arrCat = explode('_', $this->request->get('cat'));
-            if (in_array(strtolower($name), $arrCat)) {
+            if (in_array($name, $arrCat)) {
                 return true;
             }
             return false;
         } else {
             $arrCat = explode('_', $this->request->get('cat'));
             if (is_object($category)) {
-                $parent = $category->getParentCategory();
-                $requestParent = $this->request->get('parent_cat_' . $category->getId());
-                if ($parent) {
-                    $parentId = $parent->getId();
-                } else {
-                    $parentId = $category->getId();
-                }
-                if (in_array(strtolower($name), $arrCat) && ($parentId ==
-                        $requestParent || $requestParent == $category->getId())) {
+                if (in_array($name, $arrCat)) {
                     return true;
                 }
                 return false;
             } else {
-                $parentId = $category['parent_cat'];
-                $requestParent = $this->request->get('parent_cat_' . $category['entity_id']);
-                if (in_array(strtolower($name), $arrCat) && $parentId == $requestParent) {
+                if (in_array(strtolower($name), $arrCat)) {
                     return true;
                 }
                 return false;

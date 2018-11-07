@@ -81,6 +81,7 @@ class Categories extends \Magento\Framework\View\Element\Template
      * @var \GoMage\Navigation\Helper\NavigationViewData
      */
     protected $navigationViewHelper;
+    protected $coreRegistry;
 
     /**
      * @param \Magento\Framework\View\Element\Template\Context $context
@@ -103,6 +104,7 @@ class Categories extends \Magento\Framework\View\Element\Template
         \GoMage\Navigation\Helper\CategoryData $categoriesHelper,
         \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper,
         \GoMage\Navigation\Model\Config\Source\Category\Templates $templates,
+        \Magento\Framework\Registry $coreRegistry,
         \Magento\Catalog\Model\ResourceModel\Category $categoryResource,
         \Magento\Catalog\Model\Layer\Resolver $layerResolver
     ) {
@@ -115,6 +117,7 @@ class Categories extends \Magento\Framework\View\Element\Template
         $this->templates = $templates;
         $this->categoryResource = $categoryResource;
         $this->navigationViewHelper = $navigationViewHelper;
+        $this->coreRegistry = $coreRegistry;
         parent::__construct($context);
         $this->setLocation();
     }
@@ -487,5 +490,15 @@ class Categories extends \Magento\Framework\View\Element\Template
     public function getImage()
     {
         return $this->image;
+    }
+
+    public function isHideEmpty($id)
+    {
+        if ($this->categoriesHelper->isHideEmptyCategories()) {
+            $facetsCategories = $this->coreRegistry->registry('facets_categoties');
+            return (int)$facetsCategories[$id]['count'];
+        } else {
+            return true;
+        }
     }
 }

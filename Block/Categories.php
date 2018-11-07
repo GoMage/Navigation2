@@ -73,6 +73,7 @@ class Categories extends \Magento\Framework\View\Element\Template
      * @var \GoMage\Navigation\Helper\NavigationViewData
      */
     protected $navigationViewHelper;
+    protected $coreRegistry;
 
     /**
      * @param \Magento\Framework\View\Element\Template\Context          $context
@@ -96,8 +97,10 @@ class Categories extends \Magento\Framework\View\Element\Template
         \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper,
         \GoMage\Navigation\Model\Config\Source\Category\Templates $templates,
         \Magento\Catalog\Model\ResourceModel\Category $categoryResource,
-        \Magento\Catalog\Model\Layer\Resolver $layerResolver
+        \Magento\Catalog\Model\Layer\Resolver $layerResolver,
+        \Magento\Framework\Registry $coreRegistry
     ) {
+        $this->coreRegistry = $coreRegistry;
         $this->catalogLayer = $layerResolver->get();
         $this->categoryHelper = $categoryHelper;
         $this->categoryFlatConfig = $categoryFlatState;
@@ -197,7 +200,7 @@ class Categories extends \Magento\Framework\View\Element\Template
      * @param $category
      * @return array
      */
-    public function getChildCategories($category)
+    public function getChildCategories($category, $name='')
     {
         $data = [];
         if ($this->categoryFlatConfig->isFlatEnabled() && $category->getUseFlatResource()) {
@@ -208,8 +211,7 @@ class Categories extends \Magento\Framework\View\Element\Template
         if ($subcategories) {
             foreach ($subcategories as $cat) {
                 $count = $this->getProductsCount($cat);
-                if ($this->getCategoriesDataHelper()->isHideEmptyCategories()
-                    && !$this->getProductsCount($cat) && !$cat->getChildrenCount()) {
+                if ($this->isHidecategory($cat)) {
                     continue;
                 }
 
@@ -219,7 +221,7 @@ class Categories extends \Magento\Framework\View\Element\Template
                     'name' => $cat->getName(),
                     'level' => $cat->getLevel(),
                     'children' => $this->getChildCategories($cat),
-                    'parent_cat' => $category->getId(),
+                    'parent_cat' => trim($category->getName().'-'.$name,'-'),
                     'count' => $count
                 ];
             }
@@ -320,7 +322,18 @@ class Categories extends \Magento\Framework\View\Element\Template
      */
     public function getProductsCount($category)
     {
-        return $this->categoryResource->getProductCount($category);
+        $catFacets = $this->coreRegistry->registry('facets_categoties');
+        if(is_object($category)) {
+            if(!isset($catFacets[$category->getId()])) {
+                return 0;
+            }
+            return $catFacets[$category->getId()]['count'];
+        } else {
+            if(!isset($catFacets[$category->getId()])) {
+                return 0;
+            }
+            return (int)$catFacets[$category['entity_id']]['count'];
+        }
     }
 
     /**
@@ -329,8 +342,12 @@ class Categories extends \Magento\Framework\View\Element\Template
      */
     public function isHidecategory($category)
     {
+        if(is_null($this->coreRegistry->registry('facets_categoties'))) {
+            $facetsData = $this->catalogLayer->getProductCollection()->getFacetedData('category');
+            $this->coreRegistry->register('facets_categoties', $facetsData);
+        }
         return $this->getCategoriesDataHelper()->isHideEmptyCategories() &&
-           !$this->getProductsCount($category) && !$category->getChildrenCount();
+           !$this->getProductsCount($category);
     }
 
     /**
@@ -373,7 +390,12 @@ class Categories extends \Magento\Framework\View\Element\Template
      */
     protected function setLocation()
     {
-        if (!$this->getDataHelper()->isEnable() || !$this->getCategoriesDataHelper()->isShowCategories()) {
+        if (!$this->getDataHelper()->isEnable() || $this->getCategoriesDataHelper()->isShowCategoryInShopBy()) {
+            if($this->getLayout()->isBlock('gomage.categories')) {
+                $this->getLayout()->unsetElement('gomage.categories');
+            } elseif ($this->getLayout()->isBlock('gomage.categories.column')) {
+                $this->getLayout()->unsetElement('gomage.categories.column');
+            }
             return;
         }
         if ($this->getCategoriesDataHelper()

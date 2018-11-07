@@ -317,4 +317,25 @@ class Collection extends \Magento\CatalogSearch\Model\ResourceModel\Fulltext\Col
 
         return $this;
     }
+
+    /**
+     * Adding item to item array
+     *
+     * @param   \Magento\Framework\DataObject $item
+     * @return $this
+     * @throws \Exception
+     */
+    public function addItem(\Magento\Framework\DataObject $item)
+    {
+        $itemId = $this->_getItemId($item);
+        if ($itemId !== null) {
+            if (isset($this->_items[$itemId])) {
+               return $this;
+            }
+            $this->_items[$itemId] = $item;
+        } else {
+            $this->_addItem($item);
+        }
+        return $this;
+    }
 }

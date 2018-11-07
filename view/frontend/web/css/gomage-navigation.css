@@ -55,6 +55,11 @@
   cursor: default;
 }
 
+.gan-categories-list a.active, gan-categories-list a.active{
+  font-weight: 700;
+  cursor: default;
+}
+
 /* Filter type = input
 -------------------------------------------------- */
 .gan-filter-input-fieldset{

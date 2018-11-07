@@ -14,47 +14,51 @@
  */
 
 $helperDataCat = $this->helper('GoMage\Navigation\Helper\Data');
+$helperDataCategories = $this->helper('GoMage\Navigation\Helper\CategoryData');
 ?>
 <?php if (!empty($data)) : ?>
-    <ol <?php echo $categoriesBlock->escapeHtml($checkboxes) ?>>
+    <ol <?php if(!$helperDataCategories->isFlyout()) {
+            echo $categoriesBlock->escapeHtml($checkboxes);
+        }
+        ?>>
         <?php foreach ($data as $category) : ?>
             <?php $active = ($currentCategoryId == $category['entity_id']) ? ' class="selected"' : ''; ?>
             <li
                     data-value="<?php echo $helperDataCat->getValueCategory(
                         ['cat' => (int)$helperDataCat->isUseFriendlyUrls()
-                            ? strtolower($category['name']) : $category['entity_id']]
+                            ? urlencode(mb_strtolower($category['parent_cat'].'-'.$category['name'])) : $category['entity_id']]
                     )
                     ?>"
                     data-categories="1"
                     data-param="cat"
-                    data-param-cat-parent="<?php echo 'parent_cat_' . $category['entity_id'] ?>"
-                    data-cat-parent="<?php echo $category['parent_cat'] ?>"
                 <?php if ($helperDataCat->isInaCategoryRequest((int)$helperDataCat->isUseFriendlyUrls()
-                    ? $category['name'] : $category['entity_id'])) : ?>
+                    ? urlencode(mb_strtolower($category['parent_cat'].'-'.$category['name'])) : $category['entity_id'])) : ?>
                     data-active="1"
                 <?php endif; ?>
                     data-ajax="<?php echo $categoriesBlock->escapeHtml($isAjax) ?>"
                     data-role="navigation-filter"
                     data-type="categories-li"
                     data-url="<?php echo $helperDataCat
-                        ->getUrlCategory(['cat' => strtolower((int)$helperDataCat->isUseFriendlyUrls()
-                            ? $category['name'] : $category['entity_id']),
-                            'parent_cat_' . $category['entity_id'] => $category['parent_cat']]) ?>"
+                        ->getUrlCategory(['cat' => ((int)$helperDataCat->isUseFriendlyUrls()
+                            ?  urlencode(mb_strtolower($category['parent_cat'].'-'.$category['name'])) : $category['entity_id'])]) ?>"
                 <?php if (!empty(($category['children']))
                 ) : ?>
                     class="parent"<?php endif; ?>>
-                <a <?php if ($helperDataCat->isInaCategoryRequest((int)$helperDataCat->isUseFriendlyUrls()
-                    ? $category['name'] : $category['entity_id'])) : ?>
-                    class="selected"
-                <?php endif; ?>
+                <a class="<?php if ($helperDataCat->isInaCategoryRequest((int)$helperDataCat->isUseFriendlyUrls()
+                    ? urlencode(mb_strtolower($category['parent_cat'].'-'.$category['name'])) : $category['entity_id'])) : ?>
+                   selected
+                <?php endif; ?>  <?php if ($helperDataCat->isInaCategoryRequest((int)$helperDataCat->isUseFriendlyUrls()
+                    ? urlencode(mb_strtolower($category['parent_cat'].'-'.$category['name'])) : $category['entity_id'])) : ?>
+                    active
+                <?php endif; ?>"
                         href="<?php echo $categoriesBlock->escapeUrl($category['url']) ?>"
                     <?php echo $categoriesBlock->escapeHtml($active) ?>>
                     <span><?php echo $categoriesBlock->escapeHtml($category['name']) ?></span></a>
                 <?php if (($categoriesBlock->getCategoriesDataHelper()->getShowAllSubcategories() &&
                         !empty(($category['children']))) ||
                     $helperDataCat->isInaCategoryRequest((int)$helperDataCat->isUseFriendlyUrls()
-                        ? $category['name'] : $category['entity_id'])) : ?>
-                    <?php echo $categoriesBlock->getOlList($category['children']); ?>
+                        ? urlencode(mb_strtolower($category['parent_cat'].'-'.$category['name'])) : $category['entity_id'])) : ?>
+                    <?php echo $categoriesBlock->getOlList($category['children'], $category['parent_cat']); ?>
                 <?php endif; ?>
             </li>
         <?php endforeach; ?>

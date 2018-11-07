@@ -59,11 +59,6 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                                 ? strtolower($cat['name']) : $cat['entity_id']
                                 ]
                             ) ?>"
-                            <?php if ($cat->getParentCategory()) : ?>
-                                data-cat-parent = "<?php echo $cat->getParentCategory()->getId() ?>"
-                            <?php else : ?>
-                                data-cat-parent = "<?php echo $cat->getId() ?>"
-                            <?php endif; ?>
                             data-param-cat-parent = "<?php echo 'parent_cat_'.$cat->getId(); ?>"
                             data-param="cat"
                             <?php if ($helperData->isInaCategoryRequest(

@@ -25,20 +25,6 @@ class CategoriesSearch extends Categories
      */
     protected $coreRegistry;
 
-    /**
-     * CategoriesSearch constructor.
-     * @param \Magento\Framework\View\Element\Template\Context $context
-     * @param \GoMage\Navigation\Helper\CategoryHelper $categoryHelper
-     * @param \Magento\Catalog\Model\Indexer\Category\Flat\State $categoryFlatState
-     * @param \Magento\Theme\Block\Html\Topmenu $topMenu
-     * @param \GoMage\Navigation\Helper\Data $dataHelper
-     * @param \GoMage\Navigation\Helper\CategoryData $categoriesHelper
-     * @param \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper
-     * @param \GoMage\Navigation\Model\Config\Source\Category\Templates $templates
-     * @param \Magento\Catalog\Model\ResourceModel\Category $categoryResource
-     * @param \Magento\Catalog\Model\Layer\Resolver $layerResolver
-     * @param \Magento\Framework\Registry $coreRegistry
-     */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
         \GoMage\Navigation\Helper\CategoryHelper $categoryHelper,
@@ -50,7 +36,7 @@ class CategoriesSearch extends Categories
         \GoMage\Navigation\Model\Config\Source\Category\Templates $templates,
         \Magento\Catalog\Model\ResourceModel\Category $categoryResource,
         \Magento\Catalog\Model\Layer\Resolver $layerResolver,
-        \Magento\Framework\Registry $coreRegistry
+         \Magento\Framework\Registry $coreRegistry
     ) {
         $this->catalogLayer = $layerResolver->get();
         $this->categoryHelper = $categoryHelper;
@@ -61,7 +47,6 @@ class CategoriesSearch extends Categories
         $this->templates = $templates;
         $this->categoryResource = $categoryResource;
         $this->navigationViewHelper = $navigationViewHelper;
-        $this->coreRegistry = $coreRegistry;
         parent::__construct(
             $context,
             $categoryHelper,
@@ -72,7 +57,8 @@ class CategoriesSearch extends Categories
             $navigationViewHelper,
             $templates,
             $categoryResource,
-            $layerResolver
+            $layerResolver,
+            $coreRegistry
         );
         $this->setLocation();
     }
@@ -100,141 +86,21 @@ class CategoriesSearch extends Categories
     }
 
     /**
-     * @return array
+     * @param $category
+     * @return bool
      */
-    public function getFacetsData()
+    public function isHidecategory($category)
     {
-        if (!$this->facetsData) {
-            if (!$this->coreRegistry->registry('facets_collection')) {
-                $productCollection = $this->catalogLayer->getProductCollection();
+        if(is_null($this->coreRegistry->registry('facets_categoties'))) {
+            if(is_null($this->coreRegistry->registry('category_facets_without_filter'))) {
+                return false;
             } else {
-                $productCollection = $this->coreRegistry->registry('facets_collection');
+                $facetsData = $this->coreRegistry->registry('category_facets_without_filter');
+                $this->coreRegistry->register('facets_categoties', $facetsData);
             }
-            $facedsData = $productCollection->getFacetedData('category');
-            $this->facetsData = $facedsData;
         }
-        return $this->facetsData;
+        return $this->getCategoriesDataHelper()->isHideEmptyCategories() &&
+            !$this->getProductsCount($category);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCurrentCategoryId()
-    {
-        return $this->catalogLayer->getCurrentCategory()->getId();
-    }
-
-    /**
-     * @param $category
-     * @return array
-     */
-    public function getChildCategoriesObject($category)
-    {
-        if ($this->categoryFlatConfig->isFlatEnabled() && $category->getUseFlatResource()) {
-            return $subcategories = (array)$category->getChildrenNodes();
-        } else {
-            return $subcategories = $category->getChildren();
-        }
-    }
-
-    /**
-     * @param $category
-     * @return array
-     */
-    public function getCategoriesSearch($category)
-    {
-        $this->getFacetsData();
-        if (!$this->facetsData || !$this->getChildCategoriesObject($category)) {
-            $productCollection = $this->catalogLayer->getProductCollection();
-            $this->facetsData = $productCollection->getFacetedData('category');
-            return [];
-        } else {
-            $arrCat = [];
-            $categories = $this->getChildCategoriesObject($category);
-            foreach ($categories as $cat) {
-                if ((isset($this->facetsData[$category->getId()]))
-                    && $this->facetsData[$category->getId()]['count'] > 0) {
-                    $arrCat[$category->getId()] = $category->setParentId($category->getId());
-                } else {
-                    $arrCatTmp = $this->getCategoriesSearch($cat);
-                    if ($arrCatTmp) {
-                        $arrCat = $arrCat + $arrCatTmp;
-                    }
-                }
-            }
-
-            return $arrCat;
-        }
-    }
-
-    /**
-     * @param $data
-     * @return string
-     * @throws \Magento\Framework\Exception\LocalizedException
-     */
-    public function getOlList($data)
-    {
-        $block = $this->getListBlock();
-        $block->setTemplate('GoMage_Navigation::categories/list/search/ol_list.phtml');
-        $block->assign('data', $data);
-
-        return $block->toHtml();
-    }
-
-    /**
-     * @param $data
-     * @return string
-     * @throws \Magento\Framework\Exception\LocalizedException
-     */
-    public function getOlImageList($data)
-    {
-        $block = $this->getListBlock();
-        $block->setTemplate('GoMage_Navigation::categories/list/search/image.phtml');
-        $block->assign('data', $data);
-
-        return $block->toHtml();
-    }
-
-    /**
-     * @param $data
-     * @return string
-     * @throws \Magento\Framework\Exception\LocalizedException
-     */
-    public function getSelectList($data)
-    {
-        $block = $this->getListBlock();
-        $block->setTemplate('GoMage_Navigation::categories/list/search/select.phtml');
-        $block->assign('data', $data);
-
-        return $block->toHtml();
-    }
-
-    /**
-     * @param $data
-     * @return string
-     * @throws \Magento\Framework\Exception\LocalizedException
-     */
-    public function getImageCategoriesList($data)
-    {
-        $block = $this->getListBlock();
-        $block->setTemplate('GoMage_Navigation::categories/list/search/image.phtml');
-        $block->assign(
-            'alignment',
-            ($this->getCategoriesDataHelper()->getCategoriesImageAlignment()) ?
-                'alignment:' . $this->getCategoriesDataHelper()->getCategoriesImageAlignment() : ''
-        );
-        $block->assign(
-            'width',
-            ($this->getCategoriesDataHelper()->getCategoriesImageWidth()) ?
-                $this->getCategoriesDataHelper()->getCategoriesImageWidth() : ''
-        );
-        $block->assign(
-            'height',
-            ($this->getCategoriesDataHelper()->getCategoriesImageHeight()) ?
-                $this->getCategoriesDataHelper()->getCategoriesImageHeight() : ''
-        );
-        $block->assign('data', $data);
-
-        return $block->toHtml();
-    }
 }

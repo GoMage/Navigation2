@@ -82,19 +82,6 @@ class CategoriesCms extends Categories
      */
     protected $navigationViewHelper;
 
-    /**
-     * @param \Magento\Framework\View\Element\Template\Context $context
-     * @param \Magento\Catalog\Helper\Category $categoryHelper
-     * @param \Magento\Catalog\Model\Indexer\Category\Flat\State $categoryFlatState
-     * @param \Magento\Theme\Block\Html\Topmenu $topMenu
-     * @param \GoMage\Navigation\Helper\Data $dataHelper
-     * @param \GoMage\Navigation\Helper\CategoryData $categoriesHelper
-     * @param \GoMage\Navigation\Helper\NavigationViewData $navigationViewHelper
-     * @param \GoMage\Navigation\Model\Config\Source\Category\Templates $templates
-     * @param \Magento\Catalog\Model\ResourceModel\Category $categoryResource
-     * @param \Magento\Catalog\Model\Layer\Resolver $layerResolver
-     * @param \Magento\Framework\Registry $registry
-     */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
         \GoMage\Navigation\Helper\CategoryHelper $categoryHelper,
@@ -106,6 +93,7 @@ class CategoriesCms extends Categories
         \GoMage\Navigation\Model\Config\Source\Category\Templates $templates,
         \Magento\Catalog\Model\ResourceModel\Category $categoryResource,
         \Magento\Catalog\Model\Layer\Resolver $layerResolver,
+        \Magento\Framework\Registry $coreRegistry,
         \Magento\Framework\Registry $registry
     ) {
         $this->catalogLayer = $layerResolver->get();
@@ -116,6 +104,7 @@ class CategoriesCms extends Categories
         $this->categoriesHelper = $categoriesHelper;
         $this->templates = $templates;
         $this->categoryResource = $categoryResource;
+        $this->coreRegistry = $coreRegistry;
         $this->navigationViewHelper = $navigationViewHelper;
         $this->cmsPage = $registry->registry('gomage_cms_page');
         parent::__construct(

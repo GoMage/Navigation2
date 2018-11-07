@@ -1,49 +1,40 @@
 <?xml version="1.0"?>
-<!--
-/**
- * GoMage.com
- *
- * GoMage Navigation M2
- *
- * @category  Extension
- * @copyright Copyright (c) 2018-2018 GoMage.com (https://www.gomage.com)
- * @author    GoMage.com
- * @license   https://www.gomage.com/licensing  Single domain license
- * @terms     of use https://www.gomage.com/terms-of-use
- * @version   Release: 1.0.0
- * @since     Class available since Release 1.0.0
- */
--->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceBlock name="head.additional">
             <block class="Magento\Framework\View\Element\Template" name="go.mage.style" template="GoMage_Navigation::layer/style.phtml"/>
         </referenceBlock>
-    <referenceContainer name="sidebar.main" >
-        <block class="GoMage\Navigation\Block\Navigation" name="catalog.leftnav">
-            <block class="GoMage\Navigation\Block\Navigation\State" name="catalog.navigation.state" as="state" />
-            <block class="GoMage\Navigation\Block\Navigation\FilterRenderer" name="catalog.navigation.renderer" as="renderer"/>
-        </block>
-        <block class="GoMage\Navigation\Block\Loader" name="gomage.loader"/>
-    </referenceContainer>
-    <referenceContainer name="main">
-        <block class="GoMage\Navigation\Block\Loader" name="gomage.loader"/>
-        <block class="GoMage\Navigation\Block\Product\ProductList\More" name="gomage.products.more" />
-        <block class="Magento\Framework\View\Element\Template" name="gomage.back_to_top" >
+        <referenceContainer name="sidebar.main" >
+            <block class="GoMage\Navigation\Block\Categories" name="gomage.categories" />
+            <block class="GoMage\Navigation\Block\Navigation" name="catalog.leftnav" after="gomage.categories">
+                <block class="GoMage\Navigation\Block\Navigation\State" name="catalog.navigation.state" as="state" />
+                <block class="GoMage\Navigation\Block\Navigation\FilterRenderer" name="catalog.navigation.renderer" as="renderer"/>
+            </block>
+            <block class="GoMage\Navigation\Block\Loader" name="gomage.loader"/>
+        </referenceContainer>
+        <referenceContainer name="main">
+            <block class="GoMage\Navigation\Block\Loader" name="gomage.loader"/>
+            <block class="GoMage\Navigation\Block\Categories" name="gomage.categories.column">
+                <action method="unsetChild" ifconfig="gomage_navigation/category/shop_by">
+                    <argument name="block" xsi:type="helper" helper="GoMage\Navigation\Helper\Data::removeBlocCategoriesOrCategory" />
+                </action>
+            </block>
+            <block class="GoMage\Navigation\Block\Product\ProductList\More" name="gomage.products.more" />
+            <block class="Magento\Framework\View\Element\Template" name="gomage.back_to_top" >
+                <action method="setTemplate">
+                    <argument name="template" xsi:type="helper" helper="GoMage\Navigation\Helper\Data::isUseBackToTopButton"/>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceBlock name="product_list_toolbar_pager">
+            <arguments>
+                <argument name="template" xsi:type="helper" helper="GoMage\Navigation\Helper\Data::getPagerTheme"/>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="product_list_toolbar">
             <action method="setTemplate">
-                <argument name="template" xsi:type="helper" helper="GoMage\Navigation\Helper\Data::isUseBackToTopButton"/>
+                <argument name="template" xsi:type="string">GoMage_Navigation::product/list/toolbar.phtml</argument>
             </action>
-        </block>
-    </referenceContainer>
-    <referenceBlock name="product_list_toolbar_pager">
-        <arguments>
-            <argument name="template" xsi:type="helper" helper="GoMage\Navigation\Helper\Data::getPagerTheme"/>
-        </arguments>
-    </referenceBlock>
-    <referenceBlock name="product_list_toolbar">
-        <action method="setTemplate">
-            <argument name="template" xsi:type="string">GoMage_Navigation::product/list/toolbar.phtml</argument>
-        </action>
-    </referenceBlock>
+        </referenceBlock>
     </body>
 </page>

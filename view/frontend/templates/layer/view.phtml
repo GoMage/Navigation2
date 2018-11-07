@@ -59,7 +59,7 @@ $helperDataCat = $this->helper('GoMage\Navigation\Helper\CategoryData');
             <?php $wrapOptions = false; ?>
                 <?php foreach ($block->getFilters() as $filter): ?>
 
-            <?php if($filter->getRequestVar() == 'cat' && !$helperDataCat->isShowCategories()): ?>
+            <?php if($filter->getRequestVar() == 'cat' && !$helperDataCat->isShowCategoryInShopBy()): ?>
                 <?php continue; ?>
             <?php endif; ?>
             <?php $countApplied = 0; ?>
