@@ -25,11 +25,6 @@
                 <block class="GoMage\Navigation\Block\Navigation\FilterRenderer" name="catalog.navigation.renderer" as="renderer"/>
             </block>
             <block class="GoMage\Navigation\Block\Loader" name="gomage.loader"/>
-            <block class="GoMage\Navigation\Block\CategoriesCms" name="gomage.categories.column">
-                <action method="unsetChild" ifconfig="gomage_navigation/category/shop_by">
-                    <argument name="block" xsi:type="helper" helper="GoMage\Navigation\Helper\Data::removeBlocCategoriesOrCategory" />
-                </action>
-            </block>
             <block class="GoMage\Navigation\Block\CategoriesCms" name="gomage.categories">
                 <action method="unsetChild" ifconfig="gomage_navigation/category/shop_by">
                     <argument name="block" xsi:type="helper" helper="GoMage\Navigation\Helper\Data::removeBlocCategoriesOrCategory" />

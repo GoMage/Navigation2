@@ -86,8 +86,7 @@ class CategoriesCms extends Categories
         \GoMage\Navigation\Model\Config\Source\Category\Templates $templates,
         \Magento\Catalog\Model\ResourceModel\Category $categoryResource,
         \Magento\Catalog\Model\Layer\Resolver $layerResolver,
-        \Magento\Framework\Registry $registry,
-        \Magento\Catalog\Model\Layer $layer
+        \Magento\Framework\Registry $registry
     ) {
         $this->catalogLayer = $layerResolver->get();
         $this->categoryHelper = $categoryHelper;
