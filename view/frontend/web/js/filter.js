@@ -8,13 +8,13 @@
  * @author    GoMage.com
  * @license   https://www.gomage.com/licensing  Single domain license
  * @terms     of use https://www.gomage.com/terms-of-use
- * @version   Release: 1.0.0
+ * @version   Release: 1.1.0
  * @since     Class available since Release 1.0.0
  */
 
 define(
     [
-    "jquery"
+        "jquery"
     ], function ($) {
         "use strict";
 
@@ -32,7 +32,9 @@ define(
             this.categoiesParam = element.attr('data-param-cat-parent');
             this.categoiesParamVal = element.attr('data-cat-parent');
             this.ajax = element.attr('data-ajax');
-            this.active = element.attr('data-active');
+            if(element.is('select')) {
+                this.active = element.find('option:selected').attr('data-active');
+            }
             this.clear = element.attr('data-clear');
             this.url = element.attr('data-url');
         }

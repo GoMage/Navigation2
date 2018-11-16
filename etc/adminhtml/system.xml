@@ -10,7 +10,7 @@
  * @author    GoMage.com
  * @license   https://www.gomage.com/licensing  Single domain license
  * @terms     of use https://www.gomage.com/terms-of-use
- * @version   Release: 1.0.0
+ * @version   Release: 1.1.0
  * @since     Class available since Release 1.0.0
  */
 -->
@@ -25,7 +25,7 @@
             <tab>gomage</tab>
             <resource>GoMage_Navigation::settings_navigation</resource>
             <group id="navigation" translate="label" type="text" sortOrder="10" showInDefault="1">
-                <label>GoMage Navigation v.1.0.0</label>
+                <label>GoMage Navigation v.1.1.0</label>
                 <field id="key" translate="label comment" type="text" sortOrder="10" showInDefault="1">
                     <label>Activation Key</label>
                 </field>
@@ -127,6 +127,9 @@
                     <field id="category_background" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Category Background Color</label>
                         <frontend_model>GoMage\Navigation\Block\Color</frontend_model>
+                        <depends>
+                            <field id="gomage_navigation/category/shop_by">0</field>
+                        </depends>
                     </field>
                 </group>
                 <group id="button" translate="label" type="text" sortOrder="20" showInDefault="1"
@@ -252,7 +255,6 @@
                     <label>Show All Subcategories</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <depends>
-                        <field separator="," id="navigation">0,2,3,8</field>
                         <field id="shop_by">0</field>
                     </depends>
                 </field>

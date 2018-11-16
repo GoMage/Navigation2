@@ -10,7 +10,7 @@
  * @author    GoMage.com
  * @license   https://www.gomage.com/licensing  Single domain license
  * @terms     of use https://www.gomage.com/terms-of-use
- * @version   Release: 1.0.0
+ * @version   Release: 1.1.0
  * @since     Class available since Release 1.0.0
  */
 
@@ -220,7 +220,7 @@ class Category extends \Magento\CatalogSearch\Model\Layer\Filter\Category implem
         if ($categoryRoot->getIsActive() && $this->categoryHelper->isShowCategoryInShopBy()) {
         $categoryCollection = $this->categoryCatalogHelper->getStoreCategories('entity_id', true, false);
         $categoryCollection->addAttributeToSelect('name')
-            ->addAttributeToSelect('image')->addFieldToFilter('parent');
+            ->addAttributeToSelect('image');
         $items = $categoryCollection->getItems();
             foreach ($items as $key=>$category) {
                 $path = explode('/', $category->getPath());
@@ -255,7 +255,10 @@ class Category extends \Magento\CatalogSearch\Model\Layer\Filter\Category implem
             }
         } elseif ($categoryRoot->getIsActive()) {
             $categories = $categoryRoot->getChildrenCategories();
-
+            if(is_object($categories)) {
+                $categories = $categories->getItems();
+            }
+            ksort($categories);
             foreach ($categories as $category) {
                 if (($category->getIsActive()
                     && isset($optionsFacetedData[$category->getId()]) &&

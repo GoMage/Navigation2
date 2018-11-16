@@ -8,7 +8,7 @@
  * @author    GoMage.com
  * @license   https://www.gomage.com/licensing  Single domain license
  * @terms     of use https://www.gomage.com/terms-of-use
- * @version   Release: 1.0.0
+ * @version   Release: 1.1.0
  * @since     Class available since Release 1.0.0
  */
 
@@ -294,6 +294,7 @@ define(
                     event.preventDefault();
                     event.stopPropagation();
                     var element = event.data.element;
+                    var filter = new Filter(element);
                     var categories;
                     var ajax = Number(event.currentTarget.attributes['data-ajax'].nodeValue);
                     var url = event.currentTarget.value;
@@ -302,7 +303,12 @@ define(
                     }
                     var isCategories = event.currentTarget.attributes['data-categories'];
                     var params = this._getParams();
-                    if(isCategories && isCategories.nodeValue && url &&  event.currentTarget.attributes['data-select']) {
+                    if(element.is('select'))
+                    {
+                        element.find('option').attr('selected', true);
+                        params.set(filter.getParam(), filter.getValue());
+
+                    } else if(isCategories && isCategories.nodeValue && url &&  event.currentTarget.attributes['data-select']) {
                         categories = event.currentTarget.attributes['data-value'].nodeValue;
                         params.set('cat', categories);
                     } else if (isCategories && isCategories.nodeValue && !event.currentTarget.attributes['data-select']) {

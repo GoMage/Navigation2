@@ -9,7 +9,7 @@
  * @author    GoMage.com
  * @license   https://www.gomage.com/licensing  Single domain license
  * @terms     of use https://www.gomage.com/terms-of-use
- * @version   Release: 1.0.0
+ * @version   Release: 1.1.0
  * @since     Class available since Release 1.0.0
  */
 
@@ -43,12 +43,12 @@ $helperData = $this->helper('GoMage\Navigation\Helper\Data');
                             data-url="<?php echo $helperData
                                 ->getUrlCategory(['cat'=>urlencode(mb_strtolower($category->getName()))]) ?>"
                             data-ajax="<?php echo (int)$block->getCategoriesDataHelper()->isAjax(); ?>">
-                            <option
+                            <option disabled selected hidden
                                     data-type="remove-item"
                                     data-value=""
                                     data-param-to-remove="cat"
                                     value=""
-                            ><?php echo __('Choose Category')?></option>
+                            ><?php echo $category->getName() ?></option>
                         <option
                             data-value="<?php echo $helperData->getValueCategory(['cat'=>$helperData
                                 ->isUseFriendlyUrls() ? urlencode(mb_strtolower($category->getName())):

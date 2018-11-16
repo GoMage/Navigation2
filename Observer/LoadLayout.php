@@ -22,7 +22,7 @@ use Magento\Framework\DataObject;
  * @author    GoMage.com
  * @license   https://www.gomage.com/licensing  Single domain license
  * @terms     of use https://www.gomage.com/terms-of-use
- * @version   Release: 1.0.0
+ * @version   Release: 1.1.0
  * @since     Class available since Release 1.0.0
  */
 
@@ -112,7 +112,7 @@ class LoadLayout implements ObserverInterface
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
         $layout = $observer->getLayout();
-        if ($this->cmsPage->getId()) {
+        if ($this->cmsPage->getId() && $this->dataHelper->isEnable()) {
             if ($this->cmsPage->getNavigationCategoryId()) {
                 $categoryId = $this->cmsPage->getNavigationCategoryId();
                 $storeId = $this->storeManager->getStore()->getId();

@@ -10,7 +10,7 @@
  * @author    GoMage.com
  * @license   https://www.gomage.com/licensing  Single domain license
  * @terms     of use https://www.gomage.com/terms-of-use
- * @version   Release: 1.0.0
+ * @version   Release: 1.1.0
  * @since     Class available since Release 1.0.0
  */
 -->
@@ -35,11 +35,11 @@
                     <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers" as="details.renderers">
                         <block class="Magento\Framework\View\Element\Template" as="default"/>
                     </block>
-                    <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="category.product.addto" as="addto">
-                        <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
-                               name="category.product.addto.compare" as="compare"
-                               template="Magento_Catalog::product/list/addto/compare.phtml"/>
-                    </block>
+                    <!--<block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="category.product.addto" as="addto">-->
+                        <!--<block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"-->
+                               <!--name="category.product.addto.compare" as="compare"-->
+                               <!--template="Magento_Catalog::product/list/addto/compare.phtml"/>-->
+                    <!--</block>-->
                     <block class="Magento\Catalog\Block\Product\ProductList\Toolbar" name="product_list_toolbar" template="GoMage_Navigation::product/list/toolbar.phtml">
                         <block class="Magento\Theme\Block\Html\Pager" name="product_list_toolbar_pager"/>
                     </block>
