@@ -70,7 +70,7 @@ class CompilationClass
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, sprintf('https://www.gomage.com/index.php/gomage_downloadable/key/check'));
         curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, 'key=' . urlencode($k) . '&sku=navigation-pro-m2&domains=' . urlencode(implode(',', $this->_getDomains())) . '&ver=' . urlencode($this->_getVersion()));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, 'key=' . urlencode($k) . '&sku=advanced-navigation-m2&domains=' . urlencode(implode(',', $this->_getDomains())) . '&ver=' . urlencode($this->_getVersion()));
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
@@ -260,7 +260,7 @@ class CompilationClass
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, sprintf('https://www.gomage.com/index.php/gomage_notification/index/data'));
             curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, 'sku=navigation-pro-m2&timestamp=' . $timestamp . '&ver=' . urlencode($this->_getVersion()));
+            curl_setopt($ch, CURLOPT_POSTFIELDS, 'sku=advanced-navigation-m2&timestamp=' . $timestamp . '&ver=' . urlencode($this->_getVersion()));
             curl_setopt($ch, CURLOPT_TIMEOUT, 30);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
