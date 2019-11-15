@@ -167,9 +167,23 @@ class InstallSchema implements InstallSchemaInterface
         $installer->getConnection()->createTable($table);
         $cmsPage = $installer->getTable('cms_page');
         $installer->getConnection()
-            ->addColumn($cmsPage, 'location', "TINYINT(1) NOT NULL DEFAULT 0");
+            ->addColumn($cmsPage, 'location',
+                ['type' => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+                    'length' => 1,
+                    'nullable' => false,
+                    'default' => 0,
+                    'comment' => 'Location'
+                ]
+            );
         $installer->getConnection()
-            ->addColumn($cmsPage, 'navigation_category_id', "int(10) NOT NULL DEFAULT 0");
+            ->addColumn($cmsPage, 'navigation_category_id',
+                ['type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    'length' => 10,
+                    'nullable' => false,
+                    'default' => 0,
+                    'comment' => 'Navigation category id'
+                ]);
+
         $installer->getConnection()->createTable($table);
         $data = [
             'scope' => 'default',
