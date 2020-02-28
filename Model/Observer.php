@@ -3,7 +3,7 @@
 namespace GoMage\Navigation\Model;
 
 use Magento\Framework\Event\Observer as EventObserver;
-use Magento\Framework\Object;
+use Magento\Framework\Object as DataObject;
 
 class Observer
 {
@@ -57,7 +57,7 @@ class Observer
     public function ajaxNavigation(EventObserver $observer)
     {
         if ($this->_request->isAjax()) {
-            $result = new Object();
+            $result = new DataObject();
 
             $result->setData('navigation', $this->_layout->getBlock('gomage.navigation')->toHtml());
             $result->setData('products', $this->_layout->getBlock('category.products')->toHtml());
